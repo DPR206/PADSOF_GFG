@@ -1,0 +1,390 @@
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><help_text>Space for diagram notes
+</help_text><element><id>UMLClass</id><coordinates><x>810</x><y>75</y><w>84</w><h>54</h></coordinates><panel_attributes>/User/
+bg=#e4c1f9
+style=autoresize
+--
+- id: int
+- password: String
+--
+/+ changePassword()/	</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>618</x><y>231</y><w>108</w><h>156</h></coordinates><panel_attributes>RegisteredClient
+bg=#e4c1f9
+style=autoresize
+--
+- registerDate: LocalDateTime
+- dni: String
+- [orderHistory]
+- [exchangeHistory]
+- [wallet]
+--
++ changePassword()
++ buy()
++ review()
++ addToWallet()
++ removeFromWallet()
++ requestEvaluation()
++ offer()
++ browseNotifications()
++ searchProduct()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>702</x><y>123</y><w>156</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>240;10;10;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>936</x><y>165</y><w>84</w><h>48</h></coordinates><panel_attributes>Employee
+bg=#e4c1f9
+style=autoresize
+--
+- [permissions:ARRAY]
+--
++ changePassword()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1038</x><y>267</y><w>66</w><h>42</h></coordinates><panel_attributes>OrderEmployee
+bg=#e4c1f9
+style=autoresize
+--
++ searchOrder()
++ manageOrder()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>942</x><y>267</y><w>78</w><h>54</h></coordinates><panel_attributes>ExchangeEmployee
+bg=#e4c1f9
+style=autoresize
+--
++ searchExchange()
++ manageExchange()
++ evaluate()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>834</x><y>267</y><w>90</w><h>78</h></coordinates><panel_attributes>StoreEmployee
+bg=#e4c1f9
+style=autoresize
+--
++ searchNewProduct()
++ manageNewProduct()
++ addNewProduct()
++ searchPack()
++ managePack()
++ addPack()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>846</x><y>363</y><w>90</w><h>108</h></coordinates><panel_attributes>Manager
+bg=#e4c1f9
+style=autoresize
+--
++ changePassword()
++ manageNewProduct()
++ manageParameters()
++ searchDiscount()
++ manageDiscount()
++ addDiscount()
++ searchEmployee()
++ manageEmployee()
++ addEmployee()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>906</x><y>339</y><w>18</w><h>36</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLNote</id><coordinates><x>972</x><y>93</y><w>174</w><h>36</h></coordinates><panel_attributes>REVIEW: Un employee puede contener diversos permisos, se marcan en un array de enums. Diseño: contenedor
+style=wordwrap
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1182</x><y>261</y><w>162</w><h>42</h></coordinates><panel_attributes>Sólo "Registered client" y "Manager" pueden cambiar su contraseña por lo que el resto de usuarios sobreescribirán "changePassword()" para que no haga nada
+style=wordwrap
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>333</y><w>114</w><h>36</h></coordinates><panel_attributes>Wallet
+bg=#a9def9
+style=autoresize
+--
+- [secondHandProducts ARRAY]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>471</y><w>108</w><h>126</h></coordinates><panel_attributes>/SecondHandProduct/
+bg=#fcf6bd
+style=autoresize
+--
+- available: Bool
+- estimatedPrice: double
+- valorationDate: Date Time
+- [conservationStatus]
+- userVisible: boolean
+--
++ changeAvailability()
++ changeEstimatedPrice()
++ changeConservationStatus()
++ createComic()
++ createFigurine()
++ createGame()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>426</x><y>363</y><w>90</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r1=secondHandProducts
+m1=*</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>798</x><y>177</y><w>150</w><h>264</h></coordinates><panel_attributes>lt=&lt;-&gt;
+m1=*
+r1=subordinate
+m2=*
+r2=manager
+manages ^</panel_attributes><additional_attributes>230;20;10;20;10;410;80;410</additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>285</y><w>78</w><h>36</h></coordinates><panel_attributes>ExchangeHistory
+bg=#a9def9
+style=autoresize
+--
+- [exchanges ARRAY]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>237</y><w>66</w><h>36</h></coordinates><panel_attributes>OrderHistory
+bg=#d0f4de
+style=autoresize
+--
+- [orders ARRAY]</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>438</x><y>237</y><w>192</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+r1=orderHistory</panel_attributes><additional_attributes>10;20;300;20</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>291</y><w>180</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+r1=exchangeHistory</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>486</x><y>339</y><w>144</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+r1=wallet</panel_attributes><additional_attributes>10;20;220;20</additional_attributes></element><element><id>UMLNote</id><coordinates><x>1170</x><y>339</y><w>156</w><h>54</h></coordinates><panel_attributes>Un manager puede hacer todo lo que  hace un "StoreEmployee" y además tiene una función "manageNewProduct()" que a parte de stock y categorías puede editar todo lo demás
+style=wordwrap
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>552</x><y>423</y><w>84</w><h>174</h></coordinates><panel_attributes>/Product/
+bg=#fcf6bd
+style=autoresize
+--
+- id: int
+- name: String
+- description: String
+- photo: String
+- price: double
+- [categories ARRAY]
+- [productType]
+--
++ changeName()
++ changeDescription()
++ changePhoto()
++ changePrice()
++ changeCategories()
++ createComic()
++ createFigurine()
++ createGame()
++ getTotalPrice()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>564</x><y>621</y><w>66</w><h>90</h></coordinates><panel_attributes>/StoreProduct/
+bg=#fcf6bd
+style=autoresize
+--
+- stock: int
+--
++ changeStock()
++ createComic()
++ createFigurine()
++ createGame()
++ blockStock()
++ unblockStock()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>702</x><y>423</y><w>54</w><h>36</h></coordinates><panel_attributes>Category
+bg=#fcf6bd
+style=autoresize
+--
+- name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1080</x><y>141</y><w>54</w><h>60</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+Permission
+bg=#e4c1f9
+style=autoresize
+--
++ EXCHANGE
++ ORDER
++ STORE</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1014</x><y>165</y><w>78</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+r1=permissions
+m1=*</panel_attributes><additional_attributes>110;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>858</x><y>123</y><w>138</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;210;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>228</x><y>417</y><w>72</w><h>90</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+conservationStatus
+bg=#fcf6bd
+style=autoresize
+--
++ PERFECT
++ VERY_GOOD
++ SLIGHTLY_USED
++ EVIDENTLY_USED
++ VERY_USED
++ DAMAGED</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>294</x><y>477</y><w>96</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+r1=conservationStatus</panel_attributes><additional_attributes>10;20;140;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>702</x><y>471</y><w>54</w><h>60</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+productType
+bg=#fcf6bd
+style=autoresize
+--
++ COMIC
++ FIGURINE
++ GAME</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>489</y><w>84</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+r1=productType</panel_attributes><additional_attributes>120;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>456</x><y>747</y><w>84</w><h>102</h></coordinates><panel_attributes>Comic
+bg=#fcf6bd
+style=autoresize
+--
+- numPages: int
+- author: String
+- editorial: String
+- year: int
+--
++ changeNumPages()
++ changeAuthor()
++ changeEditorial()
++ changeYear()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>747</y><w>72</w><h>126</h></coordinates><panel_attributes>Figurine
+bg=#fcf6bd
+style=autoresize
+--
+- brand: String
+- material: String
+- height: double
+- width: double
+- depth: double
+--
++ changeBrand()
++ changeMaterial()
++ changeHeight()
++ changeWidth()
++ changeDepth()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>558</x><y>747</y><w>84</w><h>72</h></coordinates><panel_attributes>Game
+bg=#fcf6bd
+style=autoresize
+--
+- numPlayers: int
+- ageRange: String
+--
++ changeNumPlayers()
++ changeAgeRange()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>429</y><w>84</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+r1=categories
+m1=*</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>273</y><w>216</w><h>162</h></coordinates><panel_attributes>lt=-
+m1=*
+r1=searcher
+m2=*
+r2=searchResult
+searches v</panel_attributes><additional_attributes>340;20;250;20;250;230;10;230;10;250</additional_attributes></element><element><id>Relation</id><coordinates><x>546</x><y>363</y><w>84</w><h>72</h></coordinates><panel_attributes>lt=-
+m1=*
+r1=searcher
+m2=*
+r2=searchResult
+searches v</panel_attributes><additional_attributes>120;20;30;20;30;100</additional_attributes></element><element><id>Relation</id><coordinates><x>876</x><y>207</y><w>102</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+0..1</panel_attributes><additional_attributes>150;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>978</x><y>207</y><w>30</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+0..1</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>996</x><y>207</y><w>90</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+0..1</panel_attributes><additional_attributes>10;10;130;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>846</x><y>525</y><w>78</w><h>60</h></coordinates><panel_attributes>GiftsForGeeks
+bg=#ff99c8
+style=autoresize
+--
+- [products ARRAY]
+- [categories ARRAY]
+- [manager]
+- [employees ARRAY]</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>543</y><w>228</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r1=products
+m1=*</panel_attributes><additional_attributes>360;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>441</y><w>108</w><h>114</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r1=categories
+m1=*</panel_attributes><additional_attributes>160;160;70;160;70;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>918</x><y>201</y><w>210</w><h>348</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r1=employees
+m1=*</panel_attributes><additional_attributes>10;550;330;550;330;10;170;10</additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>429</y><w>162</w><h>78</h></coordinates><panel_attributes>lt=-
+m1=*
+r1=categories
+m2=*
+r2=manager
+manages ^</panel_attributes><additional_attributes>10;20;90;20;90;110;200;110;200;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>162</x><y>231</y><w>126</w><h>42</h></coordinates><panel_attributes>Order
+bg=#d0f4de
+--
+- price: double
+- [products ARRAY]</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>282</x><y>237</y><w>108</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+r1=orders
+m1=*</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>162</x><y>285</y><w>126</w><h>42</h></coordinates><panel_attributes>Exchange
+bg=#a9def9
+--
+- price: double
+- [products ARRAY]</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>282</x><y>291</y><w>108</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+r1=orders
+m1=*</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>321</y><w>180</w><h>210</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+r1=secondHandProducts
+m1=*</panel_attributes><additional_attributes>10;10;10;330;280;330</additional_attributes></element><element><id>Relation</id><coordinates><x>96</x><y>237</y><w>480</w><h>438</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+r1=sstoreProducts
+m1=*</panel_attributes><additional_attributes>110;20;20;20;20;710;780;710</additional_attributes></element><element><id>Relation</id><coordinates><x>234</x><y>177</y><w>462</w><h>66</h></coordinates><panel_attributes>lt=-
+m1=*
+r1=buyer
+m2=*
+r2=order
+places v</panel_attributes><additional_attributes>720;90;720;20;10;20;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>282</x><y>195</y><w>390</w><h>114</h></coordinates><panel_attributes>lt=-
+m1=*
+r1=exchanger
+m2=*
+r2=exchange
+makes v</panel_attributes><additional_attributes>570;60;570;20;40;20;40;160;10;160</additional_attributes></element><element><id>UMLClass</id><coordinates><x>846</x><y>621</y><w>72</w><h>84</h></coordinates><panel_attributes>Pack
+bg=#d0f4de
+style=autoresize
+--
+- precio: double
+--
++ changeStock()
++ createComic()
++ createFigurine()
++ createGame()
++blockStock(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>624</x><y>645</y><w>234</w><h>36</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+r1=products
+m1=*</panel_attributes><additional_attributes>370;30;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>912</x><y>669</y><w>96</w><h>84</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+r1=packs
+m1=1..n</panel_attributes><additional_attributes>70;110;140;110;140;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>912</x><y>321</y><w>210</w><h>336</h></coordinates><panel_attributes>lt=-
+m1=*
+r1=packs
+m2=*
+r2=manager
+manages v</panel_attributes><additional_attributes>10;530;260;530;260;20;20;20</additional_attributes></element><element><id>Relation</id><coordinates><x>906</x><y>465</y><w>48</w><h>72</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+r1=manager</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>846</x><y>765</y><w>102</w><h>60</h></coordinates><panel_attributes>Discount
+bg=#d0f4de
+style=autoresize
+--
+- startDate: LocalDateTime
+- endDate: LocalDateTime
+- [discountType]
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>864</x><y>855</y><w>60</w><h>72</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+discountType
+bg=#d0f4de
+style=autoresize
+--
++ BY_QUANTITY
++ BY_VOLUME
++ FIXED
++ GIFT</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>888</x><y>819</y><w>60</w><h>48</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+r1=discountType</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>624</x><y>669</y><w>234</w><h>132</h></coordinates><panel_attributes>lt=&lt;-&gt;
+r1=affectedProducts
+m1=*
+m2=discount</panel_attributes><additional_attributes>370;200;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>876</x><y>579</y><w>36</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r1=packs
+m1=*</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>918</x><y>561</y><w>102</w><h>228</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+r1=discounts
+m1=*</panel_attributes><additional_attributes>10;20;150;20;150;360;50;360</additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>435</y><w>144</w><h>378</h></coordinates><panel_attributes>lt=-
+m1=*
+r1=discounts
+m2=*
+r2=manager
+manages v</panel_attributes><additional_attributes>30;600;150;600;150;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>162</x><y>135</y><w>54</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+OrderState
+bg=#d0f4de
+style=autoresize
+-
++Preparation
++PickedUp
++ReadyToGet
++Paid
++NotPaid</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>207</y><w>42</w><h>36</h></coordinates><panel_attributes>lt=&lt;-
+m1=estado</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>846</x><y>699</y><w>48</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>834</x><y>729</y><w>36</w><h>24</h></coordinates><panel_attributes>Simple
+bg=#d0f4de
+style=autoresize</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>876</x><y>699</y><w>48</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>882</x><y>729</y><w>72</w><h>24</h></coordinates><panel_attributes>PackCompuesto
+bg=#d0f4de
+style=autoresize</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>384</x><y>1041</y><w>120</w><h>54</h></coordinates><panel_attributes>Search
+style=autoresize
+-
+-ARRAY CLIENTES REGI Y NO REGI
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>348</x><y>675</y><w>72</w><h>36</h></coordinates><panel_attributes>UnregisteredClient
+bg=#e4c1f9
+style=autoresize
+--
++ searchProduct()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>414</x><y>681</y><w>162</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n\nsearch</panel_attributes><additional_attributes>250;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>234</x><y>1011</y><w>84</w><h>90</h></coordinates><panel_attributes>Notificación
+style=autoresize
+-
+-title: String
+-text: String
+-time: DateTime
+-read: boolean
+-visible: boolean
+-
++markAsRead(): void
++markAsVisible():void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>792</x><y>993</y><w>66</w><h>36</h></coordinates><panel_attributes>BySearch
+style=autoresize
+-
+-ascendent: bool</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>375</y><w>90</w><h>54</h></coordinates><panel_attributes>Payment
+bg=#ff99c8
+style=autoresize
+-
+-numCreditCard: String
+-CCV: String
+-desc:  String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>132</x><y>261</y><w>48</w><h>126</h></coordinates><panel_attributes>lt=&lt;-
+m1=payment</panel_attributes><additional_attributes>10;190;10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>132</x><y>423</y><w>258</w><h>150</h></coordinates><panel_attributes>lt=&lt;-
+m1=payment</panel_attributes><additional_attributes>10;10;10;230;410;230</additional_attributes></element><element><id>Relation</id><coordinates><x>756</x><y>1023</y><w>66</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>816</x><y>1023</y><w>18</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>828</x><y>1023</y><w>66</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;90;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>732</x><y>1059</y><w>36</w><h>24</h></coordinates><panel_attributes>ForPrice
+style=autoresize</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>804</x><y>1071</y><w>36</w><h>24</h></coordinates><panel_attributes>ByPoints
+style=autoresize</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>864</x><y>1053</y><w>48</w><h>24</h></coordinates><panel_attributes>SimpleClass
+style=autoresize</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>678</x><y>1101</y><w>36</w><h>24</h></coordinates><panel_attributes>Search
+style=autoresize</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>474</x><y>129</y><w>96</w><h>66</h></coordinates><panel_attributes>Cart
+bg=#d0f4de
+style=autoresize
+-
+-caducidad: int
+-
++calculatePrice()
++payOrder(List&lt;Product&gt;)
++cancelarProducto()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>564</x><y>147</y><w>144</w><h>96</h></coordinates><panel_attributes>lt=&lt;-
+m1=carrito\n    </panel_attributes><additional_attributes>10;10;220;10;220;140</additional_attributes></element><element><id>Relation</id><coordinates><x>84</x><y>111</y><w>444</w><h>594</h></coordinates><panel_attributes>lt=&lt;-
+m1=carrito</panel_attributes><additional_attributes>680;30;680;10;10;10;10;970;440;970</additional_attributes></element><element><id>Relation</id><coordinates><x>258</x><y>147</y><w>228</w><h>96</h></coordinates><panel_attributes>lt=&lt;-
+m1=pedido</panel_attributes><additional_attributes>10;140;10;10;360;10</additional_attributes></element><element><id>Relation</id><coordinates><x>564</x><y>129</y><w>216</w><h>306</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=*\nproductos</panel_attributes><additional_attributes>10;10;340;10;340;440;90;440;90;490</additional_attributes></element><element><id>Relation</id><coordinates><x>516</x><y>57</y><w>660</w><h>612</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+r1=packs
+m1=*</panel_attributes><additional_attributes>10;120;10;10;1080;10;1080;1000;670;1000</additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>525</y><w>84</w><h>18</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>594</x><y>705</y><w>18</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>606</x><y>705</y><w>102</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;150;70</additional_attributes></element><element><id>Relation</id><coordinates><x>516</x><y>705</y><w>78</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>110;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>588</x><y>591</y><w>18</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>192</x><y>945</y><w>786</w><h>210</h></coordinates><panel_attributes>valign=center
+halign=center
+fontsize=20
+ELEMENTOS SIN PONER
+bg=yellow
+fg=red
+layer=-1</panel_attributes><additional_attributes></additional_attributes></element></diagram>

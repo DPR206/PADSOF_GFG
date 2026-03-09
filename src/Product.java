@@ -13,7 +13,7 @@ public abstract class Product {
     private String photo; /* The product's photo's path */
     private int numSales; /* The product's total sales */
     private ProductType type;
-    // TODO: Array de Category
+    // DUE: Array de Category
 
     // NOTE: Este constructor existe porque tengo miedo de Java y facilita los otros constructores, NO debería llamarse
 

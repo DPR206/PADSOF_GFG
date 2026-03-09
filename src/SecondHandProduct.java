@@ -55,7 +55,7 @@ public class SecondHandProduct extends Product {
      * @param valuation the product's price set by the employee
      */
     void valuate(double valuation) {
-        super.changePrice(valuation); // TODO: Revisar si esto es legal
+        super.changePrice(valuation); // DUE: Revisar si esto es legal
     }
 
     /**
@@ -84,13 +84,13 @@ public class SecondHandProduct extends Product {
         this.available = true;
     }
 
-    // TODO: Change -> int id
-    // TODO: Change -> String name
-    // TODO: Change -> String description
-    // TODO: Change -> String photo
-    // TODO: Change -> ProductType type
-    // TODO: Change -> RegisteredClient owner
-    // TODO: Change -> double estimatedPrice
+    // DUE: Change -> int id
+    // DUE: Change -> String name
+    // DUE: Change -> String description
+    // DUE: Change -> String photo
+    // DUE: Change -> ProductType type
+    // DUE: Change -> RegisteredClient owner
+    // DUE: Change -> double estimatedPrice
 
     /**
      * It allows a store employee, or the manager, to change the product's conservation status
@@ -99,7 +99,7 @@ public class SecondHandProduct extends Product {
     void changeConservationStatus(ConservationStatus newStatus) {
         this.status = newStatus;
     }
-    // TODO: Change -> valuationDate
+    // DUE: Change -> valuationDate
 
     /**
      * It changes the product's availability and sets its valuationDate if it's available
@@ -111,8 +111,8 @@ public class SecondHandProduct extends Product {
             this.valuationDate = now();
         }
     }
-    // TODO: Change -> owner
-    // TODO: Change -> receiver
-    // TODO: Change -> estimatedPrice
-    // TODO: Change -> status
+    // DUE: Change -> owner
+    // DUE: Change -> receiver
+    // DUE: Change -> estimatedPrice
+    // DUE: Change -> status
 }

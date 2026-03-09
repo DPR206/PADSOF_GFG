@@ -1,20 +1,19 @@
-// NOTA: Revisar esto
+// NOTE: Revisar esto
+
 /**
- * Classname: OrderPermission
- * Description: It implements the permission that allows an employee to manage Orders
- *
+ * Classname: OrderPermission Description: It implements the permission that allows an employee to manage Orders
  * @author Ana O.R.
  * @version 1.0
- *
  * @see Order
- *
+ * <p>
  * Copyright??
  */
 public class OrderPermission {
-    // NOTA: No tiene atributos propios
+    // NOTE: No tiene atributos propios
+
     /**
      * It allows an employee to change an order's status
-     * @param o the desired order
+     * @param o      the desired order
      * @param status the order's status
      */
     void manageOrder(Order o, OrderState status) {

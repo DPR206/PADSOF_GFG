@@ -1,9 +1,9 @@
 /**
- * Classname: Product Description: It implements the abstract Product class
- * @author Ana O.R.
- * @version 1.0
+ * Classname: Product
  * <p>
- * Copyright??
+ * Description: It implements the abstract Product class
+ * @author Ana O.R.
+ * @version 1.0  <p> Copyright??
  */
 public abstract class Product {
     private int id; /* The product's id */
@@ -11,41 +11,29 @@ public abstract class Product {
     private String name; /* The product's name */
     private String description; /* The product's description */
     private String photo; /* The product's photo's path */
-    private int numSales; /* The product's total sales */
-    private ProductType type;
-    // DUE: Array de Category
-
-    // NOTE: Este constructor existe porque tengo miedo de Java y facilita los otros constructores, NO debería llamarse
+    private ProductType type; /* The product's product type */
+    private Category[] categories; /* The product's categories */
 
     /**
-     * General product's constructor
+     * General product constructor
      * @param id          the product's id
      * @param name        the product's name
      * @param description the product's description
      * @param photo       the product's photo's path
      * @param price       the product's price
-     * @param numSales    the product's total sales
+     * @param type        the type
+     * @param categories  the product's categories
      */
-    public Product(int id, String name, String description, String photo, double price, int numSales, ProductType type) {
+    Product(int id, String name, String description, String photo, double price, ProductType type,
+            Category... categories) {
+        // NOTE: Este constructor existe porque tengo miedo de Java y facilita los constructores, NO debería llamarse
         this.id = id;
         this.name = name;
         this.description = description;
         this.photo = photo;
         this.price = price;
-        this.numSales = numSales;
         this.type = type;
-    }
-
-    /**
-     * StoreProduct's Product constructor
-     * @param id          the product's id
-     * @param name        the product's name
-     * @param description the product's description
-     * @param photo       the product's photo's path
-     * @param price       the product's price
-     */
-    public Product(int id, String name, String description, String photo, double price, ProductType type) {
-        Product(id, name, description, photo, price, 0, type);
+        this.categories = categories;
     }
 
     /**
@@ -54,14 +42,20 @@ public abstract class Product {
      * @param name        the product's name
      * @param description the product's description
      * @param photo       the product's photo's path
+     * @param type        the type
+     * @param categories  the product's categories
      */
-    public Product(int id, String name, String description, String photo, ProductType type) {
+    Product(int id, String name, String description, String photo, ProductType type, Category... categories) {
         // NOTE: Revisar qué precio inicial poner
-        // NOTE: Tecnicamente da igual el numSales de los productos de segunda mano
-        Product(id, name, description, photo, -1, -1, type);
+        // NOTE: Técnicamente da igual el numSales de los productos de segunda mano
+        this(id, name, description, photo, -1, type, categories);
     }
 
-    public int buy(int uds) {
-        // ! Terminar
+    /**
+     * It allows for an employee to change a product's price
+     * @param price the product's price
+     */
+    public void changePrice(double price) {
+        this.price = price;
     }
 }

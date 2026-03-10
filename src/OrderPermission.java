@@ -1,7 +1,7 @@
-// NOTE: Revisar esto
-
 /**
- * Classname: OrderPermission Description: It implements the permission that allows an employee to manage Orders
+ * Classname: OrderPermission
+ * <p>
+ * Description: It implements the permission that allows an employee to manage Orders
  * @author Ana O.R.
  * @version 1.0
  * @see Order
@@ -16,7 +16,7 @@ public class OrderPermission {
      * @param o      the desired order
      * @param status the order's status
      */
-    void manageOrder(Order o, OrderState status) {
-        o.status = status;
+    public void manageOrder(Order o, OrderState status) {
+        o.changeStatus(status);
     }
 }

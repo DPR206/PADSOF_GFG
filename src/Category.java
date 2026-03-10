@@ -1,5 +1,7 @@
 /**
- * Classname: Category Description: It implements the categories
+ * Class name: Category
+ * <p>
+ * Description: It implements the categories
  * @author Ana O.R.
  * @version 1.0
  * <p>
@@ -11,24 +13,26 @@ public class Category {
     //  a. https://stackoverflow.com/questions/27474457/uniqueness-of-an-attribute-in-an-object
     //  b. https://softwareengineering.stackexchange.com/questions/170912/ways-to-ensure-unique-instances-of-a-class
     // La segunda me llevó a la idea de que se puede hacer una operación similar contando con que Store pueda devolver
-    // la categoría con cierto name así que decidí tirar por ese camino ya que ocuparía menos memoria (supuestamente)
+    // la categoría con cierto name así que decidí tirar por ese camino, ya que ocuparía menos memoria (supuestamente)
 
     /**
      * Category's constructor
-     * @param name the new category's name
+     * @param store the store
+     * @param name  the new category's name
      */
-    Category(String name) {
-        if (getCategoryFromName(name) == null) {
+    Category(Store store, String name) {
+        if (store.getCategoryFromName(name) == null) {
             this.name = name;
         }
     }
 
     /**
      * It allows a manager to change a Category's name
-     * @param name the category's new name
+     * @param store the store
+     * @param name  the category's new name
      */
-    void changeName(String name) {
-        if (getCategoryFromName(name) == null) {
+    public void changeName(Store store, String name) {
+        if (store.getCategoryFromName(name) == null) {
             this.name = name;
         }
     }

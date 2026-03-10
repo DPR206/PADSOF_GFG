@@ -6,8 +6,6 @@
  * @version 1.0
  * @see Exchange
  * @see SecondHandProduct
- * <p>
- * Copyright??
  */
 public class ExchangePermission {
     // NOTE: No tiene atributos propios

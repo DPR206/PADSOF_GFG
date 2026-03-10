@@ -1,12 +1,10 @@
 /**
- * Classname: OrderPermission
+ * Class name: OrderPermission
  * <p>
  * Description: It implements the permission that allows an employee to manage Orders
  * @author Ana O.R.
- * @version 1.0
+ * @version 1.1
  * @see Order
- * <p>
- * Copyright??
  */
 public class OrderPermission {
     // NOTE: No tiene atributos propios

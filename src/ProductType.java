@@ -1,14 +1,15 @@
 /**
- * EnumName: ConservationStatus
+ * Enum Name: ConservationStatus
  * <p>
  * Description: It defines the conservations status
  * @author Ana O.R.
  * @version 1.0
- * <p>
- * Copyright??
  */
 public enum ProductType {
+    /** Comic product type */
     COMIC,
+    /** Figurine product type */
     FIGURINE,
+    /** Game product type */
     GAME
 }

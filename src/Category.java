@@ -3,12 +3,11 @@
  * <p>
  * Description: It implements the categories
  * @author Ana O.R.
- * @version 1.0
- * <p>
- * Copyright??
+ * @version 1.1
  */
 public class Category {
-    public String name; /* The category's name */ // NOTE: Debe ser único (mirar explicación a continuación)
+    /* The category's name */
+    public String name; // NOTE: Debe ser único (mirar explicación a continuación)
     // Encontré dos formas de que fuera único:
     //  a. https://stackoverflow.com/questions/27474457/uniqueness-of-an-attribute-in-an-object
     //  b. https://softwareengineering.stackexchange.com/questions/170912/ways-to-ensure-unique-instances-of-a-class

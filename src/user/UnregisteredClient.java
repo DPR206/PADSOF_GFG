@@ -3,6 +3,8 @@
  */
 package user;
 
+import order.Cart;
+
 /**
  * Class name: UnregisteredClient
  * <p>

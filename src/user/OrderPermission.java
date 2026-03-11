@@ -1,4 +1,4 @@
-package store;
+package user;
 import order.Order;
 import order.OrderState;
 

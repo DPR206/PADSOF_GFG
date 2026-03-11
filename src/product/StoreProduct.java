@@ -1,18 +1,22 @@
 package product;
 import order.Order;
 
+import java.util.*;
+
 /**
  * Class name: StoreProduct
  * <p>
  * Description: It implements the store's products
- * @author Ana O.R.
+ * @author Ana O.R. and Duna P.R.
  * @version 1.0
  * @see Product
  * @see Order
+ * @see Review
  */
 public abstract class StoreProduct extends Product {
     /** The number of available copies of this product */
     private int stock;
+    private ArrayList<Review> reviews;
 
     /**
      * Store product's constructor
@@ -46,4 +50,6 @@ public abstract class StoreProduct extends Product {
     public void changeStock(int stock) {
         this.stock = stock;
     }
+    
+    public void addReview() {} //habrá que desarrollar
 }

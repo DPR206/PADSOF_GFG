@@ -17,6 +17,12 @@ import java.time.format.*;
 public class RegisteredClient extends User {
 	private LocalDate registerDate;
 	private String dni;
+	//carrito
+	//cartera
+	//searcher
+	//sugestioner
+	//exchangehistory
+	//orderhistory
 	
 	/**
 	 * Creates a new RegisteredClient

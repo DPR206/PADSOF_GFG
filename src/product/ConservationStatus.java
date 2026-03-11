@@ -1,9 +1,10 @@
 package product;
+
 /**
  * Enum Name: ConservationStatus
  * <p>
  * Description: It defines the conservations status
- * @author Ana O.R.
+ * @author
  * @version 1.0
  */
 public enum ConservationStatus {

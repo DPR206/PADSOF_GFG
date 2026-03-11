@@ -1,4 +1,5 @@
 package product;
+
 import store.Store;
 
 /**

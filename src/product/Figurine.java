@@ -45,14 +45,113 @@ public class Figurine extends StoreProduct {
         this.material = material;
     }
 
-    // DUE: Change -> name
-    // DUE: Change -> description
-    // DUE: Change -> photo
-    // DUE: Change -> price
-    // DUE: Change -> type
-    // DUE: Change -> stock
+    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+
+    /**
+     * It allows for an employee to change a figurine's price
+     * @param price the figurine's new price
+     */
+    public void changePrice(double price) {
+        super.changePrice(price);
+    }
+
+    /**
+     * It allows for an employee to change a figurine's name
+     * @param newName the figurine's new name
+     */
+    public void changeName(String newName) {
+        super.changeName(newName);
+    }
+
+    /**
+     * It allows for an employee to change a figurine's description
+     * @param newDescription the figurine's new description
+     */
+    public void changeDescription(String newDescription) {
+        super.changeDescription(newDescription);
+    }
+
+    /**
+     * It allows for an employee to change a figurine's photo's path
+     * @param newPhoto the figurine's new photo
+     */
+    public void changePhoto(String newPhoto) {
+        super.changePhoto(newPhoto);
+    }
+
+    /**
+     * It allows for an employee to change a figurine's figurine's type
+     * @param newType the figurine's new product type
+     */
+    public void changeType(ProductType newType) {
+        super.changeType(newType);
+    }
+
+    /**
+     * It allows for an employee to change the figurine's stock as well as blocking or unblocking stock
+     * @param newStock the figurine's new stock
+     */
+    public void changeStock(int newStock) {
+        super.changeStock(newStock);
+    }
+
     // DUE: Change -> categories
-    // DUE: Change -> stock
+
+    // DUE: Change -> height
+    // DUE: Change -> width
+    // DUE: Change -> depth
+    // DUE: Change -> brand
+    // DUE: Change -> material
+
+    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /**
+     * It returns the figurine's id
+     * @return the figurine's id
+     */
+    public int getId() {
+        return super.getId();
+    }
+
+    /**
+     * It returns the figurine's price
+     * @return the figurine's price
+     */
+    public double getPrice() {
+        return super.getPrice();
+    }
+
+    /**
+     * It returns the figurine's description
+     * @return the figurine's description
+     */
+    public String getDescription() {
+        return super.getDescription();
+    }
+
+    /**
+     * It returns the figurine's photo's path
+     * @return the figurine's photo
+     */
+    public String getPhoto() {
+        return super.getPhoto();
+    }
+
+    /**
+     * It returns the figurine's product type
+     * @return the figurine's product type
+     */
+    public ProductType getType() {
+        return super.getType();
+    }
+
+    /**
+     * It returns the figurine's categories
+     * @return the figurine's categories
+     */
+    public Category[] getCategories() {
+        return super.getCategories();
+    }
+
     // DUE: Change -> height
     // DUE: Change -> width
     // DUE: Change -> depth

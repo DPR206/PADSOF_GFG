@@ -1,4 +1,5 @@
-package store;
+package user;
+import exchange.Exchange;
 import product.SecondHandProduct;
 
 /**

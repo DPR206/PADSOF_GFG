@@ -2,6 +2,8 @@ package product;
 
 import order.Order;
 
+import java.util.*;
+
 /**
  * Class name: StoreProduct
  * <p>
@@ -10,10 +12,12 @@ import order.Order;
  * @version 1.0
  * @see Product
  * @see Order
+ * @see Review
  */
 public abstract class StoreProduct extends Product {
     /** The number of available copies of this product */
     private int stock;
+    private ArrayList<Review> reviews;
 
     /**
      * Store product's constructor
@@ -133,4 +137,6 @@ public abstract class StoreProduct extends Product {
     public Category[] getCategories() {
         return super.getCategories();
     }
+
+    public void addReview() {} //habrá que desarrollar
 }

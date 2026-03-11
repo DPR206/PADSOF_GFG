@@ -3,6 +3,8 @@
  */
 package user;
 
+import order.Cart;
+
 /**
  * Class name: UnregisteredClient
  * <p>
@@ -13,7 +15,7 @@ package user;
  */
 public class UnregisteredClient {
 
-	//private Cart cart;
+	private Cart c;
 	//searcher
 	
 	/**

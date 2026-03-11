@@ -104,4 +104,8 @@ public class RegisteredClient extends User {
 	//addCart
 	//deleteCart
 	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

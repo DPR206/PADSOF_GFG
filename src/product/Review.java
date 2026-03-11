@@ -13,7 +13,30 @@ import user.RegisteredClient;
  * @see User
  */
 public class Review {
-	private int puntuation;
+	private int scoring;
 	private String comment;
 	private RegisteredClient author;
+	
+	/**
+	 * Creates a new review
+	 * 
+	 * @param scoring, the puntuation given to a product
+	 * @param comment, the comment about the product
+	 * @param author, the author of the comment
+	 */
+	public Review(int scoring, String comment, RegisteredClient author) {
+		this.scoring = scoring;
+		this.comment = comment;
+		this.author = author;
+	}
+	
+	/**
+	 * Written information of a review
+	 * 
+	 * @return String, information of a review
+	 */
+	public String toString() {
+		return author.toString()+"\nScoring: "+scoring+"/5\n"+comment;
+	}
+	
 }

@@ -1,14 +1,15 @@
 package product;
 
 import order.Order;
+import user.RegisteredClient;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Class name: StoreProduct
  * <p>
  * Description: It implements the store's products
- * @author Ana O.R.
+ * @author Ana O.R. and Duna P.R.
  * @version 1.0
  * @see Product
  * @see Order
@@ -17,6 +18,7 @@ import java.util.*;
 public abstract class StoreProduct extends Product {
     /** The number of available copies of this product */
     private int stock;
+    /** The product's reviews */
     private ArrayList<Review> reviews;
 
     /**
@@ -42,6 +44,7 @@ public abstract class StoreProduct extends Product {
      * It allows for an employee to change a product's price
      * @param price the product's new price
      */
+    @Override
     public void changePrice(double price) {
         super.changePrice(price);
     }
@@ -50,6 +53,7 @@ public abstract class StoreProduct extends Product {
      * It allows for an employee to change a product's name
      * @param newName the product's new name
      */
+    @Override
     public void changeName(String newName) {
         super.changeName(newName);
     }
@@ -58,6 +62,7 @@ public abstract class StoreProduct extends Product {
      * It allows for an employee to change a product's description
      * @param newDescription the product's new description
      */
+    @Override
     public void changeDescription(String newDescription) {
         super.changeDescription(newDescription);
     }
@@ -66,6 +71,7 @@ public abstract class StoreProduct extends Product {
      * It allows for an employee to change a product's photo's path
      * @param newPhoto the product's new photo
      */
+    @Override
     public void changePhoto(String newPhoto) {
         super.changePhoto(newPhoto);
     }
@@ -74,6 +80,7 @@ public abstract class StoreProduct extends Product {
      * It allows for an employee to change a product's product's type
      * @param newType the product's new product type
      */
+    @Override
     public void changeType(ProductType newType) {
         super.changeType(newType);
     }
@@ -94,6 +101,7 @@ public abstract class StoreProduct extends Product {
      * It returns the product's id
      * @return the product's id
      */
+    @Override
     public int getId() {
         return super.getId();
     }
@@ -102,6 +110,7 @@ public abstract class StoreProduct extends Product {
      * It returns the product's price
      * @return the product's price
      */
+    @Override
     public double getPrice() {
         return super.getPrice();
     }
@@ -110,6 +119,7 @@ public abstract class StoreProduct extends Product {
      * It returns the product's description
      * @return the product's description
      */
+    @Override
     public String getDescription() {
         return super.getDescription();
     }
@@ -118,6 +128,7 @@ public abstract class StoreProduct extends Product {
      * It returns the product's photo's path
      * @return the product's photo
      */
+    @Override
     public String getPhoto() {
         return super.getPhoto();
     }
@@ -126,6 +137,7 @@ public abstract class StoreProduct extends Product {
      * It returns the product's product type
      * @return the product's product type
      */
+    @Override
     public ProductType getType() {
         return super.getType();
     }
@@ -134,9 +146,23 @@ public abstract class StoreProduct extends Product {
      * It returns the product's categories
      * @return the product's categories
      */
+    @Override
     public Category[] getCategories() {
         return super.getCategories();
     }
 
-    public void addReview() {} //habrá que desarrollar
+    /**
+     * It returns's the product's stock
+     * @return the product's store
+     */
+    public int getStock() {
+        return this.stock;
+    }
+
+    /**
+     * It allows for a registered client to review the product
+     */
+    public void addReview(RegisteredClient reviewer/*Campos*/) {
+        reviews.add(new Review(/*Campos*/)); // DUE: Terminarlo
+    }
 }

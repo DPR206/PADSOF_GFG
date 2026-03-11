@@ -9,7 +9,7 @@ package product;
  */
 public abstract class Product {
     /** The product's id */
-    private int id;
+    private final int id;
     /** The product's price */
     private double price;
     /** The product's name */
@@ -21,7 +21,7 @@ public abstract class Product {
     /** The product's product type */
     private ProductType type;
     /** The product's categories */
-    private Category[] categories;
+    private final Category[] categories;
 
     /**
      * General product constructor

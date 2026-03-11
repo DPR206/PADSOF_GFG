@@ -1,5 +1,7 @@
 package product;
 
+import store.Store;
+
 import java.time.Year;
 
 /**
@@ -43,11 +45,34 @@ public class Comic extends StoreProduct {
         this.editorial = editorial;
     }
 
+    /**
+     * It allows employees to add comics to the store
+     * @param store       the store
+     * @param price       the comic's price
+     * @param name        the comic's name
+     * @param description the comic's description
+     * @param photo       the comic's photo's path
+     * @param stock       the comic's stock
+     * @param numPages    the comic's number of pages
+     * @param year        the comic's publishing year
+     * @param author      the comic's author
+     * @param editorial   the comic's editorial
+     * @param categories  the comic's categories
+     * @return the new comic
+     */
+    public Comic addComic(Store store, double price, String name, String description, String photo, int stock,
+                          int numPages, Year year, String author, String editorial, Category... categories) {
+        return new Comic(store.getProductId(), price, name, description, photo, stock, numPages, year, author,
+                editorial, categories);
+    }
+
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+
     /**
      * It allows for an employee to change a comic's price
      * @param price the comic's new price
      */
+    @Override
     public void changePrice(double price) {
         super.changePrice(price);
     }
@@ -56,6 +81,7 @@ public class Comic extends StoreProduct {
      * It allows for an employee to change a comic's name
      * @param newName the comic's new name
      */
+    @Override
     public void changeName(String newName) {
         super.changeName(newName);
     }
@@ -64,6 +90,7 @@ public class Comic extends StoreProduct {
      * It allows for an employee to change a comic's description
      * @param newDescription the comic's new description
      */
+    @Override
     public void changeDescription(String newDescription) {
         super.changeDescription(newDescription);
     }
@@ -72,6 +99,7 @@ public class Comic extends StoreProduct {
      * It allows for an employee to change a comic's photo's path
      * @param newPhoto the comic's new photo
      */
+    @Override
     public void changePhoto(String newPhoto) {
         super.changePhoto(newPhoto);
     }
@@ -80,6 +108,7 @@ public class Comic extends StoreProduct {
      * It allows for an employee to change a comic's comic's type
      * @param newType the comic's new product type
      */
+    @Override
     public void changeType(ProductType newType) {
         super.changeType(newType);
     }
@@ -88,22 +117,52 @@ public class Comic extends StoreProduct {
      * It allows for an employee to change the comic's stock as well as blocking or unblocking stock
      * @param newStock the comic's new stock
      */
+    @Override
     public void changeStock(int newStock) {
         super.changeStock(newStock);
     }
 
     // DUE: Change -> categories
 
-    // DUE: Change -> numPages
-    // DUE: Change -> year
-    // DUE: Change -> author
-    // DUE: Change -> editorial
+    /**
+     * It allows for an employee to change the comic's number of pages
+     * @param newNumPages the comic's number of pages
+     */
+    public void changeNumPages(int newNumPages) {
+        this.numPages = newNumPages;
+    }
+
+    /**
+     * It allows for an employee to change the comic's publishing year
+     * @param newYear the comic's publishing year
+     */
+    public void changeYear(Year newYear) {
+        this.year = newYear;
+    }
+
+    /**
+     * It allows for an employee to change the comic's author
+     * @param newAuthor the comic's author
+     */
+    public void changeAuthor(String newAuthor) {
+        this.author = newAuthor;
+    }
+
+    /**
+     * It allows for an employee to change the comic's editorial
+     * @param newEditorial the comic's editorial
+     */
+    public void changeEditorial(String newEditorial) {
+        this.editorial = newEditorial;
+    }
 
     /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+
     /**
      * It returns the comic's id
      * @return the comic's id
      */
+    @Override
     public int getId() {
         return super.getId();
     }
@@ -112,6 +171,7 @@ public class Comic extends StoreProduct {
      * It returns the comic's price
      * @return the comic's price
      */
+    @Override
     public double getPrice() {
         return super.getPrice();
     }
@@ -120,6 +180,7 @@ public class Comic extends StoreProduct {
      * It returns the comic's description
      * @return the comic's description
      */
+    @Override
     public String getDescription() {
         return super.getDescription();
     }
@@ -128,6 +189,7 @@ public class Comic extends StoreProduct {
      * It returns the comic's photo's path
      * @return the comic's photo
      */
+    @Override
     public String getPhoto() {
         return super.getPhoto();
     }
@@ -136,6 +198,7 @@ public class Comic extends StoreProduct {
      * It returns the comic's product type
      * @return the comic's product type
      */
+    @Override
     public ProductType getType() {
         return super.getType();
     }
@@ -144,20 +207,49 @@ public class Comic extends StoreProduct {
      * It returns the comic's categories
      * @return the comic's categories
      */
+    @Override
     public Category[] getCategories() {
         return super.getCategories();
     }
 
+    /**
+     * It returns's the product's stock
+     * @return the product's store
+     */
+    @Override
+    public int getStock() {
+        return super.getStock();
+    }
+
+    /**
+     * It returns the comic's number of pages
+     * @return the comic's number of pages
+     */
     public int getNumPages() {
         return this.numPages;
     }
 
+    /**
+     * It returns the comic's publishing year
+     * @return the comic's publishing year
+     */
     public Year getYear() {
         return this.year;
     }
 
+    /**
+     * It returns the comic's author
+     * @return the comic's author
+     */
     public String getAuthor() {
         return this.author;
     }
-    // DUE: Change -> editorial
+
+    /**
+     * It returns the comic's editorial
+     * @return the comic's editorial
+     */
+    public String getEditorial() {
+        return this.editorial;
+    }
 }

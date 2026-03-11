@@ -1,9 +1,10 @@
 /**
- * 
+ *
  */
 package product;
 
 import user.RegisteredClient;
+
 /**
  * Class name: RegisteredClient
  * <p>
@@ -13,7 +14,7 @@ import user.RegisteredClient;
  * @see User
  */
 public class Review {
-	private int puntuation;
-	private String comment;
-	private RegisteredClient author;
+    private int puntuation;
+    private String comment;
+    private RegisteredClient author;
 }

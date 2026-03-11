@@ -1,4 +1,5 @@
 package product;
+
 /**
  * Enum Name: ConservationStatus
  * <p>

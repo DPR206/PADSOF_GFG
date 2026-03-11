@@ -1,3 +1,6 @@
+package product;
+import store.Store;
+
 /**
  * Class name: Category
  * <p>

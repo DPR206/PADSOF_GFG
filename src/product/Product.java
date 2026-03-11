@@ -1,3 +1,5 @@
+package product;
+
 /**
  * Class name: Product
  * <p>

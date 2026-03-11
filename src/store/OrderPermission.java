@@ -1,3 +1,7 @@
+package store;
+import order.Order;
+import order.OrderState;
+
 /**
  * Class name: OrderPermission
  * <p>

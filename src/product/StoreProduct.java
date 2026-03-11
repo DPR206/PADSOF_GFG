@@ -1,3 +1,6 @@
+package product;
+import order.Order;
+
 /**
  * Class name: StoreProduct
  * <p>

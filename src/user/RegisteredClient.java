@@ -1,6 +1,7 @@
 /**
  * 
  */
+package user;
 
 import java.util.*;
 import java.time.*;
@@ -100,6 +101,7 @@ public class RegisteredClient extends User {
 	//requestValoration
 	//makeAnOffer
 	//browseNotifications
-	
+	//addCart
+	//deleteCart
 	
 }

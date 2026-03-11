@@ -1,3 +1,6 @@
+package store;
+import product.SecondHandProduct;
+
 /**
  * Class name: ExchangePermission
  * <p>

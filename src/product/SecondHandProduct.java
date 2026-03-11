@@ -1,7 +1,8 @@
-public class Exchange {
+package product;
+public class SecondHandProduct {
     // Está creada para que no se queje el compilador en sus referencias
 
-    public void changeExchanged(boolean exchanged) {
+    public void changePrice(double price) {
         // Rellenar
     }
 }

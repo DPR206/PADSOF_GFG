@@ -1,3 +1,6 @@
+package store;
+import product.Category;
+
 public class Store {
     // Está creada para que no se queje el compilador en sus referencias
 

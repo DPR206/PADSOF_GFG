@@ -1,7 +1,8 @@
-public class SecondHandProduct {
+package order;
+public class Order {
     // Está creada para que no se queje el compilador en sus referencias
 
-    public void changePrice(double price) {
+    public void changeStatus(OrderState state) {
         // Rellenar
     }
 }

@@ -105,6 +105,21 @@ public class Pack {
 		this.products = products;
 	}
 	
+	/**
+	 * 
+	 * @return the dateAddCart
+	 */
+	public Date getDateAddCart() {
+		return dateAddCart;
+	}
+
+	/**
+	 * @param dateAddCart the dateAddCart to set
+	 */
+	public void setDateAddCart(Date dateAddCart) {
+		this.dateAddCart = dateAddCart;
+	}
+	
 	/*-----------------------------------------------------Methods------------------------------------------------------------------*/
 
 	/**

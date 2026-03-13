@@ -137,30 +137,38 @@ public class Pack {
 	 * Adds a new product to the pack
 	 * 
 	 * @param sp, store product to add
-	 * @return true if the collection was changed successfully
+	 * @return true if the collection was changed successfully, false if not
 	 */
 	public boolean addProduct(StoreProduct sp) {
 		return products.add(sp);
 	}
 	
 	/**
-	 * Adds a new
-	 * @param sp
-	 * @return
+	 * Eliminates a product from the pack
+	 * 
+	 * @param sp, store product to eliminate
+	 * @return true if the product was eliminated correctly, false if not
 	 */
 	public boolean eliminateProduct(StoreProduct sp) {
 		return products.remove(sp);
 	}
 	
 	/**
+	 * Adds a new collection of products to the pack
 	 * 
-	 * @param newProducts
-	 * @return
+	 * @param newProducts, the store products to add
+	 * @return true if the products were added correctly, false if not
 	 */
 	public boolean addArrayProducts(ArrayList<StoreProduct> newProducts) {
 		return products.addAll(newProducts);
 	}
 	
+	/**
+	 * Eliminates a collection of store products
+	 * 
+	 * @param productsRemove, the store products to remove
+	 * @return true if the products were removed correctly, false if not
+	 */
 	public boolean eliminateArrayProducts(ArrayList<StoreProduct> productsRemove) {
 		return products.removeAll(productsRemove);
 	}

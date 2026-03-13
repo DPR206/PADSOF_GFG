@@ -12,7 +12,7 @@ import product.Category;
  * @version 1.0
  */
 public class Store {
-    private int productId;
+    private static int productId = 0;
     // Está creada para que no se queje el compilador en sus referencias
 
     public Category getCategoryFromName(String name) {
@@ -25,7 +25,6 @@ public class Store {
      */
     public int getProductId() {
         int id = this.productId;
-        productId++;
         return id;
     }
 }

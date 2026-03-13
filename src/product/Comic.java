@@ -1,5 +1,6 @@
 package product;
 
+import order.Discount;
 import store.Store;
 
 import java.time.Year;
@@ -60,10 +61,19 @@ public class Comic extends StoreProduct {
      * @param categories  the comic's categories
      * @return the new comic
      */
-    public Comic addComic(Store store, double price, String name, String description, String photo, int stock,
+    public Comic createComic(Store store, double price, String name, String description, String photo, int stock,
                           int numPages, Year year, String author, String editorial, Category... categories) {
         return new Comic(store.getProductId(), price, name, description, photo, stock, numPages, year, author,
                 editorial, categories);
+    }
+
+    /**
+     * Written information of a product
+     * @return String, information of a product
+     */
+    @Override
+    public String toString() {
+        return super.toString() + ", " + this.numPages + ", " + this.year + ", " + this.author + ", " + this.editorial;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -122,7 +132,33 @@ public class Comic extends StoreProduct {
         super.changeStock(newStock);
     }
 
-    // DUE: Change -> categories
+    /**
+     * It allows the system or an employee to add categories to a product
+     * @param newCategories the categories to be added
+     */
+    @Override
+    public void addCategory(Category... newCategories) {
+        super.addCategory(newCategories);
+    }
+
+    /**
+     * It allows an employee to remove categories from a product
+     * @param categories the categories to be deleted
+     */
+    @Override
+    public void removeCategory(Category... categories) {
+        super.removeCategory(categories);
+    }
+
+    /**
+     * It allows an employee to add discounts to products or categories (Discounts is in charge of making sure they
+     * don't overlap)
+     * @param newDiscount the new discount to be applied
+     */
+    @Override
+    public void changeDiscount(Discount newDiscount) {
+        super.changeDiscount(newDiscount);
+    }
 
     /**
      * It allows for an employee to change the comic's number of pages

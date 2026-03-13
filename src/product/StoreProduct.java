@@ -1,5 +1,6 @@
 package product;
 
+import order.Discount;
 import order.Order;
 import user.RegisteredClient;
 
@@ -19,7 +20,9 @@ public abstract class StoreProduct extends Product {
     /** The number of available copies of this product */
     private int stock;
     /** The product's reviews */
-    private ArrayList<Review> reviews;
+    private final ArrayList<Review> reviews;
+    /** The product's discount, if it has one */
+    private Discount discount;
 
     /**
      * Store product's constructor
@@ -36,6 +39,17 @@ public abstract class StoreProduct extends Product {
                  Category... categories) {
         super(id, price, name, description, photo, type, categories);
         this.stock = stock;
+        this.reviews = new ArrayList<>();
+        this.discount = null;
+    }
+
+    /**
+     * Written information of a product
+     * @return String, information of a product
+     */
+    @Override
+    public String toString() {
+        return super.toString() + ", (" + this.stock + " uds)";
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -93,7 +107,32 @@ public abstract class StoreProduct extends Product {
         this.stock = newStock;
     }
 
-    // DUE: Change -> categories
+    /**
+     * It allows the system or an employee to add categories to a product
+     * @param newCategories the categories to be added
+     */
+    @Override
+    public void addCategory(Category... newCategories) {
+        super.addCategory(newCategories);
+    }
+
+    /**
+     * It allows an employee to remove categories from a product
+     * @param categories the categories to be deleted
+     */
+    @Override
+    public void removeCategory(Category... categories) {
+        super.removeCategory(categories);
+    }
+
+    /**
+     * It allows an employee to add discounts to products or categories (Discounts is in charge of making sure they
+     * don't overlap)
+     * @param newDiscount the new discount to be applied
+     */
+    public void changeDiscount(Discount newDiscount) {
+        this.discount = newDiscount;
+    }
 
     /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
 
@@ -160,9 +199,12 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
-     * It allows for a registered client to review the product
+     * It allows a registered client to review a product
+     * @param scoring the review's score
+     * @param comment the review's comment
+     * @param author  the review's author
      */
-    public void addReview(RegisteredClient reviewer/*Campos*/) {
-        reviews.add(new Review(/*Campos*/)); // DUE: Terminarlo
+    public void addReview(int scoring, String comment, RegisteredClient author) {
+        reviews.add(new Review(scoring, comment, author));
     }
 }

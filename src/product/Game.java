@@ -1,5 +1,6 @@
 package product;
 
+import order.Discount;
 import store.Store;
 
 /**
@@ -48,9 +49,18 @@ public class Game extends StoreProduct {
      * @param categories  the game's categories
      * @return the new game
      */
-    public Game addGame(Store store, double price, String name, String description, String photo, int stock,
+    public Game createGame(Store store, double price, String name, String description, String photo, int stock,
                         int numPlayers, String ageRange, Category... categories) {
         return new Game(store.getProductId(), price, name, description, photo, stock, numPlayers, ageRange, categories);
+    }
+
+    /**
+     * Written information of a product
+     * @return String, information of a product
+     */
+    @Override
+    public String toString() {
+        return super.toString() + ", " + this.numPlayers + ", " + this.ageRange;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -109,10 +119,49 @@ public class Game extends StoreProduct {
         super.changeStock(newStock);
     }
 
-    // DUE: Change -> categories
+    /**
+     * It allows the system or an employee to add categories to a product
+     * @param newCategories the categories to be added
+     */
+    @Override
+    public void addCategory(Category... newCategories) {
+        super.addCategory(newCategories);
+    }
 
-    // DUE: Change -> numPlayers
-    // DUE: Change -> ageRange
+    /**
+     * It allows an employee to remove categories from a product
+     * @param categories the categories to be deleted
+     */
+    @Override
+    public void removeCategory(Category... categories) {
+        super.removeCategory(categories);
+    }
+
+    /**
+     * It allows an employee to add discounts to products or categories (Discounts is in charge of making sure they
+     * don't overlap)
+     * @param newDiscount the new discount to be applied
+     */
+    @Override
+    public void changeDiscount(Discount newDiscount) {
+        super.changeDiscount(newDiscount);
+    }
+
+    /**
+     * It allows an employee to change a game's number of players
+     * @param newNumPlayers the game's number of players
+     */
+    public void changeNumPlayers(int newNumPlayers) {
+        this.numPlayers = newNumPlayers;
+    }
+
+    /**
+     * It allows an employee to change a game's age range
+     * @param newAgeRange the game's age range
+     */
+    public void changeAgeRange(String newAgeRange) {
+        this.ageRange = newAgeRange;
+    }
 
     /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
 

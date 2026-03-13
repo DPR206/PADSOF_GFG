@@ -5,9 +5,9 @@ package product;
 
 import user.RegisteredClient;
 /**
- * Class name: RegisteredClient
+ * Class name: Review
  * <p>
- * Description: It implements the registered client
+ * Description: It implements the reviews
  * @author Duna P.R.
  * @version 1.0
  * @see User

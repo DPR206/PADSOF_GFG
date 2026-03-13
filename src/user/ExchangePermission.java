@@ -13,7 +13,6 @@ import product.SecondHandProduct;
  */
 public class ExchangePermission {
     // NOTE: No tiene atributos propios
-	//nota prueba
 
     /**
      * It allows an employee to change an exchange's status

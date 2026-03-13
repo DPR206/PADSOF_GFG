@@ -106,6 +106,28 @@ public abstract class StoreProduct extends Product {
     public void changeStock(int newStock) {
         this.stock = newStock;
     }
+    
+    /**
+     * It decreases the stock a certain value
+     * 
+     * @param value, the amount it decreases
+     */
+    public void drecreaseStock(int value) {
+    	
+    	if((stock = stock-value)<0)
+    		stock = 0;
+    	else
+    		return;	
+    }
+    
+    /**
+     * It increases the stock a certain value
+     * 
+     * @param value, the amount it increases
+     */
+    public void increaseStock(int value) {
+    	stock = stock + value;
+    }
 
     /**
      * It allows the system or an employee to add categories to a product

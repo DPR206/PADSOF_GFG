@@ -106,6 +106,7 @@ public class Pack {
 	}
 	
 	/**
+	 * Obtains the date the pack was added to the cart
 	 * 
 	 * @return the dateAddCart
 	 */
@@ -114,6 +115,8 @@ public class Pack {
 	}
 
 	/**
+	 * Sets the date the pack was added to the cart
+	 * 
 	 * @param dateAddCart the dateAddCart to set
 	 */
 	public void setDateAddCart(Date dateAddCart) {
@@ -149,6 +152,11 @@ public class Pack {
 		return products.remove(sp);
 	}
 	
+	/**
+	 * 
+	 * @param newProducts
+	 * @return
+	 */
 	public boolean addArrayProducts(ArrayList<StoreProduct> newProducts) {
 		return products.addAll(newProducts);
 	}

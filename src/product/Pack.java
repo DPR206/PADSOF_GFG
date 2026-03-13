@@ -18,6 +18,7 @@ public class Pack {
 	private int id;
 	private double price;
 	private ArrayList<StoreProduct> products;
+	private Date dateAddCart = null;
 	
 	/*---------------------------------------------------Constructors---------------------------------------------------------------*/
 	
@@ -28,10 +29,22 @@ public class Pack {
 	 * @param price, the pack's price
 	 * @param products, the products the pack contains
 	 */
-	public Pack(int id, double price, ArrayList<StoreProduct> products) {
+	public Pack(int id, double price, ArrayList<StoreProduct> products, Date date) {
 		this.id = id;
 		this.price = price;
 		this.products = products;
+		this.dateAddCart = date;
+	}
+	
+	/**
+	 * Creates a new pack with default id and date
+	 * 
+	 * @param price, price of the pack
+	 * @param products, the products the pack contains
+	 */
+	public Pack(double price, ArrayList<StoreProduct> products) {
+		this(totalId, price, products, null);
+		totalId++;
 	}
 	
 	/**
@@ -40,8 +53,8 @@ public class Pack {
 	 * @param price, price of the pack
 	 * @param products, the products the pack contains
 	 */
-	public Pack(double price, ArrayList<StoreProduct> products) {
-		this(totalId, price, products);
+	public Pack(double price, ArrayList<StoreProduct> products, Date date) {
+		this(totalId, price, products, date);
 		totalId++;
 	}
 
@@ -102,15 +115,30 @@ public class Pack {
 			sp.drecreaseStock(1);
 	}
 	
-	public void addProduct(StoreProduct sp) {
-		products.add(sp);
+	/**
+	 * Adds a new product to the pack
+	 * 
+	 * @param sp, store product to add
+	 * @return true if the collection was changed successfully
+	 */
+	public boolean addProduct(StoreProduct sp) {
+		return products.add(sp);
 	}
 	
-	public void eliminateProduct(StoreProduct sp) {
-		products.remove(sp);
+	/**
+	 * Adds a new
+	 * @param sp
+	 * @return
+	 */
+	public boolean eliminateProduct(StoreProduct sp) {
+		return products.remove(sp);
 	}
 	
-	public void addArrayProducts(ArrayList<StoreProduct> newProducts) {
-		
+	public boolean addArrayProducts(ArrayList<StoreProduct> newProducts) {
+		return products.addAll(newProducts);
+	}
+	
+	public boolean eliminateArrayProducts(ArrayList<StoreProduct> productsRemove) {
+		return products.removeAll(productsRemove);
 	}
 }

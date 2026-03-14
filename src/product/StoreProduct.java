@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * <p>
  * Description: It implements the store's products
  * @author Ana O.R. and Duna P.R.
- * @version 1.0
+ * @version 1.3
  * @see Product
  * @see Order
  * @see Review
@@ -26,7 +26,6 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Store product's constructor
-     * @param id          the product's id
      * @param name        the product's name
      * @param description the product's description
      * @param photo       the product's photo's path
@@ -35,9 +34,9 @@ public abstract class StoreProduct extends Product {
      * @param stock       the product's stock
      * @param categories  the product's categories
      */
-    StoreProduct(int id, double price, String name, String description, String photo, ProductType type, int stock,
+    StoreProduct(double price, String name, String description, String photo, ProductType type, int stock,
                  Category... categories) {
-        super(id, price, name, description, photo, type, categories);
+        super(price, name, description, photo, type, categories);
         this.stock = stock;
         this.reviews = new ArrayList<>();
         this.discount = null;
@@ -106,27 +105,23 @@ public abstract class StoreProduct extends Product {
     public void changeStock(int newStock) {
         this.stock = newStock;
     }
-    
+
     /**
      * It decreases the stock a certain value
-     * 
      * @param value, the amount it decreases
      */
-    public void drecreaseStock(int value) {
-    	
-    	if((stock = stock-value)<0)
-    		stock = 0;
-    	else
-    		return;	
+    public void decreaseStock(int value) {
+
+        if ((stock = stock - value) < 0)
+            stock = 0;
     }
-    
+
     /**
      * It increases the stock a certain value
-     * 
      * @param value, the amount it increases
      */
     public void increaseStock(int value) {
-    	stock = stock + value;
+        stock = stock + value;
     }
 
     /**

@@ -8,6 +8,7 @@ import store.Store;
  * Description: It implements the categories
  * @author Ana O.R.
  * @version 1.1
+ * @see Store
  */
 public class Category {
     /* The category's name */
@@ -19,7 +20,7 @@ public class Category {
     // la categoría con cierto name (hashmap <name, category>) así que decidí tirar por ese camino, ya que ocuparía
     // menos memoria (supuestamente)
     /* The list of products that belong to this category */
-    public Product[] products;
+    public Product[] products; // DUE: Terminar de implementar esto (estoy pensando cómo hacerlo)
 
     /**
      * Category's constructor

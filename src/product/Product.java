@@ -8,9 +8,11 @@ import java.util.HashMap;
  * <p>
  * Description: It implements the abstract Product class
  * @author Ana O.R.
- * @version 1.1
+ * @version 1.4
  */
 public abstract class Product {
+    /** The global variable to determine which id should a new product have */
+    public static int productId;
     /** The product's id */
     private final int id;
     /** The product's price */
@@ -26,9 +28,12 @@ public abstract class Product {
     /** The product's categories */
     private HashMap<String, Category> categories;
 
+    static {
+        productId = 0;
+    }
+
     /**
      * General product constructor
-     * @param id          the product's id
      * @param price       the product's price
      * @param name        the product's name
      * @param description the product's description
@@ -36,10 +41,10 @@ public abstract class Product {
      * @param type        the type
      * @param categories  the product's categories
      */
-    Product(int id, double price, String name, String description, String photo, ProductType type,
+    Product(double price, String name, String description, String photo, ProductType type,
             Category... categories) {
-        // NOTE: Este constructor existe porque tengo miedo de Java y facilita los constructores, NO debería llamarse
-        this.id = id;
+        this.id = productId;
+        productId++;
         this.price = price;
         this.name = name;
         this.description = description;
@@ -53,16 +58,15 @@ public abstract class Product {
 
     /**
      * SecondHandProduct's Product constructor
-     * @param id          the product's id
      * @param name        the product's name
      * @param description the product's description
      * @param photo       the product's photo's path
      * @param type        the type
      * @param categories  the product's categories
      */
-    Product(int id, String name, String description, String photo, ProductType type, Category... categories) {
+    Product(String name, String description, String photo, ProductType type, Category... categories) {
         // NOTE: Revisar qué precio inicial poner
-        this(id, -1, name, description, photo, type, categories);
+        this(-1, name, description, photo, type, categories);
     }
 
     /**

@@ -1,7 +1,6 @@
 package product;
 
 import order.Discount;
-import store.Store;
 
 import java.time.Year;
 
@@ -10,7 +9,7 @@ import java.time.Year;
  * <p>
  * Description: It implements the comics
  * @author Ana O.R.
- * @version 1.0
+ * @version 1.3
  * @see StoreProduct
  */
 public class Comic extends StoreProduct {
@@ -25,7 +24,6 @@ public class Comic extends StoreProduct {
 
     /**
      * The comic's constructor
-     * @param id          the comic's id
      * @param price       the comic's price
      * @param name        the comic's name
      * @param description the comic's description
@@ -37,9 +35,9 @@ public class Comic extends StoreProduct {
      * @param editorial   the comic's editorial
      * @param categories  the comic's categories
      */
-    Comic(int id, double price, String name, String description, String photo, int stock, int numPages, Year year,
+    Comic(double price, String name, String description, String photo, int stock, int numPages, Year year,
           String author, String editorial, Category... categories) {
-        super(id, price, name, description, photo, ProductType.COMIC, stock, categories);
+        super(price, name, description, photo, ProductType.COMIC, stock, categories);
         this.numPages = numPages;
         this.year = year;
         this.author = author;
@@ -48,7 +46,6 @@ public class Comic extends StoreProduct {
 
     /**
      * It allows employees to add comics to the store
-     * @param store       the store
      * @param price       the comic's price
      * @param name        the comic's name
      * @param description the comic's description
@@ -61,9 +58,9 @@ public class Comic extends StoreProduct {
      * @param categories  the comic's categories
      * @return the new comic
      */
-    public Comic createComic(Store store, double price, String name, String description, String photo, int stock,
-                          int numPages, Year year, String author, String editorial, Category... categories) {
-        return new Comic(store.getProductId(), price, name, description, photo, stock, numPages, year, author,
+    public Comic createComic(double price, String name, String description, String photo, int stock,
+                             int numPages, Year year, String author, String editorial, Category... categories) {
+        return new Comic(price, name, description, photo, stock, numPages, year, author,
                 editorial, categories);
     }
 

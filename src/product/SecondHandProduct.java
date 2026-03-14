@@ -6,4 +6,8 @@ public class SecondHandProduct {
     public void changePrice(double price) {
         // Rellenar
     }
+
+    public int getId() {
+        return 0; // Sustituir y rellenar
+    }
 }

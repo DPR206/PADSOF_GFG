@@ -21,7 +21,7 @@ public abstract class User {
 	public User(String pwd, String userName) {
 		this(pwd, userName, User.id);
 		User.id++;
-	} git ues una mierada
+	} 
 	
 	public void changePassword(String newPwd) {
 		this.pwd = pwd;

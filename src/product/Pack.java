@@ -172,4 +172,16 @@ public class Pack {
 	public boolean eliminateArrayProducts(ArrayList<StoreProduct> productsRemove) {
 		return products.removeAll(productsRemove);
 	}
+	
+	/**
+	 * Obtains the raw price of all the products in the pack
+	 * 
+	 * @return double, the raw price of the pack
+	 */
+	public double totalPrice() {
+		double total = 0;
+		for(StoreProduct sp: products)
+			total += sp.getPrice();
+		return total;
+	}
 }

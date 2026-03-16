@@ -27,7 +27,6 @@ public class UnregisteredClient extends User {
 	}
 	
 	public void buy() {
-		if(s.)
 		this.c.payOrder() //inicia sesión
 	}
 

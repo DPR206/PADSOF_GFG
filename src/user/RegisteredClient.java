@@ -108,4 +108,16 @@ public class RegisteredClient extends User {
 	public String toString() {
 		return super.toString();
 	}
+	
+	public void buy() {
+		this.c.payOrder()
+	}
+
+	public void removeFromCart(StoreProduct sp){
+		c.cancelProduct(sp);
+	}
+
+	public void addProduct(StoreProduct wanted){
+		c.addProduct(wanted);
+	}
 }

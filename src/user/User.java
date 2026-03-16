@@ -11,9 +11,6 @@ public abstract class User {
 	private String pwd;
 	private String userName;
 	private int actualID;
-	private Cart cart;
-	private List<SecondHandProduct> secondHandProducts;
-	private 
 	
 	public User(String pwd, String userName, int actualID) {
 		this.pwd = pwd;
@@ -24,9 +21,16 @@ public abstract class User {
 	public User(String pwd, String userName) {
 		this(pwd, userName, User.id);
 		User.id++;
-	} git ues una mierada
+	} 
 	
 	public void changePassword(String newPwd) {
 		this.pwd = pwd;
 	}
+	
+	public String getPassword() {
+		return this.pwd;
+	}	
+		
+		
 }
+

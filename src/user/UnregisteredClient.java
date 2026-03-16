@@ -13,19 +13,28 @@ import order.Cart;
  * @version 1.0
  * @see User
  */
-public class UnregisteredClient {
 
-	private Cart c;
+public class UnregisteredClient extends User {
+	private LocalDate registerDate;
+	private String dni;
+	private Carrito c;
 	//searcher
 	
 	/**
 	 * Creates a new unregistered client
 	 */
 	public UnregisteredClient() {
-		this.c = new Cart();
 	}
 	
-	//addCart
-	
-	
+	public void buy() {
+		this.c.payOrder() //inicia sesión
+	}
+
+	public void removeFromCart(StoreProduct sp){
+		c.cancelProduct(sp);
+	}
+
+	public void addProduct(StoreProduct wanted){
+		c.addProduct(wanted);
+	}
 }

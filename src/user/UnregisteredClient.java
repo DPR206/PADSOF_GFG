@@ -22,6 +22,7 @@ public class UnregisteredClient {
 	 * Creates a new unregistered client
 	 */
 	public UnregisteredClient() {
+		this.c = new Cart();
 	}
 	
 	//addCart

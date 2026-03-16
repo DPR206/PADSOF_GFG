@@ -15,18 +15,19 @@ import order.Cart;
  */
 
 public class UnregisteredClient extends User {
-	private LocalDate registerDate;
-	private String dni;
 	private Carrito c;
+	private Store s;
 	//searcher
 	
 	/**
 	 * Creates a new unregistered client
 	 */
 	public UnregisteredClient() {
+		c = new Carrito();
 	}
 	
 	public void buy() {
+		if(s.)
 		this.c.payOrder() //inicia sesión
 	}
 

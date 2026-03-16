@@ -18,6 +18,17 @@ public class Store {
     private static int productId = 0;
     // Está creada para que no se queje el compilador en sus referencias
     private Map<String, User> users = new HashMap<>();
+    private utility extras;
+    private Store(){
+        this.extras = new utilities();
+    }
+
+    public Store getInstance(){
+        if(Store.INSTANCE == null){
+            Store.INSTANCE = new Store();
+        }
+        return Store.INSTANCE;
+    }
 
     public Category getCategoryFromName(String name) {
         return null; // Sustituir y rellenar
@@ -32,34 +43,27 @@ public class Store {
         return id;
     }
     
-    private boolean logIn(String userName, String pwd) {
-    	User u;
-    	
-    	if(this.users.containsKey(userName)) {
-    		u = this.users.get(userName);
-    		if(u.getPassword() == pwd) {
-    			return true;
-    		}
-    	}
-    	return false;
-    } 
-    
-    public boolean signIn() {
-		Scanner sc = new Scanner(System.in);
-		String userName, pwd;
-		RegisteredClient rc;
-		
-		System.out.print("Introduce tu usuario: ");
-		
-		try {
-			System.out.print("Introduce tu usuario: ");
+    private boolean logIn() {
+    	Scanner sc = new Scanner(System.in);
+        String userName, pwd;
+
+        try{
+            System.out.print("Introduce tu usuario: ");
 			userName = sc.next();
-			System.out.print("Introduce tu contraseña: ");
+
+            System.out.print("Introduce tu contraseña: ");
 			pwd = sc.next();
-		}catch (InputMismatchException e) {
+        } catch (InputMismatchException e){
             System.out.println("Error: El tipo de dato introducido no es válido.");
+            return false;
         } finally {
             sc.close();
         }
+
+        if(extras.logIn(userName, pwd, this.getInstance()) == false) return false;
+        return true;
+    } 
+    
+    public boolean signIn() {
+		extras.signIn();
     }
-}

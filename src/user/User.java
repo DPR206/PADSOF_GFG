@@ -31,6 +31,8 @@ public abstract class User {
 		return this.pwd;
 	}	
 		
-		
+	public String getUserName(){
+		return this.userName;
+	}
 }
 

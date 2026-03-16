@@ -8,6 +8,14 @@ import java.util.Scanner;
 
 import user.RegisteredClient;
 
+/**
+ * Class Name: Carrito
+ * <p>
+ * Description: Cart, array of products and packs the user has not paid yet
+ * @author Sofía C.L.
+ * @version 1.0
+ */
+
 public class Carrito {
 	private List<StoreProduct> sp = new ArrayList<>();
 	private List<Pack> packs = new ArrayList<>();

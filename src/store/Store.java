@@ -67,3 +67,4 @@ public class Store {
     public boolean signIn() {
 		extras.signIn();
     }
+}

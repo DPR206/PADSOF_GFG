@@ -11,6 +11,9 @@ public abstract class User {
 	private String pwd;
 	private String userName;
 	private int actualID;
+	private Cart cart;
+	private List<SecondHandProduct> secondHandProducts;
+	private 
 	
 	public User(String pwd, String userName, int actualID) {
 		this.pwd = pwd;

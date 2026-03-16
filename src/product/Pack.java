@@ -172,7 +172,6 @@ public class Pack {
 	public boolean eliminateArrayProducts(ArrayList<StoreProduct> productsRemove) {
 		return products.removeAll(productsRemove);
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * Obtains the raw price of all the products in the pack
@@ -186,6 +185,3 @@ public class Pack {
 		return total;
 	}
 }
-=======
-}
->>>>>>> branch 'main' of https://github.com/DPR206/PADSOF_GFG.git

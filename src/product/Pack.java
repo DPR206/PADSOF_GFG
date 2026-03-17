@@ -57,6 +57,11 @@ public class Pack {
 		this(totalId, price, products, date);
 		totalId++;
 	}
+	
+	public Pack(double price, Date date) {
+		this(totalId, price, null, date);
+		totalId++;
+	}
 
 	/*----------------------------------------------------Getters and Setters---------------------------------------------------------------*/
 

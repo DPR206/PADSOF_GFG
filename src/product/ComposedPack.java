@@ -4,6 +4,7 @@
 package product;
 
 import java.util.*;
+import java.time.*;
 /**
  * Class name: ComposedPack
  * <p>
@@ -19,7 +20,8 @@ public class ComposedPack extends Pack {
 	/**
 	 * 
 	 */
-	public ComposedPack(ArrayList<Pack> newPacks) {
+	public ComposedPack(ArrayList<Pack> newPacks, int id, double price, Date date) {
+		super(double price, Date date);
 		packs = newPacks;
 	}
 

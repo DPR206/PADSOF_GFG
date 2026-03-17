@@ -4,6 +4,9 @@
 package user;
 
 import java.util.*;
+
+import order.Cart;
+
 import java.time.*;
 import java.time.format.*;
 
@@ -18,7 +21,7 @@ import java.time.format.*;
 public class RegisteredClient extends User {
 	private LocalDate registerDate;
 	private String dni;
-	//carrito
+	private Cart c;
 	//cartera
 	//searcher
 	//sugestioner
@@ -108,4 +111,6 @@ public class RegisteredClient extends User {
 	public String toString() {
 		return super.toString();
 	}
+	
+	public 
 }

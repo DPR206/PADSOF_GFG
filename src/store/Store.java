@@ -18,6 +18,18 @@ public class Store {
     private static int productId = 0;
     // Está creada para que no se queje el compilador en sus referencias
     private Map<String, User> users = new HashMap<>();
+    private Map<String, User> users = new HashMap<>();
+    private utility extras;
+    private Store(){
+        this.extras = new utilities();
+    }
+
+    public Store getInstance(){
+        if(Store.INSTANCE == null){
+            Store.INSTANCE = new Store();
+        }
+        return Store.INSTANCE;
+    }
 
     public Category getCategoryFromName(String name) {
         return null; // Sustituir y rellenar

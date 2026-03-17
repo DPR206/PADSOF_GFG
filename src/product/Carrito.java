@@ -8,6 +8,17 @@ import java.util.Scanner;
 
 import user.RegisteredClient;
 
+<<<<<<< HEAD
+=======
+/**
+ * Class Name: Carrito
+ * <p>
+ * Description: Cart, array of products and packs the user has not paid yet
+ * @author Sofía C.L.
+ * @version 1.0
+ */
+
+>>>>>>> branch 'main' of https://github.com/DPR206/PADSOF_GFG.git
 public class Carrito {
 	private List<StoreProduct> sp = new ArrayList<>();
 	private List<Pack> packs = new ArrayList<>();

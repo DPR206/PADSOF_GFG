@@ -50,7 +50,7 @@ public class ComposedPack extends Pack {
 	 * @param products, the products the pack contains
 	 */
 	public ComposedPack(double price, HashSet<Pack> newPacks) {
-		this(newPacks, price, LocalDate.now());
+		this(newPacks, price, null);
 	}
 	
 /*------------------------------------------------GETTERS AND SETTERS-----------------------------------------------------------------------*/

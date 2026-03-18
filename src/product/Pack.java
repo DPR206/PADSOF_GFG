@@ -44,7 +44,7 @@ public class Pack {
 	 * @param products, the products the pack contains
 	 */
 	public Pack(double price, ArrayList<StoreProduct> products) {
-		this(totalId, price, products, LocalDate.now());
+		this(totalId, price, products, null);
 		totalId++;
 	}
 

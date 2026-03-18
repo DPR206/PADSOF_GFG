@@ -15,7 +15,7 @@ import java.time.*;
  */
 public class ComposedPack extends Pack {
 
-	private ArrayList<Pack> packs;
+	private HashSet<Pack> packs;
 
 /*------------------------------------------------------CONSTRUCTORS-----------------------------------------------------------------------*/
 	/**
@@ -26,7 +26,7 @@ public class ComposedPack extends Pack {
 	 * @param newPacks
 	 * @param date
 	 */
-	public ComposedPack(int id, double price, ArrayList<Pack> newPacks, LocalDate date) {
+	public ComposedPack(int id, double price, HashSet<Pack> newPacks, LocalDate date) {
 		super(id, price, date);
 		this.packs = newPacks;
 	}
@@ -38,7 +38,7 @@ public class ComposedPack extends Pack {
 	 * @param price
 	 * @param date
 	 */
-	public ComposedPack(ArrayList<Pack> newPacks, double price, LocalDate date) {
+	public ComposedPack(HashSet<Pack> newPacks, double price, LocalDate date) {
 		super(price, date);
 		packs = newPacks;
 	}
@@ -49,8 +49,8 @@ public class ComposedPack extends Pack {
 	 * @param price, price of the pack
 	 * @param products, the products the pack contains
 	 */
-	public ComposedPack(double price, ArrayList<Pack> newPacks) {
-		this(newPacks, price, LocalDate.now());
+	public ComposedPack(double price, HashSet<Pack> newPacks) {
+		this(newPacks, price, null);
 	}
 	
 /*------------------------------------------------GETTERS AND SETTERS-----------------------------------------------------------------------*/
@@ -60,7 +60,7 @@ public class ComposedPack extends Pack {
 	 * 
 	 * @return the packs
 	 */
-	public ArrayList<Pack> getPacks() {
+	public HashSet<Pack> getPacks() {
 		return packs; /*A lo mejor debería devolver una lista no modificable*/
 	}
 
@@ -69,7 +69,7 @@ public class ComposedPack extends Pack {
 	 * 
 	 * @param packs the packs to set
 	 */
-	public void setPacks(ArrayList<Pack> packs) {
+	public void setPacks(HashSet<Pack> packs) {
 		this.packs = packs;
 	}
 	
@@ -94,13 +94,13 @@ public class ComposedPack extends Pack {
 		pack.decreaseStock();
 	}
 	
-	/*Habría una alternativa en las siguientes funciones haciendo llamdas recursivas a las anteriores*/
+	
 	/**
 	 * Adds various packs to the composed pack
 	 * 
 	 * @param newPacks, the packs to add
 	 */
-	public void addPacks(ArrayList<Pack> newPacks) {
+	public void addPacks(HashSet<Pack> newPacks) {
 		packs.addAll(newPacks);
 		for(Pack p: newPacks)
 			p.increaseStock();
@@ -111,7 +111,7 @@ public class ComposedPack extends Pack {
 	 * 
 	 * @param deletePacks, the packs to delete
 	 */
-	public void removePacks(ArrayList<Pack> deletePacks) {
+	public void removePacks(HashSet<Pack> deletePacks) {
 		packs.removeAll(deletePacks);
 		for(Pack p: deletePacks)
 			p.decreaseStock();

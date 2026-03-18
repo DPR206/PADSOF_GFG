@@ -47,5 +47,9 @@ public class SimplePack extends Pack{
 	public SimplePack(double price, ArrayList<StoreProduct> products, LocalDate date) {
 		super(price, products, date);
 	}
+	
+	public SimplePack(int id, double price, ArrayList<StoreProduct> products) {
+		this(id, price, products, null);
+	}
 
 }

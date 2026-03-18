@@ -9,7 +9,7 @@ import java.util.HashMap;
  * <p>
  * Description: It implements the wallet
  * @author Ana O.R.
- * @version 1.0
+ * @version 1.1
  * @see SecondHandProduct
  */
 public class Wallet {
@@ -35,7 +35,11 @@ public class Wallet {
      * It allows a registered client to add products to his wallet
      * @param newProducts the desired products
      */
-    public void addProduct(SecondHandProduct... newProducts) {
+    public void addProducts(SecondHandProduct... newProducts) throws NullPointerException {
+        if (newProducts == null) {
+            throw new NullPointerException("The products weren't provided");
+        }
+
         for (SecondHandProduct newProduct : newProducts) {
             if (!this.products.containsKey(newProduct.getId())) {
                 this.products.put(newProduct.getId(), newProduct);
@@ -47,7 +51,11 @@ public class Wallet {
      * It allows a registered client to remove products from his wallet
      * @param products the list of products to be removed
      */
-    public void removeProduct(SecondHandProduct... products) {
+    public void removeProducts(SecondHandProduct... products) throws NullPointerException {
+        if (products == null) {
+            throw new NullPointerException("The products weren't provided");
+        }
+
         for (SecondHandProduct product : products) {
             this.products.remove(product.getId());
         }

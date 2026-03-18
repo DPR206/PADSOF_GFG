@@ -20,10 +20,15 @@ public class FixedPerDisc extends Discount {
      * @param endDate    the date when the discount ends
      * @param percentage the percentage deducted from a product's price
      */
-    FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {
+    FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) throws IllegalArgumentException {
+        if (percentage < 0 || percentage > 100) {
+            throw new IllegalArgumentException("The percentage must be between 0% and 100%");
+        }
         super(startDate, endDate);
         this.percentage = percentage;
     }
+
+    // DUE: createFixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {}
 
     /**
      * It gets the discount's start date
@@ -48,7 +53,7 @@ public class FixedPerDisc extends Discount {
      * @param startDate the discount's new start date
      */
     @Override
-    public void changeStartDate(LocalDateTime startDate) {
+    public void changeStartDate(LocalDateTime startDate) throws IllegalArgumentException {
         super.changeStartDate(startDate);
     }
 
@@ -57,7 +62,7 @@ public class FixedPerDisc extends Discount {
      * @param endDate the discount's new end date
      */
     @Override
-    public void changeEndDate(LocalDateTime endDate) {
+    public void changeEndDate(LocalDateTime endDate) throws IllegalArgumentException {
         super.changeEndDate(endDate);
     }
 
@@ -65,7 +70,10 @@ public class FixedPerDisc extends Discount {
      * It allows the manager to change the fixed percentage discount's percentage
      * @param percentage the new percentage
      */
-    public void changePercentage(double percentage) {
+    public void changePercentage(double percentage) throws IllegalArgumentException {
+        if (percentage < 0 || percentage > 100) {
+            throw new IllegalArgumentException("The percentage must be between 0% and 100%");
+        }
         this.percentage = percentage;
     }
 

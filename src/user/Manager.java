@@ -29,10 +29,20 @@ public class Manager extends User{
         if(Manager.INSTANCE != null) return Manager.INSTANCE;
         return null;
     }
+
+    public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage){
+        FixedPerDisc fpd = new FixedPerDisc(startDate, endDate, percentage);
+        s.getDiscounts().add(fpd);
+    }
+
+    public void addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, double discount, int numProds){
+        QuantityDisc qd = new QuantityDisc(startDate, endDate, discount, numProds);
+        s.getDiscounts().add(qd);
+    }
 }
  /*    
-+ addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage): FixedPercDisc
-+ addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, double discount, int numProds): QuantityDisc
++ 
++ 
 + addGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift): GiftDisc
 + addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount): VolumeDisc
 + addEmployee(int id, Sttring password, List<Permission> permissions): Employee

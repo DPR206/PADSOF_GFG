@@ -15,7 +15,7 @@ import order.Cart;
  */
 
 public class UnregisteredClient extends User {
-	private Carrito c;
+	private Cart c;
 	private Store s;
 	//searcher
 	
@@ -23,7 +23,7 @@ public class UnregisteredClient extends User {
 	 * Creates a new unregistered client
 	 */
 	public UnregisteredClient() {
-		c = new Carrito();
+		c = new Cart();
 		s = new Store();
 	}
 	

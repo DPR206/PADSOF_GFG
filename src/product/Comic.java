@@ -1,7 +1,5 @@
 package product;
 
-import order.Discount;
-
 import java.time.Year;
 
 /**
@@ -81,88 +79,6 @@ public class Comic extends StoreProduct {
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
 
     /**
-     * It allows for an employee to change a comic's price
-     * @param price the comic's new price
-     */
-    @Override
-    public void changePrice(double price) {
-        super.changePrice(price);
-    }
-
-    /**
-     * It allows for an employee to change a comic's name
-     * @param newName the comic's new name
-     */
-    @Override
-    public void changeName(String newName) {
-        super.changeName(newName);
-    }
-
-    /**
-     * It allows for an employee to change a comic's description
-     * @param newDescription the comic's new description
-     */
-    @Override
-    public void changeDescription(String newDescription) {
-        super.changeDescription(newDescription);
-    }
-
-    /**
-     * It allows for an employee to change a comic's photo's path
-     * @param newPhoto the comic's new photo
-     */
-    @Override
-    public void changePhoto(String newPhoto) {
-        super.changePhoto(newPhoto);
-    }
-
-    /**
-     * It allows for an employee to change a comic's comic's type
-     * @param newType the comic's new product type
-     */
-    @Override
-    public void changeType(ProductType newType) {
-        super.changeType(newType);
-    }
-
-    /**
-     * It allows for an employee to change the comic's stock as well as blocking or unblocking stock
-     * @param newStock the comic's new stock
-     */
-    @Override
-    public void changeStock(int newStock) {
-        super.changeStock(newStock);
-    }
-
-    /**
-     * It allows the system or an employee to add categories to a product
-     * @param newCategories the categories to be added
-     */
-    @Override
-    public void addCategory(Category... newCategories) {
-        super.addCategory(newCategories);
-    }
-
-    /**
-     * It allows an employee to remove categories from a product
-     * @param categories the categories to be deleted
-     */
-    @Override
-    public void removeCategory(Category... categories) {
-        super.removeCategory(categories);
-    }
-
-    /**
-     * It allows an employee to add discounts to products or categories (Discounts is in charge of making sure they
-     * don't overlap)
-     * @param newDiscount the new discount to be applied
-     */
-    @Override
-    public void changeDiscount(Discount newDiscount) {
-        super.changeDiscount(newDiscount);
-    }
-
-    /**
      * It allows for an employee to change the comic's number of pages
      * @param newNumPages the comic's number of pages
      */
@@ -195,78 +111,6 @@ public class Comic extends StoreProduct {
     }
 
     /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
-
-    /**
-     * It returns the comic's id
-     * @return the comic's id
-     */
-    @Override
-    public String getId() {
-        return super.getId();
-    }
-
-    /**
-     * It returns the comic's price
-     * @return the comic's price
-     */
-    @Override
-    public double getPrice() {
-        return super.getPrice();
-    }
-
-    /**
-     * It returns the product's name
-     * @return the product's name
-     */
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    /**
-     * It returns the comic's description
-     * @return the comic's description
-     */
-    @Override
-    public String getDescription() {
-        return super.getDescription();
-    }
-
-    /**
-     * It returns the comic's photo's path
-     * @return the comic's photo
-     */
-    @Override
-    public String getPhoto() {
-        return super.getPhoto();
-    }
-
-    /**
-     * It returns the comic's product type
-     * @return the comic's product type
-     */
-    @Override
-    public ProductType getType() {
-        return super.getType();
-    }
-
-    /**
-     * It returns the comic's categories
-     * @return the comic's categories
-     */
-    @Override
-    public Category[] getCategories() {
-        return super.getCategories();
-    }
-
-    /**
-     * It returns's the product's stock
-     * @return the product's store
-     */
-    @Override
-    public int getStock() {
-        return super.getStock();
-    }
 
     /**
      * It returns the comic's number of pages

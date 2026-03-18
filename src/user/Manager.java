@@ -16,7 +16,6 @@ public class Manager extends User{
     /**no clue :v */
     private Parameter parameter; //?? esto que es xd
 
-    
     private Manager(String pwd, String userName, int actualID){
         super(pwd, userName, actualID);
     }
@@ -30,4 +29,11 @@ public class Manager extends User{
         if(Manager.INSTANCE != null) return Manager.INSTANCE;
         return null;
     }
-}
+
+ /*    
++ addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage): FixedPercDisc
++ addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, double discount, int numProds): QuantityDisc
++ addGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift): GiftDisc
++ addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount): VolumeDisc
++ addEmployee(int id, Sttring password, List<Permission> permissions): Employee
+}**/

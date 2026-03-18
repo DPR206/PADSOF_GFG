@@ -16,6 +16,7 @@ import java.util.*;
 public class Pack {
 	static int totalId = 0;
 
+	/** */
 	private int id;
 	private double price;
 	private ArrayList<StoreProduct> products;

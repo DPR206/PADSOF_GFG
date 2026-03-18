@@ -3,6 +3,8 @@
  */
 package store;
 
+import java.time.*;
+
 /**
  * Class Name: Parameter
  * <p>
@@ -12,11 +14,24 @@ package store;
  */
 public class Parameter {
 
+	private static final Parameter PARAM;
+	
+	private Period OfferTime;
+	private Period OrderTime;
+	private double valuationCost;
+	
 	/**
-	 * 
+	 * Creates
+	 * @param offerTime
+	 * @param orderTime
+	 * @param valuationCost
 	 */
-	public Parameter() {
-		
+	private Parameter(Period offerTime, Period orderTime, double valuationCost) {
+		OfferTime = offerTime;
+		OrderTime = orderTime;
+		this.valuationCost = valuationCost;
 	}
+	
+	
 
 }

@@ -25,17 +25,17 @@ public class Store {
     /* Them manager of the store */
     private Manager manager;
     /* The list of discounts in the store */
-    private List<Discount> discounts = new ArrayList()<>;
+    private List<Discount> discounts = new ArrayList<>();
     /* The list of all exchanges done in the store */
-    private List<Exchange> exchanges = new ArrayList()<>;
+    private List<Exchange> exchanges = new ArrayList<>();
     /* The list of orders that have been completed */
-    private List<Order> orders = new ArrayList()<>;
+    private List<Order> orders = new ArrayList<>();
     /* The list of packs available */
-    private List<Pack> packs = new ArrayList()<>;
+    private List<Pack> packs = new ArrayList<>();
     /* The list of categories available */
-    private List<Category> categories = new ArrayList()<>;
+    private List<Category> categories = new ArrayList<>();
     /* The list of products that belong to the store */
-    private List<Product> products = new ArrayList()<>;
+    private List<Product> products = new ArrayList<>();
     /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
     /* The class for the extra functions singIn and logIn */

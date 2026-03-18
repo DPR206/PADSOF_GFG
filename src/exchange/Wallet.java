@@ -16,12 +16,16 @@ public class Wallet {
     /** The list of products that belong to this wallet */
     private HashMap<Integer, SecondHandProduct> products;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * The wallet's constructor
      */
     public Wallet() {
         products = new HashMap<>();
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
 

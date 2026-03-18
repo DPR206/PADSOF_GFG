@@ -20,6 +20,8 @@ public class Comic extends StoreProduct {
     /** The comic's editorial */
     private String editorial;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * The comic's constructor
      * @param price       the comic's price
@@ -41,6 +43,8 @@ public class Comic extends StoreProduct {
         this.author = author;
         this.editorial = editorial;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * Written information of a product

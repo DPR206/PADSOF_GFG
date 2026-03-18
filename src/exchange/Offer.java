@@ -16,7 +16,7 @@ import java.time.Period;
  */
 public class Offer {
     /** The maximum amount of time an offer can be active for */
-    static Period maxOfferPeriod;
+    static Period maxOfferPeriod = Period.ofDays(1);
     /** The date and time when the offer was created */
     private final LocalDate creationDate;
     /** The client who made the offer */
@@ -30,9 +30,7 @@ public class Offer {
     /** The offer's current status */
     private OfferStatus status;
 
-    static {
-        maxOfferPeriod = Period.ofDays(30); // REVIEW: Es definido y sustituido por el gestor al principio
-    }
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 
     /**
      * The offer's constructor
@@ -54,6 +52,8 @@ public class Offer {
         this.destinationProducts = destinationProducts;
         this.status = OfferStatus.PENDING;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It checks if the offer has surpassed the maximum amount of time an offer can be active for

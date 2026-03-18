@@ -19,6 +19,8 @@ public class GiftDisc extends Discount {
     /** The product gifted to the client when a certain spending threshold is met */
     StoreProduct gift;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * Instantiates a new gift discount
      * @param startDate         the date when the discount starts
@@ -32,44 +34,10 @@ public class GiftDisc extends Discount {
         this.gift = gift;
     }
 
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
     // DUE: createGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct
     // gift) {}
-
-    /**
-     * It gets the discount's start date
-     * @return the discount's start date
-     */
-    @Override
-    public LocalDateTime getStartDate() {
-        return super.getStartDate();
-    }
-
-    /**
-     * It gets the discount's end date
-     * @return the discount's end date
-     */
-    @Override
-    public LocalDateTime getEndDate() {
-        return super.getEndDate();
-    }
-
-    /**
-     * It allows the manager to change a discount's start date
-     * @param startDate the discount's new start date
-     */
-    @Override
-    public void changeStartDate(LocalDateTime startDate) throws IllegalArgumentException {
-        super.changeStartDate(startDate);
-    }
-
-    /**
-     * It allows the manager to change a discount's end date
-     * @param endDate the discount's new end date
-     */
-    @Override
-    public void changeEndDate(LocalDateTime endDate) throws IllegalArgumentException {
-        super.changeEndDate(endDate);
-    }
 
     /**
      * It allows the manager to change the gift discount's spending threshold
@@ -82,6 +50,12 @@ public class GiftDisc extends Discount {
         this.spendingThreshold = spendingThreshold;
     }
 
+    // DUE: public createNotification(){}
+
+    // DUE: public obtainDisc();
+
+    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+
     /**
      * It allows the manager to change a gift discount's gift
      * @param gift the new gift
@@ -90,7 +64,6 @@ public class GiftDisc extends Discount {
         this.gift = gift;
     }
 
-    // DUE: public createNotification(){}
+    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
 
-    // DUE: public obtainDisc();
 }

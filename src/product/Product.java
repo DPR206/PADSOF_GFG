@@ -9,7 +9,7 @@ package product;
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
-    public static int productId;
+    static int productId = 0;
     /** The product's id */
     private final String id;
     /** The product's price */
@@ -23,9 +23,7 @@ public abstract class Product {
     /** The product's product type */
     private ProductType type;
 
-    static {
-        productId = 0;
-    }
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 
     /**
      * General product constructor
@@ -56,6 +54,8 @@ public abstract class Product {
         // NOTE: Revisar qué precio inicial poner
         this(-1, name, description, photo, type);
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
 

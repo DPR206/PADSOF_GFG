@@ -16,6 +16,8 @@ public class QuantityDisc extends Discount {
     /** The amount of money the discount deducts from the order's final price */
     private double discount;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * Instantiates a new quantity discount
      * @param startDate the date when the discount starts
@@ -28,6 +30,8 @@ public class QuantityDisc extends Discount {
         this.numProds = numProds;
         this.discount = discount;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: public createNotification(){}
 

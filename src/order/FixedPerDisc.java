@@ -14,6 +14,8 @@ public class FixedPerDisc extends Discount {
     /** The percentage deducted from a product's price */
     private double percentage;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * Instantiates a new fixed percentage discount
      * @param startDate  the date when the discount starts
@@ -27,6 +29,8 @@ public class FixedPerDisc extends Discount {
         super(startDate, endDate);
         this.percentage = percentage;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: createFixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {}
 

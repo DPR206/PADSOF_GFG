@@ -14,6 +14,8 @@ public class Game extends StoreProduct {
     /* The game's age range */
     private String ageRange;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * The game's constructor
      * @param price       the game's price
@@ -31,6 +33,8 @@ public class Game extends StoreProduct {
         this.numPlayers = numPlayers;
         this.ageRange = ageRange;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * Written information of a product

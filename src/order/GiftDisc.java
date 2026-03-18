@@ -19,6 +19,8 @@ public class GiftDisc extends Discount {
     /** The product gifted to the client when a certain spending threshold is met */
     StoreProduct gift;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * Instantiates a new gift discount
      * @param startDate         the date when the discount starts
@@ -31,6 +33,8 @@ public class GiftDisc extends Discount {
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: createGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct
     // gift) {}
@@ -59,7 +63,7 @@ public class GiftDisc extends Discount {
     public void changeGift(StoreProduct gift) {
         this.gift = gift;
     }
-    
+
     /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
 
 }

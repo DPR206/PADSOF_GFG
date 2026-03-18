@@ -16,6 +16,8 @@ public class Figurine extends StoreProduct {
     /** The figurine's material */
     private String material;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * The figurine's constructor
      * @param price       the figurine's price
@@ -35,6 +37,8 @@ public class Figurine extends StoreProduct {
         this.brand = brand;
         this.material = material;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * Written information of a product

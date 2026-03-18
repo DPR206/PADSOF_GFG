@@ -16,6 +16,8 @@ public class VolumeDisc extends Discount {
     /** The amount of money the discount deducts from the order's final price */
     private double discount;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * Instantiates a new Volume discount
      * @param startDate         the date when the discount starts
@@ -28,6 +30,8 @@ public class VolumeDisc extends Discount {
         this.spendingThreshold = spendingThreshold;
         this.discount = discount;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: public createNotification(){}
 

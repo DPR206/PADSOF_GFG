@@ -15,6 +15,8 @@ public abstract class Discount {
     /** The date when the discount ends */
     private LocalDateTime endDate;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * General constructor for a discount
      * @param startDate the date when the discount starts
@@ -28,6 +30,8 @@ public abstract class Discount {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: public abstract createNotification(){}
 

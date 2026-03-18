@@ -5,11 +5,11 @@ package product;
  * <p>
  * Description: It implements the abstract Product class
  * @author Ana O.R.
- * @version 1.5
+ * @version 1.6
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
-    public static int productId;
+    static int productId = 0;
     /** The product's id */
     private final String id;
     /** The product's price */
@@ -23,9 +23,7 @@ public abstract class Product {
     /** The product's product type */
     private ProductType type;
 
-    static {
-        productId = 0;
-    }
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 
     /**
      * General product constructor
@@ -35,7 +33,7 @@ public abstract class Product {
      * @param photo       the product's photo's path
      * @param type        the type
      */
-    Product(double price, String name, String description, String photo, ProductType type) {
+    public Product(double price, String name, String description, String photo, ProductType type) {
         this.id = type.getSymbol() + productId;
         productId++;
         this.price = price;
@@ -56,6 +54,8 @@ public abstract class Product {
         // NOTE: Revisar qué precio inicial poner
         this(-1, name, description, photo, type);
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
 

@@ -7,7 +7,7 @@ import java.time.Year;
  * <p>
  * Description: It implements the comics
  * @author Ana O.R.
- * @version 1.4
+ * @version 1.5
  * @see StoreProduct
  */
 public class Comic extends StoreProduct {
@@ -19,6 +19,8 @@ public class Comic extends StoreProduct {
     private String author;
     /** The comic's editorial */
     private String editorial;
+
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 
     /**
      * The comic's constructor
@@ -33,8 +35,8 @@ public class Comic extends StoreProduct {
      * @param editorial   the comic's editorial
      * @param categories  the comic's categories
      */
-    Comic(double price, String name, String description, String photo, int stock, int numPages, Year year,
-          String author, String editorial, Category... categories) {
+    public Comic(double price, String name, String description, String photo, int stock, int numPages, Year year,
+                 String author, String editorial, Category... categories) {
         super(price, name, description, photo, ProductType.COMIC, stock, categories);
         this.numPages = numPages;
         this.year = year;
@@ -42,25 +44,7 @@ public class Comic extends StoreProduct {
         this.editorial = editorial;
     }
 
-    /**
-     * It allows employees to add comics to the store
-     * @param price       the comic's price
-     * @param name        the comic's name
-     * @param description the comic's description
-     * @param photo       the comic's photo's path
-     * @param stock       the comic's stock
-     * @param numPages    the comic's number of pages
-     * @param year        the comic's publishing year
-     * @param author      the comic's author
-     * @param editorial   the comic's editorial
-     * @param categories  the comic's categories
-     * @return the new comic
-     */
-    public Comic createComic(double price, String name, String description, String photo, int stock,
-                             int numPages, Year year, String author, String editorial, Category... categories) {
-        return new Comic(price, name, description, photo, stock, numPages, year, author,
-                editorial, categories);
-    }
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * Written information of a product

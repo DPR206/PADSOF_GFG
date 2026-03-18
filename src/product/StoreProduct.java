@@ -27,6 +27,8 @@ public abstract class StoreProduct extends Product {
     /** The product's categories */
     private HashMap<String, Category> categories;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * Store product's constructor
      * @param name        the product's name
@@ -48,6 +50,8 @@ public abstract class StoreProduct extends Product {
             this.addCategory(category);
         }
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
 

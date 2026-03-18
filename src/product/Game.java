@@ -5,7 +5,7 @@ package product;
  * <p>
  * Description: It implements the games
  * @author Ana O.R.
- * @version 1.3
+ * @version 1.4
  * @see StoreProduct
  */
 public class Game extends StoreProduct {
@@ -13,6 +13,8 @@ public class Game extends StoreProduct {
     private int numPlayers;
     /* The game's age range */
     private String ageRange;
+
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 
     /**
      * The game's constructor
@@ -25,29 +27,14 @@ public class Game extends StoreProduct {
      * @param ageRange    the game's age range
      * @param categories  the game's categories
      */
-    Game(double price, String name, String description, String photo, int stock, int numPlayers,
-         String ageRange, Category... categories) {
+    public Game(double price, String name, String description, String photo, int stock, int numPlayers,
+                String ageRange, Category... categories) {
         super(price, name, description, photo, ProductType.GAME, stock, categories);
         this.numPlayers = numPlayers;
         this.ageRange = ageRange;
     }
 
-    /**
-     * It allows an employee to add a game to the store
-     * @param price       the game's price
-     * @param name        the game's name
-     * @param description the game's description
-     * @param photo       the game's photo's path
-     * @param stock       the game's stock
-     * @param numPlayers  the game's num players
-     * @param ageRange    the game's age range
-     * @param categories  the game's categories
-     * @return the new game
-     */
-    public Game createGame(double price, String name, String description, String photo, int stock,
-                           int numPlayers, String ageRange, Category... categories) {
-        return new Game(price, name, description, photo, stock, numPlayers, ageRange, categories);
-    }
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * Written information of a product

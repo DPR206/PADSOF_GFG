@@ -11,31 +11,26 @@ import java.time.Period;
  * <p>
  * Description: It implements the offers
  * @author Ana O.R.
- * @version 1.1
+ * @version 1.2
  * @see RegisteredClient
  */
 public class Offer {
-    /**
-     * The constant maxOfferPeriod.
-     */
-    /* The maximum amount of time an offer can be active for */
-    static Period maxOfferPeriod;
-    /* The date and time when the offer was created */
+    /** The maximum amount of time an offer can be active for */
+    static Period maxOfferPeriod = Period.ofDays(1);
+    /** The date and time when the offer was created */
     private final LocalDate creationDate;
-    /* The client who made the offer */
+    /** The client who made the offer */
     private final RegisteredClient origin;
-    /* The client who received the offer */
+    /** The client who received the offer */
     private final RegisteredClient destination;
-    /* The sender's products */
+    /** The sender's products */
     private SecondHandProduct[] originProducts;
-    /* The receiver's products */
+    /** The receiver's products */
     private SecondHandProduct[] destinationProducts;
-    /* The offer's current status */
+    /** The offer's current status */
     private OfferStatus status;
 
-    static {
-        maxOfferPeriod = Period.ofDays(30); // REVIEW: Es definido y sustituido por el gestor al principio
-    }
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 
     /**
      * The offer's constructor
@@ -43,9 +38,13 @@ public class Offer {
      * @param destination         the client who received the offer
      * @param originProducts      the sender's products
      * @param destinationProducts the receiver's products
+     * @throws NullPointerException the null pointer exception
      */
-    Offer(RegisteredClient origin, RegisteredClient destination, SecondHandProduct[] originProducts,
-          SecondHandProduct[] destinationProducts) {
+    public Offer(RegisteredClient origin, RegisteredClient destination, SecondHandProduct[] originProducts,
+                 SecondHandProduct[] destinationProducts) throws NullPointerException {
+        if (origin == null || destination == null || originProducts == null || destinationProducts == null) {
+            throw new NullPointerException("The input wasn't correctly provided");
+        }
         this.creationDate = LocalDate.now();
         this.origin = origin;
         this.destination = destination;
@@ -54,22 +53,7 @@ public class Offer {
         this.status = OfferStatus.PENDING;
     }
 
-    /**
-     * It allows e client to make offers
-     * @param origin              the client who made the offer
-     * @param destination         the client who received the offer
-     * @param originProducts      the sender's products
-     * @param destinationProducts the receiver's products
-     * @return the new offer
-     * @throws NullPointerException the null pointer exception
-     */
-    public Offer createOffer(RegisteredClient origin, RegisteredClient destination, SecondHandProduct[] originProducts,
-                             SecondHandProduct[] destinationProducts) throws NullPointerException {
-        if (origin == null || destination == null || originProducts == null || destinationProducts == null) {
-            throw new NullPointerException("The input wasn't correctly provided");
-        }
-        return new Offer(origin, destination, originProducts, destinationProducts);
-    }
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It checks if the offer has surpassed the maximum amount of time an offer can be active for
@@ -80,6 +64,19 @@ public class Offer {
             this.status = OfferStatus.EXPIRED;
         }
     }
+
+    /**
+     * Process offer exchange.
+     * @return the exchange
+     */
+    // DUE:
+    public Exchange processOffer() {
+        return new Exchange();
+    }
+
+    // DUE: createNotification
+
+    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
 
     /**
      * It allows a client to accept an incoming offer
@@ -128,14 +125,61 @@ public class Offer {
         this.destinationProducts = products;
     }
 
+    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+
     /**
-     * Process offer exchange.
-     * @return the exchange
+     * Gets the maximum amount of time an offer can be active for
+     * @return the maximum amount of time an offer can be active for
      */
-// DUE:
-    public Exchange processOffer() {
-        return new Exchange();
+    public Period getMaxOfferPeriod() {
+        return maxOfferPeriod;
     }
 
-    // DUE: createNotification
+    /**
+     * Gets the date and time when the offer was created
+     * @return the date and time when the offer was created
+     */
+    public LocalDate getCreationDate() {
+        return this.creationDate;
+    }
+
+    /**
+     * Gets the client who made the offer
+     * @return the client who made the offer
+     */
+    public RegisteredClient getOrigin() {
+        return this.origin;
+    }
+
+    /**
+     * Gets the client who received the offer
+     * @return the client who received the offer
+     */
+    public RegisteredClient getDestination() {
+        return this.destination;
+    }
+
+    /**
+     * Gets the sender's products
+     * @return the sender's products
+     */
+    public SecondHandProduct[] getOriginProducts() {
+        return this.originProducts;
+    }
+
+    /**
+     * Gets the destination's products
+     * @return the destination's products
+     */
+    public SecondHandProduct[] getDestinationProducts() {
+        return this.destinationProducts;
+    }
+
+    /**
+     * Gets the offer's offer status.
+     * @return the offer's offer status.
+     */
+    public OfferStatus getStatus() {
+        return this.status;
+    }
 }

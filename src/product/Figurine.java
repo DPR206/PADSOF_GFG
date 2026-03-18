@@ -5,7 +5,7 @@ package product;
  * <p>
  * Description: It implements the figurines
  * @author Ana O.R.
- * @version 1.3
+ * @version 1.4
  * @see StoreProduct
  */
 public class Figurine extends StoreProduct {
@@ -15,6 +15,8 @@ public class Figurine extends StoreProduct {
     private String brand;
     /** The figurine's material */
     private String material;
+
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 
     /**
      * The figurine's constructor
@@ -28,32 +30,15 @@ public class Figurine extends StoreProduct {
      * @param material    the figurine's material
      * @param categories  the figurine's categories
      */
-    Figurine(double price, String name, String description, String photo, int stock, String dimension, String brand,
-             String material, Category... categories) {
+    public Figurine(double price, String name, String description, String photo, int stock, String dimension,
+                    String brand, String material, Category... categories) {
         super(price, name, description, photo, ProductType.FIGURINE, stock, categories);
         this.dimension = dimension;
         this.brand = brand;
         this.material = material;
     }
 
-    /**
-     * It allows an employee to add a figurine to the store
-     * @param price       the figurine's price
-     * @param name        the figurine's name
-     * @param description the figurine's description
-     * @param photo       the figurine's photo's path
-     * @param stock       the figurine's stock
-     * @param dimension   the figurine's dimension
-     * @param brand       the figurine's brand
-     * @param material    the figurine's material
-     * @param categories  the figurine's categories
-     * @return the new figurine
-     */
-    public Figurine createFigurine(double price, String name, String description, String photo, int stock,
-                                   String dimension, String brand, String material, Category... categories) {
-        return new Figurine(price, name, description, photo, stock, dimension, brand
-                , material, categories);
-    }
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * Written information of a product

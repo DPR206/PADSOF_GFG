@@ -22,6 +22,8 @@ public class Category {
     /* The list of products that belong to this category */
     public Product[] products; // DUE: Terminar de implementar esto (estoy pensando cómo hacerlo)
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * Category's constructor
      * @param name the new category's name
@@ -30,6 +32,8 @@ public class Category {
         this.name = name;
         this.products = new Product[0];
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It allows a manager to add categories to the store

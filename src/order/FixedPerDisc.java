@@ -14,6 +14,8 @@ public class FixedPerDisc extends Discount {
     /** The percentage deducted from a product's price */
     private double percentage;
 
+    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+
     /**
      * Instantiates a new fixed percentage discount
      * @param startDate  the date when the discount starts
@@ -28,43 +30,15 @@ public class FixedPerDisc extends Discount {
         this.percentage = percentage;
     }
 
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
     // DUE: createFixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {}
 
-    /**
-     * It gets the discount's start date
-     * @return the discount's start date
-     */
-    @Override
-    public LocalDateTime getStartDate() {
-        return super.getStartDate();
-    }
+    // DUE: public createNotification(){}
 
-    /**
-     * It gets the discount's end date
-     * @return the discount's end date
-     */
-    @Override
-    public LocalDateTime getEndDate() {
-        return super.getEndDate();
-    }
+    // DUE: public obtainDisc();
 
-    /**
-     * It allows the manager to change a discount's start date
-     * @param startDate the discount's new start date
-     */
-    @Override
-    public void changeStartDate(LocalDateTime startDate) throws IllegalArgumentException {
-        super.changeStartDate(startDate);
-    }
-
-    /**
-     * It allows the manager to change a discount's end date
-     * @param endDate the discount's new end date
-     */
-    @Override
-    public void changeEndDate(LocalDateTime endDate) throws IllegalArgumentException {
-        super.changeEndDate(endDate);
-    }
+    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
 
     /**
      * It allows the manager to change the fixed percentage discount's percentage
@@ -76,8 +50,6 @@ public class FixedPerDisc extends Discount {
         }
         this.percentage = percentage;
     }
+    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
 
-    // DUE: public createNotification(){}
-
-    // DUE: public obtainDisc();
 }

@@ -39,11 +39,15 @@ public class Manager extends User{
         QuantityDisc qd = new QuantityDisc(startDate, endDate, discount, numProds);
         s.getDiscounts().add(qd);
     }
+
+   public  addGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift){
+    
+   }
 }
  /*    
 + 
 + 
-+ addGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift): GiftDisc
++ 
 + addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount): VolumeDisc
 + addEmployee(int id, Sttring password, List<Permission> permissions): Employee
 }**/

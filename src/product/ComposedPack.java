@@ -16,49 +16,104 @@ import java.time.*;
 public class ComposedPack extends Pack {
 
 	private ArrayList<Pack> packs;
+
+/*------------------------------------------------------CONSTRUCTORS-----------------------------------------------------------------------*/
+	/**
+	 * Creates a new composed pack
+	 * 
+	 * @param id
+	 * @param price
+	 * @param newPacks
+	 * @param date
+	 */
+	public ComposedPack(int id, double price, ArrayList<Pack> newPacks, LocalDate date) {
+		super(id, price, date);
+		this.packs = newPacks;
+	}
 	
 	/**
+	 * Creates a new composed pack with default id
 	 * 
+	 * @param newPacks
+	 * @param price
+	 * @param date
 	 */
-	public ComposedPack(ArrayList<Pack> newPacks, double price, Date date) {
+	public ComposedPack(ArrayList<Pack> newPacks, double price, LocalDate date) {
 		super(price, date);
 		packs = newPacks;
 	}
-
-
-	/**
-	 * Creates a new pack
-	 * 
-	 * @param id, the pack's id
-	 * @param price, the pack's price
-	 * @param products, the products the pack contains
-	 */
-	public Pack(int id, double price, ArrayList<StoreProduct> products, Date date) {
-		this.id = id;
-		this.price = price;
-		this.products = products;
-		this.dateAddCart = date;
-	}
 	
 	/**
-	 * Creates a new pack with default id and date
+	 * Creates a new composed pack with default id and date
 	 * 
 	 * @param price, price of the pack
 	 * @param products, the products the pack contains
 	 */
-	public Pack(double price, ArrayList<StoreProduct> products) {
-		this(totalId, price, products, null);
-		totalId++;
+	public ComposedPack(double price, ArrayList<Pack> newPacks) {
+		this(newPacks, price, LocalDate.now());
+	}
+	
+/*------------------------------------------------GETTERS AND SETTERS-----------------------------------------------------------------------*/
+
+	/**
+	 * Returns the packs within the ComposedPack
+	 * 
+	 * @return the packs
+	 */
+	public ArrayList<Pack> getPacks() {
+		return packs; /*A lo mejor debería devolver una lista no modificable*/
+	}
+
+	/**
+	 * Changes the packs within the composed pack
+	 * 
+	 * @param packs the packs to set
+	 */
+	public void setPacks(ArrayList<Pack> packs) {
+		this.packs = packs;
+	}
+	
+/*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/
+	/**
+	 * Adds a new pack to the composed pack
+	 * 
+	 * @param pack, the pack to add
+	 */
+	public void addPack(Pack pack) {
+		packs.add(pack);
+		pack.decreaseStock();
 	}
 	
 	/**
-	 * Creates a new pack with default id
+	 * Removes a pack from the composed pack
 	 * 
-	 * @param price, price of the pack
-	 * @param products, the products the pack contains
+	 * @param pack, the pack to remove
 	 */
-	public Pack(double price, ArrayList<StoreProduct> products, Date date) {
-		this(totalId, price, products, date);
-		totalId++;
+	public void removePack(Pack pack) {
+		packs.remove(pack);
+		pack.decreaseStock();
+	}
+	
+	/*Habría una alternativa en las siguientes funciones haciendo llamdas recursivas a las anteriores*/
+	/**
+	 * Adds various packs to the composed pack
+	 * 
+	 * @param newPacks, the packs to add
+	 */
+	public void addPacks(ArrayList<Pack> newPacks) {
+		packs.addAll(newPacks);
+		for(Pack p: newPacks)
+			p.increaseStock();
+	}
+	
+	/**
+	 * Remove various packs from the composed pack
+	 * 
+	 * @param deletePacks, the packs to delete
+	 */
+	public void removePacks(ArrayList<Pack> deletePacks) {
+		packs.removeAll(deletePacks);
+		for(Pack p: deletePacks)
+			p.decreaseStock();
 	}
 }

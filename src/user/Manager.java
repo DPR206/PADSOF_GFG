@@ -29,7 +29,7 @@ public class Manager extends User{
         if(Manager.INSTANCE != null) return Manager.INSTANCE;
         return null;
     }
-
+}
  /*    
 + addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage): FixedPercDisc
 + addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, double discount, int numProds): QuantityDisc

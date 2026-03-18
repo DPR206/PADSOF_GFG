@@ -30,4 +30,20 @@ public class StorePermission {
         Comic c = new Comic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
         this.s.addStoreProduct(c); // DUE
     }
+
+    public void addGame(double price, String name, String description, String photo, int stock, int numPlayers, String ageRange, Category... categories){
+        Game g = new Game(price, name, description, photo, stock, numPlayers, ageRange, categories);
+        s.addProduct(g);
+    }
+    public void addFigurine(double price, String name, String description, String photo, int stock, double height, double width, double depth, String brand, String material, Category... category){
+        Figurine f = createFigurine(price, name, description, photo, stock, height, width, depth, brand, material, category);
+        s.addProduct(f);
+    }
+    public bool addProductByFile(String fileName){
+        //rellenar xd
+    }
+    public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
+        Pack p = new Pack(price, products, date);
+        s.addProduct(p);
+    }
 }

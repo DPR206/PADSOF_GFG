@@ -9,9 +9,26 @@ package product;
  */
 public enum ProductType {
     /** Comic product type */
-    COMIC,
+    COMIC("C"),
     /** Figurine product type */
-    FIGURINE,
+    FIGURINE("F"),
     /** Game product type */
-    GAME
+    GAME("G");
+
+    /**
+     * The characters that define this type in the save file
+     */
+    private String symbol;
+
+    ProductType(String symbol) {
+        this.symbol = symbol;
+    }
+
+    /**
+     * Gets the enumeration's symbol
+     * @return the enumeration's symbol
+     */
+    public String getSymbol() {
+        return symbol;
+    }
 }

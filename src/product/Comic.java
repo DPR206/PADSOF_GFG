@@ -70,7 +70,12 @@ public class Comic extends StoreProduct {
      */
     @Override
     public String toString() {
-        return super.toString() + ", " + this.numPages + ", " + this.year + ", " + this.author + ", " + this.editorial;
+        // TIPO(C/J/F);ID;NOMBRE;DESCRIPCIÓN;PRECIO;UNIDADES;CATEGORÍAS;PAGINAS;AUTOR;EDITORIAL;AÑO;JUGADORES;EDAD
+        // ;ESTILO(Cartas/Dados/Tablero/Miniatura);MARCA;MATERIAL;DIMENSION
+        return "C" + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() + ";" + this.getPrice() +
+                ";" + this.getStock() + ";" + this.numPages + ";" + this.author + ";" + this.editorial + ";" +
+                this.year + ";" /*jugadores*/ + ";" /*edad*/ + ";" /*estilo*/ + ";" /*marca*/ + ";"
+                /*material*/ + ";" /*dimension*/;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -196,7 +201,7 @@ public class Comic extends StoreProduct {
      * @return the comic's id
      */
     @Override
-    public int getId() {
+    public String getId() {
         return super.getId();
     }
 
@@ -207,6 +212,15 @@ public class Comic extends StoreProduct {
     @Override
     public double getPrice() {
         return super.getPrice();
+    }
+
+    /**
+     * It returns the product's name
+     * @return the product's name
+     */
+    @Override
+    public String getName() {
+        return super.getName();
     }
 
     /**

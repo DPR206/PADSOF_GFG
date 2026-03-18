@@ -57,7 +57,13 @@ public class Game extends StoreProduct {
      */
     @Override
     public String toString() {
-        return super.toString() + ", " + this.numPlayers + ", " + this.ageRange;
+        // TIPO(C/J/F);ID;NOMBRE;DESCRIPCIÓN;PRECIO;UNIDADES;CATEGORÍAS;PAGINAS;AUTOR;EDITORIAL;AÑO;JUGADORES;EDAD
+        // ;ESTILO(Cartas/Dados/Tablero/Miniatura);MARCA;MATERIAL;DIMENSION
+        return "C" + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() + ";" + this.getPrice() +
+                ";" + this.getStock() + ";" + /*paginas*/ ";" + /*autor*/ ";" + /*editorial*/ ";" +
+                /*año*/ ";" + this.numPlayers + ";" + this.ageRange + ";" + this.getPrintCategories() + ";" /*marca
+         */ + ";"
+                /*material*/ + ";" /*dimension*/;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -167,7 +173,7 @@ public class Game extends StoreProduct {
      * @return the game's id
      */
     @Override
-    public int getId() {
+    public String getId() {
         return super.getId();
     }
 
@@ -178,6 +184,15 @@ public class Game extends StoreProduct {
     @Override
     public double getPrice() {
         return super.getPrice();
+    }
+
+    /**
+     * It returns the product's name
+     * @return the product's name
+     */
+    @Override
+    public String getName() {
+        return super.getName();
     }
 
     /**
@@ -214,6 +229,21 @@ public class Game extends StoreProduct {
     @Override
     public Category[] getCategories() {
         return super.getCategories();
+    }
+
+    /**
+     * It returns the game's categories in a save-file-friendly manner
+     * @return a string containing the game's categories
+     */
+    public String getPrintCategories() { // ! revisar
+        Category[] categories = super.getCategories();
+        StringBuilder sb = new StringBuilder();
+
+        for (Category category : categories) {
+            sb.append(category.toString()).append(", ");
+        }
+
+        return sb.toString();
     }
 
     /**

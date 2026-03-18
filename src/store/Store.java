@@ -1,8 +1,10 @@
 package store;
 
 import java.util.*;
-import product.Category;
 import user.*;
+import product.*;
+import exchange.Exchange;
+import order.*;
 
 // DUE: Falta el @see
 
@@ -17,8 +19,26 @@ public class Store {
 	private static final Store INSTANCE;
     private static int productId = 0;
     // Está creada para que no se queje el compilador en sus referencias
+
+    /**Falta parameter */
+
+    /* Them manager of the store */
+    private Manager manager;
+    /* The list of discounts in the store */
+    private List<Discount> discounts = new ArrayList()<>;
+    /* The list of all exchanges done in the store */
+    private List<Exchange> exchanges = new ArrayList()<>;
+    /* The list of orders that have been completed */
+    private List<Order> orders = new ArrayList()<>;
+    /* The list of packs available */
+    private List<Pack> packs = new ArrayList()<>;
+    /* The list of categories available */
+    private List<Category> categories = new ArrayList()<>;
+    /* The list of products that belong to the store */
+    private List<Product> products = new ArrayList()<>;
+    /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
-    private Map<String, User> users = new HashMap<>();
+    /* The class for the extra functions singIn and logIn */
     private utility extras;
     private Store(){
         this.extras = new utilities();
@@ -44,36 +64,25 @@ public class Store {
         return id;
     }
     
-    private boolean logIn(String userName, String pwd) {
+    private boolean logIn() {
     	User u;
     	
-    	if(this.users.containsKey(userName)) {
-    		u = this.users.get(userName);
-    		if(u.getPassword() == pwd) {
-    			return true;
-    		}
-    	}
-    	return false;
-    } 
-    
-    public boolean signIn() {
-		Scanner sc = new Scanner(System.in);
-		String userName, pwd;
-		RegisteredClient rc;
-		
-		System.out.print("Introduce tu usuario: ");
-		
-		try {
+    	try {
 			System.out.print("Introduce tu usuario: ");
 			userName = sc.next();
 			System.out.print("Introduce tu contraseña: ");
 			pwd = sc.next();
 		}catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
-        } finally {
-            sc.close();
+            return false;
         }
-		
-		
+
+        if(utilities.logIn(userName, pwd, this) == false) return false;
+
+    	return true;
+    } 
+    
+    public boolean signIn() {
+		utilities.signIn(this);
     }
 }

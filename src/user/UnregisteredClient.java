@@ -24,10 +24,13 @@ public class UnregisteredClient extends User {
 	 */
 	public UnregisteredClient() {
 		c = new Carrito();
+		s = new Store();
 	}
 	
 	public void buy() {
+
 		this.c.payOrder() //inicia sesión
+		this.s.signIn();
 	}
 
 	public void removeFromCart(StoreProduct sp){

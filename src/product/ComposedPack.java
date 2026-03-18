@@ -20,8 +20,8 @@ public class ComposedPack extends Pack {
 	/**
 	 * 
 	 */
-	public ComposedPack(ArrayList<Pack> newPacks, int id, double price, Date date) {
-		super(double price, Date date);
+	public ComposedPack(ArrayList<Pack> newPacks, double price, Date date) {
+		super(price, date);
 		packs = newPacks;
 	}
 

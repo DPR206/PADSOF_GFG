@@ -58,8 +58,14 @@ public class Pack {
 		totalId++;
 	}
 	
+	/**
+	 * Creates a new pack with no products
+	 * 
+	 * @param price, price of the pack
+	 * @param date, the products the pack contains
+	 */
 	public Pack(double price, Date date) {
-		this(totalId, price, null, date);
+		this(totalId, price, new ArrayList<StoreProduct>(), date);
 		totalId++;
 	}
 

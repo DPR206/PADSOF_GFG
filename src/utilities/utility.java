@@ -33,7 +33,7 @@ public class utility{
 			    userName = sc.next();
 
                 if(users.containsKey(userName)){
-                    System.out.print("Este nombre de usuario ya está pillado");
+                    System.out.print("Este nombre de usuario ya está cogido");
                 }
                 else{
                     aux = true;

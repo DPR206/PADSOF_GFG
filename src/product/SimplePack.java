@@ -3,8 +3,8 @@
  */
 package product;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.*;
+import java.util.*;
 
 /**
  * Class name: SimplePack
@@ -24,7 +24,7 @@ public class SimplePack extends Pack{
 	 * @param price, the pack's price
 	 * @param products, the products the pack contains
 	 */
-	public SimplePack(int id, double price, ArrayList<StoreProduct> products, Date date) {
+	public SimplePack(int id, double price, ArrayList<StoreProduct> products, LocalDate date) {
 		super(id, price, products, date);
 	}
 	
@@ -44,8 +44,12 @@ public class SimplePack extends Pack{
 	 * @param price, price of the pack
 	 * @param products, the products the pack contains
 	 */
-	public SimplePack(double price, ArrayList<StoreProduct> products, Date date) {
+	public SimplePack(double price, ArrayList<StoreProduct> products, LocalDate date) {
 		super(price, products, date);
+	}
+	
+	public SimplePack(int id, double price, ArrayList<StoreProduct> products) {
+		this(id, price, products, null);
 	}
 
 }

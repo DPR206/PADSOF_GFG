@@ -3,6 +3,7 @@
  */
 package product;
 
+import java.time.LocalDate;
 import java.util.*;
 /**
  * Class name: Pack
@@ -18,7 +19,7 @@ public class Pack {
 	private int id;
 	private double price;
 	private ArrayList<StoreProduct> products;
-	private Date dateAddCart = null;
+	private LocalDate dateAddCart = null;
 
 	/*---------------------------------------------------Constructors---------------------------------------------------------------*/
 
@@ -29,7 +30,7 @@ public class Pack {
 	 * @param price, the pack's price
 	 * @param products, the products the pack contains
 	 */
-	public Pack(int id, double price, ArrayList<StoreProduct> products, Date date) {
+	public Pack(int id, double price, ArrayList<StoreProduct> products, LocalDate date) {
 		this.id = id;
 		this.price = price;
 		this.products = products;
@@ -53,7 +54,7 @@ public class Pack {
 	 * @param price, price of the pack
 	 * @param products, the products the pack contains
 	 */
-	public Pack(double price, ArrayList<StoreProduct> products, Date date) {
+	public Pack(double price, ArrayList<StoreProduct> products, LocalDate date) {
 		this(totalId, price, products, date);
 		totalId++;
 	}
@@ -64,9 +65,19 @@ public class Pack {
 	 * @param price, price of the pack
 	 * @param date, the products the pack contains
 	 */
-	public Pack(double price, Date date) {
+	public Pack(double price, LocalDate date) {
 		this(totalId, price, new ArrayList<StoreProduct>(), date);
 		totalId++;
+	}
+	
+	/**
+	 * Creates a new pack with no products
+	 * 
+	 * @param price, price of the pack
+	 * @param date, the products the pack contains
+	 */
+	public Pack(int id, double price, LocalDate date) {
+		this(id, price, new ArrayList<StoreProduct>(), date);
 	}
 
 	/*----------------------------------------------------Getters and Setters---------------------------------------------------------------*/
@@ -104,7 +115,7 @@ public class Pack {
 	 * @return the products, the products included
 	 */
 	public ArrayList<StoreProduct> getProducts() {
-		return products;
+		return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
 	}
 
 	/**
@@ -121,7 +132,7 @@ public class Pack {
 	 *
 	 * @return the dateAddCart
 	 */
-	public Date getDateAddCart() {
+	public LocalDate getDateAddCart() {
 		return dateAddCart;
 	}
 
@@ -130,18 +141,26 @@ public class Pack {
 	 *
 	 * @param dateAddCart the dateAddCart to set
 	 */
-	public void setDateAddCart(Date dateAddCart) {
+	public void setDateAddCart(LocalDate dateAddCart) {
 		this.dateAddCart = dateAddCart;
 	}
 
 	/*-----------------------------------------------------Methods------------------------------------------------------------------*/
 
 	/**
-	 * Changes the stock of the products included in the pack
+	 * Decreases the stock of the products included in the pack
 	 */
-	public void changeStock() {
+	public void decreaseStock() {
 		for(StoreProduct sp:products)
 			sp.decreaseStock(1);
+	}
+	
+	/**
+	 * Increases the stock of the products included in the pack
+	 */
+	public void increaseStock() {
+		for(StoreProduct sp: products)
+			sp.increaseStock(1);
 	}
 
 	/**
@@ -197,6 +216,4 @@ public class Pack {
 		return total;
 	}
 }
-=======
-}
->>>>>>> branch 'main' of https://github.com/DPR206/PADSOF_GFG.git
+

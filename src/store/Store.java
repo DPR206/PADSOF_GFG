@@ -1,8 +1,10 @@
 package store;
 
 import java.util.*;
-import product.Category;
 import user.*;
+import product.*;
+import exchange.Exchange;
+import order.*;
 
 // DUE: Falta el @see
 
@@ -17,13 +19,41 @@ public class Store {
 	private static final Store INSTANCE;
     private static int productId = 0;
     // Está creada para que no se queje el compilador en sus referencias
+
+    /**Falta parameter */
+
+    /* Them manager of the store */
+    private Manager manager;
+    /* The list of discounts in the store */
+    private List<Discount> discounts = new ArrayList()<>;
+    /* The list of all exchanges done in the store */
+    private List<Exchange> exchanges = new ArrayList()<>;
+    /* The list of orders that have been completed */
+    private List<Order> orders = new ArrayList()<>;
+    /* The list of packs available */
+    private List<Pack> packs = new ArrayList()<>;
+    /* The list of categories available */
+    private List<Category> categories = new ArrayList()<>;
+    /* The list of products that belong to the store */
+    private List<Product> products = new ArrayList()<>;
+    /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
-    private Map<String, User> users = new HashMap<>();
+    /* The class for the extra functions singIn and logIn */
     private utility extras;
-    private Store(){
+
+    /**
+     * Store's constructor
+     * @param manager the store's manager
+     */
+    private Store(Manager manager){
         this.extras = new utilities();
+        this.manager = manager;
     }
 
+    /**
+     * Gets the Instance of the Store
+     * 
+     */
     public Store getInstance(){
         if(Store.INSTANCE == null){
             Store.INSTANCE = new Store();
@@ -31,8 +61,16 @@ public class Store {
         return Store.INSTANCE;
     }
 
+    /**
+     * Gets the category by its name
+     * @param name the category's name
+     */
     public Category getCategoryFromName(String name) {
-        return null; // Sustituir y rellenar
+        
+        for(Category c: this.categories){
+            if(c.getName() == name) return c
+        }
+        return null;
     }
 
     /**
@@ -44,36 +82,99 @@ public class Store {
         return id;
     }
     
-    private boolean logIn(String userName, String pwd) {
+    /**
+     * Logs in a user
+     * 
+     */
+    private boolean logIn() {
     	User u;
     	
-    	if(this.users.containsKey(userName)) {
-    		u = this.users.get(userName);
-    		if(u.getPassword() == pwd) {
-    			return true;
-    		}
-    	}
-    	return false;
-    } 
-    
-    public boolean signIn() {
-		Scanner sc = new Scanner(System.in);
-		String userName, pwd;
-		RegisteredClient rc;
-		
-		System.out.print("Introduce tu usuario: ");
-		
-		try {
+    	try {
 			System.out.print("Introduce tu usuario: ");
 			userName = sc.next();
 			System.out.print("Introduce tu contraseña: ");
 			pwd = sc.next();
 		}catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
-        } finally {
-            sc.close();
+            return false;
         }
-		
-		
+
+        if(utilities.logIn(userName, pwd, this) == false) return false;
+
+    	return true;
+    } 
+    
+    /**
+     * Signs in a user
+     * 
+     */
+    public boolean signIn() {
+		utilities.signIn(this);
+    }
+
+    /**
+     * Gets the manager of the store
+     * 
+     */
+    public Manager getManager(){
+        return this.manager;
+    }
+
+    /**
+     * Gets the list of the discounts of the store
+     * 
+     */
+    public List getDiscounts(){
+        return this.discounts;
+    }
+
+    /**
+     * Gets the list of the exchanges of the store
+     * 
+     */
+    public List getExchanges(){
+        return this.exchanges;
+    }
+
+    /**
+     * Gets the list of the orders done in the store
+     * 
+     */
+    public List getOrders(){
+        return this.orders;
+    }
+
+    /**
+     * Gets the list of the packs of the store
+     * 
+     */
+    public List getPacks(){
+        return this.packs;
+    }
+
+    /**
+     * Gets the list of the categories of the store
+     * 
+     */
+    public List getCategories(){
+        return this.categories;
+    }
+
+    /**
+     * Gets the list of the products available in the store
+     * 
+     */
+    public List getProducts(){
+        return this.products;
+    }
+
+    /**
+     * Gets the list of the users of the store
+     * 
+     */
+    public Map getUsers(){
+        return this.users;
     }
 }
+
+

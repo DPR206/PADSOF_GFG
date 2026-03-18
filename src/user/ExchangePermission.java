@@ -29,6 +29,6 @@ public class ExchangePermission {
      * @param valuation         the product's price
      */
     public void valuate(SecondHandProduct secondHandProduct, double valuation) {
-        secondHandProduct.changePrice(valuation);
+        secondHandProduct.changeEstimatedPrice(valuation);
     }
 }

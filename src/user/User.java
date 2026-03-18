@@ -29,7 +29,7 @@ public abstract class User {
 	 * @param userName, the uusername of the user
 	 * @param acutalID, the ID of the user
 	 */
-	public User(String pwd, String userName, int actualID) {
+	private User(String pwd, String userName, int actualID) {
 		this.pwd = pwd;
 		this.userName = userName;
 		this.actualID = actualID;

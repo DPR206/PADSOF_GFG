@@ -14,7 +14,10 @@ public class Employee extends User{
     private ExchangePermission ep;
     private OrderPermission op;
     private StorePermition sp;
-
+    private Permission perm;
     
+    public Employee(){
+        super()
+    }
     
 }

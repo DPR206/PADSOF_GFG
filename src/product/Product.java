@@ -5,7 +5,7 @@ package product;
  * <p>
  * Description: It implements the abstract Product class
  * @author Ana O.R.
- * @version 1.5
+ * @version 1.6
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
@@ -35,7 +35,7 @@ public abstract class Product {
      * @param photo       the product's photo's path
      * @param type        the type
      */
-    Product(double price, String name, String description, String photo, ProductType type) {
+    public Product(double price, String name, String description, String photo, ProductType type) {
         this.id = type.getSymbol() + productId;
         productId++;
         this.price = price;

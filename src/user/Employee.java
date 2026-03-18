@@ -16,5 +16,8 @@ public class Employee extends User{
     private StorePermition sp;
     private Permission perm;
     
+    public Employee(){
+        super()
+    }
     
 }

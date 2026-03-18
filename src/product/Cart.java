@@ -50,7 +50,9 @@ public class Cart {
 			aux = spp.getPrice() + aux;
 		}
 		
-		/**FALTA CONSEGUIR PRECIO DE PACKS*/
+		for(Pack p: this.packs) {
+			aux = aux + p.getPrice();
+		}
 		
 		return aux;
 	}
@@ -83,7 +85,7 @@ public class Cart {
 			}
 		
 		this.packs.remove(i);
-		///cambiar stock de packs
+		p.decreaseStock();
 		}
 	}
 	
@@ -96,9 +98,18 @@ public class Cart {
 		wanted.setAddedDate(LocalDate.now());
 	}
 	
-	public void addPack(Pack wanted) {
+	public bool addPack(Pack wanted) {
 		this.packs.add(wanted);
-		/**habría que cambiar stock, packs está en proceso**/
+		List products = wanted.getProducts();
+
+		for(StorepProduct sp: products){
+			if(sp.getStock() == 0) return false
+		}
+
+		packs.add(wanted);
+		wanted.decreaseStock();
+
+		return true;
 	}
 	
 	public int getProductAmount() {

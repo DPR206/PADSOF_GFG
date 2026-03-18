@@ -40,10 +40,20 @@ public class Store {
     private Map<String, User> users = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
     private utility extras;
-    private Store(){
+
+    /**
+     * Store's constructor
+     * @param manager the store's manager
+     */
+    private Store(Manager manager){
         this.extras = new utilities();
+        this.manager = manager;
     }
 
+    /**
+     * Gets the Instance of the Store
+     * 
+     */
     public Store getInstance(){
         if(Store.INSTANCE == null){
             Store.INSTANCE = new Store();
@@ -51,8 +61,16 @@ public class Store {
         return Store.INSTANCE;
     }
 
+    /**
+     * Gets the category by its name
+     * @param name the category's name
+     */
     public Category getCategoryFromName(String name) {
-        return null; // Sustituir y rellenar
+        
+        for(Category c: this.categories){
+            if(c.getName() == name) return c
+        }
+        return null;
     }
 
     /**
@@ -64,6 +82,10 @@ public class Store {
         return id;
     }
     
+    /**
+     * Logs in a user
+     * 
+     */
     private boolean logIn() {
     	User u;
     	
@@ -82,7 +104,77 @@ public class Store {
     	return true;
     } 
     
+    /**
+     * Signs in a user
+     * 
+     */
     public boolean signIn() {
 		utilities.signIn(this);
     }
+
+    /**
+     * Gets the manager of the store
+     * 
+     */
+    public Manager getManager(){
+        return this.manager;
+    }
+
+    /**
+     * Gets the list of the discounts of the store
+     * 
+     */
+    public List getDiscounts(){
+        return this.discounts;
+    }
+
+    /**
+     * Gets the list of the exchanges of the store
+     * 
+     */
+    public List getExchanges(){
+        return this.exchanges;
+    }
+
+    /**
+     * Gets the list of the orders done in the store
+     * 
+     */
+    public List getOrders(){
+        return this.orders;
+    }
+
+    /**
+     * Gets the list of the packs of the store
+     * 
+     */
+    public List getPacks(){
+        return this.packs;
+    }
+
+    /**
+     * Gets the list of the categories of the store
+     * 
+     */
+    public List getCategories(){
+        return this.categories;
+    }
+
+    /**
+     * Gets the list of the products available in the store
+     * 
+     */
+    public List getProducts(){
+        return this.products;
+    }
+
+    /**
+     * Gets the list of the users of the store
+     * 
+     */
+    public Map getUsers(){
+        return this.users;
+    }
 }
+
+

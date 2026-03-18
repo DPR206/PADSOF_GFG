@@ -4,7 +4,7 @@ package product;
  * Enum Name: ConservationStatus
  * <p>
  * Description: It defines the conservations status
- * @author
+ * @author Duna P.R.
  * @version 1.0
  */
 public enum ConservationStatus {

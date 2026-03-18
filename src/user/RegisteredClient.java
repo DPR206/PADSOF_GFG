@@ -18,7 +18,7 @@ import java.time.format.*;
 public class RegisteredClient extends User {
 	private LocalDate registerDate;
 	private String dni;
-	//carrito
+	private Cart c;
 	//cartera
 	//searcher
 	//sugestioner
@@ -109,15 +109,5 @@ public class RegisteredClient extends User {
 		return super.toString();
 	}
 	
-	public void buy() {
-		this.c.payOrder()
-	}
-
-	public void removeFromCart(StoreProduct sp){
-		c.cancelProduct(sp);
-	}
-
-	public void addProduct(StoreProduct wanted){
-		c.addProduct(wanted);
-	}
+	public 
 }

@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 import user.RegisteredClient;
 
+<<<<<<< HEAD
+=======
 /**
  * Class Name: Carrito
  * <p>
@@ -16,6 +18,7 @@ import user.RegisteredClient;
  * @version 1.0
  */
 
+>>>>>>> branch 'main' of https://github.com/DPR206/PADSOF_GFG.git
 public class Carrito {
 	private List<StoreProduct> sp = new ArrayList<>();
 	private List<Pack> packs = new ArrayList<>();
@@ -133,3 +136,5 @@ public class Carrito {
 		return true;
 	}
 }
+
+

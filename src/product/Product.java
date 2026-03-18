@@ -1,13 +1,18 @@
 package product;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 /**
  * Class name: Product
  * <p>
  * Description: It implements the abstract Product class
  * @author Ana O.R.
- * @version 1.1
+ * @version 1.4
  */
 public abstract class Product {
+    /** The global variable to determine which id should a new product have */
+    public static int productId;
     /** The product's id */
     private final int id;
     /** The product's price */
@@ -21,11 +26,14 @@ public abstract class Product {
     /** The product's product type */
     private ProductType type;
     /** The product's categories */
-    private final Category[] categories;
+    private HashMap<String, Category> categories;
+
+    static {
+        productId = 0;
+    }
 
     /**
      * General product constructor
-     * @param id          the product's id
      * @param price       the product's price
      * @param name        the product's name
      * @param description the product's description
@@ -33,31 +41,42 @@ public abstract class Product {
      * @param type        the type
      * @param categories  the product's categories
      */
-    Product(int id, double price, String name, String description, String photo, ProductType type,
+    Product(double price, String name, String description, String photo, ProductType type,
             Category... categories) {
-        // NOTE: Este constructor existe porque tengo miedo de Java y facilita los constructores, NO debería llamarse
-        this.id = id;
+        this.id = productId;
+        productId++;
         this.price = price;
         this.name = name;
         this.description = description;
         this.photo = photo;
         this.type = type;
-        this.categories = categories;
+        this.categories = new HashMap<>();
+        for (Category category : categories) {
+            this.addCategory(category);
+        }
     }
 
     /**
      * SecondHandProduct's Product constructor
-     * @param id          the product's id
      * @param name        the product's name
      * @param description the product's description
      * @param photo       the product's photo's path
      * @param type        the type
      * @param categories  the product's categories
      */
-    Product(int id, String name, String description, String photo, ProductType type, Category... categories) {
+    Product(String name, String description, String photo, ProductType type, Category... categories) {
         // NOTE: Revisar qué precio inicial poner
-        // NOTE: Técnicamente da igual el numSales de los productos de segunda mano
-        this(id, -1, name, description, photo, type, categories);
+        this(-1, name, description, photo, type, categories);
+    }
+
+    /**
+     * Written information of a product
+     * @return String, information of a product
+     */
+    @Override
+    public String toString() {
+        return "Product #" + this.id + ", " + this.name + ", " + this.description + ", " + this.photo + "[" + this.type
+                + "]" + "{" + Arrays.toString(this.categories.values().toArray(new Category[0])) + "}";
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -102,7 +121,27 @@ public abstract class Product {
         this.type = newType;
     }
 
-    // DUE: Change -> categories
+    /**
+     * It allows the system or an employee to add categories to a product
+     * @param newCategories the categories to be added
+     */
+    public void addCategory(Category... newCategories) {
+        for (Category newCategory : newCategories) {
+            if (!this.categories.containsKey(newCategory.getName())) {
+                this.categories.put(newCategory.getName(), newCategory);
+            }
+        }
+    }
+
+    /**
+     * It allows an employee to remove categories from a product
+     * @param categories the categories to be deleted
+     */
+    public void removeCategory(Category... categories) {
+        for (Category category : categories) {
+            this.categories.remove(category.getName());
+        }
+    }
 
     /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
 
@@ -151,6 +190,6 @@ public abstract class Product {
      * @return the product's categories
      */
     public Category[] getCategories() {
-        return this.categories;
+        return this.categories.values().toArray(new Category[0]);
     }
 }

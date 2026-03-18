@@ -57,6 +57,17 @@ public class Pack {
 		this(totalId, price, products, date);
 		totalId++;
 	}
+	
+	/**
+	 * Creates a new pack with no products
+	 * 
+	 * @param price, price of the pack
+	 * @param date, the products the pack contains
+	 */
+	public Pack(double price, Date date) {
+		this(totalId, price, new ArrayList<StoreProduct>(), date);
+		totalId++;
+	}
 
 	/*----------------------------------------------------Getters and Setters---------------------------------------------------------------*/
 
@@ -172,6 +183,7 @@ public class Pack {
 	public boolean eliminateArrayProducts(ArrayList<StoreProduct> productsRemove) {
 		return products.removeAll(productsRemove);
 	}
+
 	
 	/**
 	 * Obtains the raw price of all the products in the pack
@@ -185,3 +197,6 @@ public class Pack {
 		return total;
 	}
 }
+=======
+}
+>>>>>>> branch 'main' of https://github.com/DPR206/PADSOF_GFG.git

@@ -115,7 +115,7 @@ public class Pack {
 	 * @return the products, the products included
 	 */
 	public ArrayList<StoreProduct> getProducts() {
-		return products;
+		return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
 	}
 
 	/**

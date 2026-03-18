@@ -25,7 +25,7 @@ public class VolumeDisc extends Discount {
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param discount          the amount of money the discount deducts from the order's final price
      */
-    VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount) {
+    public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount) {
         super(startDate, endDate);
         this.spendingThreshold = spendingThreshold;
         this.discount = discount;

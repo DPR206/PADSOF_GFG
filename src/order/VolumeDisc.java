@@ -29,41 +29,11 @@ public class VolumeDisc extends Discount {
         this.discount = discount;
     }
 
-    /**
-     * It gets the discount's start date
-     * @return the discount's start date
-     */
-    @Override
-    public LocalDateTime getStartDate() {
-        return super.getStartDate();
-    }
+    // DUE: public createNotification(){}
 
-    /**
-     * It gets the discount's end date
-     * @return the discount's end date
-     */
-    @Override
-    public LocalDateTime getEndDate() {
-        return super.getEndDate();
-    }
+    // DUE: public obtainDisc();
 
-    /**
-     * It allows the manager to change a discount's start date
-     * @param startDate the discount's new start date
-     */
-    @Override
-    public void changeStartDate(LocalDateTime startDate) {
-        super.changeStartDate(startDate);
-    }
-
-    /**
-     * It allows the manager to change a discount's end date
-     * @param endDate the discount's new end date
-     */
-    @Override
-    public void changeEndDate(LocalDateTime endDate) {
-        super.changeEndDate(endDate);
-    }
+    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
 
     /**
      * It allows the manager to change the volume discount's spending threshold
@@ -80,8 +50,6 @@ public class VolumeDisc extends Discount {
     public void changeDiscount(double discount) {
         this.discount = discount;
     }
+    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
 
-    // DUE: public createNotification(){}
-
-    // DUE: public obtainDisc();
 }

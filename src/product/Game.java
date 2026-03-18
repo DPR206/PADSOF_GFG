@@ -59,11 +59,9 @@ public class Game extends StoreProduct {
     public String toString() {
         // TIPO(C/J/F);ID;NOMBRE;DESCRIPCIÓN;PRECIO;UNIDADES;CATEGORÍAS;PAGINAS;AUTOR;EDITORIAL;AÑO;JUGADORES;EDAD
         // ;ESTILO(Cartas/Dados/Tablero/Miniatura);MARCA;MATERIAL;DIMENSION
-        return "C" + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() + ";" + this.getPrice() +
-                ";" + this.getStock() + ";" + /*paginas*/ ";" + /*autor*/ ";" + /*editorial*/ ";" +
-                /*año*/ ";" + this.numPlayers + ";" + this.ageRange + ";" + this.getPrintCategories() + ";" /*marca
-         */ + ";"
-                /*material*/ + ";" /*dimension*/;
+        return ProductType.GAME.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() +
+                ";" + this.getPrice() + ";" + this.getStock() + ";" + /*paginas*/ ";" + /*autor*/ ";" + /*editorial*/ ";" + /*año*/ ";" + this.numPlayers + ";" + this.ageRange + ";" + this.getPrintCategories() + ";"
+                /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */

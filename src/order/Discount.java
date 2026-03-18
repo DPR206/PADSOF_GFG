@@ -20,7 +20,10 @@ public abstract class Discount {
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
      */
-    Discount(LocalDateTime startDate, LocalDateTime endDate) {
+    Discount(LocalDateTime startDate, LocalDateTime endDate) throws IllegalArgumentException {
+        if (startDate.isAfter(endDate)) {
+            throw new  IllegalArgumentException("Start date is after end date");
+        }
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -45,7 +48,10 @@ public abstract class Discount {
      * It allows the manager to change a discount's start date
      * @param startDate the discount's new start date
      */
-    public void changeStartDate(LocalDateTime startDate) {
+    public void changeStartDate(LocalDateTime startDate) throws IllegalArgumentException {
+        if (startDate.isAfter(endDate)) {
+            throw new  IllegalArgumentException("Start date is after end date");
+        }
         this.startDate = startDate;
     }
 
@@ -53,7 +59,10 @@ public abstract class Discount {
      * It allows the manager to change a discount's end date
      * @param endDate the discount's new end date
      */
-    public void changeEndDate(LocalDateTime endDate) {
+    public void changeEndDate(LocalDateTime endDate) throws IllegalArgumentException {
+        if (startDate.isAfter(endDate)) {
+            throw new  IllegalArgumentException("Start date is after end date");
+        }
         this.endDate = endDate;
     }
 

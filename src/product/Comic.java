@@ -9,7 +9,7 @@ import java.time.Year;
  * <p>
  * Description: It implements the comics
  * @author Ana O.R.
- * @version 1.3
+ * @version 1.4
  * @see StoreProduct
  */
 public class Comic extends StoreProduct {
@@ -72,10 +72,10 @@ public class Comic extends StoreProduct {
     public String toString() {
         // TIPO(C/J/F);ID;NOMBRE;DESCRIPCIÓN;PRECIO;UNIDADES;CATEGORÍAS;PAGINAS;AUTOR;EDITORIAL;AÑO;JUGADORES;EDAD
         // ;ESTILO(Cartas/Dados/Tablero/Miniatura);MARCA;MATERIAL;DIMENSION
-        return "C" + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() + ";" + this.getPrice() +
-                ";" + this.getStock() + ";" + this.numPages + ";" + this.author + ";" + this.editorial + ";" +
-                this.year + ";" /*jugadores*/ + ";" /*edad*/ + ";" /*estilo*/ + ";" /*marca*/ + ";"
-                /*material*/ + ";" /*dimension*/;
+        return ProductType.COMIC.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription()
+                + ";" + this.getPrice() + ";" + this.getStock() + ";" + this.numPages + ";" + this.author + ";" +
+                this.editorial + ";" + this.year + ";" /*jugadores*/ + ";" /*edad*/ + ";" /*estilo*/ + ";" /*marca*/ +
+                ";" /*material*/ + ";" /*dimension*/;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */

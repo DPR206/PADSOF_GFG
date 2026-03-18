@@ -8,7 +8,7 @@ import product.*;
  * Class Name: User
  * <p>
  * Description: It defines the user of the app
- * @author sofía C.L.
+ * @author Sofía C.L.
  * @version 1.0
  */
 public abstract class User {

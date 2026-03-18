@@ -1,14 +1,11 @@
 package product;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 /**
  * Class name: Product
  * <p>
  * Description: It implements the abstract Product class
  * @author Ana O.R.
- * @version 1.4
+ * @version 1.6
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
@@ -25,8 +22,6 @@ public abstract class Product {
     private String photo;
     /** The product's product type */
     private ProductType type;
-    /** The product's categories */
-    private HashMap<String, Category> categories;
 
     static {
         productId = 0;
@@ -39,10 +34,8 @@ public abstract class Product {
      * @param description the product's description
      * @param photo       the product's photo's path
      * @param type        the type
-     * @param categories  the product's categories
      */
-    Product(double price, String name, String description, String photo, ProductType type,
-            Category... categories) {
+    public Product(double price, String name, String description, String photo, ProductType type) {
         this.id = type.getSymbol() + productId;
         productId++;
         this.price = price;
@@ -50,10 +43,6 @@ public abstract class Product {
         this.description = description;
         this.photo = photo;
         this.type = type;
-        this.categories = new HashMap<>();
-        for (Category category : categories) {
-            this.addCategory(category);
-        }
     }
 
     /**
@@ -62,21 +51,10 @@ public abstract class Product {
      * @param description the product's description
      * @param photo       the product's photo's path
      * @param type        the type
-     * @param categories  the product's categories
      */
-    Product(String name, String description, String photo, ProductType type, Category... categories) {
+    Product(String name, String description, String photo, ProductType type) {
         // NOTE: Revisar qué precio inicial poner
-        this(-1, name, description, photo, type, categories);
-    }
-
-    /**
-     * Written information of a product
-     * @return String, information of a product
-     */
-    @Override
-    public String toString() {
-        return "Product #" + this.id + ", " + this.name + ", " + this.description + ", " + this.photo + "[" + this.type
-                + "]" + "{" + Arrays.toString(this.categories.values().toArray(new Category[0])) + "}";
+        this(-1, name, description, photo, type);
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -119,28 +97,6 @@ public abstract class Product {
      */
     public void changeType(ProductType newType) {
         this.type = newType;
-    }
-
-    /**
-     * It allows the system or an employee to add categories to a product
-     * @param newCategories the categories to be added
-     */
-    public void addCategory(Category... newCategories) {
-        for (Category newCategory : newCategories) {
-            if (!this.categories.containsKey(newCategory.getName())) {
-                this.categories.put(newCategory.getName(), newCategory);
-            }
-        }
-    }
-
-    /**
-     * It allows an employee to remove categories from a product
-     * @param categories the categories to be deleted
-     */
-    public void removeCategory(Category... categories) {
-        for (Category category : categories) {
-            this.categories.remove(category.getName());
-        }
     }
 
     /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
@@ -191,13 +147,5 @@ public abstract class Product {
      */
     public ProductType getType() {
         return this.type;
-    }
-
-    /**
-     * It returns the product's categories
-     * @return the product's categories
-     */
-    public Category[] getCategories() {
-        return this.categories.values().toArray(new Category[0]);
     }
 }

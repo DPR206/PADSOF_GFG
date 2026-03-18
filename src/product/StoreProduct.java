@@ -5,6 +5,7 @@ import order.Order;
 import user.RegisteredClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class name: StoreProduct
@@ -23,6 +24,8 @@ public abstract class StoreProduct extends Product {
     private final ArrayList<Review> reviews;
     /** The product's discount, if it has one */
     private Discount discount;
+    /** The product's categories */
+    private HashMap<String, Category> categories;
 
     /**
      * Store product's constructor
@@ -36,19 +39,14 @@ public abstract class StoreProduct extends Product {
      */
     StoreProduct(double price, String name, String description, String photo, ProductType type, int stock,
                  Category... categories) {
-        super(price, name, description, photo, type, categories);
+        super(price, name, description, photo, type);
         this.stock = stock;
         this.reviews = new ArrayList<>();
         this.discount = null;
-    }
-
-    /**
-     * Written information of a product
-     * @return String, information of a product
-     */
-    @Override
-    public String toString() {
-        return super.toString() + ", (" + this.stock + " uds)";
+        this.categories = new HashMap<>();
+        for (Category category : categories) {
+            this.addCategory(category);
+        }
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -128,18 +126,22 @@ public abstract class StoreProduct extends Product {
      * It allows the system or an employee to add categories to a product
      * @param newCategories the categories to be added
      */
-    @Override
     public void addCategory(Category... newCategories) {
-        super.addCategory(newCategories);
+        for (Category newCategory : newCategories) {
+            if (!this.categories.containsKey(newCategory.getName())) {
+                this.categories.put(newCategory.getName(), newCategory);
+            }
+        }
     }
 
     /**
      * It allows an employee to remove categories from a product
      * @param categories the categories to be deleted
      */
-    @Override
     public void removeCategory(Category... categories) {
-        super.removeCategory(categories);
+        for (Category category : categories) {
+            this.categories.remove(category.getName());
+        }
     }
 
     /**
@@ -211,9 +213,8 @@ public abstract class StoreProduct extends Product {
      * It returns the product's categories
      * @return the product's categories
      */
-    @Override
     public Category[] getCategories() {
-        return super.getCategories();
+        return this.categories.values().toArray(new Category[0]);
     }
 
     /**

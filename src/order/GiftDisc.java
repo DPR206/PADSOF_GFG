@@ -32,6 +32,9 @@ public class GiftDisc extends Discount {
         this.gift = gift;
     }
 
+    // DUE: createGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct
+    // gift) {}
+
     /**
      * It gets the discount's start date
      * @return the discount's start date
@@ -55,7 +58,7 @@ public class GiftDisc extends Discount {
      * @param startDate the discount's new start date
      */
     @Override
-    public void changeStartDate(LocalDateTime startDate) {
+    public void changeStartDate(LocalDateTime startDate) throws IllegalArgumentException {
         super.changeStartDate(startDate);
     }
 
@@ -64,7 +67,7 @@ public class GiftDisc extends Discount {
      * @param endDate the discount's new end date
      */
     @Override
-    public void changeEndDate(LocalDateTime endDate) {
+    public void changeEndDate(LocalDateTime endDate) throws IllegalArgumentException {
         super.changeEndDate(endDate);
     }
 
@@ -72,7 +75,10 @@ public class GiftDisc extends Discount {
      * It allows the manager to change the gift discount's spending threshold
      * @param spendingThreshold the new spending threshold
      */
-    public void changeSpendingThreshold(double spendingThreshold) {
+    public void changeSpendingThreshold(double spendingThreshold) throws IllegalArgumentException {
+        if (spendingThreshold < 0) {
+            throw new IllegalArgumentException("The spending threshold must be greater than 0");
+        }
         this.spendingThreshold = spendingThreshold;
     }
 

@@ -18,7 +18,7 @@ public enum ProductType {
     /**
      * The characters that define this type in the save file
      */
-    private String symbol;
+    private final String symbol;
 
     ProductType(String symbol) {
         this.symbol = symbol;

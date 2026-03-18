@@ -11,12 +11,8 @@ import order.Discount;
  * @see StoreProduct
  */
 public class Figurine extends StoreProduct {
-    /** The figurine's height */
-    private double height;
-    /** The figurine's width */
-    private double width;
-    /** The figurine's depth */
-    private double depth;
+    /** The figurine's dimension */
+    private String dimension;
     /** The figurine's brand */
     private String brand;
     /** The figurine's material */
@@ -29,19 +25,15 @@ public class Figurine extends StoreProduct {
      * @param description the figurine's description
      * @param photo       the figurine's photo's path
      * @param stock       the figurine's stock
-     * @param height      the figurine's height
-     * @param width       the figurine's width
-     * @param depth       the figurine's depth
+     * @param dimension   the figurine's dimension
      * @param brand       the figurine's brand
      * @param material    the figurine's material
      * @param categories  the figurine's categories
      */
-    Figurine(double price, String name, String description, String photo, int stock, double height,
-             double width, double depth, String brand, String material, Category... categories) {
+    Figurine(double price, String name, String description, String photo, int stock, String dimension, String brand,
+             String material, Category... categories) {
         super(price, name, description, photo, ProductType.FIGURINE, stock, categories);
-        this.height = height;
-        this.width = width;
-        this.depth = depth;
+        this.dimension = dimension;
         this.brand = brand;
         this.material = material;
     }
@@ -53,18 +45,15 @@ public class Figurine extends StoreProduct {
      * @param description the figurine's description
      * @param photo       the figurine's photo's path
      * @param stock       the figurine's stock
-     * @param height      the figurine's height
-     * @param width       the figurine's width
-     * @param depth       the figurine's depth
+     * @param dimension   the figurine's dimension
      * @param brand       the figurine's brand
      * @param material    the figurine's material
      * @param categories  the figurine's categories
      * @return the new figurine
      */
     public Figurine createFigurine(double price, String name, String description, String photo, int stock,
-                                   double height,
-                                   double width, double depth, String brand, String material, Category... categories) {
-        return new Figurine(price, name, description, photo, stock, height, width, depth, brand
+                                   String dimension, String brand, String material, Category... categories) {
+        return new Figurine(price, name, description, photo, stock, dimension, brand
                 , material, categories);
     }
 
@@ -74,8 +63,12 @@ public class Figurine extends StoreProduct {
      */
     @Override
     public String toString() {
-        return super.toString() + ", " + this.height + ", " + this.width + ", " + this.depth + ", [" + this.brand +
-                "], [" + this.material + "]";
+        // TIPO(C/J/F);ID;NOMBRE;DESCRIPCIÓN;PRECIO;UNIDADES;CATEGORÍAS;PAGINAS;AUTOR;EDITORIAL;AÑO;JUGADORES;EDAD
+        // ;ESTILO(Cartas/Dados/Tablero/Miniatura);MARCA;MATERIAL;DIMENSION
+        return "C" + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() + ";" + this.getPrice() +
+                ";" + this.getStock() + ";" + /*paginas*/ ";" + /*autor*/ ";" + /*editorial*/ ";" +
+                /*año*/ ";" /*jugadores*/ + ";" /*edad*/ + ";" /*estilo*/ + ";" + this.brand + ";"
+                + this.material + ";" + this.dimension;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -163,27 +156,11 @@ public class Figurine extends StoreProduct {
     }
 
     /**
-     * It allows for an employee to change the figurine's height
-     * @param newHeight the figurine's height
+     * It allows for an employee to change the figurine's dimension
+     * @param newDimension the figurine's dimension
      */
-    public void changeHeight(double newHeight) {
-        this.height = newHeight;
-    }
-
-    /**
-     * It allows for an employee to change the figurine's width
-     * @param newWidth the figurine's width
-     */
-    public void changeWidth(double newWidth) {
-        this.width = newWidth;
-    }
-
-    /**
-     * It allows for an employee to change the figurine's depth
-     * @param newDepth the figurine's depth
-     */
-    public void changeDepth(double newDepth) {
-        this.depth = newDepth;
+    public void changeDimension(String newDimension) {
+        this.dimension = newDimension;
     }
 
     /**
@@ -209,7 +186,7 @@ public class Figurine extends StoreProduct {
      * @return the figurine's id
      */
     @Override
-    public int getId() {
+    public String getId() {
         return super.getId();
     }
 
@@ -220,6 +197,15 @@ public class Figurine extends StoreProduct {
     @Override
     public double getPrice() {
         return super.getPrice();
+    }
+
+    /**
+     * It returns the product's name
+     * @return the product's name
+     */
+    @Override
+    public String getName() {
+        return super.getName();
     }
 
     /**
@@ -268,27 +254,11 @@ public class Figurine extends StoreProduct {
     }
 
     /**
-     * It returns's the product's height
-     * @return the product's height
+     * It returns's the product's dimension
+     * @return the product's dimension
      */
-    public double getHeight() {
-        return this.height;
-    }
-
-    /**
-     * It returns's the product's width
-     * @return the product's width
-     */
-    public double getWidth() {
-        return this.width;
-    }
-
-    /**
-     * It returns's the product's depth
-     * @return the product's depth
-     */
-    public double getDepth() {
-        return this.depth;
+    public String getDimension() {
+        return this.dimension;
     }
 
     /**

@@ -14,7 +14,7 @@ public abstract class Product {
     /** The global variable to determine which id should a new product have */
     public static int productId;
     /** The product's id */
-    private final int id;
+    private final String id;
     /** The product's price */
     private double price;
     /** The product's name */
@@ -43,7 +43,7 @@ public abstract class Product {
      */
     Product(double price, String name, String description, String photo, ProductType type,
             Category... categories) {
-        this.id = productId;
+        this.id = type.getSymbol() + productId;
         productId++;
         this.price = price;
         this.name = name;
@@ -149,7 +149,7 @@ public abstract class Product {
      * It returns the product's id
      * @return the product's id
      */
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -159,6 +159,14 @@ public abstract class Product {
      */
     public double getPrice() {
         return this.price;
+    }
+
+    /**
+     * It returns the product's name
+     * @return the product's name
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**

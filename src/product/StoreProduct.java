@@ -158,7 +158,7 @@ public abstract class StoreProduct extends Product {
      * @return the product's id
      */
     @Override
-    public int getId() {
+    public String getId() {
         return super.getId();
     }
 
@@ -169,6 +169,15 @@ public abstract class StoreProduct extends Product {
     @Override
     public double getPrice() {
         return super.getPrice();
+    }
+
+    /**
+     * It returns the product's name
+     * @return the product's name
+     */
+    @Override
+    public String getName() {
+        return super.getName();
     }
 
     /**

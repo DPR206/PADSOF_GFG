@@ -1,10 +1,16 @@
 package store;
 
-import java.util.*;
-import user.*;
-import product.*;
 import exchange.Exchange;
-import order.*;
+import order.Discount;
+import order.Order;
+import product.Category;
+import product.Pack;
+import product.Product;
+import user.Manager;
+import user.User;
+import utilities.Utility;
+
+import java.util.*;
 
 // DUE: Falta el @see
 
@@ -16,13 +22,13 @@ import order.*;
  * @version 1.0
  */
 public class Store {
-    private static final Store INSTANCE = null;
+    private static Store INSTANCE = null;
     private static int productId = 0;
     // Está creada para que no se queje el compilador en sus referencias
 
     /** Falta parameter */
 
-    /* Them manager of the store */
+    /* The manager of the store */
     private Manager manager;
     /* The list of discounts in the store */
     private List<Discount> discounts = new ArrayList<>();
@@ -39,15 +45,13 @@ public class Store {
     /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
-    private utility extras;
+    private Utility extras;
 
     /**
      * Store's constructor
-     * @param manager the store's manager
      */
-    private Store(Manager manager) {
-        this.extras = new utilities();
-        this.manager = manager;
+    public Store() {
+        this.extras = new Utility();
     }
 
     /**
@@ -101,7 +105,7 @@ public class Store {
             return false;
         }
 
-        if (utilities.logIn(userName, pwd, this) == false) return false;
+        if (extras.logIn(userName, pwd, this) == false) return false;
 
         return true;
     }
@@ -111,7 +115,7 @@ public class Store {
      *
      */
     public boolean signIn() {
-        return utilities.signIn(this);
+        return extras.signIn(this);
     }
 
     /**

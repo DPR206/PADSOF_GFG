@@ -1,10 +1,11 @@
 package user;
 
-import product.Category;
-import product.Comic;
+import product.*;
 import store.Store;
 
+import java.time.LocalDate;
 import java.time.Year;
+import java.util.ArrayList;
 
 /**
  * Class name: StorePermission
@@ -25,23 +26,28 @@ public class StorePermission {
         this.s = s;
     }
 
-    public void addComic(double price, String name, String description, String photo, int stock, int numPages, Year year,
-                         String author, String editorial, Category... categories) {
+    public void addComic(double price, String name, String description, String photo, int stock, int numPages,
+                         Year year, String author, String editorial, Category... categories) {
         Comic c = new Comic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
         this.s.addStoreProduct(c); // DUE
     }
 
-    public void addGame(double price, String name, String description, String photo, int stock, int numPlayers, String ageRange, Category... categories){
+    public void addGame(double price, String name, String description, String photo, int stock, int numPlayers,
+                        String ageRange, Category... categories) {
         Game g = new Game(price, name, description, photo, stock, numPlayers, ageRange, categories);
         s.addProduct(g);
     }
-    public void addFigurine(double price, String name, String description, String photo, int stock, double height, double width, double depth, String brand, String material, Category... category){
-        Figurine f = createFigurine(price, name, description, photo, stock, height, width, depth, brand, material, category);
+
+    public void addFigurine(double price, String name, String description, String photo, int stock, String dimension,
+                            String brand, String material, Category... categories) {
+        Figurine f = new Figurine(price, name, description, photo, stock, dimension, brand, material, categories);
         s.addProduct(f);
     }
-    public bool addProductByFile(String fileName){
-        //rellenar xd
+
+    public boolean addProductByFile(String fileName) {
+        return true; //rellenar xd
     }
+
     public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
         Pack p = new Pack(price, products, date);
         s.addProduct(p);

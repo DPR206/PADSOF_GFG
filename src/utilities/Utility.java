@@ -7,47 +7,49 @@
  */
 
 package utilities;
-import user.*;
-import store.*;
+
+import store.Store;
+import user.RegisteredClient;
+import user.User;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Utility {
 
-    public Utility(){
+    public Utility() {
     }
 
     public boolean signIn(Store s) {
-		Scanner sc = new Scanner(System.in);
-		String userName, pwd, dni;
-		RegisteredClient rc;
+        Scanner sc = new Scanner(System.in);
+        String userName, pwd, dni;
+        RegisteredClient rc;
         User u;
-		boolean aux = false;
+        boolean aux = false;
 
         HashMap<String, User> users = s.getUsers();
-		System.out.print("Introduce tu usuario: ");
+        System.out.print("Introduce tu usuario: ");
 
-		try {
+        try {
 
-            while (aux == false){
+            while (aux == false) {
 
                 System.out.print("Introduce tu usuario: ");
-			    userName = sc.next();
+                userName = sc.next();
 
-                if(users.containsKey(userName)){
+                if (users.containsKey(userName)) {
                     System.out.print("Este nombre de usuario ya está cogido");
-                }
-                else{
+                } else {
                     aux = true;
                 }
             }
 
-			System.out.print("Introduce tu contraseña: ");
-			pwd = sc.next();
+            System.out.print("Introduce tu contraseña: ");
+            pwd = sc.next();
             System.out.print("Introduce tu DNI: ");
-			dni = sc.next();
-		}catch (InputMismatchException e) {
+            dni = sc.next();
+        } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
             return false;
         } finally {
@@ -62,14 +64,14 @@ public class Utility {
     }
 
     public boolean logIn(String userName, String pwd, Store s) {
-    	User u;
+        User u;
 
-    	if(s.getUsers().containsKey(userName)) {
-    		u = this.users.get(userName);
-    		if(u.getPassword() == pwd) {
-    			return true;
-    		}
-    	}
-    	return false;
+        if (s.getUsers().containsKey(userName)) {
+            u = this.users.get(userName);
+            if (u.getPassword() == pwd) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,5 +1,13 @@
 package user;
 
+import exchange.Exchange;
+import order.Order;
+import order.OrderState;
+import product.Category;
+import product.SecondHandProduct;
+
+import java.time.Year;
+
 /**
  * Class name: Employee
  * <p>
@@ -9,41 +17,43 @@ package user;
  * @see Employee
  */
 
-public class Employee extends User{
+public class Employee extends User {
 
     private ExchangePermission ep;
     private OrderPermission op;
     private StorePermission sp;
     private Permission perm;
 
-/*------------------------------------------------------CONSTRUCTOR-----------------------------------------------------------------------*/
+    /*------------------------------------------------------CONSTRUCTOR-----------------------------------------------------------------------*/
 
     /**
-	 * Creates a new employee
-	 *
-	 * @param psw
-	 * @param userName
-	 * @param actualID
-	 * @param p
-	 */
-    public Employee(String pwd, String userName, int actualID, Permission p){
+     * Creates a new employee
+     * @param pwd
+     * @param userName
+     * @param actualID
+     * @param p
+     */
+    public Employee(String pwd, String userName, int actualID, Permission p) {
         super(pwd, userName, actualID);
         this.perm = p;
 
-        if(p.getMeaning() == "store"){sp = new StorePermission();}
-        else if(p.getMeaning() == "exchange") {sp = new ExchangePermission();}
-        else{this.sp = new OrderPermission();}
+        if (p.getMeaning() == "store") {
+            this.sp = new StorePermission();
+        } else if (p.getMeaning() == "exchange") {
+            this.ep = new ExchangePermission();
+        } else {
+            this.op = new OrderPermission();
+        }
     }
 
-/*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/
+    /*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/
 
     /**
-	 * Adds and creates new comic
-	 *
-	 * @param price
-	 * @param name
-	 * @param description
-	 * @param photo
+     * Adds and creates new comic
+     * @param price
+     * @param name
+     * @param description
+     * @param photo
      * @param stock
      * @param numPages
      * @param year
@@ -51,10 +61,10 @@ public class Employee extends User{
      * @param categories
      * @param editorial
      *
-	 */
+     */
     public boolean addComic(double price, String name, String description, String photo, int stock, int numPages,
-                            int year, String author, String editorial, Category... categories) {
-        if(this.sp != null){
+                            Year year, String author, String editorial, Category... categories) {
+        if (this.sp != null) {
             this.sp.addComic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
             return true;
         }
@@ -63,20 +73,19 @@ public class Employee extends User{
     }
 
     /**
-	 * Adds and creates new game
-	 *
-	 * @param price
-	 * @param name
-	 * @param description
-	 * @param photo
+     * Adds and creates new game
+     * @param price
+     * @param name
+     * @param description
+     * @param photo
      * @param stock
      * @param numPlayers
      * @param ageRange
      * @param categories
      *
-	 */
+     */
     public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers, String ageRange, Category... categories) {
-        if(this.sp != null){
+        if (this.sp != null) {
             this.sp.addGame(price, name, description, photo, stock, numPlayers, ageRange, categories);
             return true;
         }
@@ -85,12 +94,11 @@ public class Employee extends User{
     }
 
     /**
-	 * Adds and creates new figurine
-	 *
-	 * @param price
-	 * @param name
-	 * @param description
-	 * @param photo
+     * Adds and creates new figurine
+     * @param price
+     * @param name
+     * @param description
+     * @param photo
      * @param stock
      * @param height
      * @param width
@@ -99,9 +107,9 @@ public class Employee extends User{
      * @param material
      * @param categories
      *
-	 */
+     */
     public boolean addFigurine(double price, String name, String description, String photo, int stock, double height, double width, double depth, String brand, String material, Category... categories) {
-        if(this.sp != null){
+        if (this.sp != null) {
             this.sp.addFigurine(price, name, description, photo, stock, height, width, depth, brand, material, categories);
             return true;
         }
@@ -110,14 +118,13 @@ public class Employee extends User{
     }
 
     /**
-	 * Manages exchange
-	 *
-	 * @param exchanged
-	 * @param e
+     * Manages exchange
+     * @param exchange
+     * @param e
      *
-	 */
-    public void manageExchange(Exchange exchange, boolean e){
-        if(this.ep != null){
+     */
+    public boolean manageExchange(Exchange exchange, boolean e) {
+        if (this.ep != null) {
             ep.manageExchange(exchange, e);
             return true;
         }
@@ -126,15 +133,14 @@ public class Employee extends User{
     }
 
     /**
-	 * Gives a secondhand product a value
-	 *
-	 * @param secondHandProduct
-	 * @param valuation
+     * Gives a secondhand product a value
+     * @param secondHandProduct
+     * @param valuation
      *
-	 */
-    public void valuate(SecondHandProduct secondHandProduct, double valuation) {
-        if(this.ep != null){
-            ep.valuate(exchange, exchanged);
+     */
+    public boolean valuate(SecondHandProduct secondHandProduct, double valuation) {
+        if (this.ep != null) {
+            ep.valuate(secondHandProduct, valuation);
             return true;
         }
         System.err.println("You have no permission to do that...");
@@ -142,15 +148,14 @@ public class Employee extends User{
     }
 
     /**
-	 * Gives an order a status and manages it
-	 *
-	 * @param exchanged
-	 * @param e
+     * Gives an order a status and manages it
+     * @param o
+     * @param status
      *
-	 */
-    public void manageOrder(Order o, OrderState status) {
-        if(this.op != null){
-            op.valuate(o, status);
+     */
+    public boolean manageOrder(Order o, OrderState status) {
+        if (this.op != null) {
+            op.manageOrder(o, status);
             return true;
         }
         System.err.println("You have no permission to do that...");

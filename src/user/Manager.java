@@ -1,11 +1,12 @@
 package user;
-import order.*;
 
 import order.FixedPerDisc;
 import order.GiftDisc;
 import order.QuantityDisc;
 import order.VolumeDisc;
+import product.StoreProduct;
 import store.Parameter;
+import store.Store;
 
 import java.time.LocalDateTime;
 
@@ -19,25 +20,26 @@ import java.time.LocalDateTime;
  */
 public class Manager extends User {
     private static final Manager INSTANCE = null;
-
+    private final Store s;
     /** Store permission necessary for the manager to do its functions */
     private StorePermission sp;
     /** no clue :v */
     private Parameter parameter; //?? esto que es xd
 
-    private Manager(String pwd, String userName, int actualID) {
+    public Manager(String pwd, String userName, int actualID, Store s) {
         super(pwd, userName, actualID);
+        this.s = s;
     }
 
-    public Manager getManagerNotInitialized(String pwd, String userName) {
+    /* public Manager getManagerNotInitialized(String pwd, String userName) {
         if (Manager.INSTANCE == null) Manager.INSTANCE = new Manager(pwd, userName);
         return Manager.INSTANCE;
-    }
+    }*/ // NOTE: Lo comento por ahora para que no me aparezca el error
 
-    public Manager getIntializedManager() {
+    /*public Manager getIntializedManager() {
         if (Manager.INSTANCE != null) return Manager.INSTANCE;
         return null;
-    }
+    }*/ // NOTE: Lo comento por ahora para que no me aparezca el error
 
     public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {
         FixedPerDisc fpd = new FixedPerDisc(startDate, endDate, percentage);
@@ -55,7 +57,7 @@ public class Manager extends User {
     }
 
     public void addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount) {
-        VolumeDisc vd = new VolumeDisc(startDate, endDate, spendingThreshold, gift);
+        VolumeDisc vd = new VolumeDisc(startDate, endDate, spendingThreshold, discount);
         s.getDiscounts().add(vd);
     }
 }
@@ -63,5 +65,5 @@ public class Manager extends User {
 +
 +
 +
-+ addEmployee(int id, Sttring password, List<Permission> permissions): Employee
++ addEmployee(int id, String password, List<Permission> permissions): Employee
 }**/

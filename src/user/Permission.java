@@ -1,3 +1,5 @@
+package user;
+
 public enum Permission{
     STORE("store"),
     ORDER("order"),

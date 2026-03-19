@@ -1,4 +1,5 @@
 package user;
+
 import exchange.Exchange;
 import product.SecondHandProduct;
 
@@ -13,6 +14,9 @@ import product.SecondHandProduct;
  */
 public class ExchangePermission {
     // NOTE: No tiene atributos propios
+
+    public ExchangePermission() {
+    }
 
     /**
      * It allows an employee to change an exchange's status

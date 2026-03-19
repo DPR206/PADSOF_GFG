@@ -1,4 +1,5 @@
 package user;
+
 import order.Order;
 import order.OrderState;
 
@@ -12,6 +13,9 @@ import order.OrderState;
  */
 public class OrderPermission {
     // NOTE: No tiene atributos propios
+
+    public OrderPermission() {
+    }
 
     /**
      * It allows an employee to change an order's status

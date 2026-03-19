@@ -1,16 +1,10 @@
 package store;
 
-import exchange.Exchange;
-import order.Discount;
-import order.Order;
-import product.Category;
-import product.Pack;
-import product.Product;
-import user.Manager;
-import user.User;
-import utilities.Utility;
-
 import java.util.*;
+import user.*;
+import product.*;
+import exchange.Exchange;
+import order.*;
 
 // DUE: Falta el @see
 
@@ -31,21 +25,21 @@ public class Store {
     /* Them manager of the store */
     private Manager manager;
     /* The list of discounts in the store */
-    private List<Discount> discounts = new ArrayList() < >;
+    private List<Discount> discounts = new ArrayList<>();
     /* The list of all exchanges done in the store */
-    private List<Exchange> exchanges = new ArrayList() < >;
+    private List<Exchange> exchanges = new ArrayList<>();
     /* The list of orders that have been completed */
-    private List<Order> orders = new ArrayList() < >;
+    private List<Order> orders = new ArrayList<>();
     /* The list of packs available */
-    private List<Pack> packs = new ArrayList() < >;
+    private List<Pack> packs = new ArrayList<>();
     /* The list of categories available */
-    private List<Category> categories = new ArrayList() < >;
+    private List<Category> categories = new ArrayList<>();
     /* The list of products that belong to the store */
-    private List<Product> products = new ArrayList() < >;
+    private List<Product> products = new ArrayList<>();
     /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
-    private Utility extras;
+    private utility extras;
 
     /**
      * Store's constructor
@@ -107,7 +101,7 @@ public class Store {
             return false;
         }
 
-        if (extras.logIn(userName, pwd, this) == false) return false;
+        if (utilities.logIn(userName, pwd, this) == false) return false;
 
         return true;
     }
@@ -117,7 +111,7 @@ public class Store {
      *
      */
     public boolean signIn() {
-        return extras.signIn(this);
+        return utilities.signIn(this);
     }
 
     /**

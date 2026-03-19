@@ -1,21 +1,148 @@
-package order;
+package product;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
-import product.StoreProduct;
+import user.RegisteredClient;
+
+/**
+ * Class Name: Carrito
+ * <p>
+ * Description: Cart, array of products and packs the user has not paid yet
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 
 public class Cart {
 	private List<StoreProduct> sp = new ArrayList<>();
-	private LocalDate modificationDate;
+	private List<Pack> packs = new ArrayList<>();
 	private boolean expired;
+	private LocalDate modificationDate;
 	
-	public Cart() {
-		this.expired = false;
-		this.modificationDate = LocalDate.now();
+	public Cart(boolean expired, LocalDate modificationDate) {
+		this.expired = expired;
+		this.modificationDate = modificationDate;
 	}
 	
-	public void addProduct(StoreProduct p) {
+	public boolean getExpired() {
+		return this.expired;
+	}
+	
+	public LocalDate getModificationDate() {
+		return this.modificationDate;
+	}
+	
+	public void setExpired(boolean exp) {
+		this.expired = exp;
+	}
+	
+	public void setModificationDate(LocalDate ld) {
+		this.modificationDate = ld;
+	}
+	
+	public double calculatePrice() {
+		double aux = 0;
 		
+		for(StoreProduct spp: this.sp) {
+			aux = spp.getPrice() + aux;
+		}
+		
+		for(Pack p: this.packs) {
+			aux = aux + p.getPrice();
+		}
+		
+		return aux;
+	}
+	
+	public void cancelProduct(StoreProduct toCancel) {
+		int i = 0;
+		
+		if(this.sp.contains(toCancel) == true) {
+			for(StoreProduct p: this.sp) {
+				if(p == toCancel) {
+					break;
+				}
+				i++;
+			}
+			
+		this.sp.remove(i);
+		toCancel.changeStock(toCancel.getStock()+1);
+		}
+	}
+	
+	public void cancelPack(Pack p) {
+		int i = 0;
+		
+		if(this.packs.contains(p) == true) {
+			for(Pack pack: this.packs) {
+				if(p == pack) {
+					break;
+				}
+				i++;
+			}
+		
+		this.packs.remove(i);
+		p.decreaseStock();
+		}
+	}
+	
+	public void addProduct(StoreProduct wanted) {
+		
+		if(wanted.getStock() == 0) return;
+		
+		this.sp.add(wanted);
+		wanted.changeStock(wanted.getStock()-1);
+		wanted.setAddedDate(LocalDate.now());
+	}
+	
+	public bool addPack(Pack wanted) {
+		this.packs.add(wanted);
+		List products = wanted.getProducts();
+
+		for(StorepProduct sp: products){
+			if(sp.getStock() == 0) return false
+		}
+
+		packs.add(wanted);
+		wanted.decreaseStock();
+
+		return true;
+	}
+	
+	public int getProductAmount() {
+		return this.sp.size();
+	}
+	
+	public boolean payOrder() {
+		double price = this.calculatePrice();
+		
+		Scanner sc = new Scanner(System.in);
+		String numeroTarjeta, CCV, fechaCad;
+		RegisteredClient rc;
+		
+		try {
+			System.out.print("Introduce tu número de tarjerta: ");
+			numeroTarjeta = sc.next();
+			System.out.print("Introduce tu CCV: ");
+			CCV = sc.next();
+			System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
+			fechaCad = sc.next();
+			
+			/**para después de el lunes, comprobar si el formato es correcto, y si no, retorno false**/
+		}catch (InputMismatchException e) {
+            System.out.println("Error: El tipo de dato introducido no es válido.");
+        } finally {
+            sc.close();
+        }
+		
+		this.packs.clear();
+		this.sp.clear();
+		
+		return true;
 	}
 }
+
+

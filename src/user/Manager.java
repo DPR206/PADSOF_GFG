@@ -1,7 +1,10 @@
 package user;
+import order.*;
 
 import order.FixedPerDisc;
+import order.GiftDisc;
 import order.QuantityDisc;
+import order.VolumeDisc;
 import store.Parameter;
 
 import java.time.LocalDateTime;
@@ -15,7 +18,7 @@ import java.time.LocalDateTime;
  * @see User
  */
 public class Manager extends User {
-    private static final Manager INSTANCE;
+    private static final Manager INSTANCE = null;
 
     /** Store permission necessary for the manager to do its functions */
     private StorePermission sp;
@@ -45,11 +48,20 @@ public class Manager extends User {
         QuantityDisc qd = new QuantityDisc(startDate, endDate, discount, numProds);
         s.getDiscounts().add(qd);
     }
+
+    public void addGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift) {
+        GiftDisc gd = new GiftDisc(startDate, endDate, spendingThreshold, gift);
+        s.getDiscounts().add(gd);
+    }
+
+    public void addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount) {
+        VolumeDisc vd = new VolumeDisc(startDate, endDate, spendingThreshold, gift);
+        s.getDiscounts().add(vd);
+    }
 }
  /*
 +
 +
-+ addGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift): GiftDisc
-+ addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount): VolumeDisc
-+ addEmployee(int id, String password, List<Permission> permissions): Employee
++
++ addEmployee(int id, Sttring password, List<Permission> permissions): Employee
 }**/

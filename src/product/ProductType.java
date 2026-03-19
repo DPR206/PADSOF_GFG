@@ -20,6 +20,10 @@ public enum ProductType {
      */
     private final String symbol;
 
+    /**
+     * A product type's constructor
+     * @param symbol the symbol that defines said enumeration
+     */
     ProductType(String symbol) {
         this.symbol = symbol;
     }

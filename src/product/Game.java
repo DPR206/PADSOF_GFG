@@ -5,7 +5,7 @@ package product;
  * <p>
  * Description: It implements the games
  * @author Ana O.R.
- * @version 1.4
+ * @version 1.5
  * @see StoreProduct
  */
 public class Game extends StoreProduct {
@@ -13,6 +13,8 @@ public class Game extends StoreProduct {
     private int numPlayers;
     /* The game's age range */
     private String ageRange;
+    /* The game's style */
+    private GameStyle gameStyle;
 
     /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 
@@ -25,13 +27,15 @@ public class Game extends StoreProduct {
      * @param stock       the game's stock
      * @param numPlayers  the game's num players
      * @param ageRange    the game's age range
+     * @param gameStyle   the game's style
      * @param categories  the game's categories
      */
     public Game(double price, String name, String description, String photo, int stock, int numPlayers,
-                String ageRange, Category... categories) {
+                String ageRange, GameStyle gameStyle, Category... categories) {
         super(price, name, description, photo, ProductType.GAME, stock, categories);
         this.numPlayers = numPlayers;
         this.ageRange = ageRange;
+        this.gameStyle = gameStyle;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -42,11 +46,12 @@ public class Game extends StoreProduct {
      */
     @Override
     public String toString() {
-        // TIPO(C/J/F);ID;NOMBRE;DESCRIPCIÓN;PRECIO;UNIDADES;CATEGORÍAS;PAGINAS;AUTOR;EDITORIAL;AÑO;JUGADORES;EDAD
-        // ;ESTILO(Cartas/Dados/Tablero/Miniatura);MARCA;MATERIAL;DIMENSION
+        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
+        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
         return ProductType.GAME.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() +
-                ";" + this.getPrice() + ";" + this.getStock() + ";" + /*paginas*/ ";" + /*autor*/ ";" + /*editorial*/ ";" + /*año*/ ";" + this.numPlayers + ";" + this.ageRange + ";" + this.getPrintCategories() + ";"
-                /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
+                ";" + this.getPrice() + ";" + this.getStock() + ";" + this.getPrintCategories() + ";" + /*paginas*/
+                ";" + /*autor*/ ";" + /*editorial*/ ";" + /*año*/ ";" + this.numPlayers + ";" + this.ageRange + ";" +
+                this.gameStyle.getFormatedName() + ";" /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
@@ -67,22 +72,15 @@ public class Game extends StoreProduct {
         this.ageRange = newAgeRange;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
-
     /**
-     * It returns the game's categories in a save-file-friendly manner
-     * @return a string containing the game's categories
+     * It allows an employee to change a game's style
+     * @param newGameStyle the game's style
      */
-    public String getPrintCategories() { // ! revisar
-        Category[] categories = super.getCategories();
-        StringBuilder sb = new StringBuilder();
-
-        for (Category category : categories) {
-            sb.append(category.toString()).append(", ");
-        }
-
-        return sb.toString();
+    public void changeGameStyle(GameStyle newGameStyle) {
+        this.gameStyle = newGameStyle;
     }
+
+    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
 
     /**
      * It returns the game's number of players
@@ -98,5 +96,13 @@ public class Game extends StoreProduct {
      */
     public String getAgeRange() {
         return this.ageRange;
+    }
+
+    /**
+     * It returns the game's style
+     * @return the game's style
+     */
+    public GameStyle getGameStyle() {
+        return this.gameStyle;
     }
 }

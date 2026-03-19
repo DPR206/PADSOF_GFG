@@ -222,6 +222,20 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
+     * It returns the product's categories in a save-file-friendly manner
+     * @return a string containing the game's categories
+     */
+    public String getPrintCategories() { // ! revisar
+        StringBuilder sb = new StringBuilder();
+
+        for (Category category : this.categories.values().toArray(new Category[0])) {
+            sb.append(category.toString()).append(", ");
+        }
+
+        return sb.toString();
+    }
+
+    /**
      * It returns's the product's stock
      * @return the product's store
      */

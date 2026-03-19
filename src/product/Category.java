@@ -11,7 +11,7 @@ import store.Store;
  * @see Store
  */
 public class Category {
-    /* The category's name */
+    /** The category's name */
     public String name; // NOTE: Debe ser único (mirar explicación a continuación)
     // Encontré dos formas de que fuera único:
     //  a. https://stackoverflow.com/questions/27474457/uniqueness-of-an-attribute-in-an-object
@@ -19,7 +19,7 @@ public class Category {
     // La segunda me llevó a la idea de que se puede hacer una operación similar contando con que Store pueda devolver
     // la categoría con cierto name (hashmap <name, category>) así que decidí tirar por ese camino, ya que ocuparía
     // menos memoria (supuestamente)
-    /* The list of products that belong to this category */
+    /** The list of products that belong to this category */
     public Product[] products; // DUE: Terminar de implementar esto (estoy pensando cómo hacerlo)
 
     /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/

@@ -5,11 +5,11 @@ package product;
  * <p>
  * Description: It implements the abstract Product class
  * @author Ana O.R.
- * @version 1.6
+ * @version 1.7
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
-    static int productId = 0;
+    static int productId = -1; // NOTE: Así el primer ID es 0000 (ver línea 38)
     /** The product's id */
     private final String id;
     /** The product's price */
@@ -34,8 +34,8 @@ public abstract class Product {
      * @param type        the type
      */
     public Product(double price, String name, String description, String photo, ProductType type) {
-        this.id = type.getSymbol() + productId;
-        productId++;
+        // NOTE: Según StackOverflow: String.format("%04d", your integer));
+        this.id = type.getSymbol() + String.format("%04d", ++productId);
         this.price = price;
         this.name = name;
         this.description = description;

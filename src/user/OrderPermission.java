@@ -8,12 +8,14 @@ import order.OrderState;
  * <p>
  * Description: It implements the permission that allows an employee to manage Orders
  * @author Ana O.R.
- * @version 1.1
+ * @version 1.2
  * @see Order
  */
 public class OrderPermission {
-    // NOTE: No tiene atributos propios
 
+    /**
+     * Constructor for an order permission
+     */
     public OrderPermission() {
     }
 
@@ -25,4 +27,6 @@ public class OrderPermission {
     public void manageOrder(Order o, OrderState status) {
         o.changeStatus(status);
     }
+
+    // DUE: Realizar búsquedas
 }

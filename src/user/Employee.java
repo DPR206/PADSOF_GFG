@@ -4,6 +4,7 @@ import exchange.Exchange;
 import order.Order;
 import order.OrderState;
 import product.Category;
+import product.GameStyle;
 import product.SecondHandProduct;
 
 import java.time.Year;
@@ -84,9 +85,10 @@ public class Employee extends User {
      * @param categories
      *
      */
-    public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers, String ageRange, Category... categories) {
+    public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers,
+                           String ageRange, GameStyle gameStyle, Category... categories) {
         if (this.sp != null) {
-            this.sp.addGame(price, name, description, photo, stock, numPlayers, ageRange, categories);
+            this.sp.addGame(price, name, description, photo, stock, numPlayers, ageRange, gameStyle, categories);
             return true;
         }
         System.err.println("You have no permission to do that...");
@@ -100,17 +102,16 @@ public class Employee extends User {
      * @param description
      * @param photo
      * @param stock
-     * @param height
-     * @param width
-     * @param depth
+     * @param dimensions
      * @param brand
      * @param material
      * @param categories
      *
      */
-    public boolean addFigurine(double price, String name, String description, String photo, int stock, double height, double width, double depth, String brand, String material, Category... categories) {
+    public boolean addFigurine(double price, String name, String description, String photo, int stock, String dimensions,
+                               String brand, String material, Category... categories) {
         if (this.sp != null) {
-            this.sp.addFigurine(price, name, description, photo, stock, height, width, depth, brand, material, categories);
+            this.sp.addFigurine(price, name, description, photo, stock, dimensions, brand, material, categories);
             return true;
         }
         System.err.println("You have no permission to do that...");

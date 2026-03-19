@@ -52,12 +52,12 @@ public class Comic extends StoreProduct {
      */
     @Override
     public String toString() {
-        // TIPO(C/J/F);ID;NOMBRE;DESCRIPCIÓN;PRECIO;UNIDADES;CATEGORÍAS;PAGINAS;AUTOR;EDITORIAL;AÑO;JUGADORES;EDAD
-        // ;ESTILO(Cartas/Dados/Tablero/Miniatura);MARCA;MATERIAL;DIMENSION
+        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
+        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
         return ProductType.COMIC.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription()
-                + ";" + this.getPrice() + ";" + this.getStock() + ";" + this.numPages + ";" + this.author + ";" +
-                this.editorial + ";" + this.year + ";" /*jugadores*/ + ";" /*edad*/ + ";" /*estilo*/ + ";" /*marca*/ +
-                ";" /*material*/ + ";" /*dimension*/;
+                + ";" + this.getPrice() + ";" + this.getStock() + ";" + this.getStock() + ";" + this.numPages + ";" +
+                this.author + ";" + this.editorial + ";" + this.year + ";" /*jugadores*/ + ";" /*edad*/ + ";"
+                /*estilo*/ + ";" /*marca*/ +  ";" /*material*/ + ";" /*dimension*/;
     }
 
     /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */

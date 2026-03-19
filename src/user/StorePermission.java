@@ -33,14 +33,14 @@ public class StorePermission {
     }
 
     public void addGame(double price, String name, String description, String photo, int stock, int numPlayers,
-                        String ageRange, Category... categories) {
-        Game g = new Game(price, name, description, photo, stock, numPlayers, ageRange, categories);
+                        String ageRange, GameStyle gameStyle, Category... categories) {
+        Game g = new Game(price, name, description, photo, stock, numPlayers, ageRange, gameStyle, categories);
         s.addProduct(g);
     }
 
-    public void addFigurine(double price, String name, String description, String photo, int stock, String dimension,
+    public void addFigurine(double price, String name, String description, String photo, int stock, String dimensions,
                             String brand, String material, Category... categories) {
-        Figurine f = new Figurine(price, name, description, photo, stock, dimension, brand, material, categories);
+        Figurine f = new Figurine(price, name, description, photo, stock, dimensions, brand, material, categories);
         s.addProduct(f);
     }
 

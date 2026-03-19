@@ -8,13 +8,15 @@ import product.SecondHandProduct;
  * <p>
  * Description: It implements the permission that allows an employee to manage Exchanges
  * @author Ana O.R.
- * @version 1.0
+ * @version 1.1
  * @see Exchange
  * @see SecondHandProduct
  */
 public class ExchangePermission {
-    // NOTE: No tiene atributos propios
 
+    /**
+     * Constructor for an exchange permission
+     */
     public ExchangePermission() {
     }
 
@@ -35,4 +37,6 @@ public class ExchangePermission {
     public void valuate(SecondHandProduct secondHandProduct, double valuation) {
         secondHandProduct.changeEstimatedPrice(valuation);
     }
+
+    // DUE: Realizar búsquedas
 }

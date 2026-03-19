@@ -1,10 +1,16 @@
 package store;
 
-import java.util.*;
-import user.*;
-import product.*;
 import exchange.Exchange;
-import order.*;
+import order.Discount;
+import order.Order;
+import product.Category;
+import product.Pack;
+import product.Product;
+import user.Manager;
+import user.User;
+import utilities.Utility;
+
+import java.util.*;
 
 // DUE: Falta el @see
 
@@ -16,46 +22,46 @@ import order.*;
  * @version 1.0
  */
 public class Store {
-	private static final Store INSTANCE;
+    private static final Store INSTANCE = null;
     private static int productId = 0;
     // Está creada para que no se queje el compilador en sus referencias
 
-    /**Falta parameter */
+    /** Falta parameter */
 
     /* Them manager of the store */
     private Manager manager;
     /* The list of discounts in the store */
-    private List<Discount> discounts = new ArrayList()<>;
+    private List<Discount> discounts = new ArrayList() < >;
     /* The list of all exchanges done in the store */
-    private List<Exchange> exchanges = new ArrayList()<>;
+    private List<Exchange> exchanges = new ArrayList() < >;
     /* The list of orders that have been completed */
-    private List<Order> orders = new ArrayList()<>;
+    private List<Order> orders = new ArrayList() < >;
     /* The list of packs available */
-    private List<Pack> packs = new ArrayList()<>;
+    private List<Pack> packs = new ArrayList() < >;
     /* The list of categories available */
-    private List<Category> categories = new ArrayList()<>;
+    private List<Category> categories = new ArrayList() < >;
     /* The list of products that belong to the store */
-    private List<Product> products = new ArrayList()<>;
+    private List<Product> products = new ArrayList() < >;
     /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
-    private utility extras;
+    private Utility extras;
 
     /**
      * Store's constructor
      * @param manager the store's manager
      */
-    private Store(Manager manager){
+    private Store(Manager manager) {
         this.extras = new utilities();
         this.manager = manager;
     }
 
     /**
      * Gets the Instance of the Store
-     * 
+     *
      */
-    public Store getInstance(){
-        if(Store.INSTANCE == null){
+    public Store getInstance() {
+        if (Store.INSTANCE == null) {
             Store.INSTANCE = new Store();
         }
         return Store.INSTANCE;
@@ -66,9 +72,9 @@ public class Store {
      * @param name the category's name
      */
     public Category getCategoryFromName(String name) {
-        
-        for(Category c: this.categories){
-            if(c.getName() == name) return c
+
+        for (Category c : this.categories) {
+            if (c.getName().equals(name)) return c;
         }
         return null;
     }
@@ -81,100 +87,100 @@ public class Store {
         int id = this.productId;
         return id;
     }
-    
+
     /**
      * Logs in a user
-     * 
+     *
      */
     private boolean logIn() {
-    	User u;
-    	
-    	try {
-			System.out.print("Introduce tu usuario: ");
-			userName = sc.next();
-			System.out.print("Introduce tu contraseña: ");
-			pwd = sc.next();
-		}catch (InputMismatchException e) {
+        User u;
+        Scanner sc = new Scanner(System.in);
+        String userName, pwd;
+
+        try {
+            System.out.print("Introduce tu usuario: ");
+            userName = sc.next();
+            System.out.print("Introduce tu contraseña: ");
+            pwd = sc.next();
+        } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
             return false;
         }
 
-        if(utilities.logIn(userName, pwd, this) == false) return false;
+        if (extras.logIn(userName, pwd, this) == false) return false;
 
-    	return true;
-    } 
-    
+        return true;
+    }
+
     /**
      * Signs in a user
-     * 
+     *
      */
     public boolean signIn() {
-		utilities.signIn(this);
+        return extras.signIn(this);
     }
 
     /**
      * Gets the manager of the store
-     * 
+     *
      */
-    public Manager getManager(){
+    public Manager getManager() {
         return this.manager;
     }
 
     /**
      * Gets the list of the discounts of the store
-     * 
+     *
      */
-    public List getDiscounts(){
+    public List getDiscounts() {
         return this.discounts;
     }
 
     /**
      * Gets the list of the exchanges of the store
-     * 
+     *
      */
-    public List getExchanges(){
+    public List getExchanges() {
         return this.exchanges;
     }
 
     /**
      * Gets the list of the orders done in the store
-     * 
+     *
      */
-    public List getOrders(){
+    public List getOrders() {
         return this.orders;
     }
 
     /**
      * Gets the list of the packs of the store
-     * 
+     *
      */
-    public List getPacks(){
+    public List getPacks() {
         return this.packs;
     }
 
     /**
      * Gets the list of the categories of the store
-     * 
+     *
      */
-    public List getCategories(){
+    public List getCategories() {
         return this.categories;
     }
 
     /**
      * Gets the list of the products available in the store
-     * 
+     *
      */
-    public List getProducts(){
+    public List getProducts() {
         return this.products;
     }
 
     /**
      * Gets the list of the users of the store
-     * 
+     *
      */
-    public Map getUsers(){
+    public Map getUsers() {
         return this.users;
     }
 }
-
-

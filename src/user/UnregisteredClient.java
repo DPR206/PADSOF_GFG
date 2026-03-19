@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package user;
 
@@ -18,7 +18,7 @@ public class UnregisteredClient extends User {
 	private Cart c;
 	private Store s;
 	//searcher
-	
+
 	/**
 	 * Creates a new unregistered client
 	 */
@@ -26,10 +26,10 @@ public class UnregisteredClient extends User {
 		c = new Cart();
 		s = new Store();
 	}
-	
+
 	public void buy() {
 
-		this.c.payOrder() //inicia sesión
+		this.c.payOrder(); //inicia sesión
 		this.s.signIn();
 	}
 

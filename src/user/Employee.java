@@ -15,12 +15,12 @@ public class Employee extends User{
     private OrderPermission op;
     private StorePermission sp;
     private Permission perm;
-    
+
 /*------------------------------------------------------CONSTRUCTOR-----------------------------------------------------------------------*/
 
     /**
 	 * Creates a new employee
-	 * 
+	 *
 	 * @param psw
 	 * @param userName
 	 * @param actualID
@@ -36,10 +36,10 @@ public class Employee extends User{
     }
 
 /*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/
-    
+
     /**
 	 * Adds and creates new comic
-	 * 
+	 *
 	 * @param price
 	 * @param name
 	 * @param description
@@ -50,20 +50,21 @@ public class Employee extends User{
      * @param author
      * @param categories
      * @param editorial
-     * 
+     *
 	 */
-    public boolean addComic(double price, String name, String description, String photo, int stock, int numPages, int year, String author, Category... categories, String editorial) {
+    public boolean addComic(double price, String name, String description, String photo, int stock, int numPages,
+                            int year, String author, String editorial, Category... categories) {
         if(this.sp != null){
-            this.sp.addComic(price, name, description, photo, stock, numPages, year, author, categories, editorial);
+            this.sp.addComic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
             return true;
         }
         System.err.println("You have no permission to do that...");
         return false;
-    } 
+    }
 
     /**
 	 * Adds and creates new game
-	 * 
+	 *
 	 * @param price
 	 * @param name
 	 * @param description
@@ -72,7 +73,7 @@ public class Employee extends User{
      * @param numPlayers
      * @param ageRange
      * @param categories
-     * 
+     *
 	 */
     public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers, String ageRange, Category... categories) {
         if(this.sp != null){
@@ -82,10 +83,10 @@ public class Employee extends User{
         System.err.println("You have no permission to do that...");
         return false;
     }
-    
+
     /**
 	 * Adds and creates new figurine
-	 * 
+	 *
 	 * @param price
 	 * @param name
 	 * @param description
@@ -97,7 +98,7 @@ public class Employee extends User{
      * @param brand
      * @param material
      * @param categories
-     * 
+     *
 	 */
     public boolean addFigurine(double price, String name, String description, String photo, int stock, double height, double width, double depth, String brand, String material, Category... categories) {
         if(this.sp != null){
@@ -107,13 +108,13 @@ public class Employee extends User{
         System.err.println("You have no permission to do that...");
         return false;
     }
-    
+
     /**
 	 * Manages exchange
-	 * 
+	 *
 	 * @param exchanged
 	 * @param e
-     * 
+     *
 	 */
     public void manageExchange(Exchange exchange, boolean e){
         if(this.ep != null){
@@ -126,10 +127,10 @@ public class Employee extends User{
 
     /**
 	 * Gives a secondhand product a value
-	 * 
+	 *
 	 * @param secondHandProduct
 	 * @param valuation
-     * 
+     *
 	 */
     public void valuate(SecondHandProduct secondHandProduct, double valuation) {
         if(this.ep != null){
@@ -142,10 +143,10 @@ public class Employee extends User{
 
     /**
 	 * Gives an order a status and manages it
-	 * 
+	 *
 	 * @param exchanged
 	 * @param e
-     * 
+     *
 	 */
     public void manageOrder(Order o, OrderState status) {
         if(this.op != null){
@@ -153,6 +154,6 @@ public class Employee extends User{
             return true;
         }
         System.err.println("You have no permission to do that...");
-        return false
+        return false;
     }
 }

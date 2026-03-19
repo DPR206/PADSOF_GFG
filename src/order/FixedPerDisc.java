@@ -22,7 +22,7 @@ public class FixedPerDisc extends Discount {
      * @param endDate    the date when the discount ends
      * @param percentage the percentage deducted from a product's price
      */
-    FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) throws IllegalArgumentException {
+    public FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) throws IllegalArgumentException {
         if (percentage < 0 || percentage > 100) {
             throw new IllegalArgumentException("The percentage must be between 0% and 100%");
         }

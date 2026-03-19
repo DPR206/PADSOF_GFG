@@ -10,9 +10,12 @@ package utilities;
 import user.*;
 import store.*;
 
-public class utility{
+import java.util.HashMap;
+import java.util.Scanner;
 
-    public utility(){
+public class Utility {
+
+    public Utility(){
     }
 
     public boolean signIn(Store s) {
@@ -28,7 +31,7 @@ public class utility{
 		try {
 
             while (aux == false){
-			    
+
                 System.out.print("Introduce tu usuario: ");
 			    userName = sc.next();
 
@@ -58,9 +61,9 @@ public class utility{
         return true;
     }
 
-    private boolean logIn(String userName, String pwd, Store s) {
+    public boolean logIn(String userName, String pwd, Store s) {
     	User u;
-    	
+
     	if(s.getUsers().containsKey(userName)) {
     		u = this.users.get(userName);
     		if(u.getPassword() == pwd) {
@@ -68,6 +71,5 @@ public class utility{
     		}
     	}
     	return false;
-    } 
+    }
 }
-

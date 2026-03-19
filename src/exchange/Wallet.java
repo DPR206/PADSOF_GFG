@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public class Wallet {
     /** The list of products that belong to this wallet */
-    private HashMap<Integer, SecondHandProduct> products;
+    private HashMap<String, SecondHandProduct> products; // ! No es final aunque sea lo sugerido
 
     /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
 

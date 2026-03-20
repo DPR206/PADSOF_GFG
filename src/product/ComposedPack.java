@@ -58,10 +58,10 @@ public class ComposedPack extends Pack {
 	/**
 	 * Returns the packs within the ComposedPack
 	 * 
-	 * @return the packs
+	 * @return the packs, the packs it contains
 	 */
 	public HashSet<Pack> getPacks() {
-		return packs; /*A lo mejor debería devolver una lista no modificable*/
+		return (HashSet<Pack>) Collections.unmodifiableSet(packs);
 	}
 
 	/**

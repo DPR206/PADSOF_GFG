@@ -1,4 +1,6 @@
-
+/**
+ * 
+ */
 package product;
 
 import java.time.*;
@@ -9,7 +11,7 @@ import java.time.*;
  * Description: It implements the second-hand products
  * @author Duna P.R.
  * @version 1.0
- * @see
+ * @see Product
  */
 public class SecondHandProduct extends Product{
 	
@@ -24,7 +26,7 @@ public class SecondHandProduct extends Product{
     /**
      * Creates a new second-hand product
      * 
-	 * @param price, the estimated price of the product
+	 * @param estimatedPrice, the estimated price of the product
 	 * @param name, the name of the product
 	 * @param description, the description of the product
 	 * @param photo, the photo of the product
@@ -69,7 +71,7 @@ public class SecondHandProduct extends Product{
 	 * @param description, the description of the product
 	 * @param photo, the photo of the product
 	 * @param type, the type of product
-	 * @param status, the conservation status of the product
+	 * 
 	 */
 	public SecondHandProduct(String name, String description, String photo, ProductType type) {
 		this(0, name, description, photo, type, null, false, false, null);
@@ -80,7 +82,7 @@ public class SecondHandProduct extends Product{
 	/**
 	 * Obtains the valuation date
 	 * 
-	 * @return the valuationDate
+	 * @return the valuationDate, the date of valuation
 	 */
 	public LocalDate getValuationDate() {
 		return valuationDate;

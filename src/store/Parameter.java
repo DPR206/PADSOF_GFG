@@ -31,13 +31,17 @@ public class Parameter {
 	}
 
 	/**
-	 * @return the offerTime
+	 * Obtains the offer time
+	 * 
+	 * @return the offerTime, the expiration time of the offer
 	 */
 	public Period getOfferTime() {
 		return OfferTime;
 	}
 
 	/**
+	 * Sets the expire time of an offer
+	 * 
 	 * @param offerTime the offerTime to set
 	 */
 	public void setOfferTime(Period offerTime) {
@@ -45,13 +49,17 @@ public class Parameter {
 	}
 
 	/**
-	 * @return the orderTime
+	 * Obtains the expire time of an order
+	 * 
+	 * @return the orderTime, the expiration time of an order
 	 */
 	public Period getOrderTime() {
 		return OrderTime;
 	}
 
 	/**
+	 * Obtains the expiration time of the order
+	 * 
 	 * @param orderTime the orderTime to set
 	 */
 	public void setOrderTime(Period orderTime) {
@@ -59,13 +67,17 @@ public class Parameter {
 	}
 
 	/**
-	 * @return the valuationCost
+	 * Obtains the valuation cost
+	 * 
+	 * @return the valuationCost, the valuation cost
 	 */
 	public double getValuationCost() {
 		return valuationCost;
 	}
 
 	/**
+	 * Sets the cost of a valuation
+	 * 
 	 * @param valuationCost the valuationCost to set
 	 */
 	public void setValuationCost(double valuationCost) {
@@ -73,7 +85,8 @@ public class Parameter {
 	}
 
 	/**
-	 * @return the param
+	 * Obtains the parameter
+	 * @return the param, the parameter of the store
 	 */
 	public static Parameter getParam() {
 		return PARAM;

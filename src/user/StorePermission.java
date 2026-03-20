@@ -2,10 +2,13 @@ package user;
 
 import product.*;
 import store.Store;
+import java.util.StringTokenizer.*;
+
 
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
+
 
 /**
  * Class name: StorePermission
@@ -44,13 +47,21 @@ public class StorePermission {
         s.addProduct(f);
     }
 
-    public boolean addProductByFile(String fileName) {
-        //id, nombre, descripción, tipo, categoría
+    public boolean addProductByFile(String fileName) throws IOException{
+       BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream("file.txt")));
+       String line;
+       int id;
+       Strind desc, categories,
+
+       while ((line = buffer.readLine()) != null){
+
+       }
     }
 
-    //juego
-    /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
-        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
+    
+    /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;number_of_categories;CATEGORIES;(HASTA AQUÍ)PAGES;AUTHOR;EDITORIAL;YEAR;(CÓMICS)
+        (JUEGO)PLAYERS;AGE;STYLE(Cards/Dice/GameBoard/Miniature);
+        (FIGURITA)BRAND;MATERIAL;DIMENSION */
     public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
         Pack p = new Pack(price, products, date);
         s.addProduct(p);

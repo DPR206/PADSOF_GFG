@@ -5,7 +5,7 @@ package product;
  * <p>
  * Description: It implements the abstract Product class
  * @author Ana O.R.
- * @version 1.7
+ * @version 1.8
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
@@ -23,15 +23,17 @@ public abstract class Product {
     /** The product's product type */
     private ProductType type;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * General product constructor
+     * A product's constructor
      * @param price       the product's price
      * @param name        the product's name
      * @param description the product's description
      * @param photo       the product's photo's path
-     * @param type        the type
+     * @param type        the product's type
+     * @throws IllegalArgumentException price was negative
+     * @throws NullPointerException     name, description or photo's path were null
      */
     public Product(double price, String name, String description, String photo, ProductType type)
             throws IllegalArgumentException, NullPointerException {
@@ -39,7 +41,7 @@ public abstract class Product {
             throw new IllegalArgumentException("Price cannot be negative");
         }
         if (name == null || description == null || photo == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Expect non-null parameters but received one");
         }
         // NOTE: Según StackOverflow: String.format("%04d", your integer));
         this.id = type.getSymbol() + String.format("%04d", ++productId);
@@ -50,51 +52,59 @@ public abstract class Product {
         this.type = type;
     }
 
-    /**
-     * SecondHandProduct's Product constructor
-     * @param name        the product's name
-     * @param description the product's description
-     * @param photo       the product's photo's path
-     * @param type        the type
-     */
-    Product(String name, String description, String photo, ProductType type) {
-        // NOTE: Revisar qué precio inicial poner
-        this(-1, name, description, photo, type);
-    }
-
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows for an employee to change a product's price
-     * @param price the product's new price
+     * @param newPrice the product's new price
+     * @throws IllegalArgumentException price was negative
      */
-    public void changePrice(double price) {
-        this.price = price;
+    public void changePrice(double newPrice) throws IllegalArgumentException {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+
+        this.price = newPrice;
     }
 
     /**
      * It allows for an employee to change a product's name
      * @param newName the product's new name
+     * @throws NullPointerException name was null
      */
-    public void changeName(String newName) {
+    public void changeName(String newName) throws NullPointerException {
+        if (newName == null) {
+            throw new IllegalArgumentException("The name cannot be null");
+        }
+
         this.name = newName;
     }
 
     /**
      * It allows for an employee to change a product's description
      * @param newDescription the product's new description
+     * @throws NullPointerException description was null
      */
-    public void changeDescription(String newDescription) {
+    public void changeDescription(String newDescription) throws NullPointerException {
+        if (newDescription == null) {
+            throw new IllegalArgumentException("The description cannot be null");
+        }
+
         this.description = newDescription;
     }
 
     /**
      * It allows for an employee to change a product's photo's path
      * @param newPhoto the product's new photo
+     * @throws NullPointerException photo's path was null
      */
-    public void changePhoto(String newPhoto) {
+    public void changePhoto(String newPhoto) throws NullPointerException {
+        if (newPhoto == null) {
+            throw new IllegalArgumentException("The photo's path cannot be null");
+        }
+
         this.photo = newPhoto;
     }
 
@@ -106,7 +116,7 @@ public abstract class Product {
         this.type = newType;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * It returns the product's id

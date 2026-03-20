@@ -16,7 +16,7 @@ public class QuantityDisc extends Discount {
     /** The amount of money the discount deducts from the order's final price */
     private double discount;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new quantity discount
@@ -37,7 +37,7 @@ public class QuantityDisc extends Discount {
 
     // DUE: public obtainDisc();
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
@@ -56,6 +56,6 @@ public class QuantityDisc extends Discount {
         this.discount = discount;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
 }

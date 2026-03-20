@@ -14,7 +14,7 @@ public class FixedPerDisc extends Discount {
     /** The percentage deducted from a product's price */
     private double percentage;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new fixed percentage discount
@@ -38,7 +38,7 @@ public class FixedPerDisc extends Discount {
 
     // DUE: public obtainDisc();
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows the manager to change the fixed percentage discount's percentage
@@ -50,6 +50,6 @@ public class FixedPerDisc extends Discount {
         }
         this.percentage = percentage;
     }
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
 }

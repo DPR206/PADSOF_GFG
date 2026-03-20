@@ -15,7 +15,7 @@ public abstract class Discount {
     /** The date when the discount ends */
     private LocalDateTime endDate;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * General constructor for a discount
@@ -37,7 +37,7 @@ public abstract class Discount {
 
     // DUE: public abstract obtainDisc();
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows the manager to change a discount's start date
@@ -63,7 +63,7 @@ public abstract class Discount {
         this.endDate = endDate;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * It gets the discount's start date

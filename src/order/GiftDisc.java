@@ -19,7 +19,7 @@ public class GiftDisc extends Discount {
     /** The product gifted to the client when a certain spending threshold is met */
     StoreProduct gift;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new gift discount
@@ -54,7 +54,7 @@ public class GiftDisc extends Discount {
 
     // DUE: public obtainDisc();
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows the manager to change a gift discount's gift
@@ -64,6 +64,6 @@ public class GiftDisc extends Discount {
         this.gift = gift;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
 }

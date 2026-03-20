@@ -16,7 +16,7 @@ public class Figurine extends StoreProduct {
     /** The figurine's material */
     private String material;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * The figurine's constructor
@@ -54,7 +54,7 @@ public class Figurine extends StoreProduct {
                 + this.material + ";" + this.dimension;
     }
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows for an employee to change the figurine's dimension
@@ -80,7 +80,7 @@ public class Figurine extends StoreProduct {
         this.material = newMaterial;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * It returns's the product's dimension

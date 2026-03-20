@@ -30,7 +30,7 @@ public class Offer {
     /** The offer's current status */
     private OfferStatus status;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * The offer's constructor
@@ -76,7 +76,7 @@ public class Offer {
 
     // DUE: createNotification
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows a client to accept an incoming offer
@@ -125,7 +125,7 @@ public class Offer {
         this.destinationProducts = products;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * Gets the maximum amount of time an offer can be active for

@@ -20,7 +20,7 @@ public class Comic extends StoreProduct {
     /** The comic's editorial */
     private String editorial;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * The comic's constructor
@@ -60,7 +60,7 @@ public class Comic extends StoreProduct {
                 /*estilo*/ + ";" /*marca*/ +  ";" /*material*/ + ";" /*dimension*/;
     }
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows for an employee to change the comic's number of pages
@@ -94,7 +94,7 @@ public class Comic extends StoreProduct {
         this.editorial = newEditorial;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * It returns the comic's number of pages

@@ -27,20 +27,26 @@ public abstract class StoreProduct extends Product {
     /** The product's categories */
     private HashMap<String, Category> categories;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Store product's constructor
+     * @param price       the product's price
      * @param name        the product's name
      * @param description the product's description
      * @param photo       the product's photo's path
-     * @param price       the product's price
      * @param type        the product's product type
      * @param stock       the product's stock
      * @param categories  the product's categories
+     * @throws IllegalArgumentException price or stock were negative
+     * @throws NullPointerException     name, description or photo's path were null
      */
     StoreProduct(double price, String name, String description, String photo, ProductType type, int stock,
-                 Category... categories) {
+                 Category... categories) throws IllegalArgumentException, NullPointerException {
+        if (stock < 0) {
+            throw new IllegalArgumentException("Stock cannot be negative");
+        }
+
         super(price, name, description, photo, type);
         this.stock = stock;
         this.reviews = new ArrayList<>();
@@ -53,76 +59,46 @@ public abstract class StoreProduct extends Product {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
-
-    /**
-     * It allows for an employee to change a product's price
-     * @param price the product's new price
-     */
-    @Override
-    public void changePrice(double price) {
-        super.changePrice(price);
-    }
-
-    /**
-     * It allows for an employee to change a product's name
-     * @param newName the product's new name
-     */
-    @Override
-    public void changeName(String newName) {
-        super.changeName(newName);
-    }
-
-    /**
-     * It allows for an employee to change a product's description
-     * @param newDescription the product's new description
-     */
-    @Override
-    public void changeDescription(String newDescription) {
-        super.changeDescription(newDescription);
-    }
-
-    /**
-     * It allows for an employee to change a product's photo's path
-     * @param newPhoto the product's new photo
-     */
-    @Override
-    public void changePhoto(String newPhoto) {
-        super.changePhoto(newPhoto);
-    }
-
-    /**
-     * It allows for an employee to change a product's product's type
-     * @param newType the product's new product type
-     */
-    @Override
-    public void changeType(ProductType newType) {
-        super.changeType(newType);
-    }
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows for an employee to change the product's stock as well as blocking or unblocking stock
      * @param newStock the product's new stock
+     * @throws IllegalArgumentException stock was negative
      */
-    public void changeStock(int newStock) {
+    public void changeStock(int newStock) throws IllegalArgumentException {
+        if (stock < 0) {
+            throw new IllegalArgumentException("Stock cannot be negative");
+        }
+
         this.stock = newStock;
     }
 
     /**
      * It decreases the stock a certain value
-     * @param value, the amount it decreases
+     * @param value the stock's value that should be decreased
+     * @throws IllegalArgumentException value was negative
      */
-    public void decreaseStock(int value) {
+    public void decreaseStock(int value) throws IllegalArgumentException {
+        if (value < 0) {
+            throw new IllegalArgumentException("The decreasing amount cannot be negative");
+        }
 
-        if ((stock = stock - value) < 0)
+        if ((stock = stock - value) < 0) {
             stock = 0;
+        }
     }
 
     /**
      * It increases the stock a certain value
-     * @param value, the amount it increases
+     * @param value the stock's value that should be increased
+     * @throws IllegalArgumentException value was negative
      */
-    public void increaseStock(int value) {
+    public void increaseStock(int value) throws IllegalArgumentException {
+        if (value < 0) {
+            throw new IllegalArgumentException("The increasing amount cannot be negative");
+        }
+
         stock = stock + value;
     }
 
@@ -152,66 +128,17 @@ public abstract class StoreProduct extends Product {
      * It allows an employee to add discounts to products or categories (Discounts is in charge of making sure they
      * don't overlap)
      * @param newDiscount the new discount to be applied
+     * @throws NullPointerException discount was null
      */
-    public void changeDiscount(Discount newDiscount) {
+    public void changeDiscount(Discount newDiscount) throws NullPointerException {
+        if (discount == null) {
+            throw new NullPointerException("Discount cannot be null");
+        }
+
         this.discount = newDiscount;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
-
-    /**
-     * It returns the product's id
-     * @return the product's id
-     */
-    @Override
-    public String getId() {
-        return super.getId();
-    }
-
-    /**
-     * It returns the product's price
-     * @return the product's price
-     */
-    @Override
-    public double getPrice() {
-        return super.getPrice();
-    }
-
-    /**
-     * It returns the product's name
-     * @return the product's name
-     */
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    /**
-     * It returns the product's description
-     * @return the product's description
-     */
-    @Override
-    public String getDescription() {
-        return super.getDescription();
-    }
-
-    /**
-     * It returns the product's photo's path
-     * @return the product's photo
-     */
-    @Override
-    public String getPhoto() {
-        return super.getPhoto();
-    }
-
-    /**
-     * It returns the product's product type
-     * @return the product's product type
-     */
-    @Override
-    public ProductType getType() {
-        return super.getType();
-    }
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * It returns the product's categories
@@ -225,7 +152,7 @@ public abstract class StoreProduct extends Product {
      * It returns the product's categories in a save-file-friendly manner
      * @return a string containing the game's categories
      */
-    public String getPrintCategories() { // ! revisar
+    public String getPrintCategories() {
         StringBuilder sb = new StringBuilder();
 
         for (Category category : this.categories.values().toArray(new Category[0])) {

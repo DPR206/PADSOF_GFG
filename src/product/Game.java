@@ -16,7 +16,7 @@ public class Game extends StoreProduct {
     /** The game's style */
     private GameStyle gameStyle;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * The game's constructor
@@ -54,7 +54,7 @@ public class Game extends StoreProduct {
                 this.gameStyle.getFormatedName() + ";" /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
     }
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows an employee to change a game's number of players
@@ -80,7 +80,7 @@ public class Game extends StoreProduct {
         this.gameStyle = newGameStyle;
     }
 
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * It returns the game's number of players

@@ -7,57 +7,76 @@ import store.Store;
  * <p>
  * Description: It implements the categories
  * @author Ana O.R.
- * @version 1.1
+ * @version 1.2
  * @see Store
  */
 public class Category {
     /** The category's name */
-    public String name; // NOTE: Debe ser único (mirar explicación a continuación)
-    // Encontré dos formas de que fuera único:
-    //  a. https://stackoverflow.com/questions/27474457/uniqueness-of-an-attribute-in-an-object
-    //  b. https://softwareengineering.stackexchange.com/questions/170912/ways-to-ensure-unique-instances-of-a-class
-    // La segunda me llevó a la idea de que se puede hacer una operación similar contando con que Store pueda devolver
-    // la categoría con cierto name (hashmap <name, category>) así que decidí tirar por ese camino, ya que ocuparía
-    // menos memoria (supuestamente)
-    /** The list of products that belong to this category */
-    public Product[] products; // DUE: Terminar de implementar esto (estoy pensando cómo hacerlo)
+    public String name;
+    /** The store the category is part of */
+    private final Store store;
+    /** The category's total revenue */
+    private double revenue;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Category's constructor
-     * @param name the new category's name
+     * @param store the store the category is part of
+     * @param name  the new category's name
+     * @throws IllegalArgumentException category already existed
+     * @throws NullPointerException     store or name were null
      */
-    Category(String name) {
+    public Category(Store store, String name) throws IllegalArgumentException, NullPointerException {
+        if (store == null || name == null) {
+            throw new NullPointerException("Name must not be null");
+        }
+        if (store.isCategoryInStore(name) == true) {
+            this.name = "Borrar"; // DUE: Revisar esto
+            this.store = store;
+            this.revenue = 0;
+            throw new IllegalArgumentException("Category already exists");
+        }
+
         this.name = name;
-        this.products = new Product[0];
+        this.store = store;
+        this.revenue = 0;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    /**
-     * It allows a manager to add categories to the store
-     * @param store the store
-     * @param name  the new category's name
-     * @return the new category
-     */
-    public Category createCategory(Store store, String name) {
-        if (store.getCategoryFromName(name) == null) {
-            return new Category(name);
-        }
-        return null;
-    }
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows a manager to change a Category's name
-     * @param store the store
-     * @param name  the category's new name
+     * @param newName the category's new name
+     * @throws NullPointerException name was null
      */
-    public void changeName(Store store, String name) {
-        if (store.getCategoryFromName(name) == null) {
-            this.name = name;
+    public void changeName(String newName) throws NullPointerException {
+        if (name == null) {
+            throw new NullPointerException("Name must not be null");
         }
+        if (this.store.isCategoryInStore(newName) == true) {
+            throw new IllegalArgumentException("Category already exists");
+        }
+
+        this.name = newName;
     }
+
+    /**
+     * It increases the category's revenue when a product belonging to it is sold
+     * @param profit the sold product's profit
+     * @throws IllegalArgumentException profit was negative
+     */
+    public void increaseRevenue(double profit) throws IllegalArgumentException {
+        if (profit < 0) {
+            throw new IllegalArgumentException("Profit must not be negative");
+        }
+
+        this.revenue = this.revenue + profit;
+    }
+
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * It returns the category's name

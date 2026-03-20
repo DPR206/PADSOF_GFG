@@ -16,7 +16,7 @@ public class VolumeDisc extends Discount {
     /** The amount of money the discount deducts from the order's final price */
     private double discount;
 
-    /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new Volume discount
@@ -37,7 +37,7 @@ public class VolumeDisc extends Discount {
 
     // DUE: public obtainDisc();
 
-    /* ------------------------------------------------- LOS CHANGES ------------------------------------------------ */
+    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
 
     /**
      * It allows the manager to change the volume discount's spending threshold
@@ -54,6 +54,6 @@ public class VolumeDisc extends Discount {
     public void changeDiscount(double discount) {
         this.discount = discount;
     }
-    /* ------------------------------------------------- LOS GETTERS ------------------------------------------------ */
+    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
 }

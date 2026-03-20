@@ -30,6 +30,8 @@ public class Parameter {
 		this.valuationCost = 10;
 	}
 
+/*--------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------------*/	
+	
 	/**
 	 * Obtains the offer time
 	 * 
@@ -44,7 +46,7 @@ public class Parameter {
 	 * 
 	 * @param offerTime the offerTime to set
 	 */
-	public void setOfferTime(Period offerTime) {
+	private void setOfferTime(Period offerTime) {
 		OfferTime = offerTime;
 	}
 
@@ -62,7 +64,7 @@ public class Parameter {
 	 * 
 	 * @param orderTime the orderTime to set
 	 */
-	public void setOrderTime(Period orderTime) {
+	private void setOrderTime(Period orderTime) {
 		OrderTime = orderTime;
 	}
 
@@ -80,7 +82,7 @@ public class Parameter {
 	 * 
 	 * @param valuationCost the valuationCost to set
 	 */
-	public void setValuationCost(double valuationCost) {
+	private void setValuationCost(double valuationCost) {
 		this.valuationCost = valuationCost;
 	}
 
@@ -93,5 +95,31 @@ public class Parameter {
 	}
 	
 	
+/*------------------------------------------------------------------METHODS------------------------------------------------------------------*/
+	/**
+	 * Change the expiration of an offer
+	 * 
+	 * @param newOfferTime, the new expiration time
+	 */
+	public void changeOfferTime(Period newOfferTime) {
+		this.setOfferTime(newOfferTime);
+	}
 	
+	/**
+	 * Change the expiration of an order
+	 * 
+	 * @param newOrderTime, the new expiration time
+	 */
+	public void changeOrderTime(Period newOrderTime) {
+		this.setOrderTime(newOrderTime);
+	}
+	
+	/**
+	 * Change the valuation cost
+	 * 
+	 * @param newCost, the new cost of a valuation
+	 */
+	public void changeValuationCost(double newCost) {
+		this.setValuationCost(newCost);
+	}
 }

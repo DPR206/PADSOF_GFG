@@ -28,7 +28,7 @@ public class Category {
      * Category's constructor
      * @param name the new category's name
      */
-    Category(String name) {
+    public Category(String name) {
         this.name = name;
         this.products = new Product[0];
     }

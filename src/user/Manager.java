@@ -26,9 +26,11 @@ public class Manager extends User {
     /** no clue :v */
     private Parameter parameter; //?? esto que es xd
 
-    private Manager(String pwd, String userName, int actualID, Store s) {
+    private Manager(String pwd, String userName, int actualID, Store s, StorePermission sp, Parameter p) {
         super(pwd, userName, actualID);
         this.s = s;
+        this.sp = sp;
+        this.parameter = p;
     }
 
     public Manager getManagerNotInitialized(String pwd, String userName) {
@@ -43,7 +45,7 @@ public class Manager extends User {
 
     public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {
         FixedPerDisc fpd = new FixedPerDisc(startDate, endDate, percentage);
-        s.getDiscounts().add(fpd);
+        this.sp.getDiscounts().add(fpd);
     }
 
     public void addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int discount, int numProds) {
@@ -58,7 +60,7 @@ public class Manager extends User {
 
     public void addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount) {
         VolumeDisc vd = new VolumeDisc(startDate, endDate, spendingThreshold, discount);
-        s.getDiscounts().add(vd);
+        this.sp.getDiscounts().add(vd);
     }
 
     public void addEmployee(String password, String userName, Permission permission) {

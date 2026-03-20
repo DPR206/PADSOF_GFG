@@ -45,9 +45,12 @@ public class StorePermission {
     }
 
     public boolean addProductByFile(String fileName) {
-        return true; //rellenar xd
+        //id, nombre, descripción, tipo, categoría
     }
 
+    //juego
+    /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
+        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
     public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
         Pack p = new Pack(price, products, date);
         s.addProduct(p);

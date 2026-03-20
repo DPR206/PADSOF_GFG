@@ -34,8 +34,8 @@ public class Employee extends User {
      * @param actualID
      * @param p
      */
-    public Employee(String pwd, String userName, int actualID, Permission p) {
-        super(pwd, userName, actualID);
+    public Employee(String pwd, String userName, Permission p) {
+        super(pwd, userName);
         this.perm = p;
 
         if (p.getMeaning() == "store") {
@@ -46,7 +46,6 @@ public class Employee extends User {
             this.op = new OrderPermission();
         }
     }
-
     /*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/
 
     /**

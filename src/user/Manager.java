@@ -60,10 +60,10 @@ public class Manager extends User {
         VolumeDisc vd = new VolumeDisc(startDate, endDate, spendingThreshold, discount);
         s.getDiscounts().add(vd);
     }
+
+    public void addEmployee(String password, String userName, Permission permission) {
+        Eployee emp = new Employee(password, userName, permission);
+    }
 }
- /*
-+
-+
-+
-+ addEmployee(int id, String password, List<Permission> permissions): Employee
-}**/
+ 
+

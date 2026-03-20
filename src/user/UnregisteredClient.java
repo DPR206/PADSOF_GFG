@@ -3,7 +3,7 @@
  */
 package user;
 
-import order.Cart;
+import order.*;
 import product.StoreProduct;
 import store.Store;
 
@@ -25,8 +25,9 @@ public class UnregisteredClient extends User {
      * Creates a new unregistered client
      */
     public UnregisteredClient() {
-        c = new Cart();
-        s = new Store();
+        super();
+    	c = new Cart();
+        s = s.getInstance();
     }
 
     public void buy() {

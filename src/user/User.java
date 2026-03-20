@@ -13,7 +13,7 @@ import product.*;
  */
 public abstract class User {
 	/**ID counter for the users */
-	private static int id = 0;
+	private static int id = 1;
 	/**Password of the user */
 	private String pwd;
 	/**Username of the user */
@@ -45,7 +45,15 @@ public abstract class User {
 		this(pwd, userName, User.id);
 		User.id++;
 	}
-
+	
+	/**
+	 * Creates a new user without id, password or username
+	 */
+	public User()
+	{
+		this(null, null, 0);
+	}
+	
 	/**
 	 * Changes the password of the user
 	 *

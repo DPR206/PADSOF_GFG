@@ -50,7 +50,7 @@ public class Store {
     /**
      * Store's constructor
      */
-    public Store() {
+    private Store() {
         this.extras = new Utility();
     }
 

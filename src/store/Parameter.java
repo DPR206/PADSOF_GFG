@@ -14,22 +14,20 @@ import java.time.*;
  */
 public class Parameter {
 
-	private static final Parameter PARAM;
+	private static final Parameter PARAM = new Parameter();
 	
 	private Period OfferTime;
 	private Period OrderTime;
 	private double valuationCost;
 	
 	/**
-	 * Creates
-	 * @param offerTime
-	 * @param orderTime
-	 * @param valuationCost
+	 * Creates parameter
+	 * 
 	 */
-	private Parameter(Period offerTime, Period orderTime, double valuationCost) {
-		OfferTime = offerTime;
-		OrderTime = orderTime;
-		this.valuationCost = valuationCost;
+	private Parameter() {
+		OfferTime = Period.ofDays(5);
+		OrderTime = Period.ofDays(7);
+		this.valuationCost = 10;
 	}
 	
 	

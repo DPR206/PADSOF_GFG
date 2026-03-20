@@ -11,9 +11,9 @@ package product;
 public class Game extends StoreProduct {
     /** The game's number of players */
     private int numPlayers;
-    /* The game's age range */
+    /** The game's age range */
     private String ageRange;
-    /* The game's style */
+    /** The game's style */
     private GameStyle gameStyle;
 
     /*------------------------------------------------- CONSTRUCTORS -------------------------------------------------*/

@@ -33,7 +33,14 @@ public abstract class Product {
      * @param photo       the product's photo's path
      * @param type        the type
      */
-    public Product(double price, String name, String description, String photo, ProductType type) {
+    public Product(double price, String name, String description, String photo, ProductType type)
+            throws IllegalArgumentException, NullPointerException {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+        if (name == null || description == null || photo == null) {
+            throw new NullPointerException();
+        }
         // NOTE: Según StackOverflow: String.format("%04d", your integer));
         this.id = type.getSymbol() + String.format("%04d", ++productId);
         this.price = price;

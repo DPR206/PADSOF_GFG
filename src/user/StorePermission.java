@@ -86,12 +86,18 @@ public class StorePermission {
                 String editorial = tokenizer.nextToken();
                 aux = tokenizer.nextToken();
                 int year = Integer.parseInt(aux);
-                Comic c = new Comic(price, name, desc, photo, stock, numPages, year, author, editorial, c);
+                this.addComic(price, name, desc, photo, stock, numPages, year, author, editorial, c);
+
             } else if(type == "G"){
-                
+                aux = tokenizer.nextToken();
+                int numPlayers = Integer.parseInt(aux);
+                aux = tokenizer.nextToken();
+                int age = Integer.parseInt(aux);
+                String style = tokenizer.nextToken();
+                this.addGame(price, name, desc, photo, stock, numPlayers, age, style, c);
 
             } else if(type == "F"){
-
+                String brand = tokenizer.nextToken()
             }
 
        }

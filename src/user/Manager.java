@@ -26,20 +26,20 @@ public class Manager extends User {
     /** no clue :v */
     private Parameter parameter; //?? esto que es xd
 
-    public Manager(String pwd, String userName, int actualID, Store s) {
+    private Manager(String pwd, String userName, int actualID, Store s) {
         super(pwd, userName, actualID);
         this.s = s;
     }
 
-    /* public Manager getManagerNotInitialized(String pwd, String userName) {
+    public Manager getManagerNotInitialized(String pwd, String userName) {
         if (Manager.INSTANCE == null) Manager.INSTANCE = new Manager(pwd, userName);
         return Manager.INSTANCE;
-    }*/ // NOTE: Lo comento por ahora para que no me aparezca el error
+    }
 
-    /*public Manager getIntializedManager() {
+    public Manager getIntializedManager() {
         if (Manager.INSTANCE != null) return Manager.INSTANCE;
         return null;
-    }*/ // NOTE: Lo comento por ahora para que no me aparezca el error
+    }
 
     public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {
         FixedPerDisc fpd = new FixedPerDisc(startDate, endDate, percentage);

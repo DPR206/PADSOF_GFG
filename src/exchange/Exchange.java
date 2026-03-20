@@ -11,7 +11,6 @@ import java.time.*;
  * Description: It implements the exchange
  * @author Duna P.R.
  * @version 1.0
- * @see Pack
  */
 public class Exchange {
     

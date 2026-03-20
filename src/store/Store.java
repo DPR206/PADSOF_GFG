@@ -39,7 +39,7 @@ public class Store {
     /* The list of packs available */
     private List<Pack> packs = new ArrayList<>();
     /* The list of categories available */
-    private List<Category> categories = new ArrayList<>();
+    private HashMap<String, Category> categories = new HashMap<>();
     /* The list of products that belong to the store */
     private List<Product> products = new ArrayList<>();
     /* The list users ordered by username */
@@ -70,11 +70,9 @@ public class Store {
      * @param name the category's name
      */
     public Category getCategoryFromName(String name) {
-
-        for (Category c : this.categories) {
-            if (c.getName().equals(name)) return c;
+        if(this.categories.containsKey(name)){
+            return this.categories.get(name);
         }
-        return null;
     }
 
     /**
@@ -162,7 +160,7 @@ public class Store {
      * Gets the list of the categories of the store
      *
      */
-    public List getCategories() {
+    public Map getCategories() {
         return this.categories;
     }
 

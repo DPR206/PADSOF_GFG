@@ -30,55 +30,96 @@ public class Parameter {
 		this.valuationCost = 10;
 	}
 
+/*--------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------------*/	
+	
 	/**
-	 * @return the offerTime
+	 * Obtains the offer time
+	 * 
+	 * @return the offerTime, the expiration time of the offer
 	 */
 	public Period getOfferTime() {
 		return OfferTime;
 	}
 
 	/**
+	 * Sets the expire time of an offer
+	 * 
 	 * @param offerTime the offerTime to set
 	 */
-	public void setOfferTime(Period offerTime) {
+	private void setOfferTime(Period offerTime) {
 		OfferTime = offerTime;
 	}
 
 	/**
-	 * @return the orderTime
+	 * Obtains the expire time of an order
+	 * 
+	 * @return the orderTime, the expiration time of an order
 	 */
 	public Period getOrderTime() {
 		return OrderTime;
 	}
 
 	/**
+	 * Obtains the expiration time of the order
+	 * 
 	 * @param orderTime the orderTime to set
 	 */
-	public void setOrderTime(Period orderTime) {
+	private void setOrderTime(Period orderTime) {
 		OrderTime = orderTime;
 	}
 
 	/**
-	 * @return the valuationCost
+	 * Obtains the valuation cost
+	 * 
+	 * @return the valuationCost, the valuation cost
 	 */
 	public double getValuationCost() {
 		return valuationCost;
 	}
 
 	/**
+	 * Sets the cost of a valuation
+	 * 
 	 * @param valuationCost the valuationCost to set
 	 */
-	public void setValuationCost(double valuationCost) {
+	private void setValuationCost(double valuationCost) {
 		this.valuationCost = valuationCost;
 	}
 
 	/**
-	 * @return the param
+	 * Obtains the parameter
+	 * @return the param, the parameter of the store
 	 */
 	public static Parameter getParam() {
 		return PARAM;
 	}
 	
 	
+/*------------------------------------------------------------------METHODS------------------------------------------------------------------*/
+	/**
+	 * Change the expiration of an offer
+	 * 
+	 * @param newOfferTime, the new expiration time
+	 */
+	public void changeOfferTime(Period newOfferTime) {
+		this.setOfferTime(newOfferTime);
+	}
 	
+	/**
+	 * Change the expiration of an order
+	 * 
+	 * @param newOrderTime, the new expiration time
+	 */
+	public void changeOrderTime(Period newOrderTime) {
+		this.setOrderTime(newOrderTime);
+	}
+	
+	/**
+	 * Change the valuation cost
+	 * 
+	 * @param newCost, the new cost of a valuation
+	 */
+	public void changeValuationCost(double newCost) {
+		this.setValuationCost(newCost);
+	}
 }

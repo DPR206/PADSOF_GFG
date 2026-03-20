@@ -24,6 +24,7 @@ public class RegisteredClient extends User {
     //sugestioner
     //exchangehistory
     //orderhistory
+    //variable estatica para contabilizar intercambios y pedidos
 
     /**
      * Creates a new RegisteredClient

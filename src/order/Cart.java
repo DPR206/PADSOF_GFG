@@ -28,6 +28,13 @@ public class Cart {
         this.expired = expired;
         this.modificationDate = modificationDate;
     }
+    
+    /**
+     * Creates a cart with default modification date (today)
+     */
+    public Cart() {
+    	this(false, LocalDate.now());
+    }
 
     public boolean getExpired() {
         return this.expired;

@@ -48,18 +48,64 @@ public class StorePermission {
     }
 
     public boolean addProductByFile(String fileName) throws IOException{
-       BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream("file.txt")));
+       BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
        String line;
        int id;
-       Strind desc, categories,
+       String desc, name, desc, categories, aux, stock, numCat, type;
+       double price;
+       int i = 0;
+       Category auxC;
+       List<Category> c = new ArrayList<>()
 
        while ((line = buffer.readLine()) != null){
+            StringTokenizer tokenizer = new StringTokenizer(line, ";"); 
+            type = tokenizer.nextToken();
+            aux = tokenizer.nextToken();
+            id = Integer.parseInt(aux);
+            aux = tokenizer.nextToken();
+            name = tokenizer.nextToken();
+            desc = tokenizer.nextToken();
+            aux = tokenizer.nextToken();
+            price = Double.parseDouble(aux);
+            aux = tokenizer.nextToken();
+            stock = Integer.parseInt(aux);
+            aux = tokenizer.nextToken();
+            numCat = Integer.parseInt(aux);
+
+            for(i=0; i < numCat; i++){
+                aux = tokenizer.nextToken();
+                if((auxC = this.s.getCategoryFromName(aux)) != null){
+                    c.add(auxC);
+                }
+            }
+            String photo = tokenizer.nextToken();
+            if(type == "C"){
+                aux = tokenizer.nextToken();
+                int numPages = Integer.parseInt(aux);
+                String author = nextToken();
+                String editorial = tokenizer.nextToken();
+                aux = tokenizer.nextToken();
+                int year = Integer.parseInt(aux);
+                this.addComic(price, name, desc, photo, stock, numPages, year, author, editorial, c);
+
+            } else if(type == "G"){
+                aux = tokenizer.nextToken();
+                int numPlayers = Integer.parseInt(aux);
+                aux = tokenizer.nextToken();
+                int age = Integer.parseInt(aux);
+                String style = tokenizer.nextToken();
+                this.addGame(price, name, desc, photo, stock, numPlayers, age, style, c);
+
+            } else if(type == "F"){
+                String brand = tokenizer.nextToken()
+            }
 
        }
     }
 
     
-    /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;number_of_categories;CATEGORIES;(HASTA AQUÍ)PAGES;AUTHOR;EDITORIAL;YEAR;(CÓMICS)
+    /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;number_of_categories;CATEGORIES; photo;(HASTA AQUÍ)
+        PAGES;AUTHOR;EDITORIAL;YEAR;(CÓMICS)
         (JUEGO)PLAYERS;AGE;STYLE(Cards/Dice/GameBoard/Miniature);
         (FIGURITA)BRAND;MATERIAL;DIMENSION */
     public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {

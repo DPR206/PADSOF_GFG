@@ -2,12 +2,13 @@ package user;
 
 import product.*;
 import store.Store;
-import java.util.StringTokenizer.*;
 
-
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 
 /**
@@ -47,7 +48,7 @@ public class StorePermission {
         s.addProduct(f);
     }
 
-    public boolean addProductByFile(String fileName) throws IOException{
+    public boolean addProductByFile(String fileName) throws IOException {
        BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
        String line;
        int id;
@@ -55,10 +56,10 @@ public class StorePermission {
        double price;
        int i = 0;
        Category auxC;
-       List<Category> c = new ArrayList<>()
+       List<Category> c = new ArrayList<>();
 
        while ((line = buffer.readLine()) != null){
-            StringTokenizer tokenizer = new StringTokenizer(line, ";"); 
+            StringTokenizer tokenizer = new StringTokenizer(line, ";");
             type = tokenizer.nextToken();
             aux = tokenizer.nextToken();
             id = Integer.parseInt(aux);
@@ -97,15 +98,15 @@ public class StorePermission {
                 this.addGame(price, name, desc, photo, stock, numPlayers, age, style, c);
 
             } else if(type == "F"){
-                String brand = tokenizer.nextToken()
+                String brand = tokenizer.nextToken();
             }
 
        }
     }
 
-    
-    /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;number_of_categories;CATEGORIES; photo;(HASTA AQUÍ)
-        PAGES;AUTHOR;EDITORIAL;YEAR;(CÓMICS)
+
+    /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;number_of_categories;CATEGORIES; photo;(HASTA AQUI)
+        PAGES;AUTHOR;EDITORIAL;YEAR;(COMICS)
         (JUEGO)PLAYERS;AGE;STYLE(Cards/Dice/GameBoard/Miniature);
         (FIGURITA)BRAND;MATERIAL;DIMENSION */
     public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package product;
 
@@ -10,16 +10,16 @@ import user.RegisteredClient;
  * Description: It implements the reviews
  * @author Duna P.R.
  * @version 1.0
- * @see User
+ * @see user.User
  */
 public class Review {
 	private int scoring;
 	private String comment;
 	private RegisteredClient author;
-	
+
 	/**
 	 * Creates a new review
-	 * 
+	 *
 	 * @param scoring, the puntuation given to a product
 	 * @param comment, the comment about the product
 	 * @param author, the author of the comment
@@ -29,14 +29,14 @@ public class Review {
 		this.comment = comment;
 		this.author = author;
 	}
-	
+
 	/**
 	 * Written information of a review
-	 * 
+	 *
 	 * @return String, information of a review
 	 */
 	public String toString() {
 		return author.toString()+"\nScoring: "+scoring+"/5\n"+comment;
 	}
-	
+
 }

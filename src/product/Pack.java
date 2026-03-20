@@ -11,7 +11,7 @@ import java.util.*;
  * Description: It implements the packs
  * @author Duna P.R.
  * @version 1.0
- * @see Store
+ * @see store.Store
  */
 public class Pack {
 	static int totalId = 0;
@@ -59,10 +59,10 @@ public class Pack {
 		this(totalId, price, products, date);
 		totalId++;
 	}
-	
+
 	/**
 	 * Creates a new pack with no products
-	 * 
+	 *
 	 * @param price, price of the pack
 	 * @param date, the products the pack contains
 	 */
@@ -70,10 +70,10 @@ public class Pack {
 		this(totalId, price, new ArrayList<StoreProduct>(), date);
 		totalId++;
 	}
-	
+
 	/**
 	 * Creates a new pack with no products
-	 * 
+	 *
 	 * @param price, price of the pack
 	 * @param date, the products the pack contains
 	 */
@@ -155,7 +155,7 @@ public class Pack {
 		for(StoreProduct sp:products)
 			sp.decreaseStock(1);
 	}
-	
+
 	/**
 	 * Increases the stock of the products included in the pack
 	 */
@@ -204,10 +204,10 @@ public class Pack {
 		return products.removeAll(productsRemove);
 	}
 
-	
+
 	/**
 	 * Obtains the raw price of all the products in the pack
-	 * 
+	 *
 	 * @return double, the raw price of the pack
 	 */
 	public double totalPrice() {
@@ -217,4 +217,3 @@ public class Pack {
 		return total;
 	}
 }
-

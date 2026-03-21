@@ -13,7 +13,6 @@ import java.time.Period;
  * Description: It implements the offers
  * @author Ana O.R.
  * @version 1.2
- * @param <OfferStatus>
  * @see RegisteredClient
  */
 public class Offer {

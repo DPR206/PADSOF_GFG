@@ -42,13 +42,38 @@ public class ExchangeHistory {
 	
 /*------------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------*/
 	
-//Creo que no tiene sentido hacer getters y setter the esta clase
+	/**
+	 * Obtains the exchanges in the history
+	 * 
+	 * @return the exchanges, the exchanges made
+	 */
+	public Set<Exchange> getExchanges() {
+		return Collections.unmodifiableSet(exchanges);
+	}
+
+	/**
+	 * Obtains the user associated to the research history
+	 * 
+	 * @return the owner, the owner of the history
+	 */
+	public RegisteredClient getOwner() {
+		return owner;
+	}
 	
 /*---------------------------------------------------------METHODS------------------------------------------------------------------------*/
 	
+	/**
+	 * Adds a new exchange to the history
+	 * 
+	 * @param newExchange, the new exchange made
+	 */
 	public void addExchange(Exchange newExchange) {
 		exchanges.add(newExchange);
 	}
+
 	
+	public void addExchanges(Set<Exchange> newExchanges) {
+		exchanges.addAll(newExchanges);
+	}
 	
 }

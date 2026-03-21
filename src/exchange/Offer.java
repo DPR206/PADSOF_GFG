@@ -4,6 +4,7 @@ import product.SecondHandProduct;
 import user.RegisteredClient;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 
 /**
@@ -12,6 +13,7 @@ import java.time.Period;
  * Description: It implements the offers
  * @author Ana O.R.
  * @version 1.2
+ * @param <OfferStatus>
  * @see RegisteredClient
  */
 public class Offer {
@@ -71,7 +73,7 @@ public class Offer {
      */
     // DUE:
     public Exchange processOffer() {
-        return new Exchange();
+        return new Exchange(null); //No se si null o LocalDateTime.now()
     }
 
     // DUE: createNotification

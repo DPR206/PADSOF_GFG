@@ -6,12 +6,13 @@ import user.RegisteredClient;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * Class Name: Carrito
+ * Class Name: Cart
  * <p>
  * Description: Cart, array of products and packs the user has not paid yet
  * @author Sofía C.L.
@@ -23,10 +24,32 @@ public class Cart {
     private List<Pack> packs = new ArrayList<>();
     private boolean expired;
     private LocalDate modificationDate;
+    
+    
 
-    public Cart(boolean expired, LocalDate modificationDate) {
-        this.expired = expired;
-        this.modificationDate = modificationDate;
+    /**
+     * Creates a new cart
+     * 
+	 * @param sp, the store products
+	 * @param packs, the packs
+	 * @param expired, whether it's expired
+	 * @param modificationDate, the last modification date
+	 */
+	public Cart(List<StoreProduct> sp, List<Pack> packs, boolean expired, LocalDate modificationDate) {
+		this.sp = sp;
+		this.packs = packs;
+		this.expired = expired;
+		this.modificationDate = modificationDate;
+	}
+
+	/**
+	 * Creates a new cart without content
+	 * 
+	 * @param expired, whether it's expired
+	 * @param modificationDate, the last modification date
+	 */
+	public Cart(boolean expired, LocalDate modificationDate) {
+       this(Collections.emptyList(), Collections.emptyList(), expired, modificationDate);
     }
     
     /**

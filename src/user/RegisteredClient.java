@@ -4,6 +4,7 @@
 package user;
 
 import order.Cart;
+import exchange.*;
 
 import java.time.LocalDate;
 
@@ -19,10 +20,10 @@ public class RegisteredClient extends User {
     private LocalDate registerDate;
     private String dni;
     private Cart c;
+    private ExchangeHistory exchangeHistory;
     //cartera
     //searcher
     //sugestioner
-    //exchangehistory
     //orderhistory
     //variable estatica para contabilizar intercambios y pedidos
 
@@ -37,6 +38,8 @@ public class RegisteredClient extends User {
         super(userName, password);
         this.registerDate = registerDate;
         this.dni = dni;
+        this.c = new Cart();
+        this.exchangeHistory = new ExchangeHistory(this);
     }
 
     /**
@@ -80,6 +83,15 @@ public class RegisteredClient extends User {
     public void setDni(String dni) {
         this.dni = dni;
     }
+    
+    /**
+     * Obtains the exchange history
+     * 
+     * @return ExchangeHistory, the exchange history
+     */
+    public ExchangeHistory getExchangeHistory() {
+    	return exchangeHistory;
+    }
 
     /**
      * It changes the client's password
@@ -89,6 +101,7 @@ public class RegisteredClient extends User {
         //Tengo que hacer la comprobación de que la contraseña es segura
         super.changePassword(psswd);
     }
+    
 
     //public boolean buy() {}
     //removeFromWallet(Product)

@@ -1,8 +1,12 @@
 package order;
 public class Order {
-    // Está creada para que no se queje el compilador en sus referencias
+    private List<StoreProduct> p = new ArrayList<>();
+    private OrderState state;
+
+    public Order(){} //uff q difícil D:"
 
     public void changeStatus(OrderState state) {
-        // Rellenar
+        this.state = state;
     }
+    
 }

@@ -67,7 +67,7 @@ public class Pack {
 	 * @param date, the products the pack contains
 	 */
 	public Pack(double price, LocalDate date) {
-		this(totalId, price, new ArrayList<StoreProduct>(), date);
+		this(totalId, price, new ArrayList<StoreProduct<>(), date);
 		totalId++;
 	}
 

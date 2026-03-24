@@ -1,5 +1,18 @@
 package order;
 
-public class OrderState {
-    // Está creada para que no se queje el compilador en sus referencias
+public enum OrderState {
+    PAID("paid"),
+    IN_PREPARATION("inPreparation"),
+    READY_TO_PICKUP("readyToPickup"),
+    PICKED_UP("pickedUp");
+
+    private String state;
+
+    private OrderState(String state){
+        this.state = state;
+    }
+
+    private String getString(){
+        return this.state;
+    }
 }

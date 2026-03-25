@@ -42,7 +42,7 @@ public class Order {
      * @param price, total price paid of the order
      * @param pud, the date it has been picked up (initialized as null since it hasn't been picked up)
 	 */
-    public Order(double price, LocalDateTime pud, OrderState state, List<StoreProduct> sp, List<Pack> p){
+    public Order(double price, OrderState state, List<StoreProduct> sp, List<Pack> p){
         this(Order.changedId, price, state, sp, p);
         Order.changedId++;
     }

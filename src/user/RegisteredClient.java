@@ -21,6 +21,7 @@ public class RegisteredClient extends User {
     private String dni;
     private Cart c;
     private ExchangeHistory exchangeHistory;
+    private OrderHistory op;
     //cartera
     //searcher
     //sugestioner
@@ -102,7 +103,9 @@ public class RegisteredClient extends User {
         super.changePassword(psswd);
     }
     
-
+    public void getOrderHistory(){
+        return this.op;
+    }
     //public boolean buy() {}
     //removeFromWallet(Product)
     //requestValuation

@@ -1,6 +1,7 @@
 package exchange;
 
 import product.SecondHandProduct;
+import store.Parameter;
 import user.RegisteredClient;
 
 import java.time.LocalDate;
@@ -16,8 +17,6 @@ import java.time.Period;
  * @see RegisteredClient
  */
 public class Offer {
-    /** The maximum amount of time an offer can be active for */
-    static Period maxOfferPeriod = Period.ofDays(1);
     /** The date and time when the offer was created */
     private final LocalDate creationDate;
     /** The client who made the offer */
@@ -60,7 +59,7 @@ public class Offer {
      * It checks if the offer has surpassed the maximum amount of time an offer can be active for
      */
     public void checkExpiration() {
-        LocalDate expirationDate = this.creationDate.plus(maxOfferPeriod);
+        LocalDate expirationDate = this.creationDate.plus(Parameter.getParam().getOfferTime());
         if (LocalDate.now().isAfter(expirationDate)) {
             this.status = OfferStatus.EXPIRED;
         }
@@ -72,7 +71,7 @@ public class Offer {
      */
     // DUE:
     public Exchange processOffer() {
-        return new Exchange(null); //No se si null o LocalDateTime.now()
+        return new Exchange(LocalDateTime.now()); //No se si null o LocalDateTime.now()
     }
 
     // DUE: createNotification
@@ -133,7 +132,7 @@ public class Offer {
      * @return the maximum amount of time an offer can be active for
      */
     public Period getMaxOfferPeriod() {
-        return maxOfferPeriod;
+        return Parameter.getParam().getOfferTime();
     }
 
     /**

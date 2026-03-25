@@ -24,8 +24,7 @@ public class Cart {
     private List<Pack> packs = new ArrayList<>();
     private boolean expired;
     private LocalDate modificationDate;
-    
-    
+    private RegisteredClient owner;
 
     /**
      * Creates a new cart
@@ -162,6 +161,8 @@ public class Cart {
             CCV = sc.next();
             System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
             fechaCad = sc.next();
+
+            Order order = new Order();
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {

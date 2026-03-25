@@ -1,11 +1,10 @@
 package product;
 
-import order.Discount;
-import order.Order;
+import order.*;
 import user.RegisteredClient;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
+import java.time.*;
 
 /**
  * Class name: StoreProduct
@@ -26,6 +25,7 @@ public abstract class StoreProduct extends Product {
     private Discount discount;
     /** The product's categories */
     private HashMap<String, Category> categories;
+    private LocalDate addedDate = null;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -46,8 +46,15 @@ public abstract class StoreProduct extends Product {
         if (stock < 0) {
             throw new IllegalArgumentException("Stock cannot be negative");
         }
-
+        
         super(price, name, description, photo, type);
+        
+        //try {
+        //	super(price, name, description, photo, type);
+        //} catch (IllegalArgumentException arg){
+        	 
+        //}
+        //super(price, name, description, photo, type);
         this.stock = stock;
         this.reviews = new ArrayList<>();
         this.discount = null;
@@ -169,6 +176,25 @@ public abstract class StoreProduct extends Product {
     public int getStock() {
         return this.stock;
     }
+    
+    
+    /**
+     * Obtains the date the product was added to the cart
+     * 
+	 * @return the addedDate, the date it was added
+	 */
+	public LocalDate getAddedDate() {
+		return addedDate;
+	}
+
+	/**
+	 * Sets the date the product is added to the cart
+	 * 
+	 * @param addedDate the addedDate to set
+	 */
+	public void setAddedDate(LocalDate addedDate) {
+		this.addedDate = addedDate;
+	}
 
     /**
      * It allows a registered client to review a product
@@ -179,4 +205,6 @@ public abstract class StoreProduct extends Product {
     public void addReview(int scoring, String comment, RegisteredClient author) {
         reviews.add(new Review(scoring, comment, author));
     }
+
+	
 }

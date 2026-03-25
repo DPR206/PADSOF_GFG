@@ -132,7 +132,7 @@ public class Cart {
 
     public boolean addPack(Pack wanted) {
         this.packs.add(wanted);
-        List products = wanted.getProducts();
+        List<StoreProduct> products = wanted.getProducts();
 
         for (StoreProduct sp : products) {
             if (sp.getStock() == 0) return false;

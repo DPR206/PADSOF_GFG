@@ -65,7 +65,7 @@ public class Manager extends User {
 
     public void addEmployee(String password, String userName, Permission permission) {
         Eployee emp = new Employee(password, userName, permission);
-        s.getUsers().add(emp);
+        s.getUsers().put(emp.getUserName(), emp);
     }
 }
  

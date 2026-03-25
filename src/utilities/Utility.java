@@ -68,7 +68,7 @@ public class Utility {
         User u;
 
         if (s.getUsers().containsKey(userName)) {
-            u = this.users.get(userName);
+            u = s.getUsers().get(userName);
             if (u.getPassword() == pwd) {
                 return true;
             }

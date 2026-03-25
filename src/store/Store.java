@@ -73,6 +73,7 @@ public class Store {
         if(this.categories.containsKey(name)){
             return this.categories.get(name);
         }
+        return null;
     }
 
     /**
@@ -179,4 +180,14 @@ public class Store {
     public Map getUsers() {
         return this.users;
     }
+
+    /**
+     * Obtains whether a category exists in the store
+     * 
+     * @param name, the name of the category
+     * @return true if the category exists, false if else
+     */
+	public boolean isCategoryInStore(String name) {
+		return this.categories.containsKey(name);
+	}
 }

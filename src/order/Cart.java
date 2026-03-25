@@ -1,15 +1,10 @@
 package order;
 
-import product.Pack;
-import product.StoreProduct;
+import product.*;
 import user.RegisteredClient;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.time.*;
+import java.util.*;
 
 /**
  * Class Name: Cart

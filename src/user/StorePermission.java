@@ -24,10 +24,10 @@ public class StorePermission {
 
     /**
      * Constructor of the class
-     * @param s the order's status
+     * 
      */
-    public StorePermission(Store s) {
-        this.s = s;
+    public StorePermission() {
+        this.s = s.getInstance();
     }
 
     public void addComic(double price, String name, String description, String photo, int stock, int numPages,
@@ -52,6 +52,7 @@ public class StorePermission {
        int stock, numCat;
        String name, desc, aux, type;
        double price;
+       String line;
        int i = 0;
        Category auxC;
        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {

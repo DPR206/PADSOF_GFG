@@ -1,5 +1,4 @@
-package order;
-
+import order.OrderState;
 import product.Pack;
 import product.StoreProduct;
 
@@ -14,6 +13,7 @@ import java.util.List;
  * Description: It implements the order paid by the client
  * @author Sofía C.L.
  * @version 1.0
+ * @see RegisteredClient
  */
 public class Order {
     private static int changedId = 0;
@@ -43,11 +43,10 @@ public class Order {
     /**
      * Creates an order for when it hasn't been picked up
      * @param price, total price paid of the order
-     * @param pud,   the date it has been picked up (initialized as null since it hasn't been picked up)
-     */
-    public Order(double price, LocalDateTime pud, OrderState state, List<StoreProduct> sp, List<Pack> p) {
-        this(changedId, price, state, sp, p);
-        this.changedId++;
+	 */
+    public Order(double price, OrderState state, List<StoreProduct> sp, List<Pack> p){
+        this(Order.changedId, price, state, sp, p);
+        Order.changedId++;
     }
 
     /**

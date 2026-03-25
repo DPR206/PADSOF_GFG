@@ -160,7 +160,8 @@ public class Cart {
             System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
             fechaCad = sc.next();
 
-            Order order = new Order();
+            Order order = new Order(price, OrderState.PAID, this.sp,this.packs);
+            this.owner.getOrderHistory().add(order);
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {

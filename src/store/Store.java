@@ -73,6 +73,7 @@ public class Store {
         if(this.categories.containsKey(name)){
             return this.categories.get(name);
         }
+        return null;
     }
 
     /**

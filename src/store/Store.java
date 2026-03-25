@@ -4,6 +4,7 @@ import exchange.Exchange;
 import order.Discount;
 import order.Order;
 import product.Category;
+import product.Game;
 import product.Pack;
 import product.Product;
 import user.Manager;
@@ -189,5 +190,14 @@ public class Store {
      */
 	public boolean isCategoryInStore(String name) {
 		return this.categories.containsKey(name);
+	}
+
+	/**
+	 * Adds a new product to the store
+	 * @param g, the new game to add
+	 */
+	public void addProduct(Game g) {
+		
+		
 	}
 }

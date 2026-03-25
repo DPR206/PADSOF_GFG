@@ -43,9 +43,6 @@ public abstract class StoreProduct extends Product {
      */
     StoreProduct(double price, String name, String description, String photo, ProductType type, int stock,
                  Category... categories) throws IllegalArgumentException, NullPointerException {
-        if (stock < 0) {
-            throw new IllegalArgumentException("Stock cannot be negative");
-        }
         
         super(price, name, description, photo, type);
         
@@ -55,6 +52,11 @@ public abstract class StoreProduct extends Product {
         	 
         //}
         //super(price, name, description, photo, type);
+        
+        if (stock < 0) {
+            throw new IllegalArgumentException("Stock cannot be negative");
+        }
+        
         this.stock = stock;
         this.reviews = new ArrayList<>();
         this.discount = null;

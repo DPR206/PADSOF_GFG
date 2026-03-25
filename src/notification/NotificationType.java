@@ -1,5 +1,7 @@
 package notification;
 
 public enum NotificationType{
-    /*cosas */
+    EXCHANGE,
+    DISCOUNT,
+    ORDER;
 }

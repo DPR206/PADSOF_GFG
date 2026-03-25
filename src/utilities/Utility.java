@@ -14,6 +14,7 @@ import user.User;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Utility {
@@ -23,12 +24,12 @@ public class Utility {
 
     public boolean signIn(Store s) {
         Scanner sc = new Scanner(System.in);
-        String userName, pwd, dni;
+        String userName = null, pwd, dni;
         RegisteredClient rc;
         User u;
         boolean aux = false;
 
-        HashMap<String, User> users = s.getUsers();
+        Map<String, User> users = s.getUsers();
         System.out.print("Introduce tu usuario: ");
 
         try {
@@ -49,18 +50,18 @@ public class Utility {
             pwd = sc.next();
             System.out.print("Introduce tu DNI: ");
             dni = sc.next();
+            
+            rc = new RegisteredClient(userName, dni, pwd);
+
+            u = rc;
+            users.put(u.getUserName(), u);
+            return true;
         } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
             return false;
         } finally {
             sc.close();
         }
-
-        rc = new RegisteredClient(userName, dni, pwd);
-
-        u = rc;
-        users.put(u, u.getUserName());
-        return true;
     }
 
     public boolean logIn(String userName, String pwd, Store s) {

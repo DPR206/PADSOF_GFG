@@ -1,12 +1,19 @@
 package order;
 public class Order {
-    private List<StoreProduct> p = new ArrayList<>();
-    private OrderState state;
+    private static int changeId = 0;
+    
+    private int id;
+    private double price;
+    private LocalDateTime pickedUpDate;
 
-    public Order(){} //uff q difícil D:"
+    private List<StoreProduct> p = new ArrayList<>();
+    private 
+    private OrderState state;
 
     public void changeStatus(OrderState state) {
         this.state = state;
     }
+
+
     
 }

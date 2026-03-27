@@ -20,7 +20,7 @@ public class Review {
 	/**
 	 * Creates a new review
 	 *
-	 * @param scoring, the puntuation given to a product
+	 * @param scoring, the punctuation given to a product
 	 * @param comment, the comment about the product
 	 * @param author, the author of the comment
 	 */

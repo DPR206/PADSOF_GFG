@@ -206,6 +206,7 @@ public abstract class StoreProduct extends Product {
      */
     public void addReview(int scoring, String comment, RegisteredClient author) {
         reviews.add(new Review(scoring, comment, author));
+        
     }
 
 	

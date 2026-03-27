@@ -128,6 +128,7 @@ public class RegisteredClient extends User {
     //browseNotifications
     //addCart
     //deleteCart
+    //review
 
     @Override
     public String toString() {

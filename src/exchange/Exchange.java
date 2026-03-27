@@ -4,6 +4,9 @@
 package exchange;
 
 import java.time.*;
+import java.util.*;
+
+import product.*;
 
 import store.Store;
 
@@ -21,6 +24,9 @@ public class Exchange {
 	private int id;
 	private LocalDateTime date;
 	private boolean exchanged;
+	private ArrayList<SecondHandProduct> products1;
+	private ArrayList<SecondHandProduct> products2;
+	
 	
 	
 

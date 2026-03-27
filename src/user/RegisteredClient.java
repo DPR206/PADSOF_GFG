@@ -3,7 +3,7 @@
  */
 package user;
 
-import order.Cart;
+import order.*;
 import exchange.*;
 
 import java.time.LocalDate;
@@ -103,7 +103,7 @@ public class RegisteredClient extends User {
         super.changePassword(psswd);
     }
     
-    public void getOrderHistory(){
+    public OrderHistory getOrderHistory(){
         return this.op;
     }
     //public boolean buy() {}

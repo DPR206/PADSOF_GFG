@@ -1,6 +1,7 @@
 import store.*;
 
 import java.time.*;
+import java.util.*;
 
 import exchange.*;
 import product.*;
@@ -13,9 +14,11 @@ public class ExchangeDemo {
     
 	public static void main(String[] args) {
 		Store s = Store.getInstance();
+		SecondHandProduct products1[] = new SecondHandProduct[] {};
+		SecondHandProduct products2[] = new SecondHandProduct[] {};
 
 	    /* s.addManager */
-	    Manager manager = Manager.getInstance();
+	    //Manager manager = Manager.getInstance();
 
 	    /* s.addRegisteredClient */
 	    RegisteredClient rc1 = new RegisteredClient("client1", "12345678A", "password");
@@ -30,7 +33,7 @@ public class ExchangeDemo {
 	    /* Cliente 1 sube un producto a su cartera */
 	    SecondHandProduct product1 = new SecondHandProduct("Funko", "Figura Aladin", "1234.jpg", 
 	    													ProductType.FIGURINE, true, true, ConservationStatus.VERY_GOOD);
-
+	    
 	    rc1.addProductWallet(product1);
 	    
 	    /* Cliente 2 sube un producto a su cartera */
@@ -39,16 +42,18 @@ public class ExchangeDemo {
 	    
 	    rc2.addProductWallet(product2);
 	    
-	    Offer offer = new Offer(rc1, rc2, null, null); /*No se como meterle los argumentos que pide el constructor*/
+	    Offer offer = new Offer(rc1, rc2, products1, products2); 
 	    
-	    offer.chooseMyProducts(product1);
-	    offer.chooseTheirProducts(product2);
-	    offer.acceptOffer();
+	    products1 = offer.chooseMyProducts(product1);
+	    products2 = offer.chooseTheirProducts(product2);
+	   
+	    offer.chooseMyProducts(products1);
+	    offer.chooseTheirProducts(products2);
 	    
-	    Exchange exchange = new Exchange(LocalDateTime.now());
+	    Exchange exchange = offer.acceptOffer();
 	    
 	    rc1.getExchangeHistory().addExchange(exchange);
-	    rc2.getExchangeHistory().addExchange(exchange);
+	    //rc2.getExchangeHistory().addExchange(exchange);
 	    
 	    emp.manageExchange(exchange, true);
 	}

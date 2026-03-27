@@ -131,7 +131,7 @@ public class Store {
      * Gets the list of the discounts of the store
      *
      */
-    public List getDiscounts() {
+    public List<Discount> getDiscounts() {
         return this.discounts;
     }
 
@@ -139,7 +139,7 @@ public class Store {
      * Gets the list of the exchanges of the store
      *
      */
-    public List getExchanges() {
+    public List<Exchange> getExchanges() {
         return this.exchanges;
     }
 
@@ -147,7 +147,7 @@ public class Store {
      * Gets the list of the orders done in the store
      *
      */
-    public List getOrders() {
+    public List<Order> getOrders() {
         return this.orders;
     }
 
@@ -155,7 +155,7 @@ public class Store {
      * Gets the list of the packs of the store
      *
      */
-    public List getPacks() {
+    public List<Pack> getPacks() {
         return this.packs;
     }
 
@@ -171,7 +171,7 @@ public class Store {
      * Gets the list of the products available in the store
      *
      */
-    public List getProducts() {
+    public List<Product> getProducts() {
         return this.products;
     }
 

@@ -1,11 +1,8 @@
 package exchange;
 
-import product.SecondHandProduct;
-import user.RegisteredClient;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
+import product.*;
+import user.*;
+import java.time.*;
 
 /**
  * Class name: Offer
@@ -107,11 +104,11 @@ public class Offer {
      * @param products the origin client's products
      * @throws NullPointerException the null pointer exception
      */
-    public void chooseMyProducts(SecondHandProduct... products) throws NullPointerException {
+    public SecondHandProduct[] chooseMyProducts(SecondHandProduct... products) throws NullPointerException {
         if (products == null) {
             throw new NullPointerException("The products weren't provided");
         }
-        this.originProducts = products;
+       return this.originProducts = products;
     }
 
     /**
@@ -119,11 +116,11 @@ public class Offer {
      * @param products the origin client's products
      * @throws NullPointerException the null pointer exception
      */
-    public void chooseTheirProducts(SecondHandProduct... products) throws NullPointerException {
+    public SecondHandProduct[] chooseTheirProducts(SecondHandProduct... products) throws NullPointerException {
         if (products == null) {
             throw new NullPointerException("The products weren't provided");
         }
-        this.destinationProducts = products;
+        return this.destinationProducts = products;
     }
 
     /*---------------------------------------------------- GETTERS ---------------------------------------------------*/

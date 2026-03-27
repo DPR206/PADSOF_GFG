@@ -201,8 +201,18 @@ public class SecondHandProduct extends Product{
 		this.changeConservationStatus(status);
 		this.valuationDate = LocalDate.now();
 	}
+
+	@Override
+	public String toString() {
+		return "SecondHandProduct [valuationDate=" + valuationDate + ", available=" + available + ", paidValuation="
+				+ paidValuation + ", status=" + status + ", " + getId() + ", "+ getPrice() + ", "+ getName()
+				+ ", " + getDescription() + ", " + getPhoto() + ", " + getType() + ", "
+				+ getClass()
+				+ "]";
+	}
     
 	
 	//Faltan métodos de intercambio para más adelante
+	
 	
 }

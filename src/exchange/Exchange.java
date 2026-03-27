@@ -122,6 +122,13 @@ public class Exchange {
 	public void changeDate(LocalDateTime date) {
 		this.setDate(date);
 	}
+
+	@Override
+	public String toString() {
+		return "Exchange [id=" + id + ", date=" + date + ", exchanged=" + exchanged + "]";
+	}
 	
 	//Falta createNotification
+	
+	
 }

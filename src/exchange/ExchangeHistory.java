@@ -27,7 +27,7 @@ public class ExchangeHistory {
 	 * @param owner, the user associated to the history
 	 */
 	public ExchangeHistory(Set<Exchange> exchanges, RegisteredClient owner) {
-		this.exchanges = exchanges;
+		this.exchanges = new HashSet<Exchange>(exchanges);
 		this.owner = owner;
 	}
 
@@ -75,5 +75,11 @@ public class ExchangeHistory {
 	public void addExchanges(Set<Exchange> newExchanges) {
 		exchanges.addAll(newExchanges);
 	}
+
+	@Override
+	public String toString() {
+		return "ExchangeHistory [exchanges=" + exchanges + ", owner=" + owner + "]";
+	}
+	
 	
 }

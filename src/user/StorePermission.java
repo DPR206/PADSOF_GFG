@@ -3,7 +3,10 @@ package user;
 import product.*;
 import store.Store;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ public class StorePermission {
 
     /**
      * Constructor of the class
-     * 
+     *
      */
     public StorePermission() {
         this.s = s.getInstance();
@@ -33,7 +36,7 @@ public class StorePermission {
     public void addComic(double price, String name, String description, String photo, int stock, int numPages,
                          Year year, String author, String editorial, Category... categories) {
         Comic c = new Comic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
-        this.s.addStoreProduct(c); // DUE
+        this.s.addProduct(c); // DUE
     }
 
     public void addGame(double price, String name, String description, String photo, int stock, int numPlayers,
@@ -49,15 +52,15 @@ public class StorePermission {
     }
 
     public boolean addProductByFile(String fileName) throws IOException {
-       int stock, numCat;
-       String name, desc, aux, type;
-       double price;
-       String line;
-       int i = 0;
-       Category auxC;
-       try (BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
+        int stock, numCat;
+        String name, desc, aux, type;
+        double price;
+        String line;
+        int i = 0;
+        Category auxC;
+        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
 
-            while ((line = buffer.readLine()) != null){
+            while ((line = buffer.readLine()) != null) {
                 StringTokenizer tokenizer = new StringTokenizer(line, ";");
                 List<Category> c = new ArrayList<>();
                 type = tokenizer.nextToken();
@@ -70,43 +73,46 @@ public class StorePermission {
                 aux = tokenizer.nextToken();
                 numCat = Integer.parseInt(aux);
 
-                for(i=0; i < numCat; i++){
+                for (i = 0; i < numCat; i++) {
                     aux = tokenizer.nextToken();
-                    if((auxC = this.s.getCategoryFromName(aux)) != null){
+                    if ((auxC = this.s.getCategoryFromName(aux)) != null) {
                         c.add(auxC);
                     }
                 }
                 String photo = tokenizer.nextToken();
-                if(type.equals("C")){
+                if (type.equals("C")) {
                     aux = tokenizer.nextToken();
                     int numPages = Integer.parseInt(aux);
                     String author = tokenizer.nextToken();
                     String editorial = tokenizer.nextToken();
                     aux = tokenizer.nextToken();
-                    int year = Integer.parseInt(aux);
-                    this.addComic(price, name, desc, photo, stock, numPages, year, author, editorial, c);
+                    Year year = Year.parse(aux);
+                    this.addComic(price, name, desc, photo, stock, numPages, year, author, editorial,
+                            c.toArray(new Category[0]));
 
-                } else if(type.equals("G")){
+                } else if (type.equals("G")) {
                     aux = tokenizer.nextToken();
                     int numPlayers = Integer.parseInt(aux);
-                    aux = tokenizer.nextToken();
-                    int age = Integer.parseInt(aux);
+                    String ageRange = tokenizer.nextToken();
                     String style = tokenizer.nextToken();
-                    this.addGame(price, name, desc, photo, stock, numPlayers, age, style, c);
+                    GameStyle gs = GameStyle.valueOf(style);
+                    this.addGame(price, name, desc, photo, stock, numPlayers, ageRange, gs, c.toArray(new Category[0]));
 
-                } else if(type.equals("F")){
+                } else if (type.equals("F")) {
                     String brand = tokenizer.nextToken();
                     String material = tokenizer.nextToken();
                     String dimension = tokenizer.nextToken();
 
-                   this.addFigurine(price, name, desc, photo, stock,  dimension, brand,  material, c);
-                }  
-                else{System.out.println("Tipo desconocido: " + type);} 
+                    this.addFigurine(price, name, desc, photo, stock, dimension, brand, material,
+                            c.toArray(new Category[0]));
+                } else {
+                    System.out.println("Tipo desconocido: " + type);
+                }
 
             }
         }
-       
-       return true;
+
+        return true;
     }
 
 
@@ -116,6 +122,10 @@ public class StorePermission {
         (FIGURITA)BRAND;MATERIAL;DIMENSION */
     public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
         Pack p = new Pack(price, products, date);
-        s.addProduct(p);
+        s.addPack(p);
+    }
+
+    public Store getStore() {
+        return this.s;
     }
 }

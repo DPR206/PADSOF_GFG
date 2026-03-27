@@ -4,7 +4,6 @@ import exchange.Exchange;
 import order.Discount;
 import order.Order;
 import product.Category;
-import product.Game;
 import product.Pack;
 import product.Product;
 import user.Manager;
@@ -72,7 +71,7 @@ public class Store {
      * @param name the category's name
      */
     public Category getCategoryFromName(String name) {
-        if(this.categories.containsKey(name)){
+        if (this.categories.containsKey(name)) {
             return this.categories.get(name);
         }
         return null;
@@ -106,7 +105,9 @@ public class Store {
             return false;
         }
 
-        if (extras.logIn(userName, pwd, this) == false) return false;
+        if (extras.logIn(userName, pwd, this) == false) {
+            return false;
+        }
 
         return true;
     }
@@ -185,27 +186,30 @@ public class Store {
 
     /**
      * Obtains whether a category exists in the store
-     * 
      * @param name, the name of the category
      * @return true if the category exists, false if else
      */
-	public boolean isCategoryInStore(String name) {
-		return this.categories.containsKey(name);
-	}
+    public boolean isCategoryInStore(String name) {
+        return this.categories.containsKey(name);
+    }
 
-	/**
-	 * Adds a new product to the store
-	 * @param product, the new product
-	 */
-	public void addProduct(Product product) {
-		this.products.add(product);
-	}
-	
-	/**
-	 * Adds a new exchange to the store
-	 * @param e, the new exchange
-	 */
-	public void addExchange(Exchange e) {
-		this.exchanges.add(e);
-	}
+    /**
+     * Adds a new product to the store
+     * @param product, the new product
+     */
+    public void addProduct(Product product) {
+        this.products.add(product);
+    }
+
+    public void addPack(Pack p) {
+        this.packs.add(p);
+    }
+
+    /**
+     * Adds a new exchange to the store
+     * @param e, the new exchange
+     */
+    public void addExchange(Exchange e) {
+        this.exchanges.add(e);
+    }
 }

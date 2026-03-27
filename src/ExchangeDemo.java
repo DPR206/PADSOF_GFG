@@ -50,7 +50,7 @@ public class ExchangeDemo {
 	    rc1.getExchangeHistory().addExchange(exchange);
 	    rc2.getExchangeHistory().addExchange(exchange);
 	    
-	    
+	    emp.manageExchange(exchange, true);
 	}
     
     

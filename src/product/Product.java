@@ -44,7 +44,7 @@ public abstract class Product {
             throw new NullPointerException("Expect non-null parameters but received one");
         }
         // NOTE: Según StackOverflow: String.format("%04d", your integer));
-        this.id = type.getSymbol() + String.format("%04d", ++productId);
+        this.id = type.getSymbol() + String.format("%06d", ++productId);
         this.price = price;
         this.name = name;
         this.description = description;

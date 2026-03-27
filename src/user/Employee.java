@@ -31,7 +31,6 @@ public class Employee extends User {
      * Creates a new employee
      * @param pwd
      * @param userName
-     * @param actualID
      * @param p
      */
     public Employee(String pwd, String userName, Permission p) {
@@ -107,8 +106,8 @@ public class Employee extends User {
      * @param categories
      *
      */
-    public boolean addFigurine(double price, String name, String description, String photo, int stock, String dimensions,
-                               String brand, String material, Category... categories) {
+    public boolean addFigurine(double price, String name, String description, String photo, int stock,
+                               String dimensions, String brand, String material, Category... categories) {
         if (this.sp != null) {
             this.sp.addFigurine(price, name, description, photo, stock, dimensions, brand, material, categories);
             return true;

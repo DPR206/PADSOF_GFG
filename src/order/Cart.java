@@ -3,7 +3,11 @@ package order;
 import product.*;
 import user.RegisteredClient;
 
+<<<<<<< HEAD
 import java.time.*;
+=======
+import java.time.LocalDate;
+>>>>>>> refs/remotes/origin/main
 import java.util.*;
 
 /**
@@ -23,46 +27,44 @@ public class Cart {
 
     /**
      * Creates a new cart
-     * 
-	 * @param sp, the store products
-	 * @param packs, the packs
-	 * @param expired, whether it's expired
-	 * @param modificationDate, the last modification date
-	 */
-	public Cart(List<StoreProduct> sp, List<Pack> packs, boolean expired, LocalDate modificationDate) {
-		this.sp = sp;
-		this.packs = packs;
-		this.expired = expired;
-		this.modificationDate = modificationDate;
-	}
-
-	/**
-	 * Creates a new cart without content
-	 * 
-	 * @param expired, whether it's expired
-	 * @param modificationDate, the last modification date
-	 */
-	public Cart(boolean expired, LocalDate modificationDate) {
-       this(Collections.emptyList(), Collections.emptyList(), expired, modificationDate);
+     * @param sp,               the store products
+     * @param packs,            the packs
+     * @param expired,          whether it's expired
+     * @param modificationDate, the last modification date
+     */
+    public Cart(List<StoreProduct> sp, List<Pack> packs, boolean expired, LocalDate modificationDate) {
+        this.sp = sp;
+        this.packs = packs;
+        this.expired = expired;
+        this.modificationDate = modificationDate;
     }
-    
+
+    /**
+     * Creates a new cart without content
+     * @param expired,          whether it's expired
+     * @param modificationDate, the last modification date
+     */
+    public Cart(boolean expired, LocalDate modificationDate) {
+        this(Collections.emptyList(), Collections.emptyList(), expired, modificationDate);
+    }
+
     /**
      * Creates a cart with default modification date (today)
      */
     public Cart() {
-    	this(false, LocalDate.now());
+        this(false, LocalDate.now());
     }
 
     public boolean getExpired() {
         return this.expired;
     }
 
-    public LocalDate getModificationDate() {
-        return this.modificationDate;
-    }
-
     public void setExpired(boolean exp) {
         this.expired = exp;
+    }
+
+    public LocalDate getModificationDate() {
+        return this.modificationDate;
     }
 
     public void setModificationDate(LocalDate ld) {
@@ -117,7 +119,9 @@ public class Cart {
 
     public void addProduct(StoreProduct wanted) {
 
-        if (wanted.getStock() == 0) return;
+        if (wanted.getStock() == 0) {
+            return;
+        }
 
         this.sp.add(wanted);
         wanted.changeStock(wanted.getStock() - 1);
@@ -129,7 +133,9 @@ public class Cart {
         List<StoreProduct> products = wanted.getProducts();
 
         for (StoreProduct sp : products) {
-            if (sp.getStock() == 0) return false;
+            if (sp.getStock() == 0) {
+                return false;
+            }
         }
 
         packs.add(wanted);

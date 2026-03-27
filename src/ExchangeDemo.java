@@ -24,21 +24,25 @@ public class ExchangeDemo {
 	    RegisteredClient rc1 = new RegisteredClient("client1", "12345678A", "password");
 	    System.out.println(rc1);
 	    RegisteredClient rc2 = new RegisteredClient("client2", "12345678A", "password");
+	    System.out.println(rc2);
 
 	    /* s.addEmployee <- con exchangePermission */
 	    Employee emp = new Employee("password", "exchangeEmployee", Permission.EXCHANGE);
+	    System.out.println(emp);
 
 	    /*----------------------------------------------- Inicio simulación ----------------------------------------------*/
 
 	    /* Cliente 1 sube un producto a su cartera */
 	    SecondHandProduct product1 = new SecondHandProduct("Funko", "Figura Aladin", "1234.jpg", 
 	    													ProductType.FIGURINE, true, true, ConservationStatus.VERY_GOOD);
+	    System.out.println(product1);
 	    
 	    rc1.addProductWallet(product1);
 	    
 	    /* Cliente 2 sube un producto a su cartera */
 	    SecondHandProduct product2 = new SecondHandProduct("Figura acción", "Figura Spiderman", "1254.jpg", 
 				ProductType.FIGURINE, true, true, ConservationStatus.SLIGHTLY_USED);
+	    System.out.println(product2);
 	    
 	    rc2.addProductWallet(product2);
 	    
@@ -49,13 +53,18 @@ public class ExchangeDemo {
 	   
 	    offer.chooseMyProducts(products1);
 	    offer.chooseTheirProducts(products2);
+	    System.out.println(offer);
 	    
 	    Exchange exchange = offer.acceptOffer();
+	    System.out.println(offer);
 	    
 	    rc1.getExchangeHistory().addExchange(exchange);
+	    System.out.println(rc1.getExchangeHistory());
 	    rc2.getExchangeHistory().addExchange(exchange);
+	    System.out.println(rc2.getExchangeHistory());
 	    
 	    emp.manageExchange(exchange, true);
+	    System.out.println(rc2.getExchangeHistory());
 	}
     
     

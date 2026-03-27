@@ -75,5 +75,11 @@ public class ExchangeHistory {
 	public void addExchanges(Set<Exchange> newExchanges) {
 		exchanges.addAll(newExchanges);
 	}
+
+	@Override
+	public String toString() {
+		return "ExchangeHistory [exchanges=" + exchanges + ", owner=" + owner + "]";
+	}
+	
 	
 }

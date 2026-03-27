@@ -3,6 +3,7 @@ package exchange;
 import product.*;
 import user.*;
 import java.time.*;
+import java.util.Arrays;
 
 /**
  * Class name: Offer
@@ -180,4 +181,13 @@ public class Offer {
     public OfferStatus getStatus() {
         return this.status;
     }
+
+	@Override
+	public String toString() {
+		return "Offer [creationDate=" + creationDate + ", origin=" + origin + ", destination=" + destination
+				+ ", originProducts=" + Arrays.toString(originProducts) + ", destinationProducts="
+				+ Arrays.toString(destinationProducts) + ", status=" + status + "]";
+	}
+    
+    
 }

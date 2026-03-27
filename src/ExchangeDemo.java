@@ -30,6 +30,12 @@ public class ExchangeDemo {
 	    rc1.addProductWallet(product1);
 	    
 	    /* Cliente 2 sube un producto a su cartera */
+	    SecondHandProduct product2 = new SecondHandProduct("Figura acción", "Figura Spiderman", "1254.jpg", 
+				ProductType.FIGURINE, true, true, ConservationStatus.SLIGHTLY_USED);
+	    
+	    rc2.addProductWallet(product2);
+	    
+	    Offer offer = new Offer()
 	}
     
     

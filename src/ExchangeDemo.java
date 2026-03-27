@@ -35,7 +35,7 @@ public class ExchangeDemo {
 	    
 	    rc2.addProductWallet(product2);
 	    
-	    Offer offer = new Offer()
+	    Offer offer = new Offer(rc1, rc2, null, null); /*No se como meterle los argumentos que pide el constructor*/
 	}
     
     

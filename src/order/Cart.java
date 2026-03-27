@@ -3,11 +3,7 @@ package order;
 import product.*;
 import user.RegisteredClient;
 
-<<<<<<< HEAD
 import java.time.*;
-=======
-import java.time.LocalDate;
->>>>>>> refs/remotes/origin/main
 import java.util.*;
 
 /**
@@ -164,7 +160,7 @@ public class Cart {
             fechaCad = sc.next();
 
             Order order = new Order(price, OrderState.PAID, this.sp,this.packs);
-            this.owner.getOrderHistory().add(order);
+            this.owner.getOrderHistory().addOrder(order);
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {

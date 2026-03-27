@@ -53,7 +53,7 @@ public class ExchangeDemo {
 	    Exchange exchange = offer.acceptOffer();
 	    
 	    rc1.getExchangeHistory().addExchange(exchange);
-	    //rc2.getExchangeHistory().addExchange(exchange);
+	    rc2.getExchangeHistory().addExchange(exchange);
 	    
 	    emp.manageExchange(exchange, true);
 	}

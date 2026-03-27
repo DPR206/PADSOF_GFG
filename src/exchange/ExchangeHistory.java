@@ -27,7 +27,7 @@ public class ExchangeHistory {
 	 * @param owner, the user associated to the history
 	 */
 	public ExchangeHistory(Set<Exchange> exchanges, RegisteredClient owner) {
-		this.exchanges = exchanges;
+		this.exchanges = new HashSet<Exchange>(exchanges);
 		this.owner = owner;
 	}
 

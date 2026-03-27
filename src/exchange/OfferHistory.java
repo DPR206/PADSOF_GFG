@@ -41,10 +41,11 @@ public class OfferHistory {
      * @throws NullPointerException owner is null
      */
     public OfferHistory(RegisteredClient owner) throws NullPointerException {
-        if (owner == null) {
+    	this(Collections.emptySet(), owner);
+    	if (owner == null) {
             throw new NullPointerException("Owner is null");
         }
-        this(Collections.emptySet(), owner);
+        //this(Collections.emptySet(), owner);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

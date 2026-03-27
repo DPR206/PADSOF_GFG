@@ -179,7 +179,7 @@ public class Store {
      * Gets the list of the users of the store
      *
      */
-    public Map getUsers() {
+    public Map<String, User> getUsers() {
         return this.users;
     }
 

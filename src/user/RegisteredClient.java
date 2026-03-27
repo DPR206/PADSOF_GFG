@@ -24,7 +24,8 @@ public class RegisteredClient extends User {
     private ExchangeHistory exchangeHistory;
     private OrderHistory op;
     private Wallet wallet;
-    //cartera
+    private OrderHistory orderHistory;
+    
     //searcher
     //sugestioner
     //orderhistory
@@ -43,6 +44,7 @@ public class RegisteredClient extends User {
         this.dni = dni;
         this.c = new Cart();
         this.exchangeHistory = new ExchangeHistory(this);
+        this.orderHistory = new OrderHistory(this);
         this.wallet = new Wallet();
     }
 
@@ -106,9 +108,15 @@ public class RegisteredClient extends User {
         super.changePassword(psswd);
     }
     
+    /**
+     * Obtains the client's order history
+     * 
+     * @return the order history
+     */
     public OrderHistory getOrderHistory(){
         return this.op;
     }
+    
     
     public void addProductWallet(SecondHandProduct product) {
     	this.wallet.addProducts(product);

@@ -195,10 +195,9 @@ public class Store {
 
 	/**
 	 * Adds a new product to the store
-	 * @param g, the new game to add
+	 * @param product
 	 */
-	public void addProduct(Game g) {
-		
-		
+	public void addProduct(Product product) {
+		this.products.add(product);
 	}
 }

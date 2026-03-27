@@ -1,16 +1,7 @@
-<<<<<<< HEAD
+
 package order;
-=======
+
 import order.OrderState;
-import product.Pack;
-import product.StoreProduct;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
->>>>>>> refs/remotes/origin/main
-
 import product.*;
 
 import java.time.*;

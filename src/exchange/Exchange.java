@@ -5,6 +5,8 @@ package exchange;
 
 import java.time.*;
 
+import store.Store;
+
 /**
  * Class name: Exchange
  * <p>
@@ -33,6 +35,7 @@ public class Exchange {
 		this.exchanged = exchanged;
 		this.id = totalId;
 		totalId++;
+		Store.getInstance().addExchange(this);
 	}
 	
 	/**

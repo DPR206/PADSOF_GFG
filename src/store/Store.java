@@ -200,4 +200,8 @@ public class Store {
 	public void addProduct(Product product) {
 		this.products.add(product);
 	}
+	
+	public void addExchange(Exchange e) {
+		this.exchanges.add(e);
+	}
 }

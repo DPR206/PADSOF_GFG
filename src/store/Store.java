@@ -195,12 +195,16 @@ public class Store {
 
 	/**
 	 * Adds a new product to the store
-	 * @param product
+	 * @param product, the new product
 	 */
 	public void addProduct(Product product) {
 		this.products.add(product);
 	}
 	
+	/**
+	 * Adds a new exchange to the store
+	 * @param e, the new exchange
+	 */
 	public void addExchange(Exchange e) {
 		this.exchanges.add(e);
 	}

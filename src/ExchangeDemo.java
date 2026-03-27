@@ -7,24 +7,32 @@ import user.*;
 // NOTE: Es sin buscador ni notificaciones por ahora
 
 public class ExchangeDemo {
-    Store s = Store.getInstance();
-
-    /* s.addManager */
-    Manager manager = Manager.getInstance();
-
-    /* s.addRegisteredClient */
-    RegisteredClient rc1 = new RegisteredClient("client1", "12345678A", "password");
-    RegisteredClient rc2 = new RegisteredClient("client2", "12345678A", "password");
-
-    /* s.addEmployee <- con exchangePermission */
-    Employee emp = new Employee("password", "exchangeEmployee", Permission.EXCHANGE);
-
-    /*----------------------------------------------- Inicio simulación ----------------------------------------------*/
-
-    /* Cliente 1 sube un producto a su cartera */
     
+	public static void main(String[] args) {
+		Store s = Store.getInstance();
 
-    /* Cliente 2 sube un producto a su cartera */
+	    /* s.addManager */
+	    Manager manager = Manager.getInstance();
+
+	    /* s.addRegisteredClient */
+	    RegisteredClient rc1 = new RegisteredClient("client1", "12345678A", "password");
+	    RegisteredClient rc2 = new RegisteredClient("client2", "12345678A", "password");
+
+	    /* s.addEmployee <- con exchangePermission */
+	    Employee emp = new Employee("password", "exchangeEmployee", Permission.EXCHANGE);
+
+	    /*----------------------------------------------- Inicio simulación ----------------------------------------------*/
+
+	    /* Cliente 1 sube un producto a su cartera */
+	    SecondHandProduct product1 = new SecondHandProduct("Funko", "Figura Aladin", "1234.jpg", 
+	    													ProductType.FIGURINE, true, true, ConservationStatus.VERY_GOOD);
+
+	    rc1.addProductWallet(product1);
+	    
+	    /* Cliente 2 sube un producto a su cartera */
+	}
+    
+    
 
     /* Cliente 1 "busca" productos de segunda mano y hace una oferta a cliente 2 */
 

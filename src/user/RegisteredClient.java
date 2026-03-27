@@ -4,6 +4,7 @@
 package user;
 
 import order.*;
+import product.*;
 import exchange.*;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class RegisteredClient extends User {
     private Cart c;
     private ExchangeHistory exchangeHistory;
     private OrderHistory op;
+    private Wallet wallet;
     //cartera
     //searcher
     //sugestioner
@@ -41,6 +43,7 @@ public class RegisteredClient extends User {
         this.dni = dni;
         this.c = new Cart();
         this.exchangeHistory = new ExchangeHistory(this);
+        this.wallet = new Wallet();
     }
 
     /**
@@ -105,6 +108,10 @@ public class RegisteredClient extends User {
     
     public OrderHistory getOrderHistory(){
         return this.op;
+    }
+    
+    public void addProductWallet(SecondHandProduct product) {
+    	this.wallet.addProducts(product);
     }
     //public boolean buy() {}
     //removeFromWallet(Product)

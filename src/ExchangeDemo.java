@@ -7,7 +7,7 @@ import user.*;
 // NOTE: Es sin buscador ni notificaciones por ahora
 
 public class ExchangeDemo {
-    Store s = new Store();
+    Store s = Store.getInstance();
 
     /* s.addManager */
     Manager manager = new Manager("password", "manager", 0, s);

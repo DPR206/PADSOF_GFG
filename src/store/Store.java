@@ -59,7 +59,7 @@ public class Store {
      * Gets the Instance of the Store
      *
      */
-    public Store getInstance() {
+    public static Store getInstance() {
         if (Store.INSTANCE == null) {
             Store.INSTANCE = new Store();
         }

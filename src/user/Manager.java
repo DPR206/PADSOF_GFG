@@ -1,12 +1,8 @@
 package user;
 
-import order.FixedPerDisc;
-import order.GiftDisc;
-import order.QuantityDisc;
-import order.VolumeDisc;
+import order.*;
 import product.StoreProduct;
-import store.Parameter;
-import store.Store;
+import store.*;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +15,7 @@ import java.time.LocalDateTime;
  * @see User
  */
 public class Manager extends User {
-    private static final Manager INSTANCE = null;
+    private static Manager INSTANCE = null;
     private final Store s;
     /** Store permission necessary for the manager to do its functions */
     private StorePermission sp;
@@ -33,7 +29,7 @@ public class Manager extends User {
         this.parameter = p;
     }
 
-    public Manager getManagerNotInitialized(String pwd, String userName) {
+	public Manager getManagerNotInitialized(String pwd, String userName) {
         if (Manager.INSTANCE == null) Manager.INSTANCE = new Manager(pwd, userName);
         return Manager.INSTANCE;
     }
@@ -41,6 +37,13 @@ public class Manager extends User {
     public Manager getIntializedManager() {
         if (Manager.INSTANCE != null) return Manager.INSTANCE;
         return null;
+    }
+    
+    public static Manager getInstance() {
+    	if (Manager.INSTANCE == null) {
+            Manager.INSTANCE = new Manager("password", "manager", 0, Store.getInstance(), new StorePermission(), Parameter.getParam());
+        }
+        return Manager.INSTANCE;
     }
 
     public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {

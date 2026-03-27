@@ -10,18 +10,19 @@ public class ExchangeDemo {
     Store s = Store.getInstance();
 
     /* s.addManager */
-    Manager manager = new Manager("password", "manager", 0, s);
+    Manager manager = Manager.getInstance();
 
     /* s.addRegisteredClient */
     RegisteredClient rc1 = new RegisteredClient("client1", "12345678A", "password");
     RegisteredClient rc2 = new RegisteredClient("client2", "12345678A", "password");
 
     /* s.addEmployee <- con exchangePermission */
-    Employee emp = new Employee("password", "exchangeEmployee", 1, Permission.EXCHANGE);
+    Employee emp = new Employee("password", "exchangeEmployee", Permission.EXCHANGE);
 
     /*----------------------------------------------- Inicio simulación ----------------------------------------------*/
 
     /* Cliente 1 sube un producto a su cartera */
+    
 
     /* Cliente 2 sube un producto a su cartera */
 

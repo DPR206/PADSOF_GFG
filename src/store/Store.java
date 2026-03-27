@@ -27,7 +27,7 @@ public class Store {
     private static int productId = 0;
     // Está creada para que no se queje el compilador en sus referencias
 
-    /** Falta parameter */
+    private Parameter param;
 
     /* The manager of the store */
     private Manager manager;
@@ -53,6 +53,7 @@ public class Store {
      */
     private Store() {
         this.extras = new Utility();
+        this.param = Parameter.getParam();
     }
 
     /**

@@ -1,4 +1,7 @@
 import store.*;
+
+import java.time.*;
+
 import exchange.*;
 import product.*;
 import user.*;
@@ -16,6 +19,7 @@ public class ExchangeDemo {
 
 	    /* s.addRegisteredClient */
 	    RegisteredClient rc1 = new RegisteredClient("client1", "12345678A", "password");
+	    System.out.println(rc1);
 	    RegisteredClient rc2 = new RegisteredClient("client2", "12345678A", "password");
 
 	    /* s.addEmployee <- con exchangePermission */
@@ -36,6 +40,17 @@ public class ExchangeDemo {
 	    rc2.addProductWallet(product2);
 	    
 	    Offer offer = new Offer(rc1, rc2, null, null); /*No se como meterle los argumentos que pide el constructor*/
+	    
+	    offer.chooseMyProducts(product1);
+	    offer.chooseTheirProducts(product2);
+	    offer.acceptOffer();
+	    
+	    Exchange exchange = new Exchange(LocalDateTime.now());
+	    
+	    rc1.getExchangeHistory().addExchange(exchange);
+	    rc2.getExchangeHistory().addExchange(exchange);
+	    
+	    
 	}
     
     

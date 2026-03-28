@@ -10,7 +10,7 @@
 /httpRequests/
 # Cosas del Intellij
 .idea/
-.out/
+/out/
 /bin/
 .classpath
 .project

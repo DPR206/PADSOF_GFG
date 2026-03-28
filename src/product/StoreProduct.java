@@ -21,12 +21,15 @@ import java.util.HashMap;
 public abstract class StoreProduct extends Product {
     /** The product's reviews */
     private final ArrayList<Review> reviews;
+    /** The product's average punctuation */
+    private double averagePunctuation;
     /** The number of available copies of this product */
     private int stock;
     /** The product's discount, if it has one */
     private Discount discount;
     /** The product's categories */
     private HashMap<String, Category> categories;
+    /** The date when the product was added to the cart */
     private LocalDate addedDate = null;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -61,6 +64,7 @@ public abstract class StoreProduct extends Product {
 
         this.stock = stock;
         this.reviews = new ArrayList<>();
+        this.averagePunctuation = 0;
         this.discount = null;
         this.categories = new HashMap<>();
         for (Category category : categories) {
@@ -128,7 +132,9 @@ public abstract class StoreProduct extends Product {
      */
     public void addReview(int scoring, String comment, RegisteredClient author) {
         reviews.add(new Review(scoring, comment, author));
-
+        // NOTE: Probablemente, haya una mejor forma de recalcular esto
+        this.averagePunctuation = (((this.reviews.toArray().length - 1) * this.averagePunctuation) + scoring) /
+                                  this.reviews.toArray().length;
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -143,10 +149,26 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Sets the date the product is added to the cart
-     * @param addedDate the addedDate to set
+     * @param newAddedDate the new addedDate to set
      */
-    public void setAddedDate(LocalDate addedDate) {
-        this.addedDate = addedDate;
+    public void setAddedDate(LocalDate newAddedDate) {
+        this.addedDate = newAddedDate;
+    } // NOTE: Cart debería tener una copia del producto para poder hacer esto
+
+    /**
+     * It gets the store product's average punctuation.
+     * @return the store product's average punctuation
+     */
+    public double getAveragePunctuation() {
+        return averagePunctuation;
+    }
+
+    /**
+     * It sets the store product's average punctuation.
+     * @param newAveragePunctuation the store product's new average punctuation
+     */
+    public void setAveragePunctuation(double newAveragePunctuation) {
+        this.averagePunctuation = newAveragePunctuation;
     }
 
     /**

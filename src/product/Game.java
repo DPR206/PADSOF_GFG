@@ -30,8 +30,8 @@ public class Game extends StoreProduct {
      * @param gameStyle   the game's style
      * @param categories  the game's categories
      */
-    public Game(double price, String name, String description, String photo, int stock, int numPlayers,
-                String ageRange, GameStyle gameStyle, Category... categories) {
+    public Game(double price, String name, String description, String photo, int stock, int numPlayers, String ageRange,
+                GameStyle gameStyle, Category... categories) {
         super(price, name, description, photo, ProductType.GAME, stock, categories);
         this.numPlayers = numPlayers;
         this.ageRange = ageRange;
@@ -39,56 +39,7 @@ public class Game extends StoreProduct {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * Written information of a product
-     * @return String, information of a product
-     */
-    @Override
-    public String toString() {
-        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
-        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
-        return ProductType.GAME.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() +
-                ";" + this.getPrice() + ";" + this.getStock() + ";" + this.getPrintCategories() + ";" + /*paginas*/
-                ";" + /*autor*/ ";" + /*editorial*/ ";" + /*año*/ ";" + this.numPlayers + ";" + this.ageRange + ";" +
-                this.gameStyle.getFormatedName() + ";" /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
-    }
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
-
-    /**
-     * It allows an employee to change a game's number of players
-     * @param newNumPlayers the game's number of players
-     */
-    public void changeNumPlayers(int newNumPlayers) {
-        this.numPlayers = newNumPlayers;
-    }
-
-    /**
-     * It allows an employee to change a game's age range
-     * @param newAgeRange the game's age range
-     */
-    public void changeAgeRange(String newAgeRange) {
-        this.ageRange = newAgeRange;
-    }
-
-    /**
-     * It allows an employee to change a game's style
-     * @param newGameStyle the game's style
-     */
-    public void changeGameStyle(GameStyle newGameStyle) {
-        this.gameStyle = newGameStyle;
-    }
-
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
-
-    /**
-     * It returns the game's number of players
-     * @return the game's number of players
-     */
-    public int getNumPlayers() {
-        return this.numPlayers;
-    }
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * It returns the game's age range
@@ -99,10 +50,59 @@ public class Game extends StoreProduct {
     }
 
     /**
+     * It allows an employee to change a game's age range
+     * @param newAgeRange the game's age range
+     */
+    public void setAgeRange(String newAgeRange) {
+        this.ageRange = newAgeRange;
+    }
+
+    /**
      * It returns the game's style
      * @return the game's style
      */
     public GameStyle getGameStyle() {
         return this.gameStyle;
+    }
+
+    /**
+     * It allows an employee to change a game's style
+     * @param newGameStyle the game's style
+     */
+    public void setGameStyle(GameStyle newGameStyle) {
+        this.gameStyle = newGameStyle;
+    }
+
+
+    /**
+     * It returns the game's number of players
+     * @return the game's number of players
+     */
+    public int getNumPlayers() {
+        return this.numPlayers;
+    }
+
+    /**
+     * It allows an employee to change a game's number of players
+     * @param newNumPlayers the game's number of players
+     */
+    public void setNumPlayers(int newNumPlayers) {
+        this.numPlayers = newNumPlayers;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a product
+     * @return String, information of a product
+     */
+    @Override
+    public String toString() {
+        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
+        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
+        return ProductType.GAME.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() +
+               ";" + this.getPrice() + ";" + this.getStock() + ";" + this.getPrintCategories() + ";" + /*paginas*/
+               ";" + /*autor*/ ";" + /*editorial*/ ";" + /*año*/ ";" + this.numPlayers + ";" + this.ageRange + ";" +
+               this.gameStyle.getFormatedName() + ";" /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
     }
 }

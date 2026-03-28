@@ -22,30 +22,31 @@ public class OfferHistory {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * Creates an offer history
-     * @param offers the offers of the history
-     * @param owner  the user associated to the history
-     * @throws NullPointerException the offers' set or owner is null
+     * It creates an empty offer history
+     * @param owner the user associated to the history
+     * @throws NullPointerException the owner is null
      */
-    public OfferHistory(Set<Offer> offers, RegisteredClient owner) throws NullPointerException {
-        if (offers == null || owner == null) {
-            throw new NullPointerException("Offers or owner is null");
+    public OfferHistory(RegisteredClient owner) throws NullPointerException {
+        if (owner == null) {
+            throw new NullPointerException("Owner is null");
         }
-        this.offers = offers;
-        this.owner = owner;
+
+        this(Collections.emptySet(), owner);
     }
 
     /**
-     * Creates an empty offer history
-     * @param owner the user associated to the history
-     * @throws NullPointerException owner is null
+     * The offer history's complete constructor
+     * @param offers the offers of the history
+     * @param owner  the user associated to the history
+     * @throws NullPointerException the owner is null
      */
-    public OfferHistory(RegisteredClient owner) throws NullPointerException {
-    	this(Collections.emptySet(), owner);
-    	if (owner == null) {
+    public OfferHistory(Set<Offer> offers, RegisteredClient owner) throws NullPointerException {
+        if (owner == null) {
             throw new NullPointerException("Owner is null");
         }
-        //this(Collections.emptySet(), owner);
+
+        this.offers = offers;
+        this.owner = owner;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -59,9 +60,9 @@ public class OfferHistory {
         if (newOffer == null) {
             throw new NullPointerException("The new offer is null");
         }
+
         offers.add(newOffer);
     }
-
 
     /**
      * Add multiple new offers to the history
@@ -72,12 +73,11 @@ public class OfferHistory {
         if (newOffers == null) {
             throw new NullPointerException("The new offers is null");
         }
+
         offers.addAll(newOffers);
     }
 
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
-
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * Obtains the offers in the history
@@ -87,11 +87,34 @@ public class OfferHistory {
         return Collections.unmodifiableSet(offers);
     }
 
+    /* owner is final thus has no setter */
+
+    /**
+     * It sets a new set of offers
+     * @param newOffers the new offers
+     * @throws NullPointerException the new offers is null
+     */
+    public void setOffers(Set<Offer> newOffers) throws NullPointerException {
+        if (newOffers == null) {
+            throw new NullPointerException("The new offers is null");
+        }
+
+        this.offers = newOffers;
+    }
+
     /**
      * Obtains the user associated to the research history
      * @return the owner of the history
      */
     public RegisteredClient getOwner() {
         return owner;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    @Override
+    public String toString() {
+        // DUE
+        return "OfferHistory{" + "owner=" + owner + ", offers=" + offers + '}';
     }
 }

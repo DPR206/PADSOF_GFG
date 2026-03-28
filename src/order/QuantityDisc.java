@@ -36,26 +36,38 @@ public class QuantityDisc extends Discount {
     // DUE: public createNotification(){}
 
     // DUE: public obtainDisc();
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
-     * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
-     * take place
-     * @param numProds the new amount of products in a cart from which the discount can take place
+     * It gets the quantity discount's discount
+     * @return the quantity discount's discount
      */
-    public void changeNumProds(int numProds) {
-        this.numProds = numProds;
+    public double getDiscount() {
+        return this.discount;
     }
 
     /**
      * It allows the manager to change the quantity discount's discount
      * @param discount the new discount
      */
-    public void changeDiscount(double discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
+    /**
+     * It gets the quantity discount's amount of products in a cart from which the discount can take place
+     * @return the amount of products in a cart from which the discount can take place
+     */
+    public int getNumProds() {
+        return this.numProds;
+    }
 
+    /**
+     * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
+     * take place
+     * @param numProds the new amount of products in a cart from which the discount can take place
+     */
+    public void setNumProds(int numProds) {
+        this.numProds = numProds;
+    }
 }

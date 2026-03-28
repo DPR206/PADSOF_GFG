@@ -21,11 +21,14 @@ public class FixedPerDisc extends Discount {
      * @param startDate  the date when the discount starts
      * @param endDate    the date when the discount ends
      * @param percentage the percentage deducted from a product's price
+     * @throws IllegalArgumentException the percentage wasn't between 0 and 100
      */
-    public FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) throws IllegalArgumentException {
+    public FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage)
+            throws IllegalArgumentException {
         if (percentage < 0 || percentage > 100) {
             throw new IllegalArgumentException("The percentage must be between 0% and 100%");
         }
+
         super(startDate, endDate);
         this.percentage = percentage;
     }
@@ -37,19 +40,28 @@ public class FixedPerDisc extends Discount {
     // DUE: public createNotification(){}
 
     // DUE: public obtainDisc();
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
+    /**
+     * It gets the fixed percentage discount's percentage.
+     * @return the fixed percentage discount's percentage
+     */
+    public double getPercentage() {
+        return percentage;
+    }
 
     /**
      * It allows the manager to change the fixed percentage discount's percentage
-     * @param percentage the new percentage
+     * @param newPercentage the new percentage
+     * @throws IllegalArgumentException the percentage wasn't between 0 and 100
      */
-    public void changePercentage(double percentage) throws IllegalArgumentException {
-        if (percentage < 0 || percentage > 100) {
+    public void setPercentage(double newPercentage) throws IllegalArgumentException {
+        if (newPercentage < 0 || newPercentage > 100) {
             throw new IllegalArgumentException("The percentage must be between 0% and 100%");
         }
-        this.percentage = percentage;
+
+        this.percentage = newPercentage;
     }
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
+
 
 }

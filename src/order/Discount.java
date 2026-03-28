@@ -27,6 +27,7 @@ public abstract class Discount {
         if (startDate.isAfter(endDate)) {
             throw new IllegalArgumentException("Start date is after end date");
         }
+
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -35,35 +36,29 @@ public abstract class Discount {
 
     // DUE: public abstract createNotification(){}
 
-    // DUE: public abstract obtainDisc();
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
+    // DUE: public abstract obtainDisc(); <- Creo que no puedo pq no devuelven lo mismo
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
-     * It allows the manager to change a discount's start date
-     * @param startDate the discount's new start date
-     * @throws IllegalArgumentException the illegal argument exception
+     * It gets the discount's end date
+     * @return the discount's end date
      */
-    public void changeStartDate(LocalDateTime startDate) throws IllegalArgumentException {
-        if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Start date is after end date");
-        }
-        this.startDate = startDate;
+    public LocalDateTime getEndDate() {
+        return this.endDate;
     }
 
     /**
      * It allows the manager to change a discount's end date
-     * @param endDate the discount's new end date
-     * @throws IllegalArgumentException the illegal argument exception
+     * @param newEndDate the discount's new end date
+     * @throws IllegalArgumentException the start date is after the end date
      */
-    public void changeEndDate(LocalDateTime endDate) throws IllegalArgumentException {
-        if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Start date is after end date");
+    public void setEndDate(LocalDateTime newEndDate) throws IllegalArgumentException {
+        if (this.startDate.isAfter(newEndDate)) {
+            throw new IllegalArgumentException("Start date is after the end date");
         }
-        this.endDate = endDate;
-    }
 
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
+        this.endDate = newEndDate;
+    }
 
     /**
      * It gets the discount's start date
@@ -74,10 +69,22 @@ public abstract class Discount {
     }
 
     /**
-     * It gets the discount's end date
-     * @return the discount's end date
+     * It allows the manager to change a discount's start date
+     * @param newStartDate the discount's new start date
+     * @throws IllegalArgumentException the start date is after the end date
      */
-    public LocalDateTime getEndDate() {
-        return this.endDate;
+    public void setStartDate(LocalDateTime newStartDate) throws IllegalArgumentException {
+        if (newStartDate.isAfter(this.endDate)) {
+            throw new IllegalArgumentException("Start date is after the end date");
+        }
+
+        this.startDate = newStartDate;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    @Override
+    public String toString() {
+        // DUE
+        return "Discount{" + "startDate=" + startDate + ", endDate=" + endDate + '}';
     }
 }

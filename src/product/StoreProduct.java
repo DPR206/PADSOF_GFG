@@ -1,10 +1,12 @@
 package product;
 
-import order.*;
+import order.Discount;
+import order.Order;
 import user.RegisteredClient;
 
-import java.util.*;
-import java.time.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class name: StoreProduct
@@ -17,10 +19,10 @@ import java.time.*;
  * @see Review
  */
 public abstract class StoreProduct extends Product {
-    /** The number of available copies of this product */
-    private int stock;
     /** The product's reviews */
     private final ArrayList<Review> reviews;
+    /** The number of available copies of this product */
+    private int stock;
     /** The product's discount, if it has one */
     private Discount discount;
     /** The product's categories */
@@ -43,20 +45,20 @@ public abstract class StoreProduct extends Product {
      */
     StoreProduct(double price, String name, String description, String photo, ProductType type, int stock,
                  Category... categories) throws IllegalArgumentException, NullPointerException {
-        
+
         super(price, name, description, photo, type);
-        
+
         //try {
         //	super(price, name, description, photo, type);
         //} catch (IllegalArgumentException arg){
-        	 
+
         //}
         //super(price, name, description, photo, type);
-        
+
         if (stock < 0) {
             throw new IllegalArgumentException("Stock cannot be negative");
         }
-        
+
         this.stock = stock;
         this.reviews = new ArrayList<>();
         this.discount = null;
@@ -66,22 +68,19 @@ public abstract class StoreProduct extends Product {
         }
     }
 
-    /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
-
     /**
-     * It allows for an employee to change the product's stock as well as blocking or unblocking stock
-     * @param newStock the product's new stock
-     * @throws IllegalArgumentException stock was negative
+     * It allows the system or an employee to add categories to a product
+     * @param newCategories the categories to be added
      */
-    public void changeStock(int newStock) throws IllegalArgumentException {
-        if (stock < 0) {
-            throw new IllegalArgumentException("Stock cannot be negative");
+    public void addCategory(Category... newCategories) {
+        for (Category newCategory : newCategories) {
+            if (!this.categories.containsKey(newCategory.getName())) {
+                this.categories.put(newCategory.getName(), newCategory);
+            }
         }
-
-        this.stock = newStock;
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It decreases the stock a certain value
@@ -112,18 +111,6 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
-     * It allows the system or an employee to add categories to a product
-     * @param newCategories the categories to be added
-     */
-    public void addCategory(Category... newCategories) {
-        for (Category newCategory : newCategories) {
-            if (!this.categories.containsKey(newCategory.getName())) {
-                this.categories.put(newCategory.getName(), newCategory);
-            }
-        }
-    }
-
-    /**
      * It allows an employee to remove categories from a product
      * @param categories the categories to be deleted
      */
@@ -134,20 +121,33 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
-     * It allows an employee to add discounts to products or categories (Discounts is in charge of making sure they
-     * don't overlap)
-     * @param newDiscount the new discount to be applied
-     * @throws NullPointerException discount was null
+     * It allows a registered client to review a product
+     * @param scoring the review's score
+     * @param comment the review's comment
+     * @param author  the review's author
      */
-    public void changeDiscount(Discount newDiscount) throws NullPointerException {
-        if (discount == null) {
-            throw new NullPointerException("Discount cannot be null");
-        }
+    public void addReview(int scoring, String comment, RegisteredClient author) {
+        reviews.add(new Review(scoring, comment, author));
 
-        this.discount = newDiscount;
     }
 
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * Obtains the date the product was added to the cart
+     * @return the addedDate, the date it was added
+     */
+    public LocalDate getAddedDate() {
+        return addedDate;
+    }
+
+    /**
+     * Sets the date the product is added to the cart
+     * @param addedDate the addedDate to set
+     */
+    public void setAddedDate(LocalDate addedDate) {
+        this.addedDate = addedDate;
+    }
 
     /**
      * It returns the product's categories
@@ -155,6 +155,36 @@ public abstract class StoreProduct extends Product {
      */
     public Category[] getCategories() {
         return this.categories.values().toArray(new Category[0]);
+    }
+
+    /**
+     * It sets the store product's categories
+     * @param newCategories the store product's new categories
+     */
+    public void setCategories(HashMap<String, Category> newCategories) {
+        this.categories = newCategories;
+    }
+
+    /**
+     * Gets discount.
+     * @return the discount
+     */
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    /**
+     * It allows an employee to add discounts to products or categories (Discounts is in charge of making sure they
+     * don't overlap)
+     * @param newDiscount the new discount to be applied
+     * @throws NullPointerException discount was null
+     */
+    public void setDiscount(Discount newDiscount) throws NullPointerException {
+        if (discount == null) {
+            throw new NullPointerException("Discount cannot be null");
+        }
+
+        this.discount = newDiscount;
     }
 
     /**
@@ -172,42 +202,33 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
+     * Gets reviews.
+     * @return the reviews
+     */
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+    /**
      * It returns's the product's stock
      * @return the product's store
      */
     public int getStock() {
         return this.stock;
     }
-    
-    
-    /**
-     * Obtains the date the product was added to the cart
-     * 
-	 * @return the addedDate, the date it was added
-	 */
-	public LocalDate getAddedDate() {
-		return addedDate;
-	}
-
-	/**
-	 * Sets the date the product is added to the cart
-	 * 
-	 * @param addedDate the addedDate to set
-	 */
-	public void setAddedDate(LocalDate addedDate) {
-		this.addedDate = addedDate;
-	}
 
     /**
-     * It allows a registered client to review a product
-     * @param scoring the review's score
-     * @param comment the review's comment
-     * @param author  the review's author
+     * It allows for an employee to change the product's stock as well as blocking or unblocking stock
+     * @param newStock the product's new stock
+     * @throws IllegalArgumentException stock was negative
      */
-    public void addReview(int scoring, String comment, RegisteredClient author) {
-        reviews.add(new Review(scoring, comment, author));
-        
+    public void setStock(int newStock) throws IllegalArgumentException {
+        if (stock < 0) {
+            throw new IllegalArgumentException("Stock cannot be negative");
+        }
+
+        this.stock = newStock;
     }
 
-	
+
 }

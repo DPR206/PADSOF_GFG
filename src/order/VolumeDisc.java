@@ -36,24 +36,38 @@ public class VolumeDisc extends Discount {
     // DUE: public createNotification(){}
 
     // DUE: public obtainDisc();
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
-     * It allows the manager to change the volume discount's spending threshold
-     * @param spendingThreshold the new spending threshold
+     * It gets the volume discount's discount
+     * @return the volume discount's discount
      */
-    public void changeSpendingThreshold(double spendingThreshold) {
-        this.spendingThreshold = spendingThreshold;
+    public double getDiscount() {
+        return discount;
     }
 
     /**
      * It allows the manager to change the volume discount's discount
      * @param discount the new discount
      */
-    public void changeDiscount(double discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
+
+    /**
+     * It sets the volume discount's spending threshold.
+     * @return the volume discount's spending threshold
+     */
+    public double getSpendingThreshold() {
+        return spendingThreshold;
+    }
+
+    /**
+     * It allows the manager to change the volume discount's spending threshold
+     * @param spendingThreshold the new spending threshold
+     */
+    public void setSpendingThreshold(double spendingThreshold) {
+        this.spendingThreshold = spendingThreshold;
+    }
 
 }

@@ -45,56 +45,39 @@ public class Comic extends StoreProduct {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
-     * Written information of a product
-     * @return String, information of a product
+     * It returns the comic's author
+     * @return the comic's author
      */
-    @Override
-    public String toString() {
-        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
-        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
-        return ProductType.COMIC.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription()
-                + ";" + this.getPrice() + ";" + this.getStock() + ";" + this.getStock() + ";" + this.numPages + ";" +
-                this.author + ";" + this.editorial + ";" + this.year + ";" /*jugadores*/ + ";" /*edad*/ + ";"
-                /*estilo*/ + ";" /*marca*/ +  ";" /*material*/ + ";" /*dimension*/;
-    }
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
-
-    /**
-     * It allows for an employee to change the comic's number of pages
-     * @param newNumPages the comic's number of pages
-     */
-    public void changeNumPages(int newNumPages) {
-        this.numPages = newNumPages;
-    }
-
-    /**
-     * It allows for an employee to change the comic's publishing year
-     * @param newYear the comic's publishing year
-     */
-    public void changeYear(Year newYear) {
-        this.year = newYear;
+    public String getAuthor() {
+        return this.author;
     }
 
     /**
      * It allows for an employee to change the comic's author
      * @param newAuthor the comic's author
      */
-    public void changeAuthor(String newAuthor) {
+    public void setAuthor(String newAuthor) {
         this.author = newAuthor;
+    }
+
+    /**
+     * It returns the comic's editorial
+     * @return the comic's editorial
+     */
+    public String getEditorial() {
+        return this.editorial;
     }
 
     /**
      * It allows for an employee to change the comic's editorial
      * @param newEditorial the comic's editorial
      */
-    public void changeEditorial(String newEditorial) {
+    public void setEditorial(String newEditorial) {
         this.editorial = newEditorial;
     }
-
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
 
     /**
      * It returns the comic's number of pages
@@ -102,6 +85,14 @@ public class Comic extends StoreProduct {
      */
     public int getNumPages() {
         return this.numPages;
+    }
+
+    /**
+     * It allows for an employee to change the comic's number of pages
+     * @param newNumPages the comic's number of pages
+     */
+    public void setNumPages(int newNumPages) {
+        this.numPages = newNumPages;
     }
 
     /**
@@ -113,18 +104,26 @@ public class Comic extends StoreProduct {
     }
 
     /**
-     * It returns the comic's author
-     * @return the comic's author
+     * It allows for an employee to change the comic's publishing year
+     * @param newYear the comic's publishing year
      */
-    public String getAuthor() {
-        return this.author;
+    public void setYear(Year newYear) {
+        this.year = newYear;
     }
 
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
     /**
-     * It returns the comic's editorial
-     * @return the comic's editorial
+     * Written information of a product
+     * @return String, information of a product
      */
-    public String getEditorial() {
-        return this.editorial;
+    @Override
+    public String toString() {
+        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
+        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
+        return ProductType.COMIC.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() +
+               ";" + this.getPrice() + ";" + this.getStock() + ";" + this.getStock() + ";" + this.numPages + ";" +
+               this.author + ";" + this.editorial + ";" + this.year + ";" /*jugadores*/ + ";" /*edad*/ + ";"
+                /*estilo*/ + ";" /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
     }
 }

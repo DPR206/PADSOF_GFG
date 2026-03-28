@@ -1,11 +1,12 @@
 
 package order;
 
-import order.OrderState;
-import product.*;
+import product.Pack;
+import product.StoreProduct;
 
-import java.time.*;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class name: Order
@@ -13,7 +14,6 @@ import java.util.*;
  * Description: It implements the order paid by the client
  * @author Sofía C.L.
  * @version 1.0
- * @see RegisteredClient
  */
 public class Order {
     private static int changedId = 0;
@@ -53,7 +53,7 @@ public class Order {
      * Changes the state of the Order
      * @param state, the state to which we have to change it
      */
-    public void changeStatus(OrderState state) {
+    public void setStatus(OrderState state) {
         this.state = state;
     }
 

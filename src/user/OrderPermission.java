@@ -35,7 +35,7 @@ public class OrderPermission {
             throw new IllegalArgumentException("Order is null");
         }
 
-        order.changeStatus(status);
+        order.setStatus(status);
     }
 
     // DUE: Realizar búsquedas

@@ -36,7 +36,7 @@ public class ExchangePermission {
             throw new IllegalArgumentException("Exchange is null");
         }
 
-        exchange.changeExchanged(exchanged);
+        exchange.setExchanged(exchanged);
     }
 
     /**
@@ -54,8 +54,8 @@ public class ExchangePermission {
         if (valuation < 0) {
             throw new NullPointerException("Value cannot be negative");
         }
-        
-        secondHandProduct.changeEstimatedPrice(valuation);
+
+        secondHandProduct.setEstimatedPrice(valuation);
     }
 
     // DUE: Realizar búsquedas

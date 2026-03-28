@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package product;
 
@@ -14,18 +14,18 @@ import java.time.*;
  * @see Product
  */
 public class SecondHandProduct extends Product{
-	
+
     private LocalDate valuationDate;
     private boolean available;
     private boolean paidValuation;
     private ConservationStatus status;
     //private double estimatedPrice;
-    
-    
+
+
     /*----------------------------------------------------------CONSTRUCTORS------------------------------------------------------------------*/
     /**
      * Creates a new second-hand product
-     * 
+     *
 	 * @param estimatedPrice, the estimated price of the product
 	 * @param name, the name of the product
 	 * @param description, the description of the product
@@ -36,7 +36,7 @@ public class SecondHandProduct extends Product{
 	 * @param paidValuation, if the valuation is paid
 	 * @param status, the conservation status of the product
 	 */
-	public SecondHandProduct(double estimatedPrice, String name, String description, String photo, ProductType type, 
+	public SecondHandProduct(double estimatedPrice, String name, String description, String photo, ProductType type,
 			LocalDate valuationDate, boolean available, boolean paidValuation, ConservationStatus status
 			/*double estimatedPrice*/) {
 		super(estimatedPrice, name, description, photo, type);
@@ -49,7 +49,7 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Creates a new second-hand product with no valuation
-	 * 
+	 *
 	 * @param name, the name of the product
 	 * @param description, the description of the product
 	 * @param photo, the photo of the product
@@ -61,27 +61,27 @@ public class SecondHandProduct extends Product{
 	public SecondHandProduct(String name, String description, String photo, ProductType type,
 			boolean available, boolean paidValuation, ConservationStatus status) {
 		this(0, name, description, photo, type, null, available, paidValuation, null);
-		
+
 	}
-	
+
 	/**
 	 * Creates a new second-hand product that hasn't paid the valuation
-	 * 
+	 *
 	 * @param name, the name of the product
 	 * @param description, the description of the product
 	 * @param photo, the photo of the product
 	 * @param type, the type of product
-	 * 
+	 *
 	 */
 	public SecondHandProduct(String name, String description, String photo, ProductType type) {
 		this(0, name, description, photo, type, null, false, false, null);
 	}
-	
+
 /*----------------------------------------------------------GETTERS AND SETTERS---------------------------------------------------------------------------*/
-	
+
 	/**
 	 * Obtains the valuation date
-	 * 
+	 *
 	 * @return the valuationDate, the date of valuation
 	 */
 	public LocalDate getValuationDate() {
@@ -90,7 +90,7 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Sets the valuation date
-	 * 
+	 *
 	 * @param valuationDate the valuationDate to set
 	 */
 	public void setValuationDate(LocalDate valuationDate) {
@@ -99,7 +99,7 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Obtains if the product is available
-	 * 
+	 *
 	 * @return true if the product is available, false if else
 	 */
 	public boolean isAvailable() {
@@ -108,7 +108,7 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Sets if the product is available
-	 * 
+	 *
 	 * @param available, true if the product is available, false if else
 	 */
 	public void setAvailable(boolean available) {
@@ -117,7 +117,7 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Obtains if the valuations is paid
-	 * 
+	 *
 	 * @return true if the valuation is paid, false if else
 	 */
 	public boolean isPaidValuation() {
@@ -126,16 +126,16 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Sets if the valuation was paid
-	 * 
+	 *
 	 * @param paidValuation, true if the valuation is paid, false if else
 	 */
 	public void setPaidValuation(boolean paidValuation) {
 		this.paidValuation = paidValuation;
 	}
-	
+
 	/**
-	 * Obtains the conservation status of the product 
-	 * 
+	 * Obtains the conservation status of the product
+	 *
 	 * @return the status, the conservation status
 	 */
 	public ConservationStatus getStatus() {
@@ -144,42 +144,42 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Sets the conservation status of the product
-	 * 
+	 *
 	 * @param status the status to set
 	 */
 	public void setStatus(ConservationStatus status) {
 		this.status = status;
 	}
 
-	
-	
+
+
 /*----------------------------------------------------------METHODS---------------------------------------------------------------------------*/
-	
+
 
 	/**
 	 * Changes the estimated price of the second-hand product
-	 * 
+	 *
 	 * @param price, the new estimated price
 	 */
-	public void changeEstimatedPrice(double price) {
-        this.changePrice(price);
+	public void setEstimatedPrice(double price) {
+        this.setPrice(price);
     }
-	
+
 	/**
 	 * Changes the conservation status of the second-hand product
-	 * 
+	 *
 	 * @param status, the new conservation status
 	 */
-	public void changeConservationStatus(ConservationStatus status) {
+	public void setConservationStatus(ConservationStatus status) {
 		setStatus(status);
 	}
-	
+
 	/**
 	 * Changes the availability of the second-hand product
-	 * 
+	 *
 	 * @param available, whether the product is available or not
 	 */
-	public void changeAvailability(boolean available) {
+	public void setAvailability(boolean available) {
 		setAvailable(available);
 	}
 
@@ -192,13 +192,13 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Makes a valuation of a second-hand product
-	 * 
+	 *
 	 * @param estimatedPrice, the estimated price
 	 * @param status, the conservation status
 	 */
 	public void valuate(double estimatedPrice, ConservationStatus status) {
-		this.changeEstimatedPrice(estimatedPrice);
-		this.changeConservationStatus(status);
+		this.setEstimatedPrice(estimatedPrice);
+		this.setConservationStatus(status);
 		this.valuationDate = LocalDate.now();
 	}
 
@@ -210,9 +210,9 @@ public class SecondHandProduct extends Product{
 				+ getClass()
 				+ "]";
 	}
-    
-	
+
+
 	//Faltan métodos de intercambio para más adelante
-	
-	
+
+
 }

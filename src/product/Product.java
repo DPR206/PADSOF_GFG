@@ -56,33 +56,14 @@ public abstract class Product {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
-
-    /**
-     * It allows for an employee to change a product's price
-     * @param newPrice the product's new price
-     * @throws IllegalArgumentException price was negative
-     */
-    public void changePrice(double newPrice) throws IllegalArgumentException {
-        if (price < 0) {
-            throw new IllegalArgumentException("Price cannot be negative");
-        }
-
-        this.price = newPrice;
-    }
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
-     * It allows for an employee to change a product's name
-     * @param newName the product's new name
-     * @throws NullPointerException name was null
+     * It returns the product's description
+     * @return the product's description
      */
-    public void changeName(String newName) throws NullPointerException {
-        if (newName == null) {
-            throw new IllegalArgumentException("The name cannot be null");
-        }
-
-        this.name = newName;
+    public String getDescription() {
+        return this.description;
     }
 
     /**
@@ -90,7 +71,7 @@ public abstract class Product {
      * @param newDescription the product's new description
      * @throws NullPointerException description was null
      */
-    public void changeDescription(String newDescription) throws NullPointerException {
+    public void setDescription(String newDescription) throws NullPointerException {
         if (newDescription == null) {
             throw new IllegalArgumentException("The description cannot be null");
         }
@@ -99,42 +80,11 @@ public abstract class Product {
     }
 
     /**
-     * It allows for an employee to change a product's photo's path
-     * @param newPhoto the product's new photo
-     * @throws NullPointerException photo's path was null
-     */
-    public void changePhoto(String newPhoto) throws NullPointerException {
-        if (newPhoto == null) {
-            throw new IllegalArgumentException("The photo's path cannot be null");
-        }
-
-        this.photo = newPhoto;
-    }
-
-    /**
-     * It allows for an employee to change a product's product's type
-     * @param newType the product's new product type
-     */
-    public void changeType(ProductType newType) {
-        this.type = newType;
-    }
-
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
-
-    /**
      * It returns the product's id
      * @return the product's id
      */
     public String getId() {
         return this.id;
-    }
-
-    /**
-     * It returns the product's price
-     * @return the product's price
-     */
-    public double getPrice() {
-        return this.price;
     }
 
     /**
@@ -146,11 +96,16 @@ public abstract class Product {
     }
 
     /**
-     * It returns the product's description
-     * @return the product's description
+     * It allows for an employee to change a product's name
+     * @param newName the product's new name
+     * @throws NullPointerException name was null
      */
-    public String getDescription() {
-        return this.description;
+    public void setName(String newName) throws NullPointerException {
+        if (newName == null) {
+            throw new IllegalArgumentException("The name cannot be null");
+        }
+
+        this.name = newName;
     }
 
     /**
@@ -162,10 +117,52 @@ public abstract class Product {
     }
 
     /**
+     * It allows for an employee to change a product's photo's path
+     * @param newPhoto the product's new photo
+     * @throws NullPointerException photo's path was null
+     */
+    public void setPhoto(String newPhoto) throws NullPointerException {
+        if (newPhoto == null) {
+            throw new IllegalArgumentException("The photo's path cannot be null");
+        }
+
+        this.photo = newPhoto;
+    }
+
+    /**
+     * It returns the product's price
+     * @return the product's price
+     */
+    public double getPrice() {
+        return this.price;
+    }
+
+    /**
+     * It allows for an employee to change a product's price
+     * @param newPrice the product's new price
+     * @throws IllegalArgumentException price was negative
+     */
+    public void setPrice(double newPrice) throws IllegalArgumentException {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+
+        this.price = newPrice;
+    }
+
+    /**
      * It returns the product's product type
      * @return the product's product type
      */
     public ProductType getType() {
         return this.type;
+    }
+
+    /**
+     * It allows for an employee to change a product's product's type
+     * @param newType the product's new product type
+     */
+    public void setType(ProductType newType) {
+        this.type = newType;
     }
 }

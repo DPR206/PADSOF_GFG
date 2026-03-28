@@ -39,56 +39,7 @@ public class Figurine extends StoreProduct {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * Written information of a product
-     * @return String, information of a product
-     */
-    @Override
-    public String toString() {
-        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
-        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
-        return "C" + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() + ";" + this.getPrice() +
-                ";" + this.getStock() + ";" + this.getStock() + ";" + /*paginas*/ ";" + /*autor*/ ";" + /*editorial
-                */ ";" + /*año*/ ";" /*jugadores*/ + ";" /*edad*/ + ";" /*estilo*/ + ";" + this.brand + ";"
-                + this.material + ";" + this.dimension;
-    }
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
-
-    /**
-     * It allows for an employee to change the figurine's dimension
-     * @param newDimension the figurine's dimension
-     */
-    public void changeDimension(String newDimension) {
-        this.dimension = newDimension;
-    }
-
-    /**
-     * It allows for an employee to change the figurine's brand
-     * @param newBrand the figurine's brand
-     */
-    public void changeBrand(String newBrand) {
-        this.brand = newBrand;
-    }
-
-    /**
-     * It allows for an employee to change the figurine's material
-     * @param newMaterial the figurine's material
-     */
-    public void changeMaterial(String newMaterial) {
-        this.material = newMaterial;
-    }
-
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
-
-    /**
-     * It returns's the product's dimension
-     * @return the product's dimension
-     */
-    public String getDimension() {
-        return this.dimension;
-    }
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * It returns's the product's brand
@@ -99,10 +50,58 @@ public class Figurine extends StoreProduct {
     }
 
     /**
+     * It allows for an employee to change the figurine's brand
+     * @param newBrand the figurine's brand
+     */
+    public void setBrand(String newBrand) {
+        this.brand = newBrand;
+    }
+
+    /**
+     * It returns's the product's dimension
+     * @return the product's dimension
+     */
+    public String getDimension() {
+        return this.dimension;
+    }
+
+    /**
+     * It allows for an employee to change the figurine's dimension
+     * @param newDimension the figurine's dimension
+     */
+    public void setDimension(String newDimension) {
+        this.dimension = newDimension;
+    }
+
+    /**
      * It returns's the product's material
      * @return the product's material
      */
     public String getMaterial() {
         return this.material;
+    }
+
+    /**
+     * It allows for an employee to change the figurine's material
+     * @param newMaterial the figurine's material
+     */
+    public void setMaterial(String newMaterial) {
+        this.material = newMaterial;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a product
+     * @return String, information of a product
+     */
+    @Override
+    public String toString() {
+        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
+        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
+        return "C" + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() + ";" + this.getPrice() +
+               ";" + this.getStock() + ";" + this.getStock() + ";" + /*paginas*/ ";" + /*autor*/ ";" + /*editorial
+         */ ";" + /*año*/ ";" /*jugadores*/ + ";" /*edad*/ + ";" /*estilo*/ + ";" + this.brand + ";" + this.material +
+               ";" + this.dimension;
     }
 }

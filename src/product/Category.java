@@ -11,10 +11,10 @@ import store.Store;
  * @see Store
  */
 public class Category {
-    /** The category's name */
-    public String name;
     /** The store the category is part of */
     private final Store store;
+    /** The category's name */
+    public String name;
     /** The category's total revenue */
     private double revenue;
 
@@ -31,7 +31,7 @@ public class Category {
         if (store == null || name == null) {
             throw new NullPointerException("Name must not be null");
         }
-        if (store.isCategoryInStore(name) == true) {
+        if (store.isCategoryInStore(name)) {
             this.name = "Borrar"; // DUE: Revisar esto
             this.store = store;
             this.revenue = 0;
@@ -44,25 +44,6 @@ public class Category {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /*--------------------------------------------------- CHANGERS ---------------------------------------------------*/
-
-    /**
-     * It allows a manager to change a Category's name
-     * @param newName the category's new name
-     * @throws NullPointerException name was null
-     */
-    public void changeName(String newName) throws NullPointerException {
-        if (name == null) {
-            throw new NullPointerException("Name must not be null");
-        }
-        if (this.store.isCategoryInStore(newName) == true) {
-            throw new IllegalArgumentException("Category already exists");
-        }
-
-        this.name = newName;
-    }
-
     /**
      * It increases the category's revenue when a product belonging to it is sold
      * @param profit the sold product's profit
@@ -76,13 +57,34 @@ public class Category {
         this.revenue = this.revenue + profit;
     }
 
-    /*---------------------------------------------------- GETTERS ---------------------------------------------------*/
-
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     /**
      * It returns the category's name
      * @return the category's name
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * It allows a manager to change a Category's name
+     * @param newName the category's new name
+     * @throws NullPointerException name was null
+     */
+    public void setName(String newName) throws NullPointerException {
+        if (name == null) {
+            throw new NullPointerException("Name must not be null");
+        }
+        if (this.store.isCategoryInStore(newName)) {
+            throw new IllegalArgumentException("Category already exists");
+        }
+
+        this.name = newName;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    @Override
+    public String toString() {
+        return "Category{" + "store=" + store + ", name='" + name + '\'' + ", revenue=" + revenue + '}';
     }
 }

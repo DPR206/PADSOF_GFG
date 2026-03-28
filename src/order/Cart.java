@@ -93,7 +93,7 @@ public class Cart {
             }
 
             this.sp.remove(i);
-            toCancel.changeStock(toCancel.getStock() + 1);
+            toCancel.setStock(toCancel.getStock() + 1);
         }
     }
 
@@ -120,7 +120,7 @@ public class Cart {
         }
 
         this.sp.add(wanted);
-        wanted.changeStock(wanted.getStock() - 1);
+        wanted.setStock(wanted.getStock() - 1);
         wanted.setAddedDate(LocalDate.now());
     }
 

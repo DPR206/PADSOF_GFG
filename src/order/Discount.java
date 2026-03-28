@@ -85,6 +85,6 @@ public abstract class Discount {
     @Override
     public String toString() {
         // DUE
-        return "Discount{" + "startDate=" + startDate + ", endDate=" + endDate + '}';
+        return this.startDate + "|" + this.endDate;
     }
 }

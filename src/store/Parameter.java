@@ -122,4 +122,8 @@ public class Parameter {
 	public void changeValuationCost(double newCost) {
 		this.setValuationCost(newCost);
 	}
+
+	public String toString(){
+		return this.OfferTime + "|" + this.OrderTime + "|" + this.valuationCost;
+	}
 }

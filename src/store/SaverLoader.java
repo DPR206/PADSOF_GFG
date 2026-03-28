@@ -13,7 +13,7 @@ import java.util.*;
  * <p>
  * Description: It implements the store's saver and loader
  * 
- * @author Ana O.R.
+ * @author Ana O.R. & Sofía C.L.
  * 
  * @version 1.0
  */
@@ -62,6 +62,25 @@ public class SaverLoader {
             throw new IOException(exception.getMessage());
         }
     }
+
+    public void loadStore(String parameterFilename, String discountsFilename, String exchangesFilename,
+                          String ordersFilename, String packsFilename, String categoriesFilename,
+                          String productFilename, String userFilename) throws IOException {
+        try {
+            loadParameters(parameterFilename);
+            loadDiscounts(discountsFilename);
+            loadExchanges(exchangesFilename);
+            loadOrders(ordersFilename);
+            loadPacks(packsFilename);
+            loadCategories(categoriesFilename);
+            loadStoreProducts(productFilename);
+            loadUsers(userFilename);
+
+        } catch (IOException exception) {
+            throw new IOException(exception.getMessage());
+        }
+    }
+
 
     /**
      * It allows for the store's parameters to be saved
@@ -251,6 +270,13 @@ public class SaverLoader {
 
         } catch (IOException e) {
             throw new IOException(e.getMessage());
+        }
+    }
+
+    public void loadParameters(parameterFilename){
+        
+        try(BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))){
+            
         }
     }
 }

@@ -13,10 +13,12 @@ import java.util.Collections;
  * <p>
  * Description: It implements the offers
  * @author Ana O.R.
- * @version 1.2
+ * @version 1.4
  * @see RegisteredClient
  */
 public class Offer {
+    /** The general id counter */
+    static int totalId = 0;
     /** The maximum amount of time an offer can be active for */
     static Period maxOfferPeriod = Period.ofDays(1);
     /** The date and time when the offer was created */
@@ -25,6 +27,8 @@ public class Offer {
     private final RegisteredClient origin;
     /** The client who received the offer */
     private final RegisteredClient destination;
+    /** The offer's id */
+    private final String id;
     /** The sender's products */
     private ArrayList<SecondHandProduct> originProducts;
     /** The receiver's products */
@@ -33,6 +37,23 @@ public class Offer {
     private OfferStatus status;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * The offer's constructor when products are specified
+     * @param origin              the client who made the offer
+     * @param destination         the client who received the offer
+     * @param originProducts      the sender's products
+     * @param destinationProducts the receiver's products
+     * @throws NullPointerException the null pointer exception
+     */
+    public Offer(RegisteredClient origin, RegisteredClient destination, ArrayList<SecondHandProduct> originProducts,
+                 ArrayList<SecondHandProduct> destinationProducts) throws NullPointerException {
+        if (origin == null || destination == null || originProducts == null || destinationProducts == null) {
+            throw new NullPointerException("The input wasn't correctly provided");
+        }
+
+        this(LocalDate.now(), origin, destination, originProducts, destinationProducts, OfferStatus.PENDING);
+    }
 
     /**
      * The offer's complete constructor
@@ -50,33 +71,10 @@ public class Offer {
         if (origin == null || destination == null || originProducts == null || destinationProducts == null) {
             throw new NullPointerException("The input wasn't correctly provided");
         }
-        this.creationDate = creationDate;
-        this.origin = origin;
-        this.destination = destination;
-        this.originProducts = originProducts;
-        this.destinationProducts = destinationProducts;
-        this.status = status;
-    }
 
-    /**
-     * The offer's constructor when products are specified
-     * @param origin              the client who made the offer
-     * @param destination         the client who received the offer
-     * @param originProducts      the sender's products
-     * @param destinationProducts the receiver's products
-     * @throws NullPointerException the null pointer exception
-     */
-    public Offer(RegisteredClient origin, RegisteredClient destination, ArrayList<SecondHandProduct> originProducts,
-                 ArrayList<SecondHandProduct> destinationProducts) throws NullPointerException {
-        if (origin == null || destination == null || originProducts == null || destinationProducts == null) {
-            throw new NullPointerException("The input wasn't correctly provided");
-        }
-        this.creationDate = LocalDate.now();
-        this.origin = origin;
-        this.destination = destination;
+        this(origin, destination);
         this.originProducts = originProducts;
         this.destinationProducts = destinationProducts;
-        this.status = OfferStatus.PENDING;
     }
 
     /**
@@ -89,6 +87,8 @@ public class Offer {
         if (origin == null || destination == null) {
             throw new NullPointerException("The input wasn't correctly provided");
         }
+
+        this.id = String.format("%06d", ++totalId);
         this.creationDate = LocalDate.now();
         this.origin = origin;
         this.destination = destination;
@@ -96,6 +96,13 @@ public class Offer {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+    public static int getTotalId() {
+        return totalId;
+    }
+
+    public static void setTotalId(int newTotalId) {
+        Offer.totalId = newTotalId;
+    }
 
     /**
      * It checks if the offer has surpassed the maximum amount of time an offer can be active for
@@ -181,7 +188,13 @@ public class Offer {
         Collections.addAll(this.destinationProducts, newProducts);
     }
 
-    /* destination is final thus has no setters */
+    public void setDestinationProducts(ArrayList<SecondHandProduct> newDestinationProducts) {
+        this.destinationProducts = newDestinationProducts;
+    }
+
+    public String getId() {
+        return id;
+    }
 
     /**
      * It gets the maximum amount of time an offer can be active for
@@ -190,6 +203,8 @@ public class Offer {
     public Period getMaxOfferPeriod() {
         return maxOfferPeriod;
     }
+
+    /* destination is final thus has no setters */
 
     /**
      * It sets the maximum amount of time an offer can be active for
@@ -218,6 +233,10 @@ public class Offer {
      */
     public ArrayList<SecondHandProduct> getOriginProducts() {
         return this.originProducts;
+    }
+
+    public void setOriginProducts(ArrayList<SecondHandProduct> newOriginProducts) {
+        this.originProducts = newOriginProducts;
     }
 
     /**

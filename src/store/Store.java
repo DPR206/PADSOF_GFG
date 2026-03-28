@@ -87,6 +87,14 @@ public class Store {
     }
 
     /**
+     * It gets the store's parameters
+     * @return the store's parameters
+     */
+    public Parameter getParameters() {
+        return this.param;
+    }
+
+    /**
      * Logs in a user
      *
      */
@@ -164,7 +172,7 @@ public class Store {
      * Gets the list of the categories of the store
      *
      */
-    public Map getCategories() {
+    public HashMap<String, Category> getCategories() {
         return this.categories;
     }
 

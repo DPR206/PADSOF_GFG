@@ -13,12 +13,16 @@ public enum ProductType {
     /** Figurine product type */
     FIGURINE("F"),
     /** Game product type */
-    GAME("G");
+    GAME("G"),
+    /** Second hand product type */
+    SECONDHAND("SH");
 
     /**
      * The characters that define this type in the save file
      */
     private final String symbol;
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * A product type's constructor
@@ -27,6 +31,8 @@ public enum ProductType {
     ProductType(String symbol) {
         this.symbol = symbol;
     }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * Gets the enumeration's symbol

@@ -12,7 +12,9 @@ import java.util.*;
  * Class name: SaverLoader
  * <p>
  * Description: It implements the store's saver and loader
+ * 
  * @author Ana O.R.
+ * 
  * @version 1.0
  */
 public class SaverLoader {

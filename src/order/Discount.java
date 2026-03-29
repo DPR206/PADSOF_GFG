@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
  * @version 1.1
  */
 public abstract class Discount {
+    /** The global variable to determine which id should a new product have */
+    static public int discountId = -1;
+    /** The discount's id */
+    private final String id;
     /** The date when the discount starts */
     private LocalDateTime startDate;
     /** The date when the discount ends */
@@ -28,16 +32,17 @@ public abstract class Discount {
             throw new IllegalArgumentException("Start date is after end date");
         }
 
+        this.id = String.format("%06d", ++discountId);
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     // DUE: public abstract createNotification(){}
 
     // DUE: public abstract obtainDisc(); <- Creo que no puedo pq no devuelven lo mismo
-    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * It gets the discount's end date
@@ -58,6 +63,14 @@ public abstract class Discount {
         }
 
         this.endDate = newEndDate;
+    }
+
+    /**
+     * It gets the discount's id
+     * @return the discount's id
+     */
+    public String getId() {
+        return this.id;
     }
 
     /**

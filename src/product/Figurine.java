@@ -97,11 +97,9 @@ public class Figurine extends StoreProduct {
      */
     @Override
     public String toString() {
-        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
-        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
-        return "C" + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() + ";" + this.getPrice() +
-               ";" + this.getStock() + ";" + this.getStock() + ";" + /*paginas*/ ";" + /*autor*/ ";" + /*editorial
-         */ ";" + /*año*/ ";" /*jugadores*/ + ";" /*edad*/ + ";" /*estilo*/ + ";" + this.brand + ";" + this.material +
-               ";" + this.dimension;
+        /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
+        return super.toString() + ";" + /*num_pages*/ ";" + /*author*/ ";" + /*editorial*/ ";" + /*year*/
+               ";" /*num_players*/ + ";" /*ager_range*/ + ";" /*game_style*/ + ";" + this.brand + ";" + this.material + ";" +
+               this.dimension;
     }
 }

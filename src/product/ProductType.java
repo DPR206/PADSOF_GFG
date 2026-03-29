@@ -1,11 +1,11 @@
 package product;
 
 /**
- * Enum Name: ConservationStatus
+ * Enum Name: ProductType
  * <p>
- * Description: It defines the conservations status
+ * Description: It defines the store product types
  * @author Ana O.R.
- * @version 1.0
+ * @version 1.2
  */
 public enum ProductType {
     /** Comic product type */
@@ -13,9 +13,7 @@ public enum ProductType {
     /** Figurine product type */
     FIGURINE("F"),
     /** Game product type */
-    GAME("G"),
-    /** Second hand product type */
-    SECONDHAND("SH");
+    GAME("G");
 
     /**
      * The characters that define this type in the save file

@@ -7,6 +7,7 @@ import product.*;
 import user.User;
 
 import java.io.*;
+import java.time.Period;
 import java.util.*;
 
 /**
@@ -17,17 +18,13 @@ import java.util.*;
  * @version 1.2
  */
 public class SaverLoader {
-    /** The store to be saved or loaded */
-    private final Store store;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * The saver loader's constructor
-     * @param store the saver loader's store
      */
-    public SaverLoader(Store store) {
-        this.store = store;
+    public SaverLoader() {
     }
 
     /*---------------------------------------------------- SAVES -----------------------------------------------------*/
@@ -72,12 +69,13 @@ public class SaverLoader {
      */
     private void saveParameters(String parameterFilename) throws IOException {
         BufferedWriter buffer;
-        Parameter parameters = store.getParameters();
+        Parameter parameters = Store.getInstance().getParameters();
 
         try {
             buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + parameterFilename + ".txt")));
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + parameterFilename + ".csv")));
 
+            buffer.write("OFFER_TIME;ORDER_TIME;VAL_COST\n");
             buffer.write(parameters.toString() + "\n");
 
             buffer.close();
@@ -94,12 +92,12 @@ public class SaverLoader {
      */
     private void saveCategories(String categoriesFilename) throws IOException {
         BufferedWriter buffer;
-        HashMap<String, Category> categories = store.getCategories();
-        Set<String> keys = store.getCategories().keySet();
+        HashMap<String, Category> categories = Store.getInstance().getCategories();
+        Set<String> keys = Store.getInstance().getCategories().keySet();
 
         try {
             buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + categoriesFilename + ".txt")));
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + categoriesFilename + ".csv")));
 
             for (String key : keys) {
                 buffer.write(categories.get(key).toString() + "\n");
@@ -119,12 +117,14 @@ public class SaverLoader {
      */
     private void saveStoreProducts(String storeProductFilename) throws IOException {
         BufferedWriter buffer;
-        List<StoreProduct> products = store.getStoreProducts();
+        List<StoreProduct> products = Store.getInstance().getStoreProducts();
 
         try {
             buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + storeProductFilename + ".txt")));
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + storeProductFilename + ".csv")));
 
+            buffer.write("TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;" +
+                         "PLAYER;AGE;STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION\n");
             for (StoreProduct product : products) {
                 buffer.write(product.toString() + "\n");
             }
@@ -143,11 +143,11 @@ public class SaverLoader {
      */
     private void saveSecondHandProducts(String secondHandProductFilename) throws IOException {
         BufferedWriter buffer;
-        List<SecondHandProduct> products = store.getSecondHandProducts();
+        List<SecondHandProduct> products = Store.getInstance().getSecondHandProducts();
 
         try {
             buffer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(".\\resources\\" + secondHandProductFilename + ".txt")));
+                    new FileOutputStream(".\\resources\\" + secondHandProductFilename + ".csv")));
 
             for (SecondHandProduct product : products) {
                 buffer.write(product.toString() + "\n");
@@ -167,11 +167,11 @@ public class SaverLoader {
      */
     private void saveDiscounts(String discountsFilename) throws IOException {
         BufferedWriter buffer;
-        List<Discount> discounts = store.getDiscounts();
+        List<Discount> discounts = Store.getInstance().getDiscounts();
 
         try {
             buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + discountsFilename + ".txt")));
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + discountsFilename + ".csv")));
 
             for (Discount discount : discounts) {
                 buffer.write(discount.toString() + "\n");
@@ -191,11 +191,11 @@ public class SaverLoader {
      */
     private void saveExchanges(String exchangesFilename) throws IOException {
         BufferedWriter buffer;
-        List<Exchange> exchanges = store.getExchanges();
+        List<Exchange> exchanges = Store.getInstance().getExchanges();
 
         try {
             buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + exchangesFilename + ".txt")));
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + exchangesFilename + ".csv")));
 
             for (Exchange exchange : exchanges) {
                 buffer.write(exchange.toString() + "\n");
@@ -215,11 +215,11 @@ public class SaverLoader {
      */
     private void saveOrders(String ordersFilename) throws IOException {
         BufferedWriter buffer;
-        List<Order> orders = store.getOrders();
+        List<Order> orders = Store.getInstance().getOrders();
 
         try {
             buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + ordersFilename + ".txt")));
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + ordersFilename + ".csv")));
 
             for (Order order : orders) {
                 buffer.write(order.toString() + "\n");
@@ -239,11 +239,11 @@ public class SaverLoader {
      */
     private void savePacks(String packsFilename) throws IOException {
         BufferedWriter buffer;
-        List<Pack> packs = store.getPacks();
+        List<Pack> packs = Store.getInstance().getPacks();
 
         try {
             buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + packsFilename + ".txt")));
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + packsFilename + ".csv")));
 
             for (Pack pack : packs) {
                 buffer.write(pack.toString() + "\n");
@@ -263,12 +263,12 @@ public class SaverLoader {
      */
     private void saveUsers(String userFilename) throws IOException {
         BufferedWriter buffer;
-        Map<String, User> users = store.getUsers();
-        Set<String> keys = store.getUsers().keySet();
+        Map<String, User> users = Store.getInstance().getUsers();
+        Set<String> keys = Store.getInstance().getUsers().keySet();
 
         try {
             buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + userFilename + ".txt")));
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + userFilename + ".csv")));
             for (String key : keys) {
                 buffer.write(users.get(key).toString() + "\n");
             }
@@ -284,7 +284,7 @@ public class SaverLoader {
 
 
     /**
-     * It loads the store
+     * It loads an initialized store (the store should be empty!!)
      * @param parameterFilename         the name of the parameter's backup
      * @param discountsFilename         the name of the discounts' backup
      * @param exchangesFilename         the name of the exchanges' backup
@@ -318,12 +318,26 @@ public class SaverLoader {
 
     private void loadParameters(String parameterFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
+        Period OfferTime;
+        Period OrderTime;
+        double valuationCost;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + parameterFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + parameterFilename + ".csv")));
 
-            // DUE
+            /* OFFER_TIME;ORDER_TIME;VAL_COST */
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                OfferTime = Period.parse(words[0]);
+                Store.getInstance().getParameters().changeOfferTime(OfferTime);
+                OrderTime = Period.parse(words[1]);
+                Store.getInstance().getParameters().changeOrderTime(OrderTime);
+                valuationCost = Double.parseDouble(words[2]);
+                Store.getInstance().getParameters().changeValuationCost(valuationCost);
+            }
 
             buffer.close();
 
@@ -334,12 +348,17 @@ public class SaverLoader {
 
     private void loadCategories(String categoriesFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + categoriesFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + categoriesFilename + ".csv")));
 
-            // DUE
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
 
             buffer.close();
 
@@ -350,12 +369,17 @@ public class SaverLoader {
 
     private void loadStoreProducts(String storeProductFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + storeProductFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + storeProductFilename + ".csv")));
 
-            // DUE
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
 
             buffer.close();
 
@@ -366,12 +390,17 @@ public class SaverLoader {
 
     private void loadSecondHandProducts(String secondHandProductFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + secondHandProductFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + secondHandProductFilename + ".csv")));
 
-            // DUE
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
 
             buffer.close();
 
@@ -382,12 +411,17 @@ public class SaverLoader {
 
     private void loadDiscounts(String discountsFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + discountsFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + discountsFilename + ".csv")));
 
-            // DUE
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
 
             buffer.close();
 
@@ -398,12 +432,17 @@ public class SaverLoader {
 
     private void loadExchanges(String exchangesFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + exchangesFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + exchangesFilename + ".csv")));
 
-            // DUE
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
 
             buffer.close();
 
@@ -414,12 +453,17 @@ public class SaverLoader {
 
     private void loadOrders(String ordersFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + ordersFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + ordersFilename + ".csv")));
 
-            // DUE
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
 
             buffer.close();
 
@@ -430,12 +474,17 @@ public class SaverLoader {
 
     private void loadPacks(String packsFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + packsFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + packsFilename + ".csv")));
 
-            // DUE
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
 
             buffer.close();
 
@@ -446,12 +495,17 @@ public class SaverLoader {
 
     private void loadUsers(String userFilename) throws IOException {
         BufferedReader buffer;
+        String[] words;
+        String line;
 
         try {
             buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + userFilename + ".txt")));
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + userFilename + ".csv")));
 
-            // DUE
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
 
             buffer.close();
 

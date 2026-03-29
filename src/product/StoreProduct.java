@@ -228,6 +228,10 @@ public abstract class StoreProduct extends Product {
         return sb.toString();
     }
 
+    public String getPrintReviews() {
+        // DUE
+    }
+
     /**
      * Gets reviews.
      * @return the reviews
@@ -256,6 +260,17 @@ public abstract class StoreProduct extends Product {
 
         this.stock = newStock;
     }
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 
+    /**
+     * Written information of a product
+     * @return String, information of a product
+     */
+    @Override
+    public String toString() {
+        /* super;REVIEW_IDS;AVG_PUNCT;STOCK;DISC_IDS;CATEGORIES;ADDED_DATE */
+        return super.toString() + ";" + this.getPrintReviews() + ";" + this.averagePunctuation + ";" + this.stock +
+               ";" + this.discount.getId() + ";" + this.getPrintCategories() + this.addedDate;
+    }
 
 }

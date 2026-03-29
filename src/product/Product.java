@@ -9,7 +9,7 @@ package product;
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
-    static int productId = -1; // NOTE: Así el primer ID es 0000 (ver línea 38)
+    static public int productId = -1; // NOTE: Así el primer ID es 0000 (ver línea 38)
     /** The product's id */
     private final String id;
     /** The product's price */
@@ -43,7 +43,7 @@ public abstract class Product {
         if (name == null || description == null || photo == null) {
             throw new NullPointerException("Expect non-null parameters but received one");
         }
-        // NOTE: Según StackOverflow: String.format("%04d", your integer));
+
         this.id = type.getSymbol() + String.format("%06d", ++productId);
         this.price = price;
         this.name = name;
@@ -161,5 +161,18 @@ public abstract class Product {
      */
     public void setType(ProductType newType) {
         this.type = newType;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a product
+     * @return String, information of a product
+     */
+    @Override
+    public String toString() {
+        /* TYPE;ID;PRICE;NAME;DESC;PHOTO */
+        return this.type.getSymbol() + ";" + this.id + ";" + this.price + ";" + this.name + ";" + this.description +
+               ";" + this.price;
     }
 }

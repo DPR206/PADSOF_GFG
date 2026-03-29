@@ -98,11 +98,9 @@ public class Game extends StoreProduct {
      */
     @Override
     public String toString() {
-        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
-        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
-        return ProductType.GAME.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() +
-               ";" + this.getPrice() + ";" + this.getStock() + ";" + this.getPrintCategories() + ";" + /*paginas*/
-               ";" + /*autor*/ ";" + /*editorial*/ ";" + /*año*/ ";" + this.numPlayers + ";" + this.ageRange + ";" +
-               this.gameStyle.getFormatedName() + ";" /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
+        /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
+        return super.toString() + ";" + /*num_pages*/ ";" + /*author*/ ";" + /*editorial*/ ";" + /*year*/ ";" +
+               this.numPlayers + ";" + this.ageRange + ";" + this.gameStyle.getFormatedName() + ";" /*brand*/ +
+               ";" /*material*/ + ";" /*dimension*/;
     }
 }

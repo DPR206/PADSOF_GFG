@@ -119,11 +119,9 @@ public class Comic extends StoreProduct {
      */
     @Override
     public String toString() {
-        /* TYPE(C/G/F);ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYERS;AGE;
-        STYLE(Cards/Dice/GameBoard/Miniature);BRAND;MATERIAL;DIMENSION */
-        return ProductType.COMIC.getSymbol() + ";" + this.getId() + ";" + this.getName() + ";" + this.getDescription() +
-               ";" + this.getPrice() + ";" + this.getStock() + ";" + this.getStock() + ";" + this.numPages + ";" +
-               this.author + ";" + this.editorial + ";" + this.year + ";" /*jugadores*/ + ";" /*edad*/ + ";"
-                /*estilo*/ + ";" /*marca*/ + ";" /*material*/ + ";" /*dimension*/;
+        /* super;<NUM_PAGES;AUTHOR;EDITORIAL;YEAR>;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
+        return super.toString() + ";" + this.numPages + ";" + this.author + ";" + this.editorial + ";" + this.year +
+               ";" /*num_players*/ + ";" /*ager_range*/ + ";" /*game_style*/ + ";" /*brand*/ + ";" /*material*/ +
+               ";" /*dimension*/;
     }
 }

@@ -5,10 +5,9 @@ package exchange;
 
 import java.time.*;
 import java.util.*;
-
 import product.*;
-
 import store.Store;
+import user.*;
 
 /**
  * Class name: Exchange
@@ -24,8 +23,7 @@ public class Exchange {
 	private int id;
 	private LocalDateTime date;
 	private boolean exchanged;
-	private ArrayList<SecondHandProduct> products1;
-	private ArrayList<SecondHandProduct> products2;
+	private HashMap<RegisteredClient, ArrayList<SecondHandProduct>> productos_propietario = new HashMap<>();
 	
 	
 	
@@ -36,9 +34,12 @@ public class Exchange {
 	 * @param date, the date it was exchanged
 	 * @param exchanged, whether the exchange was done
 	 */
-	public Exchange(LocalDateTime date, boolean exchanged) {
+	public Exchange(LocalDateTime date, boolean exchanged, RegisteredClient user1, ArrayList<SecondHandProduct> products1,
+			RegisteredClient user2, ArrayList<SecondHandProduct> products2) {
 		this.date = date;
 		this.exchanged = exchanged;
+		this.productos_propietario.put(user1, products1);
+		this.productos_propietario.put(user2, products2);
 		this.id = totalId;
 		totalId++;
 		Store.getInstance().addExchange(this);
@@ -49,8 +50,9 @@ public class Exchange {
 	 * 
 	 * @param date, the date it will be exchanged
 	 */
-	public Exchange(LocalDateTime date) {
-		this(date, false);
+	public Exchange(LocalDateTime date, RegisteredClient user1, ArrayList<SecondHandProduct> products1,
+			RegisteredClient user2, ArrayList<SecondHandProduct> products2) {
+		this(date, false, user1, products1, user2, products2);
 	}
 	
 
@@ -109,8 +111,18 @@ public class Exchange {
 		return totalId;
 	}
 	
+	/**
+	 * Obtains the clients and products involved in the exchange
+	 * 
+	 * @return the productos_propietario, the HashMap of the clients and their products
+	 */
+	public HashMap<RegisteredClient, ArrayList<SecondHandProduct>> getProductos_propietario() {
+		return productos_propietario;
+	}	
+	
 /*---------------------------------------------------------------METHODS--------------------------------------------------------------------*/
 	
+
 	/**
 	 * Changes if the exchange was done
 	 * 

@@ -1,5 +1,11 @@
+/**
+ * 
+ */
 package notification;
 
-public class Notification{
-    /*ay */
+/**
+ * 
+ */
+public class Notification {
+
 }

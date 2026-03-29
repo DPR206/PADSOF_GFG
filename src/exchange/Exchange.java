@@ -49,7 +49,7 @@ public class Exchange {
 	}
 	
 	/**
-	 * Creates an exchange with the date
+	 * Creates an exchange that hasn't been exchanged
 	 * 
 	 * @param date, the date it will be exchanged
 	 * @param user1, the registered client that owns the products "products1"

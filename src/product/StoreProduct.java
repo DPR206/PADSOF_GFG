@@ -2,6 +2,7 @@ package product;
 
 import order.Discount;
 import order.Order;
+import store.Store;
 import user.RegisteredClient;
 
 import java.time.LocalDate;
@@ -70,7 +71,10 @@ public abstract class StoreProduct extends Product {
         for (Category category : categories) {
             this.addCategory(category);
         }
+        Store.getInstance().addStoreProduct(this);
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It allows the system or an employee to add categories to a product
@@ -83,8 +87,6 @@ public abstract class StoreProduct extends Product {
             }
         }
     }
-
-    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It decreases the stock a certain value

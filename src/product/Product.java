@@ -1,7 +1,5 @@
 package product;
 
-import store.Store;
-
 /**
  * Class name: Product
  * <p>
@@ -52,7 +50,6 @@ public abstract class Product {
         this.description = description;
         this.photo = photo;
         this.type = type;
-        Store.getInstance().addProduct(this);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

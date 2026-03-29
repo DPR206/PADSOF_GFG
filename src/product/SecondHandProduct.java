@@ -3,6 +3,8 @@
  */
 package product;
 
+import store.Store;
+
 import java.time.*;
 
 /**
@@ -44,6 +46,7 @@ public class SecondHandProduct extends Product{
 		this.available = available;
 		this.paidValuation = paidValuation;
 		this.status = status;
+		Store.getInstance().addSecondHandProduct(this);
 		//this.estimatedPrice = estimatedPrice;
 	}
 

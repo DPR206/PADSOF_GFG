@@ -16,7 +16,7 @@ import java.util.List;
  * @version 1.0
  */
 public class Order {
-    private static int changedId = 0;
+    static public int totalId = 0;
 
     private int id;
     private double price;
@@ -45,8 +45,8 @@ public class Order {
      * @param price, total price paid of the order
 	 */
     public Order(double price, OrderState state, List<StoreProduct> sp, List<Pack> p){
-        this(Order.changedId, price, state, sp, p);
-        Order.changedId++;
+        this(Order.totalId, price, state, sp, p);
+        Order.totalId++;
     }
 
     /**

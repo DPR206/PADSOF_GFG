@@ -9,7 +9,7 @@ package product;
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
-    static public int productId = -1; // NOTE: Así el primer ID es 0000 (ver línea 38)
+    static public int totalId = -1; // NOTE: Así el primer ID es 0000 (ver línea 38)
     /** The product's id */
     private final String id;
     /** The product's price */
@@ -65,26 +65,10 @@ public abstract class Product {
      */
     public Product(double price, String name, String description, String photo, ProductType type)
             throws IllegalArgumentException, NullPointerException {
-        this(type.getSymbol() + String.format("%06d", ++productId), price, name, description, photo, type);
+        this(type.getSymbol() + String.format("%06d", ++totalId), price, name, description, photo, type);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It gets the global product id
-     * @return the global product id
-     */
-    public static int getProductId() {
-        return productId;
-    }
-
-    /**
-     * It sets the global product id
-     * @param newProductId the new global product id
-     */
-    public static void setProductId(int newProductId) {
-        Product.productId = newProductId;
-    }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

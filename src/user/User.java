@@ -9,7 +9,7 @@ package user;
  */
 public abstract class User {
     /** ID counter for the users */
-    private static int id = 1;
+    static public int totalId = 1;
     /** Password of the user */
     private String pwd;
     /** Username of the user */
@@ -36,8 +36,8 @@ public abstract class User {
      * @param userName, the uusername of the user
      */
     public User(String pwd, String userName) {
-        this(pwd, userName, User.id);
-        User.id++;
+        this(pwd, userName, User.totalId);
+        User.totalId++;
     }
 
     /**

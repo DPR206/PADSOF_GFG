@@ -1,6 +1,7 @@
 package store;
 
 import exchange.Exchange;
+import exchange.Offer;
 import order.Discount;
 import order.Order;
 import product.*;
@@ -30,6 +31,8 @@ public class Store {
     private Manager manager;
     /* The list of discounts in the store */
     private List<Discount> discounts = new ArrayList<>();
+    /* The list of all offers done in the store */
+    private List<Offer> offers = new ArrayList<>();
     /* The list of all exchanges done in the store */
     private List<Exchange> exchanges = new ArrayList<>();
     /* The list of orders that have been completed */
@@ -142,6 +145,14 @@ public class Store {
      */
     public List<Discount> getDiscounts() {
         return this.discounts;
+    }
+
+    /**
+     * Gets the list of the offers of the store
+     *
+     */
+    public List<Offer> getOffers() {
+        return this.offers;
     }
 
     /**

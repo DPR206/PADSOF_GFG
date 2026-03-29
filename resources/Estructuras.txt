@@ -28,6 +28,8 @@
 
 [ ] Exchanges:
 
+[ ] Offers:
+
 [ ] Orders:
 
 [ ] Packs:

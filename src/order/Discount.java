@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
  */
 public abstract class Discount {
     /** The global variable to determine which id should a new product have */
-    static public int discountId = -1;
+    static public int totalId = -1;
     /** The discount's id */
-    private final String id;
+    private final int id;
     /** The date when the discount starts */
     private LocalDateTime startDate;
     /** The date when the discount ends */
@@ -22,7 +22,24 @@ public abstract class Discount {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * General constructor for a discount
+     * A discount's general constructor
+     * @param id        the discount's id
+     * @param startDate the date when the discount starts
+     * @param endDate   the date when the discount ends
+     * @throws IllegalArgumentException the illegal argument exception
+     */
+    public Discount(int id, LocalDateTime startDate, LocalDateTime endDate) throws IllegalArgumentException {
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("Start date is after end date");
+        }
+
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    /**
+     * A discount's constructor
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
      * @throws IllegalArgumentException the illegal argument exception
@@ -32,9 +49,7 @@ public abstract class Discount {
             throw new IllegalArgumentException("Start date is after end date");
         }
 
-        this.id = String.format("%06d", ++discountId);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this(++totalId, startDate, endDate);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -69,7 +84,7 @@ public abstract class Discount {
      * It gets the discount's id
      * @return the discount's id
      */
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 

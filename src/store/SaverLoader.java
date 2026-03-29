@@ -1,6 +1,7 @@
 package store;
 
 import exchange.Exchange;
+import exchange.Offer;
 import order.Discount;
 import order.Order;
 import product.*;
@@ -33,6 +34,7 @@ public class SaverLoader {
      * It saves the store
      * @param parameterFilename         the name of the parameter's backup
      * @param discountsFilename         the name of the discounts' backup
+     * @param offersFilename            the name of the offers' backup
      * @param exchangesFilename         the name of the exchanges' backup
      * @param ordersFilename            the name of the orders' backup
      * @param packsFilename             the name of the packs' backup
@@ -40,18 +42,19 @@ public class SaverLoader {
      * @param storeProductFilename      the name of the store products' backup
      * @param secondHandProductFilename the name of the hand products' filename
      * @param userFilename              the name of the users' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
-    public void saveStore(String parameterFilename, String discountsFilename, String exchangesFilename,
-                          String ordersFilename, String packsFilename, String categoriesFilename,
-                          String storeProductFilename, String secondHandProductFilename, String userFilename)
-            throws IOException {
+    public void saveStore(String parameterFilename, String discountsFilename, String offersFilename,
+                          String exchangesFilename, String ordersFilename, String packsFilename,
+                          String categoriesFilename, String storeProductFilename, String secondHandProductFilename,
+                          String userFilename) throws IOException {
         try {
             saveParameters(parameterFilename);
             saveCategories(categoriesFilename);
             saveStoreProducts(storeProductFilename);
             saveSecondHandProducts(secondHandProductFilename);
             saveDiscounts(discountsFilename);
+            saveOffers(offersFilename);
             saveExchanges(exchangesFilename);
             saveOrders(ordersFilename);
             savePacks(packsFilename);
@@ -65,7 +68,7 @@ public class SaverLoader {
     /**
      * It allows for the store's parameters to be saved
      * @param parameterFilename the desired filename for the store's parameters' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void saveParameters(String parameterFilename) throws IOException {
         BufferedWriter buffer;
@@ -88,7 +91,7 @@ public class SaverLoader {
     /**
      * It allows for the store's categories to be saved
      * @param categoriesFilename the desired filename for the store's categories' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void saveCategories(String categoriesFilename) throws IOException {
         BufferedWriter buffer;
@@ -114,7 +117,7 @@ public class SaverLoader {
     /**
      * It allows for the store's store products to be saved
      * @param storeProductFilename the desired filename for the store's store product's backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void saveStoreProducts(String storeProductFilename) throws IOException {
         BufferedWriter buffer;
@@ -126,7 +129,7 @@ public class SaverLoader {
 
             buffer.write("TYPE;ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYER;AGE;" +
                          "STYLE;BRAND;MATERIAL;DIMENSION\n");
-            buffer.write(Product.productId); /* Global ID */
+            buffer.write(Product.totalId); /* Global ID */
             for (StoreProduct product : products) {
                 buffer.write(product.toString() + "\n");
             }
@@ -141,7 +144,7 @@ public class SaverLoader {
     /**
      * It allows for the store's second hand products to be saved
      * @param secondHandProductFilename the desired filename for the store's second hand product's backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void saveSecondHandProducts(String secondHandProductFilename) throws IOException {
         BufferedWriter buffer;
@@ -152,6 +155,7 @@ public class SaverLoader {
                     new FileOutputStream(".\\resources\\" + secondHandProductFilename + ".csv")));
 
             buffer.write("TYPE;ID;PRICE;NAME;DESC;PHOTO;VAL_DATE;AVAILABLE;PAID_VAL;STATUS");
+            buffer.write(Product.totalId); /* Global ID */
             for (SecondHandProduct product : products) {
                 buffer.write(product.toString() + "\n");
             }
@@ -166,7 +170,7 @@ public class SaverLoader {
     /**
      * It allows for the store's discounts to be saved
      * @param discountsFilename the desired filename for the store's discounts' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void saveDiscounts(String discountsFilename) throws IOException {
         BufferedWriter buffer;
@@ -177,6 +181,7 @@ public class SaverLoader {
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + discountsFilename + ".csv")));
 
             buffer.write(""); // DUE
+            buffer.write(Discount.totalId); /* Global ID */
             for (Discount discount : discounts) {
                 buffer.write(discount.toString() + "\n");
             }
@@ -189,9 +194,35 @@ public class SaverLoader {
     }
 
     /**
+     * It allows for the store's offers to be saved
+     * @param offersFilename the desired filename for the store's offers' backup
+     * @throws IOException something went wrong when writing
+     */
+    private void saveOffers(String offersFilename) throws IOException {
+        BufferedWriter buffer;
+        List<Offer> offers = Store.getInstance().getOffers();
+
+        try {
+            buffer = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + offersFilename + ".csv")));
+
+            buffer.write(""); // DUE
+            buffer.write(Offer.totalId); /* Global ID */
+            for (Offer offer : offers) {
+                buffer.write(offer.toString() + "\n");
+            }
+
+            buffer.close();
+
+        } catch (IOException e) {
+            throw new IOException(e.getMessage());
+        }
+    }
+
+    /**
      * It allows for the store's exchanges to be saved
      * @param exchangesFilename the desired filename for the store's exchanges' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void saveExchanges(String exchangesFilename) throws IOException {
         BufferedWriter buffer;
@@ -202,6 +233,7 @@ public class SaverLoader {
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + exchangesFilename + ".csv")));
 
             buffer.write(""); // DUE
+            buffer.write(Exchange.totalId); /* Global ID */
             for (Exchange exchange : exchanges) {
                 buffer.write(exchange.toString() + "\n");
             }
@@ -216,7 +248,7 @@ public class SaverLoader {
     /**
      * It allows for the store's orders to be saved
      * @param ordersFilename the desired filename for the store's orders' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void saveOrders(String ordersFilename) throws IOException {
         BufferedWriter buffer;
@@ -227,6 +259,7 @@ public class SaverLoader {
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + ordersFilename + ".csv")));
 
             buffer.write(""); // DUE
+            buffer.write(Order.totalId); /* Global ID */
             for (Order order : orders) {
                 buffer.write(order.toString() + "\n");
             }
@@ -241,7 +274,7 @@ public class SaverLoader {
     /**
      * It allows for the store's packs to be saved
      * @param packsFilename the desired filename for the store's packs' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void savePacks(String packsFilename) throws IOException {
         BufferedWriter buffer;
@@ -252,6 +285,7 @@ public class SaverLoader {
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + packsFilename + ".csv")));
 
             buffer.write(""); // DUE
+            buffer.write(Pack.totalId); /* Global ID */
             for (Pack pack : packs) {
                 buffer.write(pack.toString() + "\n");
             }
@@ -266,7 +300,7 @@ public class SaverLoader {
     /**
      * It allows for the store's users to be saved
      * @param userFilename the desired filename for the store's users' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when writing
      */
     private void saveUsers(String userFilename) throws IOException {
         BufferedWriter buffer;
@@ -278,6 +312,7 @@ public class SaverLoader {
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + userFilename + ".csv")));
 
             buffer.write(""); // DUE
+            buffer.write(User.totalId); /* Global ID */
             for (String key : keys) {
                 buffer.write(users.get(key).toString() + "\n");
             }
@@ -295,6 +330,7 @@ public class SaverLoader {
      * It loads an initialized store (the store should be empty!!)
      * @param parameterFilename         the name of the parameter's backup
      * @param discountsFilename         the name of the discounts' backup
+     * @param offersFilename            the name of the offers' backup
      * @param exchangesFilename         the name of the exchanges' backup
      * @param ordersFilename            the name of the orders' backup
      * @param packsFilename             the name of the packs' backup
@@ -302,18 +338,19 @@ public class SaverLoader {
      * @param storeProductFilename      the name of the store products' backup
      * @param secondHandProductFilename the name of the hand products' filename
      * @param userFilename              the name of the users' backup
-     * @throws IOException something went wrong when writing or reading
+     * @throws IOException something went wrong when reading
      */
-    public void loadStore(String parameterFilename, String discountsFilename, String exchangesFilename,
-                          String ordersFilename, String packsFilename, String categoriesFilename,
-                          String storeProductFilename, String secondHandProductFilename, String userFilename)
-            throws IOException {
+    public void loadStore(String parameterFilename, String discountsFilename, String offersFilename,
+                          String exchangesFilename, String ordersFilename, String packsFilename,
+                          String categoriesFilename, String storeProductFilename, String secondHandProductFilename,
+                          String userFilename) throws IOException {
         try {
             loadParameters(parameterFilename);
             loadCategories(categoriesFilename);
             loadStoreProducts(storeProductFilename);
             loadSecondHandProducts(secondHandProductFilename);
             loadDiscounts(discountsFilename);
+            loadOffers(offersFilename);
             loadExchanges(exchangesFilename);
             loadOrders(ordersFilename);
             loadPacks(packsFilename);
@@ -324,6 +361,11 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's parameters to be loaded
+     * @param parameterFilename the filename of the store's parameters' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadParameters(String parameterFilename) throws IOException {
         BufferedReader buffer;
         String[] words;
@@ -354,6 +396,11 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's categories to be loaded
+     * @param categoriesFilename the filename of the store's categories' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadCategories(String categoriesFilename) throws IOException {
         BufferedReader buffer;
         String[] words;
@@ -380,6 +427,11 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's store products to be loaded
+     * @param storeProductFilename the filename of the store's store products' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadStoreProducts(String storeProductFilename) throws IOException {
         BufferedReader buffer;
         String[] words;
@@ -394,8 +446,7 @@ public class SaverLoader {
 
             buffer.readLine(); /* TYPE;ID;NAME;DESCRIPTION;PHOTO;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;
             PLAYER;AGE;STYLE;BRAND;MATERIAL;DIMENSION */
-            int productId = Integer.parseInt(buffer.readLine()); /* Global ID */
-            Product.setProductId(productId);
+            Product.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 ProductType type = ProductType.valueOf(words[0]);
@@ -417,7 +468,7 @@ public class SaverLoader {
                 String material = words[16];
                 String dimension = words[17];
 
-                words = categoriesString.split(";");
+                words = categoriesString.split(",");
                 while (words[i] != null) {
                     categoryName = words[i];
                     categories.add(Store.getInstance().getCategoryFromName(categoryName));
@@ -447,6 +498,11 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's second-hand products to be loaded
+     * @param secondHandProductFilename the filename of the store's second-hand products' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadSecondHandProducts(String secondHandProductFilename) throws IOException {
         BufferedReader buffer;
         String[] words;
@@ -457,6 +513,10 @@ public class SaverLoader {
                     new InputStreamReader(new FileInputStream(".\\resources\\" + secondHandProductFilename + ".csv")));
 
             buffer.readLine(); /* TYPE;ID;PRICE;NAME;DESC;PHOTO;VAL_DATE;AVAILABLE;PAID_VAL;STATUS */
+            int totalId = Integer.parseInt(buffer.readLine()); /* Global ID, SP se carga antes que SHP */
+            if (totalId > Product.totalId) {
+                Product.totalId = Integer.parseInt(buffer.readLine());
+            }
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 ProductType type = ProductType.valueOf(words[0]);
@@ -481,6 +541,11 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's discounts to be loaded
+     * @param discountsFilename the filename of the store's discounts' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadDiscounts(String discountsFilename) throws IOException {
         BufferedReader buffer;
         String[] words;
@@ -503,6 +568,38 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's offers to be loaded
+     * @param offersFilename the filename of the store's offers' backup
+     * @throws IOException something went wrong when reading
+     */
+    private void loadOffers(String offersFilename) throws IOException {
+        BufferedReader buffer;
+        String[] words;
+        String line;
+
+        try {
+            buffer = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + offersFilename + ".csv")));
+
+            buffer.readLine(); /*  */
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                // DUE
+            }
+
+            buffer.close();
+
+        } catch (IOException e) {
+            throw new IOException(e.getMessage());
+        }
+    }
+
+    /**
+     * It allows for the store's exchanges to be loaded
+     * @param exchangesFilename the filename of the store's exchanges' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadExchanges(String exchangesFilename) throws IOException {
         BufferedReader buffer;
         String[] words;
@@ -525,6 +622,11 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's orders to be loaded
+     * @param ordersFilename the filename of the store's orders' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadOrders(String ordersFilename) throws IOException {
         BufferedReader buffer;
         String[] words;
@@ -547,6 +649,11 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's packs to be loaded
+     * @param packsFilename the filename of the store's packs' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadPacks(String packsFilename) throws IOException {
         BufferedReader buffer;
         String[] words;
@@ -569,6 +676,11 @@ public class SaverLoader {
         }
     }
 
+    /**
+     * It allows for the store's users to be loaded
+     * @param userFilename the filename of the store's users' backup
+     * @throws IOException something went wrong when reading
+     */
     private void loadUsers(String userFilename) throws IOException {
         BufferedReader buffer;
         String[] words;

@@ -14,7 +14,7 @@ import java.util.*;
  * @see store.Store
  */
 public class Pack {
-	static int totalId = 0;
+	static public int totalId = 0;
 
 	/** */
 	private int id;

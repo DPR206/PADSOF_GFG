@@ -3,17 +3,15 @@ package exchange;
 import product.SecondHandProduct;
 import user.RegisteredClient;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.time.*;
+import java.util.*;
 
 /**
  * Class name: Offer
  * <p>
  * Description: It implements the offers
  * @author Ana O.R.
- * @version 1.4
+ * @version 1.5
  * @see RegisteredClient
  */
 public class Offer {
@@ -29,10 +27,8 @@ public class Offer {
     private final RegisteredClient destination;
     /** The offer's id */
     private final String id;
-    /** The sender's products */
-    private ArrayList<SecondHandProduct> originProducts;
-    /** The receiver's products */
-    private ArrayList<SecondHandProduct> destinationProducts;
+    /** The sender's and receiver's products */
+    private HashMap<RegisteredClient, ArrayList<SecondHandProduct>> products = new HashMap<>();
     /** The offer's current status */
     private OfferStatus status;
 
@@ -73,8 +69,8 @@ public class Offer {
         }
 
         this(origin, destination);
-        this.originProducts = originProducts;
-        this.destinationProducts = destinationProducts;
+        this.products.put(origin, originProducts);
+        this.products.put(destination, destinationProducts);
     }
 
     /**
@@ -96,10 +92,19 @@ public class Offer {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It gets the total id
+     * @return the total id
+     */
     public static int getTotalId() {
         return totalId;
     }
 
+    /**
+     * It sets the total id
+     * @param newTotalId the new total id
+     */
     public static void setTotalId(int newTotalId) {
         Offer.totalId = newTotalId;
     }
@@ -128,8 +133,11 @@ public class Offer {
      * @return the new exchange
      */
     public Exchange processOffer() {
-        return new Exchange(null); // DUE: Arreglar llamada a constructor
+        return new Exchange(LocalDateTime.now(), this.origin, this.products.get(this.origin), this.destination,
+                this.products.get(this.destination));
     }
+
+    // DUE: createNotification
 
     /**
      * It allows a client to reject an incoming offer
@@ -144,8 +152,6 @@ public class Offer {
     public void cancelOffer() {
         this.status = OfferStatus.CANCELED;
     }
-
-    // DUE: createNotification
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
@@ -170,28 +176,37 @@ public class Offer {
      * @return the destination's products
      */
     public ArrayList<SecondHandProduct> getDestinationProducts() {
-        return this.destinationProducts;
+        return this.products.get(this.destination);
+    }
+
+    /**
+     * It allows a client to add products from the offer's receiver's wallet to an offer
+     * @param newDestinationProducts the destination client's products
+     * @throws NullPointerException the products weren't provided
+     */
+    public void setDestinationProducts(SecondHandProduct... newDestinationProducts) throws NullPointerException {
+        if (newDestinationProducts == null) {
+            throw new NullPointerException("The products weren't provided");
+        }
+
+        this.products.put(this.destination,
+                (ArrayList<SecondHandProduct>) Arrays.stream(newDestinationProducts).toList());
+    }
+
+    /**
+     * It sets the destination client's products.
+     * @param newDestinationProducts the new destination client's products
+     */
+    public void setDestinationProducts(ArrayList<SecondHandProduct> newDestinationProducts) {
+        this.products.put(this.destination, newDestinationProducts);
     }
 
     /* origin is final thus has no setters */
 
     /**
-     * It allows a client to add products from the offer's receiver's wallet to an offer
-     * @param newProducts the origin client's products
-     * @throws NullPointerException the products weren't provided
+     * It gets the offer's id
+     * @return the offer's id
      */
-    public void setDestinationProducts(SecondHandProduct... newProducts) throws NullPointerException {
-        if (newProducts == null) {
-            throw new NullPointerException("The products weren't provided");
-        }
-
-        Collections.addAll(this.destinationProducts, newProducts);
-    }
-
-    public void setDestinationProducts(ArrayList<SecondHandProduct> newDestinationProducts) {
-        this.destinationProducts = newDestinationProducts;
-    }
-
     public String getId() {
         return id;
     }
@@ -203,8 +218,6 @@ public class Offer {
     public Period getMaxOfferPeriod() {
         return maxOfferPeriod;
     }
-
-    /* destination is final thus has no setters */
 
     /**
      * It sets the maximum amount of time an offer can be active for
@@ -227,29 +240,51 @@ public class Offer {
         return this.origin;
     }
 
+    /* destination is final thus has no setters */
+
     /**
      * It gets the sender's products
      * @return the sender's products
      */
     public ArrayList<SecondHandProduct> getOriginProducts() {
-        return this.originProducts;
+        return this.products.get(this.origin);
     }
 
+    /**
+     * It sets the origin client's products.
+     * @param newOriginProducts the new origin client's products
+     */
     public void setOriginProducts(ArrayList<SecondHandProduct> newOriginProducts) {
-        this.originProducts = newOriginProducts;
+        this.products.put(this.origin, newOriginProducts);
     }
 
     /**
      * It allows a client to add products from their wallet to an offer
-     * @param newProducts the origin client's products
+     * @param newOriginProducts the origin client's products
      * @throws NullPointerException the products weren't provided
      */
-    public void setOriginProducts(SecondHandProduct... newProducts) throws NullPointerException {
-        if (newProducts == null) {
+    public void setOriginProducts(SecondHandProduct... newOriginProducts) throws NullPointerException {
+        if (newOriginProducts == null) {
             throw new NullPointerException("The products weren't provided");
         }
 
-        Collections.addAll(this.originProducts, newProducts);
+        this.products.put(this.destination, (ArrayList<SecondHandProduct>) Arrays.stream(newOriginProducts).toList());
+    }
+
+    /**
+     * It gets all the offer's products
+     * @return all the offer's products
+     */
+    public HashMap<RegisteredClient, ArrayList<SecondHandProduct>> getProducts() {
+        return products;
+    }
+
+    /**
+     * It sets all the offer's products.
+     * @param newProducts all the new offer's products
+     */
+    public void setProducts(HashMap<RegisteredClient, ArrayList<SecondHandProduct>> newProducts) {
+        this.products = newProducts;
     }
 
     /**
@@ -274,7 +309,7 @@ public class Offer {
     public String toString() {
         // DUE
         return "Offer{" + "creationDate=" + creationDate + ", origin=" + origin + ", destination=" + destination +
-               ", originProducts=" + originProducts + ", destinationProducts=" + destinationProducts + ", status=" +
-               status + '}';
+               ", originProducts=" + this.products.get(this.origin).toString() + ", destinationProducts=" +
+               this.products.get(this.destination).toString() + ", status=" + status + '}';
     }
 }

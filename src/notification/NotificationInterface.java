@@ -1,7 +1,5 @@
 package notification;
 
-import user.RegisteredClient;
-
 /**
  * It implements the wallet
  * 

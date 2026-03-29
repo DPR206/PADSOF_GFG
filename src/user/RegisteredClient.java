@@ -117,17 +117,64 @@ public class RegisteredClient extends User {
         return this.op;
     }
     
-    
+    /**
+     * Adds a new product to the wallet
+     * 
+     * @param product, the new product
+     */
     public void addProductWallet(SecondHandProduct product) {
     	this.wallet.addProducts(product);
     }
+    
+    /**
+     * Removes products from the wallet
+     * 
+     * @param products, the product to remove
+     */
+    public void removeProductWallet(SecondHandProduct...products) {
+    	this.wallet.removeProducts(products);
+    }
+    
+    /**
+     * Adds a product to the cart
+     * @param product, the product to add
+     */
+    public void addCart(StoreProduct product) {
+    	this.c.addProduct(product);
+    }
+    
+    /**
+     * Adds a pack to the cart
+     * 
+     * @param pack, the pack to add
+     */
+    public void addCart(Pack pack) {
+    	this.c.addPack(pack);
+    }
+    
+    /**
+     * Removes a product from the cart
+     * 
+     * @param product, the product to remove
+     */
+    public void deleteCart(StoreProduct product){
+    	this.c.cancelProduct(product);
+    }
+    
+    /**
+     * Removes a pack from the cart
+     * 
+     * @param pack, the pack to remove
+     */
+    public void deleteCart(Pack pack) {
+    	this.c.cancelPack(pack);
+    }
+    
     //public boolean buy() {}
-    //removeFromWallet(Product)
+    
     //requestValuation
     //makeAnOffer
     //browseNotifications
-    //addCart
-    //deleteCart
     //review
 
     @Override

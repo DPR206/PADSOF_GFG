@@ -4,6 +4,7 @@
 package user;
 
 import order.*;
+import product.Pack;
 import product.StoreProduct;
 import store.Store;
 
@@ -36,11 +37,40 @@ public class UnregisteredClient extends User {
         this.s.signIn();
     }
 
-    public void removeFromCart(StoreProduct sp) {
-        c.cancelProduct(sp);
+    /**
+     * Removes a product from the cart
+     * 
+     * @param product, the product to remove
+     */
+    public void deleteCart(StoreProduct product){
+    	this.c.cancelProduct(product);
+    }
+    
+    /**
+     * Removes a pack from the cart
+     * 
+     * @param pack, the pack to remove
+     */
+    public void deleteCart(Pack pack) {
+    	this.c.cancelPack(pack);
+    }
+    
+    /**
+     * Adds a product to the cart
+     * @param product, the product to add
+     */
+    public void addCart(StoreProduct product) {
+    	this.c.addProduct(product);
+    }
+    
+    /**
+     * Adds a pack to the cart
+     * 
+     * @param pack, the pack to add
+     */
+    public void addCart(Pack pack) {
+    	this.c.addPack(pack);
     }
 
-    public void addProduct(StoreProduct wanted) {
-        c.addProduct(wanted);
-    }
+
 }

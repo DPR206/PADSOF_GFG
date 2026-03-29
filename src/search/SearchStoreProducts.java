@@ -39,9 +39,9 @@ public class SearchStoreProducts{
 
         if(this.priceF){
             for(Product p: fromStore){
-                if(p.getPrice() >= this.priceF.getMin && p.getPrice()<= this.priceF.getMax) fromStore.add(p);
+                if(p.getPrice() >= this.priceF.getMin && p.getPrice()<= this.priceF.getMax) aux.add(p);
             }
-            return fromStore;
+            return aux;
         }
         return null;
     }
@@ -52,8 +52,14 @@ public class SearchStoreProducts{
 
         if(this.punctuationF){
             for(Product p: fromStore){
-                if(p.get)
+                if(p.getAveragePunctuation() >= this.punctuationF.getMin() && p.getAveragePunctuation() <= this.punctuationF.getMax()){
+                    aux.add(p);
+                }
             }
         }
+    }
+
+    private List<StoreProduct> filterByCategory(){ //para cada producto, buscar la categoría
+        
     }
 }

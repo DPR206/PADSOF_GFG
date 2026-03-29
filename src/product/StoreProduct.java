@@ -62,7 +62,7 @@ public abstract class StoreProduct extends Product {
         this.discount = null;
         this.categories = new HashMap<>();
         for (Category category : categories) {
-            this.addCategory(category);
+            this.categories.put(category.getName(), category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
 

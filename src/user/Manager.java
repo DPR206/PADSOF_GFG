@@ -1,9 +1,6 @@
 package user;
 
-import order.FixedPerDisc;
-import order.GiftDisc;
-import order.QuantityDisc;
-import order.VolumeDisc;
+import order.*;
 import product.StoreProduct;
 import store.Parameter;
 import store.Store;
@@ -48,25 +45,27 @@ public class Manager extends User {
         return null;
     }
 
-    public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {
-        FixedPerDisc fpd = new FixedPerDisc(startDate, endDate, percentage);
+    public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage,
+                                 StoreProduct... products) {
+        FixedPerDisc fpd = new FixedPerDisc(startDate, endDate, percentage, products);
         this.sp.getStore().getDiscounts().add(fpd);
     }
 
-    public void addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int discount, int numProds) {
-        QuantityDisc qd = new QuantityDisc(startDate, endDate, discount, numProds);
+    public void addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int discount, int numProds,
+                                StoreProduct... products) {
+        QuantityDisc qd = new QuantityDisc(startDate, endDate, discount, numProds, products);
         s.getDiscounts().add(qd);
     }
 
-    public void addGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                            StoreProduct gift) {
-        GiftDisc gd = new GiftDisc(startDate, endDate, spendingThreshold, gift);
+    public void addGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
+                            StoreProduct... products) {
+        GiftDisc gd = new GiftDisc(startDate, endDate, spendingThreshold, gift, products);
         s.getDiscounts().add(gd);
     }
 
-    public void addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                              double discount) {
-        VolumeDisc vd = new VolumeDisc(startDate, endDate, spendingThreshold, discount);
+    public void addVolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount,
+                              StoreProduct... products) {
+        VolumeDisc vd = new VolumeDisc(startDate, endDate, spendingThreshold, discount, products);
         this.sp.getStore().getDiscounts().add(vd);
     }
 

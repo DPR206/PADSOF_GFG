@@ -1,5 +1,7 @@
 package order;
 
+import product.StoreProduct;
+
 import java.time.LocalDateTime;
 
 /**
@@ -23,13 +25,13 @@ public class FixedPerDisc extends Discount {
      * @param percentage the percentage deducted from a product's price
      * @throws IllegalArgumentException the percentage wasn't between 0 and 100
      */
-    public FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage)
+    public FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage, StoreProduct... products)
             throws IllegalArgumentException {
         if (percentage < 0 || percentage > 100) {
             throw new IllegalArgumentException("The percentage must be between 0% and 100%");
         }
 
-        super(startDate, endDate);
+        super(startDate, endDate, products);
         this.percentage = percentage;
     }
 
@@ -62,6 +64,5 @@ public class FixedPerDisc extends Discount {
 
         this.percentage = newPercentage;
     }
-
 
 }

@@ -28,8 +28,9 @@ public class GiftDisc extends Discount {
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param gift              the product gifted to the client when a certain spending threshold is met
      */
-    public GiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift) {
-        super(startDate, endDate);
+    public GiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
+                    StoreProduct... products) {
+        super(startDate, endDate, products);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }
@@ -79,6 +80,5 @@ public class GiftDisc extends Discount {
         }
         this.spendingThreshold = spendingThreshold;
     }
-
 
 }

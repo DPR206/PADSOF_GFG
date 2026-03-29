@@ -1,5 +1,7 @@
 package order;
 
+import product.StoreProduct;
+
 import java.time.LocalDateTime;
 
 /**
@@ -25,8 +27,9 @@ public class VolumeDisc extends Discount {
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param discount          the amount of money the discount deducts from the order's final price
      */
-    public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount) {
-        super(startDate, endDate);
+    public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount,
+                      StoreProduct... products) {
+        super(startDate, endDate, products);
         this.spendingThreshold = spendingThreshold;
         this.discount = discount;
     }

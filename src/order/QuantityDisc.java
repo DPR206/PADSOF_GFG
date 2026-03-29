@@ -1,5 +1,7 @@
 package order;
 
+import product.StoreProduct;
+
 import java.time.LocalDateTime;
 
 /**
@@ -25,8 +27,9 @@ public class QuantityDisc extends Discount {
      * @param numProds  the amount of products in a cart from which the discount can take place
      * @param discount  the amount of money the discount deducts from the order's final price
      */
-    public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int numProds, double discount) {
-        super(startDate, endDate);
+    public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int numProds, double discount,
+                        StoreProduct... products) {
+        super(startDate, endDate, products);
         this.numProds = numProds;
         this.discount = discount;
     }

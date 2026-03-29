@@ -1,6 +1,10 @@
 package order;
 
+import product.StoreProduct;
+import store.Store;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Class name: Discount
@@ -18,6 +22,8 @@ public abstract class Discount {
     private LocalDateTime startDate;
     /** The date when the discount ends */
     private LocalDateTime endDate;
+    /** The list of products affected by this discount */
+    private List<StoreProduct> products;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -26,38 +32,68 @@ public abstract class Discount {
      * @param id        the discount's id
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
-     * @throws IllegalArgumentException the illegal argument exception
+     * @param products  the products
+     * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
      */
-    public Discount(int id, LocalDateTime startDate, LocalDateTime endDate) throws IllegalArgumentException {
+    public Discount(int id, LocalDateTime startDate, LocalDateTime endDate, StoreProduct... products)
+            throws IllegalArgumentException {
         if (startDate.isAfter(endDate)) {
             throw new IllegalArgumentException("Start date is after end date");
+        }
+
+        if (conflictingDisc(List.of(products))) {
+            throw new IllegalArgumentException("Conflicting Discount");
         }
 
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.products = List.of(products);
+        for (StoreProduct product : products) {
+            product.setDiscount(this);
+        }
+
+        Store.getInstance().getDiscounts().add(this);
     }
 
     /**
      * A discount's constructor
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
+     * @param products  the products
      * @throws IllegalArgumentException the illegal argument exception
      */
-    public Discount(LocalDateTime startDate, LocalDateTime endDate) throws IllegalArgumentException {
-        if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Start date is after end date");
-        }
+    public Discount(LocalDateTime startDate, LocalDateTime endDate, StoreProduct... products)
+            throws IllegalArgumentException {
 
-        this(++totalId, startDate, endDate);
+        this(++totalId, startDate, endDate, products);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * Checks whether the desired discount can be added to the store without interfering with another
+     * @param testedProducts the discount to be tested's products
+     * @return true if it is conflicting, false otherwise
+     */
+    public boolean conflictingDisc(List<StoreProduct> testedProducts) {
+        List<Discount> discounts = Store.getInstance().getDiscounts();
+
+        for (Discount discount : discounts) {
+            List<StoreProduct> alreadyAffectedProducts = discount.getProducts();
+            // NOTE: retainAll mantiene en alreadyAffectedProducts los productos en común, así pues, si afectaran al
+            // mismo producto la lista resultante no estaría vacía
+            alreadyAffectedProducts.retainAll(testedProducts);
+            if (!alreadyAffectedProducts.isEmpty()) {
+                System.out.println("Discount conflicts with Discount #" + discount.getId());
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-
-    // DUE: public abstract createNotification(){}
-
-    // DUE: public abstract obtainDisc(); <- Creo que no puedo pq no devuelven lo mismo
 
     /**
      * It gets the discount's end date
@@ -80,12 +116,40 @@ public abstract class Discount {
         this.endDate = newEndDate;
     }
 
+    // DUE: public abstract createNotification(){}
+
+    // DUE: public abstract obtainDisc(); <- Creo que no puedo pq no devuelven lo mismo
+
     /**
      * It gets the discount's id
      * @return the discount's id
      */
     public int getId() {
         return this.id;
+    }
+
+    /**
+     * It gets the store products affected by this discount
+     * @return the store products affected by this discount
+     */
+    public List<StoreProduct> getProducts() {
+        return products;
+    }
+
+    /**
+     * It sets the store products affected by this discount
+     * @param newProducts the new list of products
+     * @throws IllegalArgumentException the discount is conflicting
+     */
+    public void setProducts(List<StoreProduct> newProducts) throws IllegalArgumentException {
+        if (conflictingDisc(products)) {
+            throw new IllegalArgumentException("Conflicting Discount");
+        }
+
+        this.products = newProducts;
+        for (StoreProduct newProduct : newProducts) {
+            newProduct.setDiscount(this);
+        }
     }
 
     /**

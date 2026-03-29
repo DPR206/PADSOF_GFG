@@ -2,21 +2,24 @@ package product;
 
 import store.Store;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class name: Category
  * <p>
  * Description: It implements the categories
  * @author Ana O.R.
- * @version 1.2
+ * @version 1.3
  * @see Store
  */
 public class Category {
-    /** The store the category is part of */
-    private final Store store;
     /** The category's name */
     public String name;
     /** The category's total revenue */
     private double revenue;
+    /** The store products that belong to this category */
+    private List<StoreProduct> products = new ArrayList<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -31,19 +34,17 @@ public class Category {
         if (store == null || name == null) {
             throw new NullPointerException("Name must not be null");
         }
+
         if (store.isCategoryInStore(name)) {
-            this.name = "Borrar"; // DUE: Revisar esto
-            this.store = store;
-            this.revenue = 0;
             throw new IllegalArgumentException("Category already exists");
         }
 
         this.name = name;
-        this.store = store;
         this.revenue = 0;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
     /**
      * It increases the category's revenue when a product belonging to it is sold
      * @param profit the sold product's profit
@@ -57,7 +58,24 @@ public class Category {
         this.revenue = this.revenue + profit;
     }
 
+    /**
+     * It allows for product's categories to be changed
+     * @param product the product to be added
+     */
+    public void addProduct(StoreProduct product) {
+        this.products.add(product);
+    }
+
+    /**
+     * It allows for product's categories to be changed
+     * @param product the product to be removed
+     */
+    public void removeProduct(StoreProduct product) {
+        this.products.remove(product);
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * It returns the category's name
      * @return the category's name
@@ -75,16 +93,25 @@ public class Category {
         if (name == null) {
             throw new NullPointerException("Name must not be null");
         }
-        if (this.store.isCategoryInStore(newName)) {
+        if (Store.getInstance().isCategoryInStore(newName)) {
             throw new IllegalArgumentException("Category already exists");
         }
 
         this.name = newName;
     }
 
+    /**
+     * It gets the category's products
+     * @return the category's products
+     */
+    public List<StoreProduct> getProducts() {
+        return this.products;
+    }
+
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override
     public String toString() {
-        return "Category{" + "store=" + store + ", name='" + name + '\'' + ", revenue=" + revenue + '}';
+        // DUE
+        return "Category{" + ", name='" + name + '\'' + ", revenue=" + revenue + '}';
     }
 }

@@ -1,7 +1,7 @@
 package notification;
 
 /**
- * It implements the wallet
+ * It implements the notification interface
  * 
  * @author Duna P.R.
  * @version 1.0

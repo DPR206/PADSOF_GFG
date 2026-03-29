@@ -9,10 +9,10 @@ public class SearchPack extends SearchID{
     public SearchPack(List<Pack> p){
         this.packs = p;
     }
-    
+
     @Override
     public Pack searchByID(int id){
-        for(Pack p: packs){
+        for(Pack p: this.packs){
             if(p.getId() == id) return p;
         }
         return null;

@@ -8,4 +8,11 @@ public class PunctuationFilter{
         this.min = min;
         this.max = max;
     }
+
+    public int getMin(){
+        return this.min;
+    }
+    public int getMax(){
+        return this.max;
+    }
 }

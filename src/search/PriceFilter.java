@@ -8,4 +8,10 @@ public class PriceFilter{
         this.min = min;
         this.max = max;
     }
+    public double getMin(){
+        return this.min;
+    }
+    public double getMax(){
+        return this.max;
+    }
 }

@@ -41,7 +41,7 @@ public class Store {
     /* The list of categories available */
     private HashMap<String, Category> categories = new HashMap<>();
     /* The list of products that belong to the store */
-    private List<Product> products = new ArrayList<>();
+    private List<StoreProduct> products = new ArrayList<>();
     /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
@@ -180,7 +180,7 @@ public class Store {
      * Gets the list of the products available in the store
      *
      */
-    public List<Product> getProducts() {
+    public List<StoreProduct> getProducts() {
         return this.products;
     }
 

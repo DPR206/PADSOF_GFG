@@ -40,10 +40,28 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param timeMade
 	 * @param timeReceived
 	 * @param read
+	 * @param address
+	 * @param timeAndDate
+	 */
+	public NotificationExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
+			boolean read, String address, LocalDateTime timeAndDate) {
+		super(title, text, timeMade, timeReceived, read);
+		this.address = address;
+		this.timeAndDate = timeAndDate;
+	}
+	
+	/**
+	 * @param title
+	 * @param text
+	 * @param timeMade
+	 * @param timeReceived
+	 * @param read
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
 			boolean read) {
 		super(title, text, timeMade, timeReceived, read);
+		this.address = null;
+		this.timeAndDate = null;
 	}
 
 	@Override

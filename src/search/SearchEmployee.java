@@ -1,7 +1,11 @@
 package search;
 
+import store.Store;
 import user.Employee;
-package search;
+import user.User;
+
+import java.util.List;
+
 /**
  * Class name: SearchEmployee
  * <p>
@@ -12,11 +16,11 @@ package search;
   */
 public class SearchEmployee extends SearchID{
     private List<User> users;
-    
+
     public SearchEmployee(Store s){
         this.users = s.getUsers();
     }
-       
+
     @Override
     public Employee searchByID(int id){
         for(Employee e: this.employees){

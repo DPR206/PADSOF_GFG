@@ -53,6 +53,23 @@ public abstract class Product {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It gets the global product id
+     * @return the global product id
+     */
+    public static int getProductId() {
+        return productId;
+    }
+
+    /**
+     * It sets the global product id
+     * @param newProductId the new global product id
+     */
+    public static void setProductId(int newProductId) {
+        Product.productId = newProductId;
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**

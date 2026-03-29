@@ -4,7 +4,7 @@
     ---- Parameter ----
     OFFER_TIME;ORDER_TIME;VAL_COST
 
-[ ] Categories:
+[x] Categories:
     ---- Category ----
     NAME;REVENUE <- Products se rellena al crear los storeProducts
 

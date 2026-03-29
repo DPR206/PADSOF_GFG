@@ -1,7 +1,9 @@
 package search;
 
-import product.*;
-import exchange.*;
+import exchange.Exchange;
+import store.Store;
+
+import java.util.List;
 
 public class SearchExchange extends SearchID{
     private List<Exchange> exchanges;

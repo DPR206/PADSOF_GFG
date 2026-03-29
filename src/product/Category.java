@@ -10,7 +10,7 @@ import java.util.List;
  * <p>
  * Description: It implements the categories
  * @author Ana O.R.
- * @version 1.3
+ * @version 1.4
  * @see Store
  */
 public class Category {
@@ -24,23 +24,33 @@ public class Category {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * Category's constructor
-     * @param store the store the category is part of
-     * @param name  the new category's name
-     * @throws IllegalArgumentException category already existed
+     * Category's full constructor
+     * @param name the new category's name
+     * @throws IllegalArgumentException revenue was negative or category already existed
      * @throws NullPointerException     store or name were null
      */
-    public Category(Store store, String name) throws IllegalArgumentException, NullPointerException {
-        if (store == null || name == null) {
+    public Category(String name, double revenue) throws IllegalArgumentException, NullPointerException {
+        if (name == null) {
             throw new NullPointerException("Name must not be null");
         }
-
-        if (store.isCategoryInStore(name)) {
-            throw new IllegalArgumentException("Category already exists");
+        if (revenue < 0) {
+            throw new NullPointerException("Revenue must not be negative");
         }
 
         this.name = name;
-        this.revenue = 0;
+        this.revenue = revenue;
+
+        Store.getInstance().getCategories().put(this.name, this);
+    }
+
+    /**
+     * Category's constructor
+     * @param name the new category's name
+     * @throws IllegalArgumentException category already existed
+     * @throws NullPointerException     store or name were null
+     */
+    public Category(String name) throws IllegalArgumentException, NullPointerException {
+        this(name, 0);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -109,9 +119,13 @@ public class Category {
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * It allows a category to be saved
+     * @return the category's info
+     */
     @Override
     public String toString() {
-        // DUE
-        return "Category{" + ", name='" + name + '\'' + ", revenue=" + revenue + '}';
+        return this.name + ";" + this.revenue;
     }
 }

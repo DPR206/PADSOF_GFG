@@ -1,6 +1,9 @@
 package search;
 
-import order.*;
+import order.Order;
+import store.Store;
+
+import java.util.List;
 
 public class SearchOrder extends SearchID{
     private List<Order> orders;

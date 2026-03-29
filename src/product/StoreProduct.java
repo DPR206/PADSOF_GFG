@@ -72,6 +72,7 @@ public abstract class StoreProduct extends Product {
             this.addCategory(category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
+
         Store.getInstance().addStoreProduct(this);
     }
 
@@ -230,6 +231,7 @@ public abstract class StoreProduct extends Product {
 
     public String getPrintReviews() {
         // DUE
+        return "alo";
     }
 
     /**

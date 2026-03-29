@@ -1,6 +1,9 @@
 package search;
 
-import product.*;
+import product.Pack;
+import store.Store;
+
+import java.util.List;
 
 public class SearchPack extends SearchID{
 

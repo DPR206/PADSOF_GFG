@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.*;
 import product.*;
 import store.Store;
+import product.StoreProduct;
 
 public class SearchStoreProducts{
     private boolean ascendant;
@@ -28,8 +29,8 @@ public class SearchStoreProducts{
     public void addPriceFilter(double min, double max){
         this.priceF= new PriceFilter(min, max);
     }
-    public List<StoreProducts> searchStoreProducts(Store s){
-        return this.s.getProducts();
+    public List<StoreProduct> searchStoreProducts(Store s){
+        return this.s.getStoreProducts();
     }
 
     private List<StoreProduct> filterByPrice(){
@@ -60,6 +61,6 @@ public class SearchStoreProducts{
     }
 
     private List<StoreProduct> filterByCategory(){ //para cada producto, buscar la categoría
-        
+
     }
 }

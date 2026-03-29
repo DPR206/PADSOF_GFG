@@ -17,7 +17,9 @@ public abstract class Discount {
     /** The global variable to determine which id should a new product have */
     static public int totalId = -1;
     /** The discount's id */
-    private final int id;
+    private final String id;
+    /** The discount's type */
+    private final DiscountType type;
     /** The date when the discount starts */
     private LocalDateTime startDate;
     /** The date when the discount ends */
@@ -35,8 +37,8 @@ public abstract class Discount {
      * @param products  the products
      * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
      */
-    public Discount(int id, LocalDateTime startDate, LocalDateTime endDate, StoreProduct... products)
-            throws IllegalArgumentException {
+    public Discount(String id, LocalDateTime startDate, LocalDateTime endDate, DiscountType type,
+                    StoreProduct... products) throws IllegalArgumentException {
         if (startDate.isAfter(endDate)) {
             throw new IllegalArgumentException("Start date is after end date");
         }
@@ -48,6 +50,7 @@ public abstract class Discount {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.type = type;
         this.products = List.of(products);
         for (StoreProduct product : products) {
             product.setDiscount(this);
@@ -63,10 +66,10 @@ public abstract class Discount {
      * @param products  the products
      * @throws IllegalArgumentException the illegal argument exception
      */
-    public Discount(LocalDateTime startDate, LocalDateTime endDate, StoreProduct... products)
+    public Discount(LocalDateTime startDate, LocalDateTime endDate, DiscountType type, StoreProduct... products)
             throws IllegalArgumentException {
 
-        this(++totalId, startDate, endDate, products);
+        this(type.getSymbol() + String.format("%06d", ++totalId), startDate, endDate, type, products);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -124,7 +127,7 @@ public abstract class Discount {
      * It gets the discount's id
      * @return the discount's id
      */
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -176,7 +179,7 @@ public abstract class Discount {
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override
     public String toString() {
-        // DUE
-        return this.startDate + "|" + this.endDate;
+        /* TYPE;ID;START_DATE;END_DATE;PRODUCTS */
+        return this.type.getSymbol() + ";" + this.id + ";" + this.startDate + ";" + this.endDate;
     }
 }

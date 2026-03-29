@@ -31,7 +31,7 @@ public class FixedPerDisc extends Discount {
             throw new IllegalArgumentException("The percentage must be between 0% and 100%");
         }
 
-        super(startDate, endDate, products);
+        super(startDate, endDate, DiscountType.FIXED_PERCENTAGE, products);
         this.percentage = percentage;
     }
 

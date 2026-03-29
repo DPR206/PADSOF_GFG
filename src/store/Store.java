@@ -22,8 +22,6 @@ import java.util.*;
  */
 public class Store {
     private static Store INSTANCE = null;
-    private static int productId = 0;
-    // Está creada para que no se queje el compilador en sus referencias
 
     private Parameter param;
 
@@ -85,8 +83,7 @@ public class Store {
      * @return the new product's id
      */
     public int getProductId() {
-        int id = this.productId;
-        return id;
+        return Product.totalId;
     }
 
     /**

@@ -29,7 +29,7 @@ public class QuantityDisc extends Discount {
      */
     public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int numProds, double discount,
                         StoreProduct... products) {
-        super(startDate, endDate, products);
+        super(startDate, endDate, DiscountType.QUANTITY, products);
         this.numProds = numProds;
         this.discount = discount;
     }

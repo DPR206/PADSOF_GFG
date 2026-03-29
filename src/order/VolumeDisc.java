@@ -29,7 +29,7 @@ public class VolumeDisc extends Discount {
      */
     public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double discount,
                       StoreProduct... products) {
-        super(startDate, endDate, products);
+        super(startDate, endDate, DiscountType.VOLUME, products);
         this.spendingThreshold = spendingThreshold;
         this.discount = discount;
     }

@@ -25,6 +25,10 @@
     + super;VAL_DATE;AVAILABLE;PAID_VAL;STATUS
 
 [ ] Discounts:
+    ---- Discount ----
+    TOTAL_ID;
+    TYPE;ID;START_DATE;END_DATE;PRODUCTS
+
 
 [ ] Exchanges:
 

@@ -30,7 +30,7 @@ public class GiftDisc extends Discount {
      */
     public GiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
                     StoreProduct... products) {
-        super(startDate, endDate, products);
+        super(startDate, endDate, DiscountType.GIFT, products);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }

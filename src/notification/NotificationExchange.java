@@ -51,7 +51,7 @@ public class NotificationExchange extends Notification implements NotificationIn
 		switch(o.getStatus()) {
 			case OfferStatus.ACCEPTED: text += " has been accepted. " + this.timeAndPlace(); break;
 			case OfferStatus.REJECTED: text += " has been rejected. You can make another offer or look for another exchange"; break;
-			case OfferStatus.EXPIRED: this.setTitle("Your offer has expired\n"); break;
+			case OfferStatus.EXPIRED: text += " has expired"; break;
 			default: this.setTitle("Not valid\n");
 		}
 		

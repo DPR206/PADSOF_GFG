@@ -7,6 +7,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 import exchange.*;
+import store.Parameter;
 import user.RegisteredClient;
 
 /**
@@ -51,7 +52,9 @@ public class NotificationExchange extends Notification implements NotificationIn
 		switch(o.getStatus()) {
 			case OfferStatus.ACCEPTED: text += " has been accepted. " + this.timeAndPlace(); break;
 			case OfferStatus.REJECTED: text += " has been rejected. You can make another offer or look for another exchange"; break;
-			case OfferStatus.EXPIRED: text += " has expired"; break;
+			case OfferStatus.EXPIRED: text += " has expired after " + Parameter.getParam().getOfferTime() 
+												+ " have passed since its publication. You can make the same offer or a new one altogether"; 
+												break;
 			default: this.setTitle("Not valid\n");
 		}
 		

@@ -11,9 +11,11 @@ package search;
  * @see SearchStoreProducts
   */
 public class SearchEmployee extends SearchID{
-    private List<Employee> employees;
+    private List<User> users;
     
-    
+    public SearchEmployee(Store s){
+        this.users = s.getUsers();
+    }
        
     @Override
     public Employee searchByID(int id){

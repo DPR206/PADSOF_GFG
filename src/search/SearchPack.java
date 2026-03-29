@@ -6,8 +6,8 @@ public class SearchPack extends SearchID{
 
     private List<Pack> packs;
 
-    public SearchPack(List<Pack> p){
-        this.packs = p;
+    public SearchPack(Store s){
+        this.packs = s.getPacks();
     }
 
     @Override

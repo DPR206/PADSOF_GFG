@@ -6,7 +6,9 @@ import exchange.*;
 public class SearchExchange extends SearchID{
     private List<Exchange> exchanges;
 
-    
+    public SearchExchange(Store s){
+        this.exchanges = s.getExchanges();
+    }
 
     public SearchExchange(List<Exchange> ex){
         this.exchange = ex;

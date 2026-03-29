@@ -5,8 +5,8 @@ import order.*;
 public class SearchOrder extends SearchID{
     private List<Order> orders;
 
-    public SearchOrder(List<Order> orders){
-        this.orders = orders;
+    public SearchOrder(Store s){
+        this.orders = s.getOrders();
     }
     @Override
     public Order searchByID(int id){

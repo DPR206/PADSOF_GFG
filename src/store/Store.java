@@ -40,9 +40,9 @@ public class Store {
     /* The list of categories available */
     private HashMap<String, Category> categories = new HashMap<>();
     /* The list of store products that belong to the store */
-    private List<StoreProduct> storeProducts = new ArrayList<>();
+    private HashMap<String, StoreProduct> storeProducts = new HashMap<>();
     /* The list of second hand products that belong to the store */
-    private List<SecondHandProduct> secondHandProducts = new ArrayList<>();
+    private HashMap<String, SecondHandProduct> secondHandProducts = new HashMap<>();
     /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
@@ -74,6 +74,18 @@ public class Store {
     public Category getCategoryFromName(String name) {
         if (this.categories.containsKey(name)) {
             return this.categories.get(name);
+        }
+        return null;
+    }
+
+    /**
+     * It gets a store product from its id
+     * @param productId the desired store product's id
+     * @return the desired product
+     */
+    public StoreProduct getProductFromId(String productId) {
+        if (this.storeProducts.containsKey(productId)) {
+            return this.storeProducts.get(productId);
         }
         return null;
     }
@@ -188,7 +200,7 @@ public class Store {
      * Gets the list of the store products available in the store
      *
      */
-    public List<StoreProduct> getStoreProducts() {
+    public HashMap<String, StoreProduct> getStoreProducts() {
         return this.storeProducts;
     }
 
@@ -196,7 +208,7 @@ public class Store {
      * Gets the list of the second hand products available in the store
      *
      */
-    public List<SecondHandProduct> getSecondHandProducts() {
+    public HashMap<String, SecondHandProduct> getSecondHandProducts() {
         return this.secondHandProducts;
     }
 
@@ -222,7 +234,7 @@ public class Store {
      * @param product, the new product
      */
     public void addStoreProduct(StoreProduct product) {
-        this.storeProducts.add(product);
+        this.storeProducts.put(product.getName(), product);
     }
 
     /**
@@ -230,7 +242,7 @@ public class Store {
      * @param product, the new product
      */
     public void addSecondHandProduct(SecondHandProduct product) {
-        this.secondHandProducts.add(product);
+        this.secondHandProducts.put(product.getName(), product);
     }
 
     public void addPack(Pack p) {

@@ -30,17 +30,17 @@ public class SearchStoreProducts{
         this.priceF= new PriceFilter(min, max);
     }
     public List<StoreProduct> searchStoreProducts(Store s){
-        return this.s.getStoreProducts();
+        return (List<StoreProduct>) this.s.getStoreProducts().values();
     }
 
     private List<StoreProduct> filterByPrice(){
 
-        List<Product> aux = new ArrayList<>();
-        List<Product> fromStore = this.s.getProducts();
+        List<StoreProduct> aux = new ArrayList<>();
+        List<StoreProduct> fromStore = (List<StoreProduct>) this.s.getStoreProducts().values();
 
         if(this.priceF){
-            for(Product p: fromStore){
-                if(p.getPrice() >= this.priceF.getMin && p.getPrice()<= this.priceF.getMax) aux.add(p);
+            for(StoreProduct p: fromStore){
+                if(p.getPrice() >= this.priceF.getMin() && p.getPrice()<= this.priceF.getMax()) aux.add(p);
             }
             return aux;
         }
@@ -48,11 +48,11 @@ public class SearchStoreProducts{
     }
 
     private List<StoreProduct> filterByPunctuation(){
-        List<Product> aux = new ArrayList<>();
-        List<Product> fromStore = this.s.getProducts();
+        List<StoreProduct> aux = new ArrayList<>();
+        List<StoreProduct> fromStore = (List<StoreProduct>) this.s.getStoreProducts().values();
 
         if(this.punctuationF){
-            for(Product p: fromStore){
+            for(StoreProduct p: fromStore){
                 if(p.getAveragePunctuation() >= this.punctuationF.getMin() && p.getAveragePunctuation() <= this.punctuationF.getMax()){
                     aux.add(p);
                 }

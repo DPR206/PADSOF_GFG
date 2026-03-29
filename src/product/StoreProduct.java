@@ -250,7 +250,7 @@ public abstract class StoreProduct extends Product {
         StringBuilder sb = new StringBuilder();
 
         for (Category category : this.categories.values().toArray(new Category[0])) {
-            sb.append(category.toString()).append(", ");
+            sb.append(category.getName()).append(",");
         }
 
         return sb.toString();

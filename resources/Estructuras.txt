@@ -24,10 +24,10 @@
     ---- SecondHandProduct ----
     + super;VAL_DATE;AVAILABLE;PAID_VAL;STATUS
 
-[ ] Discounts:
+[x] Discounts:
     ---- Discount ----
     TOTAL_ID;
-    TYPE;ID;START_DATE;END_DATE;PRODUCTS
+    TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE
 
 
 [ ] Exchanges:

@@ -2,8 +2,7 @@ package store;
 
 import exchange.Exchange;
 import exchange.Offer;
-import order.Discount;
-import order.Order;
+import order.*;
 import product.*;
 import user.User;
 
@@ -16,7 +15,7 @@ import java.util.*;
  * <p>
  * Description: It implements the store's saver and loader
  * @author Ana O.R. and Sofía C.L.
- * @version 1.4
+ * @version 1.5
  */
 public class SaverLoader {
 
@@ -121,7 +120,8 @@ public class SaverLoader {
      */
     private void saveStoreProducts(String storeProductFilename) throws IOException {
         BufferedWriter buffer;
-        List<StoreProduct> products = Store.getInstance().getStoreProducts();
+        HashMap<String, StoreProduct> products = Store.getInstance().getStoreProducts();
+        Set<String> keys = Store.getInstance().getStoreProducts().keySet();
 
         try {
             buffer = new BufferedWriter(
@@ -130,8 +130,8 @@ public class SaverLoader {
             buffer.write("TYPE;ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYER;AGE;" +
                          "STYLE;BRAND;MATERIAL;DIMENSION\n");
             buffer.write(Product.totalId); /* Global ID */
-            for (StoreProduct product : products) {
-                buffer.write(product.toString() + "\n");
+            for (String key : keys) {
+                buffer.write(products.get(key).toString() + "\n");
             }
 
             buffer.close();
@@ -148,7 +148,8 @@ public class SaverLoader {
      */
     private void saveSecondHandProducts(String secondHandProductFilename) throws IOException {
         BufferedWriter buffer;
-        List<SecondHandProduct> products = Store.getInstance().getSecondHandProducts();
+        HashMap<String, SecondHandProduct> products = Store.getInstance().getSecondHandProducts();
+        Set<String> keys = Store.getInstance().getStoreProducts().keySet();
 
         try {
             buffer = new BufferedWriter(new OutputStreamWriter(
@@ -156,8 +157,8 @@ public class SaverLoader {
 
             buffer.write("TYPE;ID;PRICE;NAME;DESC;PHOTO;VAL_DATE;AVAILABLE;PAID_VAL;STATUS");
             buffer.write(Product.totalId); /* Global ID */
-            for (SecondHandProduct product : products) {
-                buffer.write(product.toString() + "\n");
+            for (String key : keys) {
+                buffer.write(products.get(key).toString() + "\n");
             }
 
             buffer.close();
@@ -180,7 +181,7 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + discountsFilename + ".csv")));
 
-            buffer.write(""); // DUE
+            buffer.write(" TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE "); // DUE
             buffer.write(Discount.totalId); /* Global ID */
             for (Discount discount : discounts) {
                 buffer.write(discount.toString() + "\n");
@@ -550,15 +551,30 @@ public class SaverLoader {
         BufferedReader buffer;
         String[] words;
         String line;
+        int i = 0;
+        String productId;
+        List<StoreProduct> products = new ArrayList<>();
 
         try {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + discountsFilename + ".csv")));
 
-            buffer.readLine(); /*  */
+            buffer.readLine(); /* TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE */
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
-                // DUE
+                DiscountType type = DiscountType.valueOf(words[0]);
+                String id = words[1];
+                LocalDate startDate = LocalDate.parse(words[2]);
+                LocalDate endDate = LocalDate.parse(words[3]);
+                String productsString = words[4];
+                boolean overWhole = Boolean.parseBoolean(words[5]);
+
+                words = productsString.split(",");
+                while (words[i] != null) {
+                    productId = words[i];
+                    products.add(Store.getInstance().getProductFromId(productId));
+                    i++;
+                }
             }
 
             buffer.close();

@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package exchange;
 
 import user.*;
@@ -8,9 +6,8 @@ import user.*;
 import java.util.*;
 
 /**
- * Class name: ExchangeHistory
- * <p>
- * Description: It implements the exchange history
+ * It implements the exchange history
+ * 
  * @author Duna P.R.
  * @version 1.0
  * @see Exchange

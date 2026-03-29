@@ -5,9 +5,8 @@ import product.SecondHandProduct;
 import java.util.HashMap;
 
 /**
- * Class name: Wallet
- * <p>
- * Description: It implements the wallet
+ * It implements the wallet
+ * 
  * @author Ana O.R.
  * @version 1.2
  * @see SecondHandProduct

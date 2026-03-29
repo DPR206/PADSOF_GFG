@@ -7,9 +7,8 @@ import java.time.*;
 import java.util.*;
 
 /**
- * Class name: Offer
- * <p>
- * Description: It implements the offers
+ * It implements the offers
+ * 
  * @author Ana O.R.
  * @version 1.5
  * @see RegisteredClient

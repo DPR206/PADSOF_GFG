@@ -1,9 +1,8 @@
 package exchange;
 
 /**
- * Enum name: OfferStatus
- * <p>
- * Description: It defines the offer's possible statuses
+ * It defines the offer's possible statuses
+ * 
  * @author Ana O.R.
  * @version 1.0
  */

@@ -10,7 +10,7 @@ import user.RegisteredClient;
  * 
  */
 public interface NotificationInterface<T>{
-	String FullNotification(RegisteredClient user, T o);
-	String SnippetNotification(RegisteredClient user, T o);
+	String FullNotification(T o);
+	String SnippetNotification(T o);
 	
 }

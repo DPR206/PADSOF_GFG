@@ -28,7 +28,7 @@ public class UnregisteredClient extends User {
     public UnregisteredClient() {
         super();
     	c = new Cart();
-        s = s.getInstance();
+        s = Store.getInstance();
     }
 
     public void buy() {

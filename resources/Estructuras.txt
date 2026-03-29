@@ -8,7 +8,7 @@
     ---- Category ----
     NAME;REVENUE <- Products se rellena al crear los storeProducts
 
-[ ] StoreProducts:
+[x] StoreProducts:
     ---- Product -----
     PRODUCT_ID;
     TYPE;ID;PRICE;NAME;DESC;PHOTO

@@ -8,6 +8,7 @@ import user.User;
 
 import java.io.*;
 import java.time.Period;
+import java.time.Year;
 import java.util.*;
 
 /**
@@ -384,13 +385,16 @@ public class SaverLoader {
         BufferedReader buffer;
         String[] words;
         String line;
+        int i = 0;
+        String categoryName;
+        List<Category> categories = new ArrayList<>();
 
         try {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + storeProductFilename + ".csv")));
 
-            buffer.readLine(); /* TYPE;ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYER;
-                                AGE;STYLE;BRAND;MATERIAL;DIMENSION */
+            buffer.readLine(); /* TYPE;ID;NAME;DESCRIPTION;PHOTO;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;
+            PLAYER;AGE;STYLE;BRAND;MATERIAL;DIMENSION */
             int productId = Integer.parseInt(buffer.readLine()); /* Global ID */
             Product.setProductId(productId);
             while ((line = buffer.readLine()) != null) {
@@ -399,11 +403,42 @@ public class SaverLoader {
                 String id = words[1];
                 String name = words[2];
                 String description = words[3];
-                double price = Double.parseDouble(words[4]);
-                int stock = Integer.parseInt(words[5]);
-                String categories = words[6]; // DUE: Parse this
-                int numPages = Integer.parseInt(words[7]);
+                String photo = words[4];
+                double price = Double.parseDouble(words[5]);
+                int stock = Integer.parseInt(words[6]);
+                String categoriesString = words[7]; // DUE: Parse this
+                int numPages = Integer.parseInt(words[8]);
+                String author = words[9];
+                String editorial = words[10];
+                Year year = Year.parse(words[11]);
+                int numPlayers = Integer.parseInt(words[12]);
+                String ageRange = words[13];
+                GameStyle gameStyle = GameStyle.valueOf(words[14]);
+                String brand = words[15];
+                String material = words[16];
+                String dimension = words[17];
 
+                words = categoriesString.split(";");
+                while (words[i] != null) {
+                    categoryName = words[i];
+                    categories.add(Store.getInstance().getCategoryFromName(categoryName));
+                    i++;
+                }
+
+                switch (type) {
+                    case ProductType.COMIC:
+                        new Comic(price, name, description, photo, stock, numPages, year, author, editorial,
+                                categories.toArray(new Category[0]));
+                        break;
+                    case ProductType.FIGURINE:
+                        new Figurine(price, name, description, photo, stock, dimension, brand, material,
+                                categories.toArray(new Category[0]));
+                        break;
+                    case ProductType.GAME:
+                        new Game(price, name, description, photo, stock, numPlayers, ageRange, gameStyle,
+                                categories.toArray(new Category[0]));
+                        break;
+                }
             }
 
             buffer.close();

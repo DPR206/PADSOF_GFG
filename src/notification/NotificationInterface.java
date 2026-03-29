@@ -1,16 +1,14 @@
 package notification;
 
-import user.RegisteredClient;
-
 /**
- * It implements the wallet
+ * It implements the notification interface
  * 
  * @author Duna P.R.
  * @version 1.0
  * 
  */
 public interface NotificationInterface<T>{
-	String FullNotification(RegisteredClient user, T o);
-	String SnippetNotification(RegisteredClient user, T o);
+	String FullNotification(T o);
+	String SnippetNotification(T o);
 	
 }

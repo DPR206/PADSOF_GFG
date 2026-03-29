@@ -2,7 +2,6 @@ package notification;
 
 import java.time.*;
 
-import user.RegisteredClient;
 import product.*;
 
 public class NotificationNewSecondHand extends Notification implements NotificationInterface<SecondHandProduct>{
@@ -13,7 +12,7 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	 */
 	public NotificationNewSecondHand(LocalDateTime timeReceived, boolean read) {
 		super(timeReceived, read);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
@@ -24,7 +23,7 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	 */
 	public NotificationNewSecondHand(String title, String text, LocalDateTime timeReceived, boolean read) {
 		super(title, text, timeReceived, read);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
@@ -37,19 +36,19 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	public NotificationNewSecondHand(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
 			boolean read) {
 		super(title, text, timeMade, timeReceived, read);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
-	public String FullNotification(RegisteredClient user, SecondHandProduct sp) {
-		// TODO Auto-generated method stub
-		return null;
+	public String FullNotification(SecondHandProduct sp) {
+		String text = "Se ha subido un nuevo producto de segunda mano: " + sp.getName();
+		return this.SnippetNotification(sp) + text + this.signOff();
 	}
 
 	@Override
-	public String SnippetNotification(RegisteredClient user, SecondHandProduct sp) {
-		// TODO Auto-generated method stub
-		return null;
+	public String SnippetNotification(SecondHandProduct sp) {
+		this.setTitle("Se ha añadido un nuevo producto de segunda mano\n");
+		return this.getTitle() + this.timeLog();
 	}
 	
 	

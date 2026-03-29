@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 
 import exchange.*;
 import store.Parameter;
-import user.RegisteredClient;
 
 /**
  * 
@@ -63,9 +62,21 @@ public class NotificationExchange extends Notification implements NotificationIn
 		this.address = null;
 		this.timeAndDate = null;
 	}
+	
+	
+
+	/**
+	 * @param timeReceived
+	 * @param read
+	 */
+	public NotificationExchange(LocalDateTime timeReceived, boolean read) {
+		super(timeReceived, read);
+		this.address = null;
+		this.timeAndDate = null;
+	}
 
 	@Override
-	public String FullNotification(RegisteredClient user, Offer o) {
+	public String FullNotification(Offer o) {
 		String text = "Tu oferta para intercambiar " + o.getOriginProducts() + "por " + o.getDestinationProducts();
 		switch(o.getStatus()) {
 			case OfferStatus.ACCEPTED: text += " has been accepted. " + this.timeAndPlace(); break;
@@ -77,11 +88,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 		}
 		
 		this.setText(text);
-		return this.SnippetNotification(user, o) + text +  this.signOff();
+		return this.SnippetNotification(o) + text +  this.signOff();
 	}
 	
 	@Override
-	public String SnippetNotification(RegisteredClient user, Offer o) {
+	public String SnippetNotification(Offer o) {
 		switch(o.getStatus()) {
 			case OfferStatus.ACCEPTED: this.setTitle("Your offer has been accepted\n"); break;
 			case OfferStatus.REJECTED: this.setTitle("Your offer has been rejected\n"); break;

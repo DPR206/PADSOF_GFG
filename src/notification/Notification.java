@@ -7,7 +7,7 @@ import java.time.*;
 /**
  * 
  */
-public class Notification {
+public abstract class Notification {
 	private String title;
 	private String text;
 	private LocalDateTime timeMade;

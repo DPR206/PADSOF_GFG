@@ -5,7 +5,7 @@ package product;
 
 import store.Store;
 
-import java.time.*;
+import java.time.LocalDate;
 
 /**
  * Class name: SecondHandProduct
@@ -25,6 +25,7 @@ public class SecondHandProduct extends Product{
 
 
     /*----------------------------------------------------------CONSTRUCTORS------------------------------------------------------------------*/
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     /**
      * Creates a new second-hand product
      *
@@ -83,24 +84,6 @@ public class SecondHandProduct extends Product{
 /*----------------------------------------------------------GETTERS AND SETTERS---------------------------------------------------------------------------*/
 
 	/**
-	 * Obtains the valuation date
-	 *
-	 * @return the valuationDate, the date of valuation
-	 */
-	public LocalDate getValuationDate() {
-		return valuationDate;
-	}
-
-	/**
-	 * Sets the valuation date
-	 *
-	 * @param valuationDate the valuationDate to set
-	 */
-	public void setValuationDate(LocalDate valuationDate) {
-		this.valuationDate = valuationDate;
-	}
-
-	/**
 	 * Obtains if the product is available
 	 *
 	 * @return true if the product is available, false if else
@@ -137,6 +120,26 @@ public class SecondHandProduct extends Product{
 	}
 
 	/**
+	 * Marks that the valuation service was paid
+	 */
+	public void valuationWasPaid() {
+		this.paidValuation = true;
+	}
+
+	/**
+	 * Makes a valuation of a second-hand product
+	 *
+	 * @param estimatedPrice, the estimated price
+	 * @param status, the conservation status
+	 */
+	public void valuate(double estimatedPrice, ConservationStatus status) {
+		this.setEstimatedPrice(estimatedPrice);
+		this.setConservationStatus(status);
+		this.valuationDate = LocalDate.now();
+	}
+
+/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+	/**
 	 * Obtains the conservation status of the product
 	 *
 	 * @return the status, the conservation status
@@ -158,23 +161,22 @@ public class SecondHandProduct extends Product{
 
 /*----------------------------------------------------------METHODS---------------------------------------------------------------------------*/
 
+	/**
+	 * Obtains the valuation date
+	 *
+	 * @return the valuationDate, the date of valuation
+	 */
+	public LocalDate getValuationDate() {
+		return valuationDate;
+	}
 
 	/**
-	 * Changes the estimated price of the second-hand product
+	 * Sets the valuation date
 	 *
-	 * @param price, the new estimated price
+	 * @param valuationDate the valuationDate to set
 	 */
-	public void setEstimatedPrice(double price) {
-        this.setPrice(price);
-    }
-
-	/**
-	 * Changes the conservation status of the second-hand product
-	 *
-	 * @param status, the new conservation status
-	 */
-	public void setConservationStatus(ConservationStatus status) {
-		setStatus(status);
+	public void setValuationDate(LocalDate valuationDate) {
+		this.valuationDate = valuationDate;
 	}
 
 	/**
@@ -187,32 +189,30 @@ public class SecondHandProduct extends Product{
 	}
 
 	/**
-	 * Marks that the valuation service was paid
+	 * Changes the conservation status of the second-hand product
+	 *
+	 * @param status, the new conservation status
 	 */
-	public void valuationWasPaid() {
-		this.paidValuation = true;
+	public void setConservationStatus(ConservationStatus status) {
+		setStatus(status);
 	}
 
 	/**
-	 * Makes a valuation of a second-hand product
+	 * Changes the estimated price of the second-hand product
 	 *
-	 * @param estimatedPrice, the estimated price
-	 * @param status, the conservation status
+	 * @param price, the new estimated price
 	 */
-	public void valuate(double estimatedPrice, ConservationStatus status) {
-		this.setEstimatedPrice(estimatedPrice);
-		this.setConservationStatus(status);
-		this.valuationDate = LocalDate.now();
-	}
+	public void setEstimatedPrice(double price) {
+        this.setPrice(price);
+    }
 
-	@Override
-	public String toString() {
-		return "SecondHandProduct [valuationDate=" + valuationDate + ", available=" + available + ", paidValuation="
-				+ paidValuation + ", status=" + status + ", " + getId() + ", "+ getPrice() + ", "+ getName()
-				+ ", " + getDescription() + ", " + getPhoto() + ", " + getType() + ", "
-				+ getClass()
-				+ "]";
-	}
+/*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    @Override
+    public String toString() {
+        /* [TYPE;ID;NAME;DESC;PHOTO];VAL_DATE;AVAILABLE;PAID_VAL;STATUS */
+        return super.toString() + ";" + this.valuationDate + this.available + ";" + this.paidValuation + ";" +
+               this.status.name();
+    }
 
 
 	//Faltan métodos de intercambio para más adelante

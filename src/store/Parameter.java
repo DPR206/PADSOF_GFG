@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package store;
 
@@ -15,14 +15,14 @@ import java.time.*;
 public class Parameter {
 
 	private static final Parameter PARAM = new Parameter();
-	
+
 	private Period OfferTime;
 	private Period OrderTime;
 	private double valuationCost;
-	
+
 	/**
 	 * Creates parameter
-	 * 
+	 *
 	 */
 	private Parameter() {
 		OfferTime = Period.ofDays(5);
@@ -30,11 +30,11 @@ public class Parameter {
 		this.valuationCost = 10;
 	}
 
-/*--------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------------*/	
-	
+/*--------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------------*/
+
 	/**
 	 * Obtains the offer time
-	 * 
+	 *
 	 * @return the offerTime, the expiration time of the offer
 	 */
 	public Period getOfferTime() {
@@ -43,7 +43,7 @@ public class Parameter {
 
 	/**
 	 * Sets the expire time of an offer
-	 * 
+	 *
 	 * @param offerTime the offerTime to set
 	 */
 	private void setOfferTime(Period offerTime) {
@@ -52,7 +52,7 @@ public class Parameter {
 
 	/**
 	 * Obtains the expire time of an order
-	 * 
+	 *
 	 * @return the orderTime, the expiration time of an order
 	 */
 	public Period getOrderTime() {
@@ -61,7 +61,7 @@ public class Parameter {
 
 	/**
 	 * Obtains the expiration time of the order
-	 * 
+	 *
 	 * @param orderTime the orderTime to set
 	 */
 	private void setOrderTime(Period orderTime) {
@@ -70,7 +70,7 @@ public class Parameter {
 
 	/**
 	 * Obtains the valuation cost
-	 * 
+	 *
 	 * @return the valuationCost, the valuation cost
 	 */
 	public double getValuationCost() {
@@ -79,7 +79,7 @@ public class Parameter {
 
 	/**
 	 * Sets the cost of a valuation
-	 * 
+	 *
 	 * @param valuationCost the valuationCost to set
 	 */
 	private void setValuationCost(double valuationCost) {
@@ -93,37 +93,42 @@ public class Parameter {
 	public static Parameter getParam() {
 		return PARAM;
 	}
-	
-	
+
+
 /*------------------------------------------------------------------METHODS------------------------------------------------------------------*/
 	/**
 	 * Change the expiration of an offer
-	 * 
+	 *
 	 * @param newOfferTime, the new expiration time
 	 */
 	public void changeOfferTime(Period newOfferTime) {
 		this.setOfferTime(newOfferTime);
 	}
-	
+
 	/**
 	 * Change the expiration of an order
-	 * 
+	 *
 	 * @param newOrderTime, the new expiration time
 	 */
 	public void changeOrderTime(Period newOrderTime) {
 		this.setOrderTime(newOrderTime);
 	}
-	
+
 	/**
 	 * Change the valuation cost
-	 * 
+	 *
 	 * @param newCost, the new cost of a valuation
 	 */
 	public void changeValuationCost(double newCost) {
 		this.setValuationCost(newCost);
 	}
 
+	/**
+	 * It allows the parameter's to be saved
+	 * @return the parameter's info
+	 */
+	@Override
 	public String toString(){
-		return this.OfferTime + "|" + this.OrderTime + "|" + this.valuationCost;
+		return this.OfferTime + ";" + this.OrderTime + ";" + this.valuationCost;
 	}
 }

@@ -1,0 +1,35 @@
+[ Campos separados con ";", listados separados con "," ]
+
+[x] Parameters:
+    ---- Parameter ----
+    OFFER_TIME;ORDER_TIME;VAL_COST
+
+[ ] Categories:
+    ---- Category ----
+    NAME;REVENUE <- Products se rellena al crear los storeProducts
+
+[ ] StoreProducts:
+    ---- Product -----
+    PRODUCT_ID;
+    TYPE;ID;PRICE;NAME;DESC;PHOTO
+    ---- StoreProduct ----
+    + super;REVIEW_IDS;AVG_PUNCT;STOCK;DISC_IDS;CATEGORIES;ADDED_DATE
+    ---- Comic / Figurine / Game ----
+    + super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION
+
+[ ] SecondHandProducts:
+    ---- Product -----
+    PRODUCT_ID;
+    TYPE;ID;PRICE;NAME;DESC;PHOTO
+    ---- SecondHandProduct ----
+    + super;VAL_DATE;AVAILABLE;PAID_VAL;STATUS
+
+[ ] Discounts:
+
+[ ] Exchanges:
+
+[ ] Orders:
+
+[ ] Packs:
+
+[ ] Users:

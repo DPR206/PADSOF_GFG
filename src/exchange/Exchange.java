@@ -10,11 +10,10 @@ import store.Store;
 import user.*;
 
 /**
- * Class name: Exchange
- * <p>
- * Description: It implements the exchange
+ * It implements the exchange
  * @author Duna P.R.
  * @version 1.0
+ * File name: Exchange.java
  */
 public class Exchange {
     
@@ -33,6 +32,10 @@ public class Exchange {
      * 
 	 * @param date, the date it was exchanged
 	 * @param exchanged, whether the exchange was done
+	 * @param user1, the registered client that owns the products "products1"
+	 * @param products1, the products of user1
+	 * @param user2, the registered client that owns the products "products2"
+	 * @param products2, the products of user2
 	 */
 	public Exchange(LocalDateTime date, boolean exchanged, RegisteredClient user1, ArrayList<SecondHandProduct> products1,
 			RegisteredClient user2, ArrayList<SecondHandProduct> products2) {
@@ -49,6 +52,10 @@ public class Exchange {
 	 * Creates an exchange with the date
 	 * 
 	 * @param date, the date it will be exchanged
+	 * @param user1, the registered client that owns the products "products1"
+	 * @param products1, the products of user1
+	 * @param user2, the registered client that owns the products "products2"
+	 * @param products2, the products of user2
 	 */
 	public Exchange(LocalDateTime date, RegisteredClient user1, ArrayList<SecondHandProduct> products1,
 			RegisteredClient user2, ArrayList<SecondHandProduct> products2) {

@@ -3,9 +3,7 @@ package store;
 import exchange.Exchange;
 import order.Discount;
 import order.Order;
-import product.Category;
-import product.Pack;
-import product.Product;
+import product.*;
 import user.Manager;
 import user.User;
 import utilities.Utility;
@@ -40,8 +38,10 @@ public class Store {
     private List<Pack> packs = new ArrayList<>();
     /* The list of categories available */
     private HashMap<String, Category> categories = new HashMap<>();
-    /* The list of products that belong to the store */
-    private List<Product> products = new ArrayList<>();
+    /* The list of store products that belong to the store */
+    private List<StoreProduct> storeProducts = new ArrayList<>();
+    /* The list of second hand products that belong to the store */
+    private List<SecondHandProduct> secondHandProducts = new ArrayList<>();
     /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
@@ -177,11 +177,19 @@ public class Store {
     }
 
     /**
-     * Gets the list of the products available in the store
+     * Gets the list of the store products available in the store
      *
      */
-    public List<Product> getProducts() {
-        return this.products;
+    public List<StoreProduct> getStoreProducts() {
+        return this.storeProducts;
+    }
+
+    /**
+     * Gets the list of the second hand products available in the store
+     *
+     */
+    public List<SecondHandProduct> getSecondHandProducts() {
+        return this.secondHandProducts;
     }
 
     /**
@@ -202,11 +210,19 @@ public class Store {
     }
 
     /**
-     * Adds a new product to the store
+     * Adds a new store product to the store
      * @param product, the new product
      */
-    public void addProduct(Product product) {
-        this.products.add(product);
+    public void addStoreProduct(StoreProduct product) {
+        this.storeProducts.add(product);
+    }
+
+    /**
+     * Adds a new second hand product to the store
+     * @param product, the new product
+     */
+    public void addSecondHandProduct(SecondHandProduct product) {
+        this.secondHandProducts.add(product);
     }
 
     public void addPack(Pack p) {

@@ -36,19 +36,16 @@ public class StorePermission {
     public void addComic(double price, String name, String description, String photo, int stock, int numPages,
                          Year year, String author, String editorial, Category... categories) {
         Comic c = new Comic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
-        this.s.addProduct(c); // DUE
     }
 
     public void addGame(double price, String name, String description, String photo, int stock, int numPlayers,
                         String ageRange, GameStyle gameStyle, Category... categories) {
         Game g = new Game(price, name, description, photo, stock, numPlayers, ageRange, gameStyle, categories);
-        s.addProduct(g);
     }
 
     public void addFigurine(double price, String name, String description, String photo, int stock, String dimensions,
                             String brand, String material, Category... categories) {
         Figurine f = new Figurine(price, name, description, photo, stock, dimensions, brand, material, categories);
-        s.addProduct(f);
     }
 
     public boolean addProductByFile(String fileName) throws IOException {

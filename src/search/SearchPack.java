@@ -6,13 +6,13 @@ public class SearchPack extends SearchID{
 
     private List<Pack> packs;
 
-    public SearchPack(List<Pack> p){
-        this.packs = p;
+    public SearchPack(Store s){
+        this.packs = s.getPacks();
     }
-    
+
     @Override
     public Pack searchByID(int id){
-        for(Pack p: packs){
+        for(Pack p: this.packs){
             if(p.getId() == id) return p;
         }
         return null;

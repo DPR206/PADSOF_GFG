@@ -2,6 +2,7 @@ package product;
 
 import order.Discount;
 import order.Order;
+import store.Store;
 import user.RegisteredClient;
 
 import java.time.LocalDate;
@@ -69,8 +70,12 @@ public abstract class StoreProduct extends Product {
         this.categories = new HashMap<>();
         for (Category category : categories) {
             this.addCategory(category);
+            Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
+        Store.getInstance().addStoreProduct(this);
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It allows the system or an employee to add categories to a product
@@ -80,11 +85,10 @@ public abstract class StoreProduct extends Product {
         for (Category newCategory : newCategories) {
             if (!this.categories.containsKey(newCategory.getName())) {
                 this.categories.put(newCategory.getName(), newCategory);
+                Store.getInstance().getCategoryFromName(newCategory.getName()).addProduct(this);
             }
         }
     }
-
-    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It decreases the stock a certain value
@@ -121,6 +125,7 @@ public abstract class StoreProduct extends Product {
     public void removeCategory(Category... categories) {
         for (Category category : categories) {
             this.categories.remove(category.getName());
+            Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
     }
 

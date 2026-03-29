@@ -7,8 +7,7 @@ import product.*;
 import user.User;
 
 import java.io.*;
-import java.time.Period;
-import java.time.Year;
+import java.time.*;
 import java.util.*;
 
 /**
@@ -16,7 +15,7 @@ import java.util.*;
  * <p>
  * Description: It implements the store's saver and loader
  * @author Ana O.R. and Sofía C.L.
- * @version 1.2
+ * @version 1.4
  */
 public class SaverLoader {
 
@@ -152,7 +151,7 @@ public class SaverLoader {
             buffer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(".\\resources\\" + secondHandProductFilename + ".csv")));
 
-            buffer.write(""); // DUE
+            buffer.write("TYPE;ID;PRICE;NAME;DESC;PHOTO;VAL_DATE;AVAILABLE;PAID_VAL;STATUS");
             for (SecondHandProduct product : products) {
                 buffer.write(product.toString() + "\n");
             }
@@ -427,15 +426,15 @@ public class SaverLoader {
 
                 switch (type) {
                     case ProductType.COMIC:
-                        new Comic(price, name, description, photo, stock, numPages, year, author, editorial,
+                        new Comic(id, price, name, description, photo, stock, numPages, year, author, editorial,
                                 categories.toArray(new Category[0]));
                         break;
                     case ProductType.FIGURINE:
-                        new Figurine(price, name, description, photo, stock, dimension, brand, material,
+                        new Figurine(id, price, name, description, photo, stock, dimension, brand, material,
                                 categories.toArray(new Category[0]));
                         break;
                     case ProductType.GAME:
-                        new Game(price, name, description, photo, stock, numPlayers, ageRange, gameStyle,
+                        new Game(id, price, name, description, photo, stock, numPlayers, ageRange, gameStyle,
                                 categories.toArray(new Category[0]));
                         break;
                 }
@@ -457,10 +456,22 @@ public class SaverLoader {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + secondHandProductFilename + ".csv")));
 
-            buffer.readLine(); /*  */
+            buffer.readLine(); /* TYPE;ID;PRICE;NAME;DESC;PHOTO;VAL_DATE;AVAILABLE;PAID_VAL;STATUS */
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
-                // DUE
+                ProductType type = ProductType.valueOf(words[0]);
+                String id = words[1];
+                double price = Double.parseDouble(words[2]);
+                String name = words[3];
+                String description = words[4];
+                String photo = words[5];
+                LocalDate valuationDate = LocalDate.parse(words[6]);
+                boolean available = Boolean.parseBoolean(words[7]);
+                boolean paidValuation = Boolean.parseBoolean(words[8]);
+                ConservationStatus status = ConservationStatus.valueOf(words[9]);
+
+                new SecondHandProduct(id, price, name, description, photo, type, valuationDate, available,
+                        paidValuation, status);
             }
 
             buffer.close();

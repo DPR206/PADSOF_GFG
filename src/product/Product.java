@@ -5,7 +5,7 @@ package product;
  * <p>
  * Description: It implements the abstract Product class
  * @author Ana O.R.
- * @version 1.8
+ * @version 1.9
  */
 public abstract class Product {
     /** The global variable to determine which id should a new product have */
@@ -26,6 +26,34 @@ public abstract class Product {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
+     * A product's general constructor
+     * @param id          the product's id
+     * @param price       the product's price
+     * @param name        the product's name
+     * @param description the product's description
+     * @param photo       the product's photo's path
+     * @param type        the product's type
+     * @throws IllegalArgumentException price was negative
+     * @throws NullPointerException     name, description or photo's path were null
+     */
+    public Product(String id, double price, String name, String description, String photo, ProductType type)
+            throws IllegalArgumentException, NullPointerException {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+        if (name == null || description == null || photo == null) {
+            throw new NullPointerException("Expect non-null parameters but received one");
+        }
+
+        this.id = id;
+        this.price = price;
+        this.name = name;
+        this.description = description;
+        this.photo = photo;
+        this.type = type;
+    }
+
+    /**
      * A product's constructor
      * @param price       the product's price
      * @param name        the product's name
@@ -37,19 +65,7 @@ public abstract class Product {
      */
     public Product(double price, String name, String description, String photo, ProductType type)
             throws IllegalArgumentException, NullPointerException {
-        if (price < 0) {
-            throw new IllegalArgumentException("Price cannot be negative");
-        }
-        if (name == null || description == null || photo == null) {
-            throw new NullPointerException("Expect non-null parameters but received one");
-        }
-
-        this.id = type.getSymbol() + String.format("%06d", ++productId);
-        this.price = price;
-        this.name = name;
-        this.description = description;
-        this.photo = photo;
-        this.type = type;
+        this(type.getSymbol() + String.format("%06d", ++productId), price, name, description, photo, type);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

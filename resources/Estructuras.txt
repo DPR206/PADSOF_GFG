@@ -17,7 +17,7 @@
     ---- Comic / Figurine / Game ----
     + super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION
 
-[ ] SecondHandProducts:
+[x] SecondHandProducts:
     ---- Product -----
     PRODUCT_ID;
     TYPE;ID;PRICE;NAME;DESC;PHOTO

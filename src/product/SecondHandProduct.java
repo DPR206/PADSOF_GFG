@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * Class name: SecondHandProduct
  * <p>
  * Description: It implements the second-hand products
- * @author Duna P.R.
+ * @author Duna P.R. and Ana O.R.
  * @version 1.0
  * @see Product
  */
@@ -26,7 +26,31 @@ public class SecondHandProduct extends Product{
 
     /*----------------------------------------------------------CONSTRUCTORS------------------------------------------------------------------*/
 /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    /**
+	/**
+	 * A second-hand product's general constructor
+	 *
+	 * @param estimatedPrice, the estimated price of the product
+	 * @param name, the name of the product
+	 * @param description, the description of the product
+	 * @param photo, the photo of the product
+	 * @param type, the type of product
+	 * @param valuationDate, the date of the valuation
+	 * @param available, if the product is available
+	 * @param paidValuation, if the valuation is paid
+	 * @param status, the conservation status of the product
+	 */
+	public SecondHandProduct(String id, double estimatedPrice, String name, String description, String photo,
+							 ProductType type, LocalDate valuationDate, boolean available, boolean paidValuation,
+                             ConservationStatus status) {
+		super(id, estimatedPrice, name, description, photo, type);
+		this.valuationDate = valuationDate;
+		this.available = available;
+		this.paidValuation = paidValuation;
+		this.status = status;
+		Store.getInstance().addSecondHandProduct(this);
+	}
+
+	/**
      * Creates a new second-hand product
      *
 	 * @param estimatedPrice, the estimated price of the product

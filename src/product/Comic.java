@@ -7,7 +7,7 @@ import java.time.Year;
  * <p>
  * Description: It implements the comics
  * @author Ana O.R.
- * @version 1.5
+ * @version 1.6
  * @see StoreProduct
  */
 public class Comic extends StoreProduct {
@@ -21,6 +21,29 @@ public class Comic extends StoreProduct {
     private String editorial;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * A comic's general constructor
+     * @param id          the comic's id
+     * @param price       the comic's price
+     * @param name        the comic's name
+     * @param description the comic's description
+     * @param photo       the comic's photo's path
+     * @param stock       the comic's stock
+     * @param numPages    the comic's number of pages
+     * @param year        the comic's publishing year
+     * @param author      the comic's author
+     * @param editorial   the comic's editorial
+     * @param categories  the comic's categories
+     */
+    public Comic(String id, double price, String name, String description, String photo, int stock, int numPages,
+                 Year year, String author, String editorial, Category... categories) {
+        super(id, price, name, description, photo, ProductType.COMIC, stock, categories);
+        this.numPages = numPages;
+        this.year = year;
+        this.author = author;
+        this.editorial = editorial;
+    }
 
     /**
      * The comic's constructor

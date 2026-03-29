@@ -36,6 +36,40 @@ public abstract class StoreProduct extends Product {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
+     * A store product's general constructor
+     * @param price       the product's price
+     * @param name        the product's name
+     * @param description the product's description
+     * @param photo       the product's photo's path
+     * @param type        the product's product type
+     * @param stock       the product's stock
+     * @param categories  the product's categories
+     * @throws IllegalArgumentException price or stock were negative
+     * @throws NullPointerException     name, description or photo's path were null
+     */
+    StoreProduct(String id, double price, String name, String description, String photo, ProductType type, int stock,
+                 Category... categories) throws IllegalArgumentException, NullPointerException {
+
+        super(id, price, name, description, photo, type);
+
+        if (stock < 0) {
+            throw new IllegalArgumentException("Stock cannot be negative");
+        }
+
+        this.stock = stock;
+        this.reviews = new ArrayList<>();
+        this.averagePunctuation = 0;
+        this.discount = null;
+        this.categories = new HashMap<>();
+        for (Category category : categories) {
+            this.addCategory(category);
+            Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
+        }
+
+        Store.getInstance().addStoreProduct(this);
+    }
+
+    /**
      * Store product's constructor
      * @param price       the product's price
      * @param name        the product's name
@@ -51,13 +85,6 @@ public abstract class StoreProduct extends Product {
                  Category... categories) throws IllegalArgumentException, NullPointerException {
 
         super(price, name, description, photo, type);
-
-        //try {
-        //	super(price, name, description, photo, type);
-        //} catch (IllegalArgumentException arg){
-
-        //}
-        //super(price, name, description, photo, type);
 
         if (stock < 0) {
             throw new IllegalArgumentException("Stock cannot be negative");

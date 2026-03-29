@@ -1,6 +1,7 @@
 package exchange;
 
 import product.SecondHandProduct;
+import store.Store;
 import user.RegisteredClient;
 
 import java.time.*;
@@ -8,30 +9,59 @@ import java.util.*;
 
 /**
  * It implements the offers
- * 
  * @author Ana O.R.
- * @version 1.5
+ * @version 1.6
  * @see RegisteredClient
+ * @see SecondHandProduct
  */
 public class Offer {
-    /** The general id counter */
-    static int totalId = 0;
+    /** The global variable to determine which id should a new offer have */
+    static public int totalId = -1;
     /** The maximum amount of time an offer can be active for */
     static Period maxOfferPeriod = Period.ofDays(1);
+    /** The offer's id */
+    private final int id;
     /** The date and time when the offer was created */
     private final LocalDate creationDate;
     /** The client who made the offer */
     private final RegisteredClient origin;
     /** The client who received the offer */
     private final RegisteredClient destination;
-    /** The offer's id */
-    private final String id;
     /** The sender's and receiver's products */
     private HashMap<RegisteredClient, ArrayList<SecondHandProduct>> products = new HashMap<>();
     /** The offer's current status */
     private OfferStatus status;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * An offer's general constructor
+     * @param id                  the offer's id
+     * @param creationDate        the offer's creation date
+     * @param origin              the client who made the offer
+     * @param destination         the client who received the offer
+     * @param originProducts      the sender's products
+     * @param destinationProducts the receiver's products
+     * @param status              the offer's status
+     * @throws NullPointerException the null pointer exception
+     */
+    public Offer(int id, LocalDate creationDate, RegisteredClient origin, RegisteredClient destination,
+                 ArrayList<SecondHandProduct> originProducts, ArrayList<SecondHandProduct> destinationProducts,
+                 OfferStatus status) throws NullPointerException {
+        if (origin == null || destination == null) {
+            throw new NullPointerException("The input wasn't correctly provided");
+        }
+
+        this.id = id;
+        this.creationDate = creationDate;
+        this.origin = origin;
+        this.destination = destination;
+        this.products.put(origin, originProducts);
+        this.products.put(destination, destinationProducts);
+        this.status = status;
+
+        Store.getInstance().getOffers().add(this);
+    }
 
     /**
      * The offer's constructor when products are specified
@@ -43,15 +73,11 @@ public class Offer {
      */
     public Offer(RegisteredClient origin, RegisteredClient destination, ArrayList<SecondHandProduct> originProducts,
                  ArrayList<SecondHandProduct> destinationProducts) throws NullPointerException {
-        if (origin == null || destination == null || originProducts == null || destinationProducts == null) {
-            throw new NullPointerException("The input wasn't correctly provided");
-        }
-
-        this(LocalDate.now(), origin, destination, originProducts, destinationProducts, OfferStatus.PENDING);
+        this(++totalId, LocalDate.now(), origin, destination, originProducts, destinationProducts, OfferStatus.PENDING);
     }
 
     /**
-     * The offer's complete constructor
+     * The offer's complete constructor (without id)
      * @param creationDate        the offer's creation date
      * @param origin              the client who made the offer
      * @param destination         the client who received the offer
@@ -63,13 +89,7 @@ public class Offer {
     public Offer(LocalDate creationDate, RegisteredClient origin, RegisteredClient destination,
                  ArrayList<SecondHandProduct> originProducts, ArrayList<SecondHandProduct> destinationProducts,
                  OfferStatus status) throws NullPointerException {
-        if (origin == null || destination == null || originProducts == null || destinationProducts == null) {
-            throw new NullPointerException("The input wasn't correctly provided");
-        }
-
-        this(origin, destination);
-        this.products.put(origin, originProducts);
-        this.products.put(destination, destinationProducts);
+        this(++totalId, creationDate, origin, destination, originProducts, destinationProducts, status);
     }
 
     /**
@@ -79,15 +99,7 @@ public class Offer {
      * @throws NullPointerException the null pointer exception
      */
     public Offer(RegisteredClient origin, RegisteredClient destination) throws NullPointerException {
-        if (origin == null || destination == null) {
-            throw new NullPointerException("The input wasn't correctly provided");
-        }
-
-        this.id = String.format("%06d", ++totalId);
-        this.creationDate = LocalDate.now();
-        this.origin = origin;
-        this.destination = destination;
-        this.status = OfferStatus.PENDING;
+        this(++totalId, LocalDate.now(), origin, destination, null, null, OfferStatus.PENDING);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -105,7 +117,7 @@ public class Offer {
      * @param newTotalId the new total id
      */
     public static void setTotalId(int newTotalId) {
-        Offer.totalId = newTotalId;
+        totalId = newTotalId;
     }
 
     /**
@@ -206,8 +218,8 @@ public class Offer {
      * It gets the offer's id
      * @return the offer's id
      */
-    public String getId() {
-        return id;
+    public int getId() {
+        return this.id;
     }
 
     /**

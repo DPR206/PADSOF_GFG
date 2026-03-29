@@ -5,7 +5,7 @@ package product;
  * <p>
  * Description: It implements the figurines
  * @author Ana O.R.
- * @version 1.4
+ * @version 1.5
  * @see StoreProduct
  */
 public class Figurine extends StoreProduct {
@@ -17,6 +17,27 @@ public class Figurine extends StoreProduct {
     private String material;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * A figurine's general constructor
+     * @param id          the figurine's id
+     * @param price       the figurine's price
+     * @param name        the figurine's name
+     * @param description the figurine's description
+     * @param photo       the figurine's photo's path
+     * @param stock       the figurine's stock
+     * @param dimension   the figurine's dimension
+     * @param brand       the figurine's brand
+     * @param material    the figurine's material
+     * @param categories  the figurine's categories
+     */
+    public Figurine(String id, double price, String name, String description, String photo, int stock, String dimension,
+                    String brand, String material, Category... categories) {
+        super(id, price, name, description, photo, ProductType.FIGURINE, stock, categories);
+        this.dimension = dimension;
+        this.brand = brand;
+        this.material = material;
+    }
 
     /**
      * The figurine's constructor
@@ -99,7 +120,7 @@ public class Figurine extends StoreProduct {
     public String toString() {
         /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
         return super.toString() + ";" + /*num_pages*/ ";" + /*author*/ ";" + /*editorial*/ ";" + /*year*/
-               ";" /*num_players*/ + ";" /*ager_range*/ + ";" /*game_style*/ + ";" + this.brand + ";" + this.material + ";" +
-               this.dimension;
+               ";" /*num_players*/ + ";" /*ager_range*/ + ";" /*game_style*/ + ";" + this.brand + ";" + this.material +
+               ";" + this.dimension;
     }
 }

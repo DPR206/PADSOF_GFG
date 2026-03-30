@@ -29,18 +29,21 @@
     ---- SecondHandProduct ----
     + super;VAL_DATE;AVAILABLE;PAID_VAL;STATUS
 
-[x] Discounts:
+[ ] Discounts:
     ---- Discount ----
     {TOTAL_ID};
     TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE
 
+
+[ ] Packs:
+    ---- Pack ----
+    {TOTAL_ID}
+    ID;PRICE;PRODUCT_IDS;DATE_ADD_CART
 
 [ ] Exchanges:
 
 [ ] Offers:
 
 [ ] Orders:
-
-[ ] Packs:
 
 [ ] Users:

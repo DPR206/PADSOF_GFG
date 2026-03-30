@@ -19,6 +19,23 @@ public class FixedPerDisc extends Discount {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
+     * A fixed percentage discount's general constructor
+     * @param startDate  the date when the discount starts
+     * @param endDate    the date when the discount ends
+     * @param percentage the percentage deducted from a product's price
+     * @throws IllegalArgumentException the percentage wasn't between 0 and 100
+     */
+    public FixedPerDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double percentage,
+                        StoreProduct... products) throws IllegalArgumentException {
+        if (percentage < 0 || percentage > 100) {
+            throw new IllegalArgumentException("The percentage must be between 0% and 100%");
+        }
+
+        super(id, startDate, endDate, DiscountType.FIXED_PERCENTAGE, products);
+        this.percentage = percentage;
+    }
+
+    /**
      * Instantiates a new fixed percentage discount
      * @param startDate  the date when the discount starts
      * @param endDate    the date when the discount ends

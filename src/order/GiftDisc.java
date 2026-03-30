@@ -22,6 +22,20 @@ public class GiftDisc extends Discount {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
+     * A gift discount's general constructor
+     * @param startDate         the date when the discount starts
+     * @param endDate           the date when the discount ends
+     * @param spendingThreshold the spending threshold that allows the discount to take place
+     * @param gift              the product gifted to the client when a certain spending threshold is met
+     */
+    public GiftDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                    StoreProduct gift, StoreProduct... products) {
+        super(id, startDate, endDate, DiscountType.GIFT, products);
+        this.spendingThreshold = spendingThreshold;
+        this.gift = gift;
+    }
+
+    /**
      * Instantiates a new gift discount
      * @param startDate         the date when the discount starts
      * @param endDate           the date when the discount ends

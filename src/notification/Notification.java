@@ -13,6 +13,7 @@ public abstract class Notification {
 	private LocalDateTime timeMade;
 	private LocalDateTime timeReceived;
 	private boolean read;
+	private boolean visible;
 	
 	/**
 	 * @param title
@@ -20,22 +21,24 @@ public abstract class Notification {
 	 * @param timeMade
 	 * @param timeReceived
 	 * @param read
+	 * @param visible
 	 */
-	public Notification(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived, boolean read) {
+	public Notification(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived, boolean read, boolean visible) {
 		this.title = title;
 		this.text = text;
 		this.timeMade = timeMade;
 		this.timeReceived = timeReceived;
 		this.read = read;
+		this.visible = visible;
 	}
 	
-	public Notification(String title, String text, LocalDateTime timeReceived, boolean read) {
-		this(title, text, LocalDateTime.now(),timeReceived, read);
+	public Notification(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible) {
+		this(title, text, LocalDateTime.now(),timeReceived, read, visible);
 		
 	}
 	
-	public Notification(LocalDateTime timeReceived, boolean read) {
-		this("", "", LocalDateTime.now(),timeReceived, read);
+	public Notification(LocalDateTime timeReceived, boolean read, boolean visible) {
+		this("", "", LocalDateTime.now(),timeReceived, read, visible);
 		
 	}
 
@@ -109,8 +112,24 @@ public abstract class Notification {
 		this.read = read;
 	}
 	
+	/**
+	 * @return the visible
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * @param visible the visible to set
+	 */
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
+	
 /*-----------------------------------------------------------------METHODS--------------------------------------------------------*/
 	
+
 	public String timeLog() {
 		Duration duration = Duration.between(timeReceived, LocalDateTime.now());
 

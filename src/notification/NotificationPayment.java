@@ -2,18 +2,18 @@ package notification;
 
 import java.time.LocalDateTime;
 
-public class NotificationPayment extends Notification implements NotificationInterface{
+public class NotificationPayment extends Notification implements NotificationInterface<String>{
 
-	private String servicePaid;
+	//private String servicePaid;
 
 	/**
 	 * @param timeReceived
 	 * @param read
-	 * @param servicePaid
+	 * @param visible
 	 */
-	public NotificationPayment(LocalDateTime timeReceived, boolean read, String servicePaid) {
-		super(timeReceived, read);
-		this.servicePaid = servicePaid;
+	public NotificationPayment(LocalDateTime timeReceived, boolean read, boolean visible/*, String servicePaid*/) {
+		super(timeReceived, read, visible);
+		//this.servicePaid = servicePaid;
 	}
 
 	/**
@@ -21,11 +21,11 @@ public class NotificationPayment extends Notification implements NotificationInt
 	 * @param text
 	 * @param timeReceived
 	 * @param read
-	 * @param servicePaid
+	 * @param visible
 	 */
-	public NotificationPayment(String title, String text, LocalDateTime timeReceived, boolean read, String servicePaid) {
-		super(title, text, timeReceived, read);
-		this.servicePaid = servicePaid;
+	public NotificationPayment(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible/*, String servicePaid*/) {
+		super(title, text, timeReceived, read, visible);
+		//this.servicePaid = servicePaid;
 	}
 
 	/**
@@ -34,36 +34,37 @@ public class NotificationPayment extends Notification implements NotificationInt
 	 * @param timeMade
 	 * @param timeReceived
 	 * @param read
-	 * @param servicePaid
+	 * @param visible
 	 */
 	public NotificationPayment(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
-			boolean read, String servicePaid) {
-		super(title, text, timeMade, timeReceived, read);
-		this.servicePaid = servicePaid;
+			boolean read, boolean visible/*, String servicePaid*/) {
+		super(title, text, timeMade, timeReceived, read, visible);
+		//this.servicePaid = servicePaid;
 	}
 
 	/**
 	 * @return the servicePaid
 	 */
-	String getServicePaid() {
+	/*String getServicePaid() {
 		return servicePaid;
-	}
+	}*/
 
 	/**
 	 * @param servicePaid the servicePaid to set
 	 */
-	void setServicePaid(String servicePaid) {
+	/*void setServicePaid(String servicePaid) {
 		this.servicePaid = servicePaid;
+	}*/
+
+	@Override
+	public String FullNotification(String o) {
+		String text = "Your payment for " + o + " was completed successfully. Once your purchase is ready you'll receive a new notification\n";
+		this.setText(text);
+		return this.SnippetNotification(o) + this.getText() + this.signOff();
 	}
 
 	@Override
-	public String FullNotification(Object o) {
-		
-		return this.SnippetNotification(o) + this.signOff();
-	}
-
-	@Override
-	public String SnippetNotification(Object o) {
+	public String SnippetNotification(String o) {
 		this.setTitle("Your payment was succesful\n");
 		return this.getTitle() + this.timeLog();
 	}

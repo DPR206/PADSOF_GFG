@@ -9,9 +9,10 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	/**
 	 * @param timeReceived
 	 * @param read
+	 * @param visible
 	 */
-	public NotificationNewSecondHand(LocalDateTime timeReceived, boolean read) {
-		super(timeReceived, read);
+	public NotificationNewSecondHand(LocalDateTime timeReceived, boolean read, boolean visible) {
+		super(timeReceived, read, visible);
 		
 	}
 
@@ -20,9 +21,10 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	 * @param text
 	 * @param timeReceived
 	 * @param read
+	 * @param visible
 	 */
-	public NotificationNewSecondHand(String title, String text, LocalDateTime timeReceived, boolean read) {
-		super(title, text, timeReceived, read);
+	public NotificationNewSecondHand(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible) {
+		super(title, text, timeReceived, read, visible);
 		
 	}
 
@@ -32,10 +34,11 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	 * @param timeMade
 	 * @param timeReceived
 	 * @param read
+	 * @param visible
 	 */
 	public NotificationNewSecondHand(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
-			boolean read) {
-		super(title, text, timeMade, timeReceived, read);
+			boolean read, boolean visible) {
+		super(title, text, timeMade, timeReceived, read, visible);
 		
 	}
 

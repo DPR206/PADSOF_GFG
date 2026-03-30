@@ -23,12 +23,13 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param text
 	 * @param timeReceived
 	 * @param read
+	 * @param visble
 	 * @param address
 	 * @param timeAndDate
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeReceived, 
-			boolean read, String address, LocalDateTime timeAndDate) {
-		super(title, text, timeReceived, read);
+			boolean read, boolean visible, String address, LocalDateTime timeAndDate) {
+		super(title, text, timeReceived, read, visible);
 		this.address = address;
 		this.timeAndDate = timeAndDate;
 	}
@@ -39,12 +40,13 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param timeMade
 	 * @param timeReceived
 	 * @param read
+	 * @param visible
 	 * @param address
 	 * @param timeAndDate
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
-			boolean read, String address, LocalDateTime timeAndDate) {
-		super(title, text, timeMade, timeReceived, read);
+			boolean read, boolean visible, String address, LocalDateTime timeAndDate) {
+		super(title, text, timeMade, timeReceived, read, visible);
 		this.address = address;
 		this.timeAndDate = timeAndDate;
 	}
@@ -55,10 +57,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param timeMade
 	 * @param timeReceived
 	 * @param read
+	 * @param visible
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
-			boolean read) {
-		super(title, text, timeMade, timeReceived, read);
+			boolean read, boolean visible) {
+		super(title, text, timeMade, timeReceived, read, visible);
 		this.address = null;
 		this.timeAndDate = null;
 	}
@@ -69,8 +72,8 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param timeReceived
 	 * @param read
 	 */
-	public NotificationExchange(LocalDateTime timeReceived, boolean read) {
-		super(timeReceived, read);
+	public NotificationExchange(LocalDateTime timeReceived, boolean read, boolean visible) {
+		super(timeReceived, read, visible);
 		this.address = null;
 		this.timeAndDate = null;
 	}

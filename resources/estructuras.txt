@@ -53,17 +53,20 @@ Se guardan y leen en este orden:
     ---- FixedPerDisc / GiftDisc / QuantityDisc / VolumeDisc ----
     + super;PERCENTAGE;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION
 
+> NOTE: Para enlazar offers y exchanges con los clientes creo que es mejor hacerlo a través de los histories
+
 [x] Offers:
     ---- Offer ----
     {TOTAL_ID}
-    ID;CREATION_DATE;ORIGIN;DESTINATION;ORIGIN_PRODUCTS;DESTINATION_PRODUCTS;STATUS
+    ID;CREATION_DATE;ORIGIN;DESTINATION;ORIGIN_PRODUCTS;DESTINATION_PRODUCTS;STATUS <- Requiere preexistencia usuarios!!
 
 [x] Exchanges:
     ---- Exchange ----
     {TOTAL_ID}
-    ID;DATE;EXCHANGED;ORIGIN;DESTINATION;ORIGIN_PRODS;DESTINATION_PRODS
-
+    ID;DATE;EXCHANGED;ORIGIN;DESTINATION;ORIGIN_PRODS;DESTINATION_PRODS <- Requiere preexistencia usuarios!!
 
 [ ] Orders:
+    ---- Order ----
+    {TOTAL_ID}
 
 [ ] Users:

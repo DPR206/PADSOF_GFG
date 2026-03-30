@@ -6,6 +6,7 @@ package notification;
 import java.time.LocalDateTime;
 
 import order.*;
+import store.Parameter;
 
 /**
  * 
@@ -47,12 +48,17 @@ public class NotificationCart extends Notification implements NotificationInterf
 
 	@Override
 	public String FullNotification(Cart o) {
-		return null;
+		String text = "The products/packs in your cart have expired after " + Parameter.getParam().getOrderTime() 
+						+ " days, and they have been removed.\n";
+		this.setText(text);
+		return this.SnippetNotification(o) + this.getText() + this.signOff();
 	}
 
 	@Override
 	public String SnippetNotification(Cart o) {
-		return null;
+		String title = "Your cart has expired\n";
+		this.setTitle(title);
+		return this.getTitle() + this.timeLog();
 	}
 
 	

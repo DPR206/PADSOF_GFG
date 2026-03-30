@@ -87,7 +87,7 @@ public class NotificationExchange extends Notification implements NotificationIn
 			case OfferStatus.EXPIRED: text += " has expired after " + Parameter.getParam().getOfferTime() 
 												+ " have passed since its publication. You can make the same offer or a new one altogether"; 
 												break;
-			default: this.setTitle("Not valid\n");
+			default: text = "Not valid\n";
 		}
 		
 		this.setText(text);

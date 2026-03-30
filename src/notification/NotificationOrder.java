@@ -45,7 +45,12 @@ public class NotificationOrder extends Notification implements NotificationInter
 	public String FullNotification(Order o) {
 		String text = "";
 		switch(o.getState()) {
-		 case OrderState.PAID: text += "" ;
+		 case OrderState.PAID: text += "Your order with price " + o.getPrice() + "has been paid successfully. "
+		 								+ "Once your order is ready you will a receive a notification.\n"; break;
+		 case OrderState.READY_TO_PICKUP: text += "Your order is ready to pickup. Your pikcup code is: " + NotificationOrder.pickupCode;
+		 									pickupCode++;
+		 									break;
+		 default: text = "Not valid\n";
 		}
 		return this.SnippetNotification(o) + text + this.signOff();
 	}

@@ -5,8 +5,7 @@ import exchange.Offer;
 import order.Discount;
 import order.Order;
 import product.*;
-import user.Manager;
-import user.User;
+import user.*;
 import utilities.Utility;
 
 import java.util.*;
@@ -31,6 +30,8 @@ public class Store {
     private List<Discount> discounts = new ArrayList<>();
     /* The list of all offers done in the store */
     private List<Offer> offers = new ArrayList<>();
+    /* The list of all the store's reviews */
+    private List<Review> reviews = new ArrayList<>();
     /* The list of all exchanges done in the store */
     private List<Exchange> exchanges = new ArrayList<>();
     /* The list of orders that have been completed */
@@ -45,6 +46,8 @@ public class Store {
     private HashMap<String, SecondHandProduct> secondHandProducts = new HashMap<>();
     /* The list users ordered by username */
     private Map<String, User> users = new HashMap<>();
+    /* The list of registered clients ordered by username */
+    private HashMap<String, RegisteredClient> registeredClients = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
     private Utility extras;
 
@@ -157,6 +160,14 @@ public class Store {
     }
 
     /**
+     * Gets the list of the reviews of the store
+     *
+     */
+    public List<Review> getReviews() {
+        return this.reviews;
+    }
+
+    /**
      * Gets the list of the offers of the store
      *
      */
@@ -218,6 +229,14 @@ public class Store {
      */
     public Map<String, User> getUsers() {
         return this.users;
+    }
+
+    /**
+     * Gets the list of the store's registered clients
+     *
+     */
+    public HashMap<String, RegisteredClient> getRegisteredClients() {
+        return this.registeredClients;
     }
 
     /**

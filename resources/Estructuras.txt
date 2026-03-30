@@ -8,25 +8,30 @@
     ---- Category ----
     NAME;REVENUE <- Products se rellena al crear los storeProducts
 
+[x] Reviews:
+    * ---- Review ----
+    {TOTAL_ID};
+    ID;SCORING;COMMENT;AUTHOR <- Los autores se guardan para los "finishing touches"
+
 [x] StoreProducts:
     ---- Product -----
-    PRODUCT_ID;
+    {TOTAL_ID};
     TYPE;ID;PRICE;NAME;DESC;PHOTO
     ---- StoreProduct ----
-    + super;REVIEW_IDS;AVG_PUNCT;STOCK;DISC_IDS;CATEGORIES;ADDED_DATE
+    + super;REVIEW_IDS;AVG_PUNCT;STOCK;CATEGORIES;ADDED_DATE <- Discount se rellena al crear los Discounts
     ---- Comic / Figurine / Game ----
     + super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION
 
 [x] SecondHandProducts:
     ---- Product -----
-    PRODUCT_ID;
+    {TOTAL_ID};
     TYPE;ID;PRICE;NAME;DESC;PHOTO
     ---- SecondHandProduct ----
     + super;VAL_DATE;AVAILABLE;PAID_VAL;STATUS
 
 [x] Discounts:
     ---- Discount ----
-    TOTAL_ID;
+    {TOTAL_ID};
     TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE
 
 

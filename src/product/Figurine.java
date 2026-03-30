@@ -1,11 +1,13 @@
 package product;
 
+import java.time.LocalDate;
+
 /**
  * Class name: Figurine
  * <p>
  * Description: It implements the figurines
  * @author Ana O.R.
- * @version 1.5
+ * @version 1.6
  * @see StoreProduct
  */
 public class Figurine extends StoreProduct {
@@ -31,9 +33,11 @@ public class Figurine extends StoreProduct {
      * @param material    the figurine's material
      * @param categories  the figurine's categories
      */
-    public Figurine(String id, double price, String name, String description, String photo, int stock, String dimension,
-                    String brand, String material, Category... categories) {
-        super(id, price, name, description, photo, ProductType.FIGURINE, stock, categories);
+    public Figurine(String id, double price, String name, String description, String photo, double averagePunctuation,
+                    LocalDate addedDate, int stock, String dimension, String brand, String material,
+                    Category... categories) {
+        super(id, price, name, description, photo, averagePunctuation, addedDate, ProductType.FIGURINE, stock,
+                categories);
         this.dimension = dimension;
         this.brand = brand;
         this.material = material;

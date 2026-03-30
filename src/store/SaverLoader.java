@@ -1,9 +1,9 @@
 package store;
 
-import exchange.Exchange;
-import exchange.Offer;
+import exchange.*;
 import order.*;
 import product.*;
+import user.RegisteredClient;
 import user.User;
 
 import java.io.*;
@@ -267,7 +267,7 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + offersFilename + ".csv")));
 
-            buffer.write(""); // DUE
+            buffer.write("ID;CREATION_DATE;ORIGIN;DESTINATION;ORIGIN_PRODUCTS;DESTINATION_PRODUCTS;STATUS");
             buffer.write(Offer.totalId); /* Global ID */
 
             for (Offer offer : offers) {
@@ -294,7 +294,7 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + exchangesFilename + ".csv")));
 
-            buffer.write(""); // DUE
+            buffer.write("ID;DATE;EXCHANGED;ORIGIN;DESTINATION;ORIGIN_PRODS;DESTINATION_PRODS"); // DUE
             buffer.write(Exchange.totalId); /* Global ID */
 
             for (Exchange exchange : exchanges) {
@@ -677,7 +677,7 @@ public class SaverLoader {
                 words = productsString.split(",");
                 while (words[i] != null) {
                     String productId = words[i];
-                    products.add(Store.getInstance().getProductFromId(productId));
+                    products.add(Store.getInstance().getStoreProductFromId(productId));
                     i++;
                 }
 
@@ -721,7 +721,7 @@ public class SaverLoader {
                 String productsString = words[4];
                 boolean overWhole = Boolean.parseBoolean(words[5]);
                 double percentage = Double.parseDouble(words[6]);
-                String giftId = words[7];
+                StoreProduct gift = Store.getInstance().getStoreProductFromId(words[7]);
                 double spendingThreshold = Double.parseDouble(words[8]);
                 int numProds = Integer.parseInt(words[9]);
                 double deduction = Double.parseDouble(words[10]);
@@ -729,7 +729,7 @@ public class SaverLoader {
                 words = productsString.split(",");
                 while (words[i] != null) {
                     String productId = words[i];
-                    products.add(Store.getInstance().getProductFromId(productId));
+                    products.add(Store.getInstance().getStoreProductFromId(productId));
                     i++;
                 }
 
@@ -738,8 +738,8 @@ public class SaverLoader {
                         new FixedPerDisc(id, startDate, endDate, percentage, products.toArray(new StoreProduct[0]));
                         break;
                     case DiscountType.GIFT:
-                        new GiftDisc(id, startDate, endDate, spendingThreshold,
-                                Store.getInstance().getProductFromId(giftId), products.toArray(new StoreProduct[0]));
+                        new GiftDisc(id, startDate, endDate, spendingThreshold, gift,
+                                products.toArray(new StoreProduct[0]));
                         break;
                     case DiscountType.QUANTITY:
                         new QuantityDisc(id, startDate, endDate, numProds, deduction,
@@ -768,17 +768,42 @@ public class SaverLoader {
         BufferedReader buffer;
         String[] words;
         String line;
+        int i = 0;
+        ArrayList<SecondHandProduct> originProducts = new ArrayList<>();
+        ArrayList<SecondHandProduct> destinationProducts = new ArrayList<>();
 
         try {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + offersFilename + ".csv")));
 
-            buffer.readLine(); /*  */
+            buffer.readLine(); /* ID;CREATION_DATE;ORIGIN;DESTINATION;ORIGIN_PRODUCTS;DESTINATION_PRODUCTS;STATUS */
             Offer.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
 
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
-                // DUE
+                int id = Integer.parseInt(words[0]);
+                LocalDate creationDate = LocalDate.parse(words[1]);
+                RegisteredClient origin = Store.getInstance().getRegisteredClients().get(words[2]);
+                RegisteredClient destination = Store.getInstance().getRegisteredClients().get(words[3]);
+                String originProdsString = words[4];
+                String destinationProdsString = words[5];
+                OfferStatus status = OfferStatus.valueOf(words[6]);
+
+                words = originProdsString.split(",");
+                while (words[i] != null) {
+                    String productId = words[i];
+                    originProducts.add(Store.getInstance().getSecondHandProductFromId(productId));
+                    i++;
+                }
+
+                words = destinationProdsString.split(",");
+                while (words[i] != null) {
+                    String productId = words[i];
+                    destinationProducts.add(Store.getInstance().getSecondHandProductFromId(productId));
+                    i++;
+                }
+
+                new Offer(id, creationDate, origin, destination, originProducts, destinationProducts, status);
             }
 
             buffer.close();
@@ -797,17 +822,42 @@ public class SaverLoader {
         BufferedReader buffer;
         String[] words;
         String line;
+        int i = 0;
+        ArrayList<SecondHandProduct> originProducts = new ArrayList<>();
+        ArrayList<SecondHandProduct> destinationProducts = new ArrayList<>();
 
         try {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + exchangesFilename + ".csv")));
 
-            buffer.readLine(); /*  */
+            buffer.readLine(); /* ID;DATE;EXCHANGED;ORIGIN;DESTINATION;ORIGIN_PRODS;DESTINATION_PRODS */
             Exchange.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
 
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
-                // DUE
+                int id = Integer.parseInt(words[0]);
+                LocalDateTime date = LocalDateTime.parse(words[1]);
+                boolean exchanged = Boolean.parseBoolean(words[2]);
+                RegisteredClient origin = Store.getInstance().getRegisteredClients().get(words[3]);
+                RegisteredClient destination = Store.getInstance().getRegisteredClients().get(words[4]);
+                String originProdsString = words[5];
+                String destinationProdsString = words[6];
+
+                words = originProdsString.split(",");
+                while (words[i] != null) {
+                    String productId = words[i];
+                    originProducts.add(Store.getInstance().getSecondHandProductFromId(productId));
+                    i++;
+                }
+
+                words = destinationProdsString.split(",");
+                while (words[i] != null) {
+                    String productId = words[i];
+                    destinationProducts.add(Store.getInstance().getSecondHandProductFromId(productId));
+                    i++;
+                }
+
+                new Exchange(id, date, exchanged, origin, originProducts, destination, destinationProducts);
             }
 
             buffer.close();

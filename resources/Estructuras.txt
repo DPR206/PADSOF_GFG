@@ -22,12 +22,12 @@ Se guardan y leen en este orden:
 
 [x] Reviews:
     * ---- Review ----
-    {TOTAL_ID};
+    {TOTAL_ID}
     ID;SCORING;COMMENT;AUTHOR <- Los autores se guardan para los "finishing touches"
 
 [x] StoreProducts:
     ---- Product -----
-    {TOTAL_ID};
+    {TOTAL_ID}
     TYPE;ID;PRICE;NAME;DESC;PHOTO
     ---- StoreProduct ----
     + super;REVIEW_IDS;AVG_PUNCT;STOCK;CATEGORIES;ADDED_DATE <- Discount se rellena al crear los Discounts
@@ -36,7 +36,7 @@ Se guardan y leen en este orden:
 
 [x] SecondHandProducts:
     ---- Product -----
-    {TOTAL_ID};
+    {TOTAL_ID}
     TYPE;ID;PRICE;NAME;DESC;PHOTO
     ---- SecondHandProduct ----
     + super;VAL_DATE;AVAILABLE;PAID_VAL;STATUS
@@ -48,14 +48,21 @@ Se guardan y leen en este orden:
 
 [x] Discounts:
     ---- Discount ----
-    {TOTAL_ID};
+    {TOTAL_ID}
     TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE
     ---- FixedPerDisc / GiftDisc / QuantityDisc / VolumeDisc ----
     + super;PERCENTAGE;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION
 
-[ ] Offers:
+[x] Offers:
+    ---- Offer ----
+    {TOTAL_ID}
+    ID;CREATION_DATE;ORIGIN;DESTINATION;ORIGIN_PRODUCTS;DESTINATION_PRODUCTS;STATUS
 
-[ ] Exchanges:
+[x] Exchanges:
+    ---- Exchange ----
+    {TOTAL_ID}
+    ID;DATE;EXCHANGED;ORIGIN;DESTINATION;ORIGIN_PRODS;DESTINATION_PRODS
+
 
 [ ] Orders:
 

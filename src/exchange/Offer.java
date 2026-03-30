@@ -1,24 +1,24 @@
 package exchange;
 
 import product.SecondHandProduct;
+import store.Parameter;
 import store.Store;
 import user.RegisteredClient;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
  * It implements the offers
  * @author Ana O.R.
- * @version 1.6
+ * @version 1.7
  * @see RegisteredClient
  * @see SecondHandProduct
  */
 public class Offer {
     /** The global variable to determine which id should a new offer have */
     static public int totalId = -1;
-    /** The maximum amount of time an offer can be active for */
-    static Period maxOfferPeriod = Period.ofDays(1);
     /** The offer's id */
     private final int id;
     /** The date and time when the offer was created */
@@ -124,7 +124,7 @@ public class Offer {
      * It checks if the offer has surpassed the maximum amount of time an offer can be active for
      */
     public void checkExpiration() {
-        LocalDate expirationDate = this.creationDate.plus(maxOfferPeriod);
+        LocalDate expirationDate = this.creationDate.plus(Parameter.getParam().getOfferTime());
         if (LocalDate.now().isAfter(expirationDate)) {
             this.status = OfferStatus.EXPIRED;
         }
@@ -212,8 +212,6 @@ public class Offer {
         this.products.put(this.destination, newDestinationProducts);
     }
 
-    /* origin is final thus has no setters */
-
     /**
      * It gets the offer's id
      * @return the offer's id
@@ -222,26 +220,7 @@ public class Offer {
         return this.id;
     }
 
-    /**
-     * It gets the maximum amount of time an offer can be active for
-     * @return the maximum amount of time an offer can be active for
-     */
-    public Period getMaxOfferPeriod() {
-        return maxOfferPeriod;
-    }
-
-    /**
-     * It sets the maximum amount of time an offer can be active for
-     * @param newMaxOfferPeriod the new maximum amount of time an offer can be active for
-     * @throws NullPointerException the new period was null
-     */
-    public static void setMaxOfferPeriod(Period newMaxOfferPeriod) throws NullPointerException {
-        if (newMaxOfferPeriod == null) {
-            throw new NullPointerException("The new period was null");
-        }
-
-        Offer.maxOfferPeriod = newMaxOfferPeriod;
-    }
+    /* origin is final thus has no setters */
 
     /**
      * It gets the client who made the offer
@@ -251,8 +230,6 @@ public class Offer {
         return this.origin;
     }
 
-    /* destination is final thus has no setters */
-
     /**
      * It gets the sender's products
      * @return the sender's products
@@ -260,6 +237,8 @@ public class Offer {
     public ArrayList<SecondHandProduct> getOriginProducts() {
         return this.products.get(this.origin);
     }
+
+    /* destination is final thus has no setters */
 
     /**
      * It sets the origin client's products.
@@ -280,6 +259,28 @@ public class Offer {
         }
 
         this.products.put(this.destination, (ArrayList<SecondHandProduct>) Arrays.stream(newOriginProducts).toList());
+    }
+
+    /**
+     * It returns the offer's products in a save-file-friendly manner
+     * @return a string containing the offer's products' id
+     */
+    public String getPrintProducts() {
+        StringBuilder sb = new StringBuilder();
+
+        ArrayList<SecondHandProduct> clientProducts = this.products.get(this.origin);
+        for (SecondHandProduct product : clientProducts) {
+            sb.append(product.getId()).append(",");
+        }
+
+        sb.append(";");
+
+        clientProducts = this.products.get(this.destination);
+        for (SecondHandProduct product : clientProducts) {
+            sb.append(product.getId()).append(",");
+        }
+
+        return sb.toString();
     }
 
     /**
@@ -318,9 +319,8 @@ public class Offer {
 
     @Override
     public String toString() {
-        // DUE
-        return "Offer{" + "creationDate=" + creationDate + ", origin=" + origin + ", destination=" + destination +
-               ", originProducts=" + this.products.get(this.origin).toString() + ", destinationProducts=" +
-               this.products.get(this.destination).toString() + ", status=" + status + '}';
+        /* ID;CREATION_DATE;ORIGIN;DESTINATION;ORIGIN_PRODUCTS;DESTINATION_PRODUCTS;STATUS */
+        return this.id + ";" + this.creationDate + ";" + this.origin + ";" + this.destination + ";" +
+               this.getPrintProducts() + ";" + this.status;
     }
 }

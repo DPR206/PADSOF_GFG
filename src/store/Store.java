@@ -86,9 +86,21 @@ public class Store {
      * @param productId the desired store product's id
      * @return the desired product
      */
-    public StoreProduct getProductFromId(String productId) {
+    public StoreProduct getStoreProductFromId(String productId) {
         if (this.storeProducts.containsKey(productId)) {
             return this.storeProducts.get(productId);
+        }
+        return null;
+    }
+
+    /**
+     * It gets a second-hand product from its id
+     * @param productId the desired second-hand product's id
+     * @return the desired product
+     */
+    public SecondHandProduct getSecondHandProductFromId(String productId) {
+        if (this.secondHandProducts.containsKey(productId)) {
+            return this.secondHandProducts.get(productId);
         }
         return null;
     }

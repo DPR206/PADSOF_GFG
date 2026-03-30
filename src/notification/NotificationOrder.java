@@ -41,13 +41,14 @@ public class NotificationOrder extends Notification implements NotificationInter
 
 	@Override
 	public String FullNotification(Order o) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String SnippetNotification(Order o) {
-		// TODO Auto-generated method stub
+		String defaultTitle = "Your order ";
+		
 		return null;
 	}
 	

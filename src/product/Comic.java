@@ -1,5 +1,6 @@
 package product;
 
+import java.time.LocalDate;
 import java.time.Year;
 
 /**
@@ -7,7 +8,7 @@ import java.time.Year;
  * <p>
  * Description: It implements the comics
  * @author Ana O.R.
- * @version 1.6
+ * @version 1.7
  * @see StoreProduct
  */
 public class Comic extends StoreProduct {
@@ -36,9 +37,10 @@ public class Comic extends StoreProduct {
      * @param editorial   the comic's editorial
      * @param categories  the comic's categories
      */
-    public Comic(String id, double price, String name, String description, String photo, int stock, int numPages,
-                 Year year, String author, String editorial, Category... categories) {
-        super(id, price, name, description, photo, ProductType.COMIC, stock, categories);
+    public Comic(String id, double price, String name, String description, String photo, double averagePunctuation,
+                 LocalDate addedDate, int stock, int numPages, Year year, String author, String editorial,
+                 Category... categories) {
+        super(id, price, name, description, photo, averagePunctuation, addedDate, ProductType.COMIC, stock, categories);
         this.numPages = numPages;
         this.year = year;
         this.author = author;

@@ -114,6 +114,32 @@ public class SaverLoader {
     }
 
     /**
+     * It allows for the store's reviews to be saved
+     * @param reviewsFilename the desired filename for the store's reviews' backup
+     * @throws IOException something went wrong when writing
+     */
+    private void saveReviews(String reviewsFilename) throws IOException {
+        BufferedWriter buffer;
+        List<Review> reviews = Store.getInstance().getReviews();
+
+        try {
+            buffer = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + reviewsFilename + ".csv")));
+
+            buffer.write("ID;SCORING;COMMENT;AUTHOR");
+            buffer.write(Review.totalId); /* Global ID */
+            for (Review review : reviews) {
+                buffer.write(review.toString() + "\n");
+            }
+
+            buffer.close();
+
+        } catch (IOException e) {
+            throw new IOException(e.getMessage());
+        }
+    }
+
+    /**
      * It allows for the store's store products to be saved
      * @param storeProductFilename the desired filename for the store's store product's backup
      * @throws IOException something went wrong when writing
@@ -341,13 +367,16 @@ public class SaverLoader {
      * @param userFilename              the name of the users' backup
      * @throws IOException something went wrong when reading
      */
-    public void loadStore(String parameterFilename, String discountsFilename, String offersFilename,
+    public void loadStore(String parameterFilename, String categoriesFilename, String reviewsFilename,
+                          String discountsFilename, String storeProductFilename, String offersFilename,
                           String exchangesFilename, String ordersFilename, String packsFilename,
-                          String categoriesFilename, String storeProductFilename, String secondHandProductFilename,
-                          String userFilename) throws IOException {
+                          String secondHandProductFilename, String userFilename) throws IOException {
+        HashMap<Review, String> reviewAuthors = new HashMap<>();
+
         try {
             loadParameters(parameterFilename);
             loadCategories(categoriesFilename);
+            loadReviews(reviewsFilename);
             loadStoreProducts(storeProductFilename);
             loadSecondHandProducts(secondHandProductFilename);
             loadDiscounts(discountsFilename);
@@ -429,6 +458,32 @@ public class SaverLoader {
     }
 
     /**
+     * It allows for the store's reviews to be loaded
+     * @param reviewsFilename the filename of the store's reviews' backup
+     * @throws IOException something went wrong when reading
+     */
+    private void loadReviews(String reviewsFilename) throws IOException {
+        BufferedReader buffer;
+        String[] words;
+        String line;
+
+        try {
+            buffer = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + reviewsFilename + ".csv")));
+
+            buffer.readLine(); /*  */
+            while ((line = buffer.readLine()) != null) {
+                // DUE
+            }
+
+            buffer.close();
+
+        } catch (IOException e) {
+            throw new IOException(e.getMessage());
+        }
+    }
+
+    /**
      * It allows for the store's store products to be loaded
      * @param storeProductFilename the filename of the store's store products' backup
      * @throws IOException something went wrong when reading
@@ -445,29 +500,33 @@ public class SaverLoader {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + storeProductFilename + ".csv")));
 
-            buffer.readLine(); /* TYPE;ID;NAME;DESCRIPTION;PHOTO;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;
-            PLAYER;AGE;STYLE;BRAND;MATERIAL;DIMENSION */
+            buffer.readLine(); /* TYPE;ID;PRICE;NAME;DESC;PHOTO;REVIEW_IDS;AVG_PUNCT;STOCK;CATEGORIES;ADDED_DATE;
+            NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
+
             Product.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 ProductType type = ProductType.valueOf(words[0]);
                 String id = words[1];
-                String name = words[2];
-                String description = words[3];
-                String photo = words[4];
-                double price = Double.parseDouble(words[5]);
-                int stock = Integer.parseInt(words[6]);
-                String categoriesString = words[7]; // DUE: Parse this
-                int numPages = Integer.parseInt(words[8]);
-                String author = words[9];
-                String editorial = words[10];
-                Year year = Year.parse(words[11]);
-                int numPlayers = Integer.parseInt(words[12]);
-                String ageRange = words[13];
-                GameStyle gameStyle = GameStyle.valueOf(words[14]);
-                String brand = words[15];
-                String material = words[16];
-                String dimension = words[17];
+                double price = Double.parseDouble(words[3]);
+                String name = words[4];
+                String description = words[5];
+                String photo = words[6];
+                String reviewIds = words[7]; // DUE: Parse this
+                double averagePunctuation = Double.parseDouble(words[8]);
+                int stock = Integer.parseInt(words[9]);
+                String categoriesString = words[10];
+                LocalDate addedDate = LocalDate.parse(words[11]);
+                int numPages = Integer.parseInt(words[12]);
+                String author = words[13];
+                String editorial = words[14];
+                Year year = Year.parse(words[15]);
+                int numPlayers = Integer.parseInt(words[16]);
+                String ageRange = words[17];
+                GameStyle gameStyle = GameStyle.valueOf(words[18]);
+                String brand = words[19];
+                String material = words[20];
+                String dimension = words[21];
 
                 words = categoriesString.split(",");
                 while (words[i] != null) {
@@ -478,16 +537,39 @@ public class SaverLoader {
 
                 switch (type) {
                     case ProductType.COMIC:
-                        new Comic(id, price, name, description, photo, stock, numPages, year, author, editorial,
-                                categories.toArray(new Category[0]));
+                        Comic comic =
+                                new Comic(id, price, name, description, photo, averagePunctuation, addedDate, stock,
+                                        numPages, year, author, editorial, categories.toArray(new Category[0]));
+
+                        words = reviewIds.split(",");
+                        while (words[i] != null) {
+                            Review review = Store.getInstance().getReviews().get(Integer.parseInt(words[i]));
+                            comic.addReview(review);
+                        }
+
                         break;
                     case ProductType.FIGURINE:
-                        new Figurine(id, price, name, description, photo, stock, dimension, brand, material,
-                                categories.toArray(new Category[0]));
+                        Figurine figurine =
+                                new Figurine(id, price, name, description, photo, averagePunctuation, addedDate, stock,
+                                        dimension, brand, material, categories.toArray(new Category[0]));
+
+                        words = reviewIds.split(",");
+                        while (words[i] != null) {
+                            Review review = Store.getInstance().getReviews().get(Integer.parseInt(words[i]));
+                            figurine.addReview(review);
+                        }
+
                         break;
                     case ProductType.GAME:
-                        new Game(id, price, name, description, photo, stock, numPlayers, ageRange, gameStyle,
-                                categories.toArray(new Category[0]));
+                        Game game = new Game(id, price, name, description, photo, averagePunctuation, addedDate, stock,
+                                numPlayers, ageRange, gameStyle, categories.toArray(new Category[0]));
+
+                        words = reviewIds.split(",");
+                        while (words[i] != null) {
+                            Review review = Store.getInstance().getReviews().get(Integer.parseInt(words[i]));
+                            game.addReview(review);
+                        }
+
                         break;
                 }
             }
@@ -716,6 +798,17 @@ public class SaverLoader {
 
         } catch (IOException e) {
             throw new IOException(e.getMessage());
+        }
+    }
+
+    /**
+     * It sets whatever parameters couldn't be set previously
+     * @param reviewAuthors the reviews' authors
+     */
+    public void finishingTouches(HashMap<Review, String> reviewAuthors) {
+        Set<Review> reviews = reviewAuthors.keySet();
+        for (Review review : reviews) {
+            review.setAuthor(Store.getInstance().getRegisteredClients().get(reviewAuthors.get(review)));
         }
     }
 

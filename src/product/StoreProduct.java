@@ -47,8 +47,9 @@ public abstract class StoreProduct extends Product {
      * @throws IllegalArgumentException price or stock were negative
      * @throws NullPointerException     name, description or photo's path were null
      */
-    StoreProduct(String id, double price, String name, String description, String photo, ProductType type, int stock,
-                 Category... categories) throws IllegalArgumentException, NullPointerException {
+    StoreProduct(String id, double price, String name, String description, String photo, double averagePunctuation,
+                 LocalDate addedDate, ProductType type, int stock, Category... categories)
+            throws IllegalArgumentException, NullPointerException {
 
         super(id, price, name, description, photo, type);
 
@@ -58,7 +59,7 @@ public abstract class StoreProduct extends Product {
 
         this.stock = stock;
         this.reviews = new ArrayList<>();
-        this.averagePunctuation = 0;
+        this.averagePunctuation = averagePunctuation;
         this.discount = null;
         this.categories = new HashMap<>();
         for (Category category : categories) {
@@ -170,6 +171,17 @@ public abstract class StoreProduct extends Product {
                                   this.reviews.toArray().length;
     }
 
+    /**
+     * It allows a registered client to review a product
+     * @param review the desired review
+     */
+    public void addReview(Review review) {
+        reviews.add(review);
+        this.averagePunctuation =
+                (((this.reviews.toArray().length - 1) * this.averagePunctuation) + review.getScoring()) /
+                this.reviews.toArray().length;
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -256,9 +268,18 @@ public abstract class StoreProduct extends Product {
         return sb.toString();
     }
 
+    /**
+     * It returns the product's reviews in a save-file-friendly manner
+     * @return a string containing the game's reviews
+     */
     public String getPrintReviews() {
-        // DUE
-        return "alo";
+        StringBuilder sb = new StringBuilder();
+
+        for (Review review : reviews) {
+            sb.append(review.getId()).append(",");
+        }
+
+        return sb.toString();
     }
 
     /**
@@ -297,9 +318,9 @@ public abstract class StoreProduct extends Product {
      */
     @Override
     public String toString() {
-        /* super;REVIEW_IDS;AVG_PUNCT;STOCK;DISC_IDS;CATEGORIES;ADDED_DATE */
+        /* super;REVIEW_IDS;AVG_PUNCT;STOCK;CATEGORIES;ADDED_DATE */
         return super.toString() + ";" + this.getPrintReviews() + ";" + this.averagePunctuation + ";" + this.stock +
-               ";" + this.discount.getId() + ";" + this.getPrintCategories() + this.addedDate;
+               ";" + this.getPrintCategories() + this.addedDate;
     }
 
 }

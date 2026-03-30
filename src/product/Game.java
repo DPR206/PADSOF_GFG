@@ -1,11 +1,13 @@
 package product;
 
+import java.time.LocalDate;
+
 /**
  * Class name: Game
  * <p>
  * Description: It implements the games
  * @author Ana O.R.
- * @version 1.6
+ * @version 1.7
  * @see StoreProduct
  */
 public class Game extends StoreProduct {
@@ -31,9 +33,10 @@ public class Game extends StoreProduct {
      * @param gameStyle   the game's style
      * @param categories  the game's categories
      */
-    public Game(String id, double price, String name, String description, String photo, int stock, int numPlayers,
-                String ageRange, GameStyle gameStyle, Category... categories) {
-        super(id, price, name, description, photo, ProductType.GAME, stock, categories);
+    public Game(String id, double price, String name, String description, String photo, double averagePunctuation,
+                LocalDate addedDate, int stock, int numPlayers, String ageRange, GameStyle gameStyle,
+                Category... categories) {
+        super(id, price, name, description, photo, averagePunctuation, addedDate, ProductType.GAME, stock, categories);
         this.numPlayers = numPlayers;
         this.ageRange = ageRange;
         this.gameStyle = gameStyle;

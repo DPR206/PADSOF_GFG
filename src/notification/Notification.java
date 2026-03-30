@@ -118,7 +118,7 @@ public abstract class Notification {
 		long mins = duration.toMinutesPart(); 
 		long segs = duration.toSecondsPart();
 
-		return "Tiempo transcurrido: " + hours + "h " + mins + "m " + segs + "s";
+		return "Elapsed time: " + hours + "h " + mins + "m " + segs + "s";
 	}
 	
 	public String signOff() {

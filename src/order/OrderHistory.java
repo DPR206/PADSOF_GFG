@@ -33,4 +33,11 @@ public class OrderHistory {
         this.orders.add(o);
     }
 
+    /**
+     * It gets the order history's orders
+     * @return the order history's orders
+     */
+    public List<Order> getOrders() {
+        return this.orders;
+    }
 }

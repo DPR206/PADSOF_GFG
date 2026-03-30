@@ -567,7 +567,7 @@ public class SaverLoader {
                         words = reviewIds.split(",");
                         while (words[i] != null) {
                             Review review = Store.getInstance().getReviews().get(Integer.parseInt(words[i]));
-                            comic.addReview(review);
+                            comic.addReview(review.getAuthor(), review);
                         }
 
                         break;
@@ -579,7 +579,7 @@ public class SaverLoader {
                         words = reviewIds.split(",");
                         while (words[i] != null) {
                             Review review = Store.getInstance().getReviews().get(Integer.parseInt(words[i]));
-                            figurine.addReview(review);
+                            figurine.addReview(review.getAuthor(), review);
                         }
 
                         break;
@@ -590,7 +590,7 @@ public class SaverLoader {
                         words = reviewIds.split(",");
                         while (words[i] != null) {
                             Review review = Store.getInstance().getReviews().get(Integer.parseInt(words[i]));
-                            game.addReview(review);
+                            game.addReview(review.getAuthor(), review);
                         }
 
                         break;

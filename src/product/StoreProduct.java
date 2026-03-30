@@ -6,8 +6,8 @@ import store.Store;
 import user.RegisteredClient;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Class name: StoreProduct
@@ -21,7 +21,7 @@ import java.util.HashMap;
  */
 public abstract class StoreProduct extends Product {
     /** The product's reviews */
-    private final ArrayList<Review> reviews;
+    private HashMap<RegisteredClient, Review> reviews = new HashMap<>(); // NOTE: No es final
     /** The product's average punctuation */
     private double averagePunctuation;
     /** The number of available copies of this product */
@@ -29,7 +29,7 @@ public abstract class StoreProduct extends Product {
     /** The product's discount, if it has one */
     private Discount discount;
     /** The product's categories */
-    private HashMap<String, Category> categories;
+    private HashMap<String, Category> categories = new HashMap<>();
     /** The date when the product was added to the cart */
     private LocalDate addedDate = null;
 
@@ -37,13 +37,16 @@ public abstract class StoreProduct extends Product {
 
     /**
      * A store product's general constructor
-     * @param price       the product's price
-     * @param name        the product's name
-     * @param description the product's description
-     * @param photo       the product's photo's path
-     * @param type        the product's product type
-     * @param stock       the product's stock
-     * @param categories  the product's categories
+     * @param id                 the product's id
+     * @param price              the product's price
+     * @param name               the product's name
+     * @param description        the product's description
+     * @param photo              the product's photo's path
+     * @param averagePunctuation the product's average punctuation
+     * @param addedDate          the product's added date
+     * @param type               the product's product type
+     * @param stock              the product's stock
+     * @param categories         the product's categories
      * @throws IllegalArgumentException price or stock were negative
      * @throws NullPointerException     name, description or photo's path were null
      */
@@ -58,10 +61,8 @@ public abstract class StoreProduct extends Product {
         }
 
         this.stock = stock;
-        this.reviews = new ArrayList<>();
         this.averagePunctuation = averagePunctuation;
         this.discount = null;
-        this.categories = new HashMap<>();
         for (Category category : categories) {
             this.categories.put(category.getName(), category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
@@ -92,10 +93,8 @@ public abstract class StoreProduct extends Product {
         }
 
         this.stock = stock;
-        this.reviews = new ArrayList<>();
         this.averagePunctuation = 0;
         this.discount = null;
-        this.categories = new HashMap<>();
         for (Category category : categories) {
             this.addCategory(category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
@@ -165,21 +164,21 @@ public abstract class StoreProduct extends Product {
      * @param author  the review's author
      */
     public void addReview(int scoring, String comment, RegisteredClient author) {
-        reviews.add(new Review(scoring, comment, author));
+        reviews.put(author, new Review(scoring, comment, author));
         // NOTE: Probablemente, haya una mejor forma de recalcular esto
-        this.averagePunctuation = (((this.reviews.toArray().length - 1) * this.averagePunctuation) + scoring) /
-                                  this.reviews.toArray().length;
+        this.averagePunctuation =
+                (((this.reviews.size() - 1) * this.averagePunctuation) + scoring) / this.reviews.size();
     }
 
     /**
      * It allows a registered client to review a product
+     * @param author the review's author
      * @param review the desired review
      */
-    public void addReview(Review review) {
-        reviews.add(review);
+    public void addReview(RegisteredClient author, Review review) {
+        reviews.put(author, review);
         this.averagePunctuation =
-                (((this.reviews.toArray().length - 1) * this.averagePunctuation) + review.getScoring()) /
-                this.reviews.toArray().length;
+                (((this.reviews.size() - 1) * this.averagePunctuation) + review.getScoring()) / this.reviews.size();
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -274,20 +273,21 @@ public abstract class StoreProduct extends Product {
      */
     public String getPrintReviews() {
         StringBuilder sb = new StringBuilder();
+        Set<RegisteredClient> keys = this.reviews.keySet();
 
-        for (Review review : reviews) {
-            sb.append(review.getId()).append(",");
+        for (RegisteredClient key : keys) {
+            sb.append(reviews.get(key).getId()).append(",");
         }
 
         return sb.toString();
     }
 
     /**
-     * Gets reviews.
-     * @return the reviews
+     * It gets the store product's reviews
+     * @return the store product's reviews
      */
-    public ArrayList<Review> getReviews() {
-        return reviews;
+    public HashMap<RegisteredClient, Review> getReviews() {
+        return this.reviews;
     }
 
     /**

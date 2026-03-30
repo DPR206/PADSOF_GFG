@@ -46,6 +46,14 @@ public class Review {
 	}
 
 	/**
+	 * It gets the review's author
+	 * @return the review's author
+	 */
+	public RegisteredClient getAuthor() {
+		return this.author;
+	}
+
+	/**
 	 * It sets the review's author
 	 * @param newAuthor the review's new author
 	 */

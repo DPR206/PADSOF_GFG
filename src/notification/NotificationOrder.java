@@ -6,6 +6,8 @@ import order.*;
 
 public class NotificationOrder extends Notification implements NotificationInterface<Order>{
 
+	static int pickupCode = 0;
+	
 	/**
 	 * @param timeReceived
 	 * @param read
@@ -41,15 +43,23 @@ public class NotificationOrder extends Notification implements NotificationInter
 
 	@Override
 	public String FullNotification(Order o) {
-		
-		return null;
+		String text = "";
+		switch(o.getState()) {
+		 case OrderState.PAID: text += "" ;
+		}
+		return this.SnippetNotification(o) + text + this.signOff();
 	}
 
 	@Override
 	public String SnippetNotification(Order o) {
-		String defaultTitle = "Your order ";
-		
-		return null;
+		String title = "Your order ";
+		switch(o.getState()) {
+			case OrderState.PAID: title += "has been paid\n"; break;
+			case OrderState.READY_TO_PICKUP: title += "is ready to pickup\n"; break;
+			default: title = "Not valid\n";
+		}
+		this.setTitle(title);
+		return this.getTitle() + this.timeLog();
 	}
 	
 	

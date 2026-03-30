@@ -41,6 +41,11 @@ Se guardan y leen en este orden:
     ---- SecondHandProduct ----
     + super;VAL_DATE;AVAILABLE;PAID_VAL;STATUS
 
+[x] Packs:
+    ---- Pack ----
+    {TOTAL_ID}
+    ID;PRICE;PRODUCT_IDS;DATE_ADD_CART
+
 [x] Discounts:
     ---- Discount ----
     {TOTAL_ID};
@@ -48,14 +53,9 @@ Se guardan y leen en este orden:
     ---- FixedPerDisc / GiftDisc / QuantityDisc / VolumeDisc ----
     + super;PERCENTAGE;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION
 
-[x] Packs:
-    ---- Pack ----
-    {TOTAL_ID}
-    ID;PRICE;PRODUCT_IDS;DATE_ADD_CART
+[ ] Offers:
 
 [ ] Exchanges:
-
-[ ] Offers:
 
 [ ] Orders:
 

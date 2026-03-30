@@ -43,20 +43,21 @@ public class SaverLoader {
      * @param userFilename              the name of the users' backup
      * @throws IOException something went wrong when writing
      */
-    public void saveStore(String parameterFilename, String discountsFilename, String offersFilename,
-                          String exchangesFilename, String ordersFilename, String packsFilename,
-                          String categoriesFilename, String storeProductFilename, String secondHandProductFilename,
-                          String userFilename) throws IOException {
+    public void saveStore(String parameterFilename, String categoriesFilename, String reviewsFilename,
+                          String storeProductFilename, String secondHandProductFilename, String packsFilename,
+                          String discountsFilename, String offersFilename, String exchangesFilename,
+                          String ordersFilename, String userFilename) throws IOException {
         try {
             saveParameters(parameterFilename);
             saveCategories(categoriesFilename);
+            saveReviews(reviewsFilename);
             saveStoreProducts(storeProductFilename);
             saveSecondHandProducts(secondHandProductFilename);
+            savePacks(packsFilename);
             saveDiscounts(discountsFilename);
             saveOffers(offersFilename);
             saveExchanges(exchangesFilename);
             saveOrders(ordersFilename);
-            savePacks(packsFilename);
             saveUsers(userFilename);
 
         } catch (IOException exception) {
@@ -199,6 +200,33 @@ public class SaverLoader {
     }
 
     /**
+     * It allows for the store's packs to be saved
+     * @param packsFilename the desired filename for the store's packs' backup
+     * @throws IOException something went wrong when writing
+     */
+    private void savePacks(String packsFilename) throws IOException {
+        BufferedWriter buffer;
+        List<Pack> packs = Store.getInstance().getPacks();
+
+        try {
+            buffer = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + packsFilename + ".csv")));
+
+            buffer.write("ID;PRICE;PRODUCT_IDS;DATE_ADD_CART\n");
+            buffer.write(Pack.totalId); /* Global ID */
+
+            for (Pack pack : packs) {
+                buffer.write(pack.toString() + "\n");
+            }
+
+            buffer.close();
+
+        } catch (IOException e) {
+            throw new IOException(e.getMessage());
+        }
+    }
+
+    /**
      * It allows for the store's discounts to be saved
      * @param discountsFilename the desired filename for the store's discounts' backup
      * @throws IOException something went wrong when writing
@@ -308,33 +336,6 @@ public class SaverLoader {
     }
 
     /**
-     * It allows for the store's packs to be saved
-     * @param packsFilename the desired filename for the store's packs' backup
-     * @throws IOException something went wrong when writing
-     */
-    private void savePacks(String packsFilename) throws IOException {
-        BufferedWriter buffer;
-        List<Pack> packs = Store.getInstance().getPacks();
-
-        try {
-            buffer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(".\\resources\\" + packsFilename + ".csv")));
-
-            buffer.write("ID;PRICE;PRODUCT_IDS;DATE_ADD_CART\n");
-            buffer.write(Pack.totalId); /* Global ID */
-
-            for (Pack pack : packs) {
-                buffer.write(pack.toString() + "\n");
-            }
-
-            buffer.close();
-
-        } catch (IOException e) {
-            throw new IOException(e.getMessage());
-        }
-    }
-
-    /**
      * It allows for the store's users to be saved
      * @param userFilename the desired filename for the store's users' backup
      * @throws IOException something went wrong when writing
@@ -379,10 +380,10 @@ public class SaverLoader {
      * @throws IOException something went wrong when reading
      */
     public void loadStore(String parameterFilename, String categoriesFilename, String reviewsFilename,
-                          String discountsFilename, String storeProductFilename, String offersFilename,
-                          String exchangesFilename, String ordersFilename, String packsFilename,
-                          String secondHandProductFilename, String userFilename) throws IOException {
-        HashMap<Review, Integer> reviewAuthors = new HashMap<>();
+                          String storeProductFilename, String secondHandProductFilename, String packsFilename,
+                          String discountsFilename, String offersFilename, String exchangesFilename,
+                          String ordersFilename, String userFilename) throws IOException {
+        HashMap<Review, String> reviewAuthors = new HashMap<>();
 
         try {
             loadParameters(parameterFilename);
@@ -390,12 +391,13 @@ public class SaverLoader {
             loadReviews(reviewsFilename, reviewAuthors);
             loadStoreProducts(storeProductFilename);
             loadSecondHandProducts(secondHandProductFilename);
+            loadPacks(packsFilename);
             loadDiscounts(discountsFilename);
             loadOffers(offersFilename);
             loadExchanges(exchangesFilename);
             loadOrders(ordersFilename);
-            loadPacks(packsFilename);
             loadUsers(userFilename);
+            finishingTouches(reviewAuthors);
 
         } catch (IOException exception) {
             throw new IOException(exception.getMessage());
@@ -475,7 +477,7 @@ public class SaverLoader {
      * @param reviewsFilename the filename of the store's reviews' backup
      * @throws IOException something went wrong when reading
      */
-    private void loadReviews(String reviewsFilename, HashMap<Review, Integer> reviewAuthors) throws IOException {
+    private void loadReviews(String reviewsFilename, HashMap<Review, String> reviewAuthors) throws IOException {
         BufferedReader buffer;
         String[] words;
         String line;
@@ -492,9 +494,9 @@ public class SaverLoader {
                 int id = Integer.parseInt(words[0]);
                 int scoring = Integer.parseInt(words[1]);
                 String comment = words[2];
-                int authorId = Integer.parseInt(words[3]);
+                String username = words[3];
 
-                reviewAuthors.put(new Review(id, scoring, comment), authorId);
+                reviewAuthors.put(new Review(id, scoring, comment), username);
             }
 
             buffer.close();
@@ -637,6 +639,50 @@ public class SaverLoader {
 
                 new SecondHandProduct(id, price, name, description, photo, type, valuationDate, available,
                         paidValuation, status);
+            }
+
+            buffer.close();
+
+        } catch (IOException e) {
+            throw new IOException(e.getMessage());
+        }
+    }
+
+    /**
+     * It allows for the store's packs to be loaded
+     * @param packsFilename the filename of the store's packs' backup
+     * @throws IOException something went wrong when reading
+     */
+    private void loadPacks(String packsFilename) throws IOException {
+        BufferedReader buffer;
+        String[] words;
+        String line;
+        int i = 0;
+        ArrayList<StoreProduct> products = new ArrayList<>();
+
+        try {
+            buffer = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + packsFilename + ".csv")));
+
+            buffer.readLine(); /* ID;PRICE;PRODUCT_IDS;DATE_ADD_CART */
+            Pack.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
+            while ((line = buffer.readLine()) != null) {
+                words = line.split(";");
+                int id = Integer.parseInt(words[0]);
+                double price = Double.parseDouble(words[1]);
+                String productsString = words[2];
+                LocalDate dateAddCart = LocalDate.parse(words[3]);
+
+                words = productsString.split(",");
+                while (words[i] != null) {
+                    String productId = words[i];
+                    products.add(Store.getInstance().getProductFromId(productId));
+                    i++;
+                }
+
+                new Pack(id, price, products, dateAddCart);
+
             }
 
             buffer.close();
@@ -791,50 +837,6 @@ public class SaverLoader {
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 // DUE
-            }
-
-            buffer.close();
-
-        } catch (IOException e) {
-            throw new IOException(e.getMessage());
-        }
-    }
-
-    /**
-     * It allows for the store's packs to be loaded
-     * @param packsFilename the filename of the store's packs' backup
-     * @throws IOException something went wrong when reading
-     */
-    private void loadPacks(String packsFilename) throws IOException {
-        BufferedReader buffer;
-        String[] words;
-        String line;
-        int i = 0;
-        ArrayList<StoreProduct> products = new ArrayList<>();
-
-        try {
-            buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + packsFilename + ".csv")));
-
-            buffer.readLine(); /* ID;PRICE;PRODUCT_IDS;DATE_ADD_CART */
-            Pack.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
-
-            while ((line = buffer.readLine()) != null) {
-                words = line.split(";");
-                int id = Integer.parseInt(words[0]);
-                double price = Double.parseDouble(words[1]);
-                String productsString = words[2];
-                LocalDate dateAddCart = LocalDate.parse(words[3]);
-
-                words = productsString.split(",");
-                while (words[i] != null) {
-                    String productId = words[i];
-                    products.add(Store.getInstance().getProductFromId(productId));
-                    i++;
-                }
-
-                new Pack(id, price, products, dateAddCart);
-
             }
 
             buffer.close();

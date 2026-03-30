@@ -97,8 +97,6 @@ public abstract class Discount {
 
         this(startDate, endDate, type, (Store.getInstance().getCategories().values().toArray(new Category[0])));
         this.overWholeStore = true;
-
-        Store.getInstance().getDiscounts().add(this);
     }
 
     /**

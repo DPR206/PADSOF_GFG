@@ -1,5 +1,17 @@
 [ Campos separados con ";", listados separados con "," ]
 
+Se guardan y leen en este orden:
+
+> Notas:
+    - [x] indica que está hecho, [ ] que no
+    - Los títulos con ---- <nombre> ---- indican qué debe imprimir el toString de esa clase
+    - Como algunas navegaciones requieren preexistencia de ambos elementos involucrados "finishingTouches()" asigna los
+    campos que no se pudieron asignar en su momento una vez creada la clase necesaria, se ejecuta al final de Load
+    - Probablemente podría hacerse en menos archivos (incluso solo uno) pero creo que con esta separación se lee mejor y
+     evita switches innecesarios
+
+------------------------------------------------------------------------------------------------------------------------
+
 [x] Parameters:
     ---- Parameter ----
     OFFER_TIME;ORDER_TIME;VAL_COST
@@ -29,20 +41,21 @@
     ---- SecondHandProduct ----
     + super;VAL_DATE;AVAILABLE;PAID_VAL;STATUS
 
-[ ] Discounts:
-    ---- Discount ----
-    {TOTAL_ID};
-    TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE
-
-
-[ ] Packs:
+[x] Packs:
     ---- Pack ----
     {TOTAL_ID}
     ID;PRICE;PRODUCT_IDS;DATE_ADD_CART
 
-[ ] Exchanges:
+[x] Discounts:
+    ---- Discount ----
+    {TOTAL_ID};
+    TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE
+    ---- FixedPerDisc / GiftDisc / QuantityDisc / VolumeDisc ----
+    + super;PERCENTAGE;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION
 
 [ ] Offers:
+
+[ ] Exchanges:
 
 [ ] Orders:
 

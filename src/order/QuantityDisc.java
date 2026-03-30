@@ -16,7 +16,7 @@ public class QuantityDisc extends Discount {
     /** The amount of products in a cart from which the discount can take place */
     private int numProds;
     /** The amount of money the discount deducts from the order's final price */
-    private double discount;
+    private double deduction;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -25,13 +25,13 @@ public class QuantityDisc extends Discount {
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
      * @param numProds  the amount of products in a cart from which the discount can take place
-     * @param discount  the amount of money the discount deducts from the order's final price
+     * @param deduction the amount of money the discount deducts from the order's final price
      */
-    public QuantityDisc(String id, LocalDateTime startDate, LocalDateTime endDate, int numProds, double discount,
+    public QuantityDisc(String id, LocalDateTime startDate, LocalDateTime endDate, int numProds, double deduction,
                         StoreProduct... products) {
         super(id, startDate, endDate, DiscountType.QUANTITY, products);
         this.numProds = numProds;
-        this.discount = discount;
+        this.deduction = deduction;
     }
 
     /**
@@ -39,13 +39,13 @@ public class QuantityDisc extends Discount {
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
      * @param numProds  the amount of products in a cart from which the discount can take place
-     * @param discount  the amount of money the discount deducts from the order's final price
+     * @param deduction the amount of money the discount deducts from the order's final price
      */
-    public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int numProds, double discount,
+    public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int numProds, double deduction,
                         StoreProduct... products) {
         super(startDate, endDate, DiscountType.QUANTITY, products);
         this.numProds = numProds;
-        this.discount = discount;
+        this.deduction = deduction;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -59,16 +59,16 @@ public class QuantityDisc extends Discount {
      * It gets the quantity discount's discount
      * @return the quantity discount's discount
      */
-    public double getDiscount() {
-        return this.discount;
+    public double getDeduction() {
+        return this.deduction;
     }
 
     /**
      * It allows the manager to change the quantity discount's discount
-     * @param discount the new discount
+     * @param newDeduction the new discount
      */
-    public void setDiscount(double discount) {
-        this.discount = discount;
+    public void setDeduction(double newDeduction) {
+        this.deduction = newDeduction;
     }
 
     /**
@@ -86,5 +86,13 @@ public class QuantityDisc extends Discount {
      */
     public void setNumProds(int numProds) {
         this.numProds = numProds;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    @Override
+    public String toString() {
+        /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;SPENDING_THRESHOLD;<NUM_PRODS;DEDUCTION> */
+        return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" +
+               this.numProds + ";" + this.deduction;
     }
 }

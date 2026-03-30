@@ -95,4 +95,11 @@ public class GiftDisc extends Discount {
         this.spendingThreshold = spendingThreshold;
     }
 
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    @Override
+    public String toString() {
+        /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;<GIFT;SPENDING_THRESHOLD>;NUM_PRODS;DEDUCTION */
+        return super.toString() + ";"  /*percentage*/ + ";" + this.gift.getId() + ";" + this.spendingThreshold + ";"
+                /*numProds*/ + ";" /*deduction*/;
+    }
 }

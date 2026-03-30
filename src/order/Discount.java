@@ -37,7 +37,8 @@ public abstract class Discount {
      * @param id        the discount's id
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
-     * @param products  the products
+     * @param type      the discount's type
+     * @param products  the discount's products
      * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
      */
     public Discount(String id, LocalDateTime startDate, LocalDateTime endDate, DiscountType type,
@@ -60,6 +61,7 @@ public abstract class Discount {
      * A discount's constructor when applied over categories
      * @param startDate  the date when the discount starts
      * @param endDate    the date when the discount ends
+     * @param type       the discount's type
      * @param categories the categories
      * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
      */
@@ -83,6 +85,7 @@ public abstract class Discount {
      * A discount's constructor when applied over the whole store
      * @param startDate      the date when the discount starts
      * @param endDate        the date when the discount ends
+     * @param type           the discount's type
      * @param overWholeStore whether the discount is applied over the whole store or not (must be true)
      * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
      */
@@ -103,7 +106,8 @@ public abstract class Discount {
      * A discount's constructor
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
-     * @param products  the products
+     * @param type      the discount's type
+     * @param products  the discount's products
      * @throws IllegalArgumentException the illegal argument exception
      */
     public Discount(LocalDateTime startDate, LocalDateTime endDate, DiscountType type, StoreProduct... products)
@@ -139,6 +143,11 @@ public abstract class Discount {
         return true;
     }
 
+    /**
+     * It adds products to the discount
+     * @param products the desired products
+     * @throws IllegalArgumentException the discount is conflicting
+     */
     public void addProducts(StoreProduct... products) throws IllegalArgumentException {
         if (conflictingDisc(List.of(products))) {
             throw new IllegalArgumentException("Conflicting Discount");
@@ -150,6 +159,10 @@ public abstract class Discount {
         }
     }
 
+    /**
+     * It adds categories to the discount
+     * @param categories the desired categories
+     */
     public void addCategories(Category... categories) {
         for (Category category : categories) {
             addProducts(category.getProducts().toArray(new StoreProduct[0]));

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * <p>
  * Description: It implements the gift discount
  * @author Ana O.R.
- * @version 1.0
+ * @version 1.1
  * @see Discount
  * @see StoreProduct
  */
@@ -23,10 +23,12 @@ public class GiftDisc extends Discount {
 
     /**
      * A gift discount's general constructor
+     * @param id                the discount's id
      * @param startDate         the date when the discount starts
      * @param endDate           the date when the discount ends
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param gift              the product gifted to the client when a certain spending threshold is met
+     * @param products          the discount's products
      */
     public GiftDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                     StoreProduct gift, StoreProduct... products) {
@@ -41,6 +43,7 @@ public class GiftDisc extends Discount {
      * @param endDate           the date when the discount ends
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param gift              the product gifted to the client when a certain spending threshold is met
+     * @param products          the discount's products
      */
     public GiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
                     StoreProduct... products) {

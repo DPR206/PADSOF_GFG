@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * <p>
  * Description: It implements the fixed percentage discount
  * @author Ana O.R.
- * @version 1.0
+ * @version 1.1
  * @see Discount
  */
 public class FixedPerDisc extends Discount {
@@ -20,9 +20,11 @@ public class FixedPerDisc extends Discount {
 
     /**
      * A fixed percentage discount's general constructor
+     * @param id         the discount's id
      * @param startDate  the date when the discount starts
      * @param endDate    the date when the discount ends
      * @param percentage the percentage deducted from a product's price
+     * @param products   the discount's products
      * @throws IllegalArgumentException the percentage wasn't between 0 and 100
      */
     public FixedPerDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double percentage,
@@ -40,6 +42,7 @@ public class FixedPerDisc extends Discount {
      * @param startDate  the date when the discount starts
      * @param endDate    the date when the discount ends
      * @param percentage the percentage deducted from a product's price
+     * @param products   the discount's products
      * @throws IllegalArgumentException the percentage wasn't between 0 and 100
      */
     public FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage, StoreProduct... products)

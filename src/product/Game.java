@@ -22,16 +22,18 @@ public class Game extends StoreProduct {
 
     /**
      * A game's general constructor
-     * @param id          the game's id
-     * @param price       the game's price
-     * @param name        the game's name
-     * @param description the game's description
-     * @param photo       the game's photo's path
-     * @param stock       the game's stock
-     * @param numPlayers  the game's num players
-     * @param ageRange    the game's age range
-     * @param gameStyle   the game's style
-     * @param categories  the game's categories
+     * @param id                 the game's id
+     * @param price              the game's price
+     * @param name               the game's name
+     * @param description        the game's description
+     * @param photo              the game's photo's path
+     * @param averagePunctuation the game's average punctuation
+     * @param addedDate          the game's added date
+     * @param stock              the game's stock
+     * @param numPlayers         the game's num players
+     * @param ageRange           the game's age range
+     * @param gameStyle          the game's style
+     * @param categories         the game's categories
      */
     public Game(String id, double price, String name, String description, String photo, double averagePunctuation,
                 LocalDate addedDate, int stock, int numPlayers, String ageRange, GameStyle gameStyle,

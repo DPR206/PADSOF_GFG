@@ -25,7 +25,8 @@ public class Category {
 
     /**
      * Category's full constructor
-     * @param name the new category's name
+     * @param name    the new category's name
+     * @param revenue the category's revenue
      * @throws IllegalArgumentException revenue was negative or category already existed
      * @throws NullPointerException     store or name were null
      */

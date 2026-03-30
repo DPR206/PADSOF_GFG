@@ -18,6 +18,9 @@ import java.util.HashMap;
  */
 public class Exchange {
 
+    /**
+     * The Total id.
+     */
     static public int totalId = 0;
     /** The client who made the exchange */
     private final RegisteredClient origin;
@@ -32,12 +35,13 @@ public class Exchange {
 
     /**
      * An exchange's general constructor
-     * @param date,      the date it was exchanged
-     * @param exchanged, whether the exchange was done
-     * @param user1,     the registered client that owns the products "products1"
-     * @param products1, the products of user1
-     * @param user2,     the registered client that owns the products "products2"
-     * @param products2, the products of user2
+     * @param id        the id
+     * @param date      the date
+     * @param exchanged the exchanged
+     * @param user1     the user 1
+     * @param products1 the products 1
+     * @param user2     the user 2
+     * @param products2 the products 2
      */
     public Exchange(int id, LocalDateTime date, boolean exchanged, RegisteredClient user1,
                     ArrayList<SecondHandProduct> products1, RegisteredClient user2,
@@ -56,12 +60,12 @@ public class Exchange {
 
     /**
      * Creates a new exchange
-     * @param date,      the date it was exchanged
-     * @param exchanged, whether the exchange was done
-     * @param user1,     the registered client that owns the products "products1"
-     * @param products1, the products of user1
-     * @param user2,     the registered client that owns the products "products2"
-     * @param products2, the products of user2
+     * @param date      the date
+     * @param exchanged the exchanged
+     * @param user1     the user 1
+     * @param products1 the products 1
+     * @param user2     the user 2
+     * @param products2 the products 2
      */
     public Exchange(LocalDateTime date, boolean exchanged, RegisteredClient user1,
                     ArrayList<SecondHandProduct> products1, RegisteredClient user2,
@@ -79,11 +83,11 @@ public class Exchange {
 
     /**
      * Creates an exchange with the date
-     * @param date,      the date it will be exchanged
-     * @param user1,     the registered client that owns the products "products1"
-     * @param products1, the products of user1
-     * @param user2,     the registered client that owns the products "products2"
-     * @param products2, the products of user2
+     * @param date      the date
+     * @param user1     the user 1
+     * @param products1 the products 1
+     * @param user2     the user 2
+     * @param products2 the products 2
      */
     public Exchange(LocalDateTime date, RegisteredClient user1, ArrayList<SecondHandProduct> products1,
                     RegisteredClient user2, ArrayList<SecondHandProduct> products2) {
@@ -121,7 +125,7 @@ public class Exchange {
 
     /**
      * Changes if the exchange was done
-     * @param exchanged, the state of exchange
+     * @param exchanged the exchanged
      */
     public void changeExchanged(boolean exchanged) {
         this.setExchanged(exchanged);
@@ -129,7 +133,7 @@ public class Exchange {
 
     /**
      * Changes the date of the exchange
-     * @param date, the date of the exchange
+     * @param date the date
      */
     public void changeDate(LocalDateTime date) {
         this.setDate(date);

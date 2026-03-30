@@ -32,14 +32,15 @@ public class SaverLoader {
     /**
      * It saves the store
      * @param parameterFilename         the name of the parameter's backup
+     * @param categoriesFilename        the name of the categories' backup
+     * @param reviewsFilename           the name of the store reviews' backup
+     * @param storeProductFilename      the name of the store products' backup
+     * @param secondHandProductFilename the name of the hand products' filename
+     * @param packsFilename             the name of the packs' backup
      * @param discountsFilename         the name of the discounts' backup
      * @param offersFilename            the name of the offers' backup
      * @param exchangesFilename         the name of the exchanges' backup
      * @param ordersFilename            the name of the orders' backup
-     * @param packsFilename             the name of the packs' backup
-     * @param categoriesFilename        the name of the categories' backup
-     * @param storeProductFilename      the name of the store products' backup
-     * @param secondHandProductFilename the name of the hand products' filename
      * @param userFilename              the name of the users' backup
      * @throws IOException something went wrong when writing
      */
@@ -368,14 +369,15 @@ public class SaverLoader {
     /**
      * It loads an initialized store (the store should be empty!!)
      * @param parameterFilename         the name of the parameter's backup
+     * @param categoriesFilename        the name of the categories' backup
+     * @param reviewsFilename           the name of the store reviews' backup
+     * @param storeProductFilename      the name of the store products' backup
+     * @param secondHandProductFilename the name of the hand products' filename
+     * @param packsFilename             the name of the packs' backup
      * @param discountsFilename         the name of the discounts' backup
      * @param offersFilename            the name of the offers' backup
      * @param exchangesFilename         the name of the exchanges' backup
      * @param ordersFilename            the name of the orders' backup
-     * @param packsFilename             the name of the packs' backup
-     * @param categoriesFilename        the name of the categories' backup
-     * @param storeProductFilename      the name of the store products' backup
-     * @param secondHandProductFilename the name of the hand products' filename
      * @param userFilename              the name of the users' backup
      * @throws IOException something went wrong when reading
      */

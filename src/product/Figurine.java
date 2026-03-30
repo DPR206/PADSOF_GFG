@@ -22,16 +22,18 @@ public class Figurine extends StoreProduct {
 
     /**
      * A figurine's general constructor
-     * @param id          the figurine's id
-     * @param price       the figurine's price
-     * @param name        the figurine's name
-     * @param description the figurine's description
-     * @param photo       the figurine's photo's path
-     * @param stock       the figurine's stock
-     * @param dimension   the figurine's dimension
-     * @param brand       the figurine's brand
-     * @param material    the figurine's material
-     * @param categories  the figurine's categories
+     * @param id                 the figurine's id
+     * @param price              the figurine's price
+     * @param name               the figurine's name
+     * @param description        the figurine's description
+     * @param photo              the figurine's photo's path
+     * @param averagePunctuation the figurine's average punctuation
+     * @param addedDate          the figurine's added date
+     * @param stock              the figurine's stock
+     * @param dimension          the figurine's dimension
+     * @param brand              the figurine's brand
+     * @param material           the figurine's material
+     * @param categories         the figurine's categories
      */
     public Figurine(String id, double price, String name, String description, String photo, double averagePunctuation,
                     LocalDate addedDate, int stock, String dimension, String brand, String material,

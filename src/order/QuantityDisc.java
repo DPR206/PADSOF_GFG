@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * <p>
  * Description: It implements the quantity discount
  * @author Ana O.R.
- * @version 1.0
+ * @version 1.1
  * @see Discount
  */
 public class QuantityDisc extends Discount {
@@ -22,10 +22,12 @@ public class QuantityDisc extends Discount {
 
     /**
      * A quantity discount's general constructor
+     * @param id        the discount's id
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
      * @param numProds  the amount of products in a cart from which the discount can take place
      * @param deduction the amount of money the discount deducts from the order's final price
+     * @param products  the discount's products
      */
     public QuantityDisc(String id, LocalDateTime startDate, LocalDateTime endDate, int numProds, double deduction,
                         StoreProduct... products) {
@@ -40,6 +42,7 @@ public class QuantityDisc extends Discount {
      * @param endDate   the date when the discount ends
      * @param numProds  the amount of products in a cart from which the discount can take place
      * @param deduction the amount of money the discount deducts from the order's final price
+     * @param products  the discount's products
      */
     public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int numProds, double deduction,
                         StoreProduct... products) {

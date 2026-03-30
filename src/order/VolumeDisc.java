@@ -22,10 +22,12 @@ public class VolumeDisc extends Discount {
 
     /**
      * A volume discount's general constructor
+     * @param id                the discount's id
      * @param startDate         the date when the discount starts
      * @param endDate           the date when the discount ends
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param deduction         the amount of money the discount deducts from the order's final price
+     * @param products          the discount's products
      */
     public VolumeDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                       double deduction, StoreProduct... products) {
@@ -40,6 +42,7 @@ public class VolumeDisc extends Discount {
      * @param endDate           the date when the discount ends
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param deduction         the amount of money the discount deducts from the order's final price
+     * @param products          the discount's products
      */
     public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
                       StoreProduct... products) {

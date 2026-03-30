@@ -16,15 +16,26 @@ import java.util.List;
  * @version 1.0
  */
 public class Recommender {
-    // NOTE: Por ambición e indecisión, primando la segunda, he decidido implementar ambos recomendadores de Moodle,
+    /**
+     * The Categories and scores.
+     */
+// NOTE: Por ambición e indecisión, primando la segunda, he decidido implementar ambos recomendadores de Moodle,
     // rezad por mí y por nuestro código
     HashMap<Category, Double> categoriesAndScores = new HashMap<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * A recommender's constructor
+     */
     Recommender() {
 
     }
 
+    /**
+     * It recommends similar products to those bought by a certain client
+     * @param client the desired client
+     */
     public void recommendSimilarProducts(RegisteredClient client) { /* 1st method */
         List<Order> orders = client.getOrderHistory().getOrders();
         // NOTE: Wtf es O(N^3), miedo, terror, pánico

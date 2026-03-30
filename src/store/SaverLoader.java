@@ -101,7 +101,8 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + categoriesFilename + ".csv")));
 
-            buffer.write("NAME;REVENUE");
+            buffer.write("NAME;REVENUE\n");
+
             for (String key : keys) {
                 buffer.write(categories.get(key).toString() + "\n");
             }
@@ -126,8 +127,9 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + reviewsFilename + ".csv")));
 
-            buffer.write("ID;SCORING;COMMENT;AUTHOR");
+            buffer.write("ID;SCORING;COMMENT;AUTHOR\n");
             buffer.write(Review.totalId); /* Global ID */
+
             for (Review review : reviews) {
                 buffer.write(review.toString() + "\n");
             }
@@ -156,6 +158,7 @@ public class SaverLoader {
             buffer.write("TYPE;ID;PRICE;NAME;DESC;PHOTO;REVIEW_IDS;AVG_PUNT;STOCK;CATEGORIES;ADDED_DATE;" +
                          "NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION\n");
             buffer.write(Product.totalId); /* Global ID */
+
             for (String key : keys) {
                 buffer.write(products.get(key).toString() + "\n");
             }
@@ -181,8 +184,9 @@ public class SaverLoader {
             buffer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(".\\resources\\" + secondHandProductFilename + ".csv")));
 
-            buffer.write("TYPE;ID;PRICE;NAME;DESC;PHOTO;VAL_DATE;AVAILABLE;PAID_VAL;STATUS");
+            buffer.write("TYPE;ID;PRICE;NAME;DESC;PHOTO;VAL_DATE;AVAILABLE;PAID_VAL;STATUS\n");
             buffer.write(Product.totalId); /* Global ID */
+
             for (String key : keys) {
                 buffer.write(products.get(key).toString() + "\n");
             }
@@ -207,8 +211,10 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + discountsFilename + ".csv")));
 
-            buffer.write(" TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE "); // DUE
+            buffer.write("TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE;PERCENTAGE;GIFT;SPENDING_THRESHOLD;" +
+                         "NUM_PRODS;DEDUCTION\n");
             buffer.write(Discount.totalId); /* Global ID */
+
             for (Discount discount : discounts) {
                 buffer.write(discount.toString() + "\n");
             }
@@ -235,6 +241,7 @@ public class SaverLoader {
 
             buffer.write(""); // DUE
             buffer.write(Offer.totalId); /* Global ID */
+
             for (Offer offer : offers) {
                 buffer.write(offer.toString() + "\n");
             }
@@ -261,6 +268,7 @@ public class SaverLoader {
 
             buffer.write(""); // DUE
             buffer.write(Exchange.totalId); /* Global ID */
+
             for (Exchange exchange : exchanges) {
                 buffer.write(exchange.toString() + "\n");
             }
@@ -287,6 +295,7 @@ public class SaverLoader {
 
             buffer.write(""); // DUE
             buffer.write(Order.totalId); /* Global ID */
+
             for (Order order : orders) {
                 buffer.write(order.toString() + "\n");
             }
@@ -311,8 +320,9 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + packsFilename + ".csv")));
 
-            buffer.write("ID;PRICE;PRODUCT_IDS;DATE_ADD_CART");
+            buffer.write("ID;PRICE;PRODUCT_IDS;DATE_ADD_CART\n");
             buffer.write(Pack.totalId); /* Global ID */
+
             for (Pack pack : packs) {
                 buffer.write(pack.toString() + "\n");
             }
@@ -340,6 +350,7 @@ public class SaverLoader {
 
             buffer.write(""); // DUE
             buffer.write(User.totalId); /* Global ID */
+
             for (String key : keys) {
                 buffer.write(users.get(key).toString() + "\n");
             }
@@ -409,6 +420,7 @@ public class SaverLoader {
                     new InputStreamReader(new FileInputStream(".\\resources\\" + parameterFilename + ".csv")));
 
             buffer.readLine(); /* OFFER_TIME;ORDER_TIME;VAL_COST */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 OfferTime = Period.parse(words[0]);
@@ -443,6 +455,7 @@ public class SaverLoader {
                     new InputStreamReader(new FileInputStream(".\\resources\\" + categoriesFilename + ".csv")));
 
             buffer.readLine(); /* NAME;REVENUE */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 name = words[0];
@@ -649,17 +662,23 @@ public class SaverLoader {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + discountsFilename + ".csv")));
 
-            buffer.readLine(); /* TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE */
+            buffer.readLine(); /* TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE;PERCENTAGE;GIFT;SPENDING_THRESHOLD;
+                                NUM_PRODS;DEDUCTION */
             Discount.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
 
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 DiscountType type = DiscountType.valueOf(words[0]);
                 String id = words[1];
-                LocalDate startDate = LocalDate.parse(words[2]);
-                LocalDate endDate = LocalDate.parse(words[3]);
+                LocalDateTime startDate = LocalDateTime.parse(words[2]);
+                LocalDateTime endDate = LocalDateTime.parse(words[3]);
                 String productsString = words[4];
                 boolean overWhole = Boolean.parseBoolean(words[5]);
+                double percentage = Double.parseDouble(words[6]);
+                String giftId = words[7];
+                double spendingThreshold = Double.parseDouble(words[8]);
+                int numProds = Integer.parseInt(words[9]);
+                double deduction = Double.parseDouble(words[10]);
 
                 words = productsString.split(",");
                 while (words[i] != null) {
@@ -670,7 +689,20 @@ public class SaverLoader {
 
                 switch (type) {
                     case DiscountType.FIXED_PERCENTAGE:
-                        //new FixedPerDisc(id, startDate, endDate, percentage, products);
+                        new FixedPerDisc(id, startDate, endDate, percentage, products.toArray(new StoreProduct[0]));
+                        break;
+                    case DiscountType.GIFT:
+                        new GiftDisc(id, startDate, endDate, spendingThreshold,
+                                Store.getInstance().getProductFromId(giftId), products.toArray(new StoreProduct[0]));
+                        break;
+                    case DiscountType.QUANTITY:
+                        new QuantityDisc(id, startDate, endDate, numProds, deduction,
+                                products.toArray(new StoreProduct[0]));
+                        break;
+                    case DiscountType.VOLUME:
+                        new VolumeDisc(id, startDate, endDate, spendingThreshold, deduction,
+                                products.toArray(new StoreProduct[0]));
+                        break;
                 }
             }
 
@@ -778,7 +810,7 @@ public class SaverLoader {
         String[] words;
         String line;
         int i = 0;
-        List<StoreProduct> products = new ArrayList<>();
+        ArrayList<StoreProduct> products = new ArrayList<>();
 
         try {
             buffer = new BufferedReader(
@@ -800,6 +832,8 @@ public class SaverLoader {
                     products.add(Store.getInstance().getProductFromId(productId));
                     i++;
                 }
+
+                new Pack(id, price, products, dateAddCart);
 
             }
 

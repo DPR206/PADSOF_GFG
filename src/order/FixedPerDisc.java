@@ -82,4 +82,11 @@ public class FixedPerDisc extends Discount {
         this.percentage = newPercentage;
     }
 
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    @Override
+    public String toString() {
+        /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];<PERCENTAGE>;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION */
+        return super.toString() + ";" + this.percentage + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" /*numProds
+         */ + ";" /*deduction*/;
+    }
 }

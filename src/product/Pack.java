@@ -3,6 +3,8 @@
  */
 package product;
 
+import store.Store;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +40,8 @@ public class Pack {
 		this.price = price;
 		this.products = products;
 		this.dateAddCart = date;
+
+		Store.getInstance().getPacks().add(this);
 	}
 
 	/**

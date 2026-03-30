@@ -21,6 +21,20 @@ public class VolumeDisc extends Discount {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
+     * A volume discount's general constructor
+     * @param startDate         the date when the discount starts
+     * @param endDate           the date when the discount ends
+     * @param spendingThreshold the spending threshold that allows the discount to take place
+     * @param discount          the amount of money the discount deducts from the order's final price
+     */
+    public VolumeDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                      double discount, StoreProduct... products) {
+        super(id, startDate, endDate, DiscountType.VOLUME, products);
+        this.spendingThreshold = spendingThreshold;
+        this.discount = discount;
+    }
+
+    /**
      * Instantiates a new Volume discount
      * @param startDate         the date when the discount starts
      * @param endDate           the date when the discount ends
@@ -39,7 +53,7 @@ public class VolumeDisc extends Discount {
     // DUE: public createNotification(){}
 
     // DUE: public obtainDisc();
-    
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**

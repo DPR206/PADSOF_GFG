@@ -21,6 +21,20 @@ public class QuantityDisc extends Discount {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
+     * A quantity discount's general constructor
+     * @param startDate the date when the discount starts
+     * @param endDate   the date when the discount ends
+     * @param numProds  the amount of products in a cart from which the discount can take place
+     * @param discount  the amount of money the discount deducts from the order's final price
+     */
+    public QuantityDisc(String id, LocalDateTime startDate, LocalDateTime endDate, int numProds, double discount,
+                        StoreProduct... products) {
+        super(id, startDate, endDate, DiscountType.QUANTITY, products);
+        this.numProds = numProds;
+        this.discount = discount;
+    }
+
+    /**
      * Instantiates a new quantity discount
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends

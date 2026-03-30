@@ -24,13 +24,11 @@ public class Review {
 	 *
 	 * @param scoring, the punctuation given to a product
 	 * @param comment, the comment about the product
-	 * @param author, the author of the comment
 	 */
-	public Review(int id, int scoring, String comment, RegisteredClient author) {
+	public Review(int id, int scoring, String comment) {
 		this.id = id;
 		this.scoring = scoring;
 		this.comment = comment;
-		this.author = author;
 	}
 
 	/**

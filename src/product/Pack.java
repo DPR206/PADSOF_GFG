@@ -4,13 +4,15 @@
 package product;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Class name: Pack
  * <p>
  * Description: It implements the packs
  * @author Duna P.R.
- * @version 1.0
+ * @version 1.1
  * @see store.Store
  */
 public class Pack {
@@ -215,5 +217,29 @@ public class Pack {
 		for(StoreProduct sp: products)
 			total += sp.getPrice();
 		return total;
+	}
+
+	/**
+	 * It returns the pack's products in a save-file-friendly manner
+	 * @return a string containing the pack's products
+	 */
+	public String getPrintProducts() {
+		StringBuilder sb = new StringBuilder();
+
+		for (StoreProduct product : products) {
+			sb.append(product.getId()).append(",");
+		}
+
+		return sb.toString();
+	}
+
+	/**
+	 * Written information of a pack
+	 * @return String, information of a pack
+	 */
+	@Override
+	public String toString() {
+		/*ID;PRICE;PRODUCT_IDS;DATE_ADD_CART*/
+		return this.id + ";" + this.price + ";" + this.getPrintProducts() + ";" + this.products;
 	}
 }

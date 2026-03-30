@@ -15,7 +15,7 @@ import java.util.*;
  * <p>
  * Description: It implements the store's saver and loader
  * @author Ana O.R. and Sofía C.L.
- * @version 1.5
+ * @version 1.7
  */
 public class SaverLoader {
 
@@ -153,8 +153,8 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + storeProductFilename + ".csv")));
 
-            buffer.write("TYPE;ID;NAME;DESCRIPTION;PRICE;STOCK;CATEGORIES;PAGES;AUTHOR;EDITORIAL;YEAR;PLAYER;AGE;" +
-                         "STYLE;BRAND;MATERIAL;DIMENSION\n");
+            buffer.write("TYPE;ID;PRICE;NAME;DESC;PHOTO;REVIEW_IDS;AVG_PUNT;STOCK;CATEGORIES;ADDED_DATE;" +
+                         "NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION\n");
             buffer.write(Product.totalId); /* Global ID */
             for (String key : keys) {
                 buffer.write(products.get(key).toString() + "\n");
@@ -311,7 +311,7 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + packsFilename + ".csv")));
 
-            buffer.write(""); // DUE
+            buffer.write("ID;PRICE;PRODUCT_IDS;DATE_ADD_CART");
             buffer.write(Pack.totalId); /* Global ID */
             for (Pack pack : packs) {
                 buffer.write(pack.toString() + "\n");
@@ -371,12 +371,12 @@ public class SaverLoader {
                           String discountsFilename, String storeProductFilename, String offersFilename,
                           String exchangesFilename, String ordersFilename, String packsFilename,
                           String secondHandProductFilename, String userFilename) throws IOException {
-        HashMap<Review, String> reviewAuthors = new HashMap<>();
+        HashMap<Review, Integer> reviewAuthors = new HashMap<>();
 
         try {
             loadParameters(parameterFilename);
             loadCategories(categoriesFilename);
-            loadReviews(reviewsFilename);
+            loadReviews(reviewsFilename, reviewAuthors);
             loadStoreProducts(storeProductFilename);
             loadSecondHandProducts(secondHandProductFilename);
             loadDiscounts(discountsFilename);
@@ -462,7 +462,7 @@ public class SaverLoader {
      * @param reviewsFilename the filename of the store's reviews' backup
      * @throws IOException something went wrong when reading
      */
-    private void loadReviews(String reviewsFilename) throws IOException {
+    private void loadReviews(String reviewsFilename, HashMap<Review, Integer> reviewAuthors) throws IOException {
         BufferedReader buffer;
         String[] words;
         String line;
@@ -471,9 +471,17 @@ public class SaverLoader {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + reviewsFilename + ".csv")));
 
-            buffer.readLine(); /*  */
+            buffer.readLine(); /* ID;SCORING;COMMENT;AUTHOR */
+            Review.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
             while ((line = buffer.readLine()) != null) {
-                // DUE
+                words = line.split(";");
+                int id = Integer.parseInt(words[0]);
+                int scoring = Integer.parseInt(words[1]);
+                String comment = words[2];
+                int authorId = Integer.parseInt(words[3]);
+
+                reviewAuthors.put(new Review(id, scoring, comment), authorId);
             }
 
             buffer.close();
@@ -500,10 +508,10 @@ public class SaverLoader {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + storeProductFilename + ".csv")));
 
-            buffer.readLine(); /* TYPE;ID;PRICE;NAME;DESC;PHOTO;REVIEW_IDS;AVG_PUNCT;STOCK;CATEGORIES;ADDED_DATE;
+            buffer.readLine(); /* TYPE;ID;PRICE;NAME;DESC;PHOTO;REVIEW_IDS;AVG_PUNT;STOCK;CATEGORIES;ADDED_DATE;
             NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
-
             Product.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 ProductType type = ProductType.valueOf(words[0]);
@@ -600,6 +608,7 @@ public class SaverLoader {
             if (totalId > Product.totalId) {
                 Product.totalId = Integer.parseInt(buffer.readLine());
             }
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 ProductType type = ProductType.valueOf(words[0]);
@@ -634,7 +643,6 @@ public class SaverLoader {
         String[] words;
         String line;
         int i = 0;
-        String productId;
         List<StoreProduct> products = new ArrayList<>();
 
         try {
@@ -642,6 +650,8 @@ public class SaverLoader {
                     new InputStreamReader(new FileInputStream(".\\resources\\" + discountsFilename + ".csv")));
 
             buffer.readLine(); /* TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE */
+            Discount.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 DiscountType type = DiscountType.valueOf(words[0]);
@@ -653,9 +663,14 @@ public class SaverLoader {
 
                 words = productsString.split(",");
                 while (words[i] != null) {
-                    productId = words[i];
+                    String productId = words[i];
                     products.add(Store.getInstance().getProductFromId(productId));
                     i++;
+                }
+
+                switch (type) {
+                    case DiscountType.FIXED_PERCENTAGE:
+                        //new FixedPerDisc(id, startDate, endDate, percentage, products);
                 }
             }
 
@@ -681,6 +696,8 @@ public class SaverLoader {
                     new InputStreamReader(new FileInputStream(".\\resources\\" + offersFilename + ".csv")));
 
             buffer.readLine(); /*  */
+            Offer.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 // DUE
@@ -708,6 +725,8 @@ public class SaverLoader {
                     new InputStreamReader(new FileInputStream(".\\resources\\" + exchangesFilename + ".csv")));
 
             buffer.readLine(); /*  */
+            Exchange.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 // DUE
@@ -735,6 +754,8 @@ public class SaverLoader {
                     new InputStreamReader(new FileInputStream(".\\resources\\" + ordersFilename + ".csv")));
 
             buffer.readLine(); /*  */
+            Order.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 // DUE
@@ -756,15 +777,30 @@ public class SaverLoader {
         BufferedReader buffer;
         String[] words;
         String line;
+        int i = 0;
+        List<StoreProduct> products = new ArrayList<>();
 
         try {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + packsFilename + ".csv")));
 
-            buffer.readLine(); /*  */
+            buffer.readLine(); /* ID;PRICE;PRODUCT_IDS;DATE_ADD_CART */
+            Pack.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
-                // DUE
+                int id = Integer.parseInt(words[0]);
+                double price = Double.parseDouble(words[1]);
+                String productsString = words[2];
+                LocalDate dateAddCart = LocalDate.parse(words[3]);
+
+                words = productsString.split(",");
+                while (words[i] != null) {
+                    String productId = words[i];
+                    products.add(Store.getInstance().getProductFromId(productId));
+                    i++;
+                }
+
             }
 
             buffer.close();
@@ -789,6 +825,8 @@ public class SaverLoader {
                     new InputStreamReader(new FileInputStream(".\\resources\\" + userFilename + ".csv")));
 
             buffer.readLine(); /*  */
+            User.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
+
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
                 // DUE

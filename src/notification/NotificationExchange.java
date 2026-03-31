@@ -10,7 +10,11 @@ import exchange.*;
 import store.Parameter;
 
 /**
- * 
+ * It implements the exchange notification
+ * @author Duna P.R.
+ * @version 1.2
+ * @see Notification
+ * @see NotificationInterface
  */
 public class NotificationExchange extends Notification implements NotificationInterface<Offer> {
 	

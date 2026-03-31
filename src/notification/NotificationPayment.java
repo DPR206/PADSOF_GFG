@@ -4,16 +4,13 @@ import java.time.LocalDateTime;
 
 public class NotificationPayment extends Notification implements NotificationInterface<String>{
 
-	//private String servicePaid;
-
 	/**
 	 * @param timeReceived
 	 * @param read
 	 * @param visible
 	 */
-	public NotificationPayment(LocalDateTime timeReceived, boolean read, boolean visible/*, String servicePaid*/) {
+	public NotificationPayment(LocalDateTime timeReceived, boolean read, boolean visible) {
 		super(timeReceived, read, visible);
-		//this.servicePaid = servicePaid;
 	}
 
 	/**
@@ -23,9 +20,8 @@ public class NotificationPayment extends Notification implements NotificationInt
 	 * @param read
 	 * @param visible
 	 */
-	public NotificationPayment(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible/*, String servicePaid*/) {
+	public NotificationPayment(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible) {
 		super(title, text, timeReceived, read, visible);
-		//this.servicePaid = servicePaid;
 	}
 
 	/**
@@ -37,24 +33,9 @@ public class NotificationPayment extends Notification implements NotificationInt
 	 * @param visible
 	 */
 	public NotificationPayment(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
-			boolean read, boolean visible/*, String servicePaid*/) {
+			boolean read, boolean visible) {
 		super(title, text, timeMade, timeReceived, read, visible);
-		//this.servicePaid = servicePaid;
 	}
-
-	/**
-	 * @return the servicePaid
-	 */
-	/*String getServicePaid() {
-		return servicePaid;
-	}*/
-
-	/**
-	 * @param servicePaid the servicePaid to set
-	 */
-	/*void setServicePaid(String servicePaid) {
-		this.servicePaid = servicePaid;
-	}*/
 
 	@Override
 	public String FullNotification(String o) {

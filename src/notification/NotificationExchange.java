@@ -12,7 +12,7 @@ import store.Parameter;
 /**
  * It implements the exchange notification
  * @author Duna P.R.
- * @version 1.2
+ * @version 1.5
  * @see Notification
  * @see NotificationInterface
  */

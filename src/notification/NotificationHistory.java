@@ -18,6 +18,32 @@ public class NotificationHistory {
 
 	private Set<Notification> notifications;
 	private User owner;
+	private NotificationSettings settings;
+	
+	/**
+	 * Creates a new notification history
+	 * 
+	 * @param notifications the notifications of the user
+	 * @param owner the user associated to the notifications
+	 * @param settings the notification settings
+	 */
+	public NotificationHistory(Set<Notification> notifications, User owner, NotificationSettings settings) {
+		this.notifications = notifications;
+		this.owner = owner;
+		this.settings = settings;
+	}
+	
+	/**
+	 * Creates a new empty notification history 
+	 * 
+	 * @param owner the user associated to the notifications
+	 * @param settings the notification settings
+	 */
+	public NotificationHistory(User owner, NotificationSettings settings) {
+		this.notifications = Collections.emptySet();
+		this.owner = owner;
+		this.settings = settings;
+	}
 	
 	/**
 	 * Creates a new notification history
@@ -28,16 +54,20 @@ public class NotificationHistory {
 	public NotificationHistory(Set<Notification> notifications, User owner) {
 		this.notifications = notifications;
 		this.owner = owner;
+		this.settings = new NotificationSettings();
 	}
 	
+	
+
 	/**
-	 * Creates a new empty notification history 
+	 * Creates a new empty notification history
 	 * 
 	 * @param owner the user associated to the notifications
 	 */
 	public NotificationHistory(User owner) {
 		this.notifications = Collections.emptySet();
 		this.owner = owner;
+		this.settings = new NotificationSettings();
 	}
 
 	/**
@@ -58,6 +88,16 @@ public class NotificationHistory {
 		return owner;
 	}
 	
+	
+	/**
+	 * Obtains the notification settings
+	 * 
+	 * @return the settings the settings of the notifications
+	 */
+	public NotificationSettings getSettings() {
+		return settings;
+	}
+
 	/**
 	 * Adds a new notification to the history
 	 * 

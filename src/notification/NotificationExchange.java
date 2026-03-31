@@ -23,13 +23,15 @@ public class NotificationExchange extends Notification implements NotificationIn
 	
 	
 	/**
-	 * @param title
-	 * @param text
-	 * @param timeReceived
-	 * @param read
-	 * @param visble
-	 * @param address
-	 * @param timeAndDate
+	 * Creates a new exchange notification with default timeMade (this moment)
+	 * 
+	 * @param title the tile of the notification
+	 * @param text the message in the notification
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param address the address of the place the exchange will take place at
+	 * @param timeAndDate the time and date of the exchange
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeReceived, 
 			boolean read, boolean visible, String address, LocalDateTime timeAndDate) {
@@ -39,14 +41,16 @@ public class NotificationExchange extends Notification implements NotificationIn
 	}
 
 	/**
-	 * @param title
-	 * @param text
-	 * @param timeMade
-	 * @param timeReceived
-	 * @param read
-	 * @param visible
-	 * @param address
-	 * @param timeAndDate
+	 * Creates a new exchange notification
+	 * 
+	 * @param title the tile of the notification
+	 * @param text the message in the notification
+	 * @param timeMade the time it was made
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param address the address of the place the exchange will take place at
+	 * @param timeAndDate the time and date of the exchange
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
 			boolean read, boolean visible, String address, LocalDateTime timeAndDate) {
@@ -56,12 +60,14 @@ public class NotificationExchange extends Notification implements NotificationIn
 	}
 	
 	/**
-	 * @param title
-	 * @param text
-	 * @param timeMade
-	 * @param timeReceived
-	 * @param read
-	 * @param visible
+	 * Creates a new exchange notification with no address or timeAndDate
+	 * 
+	 * @param title the tile of the notification
+	 * @param text the message in the notification
+	 * @param timeMade the time it was made
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
 			boolean read, boolean visible) {
@@ -73,8 +79,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 	
 
 	/**
-	 * @param timeReceived
-	 * @param read
+	 * Creates a new exchange notification without address or timeAndDate
+	 * 
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
 	 */
 	public NotificationExchange(LocalDateTime timeReceived, boolean read, boolean visible) {
 		super(timeReceived, read, visible);
@@ -83,6 +92,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 	}
 
 	@Override
+	/**
+	 * Creates a complete notification
+	 * 
+	 * @return a string with the notification
+	 */
 	public String FullNotification(Offer o) {
 		String text = "Tu oferta para intercambiar " + o.getOriginProducts() + "por " + o.getDestinationProducts();
 		switch(o.getStatus()) {
@@ -99,6 +113,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 	}
 	
 	@Override
+	/**
+	 * Creates a snippet of the notification (title and time log)
+	 * 
+	 * @return a string with the snippet of the notification
+	 */
 	public String SnippetNotification(Offer o) {
 		switch(o.getStatus()) {
 			case OfferStatus.ACCEPTED: this.setTitle("Your offer has been accepted\n"); break;
@@ -110,6 +129,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 		return this.getTitle() + this.timeLog();
 	}
 	
+	/**
+	 * Creates the string with information of address, time and date
+	 * 
+	 * @return a string with the time and place of the exchange as well as the address
+	 */
 	private String timeAndPlace() {
 		return "The exchange will take place at "+this.address 
 				+ " with date and time: "+this.timeAndDate.format(DateTimeFormatter.ofPattern("dd/MM HH:mm"))

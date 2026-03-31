@@ -38,7 +38,7 @@ public class NotificationDiscount extends Notification implements NotificationIn
 	}
 
 	/**
-	 * Creates a new cart notification
+	 * Creates a new discount notification
 	 * 
 	 * @param title the tile of the notification
 	 * @param text the message in the notification

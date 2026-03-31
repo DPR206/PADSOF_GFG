@@ -44,13 +44,13 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 
 	@Override
 	public String FullNotification(SecondHandProduct sp) {
-		String text = "Se ha subido un nuevo producto de segunda mano: " + sp.getName();
+		String text = "A new second-hand product has been uploaded: " + sp.getName() + ". With description: " + sp.getDescription() + "\n";
 		return this.SnippetNotification(sp) + text + this.signOff();
 	}
 
 	@Override
 	public String SnippetNotification(SecondHandProduct sp) {
-		this.setTitle("Se ha añadido un nuevo producto de segunda mano\n");
+		this.setTitle("A new second-hand product has been added\n");
 		return this.getTitle() + this.timeLog();
 	}
 	

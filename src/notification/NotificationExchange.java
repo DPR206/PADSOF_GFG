@@ -95,6 +95,7 @@ public class NotificationExchange extends Notification implements NotificationIn
 	/**
 	 * Creates a complete notification
 	 * 
+	 * @param o the new offer made
 	 * @return a string with the notification
 	 */
 	public String FullNotification(Offer o) {
@@ -116,6 +117,7 @@ public class NotificationExchange extends Notification implements NotificationIn
 	/**
 	 * Creates a snippet of the notification (title and time log)
 	 * 
+	 * @param o the new offer made
 	 * @return a string with the snippet of the notification
 	 */
 	public String SnippetNotification(Offer o) {

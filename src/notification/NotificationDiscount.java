@@ -56,6 +56,7 @@ public class NotificationDiscount extends Notification implements NotificationIn
 	/**
 	 * Creates a complete notification
 	 * 
+	 * @param o the new discount
 	 * @return a string with the notification
 	 */
 	public String FullNotification(Discount o) {
@@ -76,6 +77,7 @@ public class NotificationDiscount extends Notification implements NotificationIn
 	/**
 	 * Creates a snippet of the notification (title and time log)
 	 * 
+	 * @param o the new discount
 	 * @return a string with the snippet of the notification
 	 */
 	public String SnippetNotification(Discount o) {

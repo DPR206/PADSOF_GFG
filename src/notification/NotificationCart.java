@@ -60,6 +60,7 @@ public class NotificationCart extends Notification implements NotificationInterf
 	/**
 	 * Creates a complete notification
 	 * 
+	 * @param o the cart of the user
 	 * @return a string with the notification
 	 */
 	public String FullNotification(Cart o) {
@@ -73,6 +74,7 @@ public class NotificationCart extends Notification implements NotificationInterf
 	/**
 	 * Creates a snippet of the notification (title and time log)
 	 * 
+	 * @param o the cart of the user
 	 * @return a string with the snippet of the notification
 	 */
 	public String SnippetNotification(Cart o) {

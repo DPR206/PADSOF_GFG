@@ -1,4 +1,4 @@
-package notification;
+upackage notification;
 
 public class NotificationSettings{
     /*cosas */

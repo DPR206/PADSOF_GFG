@@ -12,6 +12,8 @@ import store.Parameter;
  * It implements the cart notification
  * @author Duna P.R.
  * @version 1.2
+ * @see Notification
+ * @see NotificationInterface
  */
 public class NotificationCart extends Notification implements NotificationInterface<Cart>{
 

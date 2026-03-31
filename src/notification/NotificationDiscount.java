@@ -41,8 +41,9 @@ public class NotificationDiscount extends Notification implements NotificationIn
 
 	@Override
 	public String FullNotification(Discount o) {
+		String text = "This discount starts on the " + o.getStartDate() + " and ends on the " + o.getEndDate();
 		
-		return this.SnippetNotification(o) + this.signOff();
+		return this.SnippetNotification(o) + text + this.signOff();
 	}
 
 	@Override

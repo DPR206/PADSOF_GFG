@@ -20,7 +20,7 @@ public abstract class Discount {
     /** The discount's id */
     private final String id;
     /** The discount's type */
-    private final DiscountType type;
+    public final DiscountType type;  //necesito que sea publico para las notificaciones
     /** Whether the discount is applied over the whole store or not */
     private boolean overWholeStore;
     /** The date when the discount starts */
@@ -271,7 +271,14 @@ public abstract class Discount {
         this.startDate = newStartDate;
     }
 
-    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    /**
+	 * @return the type
+	 */
+	public DiscountType getType() {
+		return type;
+	}
+
+	/*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override
     public String toString() {
         /* TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE */

@@ -13,7 +13,6 @@ public class NotificationDiscount extends Notification implements NotificationIn
 	 */
 	public NotificationDiscount(LocalDateTime timeReceived, boolean read, boolean visible) {
 		super(timeReceived, read, visible);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -25,7 +24,6 @@ public class NotificationDiscount extends Notification implements NotificationIn
 	 */
 	public NotificationDiscount(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible) {
 		super(title, text, timeReceived, read, visible);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -39,19 +37,30 @@ public class NotificationDiscount extends Notification implements NotificationIn
 	public NotificationDiscount(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
 			boolean read, boolean visible) {
 		super(title, text, timeMade, timeReceived, read, visible);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String FullNotification(Discount o) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.SnippetNotification(o) + this.signOff();
 	}
 
 	@Override
 	public String SnippetNotification(Discount o) {
-		// TODO Auto-generated method stub
-		return null;
+		String title1 = "There's a new ";
+		String title2 = " discount\n";
+		switch(o.getType()) {
+		 case DiscountType.FIXED_PERCENTAGE: title1 += "fixed percentage"; break;
+		 case DiscountType.GIFT: title1 += "gift"; break;
+		 case DiscountType.QUANTITY: title1 += "quantity"; break;
+		 case DiscountType.VOLUME: title1 += "volume"; break;
+		 default: title1 = "Not valid";
+		}
+		
+		title1 += title2;
+		this.setTitle(title1);
+		
+		return title1 + this.timeLog();
 	}
 
 	

@@ -29,8 +29,39 @@ public class SearchStoreProducts{
     public void addPriceFilter(double min, double max){
         this.priceF= new PriceFilter(min, max);
     }
-    public List<StoreProduct> searchStoreProducts(Store s){
-        return (List<StoreProduct>) this.s.getStoreProducts().values();
+
+    public List<StoreProduct> searchStoreProducts(Category... cs){
+        List<StoreProduct> pCs = this.filterByCategory(cs);
+        List<StoreProduct> filtered = this.searchStoreProducts();
+
+        if(filtered == this.s.getStoreProducts()){
+            return pCs;
+        }
+        
+        pCs.retainAll(filtered);
+        return pCs;
+    }
+
+    public List<StoreProduct> searchStoreProducts(){
+        List<StoreProduct> priced = null;
+        List<StoreProduct> punctuation = null;
+
+        if(this.punctuationF && this.priceF){
+            priced = this.filterByPrice();
+            punctuation = this.filterByPrice();
+            priced.retainAll(punctuation);
+            return priced;
+        }
+        else if(this.punctuation && !this.priceF){
+            punctuation = this.filterByPrice();
+            return punctuation;
+        }
+        else if(this.priceF && !this.punctuation){
+            priced = this.filterByPrice();
+            return priced;
+        }
+        /*caso donde no hay ningún filtro */
+        return this.s.getStoreProducts();
     }
 
     private List<StoreProduct> filterByPrice(){
@@ -60,7 +91,20 @@ public class SearchStoreProducts{
         }
     }
 
-    private List<StoreProduct> filterByCategory(){ //para cada producto, buscar la categoría
+    private List<StoreProduct> filterByCategory(Category... c){ //para cada producto, buscar la categoría
+        List<StoreProduct> aux = new ArrayList<>();
+        List<StoreProduct> product = this.s.getStoreProducts();
+        Categories productCategories[] = null
+        
+        for(Category category: c){
+            for(StoreProduct sp: product){
+                productCategories = sp.getCategories();
+                for(Category productCat: productCategories){
+                    if(c == productCat) aux.add(productCat);
+                }
+            }
+        }
 
+        return aux;
     }
 }

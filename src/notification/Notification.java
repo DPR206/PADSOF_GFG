@@ -8,7 +8,7 @@ import java.time.*;
 /**
  * It implements the notification
  * @author Duna P.R.
- * @version 1.3
+ * @version 1.4
  */
 public abstract class Notification {
 	private String title;
@@ -17,6 +17,7 @@ public abstract class Notification {
 	private LocalDateTime timeReceived;
 	private boolean read;
 	private boolean visible;
+	private NotificationType type;
 	
 	/**
 	 * Creates a new notification
@@ -27,14 +28,17 @@ public abstract class Notification {
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
-	public Notification(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived, boolean read, boolean visible) {
+	public Notification(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived, boolean read, boolean visible, 
+						NotificationType type) {
 		this.title = title;
 		this.text = text;
 		this.timeMade = timeMade;
 		this.timeReceived = timeReceived;
 		this.read = read;
 		this.visible = visible;
+		this.type = type;
 	}
 	
 	/**
@@ -45,9 +49,10 @@ public abstract class Notification {
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
-	public Notification(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible) {
-		this(title, text, LocalDateTime.now(),timeReceived, read, visible);
+	public Notification(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible, NotificationType type) {
+		this(title, text, LocalDateTime.now(),timeReceived, read, visible, type);
 		
 	}
 	
@@ -57,9 +62,10 @@ public abstract class Notification {
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
-	public Notification(LocalDateTime timeReceived, boolean read, boolean visible) {
-		this("", "", LocalDateTime.now(),timeReceived, read, visible);
+	public Notification(LocalDateTime timeReceived, boolean read, boolean visible, NotificationType type) {
+		this("", "", LocalDateTime.now(),timeReceived, read, visible, type);
 		
 	}
 
@@ -171,9 +177,28 @@ public abstract class Notification {
 		this.visible = visible;
 	}
 	
+	/**
+	 * Obtains the type of notification
+	 * 
+	 * @return the type the type of notification
+	 */
+	public NotificationType getType() {
+		return type;
+	}
+
+	/**
+	 * Sets the type of the notification
+	 * 
+	 * @param type the type to set
+	 */
+	 void setType(NotificationType type) {
+		this.type = type;
+	}
+	
 	
 /*-----------------------------------------------------------------METHODS--------------------------------------------------------*/
 	
+
 	/**
 	 * Calculates the the amount of time that has passed since the user received the notification
 	 * 

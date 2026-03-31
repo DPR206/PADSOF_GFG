@@ -1,3 +1,7 @@
+import store.Store;
+import user.User;
+import user.UserType;
+
 import java.time.LocalTime;
 import java.util.Scanner;
 
@@ -6,6 +10,7 @@ public class MainApp {
         Scanner sc = new Scanner(System.in);
         LocalTime todayTime = LocalTime.now();
         int chosenOption;
+        User currentUser;
 
         // NOTE: Me hacía ilu :7
         if (todayTime.isBefore(LocalTime.of(17, 0))) {
@@ -23,23 +28,48 @@ public class MainApp {
         switch (chosenOption) {
             case 1:
                 unregisteredClientLoop();
+                break;
             case 2:
-                logIn();
+                currentUser = Store.getInstance().logIn();
+                if (currentUser != null) {
+                    loopSelector(currentUser.getType());
+                }
+                break;
             case 3:
-                register();
+                currentUser = Store.getInstance().getUtility().signIn();
+                if (currentUser != null) {
+                    loopSelector(currentUser.getType());
+                }
+                break;
+            default:
+                main(null);
         }
 
+    }
+
+    public void loopSelector(UserType userType) {
+        switch (userType) {
+            case UNREGISTERED_CLIENT -> unregisteredClientLoop();
+            case REGISTERED_CLIENT -> registeredClientLoop();
+            case EMPLOYEE -> employeeLoop();
+            case MANAGER -> managerLoop();
+        }
     }
 
     public void unregisteredClientLoop() {
         // DUE
     }
 
-    public void logIn() {
+    public void registeredClientLoop() {
         // DUE
     }
 
-    public void register() {
+    public void employeeLoop() {
         // DUE
     }
+
+    public void managerLoop() {
+        // DUE
+    }
+
 }

@@ -49,13 +49,13 @@ public class Store {
     /* The list of registered clients ordered by username */
     private HashMap<String, RegisteredClient> registeredClients = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
-    private Utility extras;
+    private Utility utility;
 
     /**
      * Store's constructor
      */
     private Store() {
-        this.extras = new Utility();
+        this.utility = new Utility();
         this.param = Parameter.getParam();
     }
 
@@ -68,6 +68,14 @@ public class Store {
             Store.INSTANCE = new Store();
         }
         return Store.INSTANCE;
+    }
+
+    /**
+     * It gets the store's utility
+     * @return the store's utility
+     */
+    public Utility getUtility() {
+        return utility;
     }
 
     /**
@@ -125,7 +133,7 @@ public class Store {
      * Logs in a user
      *
      */
-    private boolean logIn() {
+    public User logIn() {
         User u;
         Scanner sc = new Scanner(System.in);
         String userName, pwd;
@@ -137,22 +145,18 @@ public class Store {
             pwd = sc.next();
         } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
-            return false;
+            return null;
         }
 
-        if (extras.logIn(userName, pwd, this) == false) {
-            return false;
-        }
-
-        return true;
+        return utility.logIn(userName, pwd);
     }
 
     /**
      * Signs in a user
      *
      */
-    public boolean signIn() {
-        return extras.signIn(this);
+    public User signIn() {
+        return utility.signIn();
     }
 
     /**

@@ -34,7 +34,7 @@ public class Employee extends User {
      * @param p
      */
     public Employee(String pwd, String userName, Permission p) {
-        super(pwd, userName);
+        super(UserType.EMPLOYEE, pwd, userName);
         this.perm = p;
 
         if (p.getMeaning() == "store") {

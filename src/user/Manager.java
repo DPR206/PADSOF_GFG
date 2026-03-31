@@ -24,7 +24,7 @@ public class Manager extends User {
     private Parameter parameter; //?? esto que es xd
 
     private Manager(String pwd, String userName, Store s, StorePermission sp, Parameter p) {
-        super(pwd, userName);
+        super(UserType.MANAGER, pwd, userName);
         this.s = s;
         this.sp = sp;
         this.parameter = p;

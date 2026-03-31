@@ -25,7 +25,7 @@ public class RegisteredClient extends User {
     private OrderHistory op;
     private Wallet wallet;
     private OrderHistory orderHistory;
-    
+
     //searcher
     //sugestioner
     //orderhistory
@@ -39,7 +39,7 @@ public class RegisteredClient extends User {
      * @param password     the user's password
      */
     public RegisteredClient(String userName, LocalDate registerDate, String dni, String password) {
-        super(userName, password);
+        super(UserType.REGISTERED_CLIENT, userName, password);
         this.registerDate = registerDate;
         this.dni = dni;
         this.c = new Cart();
@@ -89,10 +89,10 @@ public class RegisteredClient extends User {
     public void setDni(String dni) {
         this.dni = dni;
     }
-    
+
     /**
      * Obtains the exchange history
-     * 
+     *
      * @return ExchangeHistory, the exchange history
      */
     public ExchangeHistory getExchangeHistory() {
@@ -107,34 +107,34 @@ public class RegisteredClient extends User {
         //Tengo que hacer la comprobación de que la contraseña es segura
         super.changePassword(psswd);
     }
-    
+
     /**
      * Obtains the client's order history
-     * 
+     *
      * @return the order history
      */
     public OrderHistory getOrderHistory(){
         return this.op;
     }
-    
+
     /**
      * Adds a new product to the wallet
-     * 
+     *
      * @param product, the new product
      */
     public void addProductWallet(SecondHandProduct product) {
     	this.wallet.addProducts(product);
     }
-    
+
     /**
      * Removes products from the wallet
-     * 
+     *
      * @param products, the product to remove
      */
     public void removeProductWallet(SecondHandProduct...products) {
     	this.wallet.removeProducts(products);
     }
-    
+
     /**
      * Adds a product to the cart
      * @param product, the product to add
@@ -142,36 +142,36 @@ public class RegisteredClient extends User {
     public void addCart(StoreProduct product) {
     	this.c.addProduct(product);
     }
-    
+
     /**
      * Adds a pack to the cart
-     * 
+     *
      * @param pack, the pack to add
      */
     public void addCart(Pack pack) {
     	this.c.addPack(pack);
     }
-    
+
     /**
      * Removes a product from the cart
-     * 
+     *
      * @param product, the product to remove
      */
     public void deleteCart(StoreProduct product){
     	this.c.cancelProduct(product);
     }
-    
+
     /**
      * Removes a pack from the cart
-     * 
+     *
      * @param pack, the pack to remove
      */
     public void deleteCart(Pack pack) {
     	this.c.cancelPack(pack);
     }
-    
+
     //public boolean buy() {}
-    
+
     //requestValuation
     //makeAnOffer
     //browseNotifications

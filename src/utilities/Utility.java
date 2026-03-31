@@ -9,27 +9,23 @@
 package utilities;
 
 import store.Store;
-import user.RegisteredClient;
-import user.User;
+import user.*;
 
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Utility {
 
     public Utility() {
     }
 
-    public boolean signIn(Store s) {
+    public User signIn() {
         Scanner sc = new Scanner(System.in);
         String userName = null, pwd, dni;
         RegisteredClient rc;
         User u;
         boolean aux = false;
 
-        Map<String, User> users = s.getUsers();
+        Map<String, User> users = Store.getInstance().getUsers();
         System.out.print("Introduce tu usuario: ");
 
         try {
@@ -50,29 +46,30 @@ public class Utility {
             pwd = sc.next();
             System.out.print("Introduce tu DNI: ");
             dni = sc.next();
-            
+
             rc = new RegisteredClient(userName, dni, pwd);
 
             u = rc;
             users.put(u.getUserName(), u);
-            return true;
+            return u;
+
         } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
-            return false;
+            return null;
         } finally {
             sc.close();
         }
     }
 
-    public boolean logIn(String userName, String pwd, Store s) {
+    public User logIn(String userName, String pwd) {
         User u;
 
-        if (s.getUsers().containsKey(userName)) {
-            u = s.getUsers().get(userName);
+        if (Store.getInstance().getUsers().containsKey(userName)) {
+            u = Store.getInstance().getUsers().get(userName);
             if (u.getPassword() == pwd) {
-                return true;
+                return u;
             }
         }
-        return false;
+        return null;
     }
 }

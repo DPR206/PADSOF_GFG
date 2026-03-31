@@ -15,16 +15,20 @@ public abstract class User {
     /** Username of the user */
     private String userName;
     /** ID of the user */
-    private int actualID;
+    private String actualID;
+    /** The user's user type */
+    private final UserType type;
 
 
     /**
      * Creates a new user
+     * @param type the user's user type
      * @param pwd,      the password of the user
      * @param userName, the username of the user
      * @param actualID, the ID of the user
      */
-    public User(String pwd, String userName, int actualID) {
+    public User(UserType type,String pwd, String userName, String actualID) {
+        this.type = type;
         this.pwd = pwd;
         this.userName = userName;
         this.actualID = actualID;
@@ -32,19 +36,19 @@ public abstract class User {
 
     /**
      * Creates a new user, but for other classes
+     * @param type the user's user type
      * @param pwd,      the password of the user
-     * @param userName, the uusername of the user
+     * @param userName, the username of the user
      */
-    public User(String pwd, String userName) {
-        this(pwd, userName, User.totalId);
-        User.totalId++;
+    public User(UserType type, String pwd, String userName) {
+        this(type, pwd, userName, type.getSymbol() + String.format("%06d", ++totalId));
     }
 
     /**
      * Creates a new user without id, password or username
      */
     public User() {
-        this(null, null, 0);
+        this(UserType.UNREGISTERED_CLIENT, null, null, UserType.UNKNOWN.getSymbol() + String.format("%06d", 0));
     }
 
     /**
@@ -71,5 +75,13 @@ public abstract class User {
      */
     public String getUserName() {
         return this.userName;
+    }
+
+    /**
+     * It gets the user's user type
+     * @return the user's user type
+     */
+    public UserType getType() {
+        return this.type;
     }
 }

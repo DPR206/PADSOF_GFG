@@ -17,10 +17,10 @@ import java.util.List;
 public abstract class Discount {
     /** The global variable to determine which id should a new product have */
     static public int totalId = -1;
-    /** The discount's id */
-    private final String id;
     /** The discount's type */
     public final DiscountType type;  //necesito que sea publico para las notificaciones
+    /** The discount's id */
+    private final String id;
     /** Whether the discount is applied over the whole store or not */
     private boolean overWholeStore;
     /** The date when the discount starts */
@@ -91,14 +91,11 @@ public abstract class Discount {
      */
     public Discount(LocalDateTime startDate, LocalDateTime endDate, DiscountType type, boolean overWholeStore)
             throws IllegalArgumentException {
-        if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Start date is after end date");
-        }
+        this(startDate, endDate, type, (Store.getInstance().getCategories().values().toArray(new Category[0])));
+
         if (!overWholeStore) {
             throw new IllegalArgumentException("Must be over the whole store for it to work");
         }
-
-        this(startDate, endDate, type, (Store.getInstance().getCategories().values().toArray(new Category[0])));
         this.overWholeStore = true;
     }
 
@@ -272,13 +269,13 @@ public abstract class Discount {
     }
 
     /**
-	 * @return the type
-	 */
-	public DiscountType getType() {
-		return type;
-	}
+     * @return the type
+     */
+    public DiscountType getType() {
+        return type;
+    }
 
-	/*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override
     public String toString() {
         /* TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE */

@@ -29,11 +29,11 @@ public class FixedPerDisc extends Discount {
      */
     public FixedPerDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double percentage,
                         StoreProduct... products) throws IllegalArgumentException {
+        super(id, startDate, endDate, DiscountType.FIXED_PERCENTAGE, products);
+
         if (percentage < 0 || percentage > 100) {
             throw new IllegalArgumentException("The percentage must be between 0% and 100%");
         }
-
-        super(id, startDate, endDate, DiscountType.FIXED_PERCENTAGE, products);
         this.percentage = percentage;
     }
 
@@ -47,11 +47,11 @@ public class FixedPerDisc extends Discount {
      */
     public FixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage, StoreProduct... products)
             throws IllegalArgumentException {
+        super(startDate, endDate, DiscountType.FIXED_PERCENTAGE, products);
+
         if (percentage < 0 || percentage > 100) {
             throw new IllegalArgumentException("The percentage must be between 0% and 100%");
         }
-
-        super(startDate, endDate, DiscountType.FIXED_PERCENTAGE, products);
         this.percentage = percentage;
     }
 

@@ -13,6 +13,7 @@ import user.*;
  * @author Duna P.R.
  * @version 1.1
  * @see Notification
+ * @see NotificationSettings
  */
 public class NotificationHistory {
 

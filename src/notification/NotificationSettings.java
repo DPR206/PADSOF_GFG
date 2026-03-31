@@ -6,7 +6,12 @@ package notification;
 import java.util.*;
 
 /**
+ * It implements the notification history
  * 
+ * @author Duna P.R.
+ * @version 1.1
+ * @see Notification
+ * @see NotificationHistory
  */
 public class NotificationSettings {
 	

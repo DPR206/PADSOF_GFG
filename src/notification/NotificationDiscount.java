@@ -6,6 +6,7 @@ import order.*;
 
 /**
  * It implements the discount notification
+ * 
  * @author Duna P.R.
  * @version 1.2
  * @see Notification

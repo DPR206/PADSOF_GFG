@@ -1,12 +1,21 @@
 package search;
 import product.*;
-
-public abstract class SearchID{
-    public SearchID(){
-
-    }
+/**
+ * Interface name:SearchID
+ * <p>
+ * Description: It implements the interface searchID
+ * @author Sofía C.L.
+ * @version 1.3
+ * @see SearchStoreProducts
+  */
+public interface SearchID{
     
-    public Object searchByID(int id){
-        return null;
+ 
+     /**
+	 * Empty function. Depending on the class, it will return one thing or another
+	 *
+	 * @param id, id of the object we want to search
+	 */
+    Object searchByID(int id){
     } 
 }

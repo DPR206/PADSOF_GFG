@@ -5,13 +5,31 @@ import store.Store;
 
 import java.util.List;
 
-public class SearchOrder extends SearchID{
+/**
+    * Class name: SearchOrder
+    * <p>
+    * Description: It implements the order filter through ID
+    * @author Sofía C.L.
+    * @version 1.3
+    * @see SearchStoreProducts
+    */
+public class SearchOrder implements SearchID{
     private List<Order> orders;
 
+    /**
+	 * Creates the class
+	 *
+	 * @param s, sends the store to get all the orders available
+	 */
     public SearchOrder(Store s){
         this.orders = s.getOrders();
     }
-    @Override
+
+    /**
+	 * Searches the order that has the id sent as a parameter
+	 *
+	 * @param id, id of the order the user wants to find
+	 */
     public Order searchByID(int id){
         for(Order o: this.orders){
             if(o.getId() == id) return o;

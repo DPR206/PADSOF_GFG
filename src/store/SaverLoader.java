@@ -15,9 +15,10 @@ import java.util.*;
  * <p>
  * Description: It implements the store's saver and loader
  * @author Ana O.R. and Sofía C.L.
- * @version 1.7
+ * @version 1.8
  */
 public class SaverLoader {
+    private static final SaverLoader INSTANCE = new SaverLoader();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -25,6 +26,16 @@ public class SaverLoader {
      * The saver loader's constructor
      */
     public SaverLoader() {
+    }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It gets the saver-loader's instance
+     * @return the saver-loader's instance
+     */
+    public static SaverLoader getInstance() {
+        return SaverLoader.INSTANCE;
     }
 
     /*---------------------------------------------------- SAVES -----------------------------------------------------*/
@@ -399,7 +410,7 @@ public class SaverLoader {
             loadExchanges(exchangesFilename);
             loadOrders(ordersFilename);
             loadUsers(userFilename);
-            finishingTouches(reviewAuthors);
+            loadFinishingTouches(reviewAuthors);
 
         } catch (IOException exception) {
             throw new IOException(exception.getMessage());
@@ -931,7 +942,7 @@ public class SaverLoader {
      * It sets whatever parameters couldn't be set previously
      * @param reviewAuthors the reviews' authors
      */
-    public void finishingTouches(HashMap<Review, String> reviewAuthors) {
+    public void loadFinishingTouches(HashMap<Review, String> reviewAuthors) {
         Set<Review> reviews = reviewAuthors.keySet();
         for (Review review : reviews) {
             review.setAuthor(Store.getInstance().getRegisteredClients().get(reviewAuthors.get(review)));

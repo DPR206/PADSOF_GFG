@@ -9,12 +9,23 @@ public interface DiscountFactory {
     FixedPercentageDiscount createFixedPercentageDiscount(String id, LocalDateTime start, LocalDateTime end,
                                                           double percentage);
 
+    FixedPercentageDiscount createFixedPercentageDiscount(LocalDateTime start, LocalDateTime end, double percentage);
+
     GiftDiscount createGiftDiscount(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                                    StoreProduct gift);
+
+    GiftDiscount createGiftDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                                     StoreProduct gift);
 
     QuantityDiscount createQuantityDiscount(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold,
                                             double deduction);
 
+    QuantityDiscount createQuantityDiscount(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold,
+                                            double deduction);
+
     VolumeDiscount createVolumeDiscount(String id, LocalDateTime startDate, LocalDateTime endDate,
                                         double spendingThreshold, double deduction);
+
+    VolumeDiscount createVolumeDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                                        double deduction);
 }

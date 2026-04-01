@@ -4,6 +4,7 @@ import product.*;
 import store.Store;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -90,23 +91,22 @@ public abstract class Discount {
         List<Discount> discounts = Store.getInstance().getDiscounts();
 
         for (Discount discount : discounts) {
-            List<StoreProduct> alreadyAffectedProducts = discount.getProducts();
-            // NOTE: retainAll mantiene en alreadyAffectedProducts los productos en común, así pues, si afectaran al
-            // mismo producto la lista resultante no estaría vacía
-            if (discount.getCoverage() == DiscountCoverage.PRODUCT) {
-                ProductDiscount productDiscount = (ProductDiscount) discount;
-                if (productDiscount.getOverWholeStore()) {
-                    return false;
+            if (discount != this) {
+                List<StoreProduct> alreadyAffectedProducts = discount.getProducts();
+                if (discount.getCoverage() == DiscountCoverage.PRODUCT) {
+                    ProductDiscount productDiscount = (ProductDiscount) discount;
+                    if (productDiscount.getOverWholeStore()) {
+                        return true;
+                    }
                 }
-            }
-            alreadyAffectedProducts.retainAll(testedProducts);
-            if (!alreadyAffectedProducts.isEmpty()) {
-                System.out.println("Discount conflicts with Discount #" + discount.getId());
-                return false;
+
+                if (!Collections.disjoint(alreadyAffectedProducts, testedProducts)) {
+                    return true;
+                }
             }
         }
 
-        return true;
+        return false;
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

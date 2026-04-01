@@ -1,10 +1,10 @@
 package order;
 
-import product.Category;
-import product.StoreProduct;
+import product.*;
 import store.Store;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,13 +12,17 @@ import java.util.List;
  * <p>
  * Description: It implements the general discount
  * @author Ana O.R.
- * @version 1.2
+ * @version 1.3
+ * @see Store
+ * @see StoreProduct
+ * @see Pack
+ * @see Category
  */
 public abstract class Discount {
     /** The global variable to determine which id should a new product have */
     static public int totalId = -1;
     /** The discount's type */
-    public final DiscountType type;  //necesito que sea publico para las notificaciones
+    public final DiscountType type;
     /** The discount's id */
     private final String id;
     /** Whether the discount is applied over the whole store or not */
@@ -28,12 +32,14 @@ public abstract class Discount {
     /** The date when the discount ends */
     private LocalDateTime endDate;
     /** The list of products affected by this discount */
-    private List<StoreProduct> products;
+    private List<StoreProduct> products = new ArrayList<>();
+    /** The lis of packs affected by this discount */
+    private List<Pack> packs = new ArrayList<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * A discount's general constructor
+     * A discount's general constructor with products
      * @param id        the discount's id
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
@@ -58,11 +64,103 @@ public abstract class Discount {
     }
 
     /**
+     * A discount's general constructor when packs are specified
+     * @param id        the discount's id
+     * @param startDate the date when the discount starts
+     * @param endDate   the date when the discount ends
+     * @param type      the discount's type
+     * @param packs     the discount's packs
+     * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
+     */
+    public Discount(String id, LocalDateTime startDate, LocalDateTime endDate, DiscountType type, Pack... packs)
+            throws IllegalArgumentException {
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("Start date is after end date");
+        }
+
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.type = type;
+        addPacks(packs);
+        this.overWholeStore = false;
+
+        Store.getInstance().getDiscounts().add(this);
+    }
+
+    /**
+     * A discount's general constructor when categories are specified
+     * @param id         the discount's id
+     * @param startDate  the date when the discount starts
+     * @param endDate    the date when the discount ends
+     * @param type       the discount's type
+     * @param categories the discount's categories
+     * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
+     */
+    public Discount(String id, LocalDateTime startDate, LocalDateTime endDate, DiscountType type,
+                    Category... categories) throws IllegalArgumentException {
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("Start date is after end date");
+        }
+
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.type = type;
+        addCategories(categories);
+        this.overWholeStore = false;
+
+        Store.getInstance().getDiscounts().add(this);
+    }
+
+    /**
+     * A discount's constructor when applied over the whole store
+     * @param startDate      the date when the discount starts
+     * @param endDate        the date when the discount ends
+     * @param type           the discount's type
+     * @param overWholeStore whether the discount is applied over the whole store or not (must be true)
+     * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
+     */
+    public Discount(String id, LocalDateTime startDate, LocalDateTime endDate, DiscountType type,
+                    boolean overWholeStore) throws IllegalArgumentException {
+        this(id, startDate, endDate, type, (Store.getInstance().getCategories().values().toArray(new Category[0])));
+
+        if (!overWholeStore) {
+            throw new IllegalArgumentException("Must be over the whole store for it to work");
+        }
+        this.overWholeStore = true;
+    }
+
+    /**
+     * A discount's general constructor with packs
+     * @param startDate the date when the discount starts
+     * @param endDate   the date when the discount ends
+     * @param type      the discount's type
+     * @param packs     the discount's packs
+     * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
+     */
+    public Discount(LocalDateTime startDate, LocalDateTime endDate, DiscountType type, Pack... packs)
+            throws IllegalArgumentException {
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("Start date is after end date");
+        }
+
+        this.id = type.getSymbol() + String.format("%06d", ++totalId);
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.type = type;
+        addPacks(packs);
+        this.overWholeStore = false;
+
+        Store.getInstance().getDiscounts().add(this);
+    }
+
+    /**
      * A discount's constructor when applied over categories
      * @param startDate  the date when the discount starts
      * @param endDate    the date when the discount ends
      * @param type       the discount's type
-     * @param categories the categories
+     * @param categories the discount's categories
      * @throws IllegalArgumentException the dates aren't valid or the discount is conflicting
      */
     public Discount(LocalDateTime startDate, LocalDateTime endDate, DiscountType type, Category... categories)
@@ -100,7 +198,7 @@ public abstract class Discount {
     }
 
     /**
-     * A discount's constructor
+     * A discount's constructor with products
      * @param startDate the date when the discount starts
      * @param endDate   the date when the discount ends
      * @param type      the discount's type
@@ -166,6 +264,17 @@ public abstract class Discount {
         }
     }
 
+    /**
+     * It adds packs to the discount
+     * @param packs the desired categories
+     */
+    public void addPacks(Pack... packs) {
+        for (Pack pack : packs) {
+            addProducts(pack.getProducts().toArray(new StoreProduct[0]));
+        }
+        this.packs.addAll(List.of(packs));
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -208,6 +317,22 @@ public abstract class Discount {
     // DUE: public abstract createNotification(){}
 
     // DUE: public abstract obtainDisc(); <- Creo que no puedo pq no devuelven lo mismo
+
+    /**
+     * It gets the packs affected by this discount
+     * @return the packs affected by this discount
+     */
+    public List<Pack> getPacks() {
+        return packs;
+    }
+
+    /**
+     * It sets the packs affected by this discount
+     * @param newPacks the new packs affected by this discount
+     */
+    public void setPacks(List<Pack> newPacks) {
+        this.packs = newPacks;
+    }
 
     /**
      * It returns the discount's products in a save-file-friendly manner
@@ -269,6 +394,7 @@ public abstract class Discount {
     }
 
     /**
+     * Gets type.
      * @return the type
      */
     public DiscountType getType() {

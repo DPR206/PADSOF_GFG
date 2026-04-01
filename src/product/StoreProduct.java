@@ -27,7 +27,7 @@ public abstract class StoreProduct extends Product {
     /** The number of available copies of this product */
     private int stock;
     /** The product's discount, if it has one */
-    private Discount discount;
+    private Discount discount = null;
     /** The product's categories */
     private HashMap<String, Category> categories = new HashMap<>();
     /** The date when the product was added to the cart */
@@ -62,7 +62,6 @@ public abstract class StoreProduct extends Product {
 
         this.stock = stock;
         this.averagePunctuation = averagePunctuation;
-        this.discount = null;
         for (Category category : categories) {
             this.categories.put(category.getName(), category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
@@ -94,7 +93,6 @@ public abstract class StoreProduct extends Product {
 
         this.stock = stock;
         this.averagePunctuation = 0;
-        this.discount = null;
         for (Category category : categories) {
             this.addCategory(category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);

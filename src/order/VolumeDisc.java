@@ -191,7 +191,8 @@ public class VolumeDisc extends Discount {
     public String toString() {
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;<SPENDING_THRESHOLD>;NUM_PRODS;
         <DEDUCTION> */
-        return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" + this.spendingThreshold + ";" /*numProds
+        return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" + this.spendingThreshold +
+               ";" /*udsThreshold
          */ + ";" + this.deduction;
     }
 }

@@ -3,6 +3,7 @@
  */
 package product;
 
+import order.*;
 import store.Store;
 
 import java.time.LocalDate;
@@ -25,6 +26,8 @@ public class Pack {
 	private double price;
 	private ArrayList<StoreProduct> products;
 	private LocalDate dateAddCart = null;
+	/** The pack's discount, if it has one */
+	private Discount discount = null;
 
 	/*---------------------------------------------------Constructors---------------------------------------------------------------*/
 
@@ -90,6 +93,27 @@ public class Pack {
 	/*----------------------------------------------------Getters and Setters---------------------------------------------------------------*/
 
 	/**
+	 * It gets the pack's discount
+	 * @return the pack's discount
+	 */
+	public Discount getDiscount() {
+		return this.discount;
+	}
+
+	/**
+	 * It allows an employee to add discounts to packs (Discounts is in charge of making sure they don't overlap)
+	 * @param newDiscount the new discount to be applied
+	 * @throws NullPointerException discount was null
+	 */
+	public void setDiscount(Discount newDiscount) throws NullPointerException {
+		if (discount == null) {
+			throw new NullPointerException("Discount cannot be null");
+		}
+
+		this.discount = newDiscount;
+	}
+
+	/**
 	 * Obtains the pack's id
 	 *
 	 * @return the id
@@ -98,14 +122,32 @@ public class Pack {
 		return id;
 	}
 
-	/**
-	 * Obtains the packs price
-	 *
-	 * @return the price
-	 */
-	public double getPrice() {
-		return price;
-	}
+/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * Applies the pack's discounts (except quantity) and obtains the packs price
+     * @return the pack's price
+     */
+    public double getPrice() {
+        switch (this.discount.getType()) {
+            case FIXED_PERCENTAGE:
+                FixedPerDisc fixedPerDisc = (FixedPerDisc) this.discount;
+                return this.price - (this.price * fixedPerDisc.getPercentage());
+            case GIFT:
+                GiftDisc giftDisc = (GiftDisc) this.discount;
+                if (this.price > giftDisc.getSpendingThreshold()) {
+                    this.addProduct(giftDisc.getGift());
+                }
+                return this.price;
+            case VOLUME:
+                VolumeDisc volumeDisc = (VolumeDisc) this.discount;
+                if (this.price > volumeDisc.getSpendingThreshold()) {
+                    return this.price - volumeDisc.getSpendingThreshold();
+                }
+                return this.price;
+        }
+        return price;
+    }
 
 	/**
 	 * Sets the packs price

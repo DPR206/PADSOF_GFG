@@ -10,17 +10,18 @@ import java.util.*;
  * Class Name: Cart
  * <p>
  * Description: Cart, array of products and packs the user has not paid yet
- * @author Sofía C.L.
- * @version 1.0
+ * @author Sofía C.L. and Ana O.R.
+ * @version 1.2
  */
 
 public class Cart {
-    private List<StoreProduct> sp = new ArrayList<>();
-    private List<Pack> packs = new ArrayList<>();
+    private HashMap<StoreProduct, Integer> sp = new HashMap<>();
+    private HashMap<Pack, Integer> packs = new HashMap<>();
     private boolean expired;
     private LocalDate modificationDate;
     private RegisteredClient owner;
 
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     /**
      * Creates a new cart
      * @param sp,               the store products
@@ -29,8 +30,12 @@ public class Cart {
      * @param modificationDate, the last modification date
      */
     public Cart(List<StoreProduct> sp, List<Pack> packs, boolean expired, LocalDate modificationDate) {
-        this.sp = sp;
-        this.packs = packs;
+        for (StoreProduct product : sp) {
+            addProduct(product);
+        }
+        for (Pack pack : packs) {
+            addPack(pack);
+        }
         this.expired = expired;
         this.modificationDate = modificationDate;
     }
@@ -68,47 +73,46 @@ public class Cart {
     }
 
     public double calculatePrice() {
+        // DUE: Cálculo de descuentos sobre los productos (packs hecho)
         double aux = 0;
 
-        for (StoreProduct spp : this.sp) {
-            aux = spp.getPrice() + aux;
+        for (StoreProduct spp : this.sp.keySet()) {
+            aux = spp.getPrice()*this.sp.get(spp) + aux;
         }
 
-        for (Pack p : this.packs) {
-            aux = aux + p.getPrice();
+        for (Pack p : this.packs.keySet()) {
+            /* All other discounts + price */
+            aux = aux + p.getPrice()*this.packs.get(p);
+            /* Quantity discount */
+            if (p.getDiscount().getType() == DiscountType.QUANTITY) {
+                QuantityDisc quantityDisc = (QuantityDisc) p.getDiscount();
+                if (this.packs.get(p) >= quantityDisc.getUdsThreshold()) {
+                    aux = aux - quantityDisc.getUdsThreshold();
+                }
+            }
         }
 
         return aux;
     }
 
     public void cancelProduct(StoreProduct toCancel) {
-        int i = 0;
-
-        if (this.sp.contains(toCancel) == true) {
-            for (StoreProduct p : this.sp) {
-                if (p == toCancel) {
-                    break;
-                }
-                i++;
+        if (this.sp.containsKey(toCancel)) {
+            if (this.sp.get(toCancel) == 1) {
+                this.sp.remove(toCancel);
+            } else {
+                this.sp.put(toCancel, this.sp.get(toCancel) - 1);
             }
-
-            this.sp.remove(i);
-            toCancel.setStock(toCancel.getStock() + 1);
+            toCancel.decreaseStock(1);
         }
     }
 
     public void cancelPack(Pack p) {
-        int i = 0;
-
-        if (this.packs.contains(p) == true) {
-            for (Pack pack : this.packs) {
-                if (p == pack) {
-                    break;
-                }
-                i++;
+        if (this.packs.containsKey(p)) {
+            if (this.packs.get(p) == 1) {
+                this.packs.remove(p);
+            } else {
+                this.packs.put(p, this.packs.get(p) - 1);
             }
-
-            this.packs.remove(i);
             p.decreaseStock();
         }
     }
@@ -119,13 +123,17 @@ public class Cart {
             return;
         }
 
-        this.sp.add(wanted);
-        wanted.setStock(wanted.getStock() - 1);
+        if (this.sp.containsKey(wanted)) {
+            this.sp.put(wanted, this.sp.get(wanted) + 1);
+        } else {
+            this.sp.put(wanted, 1);
+        }
+        wanted.decreaseStock(1);
         wanted.setAddedDate(LocalDate.now());
     }
 
     public boolean addPack(Pack wanted) {
-        this.packs.add(wanted);
+        //this.packs.add(wanted); <- creo que mejor después
         List<StoreProduct> products = wanted.getProducts();
 
         for (StoreProduct sp : products) {
@@ -134,7 +142,12 @@ public class Cart {
             }
         }
 
-        packs.add(wanted);
+        if (this.packs.containsKey(wanted)) {
+            this.packs.put(wanted, this.packs.get(wanted) + 1);
+        } else {
+            this.packs.put(wanted, 1);
+        }
+
         wanted.decreaseStock();
 
         return true;
@@ -159,7 +172,8 @@ public class Cart {
             System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
             fechaCad = sc.next();
 
-            Order order = new Order(price, OrderState.PAID, this.sp,this.packs);
+            Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
+                    new ArrayList<>(this.packs.keySet()));
             this.owner.getOrderHistory().addOrder(order);
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
@@ -180,6 +194,6 @@ public class Cart {
      * @return the cart's products
      */
     public List<StoreProduct> getProducts(){
-        return this.sp;
+        return new ArrayList<>(this.sp.keySet());
     }
 }

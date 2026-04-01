@@ -51,9 +51,9 @@ public class Manager extends User {
         this.sp.getStore().getDiscounts().add(fpd);
     }
 
-    public void addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int discount, int numProds,
+    public void addQuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int discount, int udsThreshold,
                                 StoreProduct... products) {
-        QuantityDisc qd = new QuantityDisc(startDate, endDate, discount, numProds, products);
+        QuantityDisc qd = new QuantityDisc(startDate, endDate, discount, udsThreshold, products);
         s.getDiscounts().add(qd);
     }
 

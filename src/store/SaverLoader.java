@@ -736,7 +736,7 @@ public class SaverLoader {
                 double percentage = Double.parseDouble(words[6]);
                 StoreProduct gift = Store.getInstance().getStoreProductFromId(words[7]);
                 double spendingThreshold = Double.parseDouble(words[8]);
-                int numProds = Integer.parseInt(words[9]);
+                int udsThreshold = Integer.parseInt(words[9]);
                 double deduction = Double.parseDouble(words[10]);
 
                 words = productsString.split(",");
@@ -755,7 +755,7 @@ public class SaverLoader {
                                 products.toArray(new StoreProduct[0]));
                         break;
                     case DiscountType.QUANTITY:
-                        new QuantityDisc(id, startDate, endDate, numProds, deduction,
+                        new QuantityDisc(id, startDate, endDate, udsThreshold, deduction,
                                 products.toArray(new StoreProduct[0]));
                         break;
                     case DiscountType.VOLUME:

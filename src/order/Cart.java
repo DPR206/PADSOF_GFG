@@ -174,4 +174,12 @@ public class Cart {
 
         return true;
     }
+
+    /**
+     * It gets the cart's products
+     * @return the cart's products
+     */
+    public List<StoreProduct> getProducts(){
+        return this.sp;
+    }
 }

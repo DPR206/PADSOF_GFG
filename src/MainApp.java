@@ -1,18 +1,27 @@
+import order.Cart;
+import product.StoreProduct;
 import store.SaverLoader;
 import store.Store;
-import user.User;
-import user.UserType;
+import user.*;
 
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.Scanner;
 
 public class MainApp {
+    private final Scanner scanner = new Scanner(System.in);
+    /** The last chosen option when prompted */
     int chosenOption;
+    /** The apps current user */
     User currentUser;
-    private Scanner scanner = new Scanner(System.in);
 
-    public void main(String[] args) throws IOException, IllegalArgumentException, NullPointerException {
+    /**
+     * The apps main loop
+     * @throws IOException              the io exception
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
+    public void main() throws IOException, IllegalArgumentException, NullPointerException {
 
         SaverLoader.getInstance()
                    .loadStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
@@ -46,11 +55,18 @@ public class MainApp {
                 exit();
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                main(null);
+                main();
         }
 
     }
 
+    /**
+     * It chooses which loop will be triggered according to the current user
+     * @param userType the user type
+     * @throws IOException              the io exception
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
     public void loopSelector(UserType userType) throws IOException, IllegalArgumentException, NullPointerException {
         switch (userType) {
             case REGISTERED_CLIENT -> registeredClientLoop();
@@ -60,6 +76,12 @@ public class MainApp {
         }
     }
 
+    /**
+     * The unregistered client's main loop
+     * @throws IOException              the io exception
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
     public void unregisteredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.println("---- Unregistered Client ----");
         System.out.println("What do you wish to do? (enter the nº)");
@@ -81,7 +103,7 @@ public class MainApp {
                 signer();
                 break;
             case 4:
-                main(null);
+                main();
                 break;
             case 5:
                 exit();
@@ -92,6 +114,12 @@ public class MainApp {
         }
     }
 
+    /**
+     * It allows an unregistered client to browse products and add them to their cart
+     * @throws IOException              the io exception
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
     public void unregisteredClientOrderLoop() throws IOException, IllegalArgumentException, NullPointerException {
         // browseStoreProducts(); <- DUE
         System.out.println("What do you wish to do? (enter the nº)");
@@ -123,7 +151,7 @@ public class MainApp {
                 signer();
                 break;
             case 4:
-                main(null);
+                main();
                 break;
             case 5:
                 exit();
@@ -134,6 +162,12 @@ public class MainApp {
         }
     }
 
+    /**
+     * It allows an unregistered client to place an order via log in or sign up
+     * @throws IOException              the io exception
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
     public void unregisteredClientPlaceOrder() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.println("You must log in or sign up to proceed");
         System.out.println("What do you wish to do? (enter the nº)");
@@ -158,22 +192,52 @@ public class MainApp {
         }
     }
 
+    /**
+     * It prints a certain product's info
+     */
     public void seeProduct() {
         // DUE
     }
 
+    /**
+     * It prints the current user's cart's products
+     */
     public void seeCart() {
         // DUE
     }
 
-    public void cartLogger() throws IllegalArgumentException, NullPointerException {
-        // DUE
+    /**
+     * Cart logger.
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
+    public void cartLogger() throws IOException, IllegalArgumentException, NullPointerException {
+        UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
+        Cart currrentCart = unregisteredClient.getCart();
+        logger();
+        for (StoreProduct product : currrentCart.getProducts()) {
+            currrentCart.addProduct(product);
+        }
     }
 
-    public void cartSigner() throws IllegalArgumentException, NullPointerException {
-        // DUE
+    /**
+     * It handles the sign-up whilst preserving the unregistered client's cart
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
+    public void cartSigner() throws IOException, IllegalArgumentException, NullPointerException {
+        UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
+        Cart currrentCart = unregisteredClient.getCart();
+        signer();
+        for (StoreProduct product : currrentCart.getProducts()) {
+            currrentCart.addProduct(product);
+        }
     }
 
+    /**
+     * It handles the log-in and updates the current user accordingly
+     * @throws IOException the io exception
+     */
     public void logger() throws IOException {
         currentUser = Store.getInstance().getUtility().signIn();
         if (currentUser != null) {
@@ -181,6 +245,10 @@ public class MainApp {
         }
     }
 
+    /**
+     * It handles the sign-up and updates the current user accordingly
+     * @throws IOException the io exception
+     */
     public void signer() throws IOException {
         currentUser = Store.getInstance().logIn();
         if (currentUser != null) {
@@ -188,18 +256,40 @@ public class MainApp {
         }
     }
 
+    /**
+     * The registered client's main loop
+     * @throws IOException              the io exception
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
     public void registeredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
         // DUE
     }
 
+    /**
+     * The employee's main loop
+     * @throws IOException              the io exception
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
     public void employeeLoop() throws IOException, IllegalArgumentException, NullPointerException {
         // DUE
     }
 
+    /**
+     * The manager's main loop
+     * @throws IOException              the io exception
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws NullPointerException     the null pointer exception
+     */
     public void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
         // DUE
     }
 
+    /**
+     * It exists the app and saves the store
+     * @throws IOException the io exception
+     */
     public void exit() throws IOException {
         System.out.println("See you soon!");
 

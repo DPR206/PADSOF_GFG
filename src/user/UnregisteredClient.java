@@ -72,5 +72,13 @@ public class UnregisteredClient extends User {
     	this.c.addPack(pack);
     }
 
+    /**
+     * It gets the unregistered client's cart
+     * @return the unregistered client's cart
+     */
+    public Cart getCart(){
+        return this.c;
+    }
+
 
 }

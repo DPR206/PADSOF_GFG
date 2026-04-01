@@ -18,10 +18,12 @@ import product.*;
 public class NotificationEmployeeValuation extends Notification implements NotificationInterface<SecondHandProduct>{
 
 	/**
-	 * @param timeReceived
-	 * @param read
-	 * @param visible
-	 * @param type
+	 * Creates a new exchange notification for employees with default timeMade (this moment) and no content
+	 * 
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
 	public NotificationEmployeeValuation(LocalDateTime timeReceived, boolean read, boolean visible,
 			NotificationType type) {
@@ -29,12 +31,14 @@ public class NotificationEmployeeValuation extends Notification implements Notif
 	}
 
 	/**
-	 * @param title
-	 * @param text
-	 * @param timeReceived
-	 * @param read
-	 * @param visible
-	 * @param type
+	 * Creates a new exchange notification for employees with default timeMade (this moment)
+	 * 
+	 * @param title the tile of the notification
+	 * @param text the message in the notification
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
 	public NotificationEmployeeValuation(String title, String text, LocalDateTime timeReceived, boolean read,
 			boolean visible, NotificationType type) {
@@ -42,13 +46,15 @@ public class NotificationEmployeeValuation extends Notification implements Notif
 	}
 
 	/**
-	 * @param title
-	 * @param text
-	 * @param timeMade
-	 * @param timeReceived
-	 * @param read
-	 * @param visible
-	 * @param type
+	 * Creates a new exchange notification for employees
+	 * 
+	 * @param title the tile of the notification
+	 * @param text the message in the notification
+	 * @param timeMade the time it was made
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
 	public NotificationEmployeeValuation(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
 			boolean read, boolean visible, NotificationType type) {
@@ -56,13 +62,29 @@ public class NotificationEmployeeValuation extends Notification implements Notif
 	}
 
 	@Override
+	/**
+	 * Creates a complete notification
+	 * 
+	 * @param o the new second-hand product
+	 * @return a string with the notification
+	 */
 	public String FullNotification(SecondHandProduct o) {
-		return null;
+		String text = "The new second-hand product is: " + o.getName() + " with description: " + o.getDescription();
+		this.setText(text);
+		return this.SnippetNotification(o) + text + this.signOff();
 	}
 
 	@Override
+	/**
+	 * Creates a snippet of the notification (title and time log)
+	 * 
+	 * @param o the new second-hand product
+	 * @return a string with the snippet of the notification
+	 */
 	public String SnippetNotification(SecondHandProduct o) {
-		return null;
+		String title = "New product available for valuation\n";
+		this.setTitle(title);
+		return title + this.timeLog();
 	}
 
 	

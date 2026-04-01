@@ -65,7 +65,7 @@ public class NotificationEmployeeExchange extends Notification implements Notifi
 	/**
 	 * Creates a complete notification
 	 * 
-	 * @param o the new discount
+	 * @param o the new exchange
 	 * @return a string with the notification
 	 */
 	public String FullNotification(Exchange o) {
@@ -75,6 +75,12 @@ public class NotificationEmployeeExchange extends Notification implements Notifi
 	}
 
 	@Override
+	/**
+	 * Creates a snippet of the notification (title and time log)
+	 * 
+	 * @param o the new exchange
+	 * @return a string with the snippet of the notification
+	 */
 	public String SnippetNotification(Exchange o) {
 		String title = "A new exchange has been made\n";
 		this.setTitle(title);

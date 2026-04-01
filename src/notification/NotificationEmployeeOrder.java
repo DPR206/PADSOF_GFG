@@ -8,27 +8,36 @@ import java.time.LocalDateTime;
 import order.*;
 
 /**
+ * It implements the order notification for employees
  * 
+ * @author Duna P.R.
+ * @version 1.1
+ * @see Notification
+ * @see NotificationInterface
  */
 public class NotificationEmployeeOrder extends Notification implements NotificationInterface<OrderHistory>{
 
 	/**
-	 * @param timeReceived
-	 * @param read
-	 * @param visible
-	 * @param type
+	 * Creates a new order notification for employees with default timeMade (this moment) and no content
+	 * 
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
 	public NotificationEmployeeOrder(LocalDateTime timeReceived, boolean read, boolean visible, NotificationType type) {
 		super(timeReceived, read, visible, type);
 	}
 
 	/**
-	 * @param title
-	 * @param text
-	 * @param timeReceived
-	 * @param read
-	 * @param visible
-	 * @param type
+	 * Creates a new order notification for employees with default timeMade (this moment)
+	 * 
+	 * @param title the tile of the notification
+	 * @param text the message in the notification
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
 	public NotificationEmployeeOrder(String title, String text, LocalDateTime timeReceived, boolean read,
 			boolean visible, NotificationType type) {
@@ -36,13 +45,15 @@ public class NotificationEmployeeOrder extends Notification implements Notificat
 	}
 
 	/**
-	 * @param title
-	 * @param text
-	 * @param timeMade
-	 * @param timeReceived
-	 * @param read
-	 * @param visible
-	 * @param type
+	 * Creates a new order notification for employees
+	 * 
+	 * @param title the tile of the notification
+	 * @param text the message in the notification
+	 * @param timeMade the time it was made
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
 	public NotificationEmployeeOrder(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
 			boolean read, boolean visible, NotificationType type) {
@@ -50,6 +61,12 @@ public class NotificationEmployeeOrder extends Notification implements Notificat
 	}
 
 	@Override
+	/**
+	 * Creates a complete notification
+	 * 
+	 * @param o the new discount
+	 * @return a string with the notification
+	 */
 	public String FullNotification(OrderHistory o) {
 		String text = "The order of user "+ o.getOwner().getUserName() + " contains: " + o.getOrders().getLast().getP() 
 						+ o.getOrders().getLast().getSp() + "\n";
@@ -58,6 +75,12 @@ public class NotificationEmployeeOrder extends Notification implements Notificat
 	}
 
 	@Override
+	/**
+	 * Creates a snippet of the notification (title and time log)
+	 * 
+	 * @param o the new discount
+	 * @return a string with the snippet of the notification
+	 */
 	public String SnippetNotification(OrderHistory o) {
 		String title = "New order to prepare\n";
 		this.setTitle(title);

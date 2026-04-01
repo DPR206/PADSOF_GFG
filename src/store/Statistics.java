@@ -21,7 +21,7 @@ public class Statistics {
 	private HashMap<Month, Double> revenueByMonth;
 	private HashMap<String, RegisteredClient> clients;
 	private HashMap<String, Category> categories;
-	private double revenue_valuation;
+	private HashMap<Month, Double> revenue_valuation;
 	
 	/**
 	 * Statistics' constructor
@@ -33,7 +33,10 @@ public class Statistics {
         }
 		this.clients = Store.getInstance().getRegisteredClients();
 		this.categories = Store.getInstance().getCategories();
-		this.revenue_valuation = 0.0;
+		this.revenue_valuation = new HashMap<Month, Double>();
+		for (Month month : Month.values()) {
+            this.revenue_valuation.put(month, 0.0);
+        }
 	}
 
 	/**
@@ -86,8 +89,32 @@ public class Statistics {
 	public void setCategories(HashMap<String, Category> categories) {
 		this.categories = categories;
 	}
-
 	
+	/**
+	 * @return the revenue_valuation
+	 */
+	public HashMap<Month, Double> getRevenue_valuation() {
+		return revenue_valuation;
+	}
+
+	/**
+	 * @param revenue_valuation the revenue_valuation to set
+	 */
+	public void setRevenue_valuation(HashMap<Month, Double> revenue_valuation) {
+		this.revenue_valuation = revenue_valuation;
+	}
+	
+
+/*-----------------------------------------------------------METHODS--------------------------------------------------------------*/
+	
+	
+
+	public void addRevenue(Double quantity, RevenueType type, LocalDate date) {
+		this.revenueByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
+		if(type == RevenueType.VALUATION)
+			this.revenue_valuation.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
+		
+	}
 
 	
 	

@@ -70,6 +70,13 @@ public class SearchStoreProducts{
         }
         
         pCs.retainAll(filtered);
+
+        if(this.ascendant == true){
+            pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation).thenComparing(StoreProduct::getPrice));
+        }
+        else{
+            pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation).reversed().thenComparing(Comparator.comparingDouble(StoreProduct::getPrice).reversed()));
+        }
         return pCs;
     }
 

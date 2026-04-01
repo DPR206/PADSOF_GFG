@@ -136,4 +136,6 @@ public class NotificationHistory {
 		if(this.notifications.contains(n))
 			n.setRead(true);
 	}
+	
+	 
 }

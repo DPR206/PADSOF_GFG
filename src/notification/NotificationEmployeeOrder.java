@@ -64,7 +64,7 @@ public class NotificationEmployeeOrder extends Notification implements Notificat
 	/**
 	 * Creates a complete notification
 	 * 
-	 * @param o the new discount
+	 * @param o the order history
 	 * @return a string with the notification
 	 */
 	public String FullNotification(OrderHistory o) {
@@ -78,7 +78,7 @@ public class NotificationEmployeeOrder extends Notification implements Notificat
 	/**
 	 * Creates a snippet of the notification (title and time log)
 	 * 
-	 * @param o the new discount
+	 * @param o the order history
 	 * @return a string with the snippet of the notification
 	 */
 	public String SnippetNotification(OrderHistory o) {

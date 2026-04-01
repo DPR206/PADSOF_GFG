@@ -65,7 +65,8 @@ public class NotificationSettings {
 	 * @param interest true if the user is interested, false if else
 	 */
 	public void changeInterest(NotificationType type, Boolean interest) {
-		if(type != NotificationType.PAYMENT && NotificationType.ORDER != type)
+		if(type != NotificationType.PAYMENT && NotificationType.ORDER != type && NotificationType.EMPLOYEE_EXCHANGE != type
+		   && NotificationType.EMPLOYEE_ORDER != type && NotificationType.EMPLOYEE_VALUTAION != type)
 			this.interests.put(type, interest);
 	}
 	

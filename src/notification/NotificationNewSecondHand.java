@@ -19,9 +19,10 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
-	public NotificationNewSecondHand(LocalDateTime timeReceived, boolean read, boolean visible) {
-		super(timeReceived, read, visible);
+	public NotificationNewSecondHand(LocalDateTime timeReceived, boolean read, boolean visible, NotificationType type) {
+		super(timeReceived, read, visible, type);
 		
 	}
 
@@ -33,9 +34,11 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
-	public NotificationNewSecondHand(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible) {
-		super(title, text, timeReceived, read, visible);
+	public NotificationNewSecondHand(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible,
+									 NotificationType type) {
+		super(title, text, timeReceived, read, visible, type);
 		
 	}
 
@@ -48,10 +51,11 @@ public class NotificationNewSecondHand extends Notification implements Notificat
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
 	public NotificationNewSecondHand(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
-			boolean read, boolean visible) {
-		super(title, text, timeMade, timeReceived, read, visible);
+			boolean read, boolean visible, NotificationType type) {
+		super(title, text, timeMade, timeReceived, read, visible, type);
 		
 	}
 

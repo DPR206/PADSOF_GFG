@@ -12,7 +12,7 @@ import store.Parameter;
 /**
  * It implements the exchange notification
  * @author Duna P.R.
- * @version 1.5
+ * @version 1.6
  * @see Notification
  * @see NotificationInterface
  */
@@ -32,10 +32,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
 	 * @param address the address of the place the exchange will take place at
 	 * @param timeAndDate the time and date of the exchange
+	 * @param type the type of notification
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeReceived, 
-			boolean read, boolean visible, String address, LocalDateTime timeAndDate) {
-		super(title, text, timeReceived, read, visible);
+			boolean read, boolean visible, String address, LocalDateTime timeAndDate, NotificationType type) {
+		super(title, text, timeReceived, read, visible, type);
 		this.address = address;
 		this.timeAndDate = timeAndDate;
 	}
@@ -51,10 +52,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
 	 * @param address the address of the place the exchange will take place at
 	 * @param timeAndDate the time and date of the exchange
+	 * @param type the type of notification
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
-			boolean read, boolean visible, String address, LocalDateTime timeAndDate) {
-		super(title, text, timeMade, timeReceived, read, visible);
+			boolean read, boolean visible, String address, LocalDateTime timeAndDate, NotificationType type) {
+		super(title, text, timeMade, timeReceived, read, visible, type);
 		this.address = address;
 		this.timeAndDate = timeAndDate;
 	}
@@ -68,10 +70,11 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
 	public NotificationExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
-			boolean read, boolean visible) {
-		super(title, text, timeMade, timeReceived, read, visible);
+			boolean read, boolean visible, NotificationType type) {
+		super(title, text, timeMade, timeReceived, read, visible, type);
 		this.address = null;
 		this.timeAndDate = null;
 	}
@@ -84,9 +87,10 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
 	 */
-	public NotificationExchange(LocalDateTime timeReceived, boolean read, boolean visible) {
-		super(timeReceived, read, visible);
+	public NotificationExchange(LocalDateTime timeReceived, boolean read, boolean visible, NotificationType type) {
+		super(timeReceived, read, visible, type);
 		this.address = null;
 		this.timeAndDate = null;
 	}

@@ -18,7 +18,7 @@ public class Searcher{
     private Searcher<Pack> packSearcher = new Searcher<>(new SearchPack());
     private Searcher<Employee> employeeSearcher = new Searcher<>(new SearchEmployee());
     private Searcher<Order> orderSearcher = new Searcher<>(new SearchOrder());
-    private Searcher<Exchange> orderSearcher = new Searcher<>(new SearchExchange());
+    private Searcher<Exchange> exchangeSearcher = new Searcher<>(new SearchExchange());
     
     private Searcher(SearchStoreProducts searchStore, SearchType... types){
         this.searchStore = searchStore;
@@ -29,14 +29,38 @@ public class Searcher{
         return this.searchStore.searchStoreProducts();
     }
     private List<StoreProduct> searchByCategory(Category... c){
+        
         return this.searchStore.searchStoreProducts();
     }
     private Pack searchPackByID(int id){
-        this.packSearcher.searchByID();
+        if(this.linearSearch(SearchType.S_PACK)){
+            return this.packSearcher.searchByID();
+        }
+        return null;
     }
     private Exchange searchExchangeByID(int id){
-        this.packSearcher.searchByID();
+        if(this.linearSearch(SearchType.S_EXCHANGE)){
+            return this.exchangeSearcher.searchByID();
+        }
+        return null;
+    }
+    private Order searchOrderByID(int id){
+        if(this.linearSearch(SearchType.S_ORDER)){
+            return this.orderSearcher.searchByID();
+        }
+        return null;
+    }
+    private Order searchEmployeeByID(int id){
+        if(this.linearSearch(SearchType.S_EMPLOYEE)){
+            return this.employeeSearcher.searchByID();
+        }
+        return null;
     }
 
-    private 
+    private boolean linearSearch(SearchType t){
+        for(SearchType type: this.types){
+            if(t.getType().equals(type.getType())) return true
+        }
+        return false;
+    }
 }

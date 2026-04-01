@@ -1,7 +1,7 @@
 package search;
 
 import store.Store;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class name: Searcher
@@ -14,9 +14,29 @@ import java.util.List;
 public class Searcher{
     private SearchType types[];
     private SearchStoreProducts searchStore;
+
     private Searcher<Pack> packSearcher = new Searcher<>(new SearchPack());
     private Searcher<Employee> employeeSearcher = new Searcher<>(new SearchEmployee());
     private Searcher<Order> orderSearcher = new Searcher<>(new SearchOrder());
     private Searcher<Exchange> orderSearcher = new Searcher<>(new SearchExchange());
     
+    private Searcher(SearchStoreProducts searchStore, SearchType... types){
+        this.searchStore = searchStore;
+        this.types = types;
+    }
+
+    private List<StoreProduct> searchStoreProducts(){
+        return this.searchStore.searchStoreProducts();
+    }
+    private List<StoreProduct> searchByCategory(Category... c){
+        return this.searchStore.searchStoreProducts();
+    }
+    private Pack searchPackByID(int id){
+        this.packSearcher.searchByID();
+    }
+    private Exchange searchExchangeByID(int id){
+        this.packSearcher.searchByID();
+    }
+
+    private 
 }

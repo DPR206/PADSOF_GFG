@@ -18,7 +18,7 @@ import product.*;
 public class NotificationEmployeeValuation extends Notification implements NotificationInterface<SecondHandProduct>{
 
 	/**
-	 * Creates a new exchange notification for employees with default timeMade (this moment) and no content
+	 * Creates a new valuation notification for employees with default timeMade (this moment) and no content
 	 * 
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
@@ -31,7 +31,7 @@ public class NotificationEmployeeValuation extends Notification implements Notif
 	}
 
 	/**
-	 * Creates a new exchange notification for employees with default timeMade (this moment)
+	 * Creates a new valuation notification for employees with default timeMade (this moment)
 	 * 
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
@@ -46,7 +46,7 @@ public class NotificationEmployeeValuation extends Notification implements Notif
 	}
 
 	/**
-	 * Creates a new exchange notification for employees
+	 * Creates a new valuation notification for employees
 	 * 
 	 * @param title the tile of the notification
 	 * @param text the message in the notification

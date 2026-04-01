@@ -6,7 +6,7 @@ package notification;
 import java.util.*;
 
 /**
- * It implements the notification history
+ * It implements the notification settings
  * 
  * @author Duna P.R.
  * @version 1.1

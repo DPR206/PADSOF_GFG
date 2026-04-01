@@ -40,4 +40,15 @@ public class OrderHistory {
     public List<Order> getOrders() {
         return this.orders;
     }
+
+	/**
+	 * Obtains the owner of the order history
+	 * 
+	 * @return the owner the owner of the order history
+	 */
+	public RegisteredClient getOwner() {
+		return owner;
+	}
+    
+    
 }

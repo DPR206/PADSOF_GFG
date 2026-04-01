@@ -2,6 +2,8 @@ package notification;
 
 import java.time.LocalDateTime;
 
+
+
 import order.*;
 
 /**
@@ -62,7 +64,7 @@ public class NotificationOrder extends Notification implements NotificationInter
 	/**
 	 * Creates a complete notification
 	 * 
-	 * @param o the new discount
+	 * @param o the new order
 	 * @return a string with the notification
 	 */
 	public String FullNotification(Order o) {
@@ -82,7 +84,7 @@ public class NotificationOrder extends Notification implements NotificationInter
 	/**
 	 * Creates a snippet of the notification (title and time log)
 	 * 
-	 * @param o the new discount
+	 * @param o the new order
 	 * @return a string with the snippet of the notification
 	 */
 	public String SnippetNotification(Order o) {

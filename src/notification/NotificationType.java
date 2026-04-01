@@ -6,5 +6,8 @@ public enum NotificationType{
     CART,
     NEW_SECONDHAND_PRODUCT,
     PAYMENT,
-    ORDER;
+    ORDER,
+    EMPLOYEE_ORDER,
+    EMPLOYEE_VALUTAION,
+    EMPLOYEE_EXCHANGE;
 }

@@ -1,31 +1,37 @@
+/**
+ * 
+ */
 package notification;
 
 import java.time.LocalDateTime;
 
+import exchange.*;
+
 /**
- * It implements the payment notification
+ * It implements the exchange notification for employees
  * 
  * @author Duna P.R.
- * @version 1.2
+ * @version 1.1
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationPayment extends Notification implements NotificationInterface<String>{
+public class NotificationEmployeeExchange extends Notification implements NotificationInterface<Exchange>{
 
 	/**
-	 * Creates a new payment notification with default timeMade (this moment) and no content
+	 * Creates a new exchange notification for employees with default timeMade (this moment) and no content
 	 * 
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
 	 * @param type the type of notification
 	 */
-	public NotificationPayment(LocalDateTime timeReceived, boolean read, boolean visible, NotificationType type) {
+	public NotificationEmployeeExchange(LocalDateTime timeReceived, boolean read, boolean visible,
+			NotificationType type) {
 		super(timeReceived, read, visible, type);
 	}
 
 	/**
-	 * Creates a new payment notification with default timeMade (this moment)
+	 * Creates a new exchange notification for employees with default timeMade (this moment)
 	 * 
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
@@ -34,12 +40,13 @@ public class NotificationPayment extends Notification implements NotificationInt
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
 	 * @param type the type of notification
 	 */
-	public NotificationPayment(String title, String text, LocalDateTime timeReceived, boolean read, boolean visible, NotificationType type) {
+	public NotificationEmployeeExchange(String title, String text, LocalDateTime timeReceived, boolean read,
+			boolean visible, NotificationType type) {
 		super(title, text, timeReceived, read, visible, type);
 	}
 
 	/**
-	 * Creates a new payment notification
+	 * Creates a new exchange notification for employees
 	 * 
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
@@ -49,7 +56,7 @@ public class NotificationPayment extends Notification implements NotificationInt
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
 	 * @param type the type of notification
 	 */
-	public NotificationPayment(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
+	public NotificationEmployeeExchange(String title, String text, LocalDateTime timeMade, LocalDateTime timeReceived,
 			boolean read, boolean visible, NotificationType type) {
 		super(title, text, timeMade, timeReceived, read, visible, type);
 	}
@@ -58,27 +65,21 @@ public class NotificationPayment extends Notification implements NotificationInt
 	/**
 	 * Creates a complete notification
 	 * 
-	 * @param o the concept of payment
+	 * @param o the new discount
 	 * @return a string with the notification
 	 */
-	public String FullNotification(String o) {
-		String text = "Your payment for " + o + " was completed successfully. Once your purchase is ready you'll receive a new notification\n";
+	public String FullNotification(Exchange o) {
+		String text = "A new exchange has been made. It consists of: " + o.getProductos_propietario() + "\n";
 		this.setText(text);
-		return this.SnippetNotification(o) + this.getText() + this.signOff();
+		return this.SnippetNotification(o) + text + this.signOff();
 	}
 
 	@Override
-	/**
-	 * Creates a snippet of the notification (title and time log)
-	 * 
-	 * @param o the concept of payment
-	 * @return a string with the snippet of the notification
-	 */
-	public String SnippetNotification(String o) {
-		this.setTitle("Your payment was succesful\n");
-		return this.getTitle() + this.timeLog();
+	public String SnippetNotification(Exchange o) {
+		String title = "A new exchange has been made\n";
+		this.setTitle(title);
+		return title + this.timeLog();
 	}
-	
-	
+
 	
 }

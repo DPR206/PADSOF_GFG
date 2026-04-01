@@ -41,6 +41,8 @@ public class NotificationSettings {
 	}
 
 	/**
+	 * Obtains the interests in notifications
+	 * 
 	 * @return the interests
 	 */
 	public HashMap<NotificationType, Boolean> getInterests() {
@@ -48,11 +50,23 @@ public class NotificationSettings {
 	}
 
 	/**
+	 * Sets a new HashMap of notification interests
+	 * 
 	 * @param interests the interests to set
 	 */
 	public void setInterests(HashMap<NotificationType, Boolean> interests) {
 		this.interests = interests;
 	}
 	
+	/**
+	 * Changes the interest in a specific notification type
+	 * 
+	 * @param type the type of notification 
+	 * @param interest true if the user is interested, false if else
+	 */
+	public void changeInterest(NotificationType type, Boolean interest) {
+		if(type != NotificationType.PAYMENT && NotificationType.ORDER != type)
+			this.interests.put(type, interest);
+	}
 	
 }

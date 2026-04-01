@@ -8,7 +8,12 @@ import java.time.LocalDateTime;
 import product.*;
 
 /**
+ * It implements the valuation notification for employees
  * 
+ * @author Duna P.R.
+ * @version 1.1
+ * @see Notification
+ * @see NotificationInterface
  */
 public class NotificationEmployeeValuation extends Notification implements NotificationInterface<SecondHandProduct>{
 

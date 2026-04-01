@@ -28,6 +28,9 @@ public class Statistics {
 	 */
 	private Statistics() {
 		this.revenueByMonth = new HashMap<Month, Double>();
+		for (Month month : Month.values()) {
+            this.revenueByMonth.put(month, 0.0);
+        }
 		this.clients = Store.getInstance().getRegisteredClients();
 		this.categories = Store.getInstance().getCategories();
 		this.revenue_valuation = 0.0;

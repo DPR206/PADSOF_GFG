@@ -1,21 +1,10 @@
 package order;
 
-import product.*;
+import product.StoreProduct;
 
 import java.time.LocalDateTime;
 
-/**
- * Class name: GiftDisc
- * <p>
- * Description: It implements the gift discount
- * @author Ana O.R.
- * @version 1.2
- * @see Discount
- * @see StoreProduct
- * @see Pack
- * @see Category
- */
-public class GiftDisc extends Discount {
+public class ProductGift extends ProductDiscount implements GiftDiscount {
     /** The product gifted to the client when a certain spending threshold is met */
     StoreProduct gift;
     /** The spending threshold that allows the discount to take place */
@@ -32,41 +21,10 @@ public class GiftDisc extends Discount {
      * @param gift              the product gifted to the client when a certain spending threshold is met
      * @param products          the discount's products
      */
-    public GiftDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                    StoreProduct gift, StoreProduct... products) {
-        super(id, startDate, endDate, DiscountType.GIFT, products);
-        this.spendingThreshold = spendingThreshold;
-        this.gift = gift;
-    }
-
-    /**
-     * A gift discount's general constructor with packs
-     * @param id                the discount's id
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param gift              the product gifted to the client when a certain spending threshold is met
-     * @param packs             the discount's packs
-     */
-    public GiftDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                    StoreProduct gift, Pack... packs) {
-        super(id, startDate, endDate, DiscountType.GIFT, packs);
-        this.spendingThreshold = spendingThreshold;
-        this.gift = gift;
-    }
-
-    /**
-     * A gift discount's general constructor with categories
-     * @param id                the discount's id
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param gift              the product gifted to the client when a certain spending threshold is met
-     * @param categories        the discount's categories
-     */
-    public GiftDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                    StoreProduct gift, Category... categories) {
-        super(id, startDate, endDate, DiscountType.GIFT, categories);
+    public ProductGift(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                       StoreProduct gift, StoreProduct... products) {
+        super(DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addProducts(products);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }
@@ -80,9 +38,10 @@ public class GiftDisc extends Discount {
      * @param gift              the product gifted to the client when a certain spending threshold is met
      * @param overWholeStore    whether the discount is applied over the whole store or not (must be true)
      */
-    public GiftDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                    StoreProduct gift, boolean overWholeStore) {
-        super(id, startDate, endDate, DiscountType.GIFT, overWholeStore);
+    public ProductGift(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                       StoreProduct gift, boolean overWholeStore) {
+        super(DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
+        // this.addProducts(overWholeStore);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }
@@ -95,39 +54,10 @@ public class GiftDisc extends Discount {
      * @param gift              the product gifted to the client when a certain spending threshold is met
      * @param products          the discount's products
      */
-    public GiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
-                    StoreProduct... products) {
-        super(startDate, endDate, DiscountType.GIFT, products);
-        this.spendingThreshold = spendingThreshold;
-        this.gift = gift;
-    }
-
-    /**
-     * Instantiates a new gift discount with packs
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param gift              the product gifted to the client when a certain spending threshold is met
-     * @param packs             the discount's products
-     */
-    public GiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
-                    Pack... packs) {
-        super(startDate, endDate, DiscountType.GIFT, packs);
-        this.spendingThreshold = spendingThreshold;
-        this.gift = gift;
-    }
-
-    /**
-     * Instantiates a new gift discount with categories
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param gift              the product gifted to the client when a certain spending threshold is met
-     * @param categories        the discount's categories
-     */
-    public GiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
-                    Category... categories) {
-        super(startDate, endDate, DiscountType.GIFT, categories);
+    public ProductGift(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
+                       StoreProduct... products) {
+        super(DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addProducts(products);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }
@@ -140,9 +70,10 @@ public class GiftDisc extends Discount {
      * @param gift              the product gifted to the client when a certain spending threshold is met
      * @param overWholeStore    whether the discount is applied over the whole store or not (must be true)
      */
-    public GiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
-                    boolean overWholeStore) {
-        super(startDate, endDate, DiscountType.GIFT, overWholeStore);
+    public ProductGift(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
+                       boolean overWholeStore) {
+        super(DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
+        //this.addProducts(overWholeStore);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }

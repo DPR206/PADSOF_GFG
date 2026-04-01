@@ -1,20 +1,10 @@
 package order;
 
-import product.*;
+import product.StoreProduct;
 
 import java.time.LocalDateTime;
 
-/**
- * Class name: VolumeDisc
- * <p>
- * Description: It implements the volume discount
- * @author Ana O.R.
- * @version 1.1
- * @see Discount
- * @see StoreProduct
- * @see product.Pack
- */
-public class VolumeDisc extends Discount {
+public class ProductVolume extends ProductDiscount implements VolumeDiscount {
     /** The spending threshold that allows the discount to take place */
     private double spendingThreshold;
     /** The amount of money the discount deducts from the order's final price */
@@ -31,41 +21,10 @@ public class VolumeDisc extends Discount {
      * @param deduction         the amount of money the discount deducts from the order's final price
      * @param products          the discount's products
      */
-    public VolumeDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                      double deduction, StoreProduct... products) {
-        super(id, startDate, endDate, DiscountType.VOLUME, products);
-        this.spendingThreshold = spendingThreshold;
-        this.deduction = deduction;
-    }
-
-    /**
-     * A volume discount's general constructor with packs
-     * @param id                the discount's id
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param deduction         the amount of money the discount deducts from the order's final price
-     * @param packs             the discount's packs
-     */
-    public VolumeDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                      double deduction, Pack... packs) {
-        super(id, startDate, endDate, DiscountType.VOLUME, packs);
-        this.spendingThreshold = spendingThreshold;
-        this.deduction = deduction;
-    }
-
-    /**
-     * A volume discount's general constructor with categories
-     * @param id                the discount's id
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param deduction         the amount of money the discount deducts from the order's final price
-     * @param categories        the discount's categories
-     */
-    public VolumeDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                      double deduction, Category... categories) {
-        super(id, startDate, endDate, DiscountType.VOLUME, categories);
+    public ProductVolume(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                         double deduction, StoreProduct... products) {
+        super(DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addProducts(products);
         this.spendingThreshold = spendingThreshold;
         this.deduction = deduction;
     }
@@ -79,9 +38,10 @@ public class VolumeDisc extends Discount {
      * @param deduction         the amount of money the discount deducts from the order's final price
      * @param overWholeStore    whether the discount is applied over the whole store or not (must be true)
      */
-    public VolumeDisc(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                      double deduction, boolean overWholeStore) {
-        super(id, startDate, endDate, DiscountType.VOLUME, overWholeStore);
+    public ProductVolume(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                         double deduction, boolean overWholeStore) {
+        super(DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
+        //this.addProducts(overWholeStore);
         this.spendingThreshold = spendingThreshold;
         this.deduction = deduction;
     }
@@ -94,39 +54,10 @@ public class VolumeDisc extends Discount {
      * @param deduction         the amount of money the discount deducts from the order's final price
      * @param products          the discount's products
      */
-    public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
-                      StoreProduct... products) {
-        super(startDate, endDate, DiscountType.VOLUME, products);
-        this.spendingThreshold = spendingThreshold;
-        this.deduction = deduction;
-    }
-
-    /**
-     * Instantiates a new Volume discount with packs
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param deduction         the amount of money the discount deducts from the order's final price
-     * @param packs             the discount's packs
-     */
-    public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
-                      Pack... packs) {
-        super(startDate, endDate, DiscountType.VOLUME, packs);
-        this.spendingThreshold = spendingThreshold;
-        this.deduction = deduction;
-    }
-
-    /**
-     * Instantiates a new Volume discount with categories
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param deduction         the amount of money the discount deducts from the order's final price
-     * @param categories        the discount's categories
-     */
-    public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
-                      Category... categories) {
-        super(startDate, endDate, DiscountType.VOLUME, categories);
+    public ProductVolume(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
+                         StoreProduct... products) {
+        super(DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addProducts(products);
         this.spendingThreshold = spendingThreshold;
         this.deduction = deduction;
     }
@@ -139,9 +70,10 @@ public class VolumeDisc extends Discount {
      * @param deduction         the amount of money the discount deducts from the order's final price
      * @param overWholeStore    whether the discount is applied over the whole store or not (must be true)
      */
-    public VolumeDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
-                      boolean overWholeStore) {
-        super(startDate, endDate, DiscountType.VOLUME, overWholeStore);
+    public ProductVolume(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
+                         boolean overWholeStore) {
+        super(DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
+        //this.addProducts(overWholeStore);
         this.spendingThreshold = spendingThreshold;
         this.deduction = deduction;
     }

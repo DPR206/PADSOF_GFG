@@ -1,21 +1,10 @@
 package order;
 
-import product.*;
+import product.StoreProduct;
 
 import java.time.LocalDateTime;
 
-/**
- * Class name: QuantityDisc
- * <p>
- * Description: It implements the quantity discount
- * @author Ana O.R.
- * @version 1.2
- * @see Discount
- * @see StoreProduct
- * @see Pack
- * @see Category
- */
-public class QuantityDisc extends Discount {
+public class ProductQuantity extends ProductDiscount implements QuantityDiscount {
     /** The amount of products, or packs, in a cart from which the discount can take place */
     private int udsThreshold;
     /** The amount of money the discount deducts from the order's final price */
@@ -32,41 +21,10 @@ public class QuantityDisc extends Discount {
      * @param deduction    the amount of money the discount deducts from the order's final price
      * @param products     the discount's products
      */
-    public QuantityDisc(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
-                        StoreProduct... products) {
-        super(id, startDate, endDate, DiscountType.QUANTITY, products);
-        this.udsThreshold = udsThreshold;
-        this.deduction = deduction;
-    }
-
-    /**
-     * A quantity discount's general constructor with packs
-     * @param id           the discount's id
-     * @param startDate    the date when the discount starts
-     * @param endDate      the date when the discount ends
-     * @param udsThreshold the amount of products in a cart from which the discount can take place
-     * @param deduction    the amount of money the discount deducts from the order's final price
-     * @param packs        the discount's packs
-     */
-    public QuantityDisc(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
-                        Pack... packs) {
-        super(id, startDate, endDate, DiscountType.QUANTITY, packs);
-        this.udsThreshold = udsThreshold;
-        this.deduction = deduction;
-    }
-
-    /**
-     * A quantity discount's general constructor with categories
-     * @param id           the discount's id
-     * @param startDate    the date when the discount starts
-     * @param endDate      the date when the discount ends
-     * @param udsThreshold the amount of products in a cart from which the discount can take place
-     * @param deduction    the amount of money the discount deducts from the order's final price
-     * @param categories   the discount's categories
-     */
-    public QuantityDisc(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
-                        Category... categories) {
-        super(id, startDate, endDate, DiscountType.QUANTITY, categories);
+    public ProductQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold,
+                           double deduction, StoreProduct... products) {
+        super(DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addProducts(products);
         this.udsThreshold = udsThreshold;
         this.deduction = deduction;
     }
@@ -80,9 +38,10 @@ public class QuantityDisc extends Discount {
      * @param deduction      the amount of money the discount deducts from the order's final price
      * @param overWholeStore whether the discount is applied over the whole store or not (must be true)
      */
-    public QuantityDisc(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
-                        boolean overWholeStore) {
-        super(id, startDate, endDate, DiscountType.QUANTITY, overWholeStore);
+    public ProductQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold,
+                           double deduction, boolean overWholeStore) {
+        super(DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
+        //this.addProducts(overWholeStore);
         this.udsThreshold = udsThreshold;
         this.deduction = deduction;
     }
@@ -95,39 +54,10 @@ public class QuantityDisc extends Discount {
      * @param deduction    the amount of money the discount deducts from the order's final price
      * @param products     the discount's products
      */
-    public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
-                        StoreProduct... products) {
-        super(startDate, endDate, DiscountType.QUANTITY, products);
-        this.udsThreshold = udsThreshold;
-        this.deduction = deduction;
-    }
-
-    /**
-     * Instantiates a new quantity discount with packs
-     * @param startDate    the date when the discount starts
-     * @param endDate      the date when the discount ends
-     * @param udsThreshold the amount of products in a cart from which the discount can take place
-     * @param deduction    the amount of money the discount deducts from the order's final price
-     * @param packs        the discount's packs
-     */
-    public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
-                        Pack... packs) {
-        super(startDate, endDate, DiscountType.QUANTITY, packs);
-        this.udsThreshold = udsThreshold;
-        this.deduction = deduction;
-    }
-
-    /**
-     * Instantiates a new quantity discount with categories
-     * @param startDate    the date when the discount starts
-     * @param endDate      the date when the discount ends
-     * @param udsThreshold the amount of products in a cart from which the discount can take place
-     * @param deduction    the amount of money the discount deducts from the order's final price
-     * @param categories   the discount's categories
-     */
-    public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
-                        Category... categories) {
-        super(startDate, endDate, DiscountType.QUANTITY, categories);
+    public ProductQuantity(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
+                           StoreProduct... products) {
+        super(DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addProducts(products);
         this.udsThreshold = udsThreshold;
         this.deduction = deduction;
     }
@@ -140,9 +70,10 @@ public class QuantityDisc extends Discount {
      * @param deduction      the amount of money the discount deducts from the order's final price
      * @param overWholeStore whether the discount is applied over the whole store or not (must be true)
      */
-    public QuantityDisc(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
-                        boolean overWholeStore) {
-        super(startDate, endDate, DiscountType.QUANTITY, overWholeStore);
+    public ProductQuantity(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
+                           boolean overWholeStore) {
+        super(DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
+        //this.addProducts(overWholeStore);
         this.udsThreshold = udsThreshold;
         this.deduction = deduction;
     }

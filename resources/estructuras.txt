@@ -46,7 +46,7 @@ Se guardan y leen en este orden:
     {TOTAL_ID}
     ID;PRICE;PRODUCT_IDS;DATE_ADD_CART
 
-[x] Discounts:
+[ ] Discounts: <- REVISION PENDIENTE
     ---- Discount ----
     {TOTAL_ID}
     TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE

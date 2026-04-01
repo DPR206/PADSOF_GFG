@@ -1,11 +1,7 @@
 package user;
 
-import order.*;
-import product.StoreProduct;
 import store.Parameter;
 import store.Store;
-
-import java.time.LocalDateTime;
 
 /**
  * Class name: Game
@@ -45,7 +41,7 @@ public class Manager extends User {
         return null;
     }
 
-    public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage,
+    /*public void addFixedPercDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage,
                                  StoreProduct... products) {
         FixedPerDisc fpd = new FixedPerDisc(startDate, endDate, percentage, products);
         this.sp.getStore().getDiscounts().add(fpd);
@@ -67,7 +63,7 @@ public class Manager extends User {
                               StoreProduct... products) {
         VolumeDisc vd = new VolumeDisc(startDate, endDate, spendingThreshold, discount, products);
         this.sp.getStore().getDiscounts().add(vd);
-    }
+    }*/ // DUE: Arreglar esto
 
     public void addEmployee(String password, String userName, Permission permission) {
         Employee emp = new Employee(password, userName, permission);

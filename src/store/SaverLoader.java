@@ -746,7 +746,7 @@ public class SaverLoader {
                     i++;
                 }
 
-                switch (type) {
+               /* switch (type) {
                     case DiscountType.FIXED_PERCENTAGE:
                         new FixedPerDisc(id, startDate, endDate, percentage, products.toArray(new StoreProduct[0]));
                         break;
@@ -762,7 +762,7 @@ public class SaverLoader {
                         new VolumeDisc(id, startDate, endDate, spendingThreshold, deduction,
                                 products.toArray(new StoreProduct[0]));
                         break;
-                }
+                }*/ // DUE: Arreglar esto
             }
 
             buffer.close();

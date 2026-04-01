@@ -129,7 +129,7 @@ public class Pack {
      * @return the pack's price
      */
     public double getPrice() {
-        switch (this.discount.getType()) {
+        /*switch (this.discount.getType()) {
             case FIXED_PERCENTAGE:
                 FixedPerDisc fixedPerDisc = (FixedPerDisc) this.discount;
                 return this.price - (this.price * fixedPerDisc.getPercentage());
@@ -145,7 +145,7 @@ public class Pack {
                     return this.price - volumeDisc.getSpendingThreshold();
                 }
                 return this.price;
-        }
+        }*/ // DUE: Arreglar esto
         return price;
     }
 

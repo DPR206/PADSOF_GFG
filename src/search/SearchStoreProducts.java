@@ -70,6 +70,29 @@ public class SearchStoreProducts{
         }
         
         pCs.retainAll(filtered);
+
+        if(this.ascendant == true){
+            if(this.priceF && this.punctuationF){
+                pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation).thenComparing(StoreProduct::getPrice));
+            }
+            else if(this.priceF && !this.punctuationF){
+                pCs.sort(Comparator.comparing(StoreProduct::getPrice));
+            }
+            else if(!this.priceF && this.punctuation){
+                pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation));
+            }
+        }
+        else{
+             if(this.priceF && this.punctuationF){
+                pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation).reversed().thenComparing(Comparator.comparingDouble(StoreProduct::getPrice).reversed()));
+            }
+            else if(this.priceF && !this.punctuationF){
+                pCs.sort(Comparator.comparingDouble(StoreProduct::getPrice).reversed());
+            }
+            else if(!this.priceF && this.punctuation){
+                pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation).reversed());
+            }
+        }
         return pCs;
     }
 

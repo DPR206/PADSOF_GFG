@@ -167,4 +167,28 @@ public class Employee extends User {
         System.err.println("You have no permission to do that...");
         return false;
     }
+
+     public List<StoreProduct> searchStoreProduct(){
+        return this.search.searchStoreProduct();
+    }
+
+    public List<StoreProduct> searchStoreProductByCategory(Category... c){
+        return this.search.searchByCategory(c);
+    }
+
+    public Pack searchPackByID(int id){
+        return this.search.searchPackByID();
+    }
+
+    public Employee searchEmployeeByID(int id){
+        return this.search.searchEmployeeByID(id);
+    }
+
+    public Order searchOrderByID(int id){
+        return this.search.searchOrderByID(int id);
+    }
+
+    public Exchange searchExchangeByID(int id){
+        return this.search.searchExchangeByID(id);
+    }
 }

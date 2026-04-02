@@ -7,6 +7,7 @@ import order.*;
 import product.Pack;
 import product.StoreProduct;
 import store.Store;
+import search.*;
 
 /**
  * Class name: UnregisteredClient
@@ -25,7 +26,7 @@ public class UnregisteredClient extends User {
     /**
      * Creates a new unregistered client
      */
-    public UnregisteredClient(asc) {
+    public UnregisteredClient(boolean asc) {
         super(UserType.UNREGISTERED_CLIENT, null, null, asc);
     	c = new Cart();
         s = Store.getInstance();

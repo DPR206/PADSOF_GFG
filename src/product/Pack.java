@@ -129,23 +129,23 @@ public class Pack {
      * @return the pack's price
      */
     public double getPrice() {
-        /*switch (this.discount.getType()) {
+        switch (this.discount.getType()) {
             case FIXED_PERCENTAGE:
-                FixedPerDisc fixedPerDisc = (FixedPerDisc) this.discount;
+                FixedPercentageDiscount fixedPerDisc = (FixedPercentageDiscount) this.discount;
                 return this.price - (this.price * fixedPerDisc.getPercentage());
             case GIFT:
-                GiftDisc giftDisc = (GiftDisc) this.discount;
+                GiftDiscount giftDisc = (GiftDiscount) this.discount;
                 if (this.price > giftDisc.getSpendingThreshold()) {
                     this.addProduct(giftDisc.getGift());
                 }
                 return this.price;
             case VOLUME:
-                VolumeDisc volumeDisc = (VolumeDisc) this.discount;
+                VolumeDiscount volumeDisc = (VolumeDiscount) this.discount;
                 if (this.price > volumeDisc.getSpendingThreshold()) {
                     return this.price - volumeDisc.getSpendingThreshold();
                 }
                 return this.price;
-        }*/ // DUE: Arreglar esto
+        }
         return price;
     }
 

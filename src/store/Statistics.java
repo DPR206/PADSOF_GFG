@@ -198,7 +198,7 @@ public class Statistics {
 	 */
 	public HashMap<StoreProduct, Integer> getProductsSales(){
 		HashMap<StoreProduct, Integer> productsAndSales = new HashMap<>();
-		for(StoreProduct sp : this.storeProducts)
+		for(StoreProduct sp : this.getProductsBySales())
 			productsAndSales.put(sp, sp.getSales());
 		return productsAndSales;
 	}
@@ -223,7 +223,7 @@ public class Statistics {
 	 */
 	public HashMap<RegisteredClient, Integer> getUserAndOrders(){
 		HashMap<RegisteredClient, Integer> userOrders = new HashMap<>();
-		for(RegisteredClient rc : this.clients)
+		for(RegisteredClient rc : this.getUsersMostOrders())
 			userOrders.put(rc, rc.getNumOrders());
 		return userOrders;
 	}
@@ -247,7 +247,7 @@ public class Statistics {
 	 */
 	public HashMap<RegisteredClient, Integer> getUserAndExchanges(){
 		HashMap<RegisteredClient, Integer> userExchanges = new HashMap<>();
-		for(RegisteredClient rc : this.clients)
+		for(RegisteredClient rc : this.getUsersMostExchanges())
 			userExchanges.put(rc, rc.getNumExchanges());
 		return userExchanges;
 	}

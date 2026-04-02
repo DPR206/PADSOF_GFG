@@ -21,6 +21,7 @@ public class Order {
     private int id;
     private double price;
     private LocalDateTime pickedUpDate;
+	private RegisteredClient owner;
 
     private List<StoreProduct> sp = new ArrayList<>();
     private List<Pack> p = new ArrayList<>();
@@ -31,13 +32,14 @@ public class Order {
      * @param id,    the unique number of the order
      * @param price, total price paid of the order
      */
-    public Order(int id, double price, OrderState state, List<StoreProduct> sp, List<Pack> p) {
+    public Order(int id, double price, OrderState state, List<StoreProduct> sp, List<Pack> p, RegisteredClient owner) {
         this.id = id;
         this.price = price;
         this.pickedUpDate = null;
         this.state = state;
         this.sp = sp;
         this.p = p;
+		this.owner = owner;
     }
 
     /**
@@ -112,6 +114,10 @@ public class Order {
 	 */
 	public List<Pack> getP() {
 		return p;
+	}
+
+	public RegisteredClient getOwner(){
+		return this.owner;
 	}
 
 	/**

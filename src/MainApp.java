@@ -88,8 +88,9 @@ public class MainApp {
         System.out.println("\t[1] Browse products");
         System.out.println("\t[2] Log in");
         System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] Go to main page");
-        System.out.println("\t[5] Exit app");
+        System.out.println("\t[4] <- Go back");
+        System.out.println("\t[5] <<- Go to main page");
+        System.out.println("\t[6] x Exit app");
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -102,10 +103,10 @@ public class MainApp {
             case 3:
                 signer();
                 break;
-            case 4:
+            case 4, 5:
                 main();
                 break;
-            case 5:
+            case 6:
                 exit();
                 break;
             default:
@@ -121,44 +122,46 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void unregisteredClientOrderLoop() throws IOException, IllegalArgumentException, NullPointerException {
-        // browseStoreProducts(); <- DUE
+        ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] See a product");
         System.out.println("\t[2] See my cart");
-        System.out.println("\t[3] Go to main page");
-        System.out.println("\t[4] Exit app");
+        System.out.println("\t[3] Sign up");
+        System.out.println("\t[4] < Previous page");
+        System.out.println("\t[5] Next page >");
+        System.out.println("\t[6] <- Go back");
+        System.out.println("\t[7] <<- Go to main page");
+        System.out.println("\t[8] x Exit app");
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
             case 1:
-                seeProduct();
-                unregisteredClientLoop();
+                unregisteredSeeProduct();
                 break;
             case 2:
-                seeCart();
-                System.out.println("What do you wish to do? (enter the nº)");
-                System.out.println("\t[1] Place order");
-                System.out.println("\t[2] Go back");
-                int chosenOption2 = scanner.nextInt();
-
-                if (chosenOption2 == 1) {
-                    unregisteredClientPlaceOrder();
-                } else {
-                    unregisteredClientOrderLoop();
-                }
+                unregisteredSeeCart();
                 break;
             case 3:
                 signer();
                 break;
             case 4:
-                main();
+                // DUE: previousPage(); <- La idea es imprimir x productos por "página", estilo cluster
                 break;
             case 5:
+                // DUE: nextPage();
+                break;
+            case 6:
+                unregisteredClientOrderLoop();
+                break;
+            case 7:
+                main();
+                break;
+            case 8:
                 exit();
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredClientLoop();
+                unregisteredClientOrderLoop();
         }
     }
 
@@ -195,15 +198,72 @@ public class MainApp {
     /**
      * It prints a certain product's info
      */
-    public void seeProduct() {
-        // DUE
+    public void unregisteredSeeProduct() throws IOException {
+        System.out.println("Enter the number of the desired product:");
+        int product_num = scanner.nextInt();
+
+        /*StoreProduct product = getProductFromPageNumber(product_num);
+        product.printInfo();*/ // DUE
+
+        System.out.println("What do you wish to do? (enter the nº)");
+        System.out.println("\t[1] See reviews");
+        System.out.println("\t[2] See my cart");
+        System.out.println("\t[3] Sign up");
+        System.out.println("\t[4] Add to cart");
+        System.out.println("\t[5] <- Go back");
+        System.out.println("\t[6] <<- Go to main page");
+        System.out.println("\t[7] x Exit app");
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1:
+                //seeReviews(StoreProduct product);
+                break;
+            case 2:
+                unregisteredSeeCart();
+                break;
+            case 3:
+                signer();
+                break;
+            case 4:
+                System.out.println("Enter the number of copies you desire");
+                int numProds = scanner.nextInt();
+                for (int i = 0; i < numProds; i++) {
+                    //((UnregisteredClient)currentUser).addCart(product);
+                }
+                System.out.println("Added " + numProds + " copies to your cart");
+                break;
+            case 5:
+                unregisteredClientOrderLoop();
+                break;
+            case 6:
+                main();
+                break;
+            case 7:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                unregisteredSeeProduct();
+        }
+
     }
 
     /**
      * It prints the current user's cart's products
      */
-    public void seeCart() {
+    public void unregisteredSeeCart() throws IOException {
         // DUE
+        System.out.println("What do you wish to do? (enter the nº)");
+        System.out.println("\t[1] Place order");
+        System.out.println("\t[2] Go back");
+        int chosenOption2 = scanner.nextInt();
+
+        if (chosenOption2 == 1) {
+            unregisteredClientPlaceOrder();
+        } else {
+            unregisteredClientOrderLoop();
+        }
     }
 
     /**
@@ -240,9 +300,7 @@ public class MainApp {
      */
     public void logger() throws IOException {
         currentUser = Store.getInstance().getUtility().signIn();
-        if (currentUser != null) {
-            loopSelector(currentUser.getType());
-        }
+        loopSelector(currentUser.getType());
     }
 
     /**
@@ -251,9 +309,7 @@ public class MainApp {
      */
     public void signer() throws IOException {
         currentUser = Store.getInstance().logIn();
-        if (currentUser != null) {
-            loopSelector(currentUser.getType());
-        }
+        loopSelector(currentUser.getType());
     }
 
     /**

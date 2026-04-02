@@ -177,6 +177,19 @@ public abstract class StoreProduct extends Product {
                 (((this.reviews.size() - 1) * this.averagePunctuation) + review.getScoring()) / this.reviews.size();
     }
 
+    /**
+     * It prints the product's info
+     */
+    @Override
+    public void printInfo() {
+        /* super;REVIEW_IDS;AVG_PUNCT;STOCK;CATEGORIES;ADDED_DATE */
+        super.printInfo();
+        System.out.println("Stock: " + this.stock);
+        System.out.println("Categories: " + this.getPrintCategories());
+        System.out.println("Average Punctuation: " + this.averagePunctuation + " stars");
+        System.out.println(this.reviews.size() + " reviews");
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -306,6 +319,7 @@ public abstract class StoreProduct extends Product {
 
         this.stock = newStock;
     }
+
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 
     /**
@@ -318,5 +332,4 @@ public abstract class StoreProduct extends Product {
         return super.toString() + ";" + this.getPrintReviews() + ";" + this.averagePunctuation + ";" + this.stock +
                ";" + this.getPrintCategories() + this.addedDate;
     }
-
 }

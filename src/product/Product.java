@@ -68,6 +68,17 @@ public abstract class Product {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
+    /**
+     * It prints the product's info
+     */
+    public void printInfo() {
+        /* TYPE;ID;PRICE;NAME;DESC;PHOTO */
+        System.out.println("Name: " + this.name);
+        System.out.println("Description: " + this.description); // DUE: Idealmente, haría wrapping
+        System.out.println("Price: [" + this.price + "]€");
+        System.out.println(" ");
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**

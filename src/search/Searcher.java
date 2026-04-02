@@ -42,6 +42,9 @@ public class Searcher{
         this.searchStore = searchStore;
     }
 
+    public SearchStoreProducts getStoreSearcher(){
+        return this.searchStore;
+    }
     /**
 	 * Sets the types
 	 *

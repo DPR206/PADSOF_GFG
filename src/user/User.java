@@ -84,6 +84,16 @@ public abstract class User {
         return this.userName;
     }
 
+    public void addPriceFilter(double min, double max){
+        PriceFilter filter = new PriceFilter(min, max);
+        this.search.getStoreSearcher().addPriceFilter(min, max);
+    }
+
+    public void addPunctuationFilter(int min, int max){
+        this.search.getStoreSearcher().addPunctuationFilter(min, max);
+    }
+
+    
     /**
      * It gets the user's user type
      * @return the user's user type

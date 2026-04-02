@@ -1,9 +1,11 @@
 package search;
 
-import java.util.*;
-import product.*;
+import product.SecondHandProduct;
+import store.Store;
 
-package search;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Class name: BrowseSecondHandProducts
  * <p>
@@ -22,7 +24,7 @@ public class BrowseSecondHandProducts{
 	 * @param s, sends the store to get all the second hand products available
 	 */
     public BrowseSecondHandProducts(Store s){
-        this.products = s.getSecondHandProducts()
+        this.products = s.getSecondHandProducts();
     }
 
      /**

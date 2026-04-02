@@ -26,7 +26,7 @@ public class Searcher{
     private Searcher<Exchange> exchangeSearcher = new Searcher<>(new SearchExchange());
 
     private BrowseSecondHandProducts secondHandProducts;
-    
+
     /**
 	 * Creates the master class searcher
 	 *
@@ -69,11 +69,11 @@ public class Searcher{
 
     /**
 	 * Searches store products depending on the categories
-     * 
+     *
 	 *@param c, the array of the categories of the products we want to search
 	 */
     public List<StoreProduct> searchByCategory(Category... c){
-        
+
         return this.searchStore.searchStoreProducts();
     }
 
@@ -134,16 +134,16 @@ public class Searcher{
             return this.BrowseSecondHandProducts.searchSecondHandProducts();
         }
         return null;
-    } 
+    }
 
     /**
 	 * Linear search implemented to search for the searchtype on the array of searchTypes
-     * 
+     *
 	 *@param t, the searchType we want to check if it's there or not
 	 */
     private boolean linearSearch(SearchType t){
         for(SearchType type: this.types){
-            if(t.getType().equals(type.getType())) return true
+            if(t.getType().equals(type.getType())) return true;
         }
         return false;
     }

@@ -67,7 +67,7 @@ public class SearchStoreProducts{
         if(filtered == this.s.getStoreProducts()){
             return pCs;
         }
-        
+
         pCs.retainAll(filtered);
 
         if(this.ascendant == true){
@@ -163,8 +163,8 @@ public class SearchStoreProducts{
     private List<StoreProduct> filterByCategory(Category... c){ //para cada producto, buscar la categoría
         List<StoreProduct> aux = new ArrayList<>();
         List<StoreProduct> product = this.s.getStoreProducts();
-        Categories productCategories[] = null
-        
+        Categories productCategories[] = null;
+
         for(Category category: c){
             for(StoreProduct sp: product){
                 productCategories = sp.getCategories();

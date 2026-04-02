@@ -2,6 +2,7 @@ package search;
 
 import java.util.*;
 import product.*;
+import store.Store;
 
 /**
  * Class name: BrowseSecondHandProducts
@@ -12,7 +13,8 @@ import product.*;
  * @see SearchStoreProducts
   */
 public class BrowseSecondHandProducts{
-
+	
+	Store s = Store.getInstance();
     private List<SecondHandProduct> products;
 
     /**
@@ -21,7 +23,7 @@ public class BrowseSecondHandProducts{
 	 * @param s, sends the store to get all the second hand products available
 	 */
     public BrowseSecondHandProducts(Store s){
-        this.products = s.getSecondHandProducts()
+        this.products = new ArrayList<>(s.getSecondHandProducts().values());
     }
 
      /**

@@ -50,6 +50,7 @@ public class Store {
     private HashMap<String, RegisteredClient> registeredClients = new HashMap<>();
     /* The class for the extra functions singIn and logIn */
     private Utility utility;
+    private HashMap<Integer, Employee> employees = new HashMap<>();
 
     /**
      * Store's constructor
@@ -290,5 +291,9 @@ public class Store {
      */
     public void addExchange(Exchange e) {
         this.exchanges.add(e);
+    }
+    
+    public HashMap<Integer, Employee> getEmployees(){
+    	return this.employees;
     }
 }

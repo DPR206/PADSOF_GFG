@@ -218,7 +218,24 @@ public class RegisteredClient extends User {
         return this.searcher.searchStoreProducts();
     }
 
-
+    public void increaseNumOrders()
+    {
+    	this.numOrders++;
+    }
+    
+    public void increaseNumOrders(int i) {
+    	if(i > 0)
+    		this.numOrders += i;
+    }
+    
+    public void increaseNumExchanges() {
+    	this.numExchanges++;
+    }
+    
+    public void increaseNumExchanges(int i) {
+    	this.numExchanges += i;
+    }
+    
     //requestValuation
     //makeAnOffer
     //browseNotifications

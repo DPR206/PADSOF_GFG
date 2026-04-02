@@ -18,6 +18,7 @@ import product.*;
  */
 public class Statistics {
 	private static Statistics INSTANCE;
+	private static double total_revenue;
 	
 	private HashMap<Month, Double> revenueByMonth;
 	private List<RegisteredClient> clients;
@@ -35,9 +36,12 @@ public class Statistics {
 		this.clients = new ArrayList<>(Store.getInstance().getRegisteredClients().values());
 		this.categories = Store.getInstance().getCategories();
 		this.revenue_valuation = 0.0;
+		Statistics.total_revenue = 0.0;
 	}
 
 	/**
+	 * Obtains the statistics of the store
+	 * 
 	 * @return the INSTANCE
 	 */
 	public static Statistics getINSTANCE() {
@@ -47,13 +51,17 @@ public class Statistics {
 	}
 
 	/**
-	 * @return the revenueByMonth
+	 * Obtains the revenue by months
+	 * 
+	 * @return the revenueByMonth a HashMap of the revenues
 	 */
 	public HashMap<Month, Double> getRevenueByMonth() {
 		return revenueByMonth;
 	}
 
 	/**
+	 * Sets the revenue by month
+	 * 
 	 * @param revenueByMonth the revenueByMonth to set
 	 */
 	public void setRevenueByMonth(HashMap<Month, Double> revenueByMonth) {
@@ -61,13 +69,17 @@ public class Statistics {
 	}
 
 	/**
-	 * @return the clients
+	 * Obtains the registered clients
+	 * 
+	 * @return the clients the clients in the statistics
 	 */
 	public List<RegisteredClient> getClients() {
 		return Collections.unmodifiableList(this.clients);
 	}
 
 	/**
+	 * Sets the list of clients in the statistics
+	 * 
 	 * @param clients the clients to set
 	 */
 	public void setClients(List<RegisteredClient> clients) {
@@ -75,13 +87,17 @@ public class Statistics {
 	}
 
 	/**
-	 * @return the categories
+	 * The categories in the statistics
+	 * 
+	 * @return the categories the categories in the statistics
 	 */
 	public HashMap<String, Category> getCategories() {
 		return categories;
 	}
 
 	/**
+	 * Sets the categories in the statistics
+	 * 
 	 * @param categories the categories to set
 	 */
 	public void setCategories(HashMap<String, Category> categories) {
@@ -89,26 +105,44 @@ public class Statistics {
 	}
 	
 	/**
-	 * @return the revenue_valuation
+	 * Obtains the revenues from valuations
+	 * 
+	 * @return the revenue_valuation the total amount in valuation revenues
 	 */
 	public double getRevenue_valuation() {
 		return revenue_valuation;
 	}
 
 	/**
+	 * Sets the valuation revenues
+	 * 
 	 * @param revenue_valuation the revenue_valuation to set
 	 */
 	public void setRevenue_valuation(double revenue_valuation) {
 		this.revenue_valuation = revenue_valuation;
 	}
 	
+	/**
+	 * @return the total_revenue
+	 */
+	public static double getTotal_revenue() {
+		return total_revenue;
+	}
+	
 
 /*-----------------------------------------------------------METHODS--------------------------------------------------------------*/
-	
-	
 
+	/**
+	 * Increases the revenue in a certain month as well as the revenues in valuations/products
+	 * 
+	 * @param quantity the increase in the revenue
+	 * @param type the type of revenue
+	 * @param date the date the revenue took place
+	 * @param products the products that were affected in the revenue (if there were any)
+	 */
 	public void addRevenue(Double quantity, RevenueType type, LocalDate date, StoreProduct...products) {
 		this.revenueByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
+		Statistics.total_revenue += quantity;
 		if(type == RevenueType.VALUATION)
 			this.revenue_valuation += quantity;
 		else if(type == RevenueType.PRODUCTS)
@@ -117,11 +151,22 @@ public class Statistics {
 					c.increaseRevenue(quantity);
 	}
 
+	/**
+	 * Obtains the revenue by categories
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public double getRevenueByCategory(String name)
 	{
 		return this.categories.get(name).getRevenue();
 	}
 	
+	/**
+	 * Makes a descending list of the number of orders of each client
+	 * 
+	 * @return a descending list of registered clients
+	 */
 	public List<RegisteredClient> getUsersMostOrders()
 	{
 		return this.clients.stream() //Obtain data
@@ -130,6 +175,11 @@ public class Statistics {
 							.collect(Collectors.toList()); //Make the result a list
 	}
 	
+	/**
+	 * Makes a descending list of the number of exchanges of each client
+	 * 
+	 * @return  a descending list of registered clients
+	 */
 	public List<RegisteredClient> getUsersMostExchanges(){
 		return this.clients.stream()
 							.sorted(Comparator.comparingInt(RegisteredClient::getNumExchanges)

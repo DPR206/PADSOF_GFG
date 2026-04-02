@@ -86,7 +86,7 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: public createNotification(){}
+    
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

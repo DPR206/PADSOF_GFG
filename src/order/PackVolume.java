@@ -53,7 +53,7 @@ public class PackVolume extends PackDiscount implements VolumeDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: public createNotification(){}
+    
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

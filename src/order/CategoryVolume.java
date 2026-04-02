@@ -55,7 +55,7 @@ public class CategoryVolume extends CategoryDiscount implements VolumeDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: public createNotification(){}
+    
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

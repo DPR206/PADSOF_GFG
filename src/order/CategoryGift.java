@@ -60,7 +60,7 @@ public class CategoryGift extends CategoryDiscount implements GiftDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: public createNotification(){}
+    
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

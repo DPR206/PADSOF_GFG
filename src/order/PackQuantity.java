@@ -62,7 +62,7 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
         return this.deduction;
     }
 
-    // DUE: public createNotification(){}
+    
 
     /**
      * It allows the manager to change the quantity discount's discount

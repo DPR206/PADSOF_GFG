@@ -55,7 +55,7 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: public createNotification(){}
+    
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

@@ -49,7 +49,7 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: public createNotification(){}
+    
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

@@ -89,7 +89,7 @@ public class ProductGift extends ProductDiscount implements GiftDiscount {
     // DUE: createGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct
     // gift) {}
 
-    // DUE: public createNotification(){}
+    
 
     // DUE: public obtainDisc();
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

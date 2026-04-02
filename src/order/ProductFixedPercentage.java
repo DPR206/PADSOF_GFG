@@ -82,7 +82,7 @@ public class ProductFixedPercentage extends ProductDiscount implements FixedPerc
 
     // DUE: createFixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {}
 
-    // DUE: public createNotification(){}
+    
 
     // DUE: public obtainDisc();
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

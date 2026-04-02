@@ -49,7 +49,7 @@ public class PackFixedPercentage extends PackDiscount implements FixedPercentage
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: public createNotification(){}
+    
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

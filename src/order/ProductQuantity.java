@@ -86,7 +86,7 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: public createNotification(){}
+    
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

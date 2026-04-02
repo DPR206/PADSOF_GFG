@@ -21,7 +21,7 @@ public class Statistics {
 	private HashMap<Month, Double> revenueByMonth;
 	private HashMap<String, RegisteredClient> clients;
 	private HashMap<String, Category> categories;
-	private HashMap<Month, Double> revenue_valuation;
+	private double revenue_valuation;
 	
 	/**
 	 * Statistics' constructor
@@ -33,10 +33,7 @@ public class Statistics {
         }
 		this.clients = Store.getInstance().getRegisteredClients();
 		this.categories = Store.getInstance().getCategories();
-		this.revenue_valuation = new HashMap<Month, Double>();
-		for (Month month : Month.values()) {
-            this.revenue_valuation.put(month, 0.0);
-        }
+		this.revenue_valuation = 0.0;
 	}
 
 	/**
@@ -93,14 +90,14 @@ public class Statistics {
 	/**
 	 * @return the revenue_valuation
 	 */
-	public HashMap<Month, Double> getRevenue_valuation() {
+	public double getRevenue_valuation() {
 		return revenue_valuation;
 	}
 
 	/**
 	 * @param revenue_valuation the revenue_valuation to set
 	 */
-	public void setRevenue_valuation(HashMap<Month, Double> revenue_valuation) {
+	public void setRevenue_valuation(double revenue_valuation) {
 		this.revenue_valuation = revenue_valuation;
 	}
 	
@@ -112,7 +109,7 @@ public class Statistics {
 	public void addRevenue(Double quantity, RevenueType type, LocalDate date, StoreProduct...products) {
 		this.revenueByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
 		if(type == RevenueType.VALUATION)
-			this.revenue_valuation.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
+			this.revenue_valuation += quantity;
 		else if(type == RevenueType.PRODUCTS)
 			for(StoreProduct p:products)
 				for(Category c : p.getCategories())

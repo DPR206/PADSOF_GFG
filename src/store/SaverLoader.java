@@ -650,8 +650,8 @@ public class SaverLoader {
                 boolean paidValuation = Boolean.parseBoolean(words[8]);
                 ConservationStatus status = ConservationStatus.valueOf(words[9]);
 
-                new SecondHandProduct(id, price, name, description, photo, type, valuationDate, available,
-                        paidValuation, status);
+                /*new SecondHandProduct(id, price, name, description, photo, type, valuationDate, available,
+                        paidValuation, status, owner);*/ // DUE: Arreglar esto
             }
 
             buffer.close();

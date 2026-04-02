@@ -113,11 +113,15 @@ public class Statistics {
 		this.revenueByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
 		if(type == RevenueType.VALUATION)
 			this.revenue_valuation.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
-		else
-			;
-		
+		else if(type == RevenueType.PRODUCTS)
+			for(StoreProduct p:products)
+				for(Category c : p.getCategories())
+					c.increaseRevenue(quantity);
 	}
 
-	
+	public double getRevenueByCategory(String name)
+	{
+		return this.categories.get(name).getRevenue();
+	}
 	
 }

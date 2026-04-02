@@ -15,7 +15,7 @@ import order.*;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationEmployeeOrder extends Notification implements NotificationInterface<OrderHistory>{
+public class NotificationEmployeeOrder extends Notification implements NotificationInterface<Order>{
 
 	/**
 	 * Creates a new order notification for employees with default timeMade (this moment) and no content
@@ -67,9 +67,9 @@ public class NotificationEmployeeOrder extends Notification implements Notificat
 	 * @param o the order history
 	 * @return a string with the notification
 	 */
-	public String FullNotification(OrderHistory o) {
-		String text = "The order of user "+ o.getOwner().getUserName() + " contains: " + o.getOrders().getLast().getP() 
-						+ o.getOrders().getLast().getSp() + "\n";
+	public String FullNotification(Order o) {
+		String text = "The order of user "+ o.getOwner().getUserName() + " contains: " + o.getP() 
+						+ o.getSp() + "\n";
 		this.setText(text);
 		return this.SnippetNotification(o) + text + this.signOff();
 	}
@@ -81,7 +81,7 @@ public class NotificationEmployeeOrder extends Notification implements Notificat
 	 * @param o the order history
 	 * @return a string with the snippet of the notification
 	 */
-	public String SnippetNotification(OrderHistory o) {
+	public String SnippetNotification(Order o) {
 		String title = "New order to prepare\n";
 		this.setTitle(title);
 		return title + this.timeLog();

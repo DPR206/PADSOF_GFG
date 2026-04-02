@@ -18,6 +18,7 @@ import java.util.*;
  * @see User
  */
 public class RegisteredClient extends User {
+	
     private LocalDate registerDate;
     private String dni;
     private Cart c;
@@ -26,11 +27,12 @@ public class RegisteredClient extends User {
     private Wallet wallet;
     private OrderHistory orderHistory;
     private Searcher searcher;
+    private int numOrders;
+    private int numExchanges;
 
     //searcher
     //sugestioner
-    //orderhistory
-    //variable estatica para contabilizar intercambios y pedidos
+    //offerhistory
 
     /**
      * Creates a new RegisteredClient
@@ -48,6 +50,8 @@ public class RegisteredClient extends User {
         this.orderHistory = new OrderHistory(this);
         this.wallet = new Wallet();
         this.searcher = new Searcher(new SearchStoreProducts(true));
+        this.numExchanges = 0;
+        this.numOrders = 0;
 
         this.getSearcher().setTypes(SearchType.S_SECOND_HAND, SearchType.S_STORE);
     }
@@ -122,6 +126,34 @@ public class RegisteredClient extends User {
     }
 
     /**
+	 * @return the numOrders
+	 */
+	public int getNumOrders() {
+		return numOrders;
+	}
+
+	/**
+	 * @param numOrders the numOrders to set
+	 */
+	public void setNumOrders(int numOrders) {
+		this.numOrders = numOrders;
+	}
+
+	/**
+	 * @return the numExchanges
+	 */
+	public int getNumExchanges() {
+		return numExchanges;
+	}
+
+	/**
+	 * @param numExchanges the numExchanges to set
+	 */
+	public void setNumExchanges(int numExchanges) {
+		this.numExchanges = numExchanges;
+	}
+
+	/**
      * Adds a new product to the wallet
      *
      * @param product, the new product

@@ -4,6 +4,7 @@
 package store;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.time.*;
 
 import user.RegisteredClient;
@@ -19,7 +20,7 @@ public class Statistics {
 	private static Statistics INSTANCE;
 	
 	private HashMap<Month, Double> revenueByMonth;
-	private HashMap<String, RegisteredClient> clients;
+	private List<RegisteredClient> clients;
 	private HashMap<String, Category> categories;
 	private double revenue_valuation;
 	
@@ -31,7 +32,7 @@ public class Statistics {
 		for (Month month : Month.values()) {
             this.revenueByMonth.put(month, 0.0);
         }
-		this.clients = Store.getInstance().getRegisteredClients();
+		this.clients = new ArrayList<>(Store.getInstance().getRegisteredClients().values());
 		this.categories = Store.getInstance().getCategories();
 		this.revenue_valuation = 0.0;
 	}
@@ -62,14 +63,14 @@ public class Statistics {
 	/**
 	 * @return the clients
 	 */
-	public HashMap<String, RegisteredClient> getClients() {
-		return clients;
+	public List<RegisteredClient> getClients() {
+		return Collections.unmodifiableList(this.clients);
 	}
 
 	/**
 	 * @param clients the clients to set
 	 */
-	public void setClients(HashMap<String, RegisteredClient> clients) {
+	public void setClients(List<RegisteredClient> clients) {
 		this.clients = clients;
 	}
 
@@ -121,5 +122,19 @@ public class Statistics {
 		return this.categories.get(name).getRevenue();
 	}
 	
+	public List<RegisteredClient> getUsersMostOrders()
+	{
+		return this.clients.stream() //Obtain data
+							.sorted(Comparator.comparingInt(RegisteredClient::getNumOrders) //Compare based on the number of orders (type int)
+							.reversed()) //Descending order
+							.collect(Collectors.toList()); //Make the result a list
+	}
+	
+	public List<RegisteredClient> getUsersMostExchanges(){
+		return this.clients.stream()
+							.sorted(Comparator.comparingInt(RegisteredClient::getNumExchanges)
+							.reversed())
+							.collect(Collectors.toList());
+	}
 	
 }

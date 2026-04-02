@@ -49,7 +49,7 @@ public class RegisteredClient extends User {
         this.exchangeHistory = new ExchangeHistory(this);
         this.orderHistory = new OrderHistory(this);
         this.wallet = new Wallet();
-        this.searcher = new Searcher(new SearchStoreProducts(true)); /*Hay que arreglar esto y ponerlo en todos los constructore*/
+        this.searcher = new Searcher(new SearchStoreProducts(true));
 
         this.getSearcher().setTypes(SearchType.S_SECOND_HAND, SearchType.S_STORE);
     }

@@ -6,9 +6,7 @@ import product.StoreProduct;
 import java.time.LocalDateTime;
 
 /**
- * Class name: CategoryDiscountFactory
- * <p>
- * Description: It implements the factory for those with category coverage
+ * It implements the factory for those with category coverage
  * @author Ana O.R.
  * @version 1.0
  * @see Category

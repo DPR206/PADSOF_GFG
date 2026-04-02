@@ -5,9 +5,7 @@ package product;
 
 import user.RegisteredClient;
 /**
- * Class name: Review
- * <p>
- * Description: It implements the reviews
+ * It implements the reviews
  * @author Duna P.R. and Ana O.R.
  * @version 1.1
  * @see user.User

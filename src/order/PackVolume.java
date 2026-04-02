@@ -5,9 +5,7 @@ import product.Pack;
 import java.time.LocalDateTime;
 
 /**
- * Class name: PackVolume
- * <p>
- * Description: It implements the Pack discount whose type is Volume
+ * It implements the Pack discount whose type is Volume
  * @author Ana O.R.
  * @version 1.0
  * @see Pack

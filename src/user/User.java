@@ -3,9 +3,7 @@ package user;
 import search.*;
 
 /**
- * Class Name: User
- * <p>
- * Description: It defines the user of the app
+ * It defines the user of the app
  * @author Sofía C.L.
  * @version 1.0
  */
@@ -87,7 +85,7 @@ public abstract class User {
     public void changeSearchOrder(boolean bool) {
     	this.searching.changeProductOrder(bool);
     }
-    
+
     public void addPriceFilter(double min, double max){
         PriceFilter filter = new PriceFilter(min, max);
         this.searching.getStoreSearcher().addPriceFilter(min, max);
@@ -97,7 +95,7 @@ public abstract class User {
         this.searching.getStoreSearcher().addPunctuationFilter(min, max);
     }
 
-    
+
     /**
      * It gets the user's user type
      * @return the user's user type
@@ -105,7 +103,7 @@ public abstract class User {
     public UserType getType() {
         return this.type;
     }
-    
+
     public String getId() {
     	return this.actualID;
     }

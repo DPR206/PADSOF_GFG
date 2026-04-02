@@ -1,7 +1,5 @@
 /**
- * Class name: Store
- * <p>
- * Description: It implements elements such a sign in method and login method which don't belong to either classes
+ * It implements elements such a sign in method and login method which don't belong to either classes
  * @author Sofía C
  * @version 1.0
  */

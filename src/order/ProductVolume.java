@@ -5,9 +5,7 @@ import product.StoreProduct;
 import java.time.LocalDateTime;
 
 /**
- * Class name: ProductVolume
- * <p>
- * Description: It implements the Product discount whose type is Volume
+ * It implements the Product discount whose type is Volume
  * @author Ana O.R.
  * @version 1.0
  * @see StoreProduct
@@ -89,8 +87,6 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: public createNotification(){}
-
-    // DUE: public obtainDisc();
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

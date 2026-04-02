@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * Class name: OfferHistory
- * <p>
  * Description: It implements the offer history
  * @author Duna P.R. and Ana O.R.
  * @version 1.0

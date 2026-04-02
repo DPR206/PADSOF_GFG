@@ -8,9 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 /**
- * Class name: ComposedPack
- * <p>
- * Description: It implements the composed packs
+ * It implements the composed packs
  * @author Duna P.R.
  * @version 1.0
  * @see Pack

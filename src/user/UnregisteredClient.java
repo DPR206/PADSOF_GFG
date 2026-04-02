@@ -3,19 +3,15 @@
  */
 package user;
 
-import product.Category;
+import order.Cart;
+import product.*;
+import search.SearchType;
+import store.Store;
+
 import java.util.List;
 
-import order.*;
-import product.Pack;
-import product.StoreProduct;
-import store.Store;
-import search.*;
-
 /**
- * Class name: UnregisteredClient
- * <p>
- * Description: It implements the unregistered client
+ * It implements the unregistered client
  * @author Duna P.R.
  * @version 1.0
  * @see User

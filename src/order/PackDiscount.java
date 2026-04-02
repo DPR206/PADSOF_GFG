@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class name: Pack Discount
- * <p>
- * Description: It implements the general discount for those with Pack coverage
+ * It implements the general discount for those with Pack coverage
  * @author Ana O.R.
  * @version 1.0
  * @see Pack

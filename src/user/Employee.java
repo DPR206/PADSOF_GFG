@@ -10,9 +10,7 @@ import java.time.Year;
 import java.util.*;
 
 /**
- * Class name: Employee
- * <p>
- * Description: It implements the employee
+ * It implements the employee
  * @author Sofía C.L.
  * @version 1.0
  * @see Employee
@@ -170,7 +168,7 @@ public class Employee extends User {
 
     /**
      * Searches for the store products based on the filters
-     * 
+     *
      */
      public List<StoreProduct> searchStoreProduct(){
         return this.getSearcher().searchStoreProducts();
@@ -178,9 +176,9 @@ public class Employee extends User {
 
     /**
      * Searches for the store products based on the filters and the categories
-     * 
+     *
      * @param c, the array of categories
-     * 
+     *
      */
     public List<StoreProduct> searchStoreProductByCategory(Category... c){
         return this.getSearcher().searchByCategory(c);
@@ -188,9 +186,9 @@ public class Employee extends User {
 
     /**
      * Searches for the pack based on the id
-     * 
+     *
      * @param id, id of the pack
-     * 
+     *
      */
     public Pack searchPackByID(int id){
         return this.getSearcher().searchPackByID(id);
@@ -202,9 +200,9 @@ public class Employee extends User {
 
     /**
      * Searches for the employee based on the id
-     * 
+     *
      * @param id, id of the employee
-     * 
+     *
      */
     public Order searchOrderByID(int id){
         return this.getSearcher().searchOrderByID(id);
@@ -212,9 +210,9 @@ public class Employee extends User {
 
     /**
      * Searches for the exchange based on the id
-     * 
+     *
      * @param id, id of the exchange
-     * 
+     *
      */
     public Exchange searchExchangeByID(int id){
         return this.getSearcher().searchExchangeByID(id);

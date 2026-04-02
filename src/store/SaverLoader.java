@@ -11,9 +11,7 @@ import java.time.*;
 import java.util.*;
 
 /**
- * Class name: SaverLoader
- * <p>
- * Description: It implements the store's saver and loader
+ * It implements the store's saver and loader
  * @author Ana O.R. and Sofía C.L.
  * @version 1.8
  */

@@ -8,9 +8,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * Class name: Order
- * <p>
- * Description: It implements the order paid by the client
+ * It implements the order paid by the client
  * @author Sofía C.L.
  * @version 1.0
  */
@@ -146,6 +144,6 @@ public class Order {
 	public LocalDateTime getPickedUpDate() {
 		return pickedUpDate;
 	}
-    
-    
+
+
 }

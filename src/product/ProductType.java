@@ -1,9 +1,7 @@
 package product;
 
 /**
- * Enum Name: ProductType
- * <p>
- * Description: It defines the store product types
+ * It defines the store product types
  * @author Ana O.R.
  * @version 1.2
  */

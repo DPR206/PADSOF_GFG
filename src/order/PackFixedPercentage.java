@@ -5,9 +5,7 @@ import product.Pack;
 import java.time.LocalDateTime;
 
 /**
- * Class name: PackFixedPercentage
- * <p>
- * Description: It implements the Pack discount whose type is Fixed Percentage
+ * It implements the Pack discount whose type is Fixed Percentage
  * @author Ana O.R.
  * @version 1.0
  * @see Pack

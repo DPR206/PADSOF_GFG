@@ -1,9 +1,7 @@
 package user;
 
 /**
- * Enum Name: UserType
- * <p>
- * Description: It defines the user types
+ * It defines the user types
  * @author Ana O.R.
  * @version 1.0
  */

@@ -3,9 +3,7 @@ package order;
 import product.StoreProduct;
 
 /**
- * Interface name: GiftDiscount
- * <p>
- * Description: It defines the base Gift discount's methods
+ * It defines the base Gift discount's methods
  * @author Ana O.R.
  * @version 1.0
  * @see StoreProduct

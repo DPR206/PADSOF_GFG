@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class name: CategoryDiscount
- * <p>
- * Description: It implements the general discount for those with Category coverage
+ * It implements the general discount for those with Category coverage
  * @author Ana O.R.
  * @version 1.0
  * @see Category

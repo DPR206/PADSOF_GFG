@@ -1,9 +1,7 @@
 package order;
 
 /**
- * Interface name: FixedPercentageDiscount
- * <p>
- * Description: It defines the base Fixed Percentage discount's methods
+ * It defines the base Fixed Percentage discount's methods
  * @author Ana O.R.
  * @version 1.0
  */

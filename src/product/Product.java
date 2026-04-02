@@ -1,9 +1,7 @@
 package product;
 
 /**
- * Class name: Product
- * <p>
- * Description: It implements the abstract Product class
+ * It implements the abstract Product class
  * @author Ana O.R.
  * @version 1.9
  */

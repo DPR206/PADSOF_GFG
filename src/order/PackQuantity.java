@@ -5,9 +5,7 @@ import product.Pack;
 import java.time.LocalDateTime;
 
 /**
- * Class name: PackQuantity
- * <p>
- * Description: It implements the Pack discount whose type is Quantity
+ * It implements the Pack discount whose type is Quantity
  * @author Ana O.R.
  * @version 1.0
  * @see Pack

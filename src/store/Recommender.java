@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 import static java.lang.Math.sqrt;
 
 /**
- * Class name: Recommender
- * <p>
- * Description: It implements the store's recommender
+ * It implements the store's recommender
  * @author Ana O.R.
  * @version 1.1
  */

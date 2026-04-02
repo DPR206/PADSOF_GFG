@@ -1,9 +1,7 @@
 package order;
 
 /**
- * Enum Name: DiscountType
- * <p>
- * Description: It defines the discount types
+ * It defines the discount types
  * @author Ana O.R.
  * @version 1.0
  */

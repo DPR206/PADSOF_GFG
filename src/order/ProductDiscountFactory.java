@@ -6,9 +6,7 @@ import store.Store;
 import java.time.LocalDateTime;
 
 /**
- * Class name: ProductDiscountFactory
- * <p>
- * Description: It implements the factory for those with store product coverage
+ * It implements the factory for those with store product coverage
  * @author Ana O.R.
  * @version 1.0
  * @see Store

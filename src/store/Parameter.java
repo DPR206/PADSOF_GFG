@@ -6,9 +6,7 @@ package store;
 import java.time.*;
 
 /**
- * Class Name: Parameter
- * <p>
- * Description: It defines the store parameters
+ * It defines the store parameters
  * @author Duna P.R.
  * @version 1.0
  */

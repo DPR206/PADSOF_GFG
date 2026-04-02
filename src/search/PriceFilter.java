@@ -1,8 +1,6 @@
 package search;
 /**
- * Class name: PriceFilter
- * <p>
- * Description: It implements the price filter
+ * It implements the price filter
  * @author Sofía C.L.
  * @version 1.3
  * @see SearchStoreProducts

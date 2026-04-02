@@ -4,9 +4,7 @@ import order.Order;
 import order.OrderState;
 
 /**
- * Class name: OrderPermission
- * <p>
- * Description: It implements the permission that allows an employee to manage Orders
+ * It implements the permission that allows an employee to manage Orders
  * @author Ana O.R.
  * @version 1.3
  * @see Order

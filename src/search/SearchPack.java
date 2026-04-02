@@ -4,15 +4,14 @@ import product.Pack;
 import store.Store;
 
 import java.util.List;
+
 /**
-    * Class name: SearchPack
-    * <p>
-    * Description: It implements the pack filter through ID
-    * @author Sofía C.L.
-    * @version 1.3
-    * @see SearchStoreProducts
-    */
-public class SearchPack implements SearchID{
+ * It implements the pack filter through ID
+ * @author Sofía C.L.
+ * @version 1.3
+ * @see SearchStoreProducts
+ */
+public class SearchPack implements SearchID {
 
     Store s = Store.getInstance();
 

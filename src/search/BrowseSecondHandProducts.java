@@ -1,27 +1,18 @@
 package search;
 
-
-import java.util.*;
-import product.*;
-import store.Store;
-
 import product.SecondHandProduct;
 import store.Store;
 
-import java.util.Comparator;
-import java.util.List;
-
+import java.util.*;
 
 /**
- * Class name: BrowseSecondHandProducts
- * <p>
- * Description: It implements the second hand product search
+ * It implements the second hand product search
  * @author Sofía C.L.
  * @version 1.3
  * @see SearchStoreProducts
   */
 public class BrowseSecondHandProducts{
-	
+
 	Store s = Store.getInstance();
     private List<SecondHandProduct> products;
 

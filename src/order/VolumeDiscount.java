@@ -1,13 +1,20 @@
 package order;
 
+import product.StoreProduct;
+
+/**
+ * It defines the base Volume discount's methods
+ * @author Ana O.R.
+ * @version 1.0
+ * @see StoreProduct
+ */
 public interface VolumeDiscount {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: public createNotification(){}
 
-    // DUE: public obtainDisc();
-    /*----------------------------------------------------- MISC -----------------------------------------------------*/
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * It gets the volume discount's deduction
      * @return the volume discount's deduction

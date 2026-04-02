@@ -5,9 +5,7 @@ import product.StoreProduct;
 import java.time.LocalDateTime;
 
 /**
- * Class name: ProductGift
- * <p>
- * Description: It implements the Product discount whose type is Gift
+ * It implements the Product discount whose type is Gift
  * @author Ana O.R.
  * @version 1.0
  * @see StoreProduct

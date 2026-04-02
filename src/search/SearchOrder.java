@@ -6,15 +6,13 @@ import store.Store;
 import java.util.List;
 
 /**
-    * Class name: SearchOrder
-    * <p>
-    * Description: It implements the order filter through ID
-    * @author Sofía C.L.
-    * @version 1.3
-    * @see SearchStoreProducts
-    */
-public class SearchOrder implements SearchID{
-    
+ * It implements the order filter through ID
+ * @author Sofía C.L.
+ * @version 1.3
+ * @see SearchStoreProducts
+ */
+public class SearchOrder implements SearchID {
+
     private Store s = Store.getInstance();
     private List<Order> orders;
 

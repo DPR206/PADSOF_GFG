@@ -5,9 +5,7 @@ import product.Category;
 import java.time.LocalDateTime;
 
 /**
- * Class name: CategoryFixedPercentage
- * <p>
- * Description: It implements the Category discount whose type is Fixed Percentage
+ * It implements the Category discount whose type is Fixed Percentage
  * @author Ana O.R.
  * @version 1.0
  * @see Category

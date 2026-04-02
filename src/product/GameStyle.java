@@ -1,9 +1,7 @@
 package product;
 
 /**
- * Enum Name: GameStyle
- * <p>
- * Description: It defines the game's possible styles
+ * It defines the game's possible styles
  * @author Ana O.R.
  * @version 1.0
  */
@@ -20,6 +18,8 @@ public enum GameStyle {
     /** The string that defines an enumerations when written in the save file */
     private final String formatedName;
 
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * A game style's constructor
      * @param formatedName the name that defines said enumeration
@@ -27,6 +27,8 @@ public enum GameStyle {
     GameStyle(String formatedName) {
         this.formatedName = formatedName;
     }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * Gets the enumeration's name

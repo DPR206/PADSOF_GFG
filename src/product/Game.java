@@ -3,9 +3,7 @@ package product;
 import java.time.LocalDate;
 
 /**
- * Class name: Game
- * <p>
- * Description: It implements the games
+ * It implements the game store product type
  * @author Ana O.R.
  * @version 1.7
  * @see StoreProduct

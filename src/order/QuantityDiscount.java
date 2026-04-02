@@ -1,5 +1,13 @@
 package order;
 
+import product.StoreProduct;
+
+/**
+ * It defines the base Quantity discount's methods
+ * @author Ana O.R.
+ * @version 1.0
+ * @see StoreProduct
+ */
 public interface QuantityDiscount {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

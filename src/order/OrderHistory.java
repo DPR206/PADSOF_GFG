@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class name: OrderHistory
- * <p>
- * Description: It implements the order history of the registered client
+ * It implements the order history of the registered client
  * @author Sofía C.L.
  * @version 1.0
  * @see Order
@@ -43,12 +41,12 @@ public class OrderHistory {
 
 	/**
 	 * Obtains the owner of the order history
-	 * 
+	 *
 	 * @return the owner the owner of the order history
 	 */
 	public RegisteredClient getOwner() {
 		return owner;
 	}
-    
-    
+
+
 }

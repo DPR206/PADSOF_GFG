@@ -3,9 +3,7 @@ package product;
 import java.time.LocalDate;
 
 /**
- * Class name: Figurine
- * <p>
- * Description: It implements the figurines
+ * It implements the figurines
  * @author Ana O.R.
  * @version 1.6
  * @see StoreProduct

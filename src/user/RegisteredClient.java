@@ -12,9 +12,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 /**
- * Class name: RegisteredClient
- * <p>
- * Description: It implements the registered client
+ * It implements the registered client
  * @author Duna P.R.
  * @version 1.0
  * @see User
@@ -144,7 +142,7 @@ public class RegisteredClient extends User {
     /**
      * Adds a product to the cart
      * @param product, the product to add
-     * 
+     *
      */
     public void addCart(StoreProduct product) {
     	this.c.addProduct(product);
@@ -154,7 +152,7 @@ public class RegisteredClient extends User {
      * Adds a pack to the cart
      *
      * @param pack, the pack to add
-     * 
+     *
      */
     public void addCart(Pack pack) {
     	this.c.addPack(pack);
@@ -164,7 +162,7 @@ public class RegisteredClient extends User {
      * Removes a product from the cart
      *
      * @param product, the product to remove
-     * 
+     *
      */
     public void deleteCart(StoreProduct product){
     	this.c.cancelProduct(product);
@@ -174,7 +172,7 @@ public class RegisteredClient extends User {
      * Removes a pack from the cart
      *
      * @param pack, the pack to remove
-     * 
+     *
      */
     public void deleteCart(Pack pack) {
     	this.c.cancelPack(pack);
@@ -187,8 +185,8 @@ public class RegisteredClient extends User {
     public List<StoreProduct> searchStoreProduct() {
         return this.searcher.searchStoreProducts();
     }
-    
-    
+
+
     //requestValuation
     //makeAnOffer
     //browseNotifications

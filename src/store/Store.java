@@ -13,9 +13,7 @@ import java.util.*;
 // DUE: Falta el @see
 
 /**
- * Class name: Store
- * <p>
- * Description: It implements the store
+ * It implements the store
  * @author Sofía C. and Ana O.R.
  * @version 1.0
  */
@@ -292,7 +290,7 @@ public class Store {
     public void addExchange(Exchange e) {
         this.exchanges.add(e);
     }
-    
+
     public HashMap<String, Employee> getEmployees(){
     	return this.employees;
     }

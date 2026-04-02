@@ -5,9 +5,7 @@ import product.StoreProduct;
 import java.time.LocalDateTime;
 
 /**
- * Class name: ProductQuantity
- * <p>
- * Description: It implements the Product discount whose type is Quantity
+ * It implements the Product discount whose type is Quantity
  * @author Ana O.R.
  * @version 1.0
  * @see StoreProduct

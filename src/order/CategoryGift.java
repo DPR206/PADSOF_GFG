@@ -6,9 +6,7 @@ import product.StoreProduct;
 import java.time.LocalDateTime;
 
 /**
- * Class name: CategoryGift
- * <p>
- * Description: It implements the Category discount whose type is Gift
+ * It implements the Category discount whose type is Gift
  * @author Ana O.R.
  * @version 1.0
  * @see StoreProduct

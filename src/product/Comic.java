@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.time.Year;
 
 /**
- * Class name: Comic
- * <p>
- * Description: It implements the comics
+ * It implements the comic store product type
  * @author Ana O.R.
  * @version 1.7
  * @see StoreProduct

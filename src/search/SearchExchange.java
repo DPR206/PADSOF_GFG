@@ -6,9 +6,7 @@ import store.Store;
 import java.util.List;
 
 /**
- * Class name: SearchExchange
- * <p>
- * Description: It implements the class to search for an exchange
+ * It implements the class to search for an exchange
  * @author Sofía C.L.
  * @version 1.3
  * @see SearchStoreProducts

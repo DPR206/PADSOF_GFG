@@ -15,9 +15,7 @@ import java.util.StringTokenizer;
 
 
 /**
- * Class name: StorePermission
- * <p>
- * Description: It implements the store permission of the store
+ * It implements the store permission of the store
  * @author Sofía C.L.
  * @version 1.3
  * @see Employee

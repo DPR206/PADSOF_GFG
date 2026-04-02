@@ -8,9 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Class name: Discount
- * <p>
- * Description: It implements the general discount
+ * It implements the general discount
  * @author Ana O.R.
  * @version 1.5
  * @see Store

@@ -10,9 +10,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * Class name: StoreProduct
- * <p>
- * Description: It implements the store's products
+ * It implements the store's products
  * @author Ana O.R. and Duna P.R.
  * @version 1.3
  * @see Product

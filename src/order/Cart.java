@@ -7,9 +7,7 @@ import java.time.*;
 import java.util.*;
 
 /**
- * Class Name: Cart
- * <p>
- * Description: Cart, array of products and packs the user has not paid yet
+ * Cart, array of products and packs the user has not paid yet
  * @author Sofía C.L. and Ana O.R.
  * @version 1.2
  */

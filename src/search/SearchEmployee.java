@@ -2,21 +2,18 @@ package search;
 
 import store.Store;
 import user.Employee;
-import user.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class name: SearchEmployee
- * <p>
- * Description: It implements the employee filter through ID
+ * It implements the employee filter through ID
  * @author Sofía C.L.
  * @version 1.3
  * @see SearchStoreProducts
   */
 public class SearchEmployee implements SearchID{
-    
+
     private Store s = Store.getInstance();
     private List<Employee> users;
      /**

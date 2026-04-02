@@ -1,17 +1,14 @@
 package search;
 
-import store.Store;
+import exchange.Exchange;
+import order.Order;
 import product.*;
-import user.*;
-import order.*;
-import exchange.*;
+import user.Employee;
 
-import java.util.*;
+import java.util.List;
 
 /**
- * Class name: Searcher
- * <p>
- * Description: It implements the searcher master class that contains all the searches in the package
+ * It implements the searcher master class that contains all the searches in the package
  * @author Sofía C.L.
  * @version 1.3
  * @see SearchStoreProducts
@@ -74,7 +71,7 @@ public class Searcher{
 	 */
     public List<StoreProduct> searchByCategory(Category... c){
 
-        
+
         return this.searchStore.searchStoreProducts(c);
 
 
@@ -150,7 +147,7 @@ public class Searcher{
         }
         return false;
     }
-    
+
     public void changeProductOrder(boolean bool) {
     	this.searchStore.setAsc(bool);
     }

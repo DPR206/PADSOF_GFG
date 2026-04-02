@@ -8,9 +8,7 @@ import store.Store;
 import java.time.LocalDateTime;
 
 /**
- * Class name: Game
- * <p>
- * Description: It implements the manager of the store
+ * It implements the manager of the store
  * @author Sofía C.L.
  * @version 1.4
  * @see User
@@ -21,7 +19,7 @@ public class Manager extends User {
     /** Store permission necessary for the manager to do its functions */
     private StorePermission sp;
     /** no clue :v */
-    private Parameter parameter; 
+    private Parameter parameter;
 
     private Manager(String pwd, String userName, StorePermission sp, Parameter p, boolean asc) {
         super(UserType.MANAGER, pwd, userName, asc);

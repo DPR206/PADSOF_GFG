@@ -5,9 +5,7 @@ import product.StoreProduct;
 import java.time.LocalDateTime;
 
 /**
- * Class name: ProductFixedPercentage
- * <p>
- * Description: It implements the Product discount whose type is FixedPercentage
+ * It implements the Product discount whose type is FixedPercentage
  * @author Ana O.R.
  * @version 1.0
  * @see StoreProduct

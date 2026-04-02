@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class name: Category
- * <p>
- * Description: It implements the categories
+ * It implements the categories
  * @author Ana O.R. and Duna P.R.
  * @version 1.4
  * @see Store
@@ -118,30 +116,27 @@ public class Category {
     public List<StoreProduct> getProducts() {
         return this.products;
     }
-    
+
     /**
      * Obtains the revenue of a category
-     * 
-   	 * @return the revenue the total revenue
-   	 */
-   	public double getRevenue() {
-   		return revenue;
-   	}
+     * @return the revenue the total revenue
+     */
+    public double getRevenue() {
+        return revenue;
+    }
 
-   	/**
-   	 * Sets the revenue of a category
-   	 * 
-   	 * @param revenue the revenue to set
-   	 */
-   	public void setRevenue(double revenue) {
-   		this.revenue = revenue;
-   	}
-    
+    /**
+     * Sets the revenue of a category
+     * @param revenue the revenue to set
+     */
+    public void setRevenue(double revenue) {
+        this.revenue = revenue;
+    }
+
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 
-
-	/**
+    /**
      * It allows a category to be saved
      * @return the category's info
      */

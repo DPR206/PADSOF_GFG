@@ -1,12 +1,10 @@
 package search;
 
 /**
-    * Enum name: SearchType
-    * <p>
-    * Description: It implements the type of searches that will be done
+    * It implements the type of searches that will be done
     * @author Sofía C.L.
     * @version 1.3
-    * @see Search
+    * @see Searcher
     */
 public enum SearchType{
     S_STORE("store"),

@@ -4,9 +4,7 @@ import exchange.Exchange;
 import product.SecondHandProduct;
 
 /**
- * Class name: ExchangePermission
- * <p>
- * Description: It implements the permission that allows an employee to manage Exchanges
+ * It implements the permission that allows an employee to manage Exchanges
  * @author Ana O.R.
  * @version 1.2
  * @see Exchange

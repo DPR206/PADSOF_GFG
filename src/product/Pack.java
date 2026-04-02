@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Class name: Pack
- * <p>
- * Description: It implements the packs
+ * It implements the packs
  * @author Duna P.R.
  * @version 1.1
  * @see store.Store

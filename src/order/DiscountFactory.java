@@ -5,9 +5,7 @@ import product.StoreProduct;
 import java.time.LocalDateTime;
 
 /**
- * Interface name: DiscountFactory
- * <p>
- * Description: It defines the base discount constructors (without specific coverage)
+ * It defines the base discount constructors (without specific coverage)
  * @author Ana O.R.
  * @version 1.0
  * @see StoreProduct

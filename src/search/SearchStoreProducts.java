@@ -1,24 +1,23 @@
 package search;
 
-import java.time.LocalDate;
-import java.util.*;
-import product.*;
-import store.Store;
+import product.Category;
 import product.StoreProduct;
+import store.Store;
+
+import java.util.*;
+
 /**
-    * Class name: SearchStoreProducts
-    * <p>
-    * Description: It implements all the products filtering
+    * It implements all the products filtering
     * @author Sofía C.L.
     * @version 1.3
-    * @see Search
+    * @see Searcher
     */
 public class SearchStoreProducts{
     private boolean ascendant;
     private PriceFilter priceF;
     private PunctuationFilter punctuationF;
     private Store s;
-    
+
 
     /**
 	 * Creates the class and initiates the filters as null in the beggining until the user changes them
@@ -65,7 +64,7 @@ public class SearchStoreProducts{
         if(filtered == this.s.getStoreProducts()){
             return pCs;
         }
-        
+
         pCs.retainAll(filtered);
 
         if(this.ascendant == true){
@@ -163,7 +162,7 @@ public class SearchStoreProducts{
         List<StoreProduct> aux = new ArrayList<>();
         List<StoreProduct> product = (List<StoreProduct>) this.s.getStoreProducts();
         Category caux[];
-        
+
         for(Category cat: c) {
         	/** Para cada categoría, busco productos que tengan ESA categoría*/
         	for(StoreProduct sp: product) {
@@ -179,10 +178,10 @@ public class SearchStoreProducts{
         	}
         }
         List<StoreProduct> toReturn = new ArrayList<>(new LinkedHashSet<>(aux));
-        
+
         return toReturn;
     }
-    
+
     public void setAsc(boolean bool) {
     	this.ascendant = bool;
     }

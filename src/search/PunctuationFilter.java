@@ -1,8 +1,6 @@
 package search;
 /**
- * Class name: PunctuationFilter
- * <p>
- * Description: It implements the punctuation filter
+ * It implements the punctuation filter
  * @author Sofía C.L.
  * @version 1.3
  * @see SearchStoreProducts

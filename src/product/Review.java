@@ -76,6 +76,14 @@ public class Review {
 	}
 
 	/**
+	 * It gets the review's comment
+	 * @return the review's comment
+	 */
+	public String getComment() {
+		return this.comment;
+	}
+
+	/**
 	 * Written information of a review
 	 *
 	 * @return String, information of a review

@@ -182,16 +182,15 @@ public abstract class StoreProduct extends Product {
      * Increases the number of sales by one
      */
     public void increaseSales() {
-    	this.sales++;
+        this.sales++;
     }
 
     /**
      * Increases the number of sales by a certain number
-     *
      * @param i the number of sales made (and to increase)
      */
     public void increaseSales(int i) {
-    	this.sales += i;
+        this.sales += i;
     }
 
     /**
@@ -205,6 +204,18 @@ public abstract class StoreProduct extends Product {
         System.out.println("Categories: " + this.getPrintCategories());
         System.out.println("Average Punctuation: " + this.averagePunctuation + " stars");
         System.out.println(this.reviews.size() + " reviews");
+    }
+
+    /**
+     * It prints the product's review's basic info
+     */
+    public void printReviews() { // DUE: Page / wrap this
+        int i = 0;
+        for (Review review : this.reviews.values()) {
+            System.out.print(
+                    i++ + ". " + "[" + review.getScoring() + "/5]" + review.getAuthor().getUserName() + " says" + ":");
+            System.out.print("   " + review.getComment());
+        }
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -317,6 +328,22 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
+     * Obtains the number of items sold of a product
+     * @return the sells the num
+     */
+    public int getSales() {
+        return sales;
+    }
+
+    /**
+     * Sets the number of sales of a product
+     * @param sales the sales to set
+     */
+    public void setSales(int sales) {
+        this.sales = sales;
+    }
+
+    /**
      * It returns's the product's stock
      * @return the product's store
      */
@@ -336,24 +363,6 @@ public abstract class StoreProduct extends Product {
 
         this.stock = newStock;
     }
-
-    /**
-     * Obtains the number of items sold of a product
-     *
-	 * @return the sells the num
-	 */
-	public int getSales() {
-		return sales;
-	}
-
-	/**
-	 * Sets the number of sales of a product
-	 *
-	 * @param sales the sales to set
-	 */
-	public void setSales(int sales) {
-		this.sales = sales;
-	}
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 

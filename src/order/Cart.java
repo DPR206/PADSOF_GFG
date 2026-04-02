@@ -188,6 +188,36 @@ public class Cart {
     }
 
     /**
+     * It prints a cart's info
+     */
+    public void printInfo() {
+        System.out.print("Products: ");
+        this.printProducts();
+        System.out.print("Packs: ");
+        this.printPacks();
+    }
+
+    /**
+     * It prints a cart's product's basic info
+     */
+    public void printProducts() { // DUE: Page / wrap this
+        int i = 0;
+        for (StoreProduct product : this.sp.keySet()) {
+            System.out.print(i++ + ". " + product.getName() + " x" + this.sp.get(product));
+        }
+    }
+
+    /**
+     * It prints a cart's pack's basic info
+     */
+    public void printPacks() { // DUE: Page / wrap this
+        int i = 0;
+        for (Pack pack : this.packs.keySet()) {
+            System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.sp.get(pack));
+        }
+    }
+
+    /**
      * It gets the cart's products
      * @return the cart's products
      */

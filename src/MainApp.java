@@ -1,6 +1,5 @@
 import order.Cart;
 import product.StoreProduct;
-import store.SaverLoader;
 import store.Store;
 import user.*;
 
@@ -8,6 +7,9 @@ import java.io.IOException;
 import java.time.LocalTime;
 import java.util.Scanner;
 
+/**
+ * The type Main app.
+ */
 public class MainApp {
     private final Scanner scanner = new Scanner(System.in);
     /** The last chosen option when prompted */
@@ -22,10 +24,11 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void main() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- main ---- \n"); // Es para debug, borrar
 
-        SaverLoader.getInstance()
+        /*SaverLoader.getInstance()
                    .loadStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
-                           "discounts", "offers", "exchanges", "orders", "users");
+                           "discounts", "offers", "exchanges", "orders", "users");*/ // DUE
 
         // NOTE: Me hacía ilu :7
         if (LocalTime.now().isBefore(LocalTime.of(17, 0))) {
@@ -43,7 +46,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                unregisteredClientLoop();
+                loopSelector(UserType.UNREGISTERED_CLIENT);
                 break;
             case 2:
                 logger();
@@ -53,6 +56,7 @@ public class MainApp {
                 break;
             case 4:
                 exit();
+                break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 main();
@@ -68,11 +72,19 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void loopSelector(UserType userType) throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- loopSelector ---- \n"); // Es para debug, borrar
+        if (currentUser == null) {
+            currentUser = new UnregisteredClient(true); // Podría ser un default de la tienda tmb aunque habría que
+            // limpiar el carro cada vez que se invoque, no sé qué es asc
+        }
+
         switch (userType) {
+            case UNREGISTERED_CLIENT -> unregisteredClientLoop();
             case REGISTERED_CLIENT -> registeredClientLoop();
             case EMPLOYEE -> employeeLoop();
             case MANAGER -> managerLoop();
-            case UNKNOWN -> unregisteredClientLoop();
+            default -> System.out.println("You shouldn't be able to see this º-º"); // Este NO debería saltar nunca, lo
+            // pongo por si acaso
         }
     }
 
@@ -83,7 +95,7 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void unregisteredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.println("---- Unregistered Client ----");
+        System.out.println("\n ---- unregisteredClientLoop ---- \n");
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Browse products");
         System.out.println("\t[2] Log in");
@@ -122,6 +134,7 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void unregisteredClientOrderLoop() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- unregisteredClientOrderLoop ---- \n"); // Es para debug, borrar
         ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] See a product");
@@ -172,6 +185,7 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void unregisteredClientPlaceOrder() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- unregisteredClientPlaceOrder ---- \n"); // Es para debug, borrar
         System.out.println("You must log in or sign up to proceed");
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Log in");
@@ -197,11 +211,13 @@ public class MainApp {
 
     /**
      * It prints a certain product's info
+     * @throws IOException the io exception
      */
     public void unregisteredSeeProduct() throws IOException {
+        System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
         System.out.println("Enter the number of the desired product:");
         int product_num = scanner.nextInt();
-
+        StoreProduct product = null;
         /*StoreProduct product = getProductFromPageNumber(product_num);
         product.printInfo();*/ // DUE
 
@@ -217,7 +233,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                //seeReviews(StoreProduct product);
+                seeReviews(product);
                 break;
             case 2:
                 unregisteredSeeCart();
@@ -229,9 +245,10 @@ public class MainApp {
                 System.out.println("Enter the number of copies you desire");
                 int numProds = scanner.nextInt();
                 for (int i = 0; i < numProds; i++) {
-                    //((UnregisteredClient)currentUser).addCart(product);
+                    ((UnregisteredClient) currentUser).addCart(product);
                 }
                 System.out.println("Added " + numProds + " copies to your cart");
+                unregisteredClientOrderLoop(); // go back?
                 break;
             case 5:
                 unregisteredClientOrderLoop();
@@ -250,13 +267,27 @@ public class MainApp {
     }
 
     /**
+     * See reviews.
+     * @param product the product
+     */
+    /*
+     * It prints a certain product's reviews
+     */
+    public void seeReviews(StoreProduct product) {
+        System.out.print("\n ---- seeReviews ---- \n"); // Es para debug, borrar
+        product.printReviews();
+    }
+
+    /**
      * It prints the current user's cart's products
+     * @throws IOException the io exception
      */
     public void unregisteredSeeCart() throws IOException {
-        // DUE
+        System.out.print("\n ---- unregisteredSeeCart ---- \n"); // Es para debug, borrar
+        ((UnregisteredClient) this.currentUser).getCart().printInfo();
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Place order");
-        System.out.println("\t[2] Go back");
+        System.out.println("\t[2] Go back"); // DUE: Cancelar productos por n.º de impresión (ver printInfo)
         int chosenOption2 = scanner.nextInt();
 
         if (chosenOption2 == 1) {
@@ -267,25 +298,52 @@ public class MainApp {
     }
 
     /**
-     * Cart logger.
+     * It handles the log-in whilst preserving the unregistered client's cart
+     * @throws IOException              the io exception
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
     public void cartLogger() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- cartLogger ---- \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();
-        logger();
+        /* Logger */
+        System.out.print("Enter your username: ");
+        String userName = scanner.next();
+        System.out.print("Enter your password: ");
+        String password = scanner.next();
+
+        currentUser = Store.getInstance().getUtility().logIn(userName, password);
+        if (currentUser == null) {
+            System.out.println("Invalid username or password :[");
+            System.out.println("What do you wish to do? (enter the nº)");
+            System.out.println("\t[1] Try again");
+            System.out.println("\t[2] Go back");
+            int chosenOption2 = scanner.nextInt();
+
+            if (chosenOption2 == 1) {
+                cartLogger();
+            } else {
+                unregisteredClientPlaceOrder();
+            }
+        }
+        /* Logger */
         for (StoreProduct product : currrentCart.getProducts()) {
             currrentCart.addProduct(product);
         }
+        /* Logger */
+        loopSelector(currentUser.getType());
+        /* Logger */
     }
 
     /**
      * It handles the sign-up whilst preserving the unregistered client's cart
+     * @throws IOException              the io exception
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
     public void cartSigner() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- cartSigner ---- \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();
         signer();
@@ -299,7 +357,26 @@ public class MainApp {
      * @throws IOException the io exception
      */
     public void logger() throws IOException {
-        currentUser = Store.getInstance().getUtility().signIn();
+        System.out.print("\n ---- logger ---- \n"); // Es para debug, borrar
+        System.out.print("Enter your username: ");
+        String userName = scanner.next();
+        System.out.print("Enter your password: ");
+        String password = scanner.next();
+
+        currentUser = Store.getInstance().getUtility().logIn(userName, password);
+        if (currentUser == null) {
+            System.out.println("Invalid username or password :[");
+            System.out.println("What do you wish to do? (enter the nº)");
+            System.out.println("\t[1] Try again");
+            System.out.println("\t[2] Go back");
+            int chosenOption2 = scanner.nextInt();
+
+            if (chosenOption2 == 1) {
+                logger();
+            } else {
+                main();
+            }
+        }
         loopSelector(currentUser.getType());
     }
 
@@ -308,7 +385,8 @@ public class MainApp {
      * @throws IOException the io exception
      */
     public void signer() throws IOException {
-        currentUser = Store.getInstance().logIn();
+        System.out.print("\n ---- signer ---- \n"); // Es para debug, borrar
+        currentUser = Store.getInstance().signIn();
         loopSelector(currentUser.getType());
     }
 
@@ -319,6 +397,7 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void registeredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- registeredClientLoop ---- \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -329,6 +408,7 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void employeeLoop() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- employeeLoop ---- \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -339,6 +419,7 @@ public class MainApp {
      * @throws NullPointerException     the null pointer exception
      */
     public void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- managerLoop ---- \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -347,11 +428,12 @@ public class MainApp {
      * @throws IOException the io exception
      */
     public void exit() throws IOException {
+        System.out.print("\n ---- exit ---- \n"); // Es para debug, borrar
         System.out.println("See you soon!");
 
-        SaverLoader.getInstance()
+        /*SaverLoader.getInstance()
                    .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
-                           "discounts", "offers", "exchanges", "orders", "users");
+                           "discounts", "offers", "exchanges", "orders", "users");*/ // DUE
 
     }
 

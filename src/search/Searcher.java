@@ -69,7 +69,7 @@ public class Searcher{
 	 */
     public List<StoreProduct> searchByCategory(Category... c){
         
-        return this.searchStore.searchStoreProducts();
+        return this.searchStore.searchStoreProducts(c);
     }
 
     /**

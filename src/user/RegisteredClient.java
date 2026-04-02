@@ -173,12 +173,16 @@ public class RegisteredClient extends User {
     	this.c.cancelPack(pack);
     }
 
-    public List<SecondHandProduct> searchSecondHandProducts{
+    public List<SecondHandProduct> searchSecondHandProducts(){
         return this.search.browseSecondHandProduct();
     }
 
-    public List<StoreProduct> searchStoreProduct{
+    public List<StoreProduct> searchStoreProduct(){
         return this.search.searchStoreProduct();
+    }
+
+    public List<StoreProduct> searchStoreProductByCategory(Category... c){
+        return this.search.searchByCategory(c);
     }
     //requestValuation
     //makeAnOffer

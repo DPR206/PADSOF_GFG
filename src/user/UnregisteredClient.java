@@ -82,5 +82,12 @@ public class UnregisteredClient extends User {
         return this.c;
     }
 
+    public List<StoreProduct> searchStoreProduct(){
+        return this.search.searchStoreProduct();
+    }
+
+    public List<StoreProduct> searchStoreProductByCategory(Category... c){
+        return this.search.searchByCategory(c);
+    }
 
 }

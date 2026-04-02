@@ -18,6 +18,7 @@ public class SearchStoreProducts{
     private PriceFilter priceF;
     private PunctuationFilter punctuationF;
     private Store s;
+    
 
     /**
 	 * Creates the class and initiates the filters as null in the beggining until the user changes them
@@ -27,9 +28,6 @@ public class SearchStoreProducts{
 	 */
     public SearchStoreProducts(boolean asc){
         this.ascendant = asc;
-        this.type = type;
-        this.sp = sp;
-        this.c = c;
         this.priceF = null;
         this.punctuationF = null;
         this.s = this.s.getInstance();
@@ -71,24 +69,24 @@ public class SearchStoreProducts{
         pCs.retainAll(filtered);
 
         if(this.ascendant == true){
-            if(this.priceF && this.punctuationF){
+            if(this.priceF != null && this.punctuationF != null){
                 pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation).thenComparing(StoreProduct::getPrice));
             }
-            else if(this.priceF && !this.punctuationF){
+            else if(this.priceF != null && this.punctuationF == null){
                 pCs.sort(Comparator.comparing(StoreProduct::getPrice));
             }
-            else if(!this.priceF && this.punctuation){
+            else if(this.priceF == null && this.punctuationF != null){
                 pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation));
             }
         }
         else{
-             if(this.priceF && this.punctuationF){
+             if(this.priceF != null && this.punctuationF != null){
                 pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation).reversed().thenComparing(Comparator.comparingDouble(StoreProduct::getPrice).reversed()));
             }
-            else if(this.priceF && !this.punctuationF){
+            else if(this.priceF != null && this.punctuationF == null){
                 pCs.sort(Comparator.comparingDouble(StoreProduct::getPrice).reversed());
             }
-            else if(!this.priceF && this.punctuation){
+            else if(this.priceF == null && this.punctuationF != null){
                 pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation).reversed());
             }
         }
@@ -103,22 +101,22 @@ public class SearchStoreProducts{
         List<StoreProduct> priced = null;
         List<StoreProduct> punctuation = null;
 
-        if(this.punctuationF && this.priceF){
+        if(this.punctuationF != null && this.priceF != null){
             priced = this.filterByPrice();
             punctuation = this.filterByPrice();
             priced.retainAll(punctuation);
             return priced;
         }
-        else if(this.punctuation && !this.priceF){
+        else if(this.punctuationF == null && this.priceF != null){
             punctuation = this.filterByPrice();
             return punctuation;
         }
-        else if(this.priceF && !this.punctuation){
+        else if(this.priceF == null && this.punctuationF != null){
             priced = this.filterByPrice();
             return priced;
         }
         /*caso donde no hay ningún filtro */
-        return this.s.getStoreProducts();
+        return (List<StoreProduct>) this.s.getStoreProducts();
     }
 
      /**
@@ -130,7 +128,7 @@ public class SearchStoreProducts{
         List<StoreProduct> aux = new ArrayList<>();
         List<StoreProduct> fromStore = (List<StoreProduct>) this.s.getStoreProducts().values();
 
-        if(this.priceF){
+        if(this.priceF != null){
             for(StoreProduct p: fromStore){
                 if(p.getPrice() >= this.priceF.getMin() && p.getPrice()<= this.priceF.getMax()) aux.add(p);
             }
@@ -146,13 +144,14 @@ public class SearchStoreProducts{
         List<StoreProduct> aux = new ArrayList<>();
         List<StoreProduct> fromStore = (List<StoreProduct>) this.s.getStoreProducts().values();
 
-        if(this.punctuationF){
+        if(this.punctuationF != null){
             for(StoreProduct p: fromStore){
                 if(p.getAveragePunctuation() >= this.punctuationF.getMin() && p.getAveragePunctuation() <= this.punctuationF.getMax()){
                     aux.add(p);
                 }
             }
         }
+        return aux;
     }
 
     /**
@@ -162,14 +161,14 @@ public class SearchStoreProducts{
 	 */
     private List<StoreProduct> filterByCategory(Category... c){ //para cada producto, buscar la categoría
         List<StoreProduct> aux = new ArrayList<>();
-        List<StoreProduct> product = this.s.getStoreProducts();
-        Categories productCategories[] = null
+        List<StoreProduct> product = (List<StoreProduct>) this.s.getStoreProducts();
+        StoreProduct productCategories[] = null;
         
         for(Category category: c){
             for(StoreProduct sp: product){
                 productCategories = sp.getCategories();
                 for(Category productCat: productCategories){
-                    if(c == productCat) aux.add(productCat);
+                    if(category == productCat) aux.add(productCat);
                 }
             }
         }

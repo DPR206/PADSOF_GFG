@@ -18,14 +18,14 @@ import java.util.List;
 public class SearchEmployee implements SearchID{
     
     private Store s = Store.getInstance();
-    private List<User> users;
+    private List<Employee> users;
      /**
 	 * Creates the class
 	 *
 	 * @param s, the store to create the list of users
 	 */
     public SearchEmployee(Store s){
-        this.users = new ArrayList<>(s.getUsers().values());
+        this.users = new ArrayList<>(s.getEmployees().values());
     }
 
     /**
@@ -35,7 +35,7 @@ public class SearchEmployee implements SearchID{
 	 */
     public Employee searchByID(int id){
         for(Employee e: this.users){
-            if(e.getId() == id) return e;
+            if(Integer.parseInt(e.getId()) == id) return e;
         }
         return null;
     }

@@ -1,8 +1,16 @@
 package search;
 
+
 import java.util.*;
 import product.*;
 import store.Store;
+
+import product.SecondHandProduct;
+import store.Store;
+
+import java.util.Comparator;
+import java.util.List;
+
 
 /**
  * Class name: BrowseSecondHandProducts
@@ -22,7 +30,10 @@ public class BrowseSecondHandProducts{
 	 *
 	 * @param s, sends the store to get all the second hand products available
 	 */
-    public BrowseSecondHandProducts(Store s){
+    public BrowseSecondHandProducts(){
+
+        this.products = new ArrayList<>(s.getSecondHandProducts().values());
+
         this.products = new ArrayList<>(s.getSecondHandProducts().values());
     }
 

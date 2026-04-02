@@ -162,16 +162,12 @@ public class SearchStoreProducts{
     private List<StoreProduct> filterByCategory(Category... c){ //para cada producto, buscar la categoría
         List<StoreProduct> aux = new ArrayList<>();
         List<StoreProduct> product = (List<StoreProduct>) this.s.getStoreProducts();
-        StoreProduct productCategories[] = null;
+        Store productCategories[] = null;
         
-        for(Category category: c){
-            for(StoreProduct sp: product){
-                productCategories = sp.getCategories();
-                for(Category productCat: productCategories){
-                    if(category == productCat) aux.add(productCat);
-                }
-            }
-        }
+       
+        //luego lo implemento        
+      
+        
 
         return aux;
     }

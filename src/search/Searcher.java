@@ -20,13 +20,13 @@ public class Searcher{
     private SearchType types[];
     private SearchStoreProducts searchStore;
 
-    private Searcher<Pack> packSearcher = new Searcher<>(new SearchPack());
-    private Searcher<Employee> employeeSearcher = new Searcher<>(new SearchEmployee());
-    private Searcher<Order> orderSearcher = new Searcher<>(new SearchOrder());
-    private Searcher<Exchange> exchangeSearcher = new Searcher<>(new SearchExchange());
+    private SearchPack packSearcher = new SearchPack();
+    private SearchEmployee employeeSearcher = new SearchEmployee();
+    private SearchOrder orderSearcher = new SearchOrder();
+    private SearchExchange exchangeSearcher = new SearchExchange();
 
     private BrowseSecondHandProducts secondHandProducts;
-    
+
     /**
 	 * Creates the master class searcher
 	 *
@@ -69,12 +69,15 @@ public class Searcher{
 
     /**
 	 * Searches store products depending on the categories
-     * 
+     *
 	 *@param c, the array of the categories of the products we want to search
 	 */
     public List<StoreProduct> searchByCategory(Category... c){
+
         
         return this.searchStore.searchStoreProducts(c);
+
+
     }
 
     /**
@@ -84,7 +87,7 @@ public class Searcher{
 	 */
     public Pack searchPackByID(int id){
         if(this.linearSearch(SearchType.S_PACK)){
-            return this.packSearcher.searchByID();
+            return this.packSearcher.searchByID(id);
         }
         return null;
     }
@@ -96,7 +99,7 @@ public class Searcher{
 	 */
     public Exchange searchExchangeByID(int id){
         if(this.linearSearch(SearchType.S_EXCHANGE)){
-            return this.exchangeSearcher.searchByID();
+            return this.exchangeSearcher.searchByID(id);
         }
         return null;
     }
@@ -108,7 +111,7 @@ public class Searcher{
 	 */
     public Order searchOrderByID(int id){
         if(this.linearSearch(SearchType.S_ORDER)){
-            return this.orderSearcher.searchByID();
+            return this.orderSearcher.searchByID(id);
         }
         return null;
     }
@@ -118,9 +121,9 @@ public class Searcher{
 	 *
      * @param id, searches the employee by the id
 	 */
-    public Order searchEmployeeByID(int id){
+    public Employee searchEmployeeByID(int id){
         if(this.linearSearch(SearchType.S_EMPLOYEE)){
-            return this.employeeSearcher.searchByID();
+            return this.employeeSearcher.searchByID(id);
         }
         return null;
     }
@@ -131,19 +134,19 @@ public class Searcher{
 	 */
     public List<SecondHandProduct> browseSecondHandProduct(){
         if(this.linearSearch(SearchType.S_SECOND_HAND)){
-            return this.BrowseSecondHandProducts.searchSecondHandProducts();
+            return this.secondHandProducts.searchSecondHandProducts();
         }
         return null;
-    } 
+    }
 
     /**
 	 * Linear search implemented to search for the searchtype on the array of searchTypes
-     * 
+     *
 	 *@param t, the searchType we want to check if it's there or not
 	 */
     private boolean linearSearch(SearchType t){
         for(SearchType type: this.types){
-            if(t.getType().equals(type.getType())) return true
+            if(t.getType().equals(type.getType())) return true;
         }
         return false;
     }

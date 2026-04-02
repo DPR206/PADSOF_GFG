@@ -3,7 +3,6 @@ package search;
 import java.util.*;
 import product.*;
 
-package search;
 /**
  * Class name: BrowseSecondHandProducts
  * <p>
@@ -30,6 +29,7 @@ public class BrowseSecondHandProducts{
 	 *
 	 */
     public List<SecondHandProduct> searchSecondHandProducts(){
-        return this.products.sort(Comparator.comparing(SecondHandProduct::getName));
+        this.products.sort(Comparator.comparing(SecondHandProduct::getName));
+        return this.products;
     }
 }

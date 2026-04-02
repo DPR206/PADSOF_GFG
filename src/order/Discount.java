@@ -147,7 +147,18 @@ public abstract class Discount {
         return false;
     }
 
+    /**
+     * It checks if the discount is no longer active
+     */
+    public void checkExpiration() {
+        if (LocalDateTime.now().isBefore(this.startDate) || LocalDateTime.now().isAfter(this.endDate)) {
+            this.disabled = true;
+        }
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    // DUE: abstract createNotification(){}
 
     /**
      * It gets the discount's coverage type
@@ -157,13 +168,14 @@ public abstract class Discount {
         return coverage;
     }
 
-    // DUE: abstract createNotification(){}
-
     /**
      * Is gets whether the discount has expired
      * @return true if it is disabled, false otherwise
      */
     public boolean getDisabled() {
+        if (!disabled) {
+            this.checkExpiration();
+        }
         return this.disabled;
     }
 

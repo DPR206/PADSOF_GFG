@@ -42,8 +42,12 @@ public class Pager {
      */
     public void printReviewListPage(List<Review> reviewList, int pageNum) {
         List<Review> reviewListPage = getReviewListPage(reviewList, pageNum);
+        int i = 1;
+
         for (Review review : reviewListPage) {
-            //DUE: review.printInfo();
+            System.out.print(
+                    i++ + ". " + "[" + review.getScoring() + "/5]" + review.getAuthor().getUserName() + " says" + ":");
+            System.out.print("   " + review.getComment());
         }
     }
 
@@ -64,19 +68,6 @@ public class Pager {
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
-     * It gets the maximum number of pages that can be obtained from a list of products
-     * @param storeProductList the desired product list
-     * @return the maximum number of pages that can be obtained from a list of products
-     */
-    public int getMaxPageNum(List<StoreProduct> storeProductList) {
-        // DUE: Revisar esto
-        if (storeProductList.size() % Parameter.getParam().getItemsPerPage() == 0) {
-            return storeProductList.size() / Parameter.getParam().getItemsPerPage();
-        }
-        return (storeProductList.size() / Parameter.getParam().getItemsPerPage()) + 1;
-    }
-
-    /**
      * It gets the product listed as n.º productNum in a certain page
      * @param storeProductList the list of products
      * @param pageNum          the desired page's number
@@ -86,6 +77,19 @@ public class Pager {
     public StoreProduct getProductFromPage(List<StoreProduct> storeProductList, int pageNum, int productNum) {
         List<StoreProduct> productListPage = getStoreProductListPage(storeProductList, pageNum);
         return productListPage.get(productNum - 1); // Las listas se imprimen empezando por 1
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from a list of products
+     * @param storeProductList the desired product list
+     * @return the maximum number of pages that can be obtained from a list of products
+     */
+    public int getProductMaxPageNum(List<StoreProduct> storeProductList) {
+        // DUE: Revisar esto
+        if (storeProductList.size() % Parameter.getParam().getItemsPerPage() == 0) {
+            return storeProductList.size() / Parameter.getParam().getItemsPerPage();
+        }
+        return (storeProductList.size() / Parameter.getParam().getItemsPerPage()) + 1;
     }
 
     /**
@@ -107,10 +111,24 @@ public class Pager {
      * @return the desired page (sub-list n.º pageNum - 1)
      */
     public List<Review> getReviewListPage(List<Review> reviewList, int pageNum) {
-        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        int itemsPerPage = Parameter.getParam().getItemsPerPage() / 2; // Cada review ocupa dos líneas
         int from = (itemsPerPage - 1) * pageNum;
         int to = Math.min(reviewList.size(), (pageNum * itemsPerPage) - 1);
         return reviewList.subList(from, to);
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from a product's list of reviews
+     * @param storeProduct the desired product
+     * @return the maximum number of pages that can be obtained from a product's list of reviews
+     */
+    public int getReviewtMaxPageNum(StoreProduct storeProduct) {
+        List<Review> reviews = storeProduct.getReviewsList();
+        // DUE: Revisar esto
+        if (reviews.size() % (Parameter.getParam().getItemsPerPage() / 2) == 0) {
+            return reviews.size() / (Parameter.getParam().getItemsPerPage() / 2);
+        }
+        return (reviews.size() / (Parameter.getParam().getItemsPerPage() / 2)) + 1;
     }
 
     /**

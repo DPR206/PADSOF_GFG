@@ -19,7 +19,8 @@ public class MainApp {
     /** The apps current user */
     User currentUser;
     /** The current page's number, if a list is being browsed */
-    int pageNum = 0;
+    int currentScreenPageNum = 0;
+    int previousScreenPageNum = 0;
 
     /**
      * The apps main loop
@@ -111,7 +112,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                this.pageNum = 1;
+                this.currentScreenPageNum = 1;
                 unregisteredClientOrderLoop();
                 break;
             case 2:
@@ -140,24 +141,24 @@ public class MainApp {
      */
     public void unregisteredClientOrderLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- unregisteredClientOrderLoop ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.pageNum);
+        System.out.println("Page: " + this.currentScreenPageNum);
 
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
-        Pager.getInstance().printStoreProductListPage(products, this.pageNum);
+        Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] See a product");
         System.out.println("\t[2] See my cart");
         System.out.println("\t[3] Sign up");
-        if ((this.pageNum - 1) > 0) {
+        if ((this.currentScreenPageNum - 1) > 0) {
             System.out.println("\t[4] < Previous page");
         } else {
             System.out.println("\t[4] Reload page");
         }
-        if ((this.pageNum + 1) < Pager.getInstance().getMaxPageNum(products)) {
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getProductMaxPageNum(products)) {
             System.out.println("\t[5] Next page >");
         } else {
-            System.out.println("\t[4] Reload page");
+            System.out.println("\t[5] Reload page");
         }
         System.out.println("\t[6] <- Go back");
         System.out.println("\t[7] <<- Go to main page");
@@ -166,7 +167,12 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                unregisteredSeeProduct();
+                System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
+                System.out.println("Enter the number of the desired product:");
+                int productNum = scanner.nextInt();
+                this.previousScreenPageNum = this.currentScreenPageNum;
+                this.currentScreenPageNum = 1;
+                unregisteredSeeProduct(productNum, this.currentScreenPageNum);
                 break;
             case 2:
                 unregisteredSeeCart();
@@ -175,12 +181,13 @@ public class MainApp {
                 signer();
                 break;
             case 4:
-                this.pageNum = (this.pageNum - 1) > 0 ? this.pageNum - 1 : 1;
+                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
                 unregisteredClientOrderLoop();
                 break;
             case 5:
-                this.pageNum = (this.pageNum + 1) < Pager.getInstance().getMaxPageNum(products) ? this.pageNum + 1 :
-                               this.pageNum;
+                this.currentScreenPageNum =
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getProductMaxPageNum(products) ?
+                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
                 unregisteredClientOrderLoop();
                 break;
             case 6:
@@ -233,12 +240,10 @@ public class MainApp {
      * It prints a certain product's info
      * @throws IOException the io exception
      */
-    public void unregisteredSeeProduct() throws IOException {
-        System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
-        System.out.println("Enter the number of the desired product:");
-        int product_num = scanner.nextInt();
+    public void unregisteredSeeProduct(int productNum, int pageNum) throws IOException {
         StoreProduct product = null;
-        /*StoreProduct product = getProductFromPageNumber(product_num);
+        this.currentScreenPageNum = pageNum;
+        /*StoreProduct product = getProductFromPageNumber(productNum);
         product.printInfo();*/ // DUE
 
         System.out.println("What do you wish to do? (enter the nº)");
@@ -253,7 +258,9 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                seeReviews(product);
+                this.previousScreenPageNum = this.currentScreenPageNum;
+                this.currentScreenPageNum = 1;
+                unregisteredSeeReviews(product, productNum);
                 break;
             case 2:
                 unregisteredSeeCart();
@@ -281,7 +288,7 @@ public class MainApp {
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredSeeProduct();
+                unregisteredSeeProduct(productNum, this.currentScreenPageNum);
         }
 
     }
@@ -293,9 +300,56 @@ public class MainApp {
     /*
      * It prints a certain product's reviews
      */
-    public void seeReviews(StoreProduct product) {
-        System.out.print("\n ---- seeReviews ---- \n"); // Es para debug, borrar
-        product.printReviews();
+    public void unregisteredSeeReviews(StoreProduct product, int productNum) throws IOException {
+        System.out.print("\n ---- unregisteredSeeReviews ---- \n"); // Es para debug, borrar
+        System.out.println("Page: " + this.currentScreenPageNum);
+
+        product.printReviews(this.currentScreenPageNum);
+
+        System.out.println("What do you wish to do? (enter the nº)");
+        System.out.println("\t[1] Sign up");
+        if ((this.currentScreenPageNum - 1) > 0) {
+            System.out.println("\t[2] < Previous page");
+        } else {
+            System.out.println("\t[2] Reload page");
+        }
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getReviewtMaxPageNum(product)) {
+            System.out.println("\t[3] Next page >");
+        } else {
+            System.out.println("\t[3] Reload page");
+        }
+        System.out.println("\t[4] <- Go back");
+        System.out.println("\t[5] <<- Go to main page");
+        System.out.println("\t[6] x Exit app");
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1:
+                signer();
+                break;
+            case 2:
+                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                unregisteredSeeReviews(product, this.currentScreenPageNum);
+                break;
+            case 3:
+                this.currentScreenPageNum =
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getReviewtMaxPageNum(product) ?
+                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                unregisteredSeeReviews(product, this.currentScreenPageNum);
+                break;
+            case 4:
+                unregisteredSeeProduct(productNum, this.previousScreenPageNum);
+                break;
+            case 5:
+                main();
+                break;
+            case 6:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                unregisteredSeeReviews(product, productNum);
+        }
     }
 
     /**

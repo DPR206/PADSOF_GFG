@@ -2,12 +2,12 @@ package product;
 
 import order.Discount;
 import order.Order;
+import store.Pager;
 import store.Store;
 import user.RegisteredClient;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 /**
  * It implements the store's products
@@ -208,14 +208,10 @@ public abstract class StoreProduct extends Product {
 
     /**
      * It prints the product's review's basic info
+     * @param pageNum the desired page's number
      */
-    public void printReviews() { // DUE: Page / wrap this
-        int i = 0;
-        for (Review review : this.reviews.values()) {
-            System.out.print(
-                    i++ + ". " + "[" + review.getScoring() + "/5]" + review.getAuthor().getUserName() + " says" + ":");
-            System.out.print("   " + review.getComment());
-        }
+    public void printReviews(int pageNum) { // wrap this?
+        Pager.getInstance().printReviewListPage(getReviewsList(), pageNum);
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -325,6 +321,14 @@ public abstract class StoreProduct extends Product {
      */
     public HashMap<RegisteredClient, Review> getReviews() {
         return this.reviews;
+    }
+
+    /**
+     * It gets the product's reviews in a list
+     * @return the product's reviews in a list
+     */
+    public List<Review> getReviewsList() {
+        return new ArrayList<>(this.reviews.values());
     }
 
     /**

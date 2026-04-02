@@ -16,6 +16,7 @@ import static java.lang.Math.sqrt;
  * @version 1.1
  */
 public class Recommender {
+    private static final Recommender PARAM = new Recommender();
     // NOTE: Por ambición e indecisión, primando la segunda, he decidido implementar ambos recomendadores de Moodle,
     // rezad por mí y por nuestro código
     HashMap<Category, Double> categoriesAndScores = new HashMap<>();
@@ -30,6 +31,14 @@ public class Recommender {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * Obtains the recommender
+     * @return the store's recommender
+     */
+    public static Recommender getInstance() {
+        return PARAM;
+    }
 
     /**
      * It recommends products which are similar to those bought by a client, excluding those who were already bought

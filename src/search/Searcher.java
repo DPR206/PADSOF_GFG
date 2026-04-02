@@ -1,6 +1,11 @@
 package search;
 
 import store.Store;
+import product.*;
+import user.*;
+import order.*;
+import exchange.*;
+
 import java.util.*;
 
 /**

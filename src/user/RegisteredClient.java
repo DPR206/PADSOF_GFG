@@ -9,6 +9,7 @@ import exchange.*;
 import search.*;
 
 import java.time.LocalDate;
+import java.util.*;
 
 /**
  * Class name: RegisteredClient
@@ -26,6 +27,7 @@ public class RegisteredClient extends User {
     private OrderHistory op;
     private Wallet wallet;
     private OrderHistory orderHistory;
+    private Searcher searcher;
 
     //searcher
     //sugestioner
@@ -40,13 +42,14 @@ public class RegisteredClient extends User {
      * @param password     the user's password
      */
     public RegisteredClient(String userName, LocalDate registerDate, String dni, String password, boolean asc) {
-        super(UserType.REGISTERED_CLIENT, password, usernaName, asc);
+        super(UserType.REGISTERED_CLIENT, password, userName, asc);
         this.registerDate = registerDate;
         this.dni = dni;
         this.c = new Cart();
         this.exchangeHistory = new ExchangeHistory(this);
         this.orderHistory = new OrderHistory(this);
         this.wallet = new Wallet();
+        this.searcher = new Searcher(); /*Hay que arreglar esto y ponerlo en todos los constructore*/
 
         this.getSearcher().setTypes(SearchType.S_SECOND_HAND, SearchType.S_STORE);
     }
@@ -57,8 +60,8 @@ public class RegisteredClient extends User {
      * @param dni      the user's dni
      * @param password the user's password
      */
-    public RegisteredClient(String userName, String dni, String password) {
-        this(userName, LocalDate.now(), dni, password);
+    public RegisteredClient(String userName, String dni, String password, boolean asc) {
+        this(userName, LocalDate.now(), dni, password, asc);
     }
 
     /**
@@ -173,13 +176,15 @@ public class RegisteredClient extends User {
     	this.c.cancelPack(pack);
     }
 
-    public List<SecondHandProduct> searchSecondHandProducts{
-        return this.search.browseSecondHandProduct();
+    public List<SecondHandProduct> searchSecondHandProducts() {
+        return this.searcher.browseSecondHandProduct();
     }
 
-    public List<StoreProduct> searchStoreProduct{
-        return this.search.searchStoreProduct();
+    public List<StoreProduct> searchStoreProduct() {
+        return this.searcher.searchStoreProducts();
     }
+    
+    
     //requestValuation
     //makeAnOffer
     //browseNotifications

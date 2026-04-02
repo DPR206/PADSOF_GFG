@@ -177,21 +177,34 @@ public abstract class StoreProduct extends Product {
         this.averagePunctuation =
                 (((this.reviews.size() - 1) * this.averagePunctuation) + review.getScoring()) / this.reviews.size();
     }
-    
+
     /**
      * Increases the number of sales by one
      */
     public void increaseSales() {
     	this.sales++;
     }
-    
+
     /**
      * Increases the number of sales by a certain number
-     * 
+     *
      * @param i the number of sales made (and to increase)
      */
     public void increaseSales(int i) {
     	this.sales += i;
+    }
+
+    /**
+     * It prints the product's info
+     */
+    @Override
+    public void printInfo() {
+        /* super;REVIEW_IDS;AVG_PUNCT;STOCK;CATEGORIES;ADDED_DATE */
+        super.printInfo();
+        System.out.println("Stock: " + this.stock);
+        System.out.println("Categories: " + this.getPrintCategories());
+        System.out.println("Average Punctuation: " + this.averagePunctuation + " stars");
+        System.out.println(this.reviews.size() + " reviews");
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -323,10 +336,10 @@ public abstract class StoreProduct extends Product {
 
         this.stock = newStock;
     }
-    
+
     /**
      * Obtains the number of items sold of a product
-     * 
+     *
 	 * @return the sells the num
 	 */
 	public int getSales() {
@@ -335,16 +348,16 @@ public abstract class StoreProduct extends Product {
 
 	/**
 	 * Sets the number of sales of a product
-	 * 
-	 * @param sells the sells to set
+	 *
+	 * @param sales the sales to set
 	 */
 	public void setSales(int sales) {
 		this.sales = sales;
 	}
-    
+
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 
-	/**
+    /**
      * Written information of a product
      * @return String, information of a product
      */
@@ -354,5 +367,4 @@ public abstract class StoreProduct extends Product {
         return super.toString() + ";" + this.getPrintReviews() + ";" + this.averagePunctuation + ";" + this.stock +
                ";" + this.getPrintCategories() + this.addedDate;
     }
-
 }

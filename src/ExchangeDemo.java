@@ -1,22 +1,16 @@
 import exchange.Exchange;
 import exchange.Offer;
-import product.ConservationStatus;
-import product.ProductType;
-import product.SecondHandProduct;
-import store.Store;
-import user.Employee;
-import user.Permission;
-import user.RegisteredClient;
+import product.*;
+import user.*;
 
 // NOTE: Técnicamente, usaría store como fachada / base de datos
 // NOTE: Es sin buscador ni notificaciones por ahora
 
 public class ExchangeDemo {
-
-    public static void main(String[] args) {
-        Store s = Store.getInstance();
-        SecondHandProduct products1[] = new SecondHandProduct[]{};
-        SecondHandProduct products2[] = new SecondHandProduct[]{};
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+    public static void main() {
+        SecondHandProduct[] products1 = new SecondHandProduct[]{};
+        SecondHandProduct[] products2 = new SecondHandProduct[]{};
 
         /* s.addManager */
         //Manager manager = Manager.getInstance();

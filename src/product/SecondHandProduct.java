@@ -4,13 +4,13 @@
 package product;
 
 import store.Store;
+import user.RegisteredClient;
 
 import java.time.LocalDate;
-import user.RegisteredClient;
 
 /**
  * It implements the second-hand products
- * 
+ *
  * @author Duna P.R. and Ana O.R.
  * @version 1.5
  * @see Product
@@ -26,7 +26,7 @@ public class SecondHandProduct extends Product{
 
 
 /*----------------------------------------------------------CONSTRUCTORS------------------------------------------------------------------*/
-    
+
 	/**
 	 * A second-hand product's general constructor
 	 *
@@ -168,6 +168,16 @@ public class SecondHandProduct extends Product{
 		this.valuationDate = LocalDate.now();
 	}
 
+	/**
+	 * It prints the product's info
+	 */
+	@Override
+	public void printInfo() {
+		/* [TYPE;ID;NAME;DESC;PHOTO];VAL_DATE;AVAILABLE;PAID_VAL;STATUS */
+		super.printInfo();
+		System.out.println("Conservation Status: " + this.status);
+	}
+
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 	/**
 	 * Obtains the conservation status of the product
@@ -186,8 +196,8 @@ public class SecondHandProduct extends Product{
 	public void setStatus(ConservationStatus status) {
 		this.status = status;
 	}
-	
-	
+
+
 
 
 
@@ -195,7 +205,7 @@ public class SecondHandProduct extends Product{
 
 	/**
 	 * Obtains the owner of the product
-	 * 
+	 *
 	 * @return the owner
 	 */
 	public RegisteredClient getOwner() {

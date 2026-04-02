@@ -1,11 +1,21 @@
 package order;
 
 import product.StoreProduct;
+import store.Store;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class name: Product Discount
+ * <p>
+ * Description: It implements the general discount for those with Product coverage
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Store
+ * @see StoreProduct
+ */
 public abstract class ProductDiscount extends Discount {
     /** The list of products affected by this discount */
     private List<StoreProduct> products = new ArrayList<>();
@@ -13,11 +23,27 @@ public abstract class ProductDiscount extends Discount {
     private boolean overWholeStore;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * A Product discount's general constructor
+     * @param id        the discount's id
+     * @param type      the discount's type
+     * @param coverage  the discount's coverage
+     * @param startDate the discount's start date
+     * @param endDate   the discount's end date
+     */
     public ProductDiscount(String id, DiscountType type, DiscountCoverage coverage, LocalDateTime startDate,
                            LocalDateTime endDate) {
         super(id, type, coverage, startDate, endDate);
     }
 
+    /**
+     * A Product discount's constructor with default id
+     * @param type      the discount's type
+     * @param coverage  the discount's coverage
+     * @param startDate the discount's start date
+     * @param endDate   the discount's end date
+     */
     public ProductDiscount(DiscountType type, DiscountCoverage coverage, LocalDateTime startDate,
                            LocalDateTime endDate) {
         super(type, coverage, startDate, endDate);

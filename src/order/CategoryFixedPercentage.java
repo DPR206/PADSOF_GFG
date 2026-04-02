@@ -1,12 +1,25 @@
 package order;
 
 import product.Category;
+import product.StoreProduct;
+import store.Store;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: CategoryFixedPercentage
+ * <p>
+ * Description: It implements the Category discount whose type is Fixed Percentage
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Store
+ * @see StoreProduct
+ * @see Category
+ */
 public class CategoryFixedPercentage extends CategoryDiscount implements FixedPercentageDiscount {
     /** The percentage deducted from a product's price */
     double percentage = 0;
+
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
@@ -16,7 +29,7 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
      * @param endDate    the date when the discount ends
      * @param percentage the percentage deducted from a product's price
      * @param categories the discount's categories
-     * @throws IllegalArgumentException the percentage wasn't between 0 and 100
+     * @throws IllegalArgumentException the percentage wasn't between 0 and 100, 0 not included
      */
     public CategoryFixedPercentage(String id, LocalDateTime startDate, LocalDateTime endDate, double percentage,
                                    Category... categories) throws IllegalArgumentException {
@@ -31,7 +44,7 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
      * @param endDate    the date when the discount ends
      * @param percentage the percentage deducted from a product's price
      * @param categories the discount's categories
-     * @throws IllegalArgumentException the percentage wasn't between 0 and 100
+     * @throws IllegalArgumentException the percentage wasn't between 0 and 100, 0 not included
      */
     public CategoryFixedPercentage(LocalDateTime startDate, LocalDateTime endDate, double percentage,
                                    Category... categories) throws IllegalArgumentException {
@@ -42,11 +55,8 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: createFixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {}
-
     // DUE: public createNotification(){}
 
-    // DUE: public obtainDisc();
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -60,19 +70,24 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
     /**
      * It allows the manager to change the fixed percentage discount's percentage
      * @param newPercentage the new percentage
-     * @throws IllegalArgumentException the percentage wasn't between 0 and 100
+     * @throws IllegalArgumentException the percentage wasn't between 0 and 100, 0 not included
      */
     public void setPercentage(double newPercentage) throws IllegalArgumentException {
-        if (newPercentage < 0 || newPercentage > 100) {
-            throw new IllegalArgumentException("The percentage must be between 0% and 100%");
+        if (newPercentage <= 0 || newPercentage > 100) {
+            throw new IllegalArgumentException("The percentage must be between 0% and 100%, 0% not included");
         }
 
         this.percentage = newPercentage;
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a discount
+     * @return the written information of a discount
+     */
     @Override
-    public String toString() {
+    public String toString() { // DUE
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];<PERCENTAGE>;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION */
         return super.toString() + ";" + this.percentage + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" /*numThreshold
          */ + ";" /*deduction*/;

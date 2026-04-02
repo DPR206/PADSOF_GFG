@@ -35,7 +35,7 @@ public enum DiscountType {
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
-     * Gets the enumeration's symbol
+     * It gets the enumeration's symbol
      * @return the enumeration's symbol
      */
     public String getSymbol() {

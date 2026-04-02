@@ -1,10 +1,21 @@
 package order;
 
 import product.StoreProduct;
+import store.Store;
 
+/**
+ * Interface name: GiftDiscount
+ * <p>
+ * Description: It defines the base Gift discount's methods
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Store
+ * @see StoreProduct
+ */
 public interface GiftDiscount {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * It gets the gift discount's gift
      * @return the gift discount's gift

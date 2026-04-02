@@ -12,7 +12,7 @@ import java.util.List;
  * <p>
  * Description: It implements the general discount
  * @author Ana O.R.
- * @version 1.4
+ * @version 1.5
  * @see Store
  * @see StoreProduct
  * @see Pack
@@ -40,6 +40,7 @@ public abstract class Discount {
      * Instantiates a new Discount with a certain id
      * @param id        the discount's id
      * @param type      the discount's type
+     * @param coverage  the coverage
      * @param startDate the discount's start date
      * @param endDate   the discount's end date
      * @throws IllegalArgumentException the illegal argument exception
@@ -62,6 +63,7 @@ public abstract class Discount {
     /**
      * Instantiates a new Discount
      * @param type      the discount's type
+     * @param coverage  the coverage
      * @param startDate the discount's start date
      * @param endDate   the discount's end date
      * @throws IllegalArgumentException the illegal argument exception
@@ -85,7 +87,23 @@ public abstract class Discount {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
-     * Checks whether the desired discount can be added to the store without interfering with another
+     * It gets the discount's total id
+     * @return the discount's total id
+     */
+    public static int getTotalId() {
+        return totalId;
+    }
+
+    /**
+     * It sets the discount's total id.
+     * @param newTotalId the discount's new total id
+     */
+    public static void setTotalId(int newTotalId) {
+        Discount.totalId = newTotalId;
+    }
+
+    /**
+     * It checks whether the desired discount can be added to the store without interfering with another
      * @param testedProducts the discount to be tested's products
      * @return true if it is conflicting, false otherwise
      */
@@ -110,6 +128,24 @@ public abstract class Discount {
 
         return false;
     }
+
+    /**
+     * Is gets whether the discount has expired
+     * @return true if it has expired, false otherwise
+     */
+    public boolean isExpired() {
+        return expired;
+    }
+
+    /**
+     * It sets whether the discount has expired or not
+     * @param newExpired true if it has expired, false otherwise
+     */
+    public void setExpired(boolean newExpired) {
+        this.expired = newExpired;
+    }
+
+    // DUE: abstract createNotification(){}
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
@@ -156,8 +192,6 @@ public abstract class Discount {
      */
     abstract List<StoreProduct> getProducts();
 
-    // DUE: public abstract createNotification(){}
-
     /**
      * It gets the discount's start date
      * @return the discount's start date
@@ -180,10 +214,23 @@ public abstract class Discount {
     }
 
     /**
-     * Gets type.
-     * @return the type
+     * It gets the discount's discount type
+     * @return the discount's discount type
      */
     public DiscountType getType() {
         return type;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a discount
+     * @return the written information of a discount
+     */
+    @Override
+    public String toString() { // DUE
+        /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;<SPENDING_THRESHOLD>;NUM_PRODS;
+        <DEDUCTION> */
+        return super.toString();
     }
 }

@@ -1,10 +1,12 @@
 import order.Cart;
 import product.StoreProduct;
+import store.Pager;
 import store.Store;
 import user.*;
 
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -16,6 +18,8 @@ public class MainApp {
     int chosenOption;
     /** The apps current user */
     User currentUser;
+    /** The current page's number, if a list is being browsed */
+    int pageNum = 0;
 
     /**
      * The apps main loop
@@ -107,6 +111,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
+                this.pageNum = 1;
                 unregisteredClientOrderLoop();
                 break;
             case 2:
@@ -135,13 +140,25 @@ public class MainApp {
      */
     public void unregisteredClientOrderLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- unregisteredClientOrderLoop ---- \n"); // Es para debug, borrar
-        ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
+        System.out.println("Page: " + this.pageNum);
+
+        List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
+        Pager.getInstance().printStoreProductListPage(products, this.pageNum);
+
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] See a product");
         System.out.println("\t[2] See my cart");
         System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] < Previous page");
-        System.out.println("\t[5] Next page >");
+        if ((this.pageNum - 1) > 0) {
+            System.out.println("\t[4] < Previous page");
+        } else {
+            System.out.println("\t[4] Reload page");
+        }
+        if ((this.pageNum + 1) < Pager.getInstance().getMaxPageNum(products)) {
+            System.out.println("\t[5] Next page >");
+        } else {
+            System.out.println("\t[4] Reload page");
+        }
         System.out.println("\t[6] <- Go back");
         System.out.println("\t[7] <<- Go to main page");
         System.out.println("\t[8] x Exit app");
@@ -158,10 +175,13 @@ public class MainApp {
                 signer();
                 break;
             case 4:
-                // DUE: previousPage(); <- La idea es imprimir x productos por "página", estilo cluster
+                this.pageNum = (this.pageNum - 1) > 0 ? this.pageNum - 1 : 1;
+                unregisteredClientOrderLoop();
                 break;
             case 5:
-                // DUE: nextPage();
+                this.pageNum = (this.pageNum + 1) < Pager.getInstance().getMaxPageNum(products) ? this.pageNum + 1 :
+                               this.pageNum;
+                unregisteredClientOrderLoop();
                 break;
             case 6:
                 unregisteredClientOrderLoop();

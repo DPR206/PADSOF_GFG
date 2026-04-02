@@ -17,8 +17,18 @@ public class Parameter {
 	private Period OfferTime;
 	private Period OrderTime;
 	private double valuationCost;
+	/**
+	 * Param a for the recommender following: weightedScore = (a*score + b)
+	 */
 	private double scoreAParam;
+	/**
+	 * Param b for the recommender following: weightedScore = (a*score + b)
+	 */
 	private double scoreBParam;
+	/**
+	 * The number of lines that can be printed from a certain list, used for printing information
+	 */
+	private int itemsPerPage;
 
 	/**
 	 * Creates parameter
@@ -31,6 +41,7 @@ public class Parameter {
 		/* scoreWeight = a*<score> + b */
 		this.scoreAParam = 0.5;
 		this.scoreBParam = 0.5;
+		this.itemsPerPage = 10;
 	}
 
 /*--------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------------*/
@@ -111,7 +122,7 @@ public class Parameter {
 	}
 
 	/**
-	 * It gets the score b param (scoreWeight = a*score + b)
+	 * It gets the score b param (weightedScore = a*score + b)
 	 * @return the score b param
 	 */
 	public double getScoreBParam() {
@@ -119,11 +130,27 @@ public class Parameter {
 	}
 
 	/**
-	 * It gets the score b param (scoreWeight = a*score + b)
+	 * It gets the score b param (weightedScore = a*score + b)
 	 * @param newScoreBParam the new score b param
 	 */
 	public void setScoreBParam(double newScoreBParam) {
 		this.scoreBParam = newScoreBParam;
+	}
+
+	/**
+	 * It gets the number of lines that can be printed from a certain list
+	 * @return the number of lines that can be printed from a certain list
+	 */
+	public int getItemsPerPage() {
+		return itemsPerPage;
+	}
+
+	/**
+	 * It sets the number of lines that can be printed from a certain list
+	 * @param newItemsPerPage the new number of lines that can be printed from a certain list
+	 */
+	public void setItemsPerPage(int newItemsPerPage) {
+		this.itemsPerPage = newItemsPerPage;
 	}
 
 	/*------------------------------------------------------------------METHODS------------------------------------------------------------------*/

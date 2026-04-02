@@ -194,12 +194,12 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
-     * It prints the product's info
+     * It prints the product's info when seen individually
      */
     @Override
-    public void printInfo() {
+    public void bigPrintInfo() {
         /* super;REVIEW_IDS;AVG_PUNCT;STOCK;CATEGORIES;ADDED_DATE */
-        super.printInfo();
+        super.bigPrintInfo();
         System.out.println("Stock: " + this.stock);
         System.out.println("Categories: " + this.getPrintCategories());
         System.out.println("Average Punctuation: " + this.averagePunctuation + " stars");

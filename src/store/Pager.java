@@ -1,0 +1,131 @@
+package store;
+
+import product.Review;
+import product.StoreProduct;
+
+import java.util.List;
+
+/**
+ * It implements the store's pager, used for dividing big lists into small sub-lists of a desired size (lines-wise),
+ * helpful when browsing (check main)
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Review
+ * @see StoreProduct
+ */
+public class Pager {
+    private static final Pager PARAM = new Pager();
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * A Pager's constructor
+     */
+    Pager() {
+
+    }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * Obtains the pager
+     * @return the store's pager
+     */
+    public static Pager getInstance() {
+        return PARAM;
+    }
+
+    /**
+     * It prints a sub-list of another according to the desired page
+     * @param reviewList the list fo reviews
+     * @param pageNum    the desired page's number
+     */
+    public void printReviewListPage(List<Review> reviewList, int pageNum) {
+        List<Review> reviewListPage = getReviewListPage(reviewList, pageNum);
+        for (Review review : reviewListPage) {
+            //DUE: review.printInfo();
+        }
+    }
+
+    /**
+     * It prints a sub-list of another according to the desired page
+     * @param storeProductList the list fo reviews
+     * @param pageNum          the desired page's number
+     */
+    public void printStoreProductListPage(List<StoreProduct> storeProductList, int pageNum) {
+        List<StoreProduct> productListPage = getStoreProductListPage(storeProductList, pageNum);
+        int i = 1;
+
+        for (StoreProduct product : productListPage) {
+            System.out.println(i + ". " + product.smallPrintInfo());
+        }
+    }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * It gets the maximum number of pages that can be obtained from a list of products
+     * @param storeProductList the desired product list
+     * @return the maximum number of pages that can be obtained from a list of products
+     */
+    public int getMaxPageNum(List<StoreProduct> storeProductList) {
+        // DUE: Revisar esto
+        if (storeProductList.size() % Parameter.getParam().getItemsPerPage() == 0) {
+            return storeProductList.size() / Parameter.getParam().getItemsPerPage();
+        }
+        return (storeProductList.size() / Parameter.getParam().getItemsPerPage()) + 1;
+    }
+
+    /**
+     * It gets the product listed as n.º productNum in a certain page
+     * @param storeProductList the list of products
+     * @param pageNum          the desired page's number
+     * @param productNum       the desired product's n.º
+     * @return the desired product
+     */
+    public StoreProduct getProductFromPage(List<StoreProduct> storeProductList, int pageNum, int productNum) {
+        List<StoreProduct> productListPage = getStoreProductListPage(storeProductList, pageNum);
+        return productListPage.get(productNum - 1); // Las listas se imprimen empezando por 1
+    }
+
+    /**
+     * It gets the review listed as n.º reviewNum in a certain page
+     * @param reviewList the list fo reviews
+     * @param pageNum    the desired page's number
+     * @param reviewNum  the desired review's n.º
+     * @return the desired review
+     */
+    public Review getReviewFromPage(List<Review> reviewList, int pageNum, int reviewNum) {
+        List<Review> reviewListPage = getReviewListPage(reviewList, pageNum);
+        return reviewListPage.get(reviewNum - 1);
+    }
+
+    /**
+     * It gets a sub-list of another according to the desired page
+     * @param reviewList the list fo reviews
+     * @param pageNum    the desired page's number
+     * @return the desired page (sub-list n.º pageNum - 1)
+     */
+    public List<Review> getReviewListPage(List<Review> reviewList, int pageNum) {
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        int from = (itemsPerPage - 1) * pageNum;
+        int to = Math.min(reviewList.size(), (pageNum * itemsPerPage) - 1);
+        return reviewList.subList(from, to);
+    }
+
+    /**
+     * It gets a sub-list of another according to the desired page
+     * @param storeProductList the list fo reviews
+     * @param pageNum          the desired page's number
+     * @return the desired page (sub-list n.º pageNum - 1)
+     */
+    public List<StoreProduct> getStoreProductListPage(List<StoreProduct> storeProductList, int pageNum) {
+        /* Lista de tamaño 12, itemsPerPage = 5, Pages: 1 [0-4], 2 [5-9], 3 [10-11] */
+        /* [from, to]: from = (itemsPerPage - 1) * pageNum ,
+        to = (size < (pageNum*itemsPerPage) - 1) ? size : (pageNum*itemsPerPage) - 1) <- Min */
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        int from = (itemsPerPage - 1) * pageNum;
+        int to = Math.min(storeProductList.size(), (pageNum * itemsPerPage) - 1);
+        return storeProductList.subList(from, to);
+    }
+}

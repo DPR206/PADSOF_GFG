@@ -69,14 +69,21 @@ public abstract class Product {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
-     * It prints the product's info
+     * It prints the product's info when seen individually
      */
-    public void printInfo() {
+    public void bigPrintInfo() {
         /* TYPE;ID;PRICE;NAME;DESC;PHOTO */
         System.out.println("Name: " + this.name);
         System.out.println("Description: " + this.description); // DUE: Idealmente, haría wrapping
         System.out.println("Price: [" + this.price + "]€");
         System.out.println(" ");
+    }
+
+    /**
+     * It prints the product's info when showcased as list
+     */
+    public String smallPrintInfo() {
+        return "Name: " + this.name + ", Price: [" + this.price + "]€";
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

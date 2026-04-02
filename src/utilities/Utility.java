@@ -2,7 +2,7 @@
  * Class name: Store
  * <p>
  * Description: It implements elements such a sign in method and login method which don't belong to either classes
- * @author Sofía C
+ * @author Sofía C.L.
  * @version 1.0
  */
 
@@ -14,7 +14,6 @@ import user.*;
 import java.util.*;
 
 public class Utility {
-
     public Utility() {
     }
 

@@ -109,10 +109,12 @@ public class Statistics {
 	
 	
 
-	public void addRevenue(Double quantity, RevenueType type, LocalDate date) {
+	public void addRevenue(Double quantity, RevenueType type, LocalDate date, StoreProduct...products) {
 		this.revenueByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
 		if(type == RevenueType.VALUATION)
 			this.revenue_valuation.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
+		else
+			;
 		
 	}
 

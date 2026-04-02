@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PackQuantity extends PackDiscount implements QuantityDiscount {
     /** The amount of products, or packs, in a cart from which the discount can take place */
-    private int udsThreshold;
+    private int numThreshold;
     /** The amount of money the discount deducts from the order's final price */
     private double deduction;
     /** The list of packs affected by this discount */
@@ -21,15 +21,15 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
      * @param id           the discount's id
      * @param startDate    the date when the discount starts
      * @param endDate      the date when the discount ends
-     * @param udsThreshold the amount of products in a cart from which the discount can take place
+     * @param numThreshold the amount of products in a cart from which the discount can take place
      * @param deduction    the amount of money the discount deducts from the order's final price
      * @param packs        the discount's packs
      */
-    public PackQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
+    public PackQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int numThreshold, double deduction,
                         Pack... packs) {
         super(DiscountType.QUANTITY, DiscountCoverage.PACK, startDate, endDate);
         this.addPacks(packs);
-        this.udsThreshold = udsThreshold;
+        this.numThreshold = numThreshold;
         this.deduction = deduction;
     }
 
@@ -37,15 +37,15 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
      * Instantiates a new quantity discount with packs
      * @param startDate    the date when the discount starts
      * @param endDate      the date when the discount ends
-     * @param udsThreshold the amount of products in a cart from which the discount can take place
+     * @param numThreshold the amount of products in a cart from which the discount can take place
      * @param deduction    the amount of money the discount deducts from the order's final price
      * @param packs        the discount's packs
      */
-    public PackQuantity(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
+    public PackQuantity(LocalDateTime startDate, LocalDateTime endDate, int numThreshold, double deduction,
                         Pack... packs) {
         super(DiscountType.QUANTITY, DiscountCoverage.PACK, startDate, endDate);
         this.addPacks(packs);
-        this.udsThreshold = udsThreshold;
+        this.numThreshold = numThreshold;
         this.deduction = deduction;
     }
 
@@ -76,17 +76,17 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
      * It gets the quantity discount's amount of products in a cart from which the discount can take place
      * @return the amount of products in a cart from which the discount can take place
      */
-    public int getUdsThreshold() {
-        return this.udsThreshold;
+    public int getnumThreshold() {
+        return this.numThreshold;
     }
 
     /**
      * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
      * take place
-     * @param udsThreshold the new amount of products in a cart from which the discount can take place
+     * @param numThreshold the new amount of products in a cart from which the discount can take place
      */
-    public void setUdsThreshold(int udsThreshold) {
-        this.udsThreshold = udsThreshold;
+    public void setnumThreshold(int numThreshold) {
+        this.numThreshold = numThreshold;
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
@@ -94,6 +94,6 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
     public String toString() {
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;SPENDING_THRESHOLD;<NUM_PRODS;DEDUCTION> */
         return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" +
-               this.udsThreshold + ";" + this.deduction;
+               this.numThreshold + ";" + this.deduction;
     }
 }

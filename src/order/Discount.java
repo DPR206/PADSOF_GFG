@@ -31,6 +31,8 @@ public abstract class Discount {
     private LocalDateTime startDate;
     /** The date when the discount ends */
     private LocalDateTime endDate;
+    /** Whether the discount has expired or not */
+    private boolean expired;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -110,6 +112,11 @@ public abstract class Discount {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * It gets the discount's coverage type
+     * @return the discount's coverage type
+     */
     public DiscountCoverage getCoverage() {
         return coverage;
     }
@@ -143,11 +150,13 @@ public abstract class Discount {
         return this.id;
     }
 
+    /**
+     * It gets the store products affected by this discount
+     * @return the store products affected by this discount
+     */
     abstract List<StoreProduct> getProducts();
 
     // DUE: public abstract createNotification(){}
-
-    // DUE: public abstract obtainDisc(); <- Creo que no puedo pq no devuelven lo mismo
 
     /**
      * It gets the discount's start date

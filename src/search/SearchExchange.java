@@ -14,6 +14,7 @@ import java.util.List;
  * @see SearchStoreProducts
   */
 public class SearchExchange implements SearchID{
+    private Store s = Store.getInstance();
     private List<Exchange> exchanges;
 
      /**
@@ -21,7 +22,7 @@ public class SearchExchange implements SearchID{
 	 *
 	 * @param s, the store to create the list of exchanges
 	 */
-    public SearchExchange(Store s){
+    public SearchExchange(){
         this.exchanges = s.getExchanges();
     }
 

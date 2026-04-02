@@ -15,6 +15,8 @@ import java.util.List;
  * @see SearchStoreProducts
   */
 public class SearchEmployee implements SearchID{
+    
+    private Store s = Store.getInstance();
     private List<User> users;
      /**
 	 * Creates the class

@@ -14,6 +14,8 @@ import java.util.List;
     * @see SearchStoreProducts
     */
 public class SearchOrder implements SearchID{
+    
+    private Store s = Store.getInstance();
     private List<Order> orders;
 
     /**
@@ -21,7 +23,7 @@ public class SearchOrder implements SearchID{
 	 *
 	 * @param s, sends the store to get all the orders available
 	 */
-    public SearchOrder(Store s){
+    public SearchOrder(){
         this.orders = s.getOrders();
     }
 

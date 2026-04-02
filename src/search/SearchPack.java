@@ -14,13 +14,15 @@ import java.util.List;
     */
 public class SearchPack implements SearchID{
 
+    Store s = Store.getInstance();
+
     private List<Pack> packs;
     /**
 	 * Creates the class
 	 *
 	 * @param s, sends the store to get all the packs available
 	 */
-    public SearchPack(Store s){
+    public SearchPack(){
         this.packs = s.getPacks();
     }
 

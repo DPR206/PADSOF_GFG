@@ -3,11 +3,11 @@ package user;
 import exchange.Exchange;
 import order.Order;
 import order.OrderState;
-import product.Category;
-import product.GameStyle;
-import product.SecondHandProduct;
+import product.*;
+import search.*;
 
 import java.time.Year;
+import java.util.*;
 
 /**
  * Class name: Employee
@@ -43,13 +43,13 @@ public class Employee extends User {
 
         } else if (p.getMeaning() == "exchange") {
             this.ep = new ExchangePermission();
-            if(this.sp) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE);
+            if(this.sp != null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE);
             else this.getSearcher().setTypes(SearchType.S_EXCHANGE);
         } else {
             this.op = new OrderPermission();
-            if(this.sp && this.ep) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE, SearchType.S_ORDER);
-            else if(this.sp && !this.ep) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_ORDER);
-            else if(!this.sp && this.ep) this.getSearcher().setTypes(SearchType.S_EXCHANGE, SearchType.S_ORDER);
+            if(this.sp != null && this.ep != null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE, SearchType.S_ORDER);
+            else if(this.sp != null && this.ep == null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_ORDER);
+            else if(this.sp == null && this.ep != null) this.getSearcher().setTypes(SearchType.S_EXCHANGE, SearchType.S_ORDER);
             else this.getSearcher().setTypes(SearchType.S_ORDER);
         }
     }
@@ -173,7 +173,7 @@ public class Employee extends User {
      * 
      */
      public List<StoreProduct> searchStoreProduct(){
-        return this.search.searchStoreProduct();
+        return this.getSearcher().searchStoreProducts();
     }
 
     /**
@@ -183,7 +183,7 @@ public class Employee extends User {
      * 
      */
     public List<StoreProduct> searchStoreProductByCategory(Category... c){
-        return this.search.searchByCategory(c);
+        return this.getSearcher().searchByCategory(c);
     }
 
     /**
@@ -193,11 +193,11 @@ public class Employee extends User {
      * 
      */
     public Pack searchPackByID(int id){
-        return this.search.searchPackByID();
+        return this.getSearcher().searchPackByID(id);
     }
 
     public Employee searchEmployeeByID(int id){
-        return this.search.searchEmployeeByID(id);
+        return this.getSearcher().searchEmployeeByID(id);
     }
 
     /**
@@ -207,7 +207,7 @@ public class Employee extends User {
      * 
      */
     public Order searchOrderByID(int id){
-        return this.search.searchOrderByID(int id);
+        return this.getSearcher().searchOrderByID(id);
     }
 
     /**
@@ -217,6 +217,6 @@ public class Employee extends User {
      * 
      */
     public Exchange searchExchangeByID(int id){
-        return this.search.searchExchangeByID(id);
+        return this.getSearcher().searchExchangeByID(id);
     }
 }

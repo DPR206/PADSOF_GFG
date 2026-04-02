@@ -16,6 +16,5 @@ public interface SearchID{
 	 *
 	 * @param id, id of the object we want to search
 	 */
-    Object searchByID(int id){
-    } 
+    Object searchByID(int id);
 }

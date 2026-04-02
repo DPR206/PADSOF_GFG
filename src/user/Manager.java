@@ -17,23 +17,22 @@ import java.time.LocalDateTime;
  */
 public class Manager extends User {
     private static Manager INSTANCE = null;
-    private final Store s;
+    private final Store s = Store.getInstance();
     /** Store permission necessary for the manager to do its functions */
     private StorePermission sp;
     /** no clue :v */
-    private Parameter parameter; //?? esto que es xd
+    private Parameter parameter; 
 
-    private Manager(String pwd, String userName, Store s, StorePermission sp, Parameter p) {
-        super(UserType.MANAGER, pwd, userName);
-        this.s = s;
+    private Manager(String pwd, String userName, StorePermission sp, Parameter p, boolean asc) {
+        super(UserType.MANAGER, pwd, userName, asc);
+
         this.sp = sp;
         this.parameter = p;
     }
 
     public static Manager getInstance() {
         if (Manager.INSTANCE == null) {
-            Manager.INSTANCE = new Manager("password", "manager", Store.getInstance(), new StorePermission(),
-                    Parameter.getParam());
+            Manager.INSTANCE = new Manager("password", "manager", new StorePermission(), Parameter.getParam(), true);
         }
         return Manager.INSTANCE;
     }
@@ -47,8 +46,8 @@ public class Manager extends User {
 
 
     public void addEmployee(String password, String userName, Permission permission) {
-        Employee emp = new Employee(password, userName, permission);
-        s.getUsers().put(emp.getUserName(), emp);
+        Employee emp = new Employee(password, userName, permission, true);
+        s.getEmployees().put(emp.getId(), emp);
     }
 
     /* ---- DISCOUNTS ---- */

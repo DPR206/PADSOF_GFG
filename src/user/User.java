@@ -102,4 +102,8 @@ public abstract class User {
     public UserType getType() {
         return this.type;
     }
+    
+    public String getId() {
+    	return this.actualID;
+    }
 }

@@ -32,7 +32,7 @@ public class SearchExchange implements SearchID{
 	 * @param ex, sends a list of exchanges to search them
 	 */
     public SearchExchange(List<Exchange> ex){
-        this.exchange = ex;
+        this.exchanges = ex;
     }
 
      /**

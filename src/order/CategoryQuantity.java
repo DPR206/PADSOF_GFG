@@ -34,7 +34,7 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
                             double deduction, Category... categories) throws IllegalArgumentException {
         super(id, DiscountType.QUANTITY, DiscountCoverage.CATEGORY, startDate, endDate);
         this.addCategories(categories);
-        this.setnumThreshold(numThreshold);
+        this.setNumThreshold(numThreshold);
         this.setDeduction(deduction);
     }
 
@@ -51,7 +51,7 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
                             Category... categories) throws IllegalArgumentException {
         super(DiscountType.QUANTITY, DiscountCoverage.CATEGORY, startDate, endDate);
         this.addCategories(categories);
-        this.setnumThreshold(numThreshold);
+        this.setNumThreshold(numThreshold);
         this.setDeduction(deduction);
     }
 
@@ -82,26 +82,6 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
     }
 
     /**
-     * It gets the quantity discount's amount of products in a cart from which the discount can take place
-     * @return the amount of products in a cart from which the discount can take place
-     */
-    public int getnumThreshold() {
-        return this.numThreshold;
-    }
-
-    /**
-     * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
-     * take place
-     * @param numThreshold the new amount of products in a cart from which the discount can take place
-     */
-    public void setnumThreshold(int numThreshold) throws IllegalArgumentException {
-        if (numThreshold <= 0) {
-            throw new IllegalArgumentException("The number of units must be greater than 0");
-        }
-        this.numThreshold = numThreshold;
-    }
-
-    /**
      * It gets the discount's amount of products, or packs, in a cart from which the discount can take place
      * @return the discount's amount of products, or packs, in a cart from which the discount can take place
      */
@@ -110,12 +90,23 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
     }
 
     /**
-     * It sets the discount's amount of products, or packs, in a cart from which the discount can take place
-     * @param newNumThreshold the discount's new amount of products, or packs, in a cart from which the discount can
-     *                        take place
+     * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
+     * take place
+     * @param numThreshold the new amount of products in a cart from which the discount can take place
      */
-    public void setNumThreshold(int newNumThreshold) {
-        this.numThreshold = newNumThreshold;
+    public void setNumThreshold(int numThreshold) throws IllegalArgumentException {
+        if (numThreshold <= 0) {
+            throw new IllegalArgumentException("The number of units must be greater than 0");
+        }
+        this.numThreshold = numThreshold;
+    }
+
+    /**
+     * It gets the quantity discount's amount of products in a cart from which the discount can take place
+     * @return the amount of products in a cart from which the discount can take place
+     */
+    public int getnumThreshold() {
+        return this.numThreshold;
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

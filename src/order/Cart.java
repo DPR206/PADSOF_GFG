@@ -173,7 +173,7 @@ public class Cart {
             fechaCad = sc.next();
 
             Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
-                    new ArrayList<>(this.packs.keySet()));
+                    new ArrayList<>(this.packs.keySet()), this.owner);
             this.owner.getOrderHistory().addOrder(order);
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */

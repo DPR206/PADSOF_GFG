@@ -6,13 +6,13 @@ package product;
 import store.Store;
 
 import java.time.LocalDate;
+import user.RegisteredClient;
 
 /**
- * Class name: SecondHandProduct
- * <p>
- * Description: It implements the second-hand products
+ * It implements the second-hand products
+ * 
  * @author Duna P.R. and Ana O.R.
- * @version 1.0
+ * @version 1.5
  * @see Product
  */
 public class SecondHandProduct extends Product{
@@ -21,6 +21,7 @@ public class SecondHandProduct extends Product{
     private boolean available;
     private boolean paidValuation;
     private ConservationStatus status;
+    private RegisteredClient owner;
     //private double estimatedPrice;
 
 
@@ -38,15 +39,17 @@ public class SecondHandProduct extends Product{
 	 * @param available, if the product is available
 	 * @param paidValuation, if the valuation is paid
 	 * @param status, the conservation status of the product
+	 * @param owner, the owner of the product
 	 */
 	public SecondHandProduct(String id, double estimatedPrice, String name, String description, String photo,
 							 ProductType type, LocalDate valuationDate, boolean available, boolean paidValuation,
-                             ConservationStatus status) {
+                             ConservationStatus status, RegisteredClient owner) {
 		super(id, estimatedPrice, name, description, photo, type);
 		this.valuationDate = valuationDate;
 		this.available = available;
 		this.paidValuation = paidValuation;
 		this.status = status;
+		this.owner = owner;
 		Store.getInstance().addSecondHandProduct(this);
 	}
 
@@ -62,15 +65,17 @@ public class SecondHandProduct extends Product{
 	 * @param available, if the product is available
 	 * @param paidValuation, if the valuation is paid
 	 * @param status, the conservation status of the product
+	 * @param owner, the owner of the product
 	 */
 	public SecondHandProduct(double estimatedPrice, String name, String description, String photo, ProductType type,
-			LocalDate valuationDate, boolean available, boolean paidValuation, ConservationStatus status
+			LocalDate valuationDate, boolean available, boolean paidValuation, ConservationStatus status, RegisteredClient owner
 			/*double estimatedPrice*/) {
 		super(estimatedPrice, name, description, photo, type);
 		this.valuationDate = valuationDate;
 		this.available = available;
 		this.paidValuation = paidValuation;
 		this.status = status;
+		this.owner = owner;
 		Store.getInstance().addSecondHandProduct(this);
 		//this.estimatedPrice = estimatedPrice;
 	}
@@ -85,10 +90,11 @@ public class SecondHandProduct extends Product{
 	 * @param available, if the product is available
 	 * @param paidValuation, if the valuation is paid
 	 * @param status, the conservation status of the product
+	 * @param owner, the owner of the product
 	 */
 	public SecondHandProduct(String name, String description, String photo, ProductType type,
-			boolean available, boolean paidValuation, ConservationStatus status) {
-		this(0, name, description, photo, type, null, available, paidValuation, null);
+			boolean available, boolean paidValuation, ConservationStatus status, RegisteredClient owner) {
+		this(0, name, description, photo, type, null, available, paidValuation, null, owner);
 
 	}
 
@@ -99,10 +105,10 @@ public class SecondHandProduct extends Product{
 	 * @param description, the description of the product
 	 * @param photo, the photo of the product
 	 * @param type, the type of product
-	 *
+	 * @param owner, the owner of the product
 	 */
-	public SecondHandProduct(String name, String description, String photo, ProductType type) {
-		this(0, name, description, photo, type, null, false, false, null);
+	public SecondHandProduct(String name, String description, String photo, ProductType type, RegisteredClient owner) {
+		this(0, name, description, photo, type, null, false, false, null, owner);
 	}
 
 /*----------------------------------------------------------GETTERS AND SETTERS---------------------------------------------------------------------------*/
@@ -180,10 +186,21 @@ public class SecondHandProduct extends Product{
 	public void setStatus(ConservationStatus status) {
 		this.status = status;
 	}
+	
+	
 
 
 
 /*----------------------------------------------------------METHODS---------------------------------------------------------------------------*/
+
+	/**
+	 * Obtains the owner of the product
+	 * 
+	 * @return the owner
+	 */
+	public RegisteredClient getOwner() {
+		return owner;
+	}
 
 	/**
 	 * Obtains the valuation date

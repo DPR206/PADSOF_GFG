@@ -69,7 +69,8 @@ public class NotificationEmployeeValuation extends Notification implements Notif
 	 * @return a string with the notification
 	 */
 	public String FullNotification(SecondHandProduct o) {
-		String text = "The new second-hand product is: " + o.getName() + " with description: " + o.getDescription();
+		String text = "The new second-hand product is: " + o.getName() + " with description: " + o.getDescription() + " and belongs to "
+						+ o.getOwner().getUserName() + "\n";
 		this.setText(text);
 		return this.SnippetNotification(o) + text + this.signOff();
 	}

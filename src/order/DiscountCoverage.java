@@ -1,7 +1,7 @@
 package order;
 
 /**
- * Enum Name: DiscountType
+ * Enum Name: DiscountCoverage
  * <p>
  * Description: It defines the discount coverages
  * @author Ana O.R.
@@ -16,7 +16,7 @@ public enum DiscountCoverage {
     PRODUCT("PR");
 
     /**
-     * The characters that define this type in the save file
+     * The characters that define this coverage in the save file
      */
     private final String symbol;
 
@@ -33,7 +33,7 @@ public enum DiscountCoverage {
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
-     * Gets the enumeration's symbol
+     * It gets the enumeration's symbol
      * @return the enumeration's symbol
      */
     public String getSymbol() {

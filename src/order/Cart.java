@@ -86,8 +86,8 @@ public class Cart {
             /* Quantity discount */
             if (p.getDiscount().getType() == DiscountType.QUANTITY) {
                 QuantityDiscount quantityDisc = (QuantityDiscount) p.getDiscount();
-                if (this.packs.get(p) >= quantityDisc.getnumThreshold()) {
-                    aux = aux - quantityDisc.getnumThreshold();
+                if (this.packs.get(p) >= quantityDisc.getNumThreshold()) {
+                    aux = aux - quantityDisc.getNumThreshold();
                 }
             }
         }

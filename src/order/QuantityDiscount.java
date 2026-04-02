@@ -3,6 +3,7 @@ package order;
 public interface QuantityDiscount {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * It gets the quantity discount's discount
      * @return the quantity discount's discount
@@ -19,12 +20,12 @@ public interface QuantityDiscount {
      * It gets the quantity discount's amount of products in a cart from which the discount can take place
      * @return the amount of products in a cart from which the discount can take place
      */
-    int getnumThreshold();
+    int getNumThreshold();
 
     /**
      * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
      * take place
      * @param numThreshold the new amount of products in a cart from which the discount can take place
      */
-    void setnumThreshold(int numThreshold);
+    void setNumThreshold(int numThreshold);
 }

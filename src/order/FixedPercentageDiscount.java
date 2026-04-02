@@ -1,9 +1,16 @@
 package order;
 
+/**
+ * Interface name: FixedPercentageDiscount
+ * <p>
+ * Description: It defines the base Fixed Percentage discount's methods
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public interface FixedPercentageDiscount {
-
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * It gets the fixed percentage discount's percentage.
      * @return the fixed percentage discount's percentage

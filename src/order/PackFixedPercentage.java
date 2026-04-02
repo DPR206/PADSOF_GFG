@@ -4,6 +4,14 @@ import product.Pack;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: PackFixedPercentage
+ * <p>
+ * Description: It implements the Pack discount whose type is Fixed Percentage
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Pack
+ */
 public class PackFixedPercentage extends PackDiscount implements FixedPercentageDiscount {
     /** The percentage deducted from a product's price */
     private double percentage;
@@ -43,11 +51,8 @@ public class PackFixedPercentage extends PackDiscount implements FixedPercentage
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: createFixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {}
-
     // DUE: public createNotification(){}
 
-    // DUE: public obtainDisc();
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -72,8 +77,13 @@ public class PackFixedPercentage extends PackDiscount implements FixedPercentage
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a discount
+     * @return the written information of a discount
+     */
     @Override
-    public String toString() {
+    public String toString() { // DUE
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];<PERCENTAGE>;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION */
         return super.toString() + ";" + this.percentage + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" /*numThreshold
          */ + ";" /*deduction*/;

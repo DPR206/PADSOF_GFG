@@ -12,7 +12,7 @@ import java.util.List;
  * <p>
  * Description: It implements the general discount
  * @author Ana O.R.
- * @version 1.4
+ * @version 1.5
  * @see Store
  * @see StoreProduct
  * @see Pack
@@ -31,8 +31,8 @@ public abstract class Discount {
     private LocalDateTime startDate;
     /** The date when the discount ends */
     private LocalDateTime endDate;
-    /** Whether the discount has expired or not */
-    private boolean expired;
+    /** Whether the discount is disabled (due to expiration) or not */
+    private boolean disabled;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -40,21 +40,18 @@ public abstract class Discount {
      * Instantiates a new Discount with a certain id
      * @param id        the discount's id
      * @param type      the discount's type
+     * @param coverage  the coverage
      * @param startDate the discount's start date
      * @param endDate   the discount's end date
-     * @throws IllegalArgumentException the illegal argument exception
+     * @throws IllegalArgumentException the dates weren't valid
      */
     public Discount(String id, DiscountType type, DiscountCoverage coverage, LocalDateTime startDate,
                     LocalDateTime endDate) throws IllegalArgumentException {
-        if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Start date is after end date");
-        }
-
         this.id = id;
         this.type = type;
         this.coverage = coverage;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.setStartDate(startDate);
+        this.setEndDate(endDate);
 
         Store.getInstance().getDiscounts().add(this);
     }
@@ -62,21 +59,19 @@ public abstract class Discount {
     /**
      * Instantiates a new Discount
      * @param type      the discount's type
+     * @param coverage  the coverage
      * @param startDate the discount's start date
      * @param endDate   the discount's end date
-     * @throws IllegalArgumentException the illegal argument exception
+     * @throws IllegalArgumentException the dates weren't valid
      */
     public Discount(DiscountType type, DiscountCoverage coverage, LocalDateTime startDate, LocalDateTime endDate)
             throws IllegalArgumentException {
-        if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Start date is after end date");
-        }
 
         this.id = type.getSymbol() + String.format("%06d", ++totalId);
         this.type = type;
         this.coverage = coverage;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.setStartDate(startDate);
+        this.setEndDate(endDate);
 
         Store.getInstance().getDiscounts().add(this);
     }
@@ -85,7 +80,23 @@ public abstract class Discount {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
-     * Checks whether the desired discount can be added to the store without interfering with another
+     * It gets the discount's total id
+     * @return the discount's total id
+     */
+    public static int getTotalId() {
+        return totalId;
+    }
+
+    /**
+     * It sets the discount's total id.
+     * @param newTotalId the discount's new total id
+     */
+    public static void setTotalId(int newTotalId) {
+        Discount.totalId = newTotalId;
+    }
+
+    /**
+     * It checks whether the desired discount can be added to the store without interfering with another
      * @param testedProducts the discount to be tested's products
      * @return true if it is conflicting, false otherwise
      */
@@ -93,7 +104,7 @@ public abstract class Discount {
         List<Discount> discounts = Store.getInstance().getDiscounts();
 
         for (Discount discount : discounts) {
-            if (discount != this) {
+            if ((discount != this) && (!discount.getDisabled())) {
                 List<StoreProduct> alreadyAffectedProducts = discount.getProducts();
                 if (discount.getCoverage() == DiscountCoverage.PRODUCT) {
                     ProductDiscount productDiscount = (ProductDiscount) discount;
@@ -111,6 +122,31 @@ public abstract class Discount {
         return false;
     }
 
+    /**
+     * It checks whether the desired discount can be added to the store without interfering with another
+     * @param overWholeStore whether the discount to be tested applies over the whole store, must be true
+     * @return true if it is conflicting, false otherwise
+     * @throws IllegalArgumentException overWholeStore must be true
+     */
+    public boolean conflictingDisc(boolean overWholeStore) throws IllegalArgumentException {
+        if (!overWholeStore) {
+            throw new IllegalArgumentException("overWholeStore must be true");
+        }
+
+        List<Discount> discounts = Store.getInstance().getDiscounts();
+
+        for (Discount discount : discounts) {
+            if ((discount != this) && (!discount.getDisabled())) {
+                if (!discount.getProducts().isEmpty()) {
+                    return true;
+                }
+
+            }
+        }
+
+        return false;
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -119,6 +155,24 @@ public abstract class Discount {
      */
     public DiscountCoverage getCoverage() {
         return coverage;
+    }
+
+    // DUE: abstract createNotification(){}
+
+    /**
+     * Is gets whether the discount has expired
+     * @return true if it is disabled, false otherwise
+     */
+    public boolean getDisabled() {
+        return this.disabled;
+    }
+
+    /**
+     * It sets whether the discount has expired or not
+     * @param newDisabled true if it is disabled, false otherwise
+     */
+    public void setDisabled(boolean newDisabled) {
+        this.disabled = newDisabled;
     }
 
     /**
@@ -156,8 +210,6 @@ public abstract class Discount {
      */
     abstract List<StoreProduct> getProducts();
 
-    // DUE: public abstract createNotification(){}
-
     /**
      * It gets the discount's start date
      * @return the discount's start date
@@ -180,10 +232,23 @@ public abstract class Discount {
     }
 
     /**
-     * Gets type.
-     * @return the type
+     * It gets the discount's discount type
+     * @return the discount's discount type
      */
     public DiscountType getType() {
         return type;
+    }
+
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a discount
+     * @return the written information of a discount
+     */
+    @Override
+    public String toString() { // DUE
+        /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;<SPENDING_THRESHOLD>;NUM_PRODS;
+        <DEDUCTION> */
+        return super.toString();
     }
 }

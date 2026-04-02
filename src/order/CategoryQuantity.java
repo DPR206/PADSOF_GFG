@@ -4,6 +4,14 @@ import product.Category;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: CategoryQuantity
+ * <p>
+ * Description: It implements the Category discount whose type is Quantity
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Category
+ */
 public class CategoryQuantity extends CategoryDiscount implements QuantityDiscount {
     /** The amount of products, or packs, in a cart from which the discount can take place */
     private int numThreshold;
@@ -20,13 +28,14 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
      * @param numThreshold the amount of products in a cart from which the discount can take place
      * @param deduction    the amount of money the discount deducts from the order's final price
      * @param categories   the discount's categories
+     * @throws IllegalArgumentException the illegal argument exception
      */
     public CategoryQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
-                            double deduction, Category... categories) {
+                            double deduction, Category... categories) throws IllegalArgumentException {
         super(id, DiscountType.QUANTITY, DiscountCoverage.CATEGORY, startDate, endDate);
         this.addCategories(categories);
-        this.numThreshold = numThreshold;
-        this.deduction = deduction;
+        this.setnumThreshold(numThreshold);
+        this.setDeduction(deduction);
     }
 
     /**
@@ -36,20 +45,20 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
      * @param numThreshold the amount of products in a cart from which the discount can take place
      * @param deduction    the amount of money the discount deducts from the order's final price
      * @param categories   the discount's categories
+     * @throws IllegalArgumentException the illegal argument exception
      */
     public CategoryQuantity(LocalDateTime startDate, LocalDateTime endDate, int numThreshold, double deduction,
-                            Category... categories) {
+                            Category... categories) throws IllegalArgumentException {
         super(DiscountType.QUANTITY, DiscountCoverage.CATEGORY, startDate, endDate);
         this.addCategories(categories);
-        this.numThreshold = numThreshold;
-        this.deduction = deduction;
+        this.setnumThreshold(numThreshold);
+        this.setDeduction(deduction);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: public createNotification(){}
 
-    // DUE: public obtainDisc();
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -63,8 +72,12 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
     /**
      * It allows the manager to change the quantity discount's discount
      * @param newDeduction the new discount
+     * @throws IllegalArgumentException the deduction must be greater than 0
      */
-    public void setDeduction(double newDeduction) {
+    public void setDeduction(double newDeduction) throws IllegalArgumentException {
+        if (newDeduction <= 0) {
+            throw new IllegalArgumentException("The deduction must be greater than 0");
+        }
         this.deduction = newDeduction;
     }
 
@@ -81,13 +94,38 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
      * take place
      * @param numThreshold the new amount of products in a cart from which the discount can take place
      */
-    public void setnumThreshold(int numThreshold) {
+    public void setnumThreshold(int numThreshold) throws IllegalArgumentException {
+        if (numThreshold <= 0) {
+            throw new IllegalArgumentException("The number of units must be greater than 0");
+        }
         this.numThreshold = numThreshold;
     }
 
+    /**
+     * It gets the discount's amount of products, or packs, in a cart from which the discount can take place
+     * @return the discount's amount of products, or packs, in a cart from which the discount can take place
+     */
+    public int getNumThreshold() {
+        return numThreshold;
+    }
+
+    /**
+     * It sets the discount's amount of products, or packs, in a cart from which the discount can take place
+     * @param newNumThreshold the discount's new amount of products, or packs, in a cart from which the discount can
+     *                        take place
+     */
+    public void setNumThreshold(int newNumThreshold) {
+        this.numThreshold = newNumThreshold;
+    }
+
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a discount
+     * @return the written information of a discount
+     */
     @Override
-    public String toString() {
+    public String toString() { // DUE
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;SPENDING_THRESHOLD;<NUM_PRODS;DEDUCTION> */
         return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" +
                this.numThreshold + ";" + this.deduction;

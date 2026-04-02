@@ -88,7 +88,7 @@ public abstract class CategoryDiscount extends Discount {
      * It gets the discount's products
      * @return the discount's products
      */
-    List<StoreProduct> getProducts() {
+    public List<StoreProduct> getProducts() {
         List<StoreProduct> products = new ArrayList<>();
         for (Category category : this.categories) {
             products.addAll(category.getProducts());

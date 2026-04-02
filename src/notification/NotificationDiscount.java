@@ -1,12 +1,12 @@
 package notification;
 
-import java.time.LocalDateTime;
-
 import order.*;
+
+import java.time.LocalDateTime;
 
 /**
  * It implements the discount notification
- * 
+ *
  * @author Duna P.R.
  * @version 1.2
  * @see Notification
@@ -16,7 +16,7 @@ public class NotificationDiscount extends Notification implements NotificationIn
 
 	/**
 	 * Creates a new discount notification with default timeMade (this moment) and no content
-	 * 
+	 *
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
@@ -28,7 +28,7 @@ public class NotificationDiscount extends Notification implements NotificationIn
 
 	/**
 	 * Creates a new discount notification with default timeMade (this moment)
-	 * 
+	 *
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
 	 * @param timeReceived the time it was received
@@ -42,7 +42,7 @@ public class NotificationDiscount extends Notification implements NotificationIn
 
 	/**
 	 * Creates a new discount notification
-	 * 
+	 *
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
 	 * @param timeMade the time it was made
@@ -59,28 +59,28 @@ public class NotificationDiscount extends Notification implements NotificationIn
 	@Override
 	/**
 	 * Creates a complete notification
-	 * 
+	 *
 	 * @param o the new discount
 	 * @return a string with the notification
 	 */
 	public String FullNotification(Discount o) {
 		String text = "This discount starts on the " + o.getStartDate() + " and ends on the " + o.getEndDate();
-		if(o.getOverWholeStore())
+		if(o.getCoverage()==DiscountCoverage.PRODUCT && ((ProductDiscount) o).getOverWholeStore())
 			text += ". This discount applies to all the products in store.\n";
 		else if(o.getProducts().isEmpty())
 			text += ". This discount doesn't apply to a specific set of products.\n";
 		else
 			text += o.getProducts();
-		
+
 		this.setText(text);
-		
+
 		return this.SnippetNotification(o) + text + this.signOff();
 	}
 
 	@Override
 	/**
 	 * Creates a snippet of the notification (title and time log)
-	 * 
+	 *
 	 * @param o the new discount
 	 * @return a string with the snippet of the notification
 	 */
@@ -94,12 +94,12 @@ public class NotificationDiscount extends Notification implements NotificationIn
 		 case DiscountType.VOLUME: title1 += "volume"; break;
 		 default: title1 = "Not valid";
 		}
-		
+
 		title1 += title2;
 		this.setTitle(title1);
-		
+
 		return title1 + this.timeLog();
 	}
 
-	
+
 }

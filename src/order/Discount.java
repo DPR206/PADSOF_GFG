@@ -208,7 +208,7 @@ public abstract class Discount {
      * It gets the store products affected by this discount
      * @return the store products affected by this discount
      */
-    abstract List<StoreProduct> getProducts();
+    public abstract List<StoreProduct> getProducts();
 
     /**
      * It gets the discount's start date

@@ -87,7 +87,7 @@ public abstract class PackDiscount extends Discount {
      * It gets the discount's products
      * @return the discount's products
      */
-    List<StoreProduct> getProducts() {
+    public List<StoreProduct> getProducts() {
         List<StoreProduct> products = new ArrayList<>();
         for (Pack pack : this.packs) {
             products.addAll(pack.getProducts());

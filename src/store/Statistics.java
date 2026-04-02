@@ -217,6 +217,18 @@ public class Statistics {
 	}
 	
 	/**
+	 * Obtains the number of orders of each client
+	 * 
+	 * @return a HashMap of each client and its numbers of orders
+	 */
+	public HashMap<RegisteredClient, Integer> getUserAndOrders(){
+		HashMap<RegisteredClient, Integer> userOrders = new HashMap<>();
+		for(RegisteredClient rc : this.clients)
+			userOrders.put(rc, rc.getNumOrders());
+		return userOrders;
+	}
+	
+	/**
 	 * Makes a descending list of the number of exchanges of each client
 	 * 
 	 * @return  a descending list of registered clients
@@ -227,5 +239,18 @@ public class Statistics {
 							.reversed())
 							.collect(Collectors.toList());
 	}
+	
+	/**
+	 * Obtains the number of exchanges of each client
+	 * 
+	 * @return a HashMap of each client and its numbers of exchanges
+	 */
+	public HashMap<RegisteredClient, Integer> getUserAndExchanges(){
+		HashMap<RegisteredClient, Integer> userExchanges = new HashMap<>();
+		for(RegisteredClient rc : this.clients)
+			userExchanges.put(rc, rc.getNumExchanges());
+		return userExchanges;
+	}
+	
 	
 }

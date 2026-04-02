@@ -179,17 +179,28 @@ public class Statistics {
 	}
 	
 	
-	
 	/**
 	 * Obtains a list in descending order of store products based on their sales
 	 * 
 	 * @return a list of store products
 	 */
-	public List<StoreProduct> getSalesProducts() {
+	public List<StoreProduct> getProductsBySales() {
 		return this.storeProducts.stream()
 					.sorted(Comparator.comparingInt(StoreProduct::getSales)
 					.reversed())
 					.collect(Collectors.toList());
+	}
+	
+	/**
+	 * Obtains the sales of each store product
+	 * 
+	 * @return a HashMap of each store product and its sales
+	 */
+	public HashMap<StoreProduct, Integer> getProductsSales(){
+		HashMap<StoreProduct, Integer> productsAndSales = new HashMap<>();
+		for(StoreProduct sp : this.storeProducts)
+			productsAndSales.put(sp, sp.getSales());
+		return productsAndSales;
 	}
 	
 	/**

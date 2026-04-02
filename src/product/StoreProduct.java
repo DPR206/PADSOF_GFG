@@ -30,6 +30,7 @@ public abstract class StoreProduct extends Product {
     private HashMap<String, Category> categories = new HashMap<>();
     /** The date when the product was added to the cart */
     private LocalDate addedDate = null;
+    private int sales;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -64,7 +65,7 @@ public abstract class StoreProduct extends Product {
             this.categories.put(category.getName(), category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
-
+        this.sales = 0;
         Store.getInstance().addStoreProduct(this);
     }
 
@@ -95,7 +96,7 @@ public abstract class StoreProduct extends Product {
             this.addCategory(category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
-
+        this.sales = 0;
         Store.getInstance().addStoreProduct(this);
     }
 
@@ -175,6 +176,22 @@ public abstract class StoreProduct extends Product {
         reviews.put(author, review);
         this.averagePunctuation =
                 (((this.reviews.size() - 1) * this.averagePunctuation) + review.getScoring()) / this.reviews.size();
+    }
+
+    /**
+     * Increases the number of sales by one
+     */
+    public void increaseSales() {
+    	this.sales++;
+    }
+
+    /**
+     * Increases the number of sales by a certain number
+     *
+     * @param i the number of sales made (and to increase)
+     */
+    public void increaseSales(int i) {
+    	this.sales += i;
     }
 
     /**
@@ -319,6 +336,24 @@ public abstract class StoreProduct extends Product {
 
         this.stock = newStock;
     }
+
+    /**
+     * Obtains the number of items sold of a product
+     *
+	 * @return the sells the num
+	 */
+	public int getSales() {
+		return sales;
+	}
+
+	/**
+	 * Sets the number of sales of a product
+	 *
+	 * @param sales the sales to set
+	 */
+	public void setSales(int sales) {
+		this.sales = sales;
+	}
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 

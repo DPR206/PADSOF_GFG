@@ -14,7 +14,7 @@ import product.*;
  * It implements the statistics
  * 
  * @author Duna P.R.
- * @version 1.1
+ * @version 1.4.
  */
 public class Statistics {
 	private static Statistics INSTANCE;
@@ -23,6 +23,7 @@ public class Statistics {
 	private HashMap<Month, Double> revenueByMonth;
 	private List<RegisteredClient> clients;
 	private HashMap<String, Category> categories;
+	private List<StoreProduct> storeProducts;
 	private double revenue_valuation;
 	
 	/**
@@ -35,6 +36,7 @@ public class Statistics {
         }
 		this.clients = new ArrayList<>(Store.getInstance().getRegisteredClients().values());
 		this.categories = Store.getInstance().getCategories();
+		this.storeProducts = new ArrayList<>(Store.getInstance().getStoreProducts().values());
 		this.revenue_valuation = 0.0;
 		Statistics.total_revenue = 0.0;
 	}
@@ -123,6 +125,8 @@ public class Statistics {
 	}
 	
 	/**
+	 * Obtains the total revenue of the store
+	 * 
 	 * @return the total_revenue
 	 */
 	public static double getTotal_revenue() {
@@ -152,14 +156,51 @@ public class Statistics {
 	}
 
 	/**
-	 * Obtains the revenue by categories
+	 * Obtains the revenue of a category
 	 * 
-	 * @param name
-	 * @return
+	 * @param name the name of the category
+	 * @return the revenue made by that category
 	 */
 	public double getRevenueByCategory(String name)
 	{
 		return this.categories.get(name).getRevenue();
+	}
+	
+	/**
+	 * Obtains the revenues by category
+	 * 
+	 * @return a HashMap of each category and its revenue
+	 */
+	public HashMap<Category, Double> getRevenueAllCategories(){
+		HashMap<Category, Double> revenueCategories = new HashMap<>();
+		for(Category c : this.getCategories().values())
+			revenueCategories.put(c, c.getRevenue());
+		return revenueCategories;
+	}
+	
+	
+	/**
+	 * Obtains a list in descending order of store products based on their sales
+	 * 
+	 * @return a list of store products
+	 */
+	public List<StoreProduct> getProductsBySales() {
+		return this.storeProducts.stream()
+					.sorted(Comparator.comparingInt(StoreProduct::getSales)
+					.reversed())
+					.collect(Collectors.toList());
+	}
+	
+	/**
+	 * Obtains the sales of each store product
+	 * 
+	 * @return a HashMap of each store product and its sales
+	 */
+	public HashMap<StoreProduct, Integer> getProductsSales(){
+		HashMap<StoreProduct, Integer> productsAndSales = new HashMap<>();
+		for(StoreProduct sp : this.storeProducts)
+			productsAndSales.put(sp, sp.getSales());
+		return productsAndSales;
 	}
 	
 	/**
@@ -176,6 +217,18 @@ public class Statistics {
 	}
 	
 	/**
+	 * Obtains the number of orders of each client
+	 * 
+	 * @return a HashMap of each client and its numbers of orders
+	 */
+	public HashMap<RegisteredClient, Integer> getUserAndOrders(){
+		HashMap<RegisteredClient, Integer> userOrders = new HashMap<>();
+		for(RegisteredClient rc : this.clients)
+			userOrders.put(rc, rc.getNumOrders());
+		return userOrders;
+	}
+	
+	/**
 	 * Makes a descending list of the number of exchanges of each client
 	 * 
 	 * @return  a descending list of registered clients
@@ -186,5 +239,18 @@ public class Statistics {
 							.reversed())
 							.collect(Collectors.toList());
 	}
+	
+	/**
+	 * Obtains the number of exchanges of each client
+	 * 
+	 * @return a HashMap of each client and its numbers of exchanges
+	 */
+	public HashMap<RegisteredClient, Integer> getUserAndExchanges(){
+		HashMap<RegisteredClient, Integer> userExchanges = new HashMap<>();
+		for(RegisteredClient rc : this.clients)
+			userExchanges.put(rc, rc.getNumExchanges());
+		return userExchanges;
+	}
+	
 	
 }

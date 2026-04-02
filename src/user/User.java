@@ -1,5 +1,7 @@
 package user;
 
+import search.Searcher;
+
 /**
  * Class Name: User
  * <p>
@@ -18,7 +20,8 @@ public abstract class User {
     private String actualID;
     /** The user's user type */
     private final UserType type;
-
+    /** The user's searcher */
+    private Searcher searching;
 
     /**
      * Creates a new user
@@ -27,11 +30,12 @@ public abstract class User {
      * @param userName, the username of the user
      * @param actualID, the ID of the user
      */
-    public User(UserType type,String pwd, String userName, String actualID) {
+    public User(UserType type,String pwd, String userName, String actualID, boolean asc) {
         this.type = type;
         this.pwd = pwd;
         this.userName = userName;
         this.actualID = actualID;
+        this.searching = new Searcher(new SearchStoreProducts(asc));
     }
 
     /**
@@ -40,8 +44,8 @@ public abstract class User {
      * @param pwd,      the password of the user
      * @param userName, the username of the user
      */
-    public User(UserType type, String pwd, String userName) {
-        this(type, pwd, userName, type.getSymbol() + String.format("%06d", ++totalId));
+    public User(UserType type, String pwd, String userName, boolean asc) {
+        this(type, pwd, userName, type.getSymbol() + String.format("%06d", ++totalId), asc);
     }
 
     /**
@@ -68,6 +72,9 @@ public abstract class User {
         return this.pwd;
     }
 
+    public Searcher getSearcher(){
+        return this.searcher;
+    }
     /**
      * Gets the username of the user
      *

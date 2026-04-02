@@ -33,16 +33,24 @@ public class Employee extends User {
      * @param userName
      * @param p
      */
-    public Employee(String pwd, String userName, Permission p) {
-        super(UserType.EMPLOYEE, pwd, userName);
+    public Employee(String pwd, String userName, Permission p, boolean asc) {
+        super(UserType.EMPLOYEE, pwd, userName, asc);
         this.perm = p;
 
         if (p.getMeaning() == "store") {
             this.sp = new StorePermission();
+            this.getSearcher().setTypes(SearchType.S_STORE);
+
         } else if (p.getMeaning() == "exchange") {
             this.ep = new ExchangePermission();
+            if(this.sp) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE);
+            else this.getSearcher().setTypes(SearchType.S_EXCHANGE);
         } else {
             this.op = new OrderPermission();
+            if(this.sp && this.ep) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE, SearchType.S_ORDER);
+            else if(this.sp && !this.ep) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_ORDER);
+            else if(!this.sp && this.ep) this.getSearcher().setTypes(SearchType.S_EXCHANGE, SearchType.S_ORDER);
+            else this.getSearcher().setTypes(SearchType.S_ORDER);
         }
     }
     /*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/

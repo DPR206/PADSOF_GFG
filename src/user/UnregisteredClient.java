@@ -20,15 +20,17 @@ import store.Store;
 public class UnregisteredClient extends User {
     private Cart c;
     private Store s;
-    //searcher
+    private Searcher searcher;
 
     /**
      * Creates a new unregistered client
      */
-    public UnregisteredClient() {
-        super();
+    public UnregisteredClient(asc) {
+        super(UserType.UNREGISTERED_CLIENT, null, null, asc);
     	c = new Cart();
         s = Store.getInstance();
+
+        this.getSearcher().setTypes(SearchType.S_STORE);
     }
 
     public void buy() {

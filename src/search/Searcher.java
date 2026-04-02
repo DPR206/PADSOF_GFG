@@ -29,8 +29,26 @@ public class Searcher{
      * @param types, array of the types of searching that will be done
 	 */
     public Searcher(SearchStoreProducts searchStore, SearchType... types){
-        this.searchStore = searchStore;
+        this(searchStore);
         this.types = types;
+    }
+
+    /**
+	 * Creates the master class searcher
+	 *
+	 * @param searchStore, the class to search products
+	 */
+    public Searcher(SearchStoreProducts searchStore){
+        this.searchStore = searchStore;
+    }
+
+    /**
+	 * Sets the types
+	 *
+	 * @param st, the search types we want implemented in the class
+	 */
+    public void setTypes(SearchType... st){
+        this.types = st;
     }
 
      /**

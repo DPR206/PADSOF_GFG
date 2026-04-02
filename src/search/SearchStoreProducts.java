@@ -15,7 +15,6 @@ import product.StoreProduct;
     */
 public class SearchStoreProducts{
     private boolean ascendant;
-    private SearchType type;
     private PriceFilter priceF;
     private PunctuationFilter punctuationF;
     private Store s;
@@ -26,7 +25,7 @@ public class SearchStoreProducts{
 	 * @param asc, determines if the searches are ascendant or descendant
      * @param type, determines the type of search we are doing
 	 */
-    public SearchStoreProducts(boolean asc, SearchType type){
+    public SearchStoreProducts(boolean asc){
         this.ascendant = asc;
         this.type = type;
         this.sp = sp;

@@ -6,6 +6,7 @@ package user;
 import order.*;
 import product.*;
 import exchange.*;
+import search.*;
 
 import java.time.LocalDate;
 
@@ -38,14 +39,16 @@ public class RegisteredClient extends User {
      * @param dni          the user's dni
      * @param password     the user's password
      */
-    public RegisteredClient(String userName, LocalDate registerDate, String dni, String password) {
-        super(UserType.REGISTERED_CLIENT, userName, password);
+    public RegisteredClient(String userName, LocalDate registerDate, String dni, String password, boolean asc) {
+        super(UserType.REGISTERED_CLIENT, password, usernaName, asc);
         this.registerDate = registerDate;
         this.dni = dni;
         this.c = new Cart();
         this.exchangeHistory = new ExchangeHistory(this);
         this.orderHistory = new OrderHistory(this);
         this.wallet = new Wallet();
+
+        this.getSearcher().setTypes(SearchType.S_SECOND_HAND, SearchType.S_STORE);
     }
 
     /**
@@ -169,8 +172,6 @@ public class RegisteredClient extends User {
     public void deleteCart(Pack pack) {
     	this.c.cancelPack(pack);
     }
-
-    //public boolean buy() {}
 
     //requestValuation
     //makeAnOffer

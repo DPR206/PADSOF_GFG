@@ -1,6 +1,6 @@
 package user;
 
-import search.Searcher;
+import search.*;
 
 /**
  * Class Name: User
@@ -52,7 +52,7 @@ public abstract class User {
      * Creates a new user without id, password or username
      */
     public User() {
-        this(UserType.UNREGISTERED_CLIENT, null, null, UserType.UNKNOWN.getSymbol() + String.format("%06d", 0));
+        this(UserType.UNREGISTERED_CLIENT, null, null, UserType.UNKNOWN.getSymbol() + String.format("%06d", 0), true);
     }
 
     /**
@@ -73,7 +73,7 @@ public abstract class User {
     }
 
     public Searcher getSearcher(){
-        return this.searcher;
+        return this.searching;
     }
     /**
      * Gets the username of the user
@@ -87,11 +87,11 @@ public abstract class User {
     
     public void addPriceFilter(double min, double max){
         PriceFilter filter = new PriceFilter(min, max);
-        this.search.getStoreSearcher().addPriceFilter(min, max);
+        this.searching.getStoreSearcher().addPriceFilter(min, max);
     }
 
     public void addPunctuationFilter(int min, int max){
-        this.search.getStoreSearcher().addPunctuationFilter(min, max);
+        this.searching.getStoreSearcher().addPunctuationFilter(min, max);
     }
 
     

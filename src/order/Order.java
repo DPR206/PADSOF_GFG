@@ -1,12 +1,11 @@
 
 package order;
 
-import product.Pack;
-import product.StoreProduct;
+import product.*;
+import user.RegisteredClient;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class name: Order
@@ -46,8 +45,8 @@ public class Order {
      * Creates an order for when it hasn't been picked up
      * @param price, total price paid of the order
 	 */
-    public Order(double price, OrderState state, List<StoreProduct> sp, List<Pack> p){
-        this(Order.totalId, price, state, sp, p);
+    public Order(double price, OrderState state, List<StoreProduct> sp, List<Pack> p, RegisteredClient owner){
+        this(Order.totalId, price, state, sp, p, owner);
         Order.totalId++;
     }
 

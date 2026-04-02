@@ -29,6 +29,7 @@ public class PackDiscountFactory implements DiscountFactory {
     public PackDiscountFactory(Pack... targetPacks) {
         this.targetPacks = targetPacks;
     }
+
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**

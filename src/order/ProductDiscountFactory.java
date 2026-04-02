@@ -26,7 +26,7 @@ public class ProductDiscountFactory implements DiscountFactory {
      * Instantiates a new Product discount factory with a product selection
      * @param targetProducts the desired targetProducts
      */
-    ProductDiscountFactory(StoreProduct[] targetProducts) {
+    public ProductDiscountFactory(StoreProduct[] targetProducts) {
         this.targetProducts = targetProducts;
         this.overWholeStore = false;
     }
@@ -35,7 +35,7 @@ public class ProductDiscountFactory implements DiscountFactory {
      * Instantiates a new Product discount factory over the whole store
      * @param overWholeStore whether the discount is applied over all the store products or not
      */
-    ProductDiscountFactory(boolean overWholeStore) {
+    public ProductDiscountFactory(boolean overWholeStore) {
         this.overWholeStore = overWholeStore;
     }
 

@@ -47,7 +47,7 @@ public class Utility {
             System.out.print("Introduce tu DNI: ");
             dni = sc.next();
 
-            rc = new RegisteredClient(userName, dni, pwd);
+            rc = new RegisteredClient(userName, dni, pwd, true);
 
             u = rc;
             users.put(u.getUserName(), u);

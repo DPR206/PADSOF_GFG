@@ -162,14 +162,25 @@ public class SearchStoreProducts{
     private List<StoreProduct> filterByCategory(Category... c){ //para cada producto, buscar la categoría
         List<StoreProduct> aux = new ArrayList<>();
         List<StoreProduct> product = (List<StoreProduct>) this.s.getStoreProducts();
-        Store productCategories[] = null;
+        Category caux[];
         
-       
-        //luego lo implemento        
-      
+        for(Category cat: c) {
+        	/** Para cada categoría, busco productos que tengan ESA categoría*/
+        	for(StoreProduct sp: product) {
+        		/*Para cada producto, pillamos su categoría*/
+        		caux = sp.getCategories();
+        		/**Para cada categoría del producto, miramos si alguna coincide con cat*/
+        		for(Category cc: caux) {
+        			if(cc == cat) {
+        				aux.add(sp);
+        				break;
+        			}
+        		}
+        	}
+        }
+        List<StoreProduct> toReturn = new ArrayList<>(new LinkedHashSet<>(aux));
         
-
-        return aux;
+        return toReturn;
     }
     
     public void setAsc(boolean bool) {

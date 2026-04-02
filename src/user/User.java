@@ -84,6 +84,9 @@ public abstract class User {
         return this.userName;
     }
 
+    public void changeSearchOrder(boolean bool) {
+    	this.searching.changeProductOrder(bool);
+    }
     
     public void addPriceFilter(double min, double max){
         PriceFilter filter = new PriceFilter(min, max);

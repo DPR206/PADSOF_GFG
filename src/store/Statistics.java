@@ -156,16 +156,24 @@ public class Statistics {
 	/**
 	 * Obtains the revenue by categories
 	 * 
-	 * @param name
-	 * @return
+	 * @param name the name of the category
+	 * @return the revenue made by that category
 	 */
 	public double getRevenueByCategory(String name)
 	{
 		return this.categories.get(name).getRevenue();
 	}
 	
+	/**
+	 * Obtains a list in descending order of store products based on their sales
+	 * 
+	 * @return a list of store products
+	 */
 	public List<StoreProduct> getSalesProducts() {
-		return this.
+		return this.storeProducts.stream()
+					.sorted(Comparator.comparingInt(StoreProduct::getSales)
+					.reversed())
+					.collect(Collectors.toList());
 	}
 	
 	/**

@@ -129,6 +129,6 @@ public class ProductGift extends ProductDiscount implements GiftDiscount {
     public String toString() {
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;<GIFT;SPENDING_THRESHOLD>;NUM_PRODS;DEDUCTION */
         return super.toString() + ";"  /*percentage*/ + ";" + this.gift.getId() + ";" + this.spendingThreshold + ";"
-                /*udsThreshold*/ + ";" /*deduction*/;
+                /*numThreshold*/ + ";" /*deduction*/;
     }
 }

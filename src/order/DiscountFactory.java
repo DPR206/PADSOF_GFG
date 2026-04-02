@@ -17,10 +17,10 @@ public interface DiscountFactory {
     GiftDiscount createGiftDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                                     StoreProduct gift);
 
-    QuantityDiscount createQuantityDiscount(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold,
+    QuantityDiscount createQuantityDiscount(String id, LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
                                             double deduction);
 
-    QuantityDiscount createQuantityDiscount(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold,
+    QuantityDiscount createQuantityDiscount(LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
                                             double deduction);
 
     VolumeDiscount createVolumeDiscount(String id, LocalDateTime startDate, LocalDateTime endDate,

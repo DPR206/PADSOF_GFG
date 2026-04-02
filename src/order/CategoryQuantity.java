@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class CategoryQuantity extends CategoryDiscount implements QuantityDiscount {
     /** The amount of products, or packs, in a cart from which the discount can take place */
-    private int udsThreshold;
+    private int numThreshold;
     /** The amount of money the discount deducts from the order's final price */
     private double deduction;
 
@@ -17,15 +17,15 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
      * @param id           the discount's id
      * @param startDate    the date when the discount starts
      * @param endDate      the date when the discount ends
-     * @param udsThreshold the amount of products in a cart from which the discount can take place
+     * @param numThreshold the amount of products in a cart from which the discount can take place
      * @param deduction    the amount of money the discount deducts from the order's final price
      * @param categories   the discount's categories
      */
-    public CategoryQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int udsThreshold,
+    public CategoryQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
                             double deduction, Category... categories) {
         super(id, DiscountType.QUANTITY, DiscountCoverage.CATEGORY, startDate, endDate);
         this.addCategories(categories);
-        this.udsThreshold = udsThreshold;
+        this.numThreshold = numThreshold;
         this.deduction = deduction;
     }
 
@@ -33,15 +33,15 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
      * Instantiates a new quantity discount with categories
      * @param startDate    the date when the discount starts
      * @param endDate      the date when the discount ends
-     * @param udsThreshold the amount of products in a cart from which the discount can take place
+     * @param numThreshold the amount of products in a cart from which the discount can take place
      * @param deduction    the amount of money the discount deducts from the order's final price
      * @param categories   the discount's categories
      */
-    public CategoryQuantity(LocalDateTime startDate, LocalDateTime endDate, int udsThreshold, double deduction,
+    public CategoryQuantity(LocalDateTime startDate, LocalDateTime endDate, int numThreshold, double deduction,
                             Category... categories) {
         super(DiscountType.QUANTITY, DiscountCoverage.CATEGORY, startDate, endDate);
         this.addCategories(categories);
-        this.udsThreshold = udsThreshold;
+        this.numThreshold = numThreshold;
         this.deduction = deduction;
     }
 
@@ -72,17 +72,17 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
      * It gets the quantity discount's amount of products in a cart from which the discount can take place
      * @return the amount of products in a cart from which the discount can take place
      */
-    public int getUdsThreshold() {
-        return this.udsThreshold;
+    public int getnumThreshold() {
+        return this.numThreshold;
     }
 
     /**
      * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
      * take place
-     * @param udsThreshold the new amount of products in a cart from which the discount can take place
+     * @param numThreshold the new amount of products in a cart from which the discount can take place
      */
-    public void setUdsThreshold(int udsThreshold) {
-        this.udsThreshold = udsThreshold;
+    public void setnumThreshold(int numThreshold) {
+        this.numThreshold = numThreshold;
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
@@ -90,6 +90,6 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
     public String toString() {
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;SPENDING_THRESHOLD;<NUM_PRODS;DEDUCTION> */
         return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" +
-               this.udsThreshold + ";" + this.deduction;
+               this.numThreshold + ";" + this.deduction;
     }
 }

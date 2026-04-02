@@ -19,12 +19,12 @@ public interface QuantityDiscount {
      * It gets the quantity discount's amount of products in a cart from which the discount can take place
      * @return the amount of products in a cart from which the discount can take place
      */
-    int getUdsThreshold();
+    int getnumThreshold();
 
     /**
      * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
      * take place
-     * @param udsThreshold the new amount of products in a cart from which the discount can take place
+     * @param numThreshold the new amount of products in a cart from which the discount can take place
      */
-    void setUdsThreshold(int udsThreshold);
+    void setnumThreshold(int numThreshold);
 }

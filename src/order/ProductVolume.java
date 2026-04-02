@@ -124,7 +124,7 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;<SPENDING_THRESHOLD>;NUM_PRODS;
         <DEDUCTION> */
         return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" + this.spendingThreshold +
-               ";" /*udsThreshold
+               ";" /*numThreshold
          */ + ";" + this.deduction;
     }
 }

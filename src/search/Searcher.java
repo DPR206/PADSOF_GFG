@@ -150,4 +150,8 @@ public class Searcher{
         }
         return false;
     }
+    
+    private void changeProductOrder(boolean bool) {
+    	this.searchStore.setAsc(bool);
+    }
 }

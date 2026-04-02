@@ -171,4 +171,8 @@ public class SearchStoreProducts{
 
         return aux;
     }
+    
+    public void setAsc(boolean bool) {
+    	this.ascendant = bool;
+    }
 }

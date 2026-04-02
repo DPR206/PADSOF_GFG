@@ -3,6 +3,9 @@
  */
 package user;
 
+import product.Category;
+import java.util.List;
+
 import order.*;
 import product.Pack;
 import product.StoreProduct;
@@ -21,7 +24,6 @@ import search.*;
 public class UnregisteredClient extends User {
     private Cart c;
     private Store s;
-    private Searcher searcher;
 
     /**
      * Creates a new unregistered client
@@ -84,11 +86,11 @@ public class UnregisteredClient extends User {
     }
 
     public List<StoreProduct> searchStoreProduct(){
-        return this.search.searchStoreProduct();
+        return this.getSearcher().searchStoreProducts();
     }
 
     public List<StoreProduct> searchStoreProductByCategory(Category... c){
-        return this.search.searchByCategory(c);
+        return this.getSearcher().searchByCategory(c);
     }
 
 }

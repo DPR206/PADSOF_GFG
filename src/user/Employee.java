@@ -168,14 +168,30 @@ public class Employee extends User {
         return false;
     }
 
+    /**
+     * Searches for the store products based on the filters
+     * 
+     */
      public List<StoreProduct> searchStoreProduct(){
         return this.search.searchStoreProduct();
     }
 
+    /**
+     * Searches for the store products based on the filters and the categories
+     * 
+     * @param c, the array of categories
+     * 
+     */
     public List<StoreProduct> searchStoreProductByCategory(Category... c){
         return this.search.searchByCategory(c);
     }
 
+    /**
+     * Searches for the pack based on the id
+     * 
+     * @param id, id of the pack
+     * 
+     */
     public Pack searchPackByID(int id){
         return this.search.searchPackByID();
     }
@@ -184,10 +200,22 @@ public class Employee extends User {
         return this.search.searchEmployeeByID(id);
     }
 
+    /**
+     * Searches for the employee based on the id
+     * 
+     * @param id, id of the employee
+     * 
+     */
     public Order searchOrderByID(int id){
         return this.search.searchOrderByID(int id);
     }
 
+    /**
+     * Searches for the exchange based on the id
+     * 
+     * @param id, id of the exchange
+     * 
+     */
     public Exchange searchExchangeByID(int id){
         return this.search.searchExchangeByID(id);
     }

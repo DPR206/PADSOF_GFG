@@ -84,6 +84,7 @@ public abstract class User {
         return this.userName;
     }
 
+    
     public void addPriceFilter(double min, double max){
         PriceFilter filter = new PriceFilter(min, max);
         this.search.getStoreSearcher().addPriceFilter(min, max);

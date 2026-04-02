@@ -141,6 +141,7 @@ public class RegisteredClient extends User {
     /**
      * Adds a product to the cart
      * @param product, the product to add
+     * 
      */
     public void addCart(StoreProduct product) {
     	this.c.addProduct(product);
@@ -150,6 +151,7 @@ public class RegisteredClient extends User {
      * Adds a pack to the cart
      *
      * @param pack, the pack to add
+     * 
      */
     public void addCart(Pack pack) {
     	this.c.addPack(pack);
@@ -159,6 +161,7 @@ public class RegisteredClient extends User {
      * Removes a product from the cart
      *
      * @param product, the product to remove
+     * 
      */
     public void deleteCart(StoreProduct product){
     	this.c.cancelProduct(product);
@@ -168,19 +171,36 @@ public class RegisteredClient extends User {
      * Removes a pack from the cart
      *
      * @param pack, the pack to remove
+     * 
      */
     public void deleteCart(Pack pack) {
     	this.c.cancelPack(pack);
     }
 
+    /**
+     * Searches for the second hand products
+     *
+     * 
+     */
     public List<SecondHandProduct> searchSecondHandProducts(){
         return this.search.browseSecondHandProduct();
     }
 
+    /**
+     * Searches for the store products
+     *
+     * 
+     */
     public List<StoreProduct> searchStoreProduct(){
         return this.search.searchStoreProduct();
     }
 
+    /**
+     * Searches for the store products based on the categories
+     *
+     * @param c, categories that the products have that we want to search for
+     * 
+     */
     public List<StoreProduct> searchStoreProductByCategory(Category... c){
         return this.search.searchByCategory(c);
     }

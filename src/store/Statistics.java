@@ -125,6 +125,8 @@ public class Statistics {
 	}
 	
 	/**
+	 * Obtains the total revenue of the store
+	 * 
 	 * @return the total_revenue
 	 */
 	public static double getTotal_revenue() {
@@ -154,7 +156,7 @@ public class Statistics {
 	}
 
 	/**
-	 * Obtains the revenue by categories
+	 * Obtains the revenue of a category
 	 * 
 	 * @param name the name of the category
 	 * @return the revenue made by that category
@@ -163,6 +165,20 @@ public class Statistics {
 	{
 		return this.categories.get(name).getRevenue();
 	}
+	
+	/**
+	 * Obtains the revenues by category
+	 * 
+	 * @return a HashMap of each category and its revenue
+	 */
+	public HashMap<Category, Double> getRevenueAllCategories(){
+		HashMap<Category, Double> revenueCategories = new HashMap<>();
+		for(Category c : this.getCategories().values())
+			revenueCategories.put(c, c.getRevenue());
+		return revenueCategories;
+	}
+	
+	
 	
 	/**
 	 * Obtains a list in descending order of store products based on their sales

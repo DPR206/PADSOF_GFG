@@ -14,7 +14,7 @@ import product.*;
  * It implements the statistics
  * 
  * @author Duna P.R.
- * @version 1.1
+ * @version 1.4.
  */
 public class Statistics {
 	private static Statistics INSTANCE;
@@ -23,6 +23,7 @@ public class Statistics {
 	private HashMap<Month, Double> revenueByMonth;
 	private List<RegisteredClient> clients;
 	private HashMap<String, Category> categories;
+	private List<StoreProduct> storeProducts;
 	private double revenue_valuation;
 	
 	/**
@@ -35,6 +36,7 @@ public class Statistics {
         }
 		this.clients = new ArrayList<>(Store.getInstance().getRegisteredClients().values());
 		this.categories = Store.getInstance().getCategories();
+		this.storeProducts = new ArrayList<>(Store.getInstance().getStoreProducts().values());
 		this.revenue_valuation = 0.0;
 		Statistics.total_revenue = 0.0;
 	}
@@ -160,6 +162,10 @@ public class Statistics {
 	public double getRevenueByCategory(String name)
 	{
 		return this.categories.get(name).getRevenue();
+	}
+	
+	public List<StoreProduct> getSalesProducts() {
+		return this.
 	}
 	
 	/**

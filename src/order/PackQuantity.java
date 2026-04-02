@@ -6,6 +6,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class name: PackFixedPercentage
+ * <p>
+ * Description: It implements the Pack discount whose type is Quantity
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Pack
+ */
 public class PackQuantity extends PackDiscount implements QuantityDiscount {
     /** The amount of products, or packs, in a cart from which the discount can take place */
     private int numThreshold;
@@ -53,7 +61,6 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
 
     // DUE: public createNotification(){}
 
-    // DUE: public obtainDisc();
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -90,8 +97,13 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a discount
+     * @return the written information of a discount
+     */
     @Override
-    public String toString() {
+    public String toString() { // DUE
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;SPENDING_THRESHOLD;<NUM_PRODS;DEDUCTION> */
         return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" +
                this.numThreshold + ";" + this.deduction;

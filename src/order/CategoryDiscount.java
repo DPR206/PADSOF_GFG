@@ -2,7 +2,6 @@ package order;
 
 import product.Category;
 import product.StoreProduct;
-import store.Store;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,9 +13,8 @@ import java.util.List;
  * Description: It implements the general discount for those with Category coverage
  * @author Ana O.R.
  * @version 1.0
- * @see Store
- * @see StoreProduct
  * @see Category
+ * @see StoreProduct
  */
 public abstract class CategoryDiscount extends Discount {
     /** The list of categories affected by this discount */

@@ -2,7 +2,6 @@ package order;
 
 import product.Category;
 import product.StoreProduct;
-import store.Store;
 
 import java.time.LocalDateTime;
 
@@ -12,9 +11,8 @@ import java.time.LocalDateTime;
  * Description: It implements the factory for those with category coverage
  * @author Ana O.R.
  * @version 1.0
- * @see Store
- * @see StoreProduct
  * @see Category
+ * @see StoreProduct
  */
 public class CategoryDiscountFactory implements DiscountFactory {
     /** The category discount's desired categories */

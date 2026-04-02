@@ -1,14 +1,11 @@
 package order;
 
-import store.Store;
-
 /**
  * Interface name: FixedPercentageDiscount
  * <p>
  * Description: It defines the base Fixed Percentage discount's methods
  * @author Ana O.R.
  * @version 1.0
- * @see Store
  */
 public interface FixedPercentageDiscount {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

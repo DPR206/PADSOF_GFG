@@ -5,6 +5,15 @@ import product.StoreProduct;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: PackFixedPercentage
+ * <p>
+ * Description: It implements the Pack discount whose type is Gift
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Pack
+ * @see StoreProduct
+ */
 public class PackGift extends PackDiscount implements GiftDiscount {
     /** The product gifted to the client when a certain spending threshold is met */
     StoreProduct gift;
@@ -48,12 +57,8 @@ public class PackGift extends PackDiscount implements GiftDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    // DUE: createGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct
-    // gift) {}
-
     // DUE: public createNotification(){}
 
-    // DUE: public obtainDisc();
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -93,8 +98,13 @@ public class PackGift extends PackDiscount implements GiftDiscount {
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a discount
+     * @return the written information of a discount
+     */
     @Override
-    public String toString() {
+    public String toString() { // DUE
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;<GIFT;SPENDING_THRESHOLD>;NUM_PRODS;DEDUCTION */
         return super.toString() + ";"  /*percentage*/ + ";" + this.gift.getId() + ";" + this.spendingThreshold + ";"
                 /*numThreshold*/ + ";" /*deduction*/;

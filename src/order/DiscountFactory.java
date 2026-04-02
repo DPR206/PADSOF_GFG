@@ -1,7 +1,6 @@
 package order;
 
 import product.StoreProduct;
-import store.Store;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
  * Description: It defines the base discount constructors (without specific coverage)
  * @author Ana O.R.
  * @version 1.0
- * @see Store
  * @see StoreProduct
  */
 public interface DiscountFactory {

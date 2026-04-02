@@ -1,8 +1,6 @@
 package order;
 
 import product.Category;
-import product.StoreProduct;
-import store.Store;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +10,6 @@ import java.time.LocalDateTime;
  * Description: It implements the Category discount whose type is Fixed Percentage
  * @author Ana O.R.
  * @version 1.0
- * @see Store
- * @see StoreProduct
  * @see Category
  */
 public class CategoryFixedPercentage extends CategoryDiscount implements FixedPercentageDiscount {

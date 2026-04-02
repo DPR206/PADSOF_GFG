@@ -2,7 +2,6 @@ package order;
 
 import product.Pack;
 import product.StoreProduct;
-import store.Store;
 
 import java.time.LocalDateTime;
 
@@ -12,9 +11,8 @@ import java.time.LocalDateTime;
  * Description: It implements the factory for those with pack coverage
  * @author Ana O.R.
  * @version 1.0
- * @see Store
- * @see StoreProduct
  * @see Pack
+ * @see StoreProduct
  */
 public class PackDiscountFactory implements DiscountFactory {
     /** The pack discount's desired packs */

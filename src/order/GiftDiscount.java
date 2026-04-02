@@ -1,7 +1,6 @@
 package order;
 
 import product.StoreProduct;
-import store.Store;
 
 /**
  * Interface name: GiftDiscount
@@ -9,7 +8,6 @@ import store.Store;
  * Description: It defines the base Gift discount's methods
  * @author Ana O.R.
  * @version 1.0
- * @see Store
  * @see StoreProduct
  */
 public interface GiftDiscount {

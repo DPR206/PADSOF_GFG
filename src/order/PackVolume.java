@@ -4,6 +4,14 @@ import product.Pack;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: PackFixedPercentage
+ * <p>
+ * Description: It implements the Pack discount whose type is Volume
+ * @author Ana O.R.
+ * @version 1.0
+ * @see Pack
+ */
 public class PackVolume extends PackDiscount implements VolumeDiscount {
     /** The spending threshold that allows the discount to take place */
     private double spendingThreshold;
@@ -49,8 +57,6 @@ public class PackVolume extends PackDiscount implements VolumeDiscount {
 
     // DUE: public createNotification(){}
 
-    // DUE: public obtainDisc();
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -86,8 +92,13 @@ public class PackVolume extends PackDiscount implements VolumeDiscount {
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
+    /**
+     * Written information of a discount
+     * @return the written information of a discount
+     */
     @Override
-    public String toString() {
+    public String toString() { // DUE
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;<SPENDING_THRESHOLD>;NUM_PRODS;
         <DEDUCTION> */
         return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" + this.spendingThreshold +

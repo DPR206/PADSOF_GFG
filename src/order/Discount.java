@@ -43,19 +43,15 @@ public abstract class Discount {
      * @param coverage  the coverage
      * @param startDate the discount's start date
      * @param endDate   the discount's end date
-     * @throws IllegalArgumentException the illegal argument exception
+     * @throws IllegalArgumentException the dates weren't valid
      */
     public Discount(String id, DiscountType type, DiscountCoverage coverage, LocalDateTime startDate,
                     LocalDateTime endDate) throws IllegalArgumentException {
-        if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Start date is after end date");
-        }
-
         this.id = id;
         this.type = type;
         this.coverage = coverage;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.setStartDate(startDate);
+        this.setEndDate(endDate);
 
         Store.getInstance().getDiscounts().add(this);
     }
@@ -66,19 +62,16 @@ public abstract class Discount {
      * @param coverage  the coverage
      * @param startDate the discount's start date
      * @param endDate   the discount's end date
-     * @throws IllegalArgumentException the illegal argument exception
+     * @throws IllegalArgumentException the dates weren't valid
      */
     public Discount(DiscountType type, DiscountCoverage coverage, LocalDateTime startDate, LocalDateTime endDate)
             throws IllegalArgumentException {
-        if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("Start date is after end date");
-        }
 
         this.id = type.getSymbol() + String.format("%06d", ++totalId);
         this.type = type;
         this.coverage = coverage;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.setStartDate(startDate);
+        this.setEndDate(endDate);
 
         Store.getInstance().getDiscounts().add(this);
     }

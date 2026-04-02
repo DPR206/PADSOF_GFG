@@ -31,8 +31,8 @@ public abstract class Discount {
     private LocalDateTime startDate;
     /** The date when the discount ends */
     private LocalDateTime endDate;
-    /** Whether the discount has expired or not */
-    private boolean expired;
+    /** Whether the discount is disabled (due to expiration) or not */
+    private boolean disabled;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -104,7 +104,7 @@ public abstract class Discount {
         List<Discount> discounts = Store.getInstance().getDiscounts();
 
         for (Discount discount : discounts) {
-            if (discount != this) {
+            if ((discount != this) && (!discount.getDisabled())) {
                 List<StoreProduct> alreadyAffectedProducts = discount.getProducts();
                 if (discount.getCoverage() == DiscountCoverage.PRODUCT) {
                     ProductDiscount productDiscount = (ProductDiscount) discount;
@@ -123,22 +123,29 @@ public abstract class Discount {
     }
 
     /**
-     * Is gets whether the discount has expired
-     * @return true if it has expired, false otherwise
+     * It checks whether the desired discount can be added to the store without interfering with another
+     * @param overWholeStore whether the discount to be tested applies over the whole store, must be true
+     * @return true if it is conflicting, false otherwise
+     * @throws IllegalArgumentException overWholeStore must be true
      */
-    public boolean isExpired() {
-        return expired;
-    }
+    public boolean conflictingDisc(boolean overWholeStore) throws IllegalArgumentException {
+        if (!overWholeStore) {
+            throw new IllegalArgumentException("overWholeStore must be true");
+        }
 
-    /**
-     * It sets whether the discount has expired or not
-     * @param newExpired true if it has expired, false otherwise
-     */
-    public void setExpired(boolean newExpired) {
-        this.expired = newExpired;
-    }
+        List<Discount> discounts = Store.getInstance().getDiscounts();
 
-    // DUE: abstract createNotification(){}
+        for (Discount discount : discounts) {
+            if ((discount != this) && (!discount.getDisabled())) {
+                if (!discount.getProducts().isEmpty()) {
+                    return true;
+                }
+
+            }
+        }
+
+        return false;
+    }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
@@ -148,6 +155,24 @@ public abstract class Discount {
      */
     public DiscountCoverage getCoverage() {
         return coverage;
+    }
+
+    // DUE: abstract createNotification(){}
+
+    /**
+     * Is gets whether the discount has expired
+     * @return true if it is disabled, false otherwise
+     */
+    public boolean getDisabled() {
+        return this.disabled;
+    }
+
+    /**
+     * It sets whether the discount has expired or not
+     * @param newDisabled true if it is disabled, false otherwise
+     */
+    public void setDisabled(boolean newDisabled) {
+        this.disabled = newDisabled;
     }
 
     /**

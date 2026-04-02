@@ -4,6 +4,14 @@ import product.StoreProduct;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: ProductGift
+ * <p>
+ * Description: It implements the Product discount whose type is Gift
+ * @author Ana O.R.
+ * @version 1.0
+ * @see StoreProduct
+ */
 public class ProductGift extends ProductDiscount implements GiftDiscount {
     /** The product gifted to the client when a certain spending threshold is met */
     StoreProduct gift;
@@ -23,7 +31,7 @@ public class ProductGift extends ProductDiscount implements GiftDiscount {
      */
     public ProductGift(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                        StoreProduct gift, StoreProduct... products) {
-        super(DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
+        super(id, DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
         this.addProducts(products);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
@@ -40,8 +48,8 @@ public class ProductGift extends ProductDiscount implements GiftDiscount {
      */
     public ProductGift(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                        StoreProduct gift, boolean overWholeStore) {
-        super(DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
-        // this.addProducts(overWholeStore);
+        super(id, DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addWholeStore(overWholeStore);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }
@@ -73,7 +81,7 @@ public class ProductGift extends ProductDiscount implements GiftDiscount {
     public ProductGift(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
                        boolean overWholeStore) {
         super(DiscountType.GIFT, DiscountCoverage.PRODUCT, startDate, endDate);
-        //this.addProducts(overWholeStore);
+        this.addWholeStore(overWholeStore);
         this.spendingThreshold = spendingThreshold;
         this.gift = gift;
     }

@@ -3,11 +3,9 @@ package order;
 import product.Pack;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Class name: PackFixedPercentage
+ * Class name: PackQuantity
  * <p>
  * Description: It implements the Pack discount whose type is Quantity
  * @author Ana O.R.
@@ -19,8 +17,6 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
     private int numThreshold;
     /** The amount of money the discount deducts from the order's final price */
     private double deduction;
-    /** The list of packs affected by this discount */
-    private List<Pack> packs = new ArrayList<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -35,7 +31,7 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
      */
     public PackQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int numThreshold, double deduction,
                         Pack... packs) {
-        super(DiscountType.QUANTITY, DiscountCoverage.PACK, startDate, endDate);
+        super(id, DiscountType.QUANTITY, DiscountCoverage.PACK, startDate, endDate);
         this.addPacks(packs);
         this.numThreshold = numThreshold;
         this.deduction = deduction;
@@ -58,9 +54,6 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    // DUE: public createNotification(){}
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -70,6 +63,8 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
     public double getDeduction() {
         return this.deduction;
     }
+
+    // DUE: public createNotification(){}
 
     /**
      * It allows the manager to change the quantity discount's discount
@@ -83,17 +78,17 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
      * It gets the quantity discount's amount of products in a cart from which the discount can take place
      * @return the amount of products in a cart from which the discount can take place
      */
-    public int getnumThreshold() {
+    public int getNumThreshold() {
         return this.numThreshold;
     }
 
     /**
      * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
      * take place
-     * @param numThreshold the new amount of products in a cart from which the discount can take place
+     * @param newNumThreshold the new amount of products in a cart from which the discount can take place
      */
-    public void setnumThreshold(int numThreshold) {
-        this.numThreshold = numThreshold;
+    public void setNumThreshold(int newNumThreshold) {
+        this.numThreshold = newNumThreshold;
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

@@ -4,6 +4,14 @@ import product.StoreProduct;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: ProductVolume
+ * <p>
+ * Description: It implements the Product discount whose type is Volume
+ * @author Ana O.R.
+ * @version 1.0
+ * @see StoreProduct
+ */
 public class ProductVolume extends ProductDiscount implements VolumeDiscount {
     /** The spending threshold that allows the discount to take place */
     private double spendingThreshold;
@@ -23,7 +31,7 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
      */
     public ProductVolume(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                          double deduction, StoreProduct... products) {
-        super(DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
+        super(id, DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
         this.addProducts(products);
         this.spendingThreshold = spendingThreshold;
         this.deduction = deduction;
@@ -40,8 +48,8 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
      */
     public ProductVolume(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                          double deduction, boolean overWholeStore) {
-        super(DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
-        //this.addProducts(overWholeStore);
+        super(id, DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addWholeStore(overWholeStore);
         this.spendingThreshold = spendingThreshold;
         this.deduction = deduction;
     }
@@ -73,7 +81,7 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
     public ProductVolume(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
                          boolean overWholeStore) {
         super(DiscountType.VOLUME, DiscountCoverage.PRODUCT, startDate, endDate);
-        //this.addProducts(overWholeStore);
+        this.addWholeStore(overWholeStore);
         this.spendingThreshold = spendingThreshold;
         this.deduction = deduction;
     }

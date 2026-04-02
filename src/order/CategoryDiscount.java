@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class name: Category Discount
+ * Class name: CategoryDiscount
  * <p>
  * Description: It implements the general discount for those with Category coverage
  * @author Ana O.R.
@@ -67,6 +67,22 @@ public abstract class CategoryDiscount extends Discount {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * It gets the discount's categories
+     * @return the discount's categories
+     */
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    /**
+     * It sets the discount's categories
+     * @param newCategories the discount's new categories
+     */
+    public void setCategories(List<Category> newCategories) {
+        this.categories = newCategories;
+    }
 
     /**
      * It gets the discount's products

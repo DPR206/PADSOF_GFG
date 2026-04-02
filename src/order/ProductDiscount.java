@@ -20,7 +20,7 @@ public abstract class ProductDiscount extends Discount {
     /** The list of products affected by this discount */
     private List<StoreProduct> products = new ArrayList<>();
     /** Whether the discount is applied over the whole store or not */
-    private boolean overWholeStore;
+    private boolean overWholeStore = false;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -67,6 +67,23 @@ public abstract class ProductDiscount extends Discount {
         }
     }
 
+    /**
+     * It adds all the store's products to the discount
+     * @param overWholeStore whether the discount is applied over the whole store or not (must be true)
+     * @throws IllegalArgumentException the discount is conflicting
+     */
+    public void addWholeStore(boolean overWholeStore) throws IllegalArgumentException {
+        this.setOverWholeStore(overWholeStore);
+
+        if (conflictingDisc(true)) {
+            throw new IllegalArgumentException("Conflicting Discount");
+        }
+
+        for (StoreProduct product : products) {
+            product.setDiscount(this);
+        }
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -75,6 +92,14 @@ public abstract class ProductDiscount extends Discount {
      */
     public boolean getOverWholeStore() {
         return this.overWholeStore;
+    }
+
+    /**
+     * It sets whether the discount is applied over the whole store or not
+     * @param newOverWholeStore true if it is, false otherwise
+     */
+    public void setOverWholeStore(boolean newOverWholeStore) {
+        this.overWholeStore = newOverWholeStore;
     }
 
     /**

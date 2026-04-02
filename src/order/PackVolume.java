@@ -5,7 +5,7 @@ import product.Pack;
 import java.time.LocalDateTime;
 
 /**
- * Class name: PackFixedPercentage
+ * Class name: PackVolume
  * <p>
  * Description: It implements the Pack discount whose type is Volume
  * @author Ana O.R.
@@ -31,7 +31,7 @@ public class PackVolume extends PackDiscount implements VolumeDiscount {
      */
     public PackVolume(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                       double deduction, Pack... packs) {
-        super(DiscountType.VOLUME, DiscountCoverage.PACK, startDate, endDate);
+        super(id, DiscountType.VOLUME, DiscountCoverage.PACK, startDate, endDate);
         this.addPacks(packs);
         this.spendingThreshold = spendingThreshold;
         this.deduction = deduction;

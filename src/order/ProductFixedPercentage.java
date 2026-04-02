@@ -4,6 +4,14 @@ import product.StoreProduct;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: ProductFixedPercentage
+ * <p>
+ * Description: It implements the Product discount whose type is FixedPercentage
+ * @author Ana O.R.
+ * @version 1.0
+ * @see StoreProduct
+ */
 public class ProductFixedPercentage extends ProductDiscount implements FixedPercentageDiscount {
     /** The percentage deducted from a product's price */
     private double percentage;
@@ -38,7 +46,7 @@ public class ProductFixedPercentage extends ProductDiscount implements FixedPerc
     public ProductFixedPercentage(String id, LocalDateTime startDate, LocalDateTime endDate, double percentage,
                                   boolean overWholeStore) throws IllegalArgumentException {
         super(id, DiscountType.FIXED_PERCENTAGE, DiscountCoverage.PRODUCT, startDate, endDate);
-        // DUE: this.addProducts(overWholeStore);
+        this.addWholeStore(overWholeStore);
         this.setPercentage(percentage);
     }
 
@@ -68,7 +76,7 @@ public class ProductFixedPercentage extends ProductDiscount implements FixedPerc
     public ProductFixedPercentage(LocalDateTime startDate, LocalDateTime endDate, double percentage,
                                   boolean overWholeStore) throws IllegalArgumentException {
         super(DiscountType.FIXED_PERCENTAGE, DiscountCoverage.PRODUCT, startDate, endDate);
-        //this.addProducts(overWholeStore);
+        this.addWholeStore(overWholeStore);
         this.setPercentage(percentage);
     }
 

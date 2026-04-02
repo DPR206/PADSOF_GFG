@@ -6,7 +6,7 @@ import product.StoreProduct;
 import java.time.LocalDateTime;
 
 /**
- * Class name: PackFixedPercentage
+ * Class name: PackGift
  * <p>
  * Description: It implements the Pack discount whose type is Gift
  * @author Ana O.R.
@@ -30,13 +30,14 @@ public class PackGift extends PackDiscount implements GiftDiscount {
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param gift              the product gifted to the client when a certain spending threshold is met
      * @param packs             the discount's packs
+     * @throws IllegalArgumentException the illegal argument exception
      */
     public PackGift(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                    StoreProduct gift, Pack... packs) {
-        super(DiscountType.GIFT, DiscountCoverage.PACK, startDate, endDate);
+                    StoreProduct gift, Pack... packs) throws IllegalArgumentException {
+        super(id, DiscountType.GIFT, DiscountCoverage.PACK, startDate, endDate);
         this.addPacks(packs);
-        this.spendingThreshold = spendingThreshold;
-        this.gift = gift;
+        this.setSpendingThreshold(spendingThreshold);
+        this.setGift(gift);
     }
 
     /**
@@ -46,13 +47,14 @@ public class PackGift extends PackDiscount implements GiftDiscount {
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param gift              the product gifted to the client when a certain spending threshold is met
      * @param packs             the discount's products
+     * @throws IllegalArgumentException the illegal argument exception
      */
     public PackGift(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
-                    Pack... packs) {
+                    Pack... packs) throws IllegalArgumentException {
         super(DiscountType.GIFT, DiscountCoverage.PACK, startDate, endDate);
         this.addPacks(packs);
-        this.spendingThreshold = spendingThreshold;
-        this.gift = gift;
+        this.setSpendingThreshold(spendingThreshold);
+        this.setGift(gift);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -72,8 +74,12 @@ public class PackGift extends PackDiscount implements GiftDiscount {
     /**
      * It allows the manager to change a gift discount's gift
      * @param newGift the new gift
+     * @throws NullPointerException the gift wasn't provided
      */
-    public void setGift(StoreProduct newGift) {
+    public void setGift(StoreProduct newGift) throws NullPointerException {
+        if (newGift == null) {
+            throw new NullPointerException("The gift wasn't provided");
+        }
         this.gift = newGift;
     }
 

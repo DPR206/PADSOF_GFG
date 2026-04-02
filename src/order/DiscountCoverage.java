@@ -1,7 +1,7 @@
 package order;
 
 /**
- * Enum Name: DiscountType
+ * Enum Name: DiscountCoverage
  * <p>
  * Description: It defines the discount coverages
  * @author Ana O.R.

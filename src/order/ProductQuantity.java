@@ -4,6 +4,14 @@ import product.StoreProduct;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class name: ProductQuantity
+ * <p>
+ * Description: It implements the Product discount whose type is Quantity
+ * @author Ana O.R.
+ * @version 1.0
+ * @see StoreProduct
+ */
 public class ProductQuantity extends ProductDiscount implements QuantityDiscount {
     /** The amount of products, or packs, in a cart from which the discount can take place */
     private int numThreshold;
@@ -23,7 +31,7 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
      */
     public ProductQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
                            double deduction, StoreProduct... products) {
-        super(DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
+        super(id, DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
         this.addProducts(products);
         this.numThreshold = numThreshold;
         this.deduction = deduction;
@@ -40,10 +48,10 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
      */
     public ProductQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
                            double deduction, boolean overWholeStore) {
-        super(DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
-        //this.addProducts(overWholeStore);
-        this.numThreshold = numThreshold;
-        this.deduction = deduction;
+        super(id, DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
+        this.addWholeStore(overWholeStore);
+        this.setNumThreshold(numThreshold);
+        this.setDeduction(deduction);
     }
 
     /**
@@ -55,11 +63,11 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
      * @param products     the discount's products
      */
     public ProductQuantity(LocalDateTime startDate, LocalDateTime endDate, int numThreshold, double deduction,
-                           StoreProduct... products) {
+                           StoreProduct... products) throws IllegalArgumentException {
         super(DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
         this.addProducts(products);
-        this.numThreshold = numThreshold;
-        this.deduction = deduction;
+        this.setNumThreshold(numThreshold);
+        this.setDeduction(deduction);
     }
 
     /**
@@ -71,18 +79,17 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
      * @param overWholeStore whether the discount is applied over the whole store or not (must be true)
      */
     public ProductQuantity(LocalDateTime startDate, LocalDateTime endDate, int numThreshold, double deduction,
-                           boolean overWholeStore) {
+                           boolean overWholeStore) throws IllegalArgumentException {
         super(DiscountType.QUANTITY, DiscountCoverage.PRODUCT, startDate, endDate);
-        //this.addProducts(overWholeStore);
-        this.numThreshold = numThreshold;
-        this.deduction = deduction;
+        this.addWholeStore(overWholeStore);
+        this.setNumThreshold(numThreshold);
+        this.setDeduction(deduction);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     // DUE: public createNotification(){}
 
-    // DUE: public obtainDisc();
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -105,7 +112,7 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
      * It gets the quantity discount's amount of products in a cart from which the discount can take place
      * @return the amount of products in a cart from which the discount can take place
      */
-    public int getnumThreshold() {
+    public int getNumThreshold() {
         return this.numThreshold;
     }
 
@@ -114,7 +121,7 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
      * take place
      * @param numThreshold the new amount of products in a cart from which the discount can take place
      */
-    public void setnumThreshold(int numThreshold) {
+    public void setNumThreshold(int numThreshold) {
         this.numThreshold = numThreshold;
     }
 

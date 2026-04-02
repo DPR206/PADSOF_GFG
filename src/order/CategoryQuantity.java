@@ -101,6 +101,23 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
         this.numThreshold = numThreshold;
     }
 
+    /**
+     * It gets the discount's amount of products, or packs, in a cart from which the discount can take place
+     * @return the discount's amount of products, or packs, in a cart from which the discount can take place
+     */
+    public int getNumThreshold() {
+        return numThreshold;
+    }
+
+    /**
+     * It sets the discount's amount of products, or packs, in a cart from which the discount can take place
+     * @param newNumThreshold the discount's new amount of products, or packs, in a cart from which the discount can
+     *                        take place
+     */
+    public void setNumThreshold(int newNumThreshold) {
+        this.numThreshold = newNumThreshold;
+    }
+
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 
     /**

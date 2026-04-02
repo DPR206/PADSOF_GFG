@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 public class CategoryDiscountFactory implements DiscountFactory {
     /** The category discount's desired categories */
-    private Category[] targetCategories;
+    private final Category[] targetCategories;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

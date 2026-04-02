@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 public class PackDiscountFactory implements DiscountFactory {
     /** The pack discount's desired packs */
-    private Pack[] targetPacks;
+    private final Pack[] targetPacks;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

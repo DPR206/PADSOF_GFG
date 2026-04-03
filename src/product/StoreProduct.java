@@ -1,6 +1,5 @@
 package product;
 
-import order.Discount;
 import order.Order;
 import store.Pager;
 import store.Store;
@@ -8,6 +7,8 @@ import user.RegisteredClient;
 
 import java.time.*;
 import java.util.*;
+
+import discount.Discount;
 
 /**
  * It implements the store's products

@@ -10,6 +10,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import discount.Discount;
+import discount.FixedPercentageDiscount;
+import discount.GiftDiscount;
+import discount.VolumeDiscount;
+
 /**
  * It implements the packs
  * @author Duna P.R.

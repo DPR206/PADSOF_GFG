@@ -1,16 +1,16 @@
-package order;
+package discount;
 
-import product.Category;
+import product.Pack;
 
 import java.time.LocalDateTime;
 
 /**
- * It implements the Category discount whose type is Volume
+ * It implements the Pack discount whose type is Volume
  * @author Ana O.R.
  * @version 1.0
- * @see Category
+ * @see Pack
  */
-public class CategoryVolume extends CategoryDiscount implements VolumeDiscount {
+public class PackVolume extends PackDiscount implements VolumeDiscount {
     /** The spending threshold that allows the discount to take place */
     private double spendingThreshold;
     /** The amount of money the discount deducts from the order's final price */
@@ -19,38 +19,36 @@ public class CategoryVolume extends CategoryDiscount implements VolumeDiscount {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * A volume discount's general constructor with categories
+     * A volume discount's general constructor with packs
      * @param id                the discount's id
      * @param startDate         the date when the discount starts
      * @param endDate           the date when the discount ends
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param deduction         the amount of money the discount deducts from the order's final price
-     * @param categories        the discount's categories
-     * @throws IllegalArgumentException the illegal argument exception
+     * @param packs             the discount's packs
      */
-    public CategoryVolume(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                          double deduction, Category... categories) throws IllegalArgumentException {
-        super(id, DiscountType.VOLUME, DiscountCoverage.CATEGORY, startDate, endDate);
-        this.addCategories(categories);
-        this.setSpendingThreshold(spendingThreshold);
-        this.setDeduction(deduction);
+    public PackVolume(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
+                      double deduction, Pack... packs) {
+        super(id, DiscountType.VOLUME, DiscountCoverage.PACK, startDate, endDate);
+        this.addPacks(packs);
+        this.spendingThreshold = spendingThreshold;
+        this.deduction = deduction;
     }
 
     /**
-     * Instantiates a new Volume discount with categories
+     * Instantiates a new Volume discount with packs
      * @param startDate         the date when the discount starts
      * @param endDate           the date when the discount ends
      * @param spendingThreshold the spending threshold that allows the discount to take place
      * @param deduction         the amount of money the discount deducts from the order's final price
-     * @param categories        the discount's categories
-     * @throws IllegalArgumentException the illegal argument exception
+     * @param packs             the discount's packs
      */
-    public CategoryVolume(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
-                          Category... categories) throws IllegalArgumentException {
-        super(DiscountType.VOLUME, DiscountCoverage.CATEGORY, startDate, endDate);
-        this.addCategories(categories);
-        this.setSpendingThreshold(spendingThreshold);
-        this.setDeduction(deduction);
+    public PackVolume(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, double deduction,
+                      Pack... packs) {
+        super(DiscountType.VOLUME, DiscountCoverage.PACK, startDate, endDate);
+        this.addPacks(packs);
+        this.spendingThreshold = spendingThreshold;
+        this.deduction = deduction;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -70,12 +68,8 @@ public class CategoryVolume extends CategoryDiscount implements VolumeDiscount {
     /**
      * It allows the manager to change the volume discount's discount
      * @param newDeduction the new deduction
-     * @throws IllegalArgumentException the deduction must be greater than 0
      */
-    public void setDeduction(double newDeduction) throws IllegalArgumentException {
-        if (newDeduction <= 0) {
-            throw new IllegalArgumentException("The deduction must be greater than 0");
-        }
+    public void setDeduction(double newDeduction) {
         this.deduction = newDeduction;
     }
 
@@ -90,12 +84,8 @@ public class CategoryVolume extends CategoryDiscount implements VolumeDiscount {
     /**
      * It allows the manager to change the volume discount's spending threshold
      * @param spendingThreshold the new spending threshold
-     * @throws IllegalArgumentException the spending threshold must be greater than 0
      */
-    public void setSpendingThreshold(double spendingThreshold) throws IllegalArgumentException {
-        if (spendingThreshold < 0) {
-            throw new IllegalArgumentException("The spending threshold must be greater than 0");
-        }
+    public void setSpendingThreshold(double spendingThreshold) {
         this.spendingThreshold = spendingThreshold;
     }
 

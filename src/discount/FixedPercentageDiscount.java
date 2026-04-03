@@ -1,4 +1,4 @@
-package order;
+package discount;
 
 /**
  * It defines the base Fixed Percentage discount's methods

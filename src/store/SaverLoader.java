@@ -10,6 +10,9 @@ import java.io.*;
 import java.time.*;
 import java.util.*;
 
+import discount.Discount;
+import discount.DiscountType;
+
 /**
  * It implements the store's saver and loader
  * @author Ana O.R. and Sofía C.L.

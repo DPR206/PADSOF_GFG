@@ -4,6 +4,11 @@ import order.*;
 
 import java.time.LocalDateTime;
 
+import discount.Discount;
+import discount.DiscountCoverage;
+import discount.DiscountType;
+import discount.ProductDiscount;
+
 /**
  * It implements the discount notification
  *

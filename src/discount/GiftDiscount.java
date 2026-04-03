@@ -1,4 +1,4 @@
-package order;
+package discount;
 
 import product.StoreProduct;
 

@@ -1,22 +1,20 @@
-package order;
+package discount;
 
 /**
- * It defines the discount types
+ * It defines the discount coverages
  * @author Ana O.R.
  * @version 1.0
  */
-public enum DiscountType {
-    /** Fixed percentage discount type */
-    FIXED_PERCENTAGE("F"),
-    /** Gift discount type */
-    GIFT("G"),
-    /** Quantity discount type */
-    QUANTITY("Q"),
-    /** Volume discount type */
-    VOLUME("V");
+public enum DiscountCoverage {
+    /** Category discount coverage */
+    CATEGORY("CA"),
+    /** Pack discount coverage */
+    PACK("PA"),
+    /** Product discount coverage */
+    PRODUCT("PR");
 
     /**
-     * The characters that define this type in the save file
+     * The characters that define this coverage in the save file
      */
     private final String symbol;
 
@@ -26,7 +24,7 @@ public enum DiscountType {
      * A discount type's constructor
      * @param symbol the symbol that defines said enumeration
      */
-    DiscountType(String symbol) {
+    DiscountCoverage(String symbol) {
         this.symbol = symbol;
     }
 

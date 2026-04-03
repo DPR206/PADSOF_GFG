@@ -2,13 +2,14 @@ package store;
 
 import exchange.Exchange;
 import exchange.Offer;
-import order.Discount;
 import order.Order;
 import product.*;
 import user.*;
 import utilities.Utility;
 
 import java.util.*;
+
+import discount.Discount;
 
 // DUE: Falta el @see
 

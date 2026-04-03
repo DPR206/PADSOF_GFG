@@ -7,6 +7,18 @@ import store.Store;
 
 import java.time.LocalDateTime;
 
+import discount.CategoryDiscountFactory;
+import discount.FixedPercentageDiscount;
+import discount.GiftDiscount;
+import discount.PackDiscountFactory;
+import discount.ProductDiscountFactory;
+import discount.ProductFixedPercentage;
+import discount.ProductGift;
+import discount.ProductQuantity;
+import discount.ProductVolume;
+import discount.QuantityDiscount;
+import discount.VolumeDiscount;
+
 /**
  * It implements the manager of the store
  * @author Sofía C.L.

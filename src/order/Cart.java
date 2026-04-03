@@ -6,6 +6,9 @@ import user.RegisteredClient;
 import java.time.*;
 import java.util.*;
 
+import discount.DiscountType;
+import discount.QuantityDiscount;
+
 /**
  * Cart, array of products and packs the user has not paid yet
  * @author Sofía C.L. and Ana O.R.

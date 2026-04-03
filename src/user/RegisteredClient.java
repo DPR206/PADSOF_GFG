@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * It implements the registered client
  * @author Duna P.R.
- * @version 1.0
+ * @version 2.0
  * @see User
  */
 public class RegisteredClient extends User {
@@ -26,12 +26,12 @@ public class RegisteredClient extends User {
     private OrderHistory op;
     private Wallet wallet;
     private OrderHistory orderHistory;
+    private OfferHistory offerHistory;
     private Searcher searcher;
     private int numOrders;
     private int numExchanges;
 
     //sugestioner
-    //offerhistory
 
     /**
      * Creates a new RegisteredClient
@@ -47,6 +47,7 @@ public class RegisteredClient extends User {
         this.c = new Cart();
         this.exchangeHistory = new ExchangeHistory(this);
         this.orderHistory = new OrderHistory(this);
+        this.offerHistory = new OfferHistory(this);
         this.wallet = new Wallet();
         this.searcher = new Searcher(new SearchStoreProducts(true));
         this.numExchanges = 0;
@@ -124,7 +125,16 @@ public class RegisteredClient extends User {
         return this.op;
     }
 
-    /**
+	/**
+	 * Obtains the offer history
+	 * 
+	 * @return the offer history
+	 */
+	public OfferHistory getOfferHistory() {
+		return offerHistory;
+	}
+
+	/**
      * Obtains the cart of a client
      * 
 	 * @return the cart
@@ -285,4 +295,5 @@ public class RegisteredClient extends User {
     public String toString() {
         return super.toString();
     }
+
 }

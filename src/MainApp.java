@@ -65,6 +65,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 main();
+                break;
         }
 
     }
@@ -95,6 +96,7 @@ public class MainApp {
             default: // Este NO debería saltar nunca, lo pongo por si acaso
                 System.out.println("You shouldn't be able to see this :(");
                 main();
+                break;
         }
     }
 
@@ -135,6 +137,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 unregisteredClientLoop();
+                break;
         }
     }
 
@@ -211,6 +214,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 unregisteredClientOrderLoop();
+                break;
         }
     }
 
@@ -242,6 +246,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 unregisteredClientLoop();
+                break;
         }
     }
 
@@ -298,6 +303,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 unregisteredSeeProduct(productNum, this.currentScreenPageNum);
+                break;
         }
 
     }
@@ -358,6 +364,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 unregisteredSeeReviews(product, productNum);
+                break;
         }
     }
 
@@ -554,6 +561,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 managerLoop();
+                break;
         }
     }
 
@@ -607,6 +615,7 @@ public class MainApp {
                     default: // Este NO debería saltar nunca, lo pongo por si acaso
                         System.out.println("You shouldn't be able to see this :(");
                         manageStoreProducts();
+                        break;
                 }
 
                 break;
@@ -632,6 +641,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 manageStoreProducts();
+                break;
         }
     }
 
@@ -682,7 +692,7 @@ public class MainApp {
                 comic.setStock(newStock);
                 break;
             case 6:
-                managerCategoryChanger();
+                managerCategoryChanger(comic);
                 break;
             case 7:
                 System.out.println("Enter the product's new Number of pages:");
@@ -716,6 +726,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 managerManageComic(comic);
+                break;
         }
     }
 
@@ -765,7 +776,7 @@ public class MainApp {
                 game.setStock(newStock);
                 break;
             case 6:
-                managerCategoryChanger();
+                managerCategoryChanger(game);
                 break;
             case 7:
                 System.out.println("Enter the product's new Number of players:");
@@ -796,6 +807,7 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 managerManageGame(game);
+                break;
         }
     }
 
@@ -845,7 +857,7 @@ public class MainApp {
                 figurine.setStock(newStock);
                 break;
             case 6:
-                managerCategoryChanger();
+                managerCategoryChanger(figurine);
                 break;
             case 7:
                 System.out.println("Enter the product's new Brand:");
@@ -874,11 +886,68 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 managerManageFigurine(figurine);
+                break;
         }
     }
 
-    private void managerCategoryChanger() {
-        // DUE
+    private void managerCategoryChanger(StoreProduct storeProduct) throws IOException {
+        String categoryName, newCategoryName;
+        Category category, newCategory;
+        System.out.print("\n ---- managerCategoryChanger ---- \n"); // Es para debug, borrar
+        System.out.println("What do you wish to do? (enter the nº)");
+        System.out.println("\t[1] Replace an existing product's category");
+        System.out.println("\t[2] Add a new category to the product");
+        System.out.println("\t[3] Remove a product's category");
+        chosenOption = scanner.nextInt();
+        switch (chosenOption) {
+            case 1:
+                System.out.println("Which category do you want to change? (enter its name):");
+                categoryName = scanner.next();
+                category = Store.getInstance().getCategoryFromName(categoryName);
+                if (category == null) {
+                    System.out.println("A category which such a name doesn't exist, reloading...");
+                    managerCategoryChanger(storeProduct);
+                    break;
+                }
+                System.out.println("Enter the replacement category's name:");
+                newCategoryName = scanner.next();
+                newCategory = Store.getInstance().getCategoryFromName(categoryName);
+                if (newCategory == null) {
+                    System.out.println("A category which such a name doesn't exist, reloading...");
+                    managerCategoryChanger(storeProduct);
+                    break;
+                }
+                storeProduct.removeCategory(category);
+                storeProduct.addCategory(newCategory);
+                break;
+            case 2:
+                System.out.println("Which category do you want to add? (enter its name):");
+                categoryName = scanner.next();
+                category = Store.getInstance().getCategoryFromName(categoryName);
+                if (category == null) {
+                    System.out.println("A category which such a name doesn't exist, reloading...");
+                    managerCategoryChanger(storeProduct);
+                    break;
+                }
+                storeProduct.addCategory(category);
+                break;
+            case 3:
+                System.out.println("Which category do you want to add? (enter its name):");
+                categoryName = scanner.next();
+                category = Store.getInstance().getCategoryFromName(categoryName);
+                if (category == null) {
+                    System.out.println("A category which such a name doesn't exist, reloading...");
+                    managerCategoryChanger(storeProduct);
+                    break;
+                }
+                storeProduct.removeCategory(category);
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                managerCategoryChanger(storeProduct);
+                break;
+        }
+
     }
 
     private void managerAddStoreProduct() {
@@ -963,10 +1032,11 @@ public class MainApp {
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 manageParameters();
+                break;
         }
     }
 
-    private void managerSeeProfile() {
+    private void managerSeeProfile() { // DUE: Que esto sea opción en todos los loops de manager:/
         System.out.print("\n ---- managerSeeProfile ---- \n"); // Es para debug, borrar
         // DUE
     }

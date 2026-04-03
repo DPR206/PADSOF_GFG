@@ -1,11 +1,11 @@
 import order.Cart;
 import product.StoreProduct;
-import store.Pager;
-import store.Store;
+import store.*;
 import user.*;
 
 import java.io.IOException;
 import java.time.LocalTime;
+import java.time.Period;
 import java.util.List;
 import java.util.Scanner;
 
@@ -510,9 +510,10 @@ public class MainApp {
         System.out.println("\t[5] Generate statistics");
         System.out.println("\t[6] Manage discounts");
         System.out.println("\t[7] Manage parameters");
-        System.out.println("\t[8] <- Go back");
-        System.out.println("\t[9] <<- Go to main page");
-        System.out.println("\t[10] x Exit app");
+        System.out.println("\t[8] See profile");
+        System.out.println("\t[9] <- Go back");
+        System.out.println("\t[10] <<- Go to main page");
+        System.out.println("\t[11] x Exit app");
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -537,10 +538,13 @@ public class MainApp {
             case 7:
                 manageParameters();
                 break;
-            case 8, 9:
+            case 8:
+                managerSeeProfile();
+                break;
+            case 9, 10:
                 main();
                 break;
-            case 10:
+            case 11:
                 exit();
                 break;
             default:
@@ -579,8 +583,73 @@ public class MainApp {
         // DUE
     }
 
-    private void manageParameters() {
+    private void manageParameters() throws IOException {
         System.out.print("\n ---- manageParameters ---- \n"); // Es para debug, borrar
+        Manager manager = (Manager) currentUser;
+        System.out.println("What do you wish to change? (enter the nº)");
+        System.out.println("\t[1] Items per page: [" + Parameter.getParam().getItemsPerPage() + "]");
+        System.out.println(
+                "\t[2] Score a parameter: [" + Parameter.getParam().getScoreAParam() + "] <- scoreWeight = " +
+                "a*<score> + b");
+        System.out.println(
+                "\t[3] Score b parameter: [" + Parameter.getParam().getScoreBParam() + "] <- scoreWeight = " +
+                "a*<score> + b");
+        System.out.println("\t[4] Offer time: [" + Parameter.getParam().getOfferTime() + "]");
+        System.out.println("\t[5] Order time: [" + Parameter.getParam().getOrderTime() + "]");
+        System.out.println("\t[6] Valuation cost: [" + Parameter.getParam().getValuationCost() + "]");
+        System.out.println("\t[7] <- Go back");
+        System.out.println("\t[8] <<- Go to main page");
+        System.out.println("\t[9] x Exit app");
+        int chosenOption3 = scanner.nextInt();
+
+        switch (chosenOption3) {
+            case 1:
+                System.out.println("Enter the new Items per page value:");
+                int newItemsPerPage = scanner.nextInt();
+                manager.changeItemsPerPage(newItemsPerPage);
+                break;
+            case 2:
+                System.out.println("Enter the new Score a parameter value:");
+                int newScoreAParam = scanner.nextInt();
+                manager.changeScoreAParam(newScoreAParam);
+                break;
+            case 3:
+                System.out.println("Enter the new Score b parameter value:");
+                int newScoreBParam = scanner.nextInt();
+                manager.changeScoreBParam(newScoreBParam);
+                break;
+            case 4:
+                System.out.println("Enter the new Offer time:");
+                Period newOfferTime = Period.parse(scanner.next());
+                manager.changeOfferTime(newOfferTime);
+                break;
+            case 5:
+                System.out.println("Enter the new Order time:");
+                Period newOrderTime = Period.parse(scanner.next());
+                manager.changeOrderTime(newOrderTime);
+                break;
+            case 6:
+                System.out.println("Enter the new Valuation cost:");
+                double newValuationCost = scanner.nextDouble();
+                manager.changeValuationCost(newValuationCost);
+                break;
+            case 7:
+                managerLoop();
+                break;
+            case 8:
+                main();
+                break;
+            case 9:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                manageParameters();
+        }
+    }
+
+    private void managerSeeProfile() {
+        System.out.print("\n ---- managerSeeProfile ---- \n"); // Es para debug, borrar
         // DUE
     }
 

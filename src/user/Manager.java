@@ -1,23 +1,12 @@
 package user;
 
-import order.*;
+import discount.*;
 import product.*;
 import store.Parameter;
 import store.Store;
 
 import java.time.LocalDateTime;
-
-import discount.CategoryDiscountFactory;
-import discount.FixedPercentageDiscount;
-import discount.GiftDiscount;
-import discount.PackDiscountFactory;
-import discount.ProductDiscountFactory;
-import discount.ProductFixedPercentage;
-import discount.ProductGift;
-import discount.ProductQuantity;
-import discount.ProductVolume;
-import discount.QuantityDiscount;
-import discount.VolumeDiscount;
+import java.time.Period;
 
 /**
  * It implements the manager of the store
@@ -270,5 +259,53 @@ public class Manager extends User {
         }
 
         return factory.createVolumeDiscount(startDate, endDate, spendingThreshold, deduction);
+    }
+
+    /**
+     * Change the expiration of an offer parameter
+     * @param newOfferTime the new offer time
+     */
+    public void changeOfferTime(Period newOfferTime) {
+        Parameter.getParam().changeOfferTime(newOfferTime);
+    }
+
+    /**
+     * Change the expiration of an order parameter
+     * @param newOrderTime the new order time
+     */
+    public void changeOrderTime(Period newOrderTime) {
+        Parameter.getParam().changeOrderTime(newOrderTime);
+    }
+
+    /**
+     * Change the valuation cost parameter
+     * @param newCost the new cost
+     */
+    public void changeValuationCost(double newCost) {
+        Parameter.getParam().changeValuationCost(newCost);
+    }
+
+    /**
+     * It changes the score a param (scoreWeight = a*score + b)
+     * @param newScoreAParam the new score a param
+     */
+    public void changeScoreAParam(double newScoreAParam) {
+        Parameter.getParam().changeScoreAParam(newScoreAParam);
+    }
+
+    /**
+     * It changes the score b param (weightedScore = a*score + b)
+     * @param newScoreBParam the new score b param
+     */
+    public void changeScoreBParam(double newScoreBParam) {
+        Parameter.getParam().changeScoreBParam(newScoreBParam);
+    }
+
+    /**
+     * It changes the number of lines that can be printed from a certain list parameter
+     * @param newItemsPerPage the new number of lines that can be printed from a certain list
+     */
+    public void changeItemsPerPage(int newItemsPerPage) {
+        Parameter.getParam().changeItemsPerPage(newItemsPerPage);
     }
 }

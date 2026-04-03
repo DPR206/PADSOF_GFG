@@ -117,7 +117,7 @@ public class Parameter {
 	 * It sets the score a param (scoreWeight = a*score + b)
 	 * @param newScoreAParam the new score a param
 	 */
-	public void setScoreAParam(double newScoreAParam) {
+    private void setScoreAParam(double newScoreAParam) {
 		this.scoreAParam = newScoreAParam;
 	}
 
@@ -133,7 +133,7 @@ public class Parameter {
 	 * It gets the score b param (weightedScore = a*score + b)
 	 * @param newScoreBParam the new score b param
 	 */
-	public void setScoreBParam(double newScoreBParam) {
+    private void setScoreBParam(double newScoreBParam) {
 		this.scoreBParam = newScoreBParam;
 	}
 
@@ -149,7 +149,7 @@ public class Parameter {
 	 * It sets the number of lines that can be printed from a certain list
 	 * @param newItemsPerPage the new number of lines that can be printed from a certain list
 	 */
-	public void setItemsPerPage(int newItemsPerPage) {
+    private void setItemsPerPage(int newItemsPerPage) {
 		this.itemsPerPage = newItemsPerPage;
 	}
 
@@ -177,6 +177,30 @@ public class Parameter {
 	 */
 	public void changeValuationCost(double newCost) {
 		this.setValuationCost(newCost);
+	}
+
+	/**
+	 * It changes the score a param (scoreWeight = a*score + b)
+	 * @param newScoreAParam the new score a param
+	 */
+	public void changeScoreAParam(double newScoreAParam) {
+		this.setScoreAParam(newScoreAParam);
+	}
+
+	/**
+	 * It changes the score b param (weightedScore = a*score + b)
+	 * @param newScoreBParam the new score b param
+	 */
+	public void changeScoreBParam(double newScoreBParam) {
+		this.setScoreBParam(newScoreBParam);
+	}
+
+	/**
+	 * It changes the number of lines that can be printed from a certain list
+	 * @param newItemsPerPage the new number of lines that can be printed from a certain list
+	 */
+	public void changeItemsPerPage(int newItemsPerPage) {
+		this.setItemsPerPage(newItemsPerPage);
 	}
 
 	/**

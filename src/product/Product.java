@@ -80,6 +80,13 @@ public abstract class Product {
     }
 
     /**
+     * It prints the product's info when managed
+     */
+    public void printAllInfo() {
+        this.bigPrintInfo();
+    }
+
+    /**
      * It prints the product's info when showcased as list
      */
     public String smallPrintInfo() {

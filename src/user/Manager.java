@@ -7,6 +7,7 @@ import store.Store;
 
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.List;
 
 /**
  * It implements the manager of the store
@@ -34,6 +35,10 @@ public class Manager extends User {
             Manager.INSTANCE = new Manager("password", "manager", new StorePermission(), Parameter.getParam(), true);
         }
         return Manager.INSTANCE;
+    }
+
+    public List<StoreProduct> searchStoreProduct() {
+        return null; // DUE
     }
 
     public Manager getIntializedManager() {

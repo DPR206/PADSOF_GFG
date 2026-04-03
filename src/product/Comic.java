@@ -70,6 +70,32 @@ public class Comic extends StoreProduct {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It prints the product's info when seen individually
+     */
+    @Override
+    public void bigPrintInfo() {
+        /* super;<NUM_PAGES;AUTHOR;EDITORIAL;YEAR>;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
+        super.bigPrintInfo();
+        System.out.println("Number of pages: " + this.numPages);
+        System.out.println("Author: " + this.author);
+        System.out.println("Editorial: " + this.editorial);
+        System.out.println("Publishing year: " + this.year);
+    }
+
+    /**
+     * It prints the product's info when managed
+     */
+    @Override
+    public void printAllInfo() {
+        super.printAllInfo();
+        System.out.println("Number of pages: " + this.numPages);
+        System.out.println("Author: " + this.author);
+        System.out.println("Editorial: " + this.editorial);
+        System.out.println("Publishing year: " + this.year);
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**

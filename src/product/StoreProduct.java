@@ -1,14 +1,14 @@
 package product;
 
+import discount.Discount;
 import order.Order;
 import store.Pager;
 import store.Store;
 import user.RegisteredClient;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
-
-import discount.Discount;
 
 /**
  * It implements the store's products
@@ -199,7 +199,7 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Increases the number of sales by a certain number
-     * 
+     *
      * @param i the number of sales made (and to increase)
      * @param date the date of the sale
      */
@@ -219,6 +219,16 @@ public abstract class StoreProduct extends Product {
         System.out.println("Categories: " + this.getPrintCategories());
         System.out.println("Average Punctuation: " + this.averagePunctuation + " stars");
         System.out.println(this.reviews.size() + " reviews");
+    }
+
+    /**
+     * It prints the product's info when managed
+     */
+    @Override
+    public void printAllInfo() {
+        super.printAllInfo();
+        System.out.println("Stock: " + this.stock);
+        System.out.println("Categories: " + this.getPrintCategories());
     }
 
     /**
@@ -356,7 +366,7 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Sets the number of sales of a product
-     * 
+     *
      * @param sales the sales to set
      */
     public void setSales(int sales) {
@@ -365,7 +375,7 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Obtains the sales per month
-     * 
+     *
 	 * @return the salesByMonth a HashMap with the sales per month
 	 */
 	public HashMap<Month, Integer> getSalesByMonth() {
@@ -374,7 +384,7 @@ public abstract class StoreProduct extends Product {
 
 	/**
 	 * Sets the number of sales per month
-	 * 
+	 *
 	 * @param salesByMonth the salesByMonth to set
 	 */
 	public void setSalesByMonth(HashMap<Month, Integer> salesByMonth) {

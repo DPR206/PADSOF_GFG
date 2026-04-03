@@ -1,4 +1,5 @@
 import order.Cart;
+import product.ProductType;
 import product.StoreProduct;
 import store.*;
 import user.*;
@@ -85,12 +86,17 @@ public class MainApp {
         }
 
         switch (userType) {
-            case UNREGISTERED_CLIENT -> unregisteredClientLoop();
-            case REGISTERED_CLIENT -> registeredClientLoop();
-            case EMPLOYEE -> employeeLoop();
-            case MANAGER -> managerLoop();
-            default -> System.out.println("You shouldn't be able to see this :("); // Este NO debería saltar nunca, lo
-            // pongo por si acaso
+            case UNREGISTERED_CLIENT:
+                unregisteredClientLoop();
+            case REGISTERED_CLIENT:
+                registeredClientLoop();
+            case EMPLOYEE:
+                employeeLoop();
+            case MANAGER:
+                managerLoop();
+            default: // Este NO debería saltar nunca, lo pongo por si acaso
+                System.out.println("You shouldn't be able to see this :(");
+                main();
         }
     }
 
@@ -246,7 +252,7 @@ public class MainApp {
      * @throws IOException the io exception
      */
     private void unregisteredSeeProduct(int productNum, int pageNum) throws IOException {
-        System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
+        System.out.print("\n ---- unregisteredSeeProduct 2 ---- \n"); // Es para debug, borrar
         this.currentScreenPageNum = pageNum;
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct();
         StoreProduct product = Pager.getInstance().getProductFromPage(products, this.currentScreenPageNum, productNum);
@@ -558,8 +564,88 @@ public class MainApp {
         // DUE
     }
 
-    private void manageStoreProducts() {
+    private void manageStoreProducts() throws IOException {
         System.out.print("\n ---- manageStoreProducts ---- \n"); // Es para debug, borrar
+        System.out.println("Page: " + this.currentScreenPageNum);
+
+        List<StoreProduct> products = ((Manager) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
+        Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
+
+        System.out.println("What do you wish to do? (enter the nº)");
+        System.out.println("\t[1] Manage a product");
+        if ((this.currentScreenPageNum - 1) > 0) {
+            System.out.println("\t[2] < Previous page");
+        } else {
+            System.out.println("\t[2] Reload page");
+        }
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getProductMaxPageNum(products)) {
+            System.out.println("\t[3] Next page >");
+        } else {
+            System.out.println("\t[3] Reload page");
+        }
+        System.out.println("\t[4] <- Go back");
+        System.out.println("\t[5] <<- Go to main page");
+        System.out.println("\t[6] x Exit app");
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1:
+                System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
+                System.out.println("Enter the number of the desired product:");
+                int productNum = scanner.nextInt();
+
+                StoreProduct product =
+                        Pager.getInstance().getProductFromPage(products, this.currentScreenPageNum, productNum);
+                ProductType type = product.getType();
+                resetCurrentPageNum();
+
+                switch (type) {
+                    case COMIC:
+                        managerManageComic();
+                    case GAME:
+                        managerManageGame();
+                    case FIGURINE:
+                        managerManageFigurine();
+                    default: // Este NO debería saltar nunca, lo pongo por si acaso
+                        System.out.println("You shouldn't be able to see this :(");
+                        manageStoreProducts();
+                }
+
+                break;
+            case 2:
+                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                manageStoreProducts();
+                break;
+            case 3:
+                this.currentScreenPageNum =
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getProductMaxPageNum(products) ?
+                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                manageStoreProducts();
+                break;
+            case 4:
+                managerLoop();
+                break;
+            case 5:
+                main();
+                break;
+            case 6:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                manageStoreProducts();
+        }
+    }
+
+    private void managerManageComic() {
+        // DUE
+    }
+
+    private void managerManageGame() {
+        // DUE
+    }
+
+    private void managerManageFigurine() {
         // DUE
     }
 

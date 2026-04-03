@@ -63,6 +63,30 @@ public class Game extends StoreProduct {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It prints the product's info when seen individually
+     */
+    @Override
+    public void bigPrintInfo() {
+        /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;<NUM_PLAYERS;AGE_RANGE;GAME_STYLE>;BRAND;MATERIAL;DIMENSION */
+        super.bigPrintInfo();
+        System.out.println("Number of players: " + this.numPlayers);
+        System.out.println("Age range: " + this.ageRange);
+        System.out.println("Game style: " + this.gameStyle.getFormatedName());
+    }
+
+    /**
+     * It prints the product's info when managed
+     */
+    @Override
+    public void printAllInfo() {
+        super.printAllInfo();
+        System.out.println("Number of players: " + this.numPlayers);
+        System.out.println("Age range: " + this.ageRange);
+        System.out.println("Game style: " + this.gameStyle.getFormatedName());
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -121,7 +145,7 @@ public class Game extends StoreProduct {
      */
     @Override
     public String toString() {
-        /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
+        /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;<NUM_PLAYERS;AGE_RANGE;GAME_STYLE>;BRAND;MATERIAL;DIMENSION */
         return super.toString() + ";" + /*num_pages*/ ";" + /*author*/ ";" + /*editorial*/ ";" + /*year*/ ";" +
                this.numPlayers + ";" + this.ageRange + ";" + this.gameStyle.getFormatedName() + ";" /*brand*/ +
                ";" /*material*/ + ";" /*dimension*/;

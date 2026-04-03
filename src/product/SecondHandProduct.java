@@ -178,6 +178,14 @@ public class SecondHandProduct extends Product{
 		System.out.println("Conservation Status: " + this.status);
 	}
 
+	/**
+	 * It prints the product's info when managed
+	 */
+	@Override
+	public void printAllInfo() {
+		this.bigPrintInfo();
+	}
+
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 	/**
 	 * Obtains the conservation status of the product

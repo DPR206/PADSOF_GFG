@@ -64,6 +64,30 @@ public class Figurine extends StoreProduct {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It prints the product's info when seen individually
+     */
+    @Override
+    public void bigPrintInfo() {
+        /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;<BRAND;MATERIAL;DIMENSION> */
+        super.bigPrintInfo();
+        System.out.println("Brand: " + this.brand);
+        System.out.println("Material: " + this.material);
+        System.out.println("Dimensions: " + this.dimension + " cm");
+    }
+
+    /**
+     * It prints the product's info when managed
+     */
+    @Override
+    public void printAllInfo() {
+        super.printAllInfo();
+        System.out.println("Brand: " + this.brand);
+        System.out.println("Material: " + this.material);
+        System.out.println("Dimensions: " + this.dimension + " cm");
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -122,7 +146,7 @@ public class Figurine extends StoreProduct {
      */
     @Override
     public String toString() {
-        /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;BRAND;MATERIAL;DIMENSION */
+        /* super;NUM_PAGES;AUTHOR;EDITORIAL;YEAR;NUM_PLAYERS;AGE_RANGE;GAME_STYLE;<BRAND;MATERIAL;DIMENSION> */
         return super.toString() + ";" + /*num_pages*/ ";" + /*author*/ ";" + /*editorial*/ ";" + /*year*/
                ";" /*num_players*/ + ";" /*ager_range*/ + ";" /*game_style*/ + ";" + this.brand + ";" + this.material +
                ";" + this.dimension;

@@ -185,10 +185,10 @@ public class Statistics {
 	 * @return a list of store products
 	 */
 	public List<StoreProduct> getProductsBySales() {
-		return this.storeProducts.stream()
+		return Collections.unmodifiableList(this.storeProducts.stream()
 					.sorted(Comparator.comparingInt(StoreProduct::getSales)
 					.reversed())
-					.collect(Collectors.toList());
+					.collect(Collectors.toList()));
 	}
 	
 	/**
@@ -204,16 +204,34 @@ public class Statistics {
 	}
 	
 	/**
+	 * Obtains the sales of each product and its percentage
+	 * 
+	 * @return a HashMap of each store product and its sales and percentage
+	 */
+	public HashMap<StoreProduct, String> getProductsPercentage(){
+		HashMap<StoreProduct, String> productsPercentage = new HashMap<>();
+		for(StoreProduct p : this.getProductsBySales()) {
+			String data = "Sales: " + p.getSales() + " Percentage: " + this.Percentage(p) + "\n";
+			productsPercentage.put(p, data);
+		}
+		return productsPercentage;
+	}
+	
+	private double Percentage(StoreProduct p) {
+		return (p.getPrice()*p.getSales())/Statistics.total_revenue*100;
+	}
+	
+	/**
 	 * Makes a descending list of the number of orders of each client
 	 * 
 	 * @return a descending list of registered clients
 	 */
 	public List<RegisteredClient> getUsersMostOrders()
 	{
-		return this.clients.stream() //Obtain data
+		return Collections.unmodifiableList(this.clients.stream() //Obtain data
 							.sorted(Comparator.comparingInt(RegisteredClient::getNumOrders) //Compare based on the number of orders (type int)
 							.reversed()) //Descending order
-							.collect(Collectors.toList()); //Make the result a list
+							.collect(Collectors.toList()) /*Make the result a list*/);
 	}
 	
 	/**
@@ -234,10 +252,10 @@ public class Statistics {
 	 * @return  a descending list of registered clients
 	 */
 	public List<RegisteredClient> getUsersMostExchanges(){
-		return this.clients.stream()
+		return Collections.unmodifiableList(this.clients.stream()
 							.sorted(Comparator.comparingInt(RegisteredClient::getNumExchanges)
 							.reversed())
-							.collect(Collectors.toList());
+							.collect(Collectors.toList()));
 	}
 	
 	/**

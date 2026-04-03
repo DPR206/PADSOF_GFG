@@ -122,7 +122,7 @@ public class Pager {
      * @param storeProduct the desired product
      * @return the maximum number of pages that can be obtained from a product's list of reviews
      */
-    public int getReviewtMaxPageNum(StoreProduct storeProduct) {
+    public int getReviewMaxPageNum(StoreProduct storeProduct) {
         List<Review> reviews = storeProduct.getReviewsList();
         // DUE: Revisar esto
         if (reviews.size() % (Parameter.getParam().getItemsPerPage() / 2) == 0) {

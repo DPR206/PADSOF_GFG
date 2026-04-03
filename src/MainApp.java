@@ -77,7 +77,7 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void loopSelector(UserType userType) throws IOException, IllegalArgumentException, NullPointerException {
+    private void loopSelector(UserType userType) throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- loopSelector ---- \n"); // Es para debug, borrar
         if (currentUser == null) {
             currentUser = new UnregisteredClient(true); // Podría ser un default de la tienda tmb aunque habría que
@@ -100,7 +100,7 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void unregisteredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
+    private void unregisteredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.println("\n ---- unregisteredClientLoop ---- \n");
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Browse products");
@@ -113,7 +113,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                this.currentScreenPageNum = 1;
+                resetCurrentPageNum();
                 unregisteredClientOrderLoop();
                 break;
             case 2:
@@ -134,13 +134,18 @@ public class MainApp {
         }
     }
 
+    private void resetCurrentPageNum() {
+        this.previousScreenPageNum = this.currentScreenPageNum;
+        this.currentScreenPageNum = 1;
+    }
+
     /**
      * It allows an unregistered client to browse products and add them to their cart
      * @throws IOException              the io exception
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void unregisteredClientOrderLoop() throws IOException, IllegalArgumentException, NullPointerException {
+    private void unregisteredClientOrderLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- unregisteredClientOrderLoop ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + this.currentScreenPageNum);
 
@@ -171,8 +176,7 @@ public class MainApp {
                 System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
                 System.out.println("Enter the number of the desired product:");
                 int productNum = scanner.nextInt();
-                this.previousScreenPageNum = this.currentScreenPageNum;
-                this.currentScreenPageNum = 1;
+                resetCurrentPageNum();
                 unregisteredSeeProduct(productNum, this.currentScreenPageNum);
                 break;
             case 2:
@@ -212,7 +216,7 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void unregisteredClientPlaceOrder() throws IOException, IllegalArgumentException, NullPointerException {
+    private void unregisteredClientPlaceOrder() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- unregisteredClientPlaceOrder ---- \n"); // Es para debug, borrar
         System.out.println("You must log in or sign up to proceed");
         System.out.println("What do you wish to do? (enter the nº)");
@@ -241,11 +245,12 @@ public class MainApp {
      * It prints a certain product's info
      * @throws IOException the io exception
      */
-    public void unregisteredSeeProduct(int productNum, int pageNum) throws IOException {
-        StoreProduct product = null;
+    private void unregisteredSeeProduct(int productNum, int pageNum) throws IOException {
+        System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
         this.currentScreenPageNum = pageNum;
-        /*StoreProduct product = getProductFromPageNumber(productNum);
-        product.printInfo();*/ // DUE
+        List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct();
+        StoreProduct product = Pager.getInstance().getProductFromPage(products, this.currentScreenPageNum, productNum);
+        product.bigPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] See reviews");
@@ -259,8 +264,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                this.previousScreenPageNum = this.currentScreenPageNum;
-                this.currentScreenPageNum = 1;
+                resetCurrentPageNum();
                 unregisteredSeeReviews(product, productNum);
                 break;
             case 2:
@@ -276,7 +280,7 @@ public class MainApp {
                     ((UnregisteredClient) currentUser).addCart(product);
                 }
                 System.out.println("Added " + numProds + " copies to your cart");
-                unregisteredClientOrderLoop(); // go back?
+                unregisteredClientOrderLoop();
                 break;
             case 5:
                 unregisteredClientOrderLoop();
@@ -301,7 +305,7 @@ public class MainApp {
     /*
      * It prints a certain product's reviews
      */
-    public void unregisteredSeeReviews(StoreProduct product, int productNum) throws IOException {
+    private void unregisteredSeeReviews(StoreProduct product, int productNum) throws IOException {
         System.out.print("\n ---- unregisteredSeeReviews ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + this.currentScreenPageNum);
 
@@ -314,7 +318,7 @@ public class MainApp {
         } else {
             System.out.println("\t[2] Reload page");
         }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getReviewtMaxPageNum(product)) {
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product)) {
             System.out.println("\t[3] Next page >");
         } else {
             System.out.println("\t[3] Reload page");
@@ -334,7 +338,7 @@ public class MainApp {
                 break;
             case 3:
                 this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getReviewtMaxPageNum(product) ?
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product) ?
                         this.currentScreenPageNum + 1 : this.currentScreenPageNum;
                 unregisteredSeeReviews(product, this.currentScreenPageNum);
                 break;
@@ -357,7 +361,7 @@ public class MainApp {
      * It prints the current user's cart's products
      * @throws IOException the io exception
      */
-    public void unregisteredSeeCart() throws IOException {
+    private void unregisteredSeeCart() throws IOException {
         System.out.print("\n ---- unregisteredSeeCart ---- \n"); // Es para debug, borrar
         ((UnregisteredClient) this.currentUser).getCart().printInfo();
         System.out.println("What do you wish to do? (enter the nº)");
@@ -378,7 +382,7 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void cartLogger() throws IOException, IllegalArgumentException, NullPointerException {
+    private void cartLogger() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- cartLogger ---- \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();
@@ -417,7 +421,7 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void cartSigner() throws IOException, IllegalArgumentException, NullPointerException {
+    private void cartSigner() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- cartSigner ---- \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();
@@ -434,7 +438,7 @@ public class MainApp {
      * It handles the log-in and updates the current user accordingly
      * @throws IOException the io exception
      */
-    public void loggerLoop() throws IOException {
+    private void loggerLoop() throws IOException {
         System.out.print("\n ---- loggerLoop ---- \n"); // Es para debug, borrar
         System.out.print("Enter your username: ");
         String userName = scanner.next();
@@ -462,7 +466,7 @@ public class MainApp {
      * It handles the sign-up and updates the current user accordingly
      * @throws IOException the io exception
      */
-    public void signer() throws IOException {
+    private void signer() throws IOException {
         System.out.print("\n ---- signer ---- \n"); // Es para debug, borrar
         currentUser = Store.getInstance().signIn();
         loopSelector(currentUser.getType());
@@ -474,7 +478,7 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void registeredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
+    private void registeredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- registeredClientLoop ---- \n"); // Es para debug, borrar
         // DUE
     }
@@ -485,7 +489,7 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void employeeLoop() throws IOException, IllegalArgumentException, NullPointerException {
+    private void employeeLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- employeeLoop ---- \n"); // Es para debug, borrar
         // DUE
     }
@@ -496,8 +500,87 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
+    private void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- managerLoop ---- \n"); // Es para debug, borrar
+        System.out.println("What do you wish to do? (enter the nº)");
+        System.out.println("\t[1] Manage packs");
+        System.out.println("\t[2] Manage store products");
+        System.out.println("\t[3] Add store products");
+        System.out.println("\t[4] Manage employees");
+        System.out.println("\t[5] Generate statistics");
+        System.out.println("\t[6] Manage discounts");
+        System.out.println("\t[7] Manage parameters");
+        System.out.println("\t[8] <- Go back");
+        System.out.println("\t[9] <<- Go to main page");
+        System.out.println("\t[10] x Exit app");
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1:
+                managePacks();
+                break;
+            case 2:
+                manageStoreProducts();
+                break;
+            case 3:
+                managerAddStoreProduct();
+                break;
+            case 4:
+                manageEmployees();
+                break;
+            case 5:
+                generateStatistics();
+                break;
+            case 6:
+                manageDiscounts();
+                break;
+            case 7:
+                manageParameters();
+                break;
+            case 8, 9:
+                main();
+                break;
+            case 10:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                managerLoop();
+        }
+    }
+
+    private void managePacks() {
+        System.out.print("\n ---- managePacks ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    private void manageStoreProducts() {
+        System.out.print("\n ---- manageStoreProducts ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    private void managerAddStoreProduct() {
+        System.out.print("\n ---- managerAddStoreProduct ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    private void manageEmployees() {
+        System.out.print("\n ---- manageEmployees ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    private void generateStatistics() {
+        System.out.print("\n ---- generateStatistics ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    private void manageDiscounts() {
+        System.out.print("\n ---- manageDiscounts ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    private void manageParameters() {
+        System.out.print("\n ---- manageParameters ---- \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -505,7 +588,7 @@ public class MainApp {
      * It exists the app and saves the store
      * @throws IOException the io exception
      */
-    public void exit() throws IOException {
+    private void exit() throws IOException {
         System.out.print("\n ---- exit ---- \n"); // Es para debug, borrar
         System.out.println("See you soon!");
 

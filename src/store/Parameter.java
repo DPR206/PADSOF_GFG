@@ -41,7 +41,7 @@ public class Parameter {
 		/* scoreWeight = a*<score> + b */
 		this.scoreAParam = 0.5;
 		this.scoreBParam = 0.5;
-		this.itemsPerPage = 10;
+		this.itemsPerPage = 35;
 	}
 
 /*--------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------------*/

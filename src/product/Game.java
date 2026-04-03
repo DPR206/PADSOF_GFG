@@ -73,7 +73,7 @@ public class Game extends StoreProduct {
         super.bigPrintInfo();
         System.out.println("Number of players: " + this.numPlayers);
         System.out.println("Age range: " + this.ageRange);
-        System.out.println("Game style: " + this.gameStyle.getFormatedName());
+        System.out.println("Game style: " + this.gameStyle.getFormatedName() + "\n");
     }
 
     /**
@@ -84,7 +84,7 @@ public class Game extends StoreProduct {
         super.printAllInfo();
         System.out.println("Number of players: " + this.numPlayers);
         System.out.println("Age range: " + this.ageRange);
-        System.out.println("Game style: " + this.gameStyle.getFormatedName());
+        System.out.println("Game style: " + this.gameStyle.getFormatedName() + "\n");
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

@@ -1,12 +1,10 @@
 import order.Cart;
-import product.ProductType;
-import product.StoreProduct;
+import product.*;
 import store.*;
 import user.*;
 
 import java.io.IOException;
-import java.time.LocalTime;
-import java.time.Period;
+import java.time.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -601,11 +599,11 @@ public class MainApp {
 
                 switch (type) {
                     case COMIC:
-                        managerManageComic();
+                        managerManageComic((Comic) product);
                     case GAME:
-                        managerManageGame();
+                        managerManageGame((Game) product);
                     case FIGURINE:
-                        managerManageFigurine();
+                        managerManageFigurine((Figurine) product);
                     default: // Este NO debería saltar nunca, lo pongo por si acaso
                         System.out.println("You shouldn't be able to see this :(");
                         manageStoreProducts();
@@ -637,15 +635,249 @@ public class MainApp {
         }
     }
 
-    private void managerManageComic() {
-        // DUE
+    private void managerManageComic(Comic comic) throws IOException {
+        System.out.print("\n ---- managerManageComic ---- \n"); // Es para debug, borrar
+        comic.printAllInfo();
+
+        System.out.println("What do you wish to change? (enter the nº)");
+        System.out.println("\t[1] Name");
+        System.out.println("\t[2] Description");
+        System.out.println("\t[3] Price");
+        System.out.println("\t[4] Photo");
+        System.out.println("\t[5] Stock");
+        System.out.println("\t[6] Categories");
+        System.out.println("\t[7] Number of pages");
+        System.out.println("\t[8] Author");
+        System.out.println("\t[9] Editorial");
+        System.out.println("\t[10] Publishing year");
+        System.out.println("\t[11] <- Go back");
+        System.out.println("\t[12] <<- Go to main page");
+        System.out.println("\t[13] x Exit app");
+        int chosenOption3 = scanner.nextInt();
+
+        switch (chosenOption3) {
+            case 1:
+                System.out.println("Enter the product's new Name:");
+                String newName = scanner.next();
+                comic.setName(newName);
+                break;
+            case 2:
+                System.out.println("Enter the product's new Description:");
+                String newDesc = scanner.next();
+                comic.setName(newDesc);
+                break;
+            case 3:
+                System.out.println("Enter the product's new Price:");
+                double newPrice = scanner.nextDouble();
+                comic.setPrice(newPrice);
+                break;
+            case 4:
+                System.out.println("Enter the product's new Photo's path:");
+                String newPhoto = scanner.next();
+                comic.setPhoto(newPhoto);
+                break;
+            case 5:
+                System.out.println("Enter the product's new Stock:");
+                int newStock = scanner.nextInt();
+                comic.setStock(newStock);
+                break;
+            case 6:
+                managerCategoryChanger();
+                break;
+            case 7:
+                System.out.println("Enter the product's new Number of pages:");
+                int newNumPages = scanner.nextInt();
+                comic.setNumPages(newNumPages);
+                break;
+            case 8:
+                System.out.println("Enter the product's new Author:");
+                String newAuthor = scanner.next();
+                comic.setAuthor(newAuthor);
+                break;
+            case 9:
+                System.out.println("Enter the product's new Editorial:");
+                String newEditorial = scanner.next();
+                comic.setEditorial(newEditorial);
+                break;
+            case 10:
+                System.out.println("Enter the product's new Publishing year:");
+                Year newYear = Year.parse(scanner.next());
+                comic.setYear(newYear);
+                break;
+            case 11:
+                manageStoreProducts();
+                break;
+            case 12:
+                main();
+                break;
+            case 13:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                managerManageComic(comic);
+        }
     }
 
-    private void managerManageGame() {
-        // DUE
+    private void managerManageGame(Game game) throws IOException {
+        System.out.print("\n ---- managerManageGame ---- \n"); // Es para debug, borrar
+        game.printAllInfo();
+
+        System.out.println("What do you wish to change? (enter the nº)");
+        System.out.println("\t[1] Name");
+        System.out.println("\t[2] Description");
+        System.out.println("\t[3] Price");
+        System.out.println("\t[4] Photo");
+        System.out.println("\t[5] Stock");
+        System.out.println("\t[6] Categories");
+        System.out.println("\t[7] Number of players");
+        System.out.println("\t[8] Age range");
+        System.out.println("\t[9] Game Style");
+        System.out.println("\t[10] <- Go back");
+        System.out.println("\t[11] <<- Go to main page");
+        System.out.println("\t[12] x Exit app");
+        int chosenOption3 = scanner.nextInt();
+
+        switch (chosenOption3) {
+            case 1:
+                System.out.println("Enter the product's new Name:");
+                String newName = scanner.next();
+                game.setName(newName);
+                break;
+            case 2:
+                System.out.println("Enter the product's new Description:");
+                String newDesc = scanner.next();
+                game.setName(newDesc);
+                break;
+            case 3:
+                System.out.println("Enter the product's new Price:");
+                double newPrice = scanner.nextDouble();
+                game.setPrice(newPrice);
+                break;
+            case 4:
+                System.out.println("Enter the product's new Photo's path:");
+                String newPhoto = scanner.next();
+                game.setPhoto(newPhoto);
+                break;
+            case 5:
+                System.out.println("Enter the product's new Stock:");
+                int newStock = scanner.nextInt();
+                game.setStock(newStock);
+                break;
+            case 6:
+                managerCategoryChanger();
+                break;
+            case 7:
+                System.out.println("Enter the product's new Number of players:");
+                int newNumPlayers = scanner.nextInt();
+                game.setNumPlayers(newNumPlayers);
+                break;
+            case 8:
+                System.out.println("Enter the product's new Age range:");
+                String newAgeRange = scanner.next();
+                game.setAgeRange(newAgeRange);
+                break;
+            case 9:
+                System.out.println("Enter the product's new Game Style (" + GameStyle.CARDS.getFormatedName() + "/" +
+                                   GameStyle.DICE.getFormatedName() + "/" + GameStyle.GAMEBOARD.getFormatedName() +
+                                   "/" + GameStyle.MINIATURE.getFormatedName() + "):");
+                GameStyle newGameStyle = GameStyle.valueOf(scanner.next());
+                game.setGameStyle(newGameStyle);
+                break;
+            case 10:
+                manageStoreProducts();
+                break;
+            case 11:
+                main();
+                break;
+            case 12:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                managerManageGame(game);
+        }
     }
 
-    private void managerManageFigurine() {
+    private void managerManageFigurine(Figurine figurine) throws IOException {
+        System.out.print("\n ---- managerManageFigurine ---- \n"); // Es para debug, borrar
+        figurine.printAllInfo();
+
+        System.out.println("What do you wish to change? (enter the nº)");
+        System.out.println("\t[1] Name");
+        System.out.println("\t[2] Description");
+        System.out.println("\t[3] Price");
+        System.out.println("\t[4] Photo");
+        System.out.println("\t[5] Stock");
+        System.out.println("\t[6] Categories");
+        System.out.println("\t[7] Brand");
+        System.out.println("\t[8] Material");
+        System.out.println("\t[9] Dimensions");
+        System.out.println("\t[10] <- Go back");
+        System.out.println("\t[11] <<- Go to main page");
+        System.out.println("\t[12] x Exit app");
+        int chosenOption3 = scanner.nextInt();
+
+        switch (chosenOption3) {
+            case 1:
+                System.out.println("Enter the product's new Name:");
+                String newName = scanner.next();
+                figurine.setName(newName);
+                break;
+            case 2:
+                System.out.println("Enter the product's new Description:");
+                String newDesc = scanner.next();
+                figurine.setName(newDesc);
+                break;
+            case 3:
+                System.out.println("Enter the product's new Price:");
+                double newPrice = scanner.nextDouble();
+                figurine.setPrice(newPrice);
+                break;
+            case 4:
+                System.out.println("Enter the product's new Photo's path:");
+                String newPhoto = scanner.next();
+                figurine.setPhoto(newPhoto);
+                break;
+            case 5:
+                System.out.println("Enter the product's new Stock:");
+                int newStock = scanner.nextInt();
+                figurine.setStock(newStock);
+                break;
+            case 6:
+                managerCategoryChanger();
+                break;
+            case 7:
+                System.out.println("Enter the product's new Brand:");
+                String newBrand = scanner.next();
+                figurine.setBrand(newBrand);
+                break;
+            case 8:
+                System.out.println("Enter the product's new Material:");
+                String newMaterial = scanner.next();
+                figurine.setMaterial(newMaterial);
+                break;
+            case 9:
+                System.out.println("Enter the product's new Dimensions (in cm):");
+                String newDimension = scanner.next();
+                figurine.setDimension(newDimension);
+                break;
+            case 10:
+                manageStoreProducts();
+                break;
+            case 11:
+                main();
+                break;
+            case 12:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                managerManageFigurine(figurine);
+        }
+    }
+
+    private void managerCategoryChanger() {
         // DUE
     }
 

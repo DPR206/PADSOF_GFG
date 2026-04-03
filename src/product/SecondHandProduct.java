@@ -175,7 +175,7 @@ public class SecondHandProduct extends Product{
 	public void bigPrintInfo() {
 		/* [TYPE;ID;NAME;DESC;PHOTO];VAL_DATE;AVAILABLE;PAID_VAL;STATUS */
 		super.bigPrintInfo();
-		System.out.println("Conservation Status: " + this.status);
+		System.out.println("Conservation Status: " + this.status+ "\n");
 	}
 
 	/**
@@ -184,6 +184,7 @@ public class SecondHandProduct extends Product{
 	@Override
 	public void printAllInfo() {
 		this.bigPrintInfo();
+		System.out.println(" ");
 	}
 
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

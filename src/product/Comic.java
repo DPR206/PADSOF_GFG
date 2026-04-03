@@ -81,7 +81,7 @@ public class Comic extends StoreProduct {
         System.out.println("Number of pages: " + this.numPages);
         System.out.println("Author: " + this.author);
         System.out.println("Editorial: " + this.editorial);
-        System.out.println("Publishing year: " + this.year);
+        System.out.println("Publishing year: " + this.year + "\n");
     }
 
     /**
@@ -93,7 +93,7 @@ public class Comic extends StoreProduct {
         System.out.println("Number of pages: " + this.numPages);
         System.out.println("Author: " + this.author);
         System.out.println("Editorial: " + this.editorial);
-        System.out.println("Publishing year: " + this.year);
+        System.out.println("Publishing year: " + this.year + "\n");
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

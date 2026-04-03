@@ -76,7 +76,6 @@ public abstract class Product {
         System.out.println("Name: " + this.name);
         System.out.println("Description: " + this.description); // DUE: Idealmente, haría wrapping
         System.out.println("Price: [" + this.price + "]€");
-        System.out.println(" ");
     }
 
     /**

@@ -74,7 +74,7 @@ public class Figurine extends StoreProduct {
         super.bigPrintInfo();
         System.out.println("Brand: " + this.brand);
         System.out.println("Material: " + this.material);
-        System.out.println("Dimensions: " + this.dimension + " cm");
+        System.out.println("Dimensions: " + this.dimension + " cm\n");
     }
 
     /**
@@ -85,7 +85,7 @@ public class Figurine extends StoreProduct {
         super.printAllInfo();
         System.out.println("Brand: " + this.brand);
         System.out.println("Material: " + this.material);
-        System.out.println("Dimensions: " + this.dimension + " cm");
+        System.out.println("Dimensions: " + this.dimension + " cm\n");
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

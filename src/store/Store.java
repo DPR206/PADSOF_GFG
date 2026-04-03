@@ -133,21 +133,21 @@ public class Store {
      *
      */
     public User logIn() {
-        User u;
-        Scanner sc = new Scanner(System.in);
-        String userName, pwd;
+        try (Scanner sc = new Scanner(System.in)) {
+			String userName, pwd;
 
-        try {
-            System.out.print("Introduce tu usuario: ");
-            userName = sc.next();
-            System.out.print("Introduce tu contraseña: ");
-            pwd = sc.next();
-        } catch (InputMismatchException e) {
-            System.out.println("Error: El tipo de dato introducido no es válido.");
-            return null;
-        }
+			try {
+			    System.out.print("Introduce tu usuario: ");
+			    userName = sc.next();
+			    System.out.print("Introduce tu contraseña: ");
+			    pwd = sc.next();
+			} catch (InputMismatchException e) {
+			    System.out.println("Error: El tipo de dato introducido no es válido.");
+			    return null;
+			}
 
-        return utility.logIn(userName, pwd);
+			return utility.logIn(userName, pwd);
+		}
     }
 
     /**

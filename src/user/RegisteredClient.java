@@ -30,7 +30,6 @@ public class RegisteredClient extends User {
     private int numOrders;
     private int numExchanges;
 
-    //searcher
     //sugestioner
     //offerhistory
 
@@ -126,13 +125,33 @@ public class RegisteredClient extends User {
     }
 
     /**
-	 * @return the numOrders
+     * Obtains the cart of a client
+     * 
+	 * @return the cart
+	 */
+	public Cart getC() {
+		return c;
+	}
+
+	/**
+	 * Obtains the wallet of a client
+	 * @return the wallet
+	 */
+	public Wallet getWallet() {
+		return wallet;
+	}
+
+	/**
+	 * Obtains the client's number of orders
+	 * 
+	 * @return the number of orders
 	 */
 	public int getNumOrders() {
 		return numOrders;
 	}
 
 	/**
+	 * Sets the client's number of orders
 	 * @param numOrders the numOrders to set
 	 */
 	public void setNumOrders(int numOrders) {
@@ -140,13 +159,17 @@ public class RegisteredClient extends User {
 	}
 
 	/**
-	 * @return the numExchanges
+	 * Obtains the client's number of exchanges
+	 * 
+	 * @return the number of exchanges
 	 */
 	public int getNumExchanges() {
 		return numExchanges;
 	}
 
 	/**
+	 * Sets the client's number of exchanges
+	 * 
 	 * @param numExchanges the numExchanges to set
 	 */
 	public void setNumExchanges(int numExchanges) {
@@ -210,6 +233,7 @@ public class RegisteredClient extends User {
     	this.c.cancelPack(pack);
     }
 
+    
     public List<SecondHandProduct> searchSecondHandProducts() {
         return this.searcher.browseSecondHandProduct();
     }
@@ -218,20 +242,36 @@ public class RegisteredClient extends User {
         return this.searcher.searchStoreProducts();
     }
 
+    /**
+     * Increase the number of orders by 1
+     */
     public void increaseNumOrders()
     {
     	this.numOrders++;
     }
     
+    /**
+     * Increases the number of orders
+     * 
+     * @param i the number to increase
+     */
     public void increaseNumOrders(int i) {
     	if(i > 0)
     		this.numOrders += i;
     }
     
+    /**
+     * Increases the number of exchanges by 1
+     */
     public void increaseNumExchanges() {
     	this.numExchanges++;
     }
     
+    /**
+     * Increases the number of exchanges
+     * 
+     * @param i the number to increase
+     */
     public void increaseNumExchanges(int i) {
     	this.numExchanges += i;
     }

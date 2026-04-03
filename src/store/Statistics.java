@@ -150,9 +150,11 @@ public class Statistics {
 		if(type == RevenueType.VALUATION)
 			this.revenue_valuation += quantity;
 		else if(type == RevenueType.PRODUCTS)
-			for(StoreProduct p:products)
+			for(StoreProduct p:products) {
+				p.increaseSales(date);
 				for(Category c : p.getCategories())
 					c.increaseRevenue(quantity);
+			}
 	}
 
 	/**
@@ -204,21 +206,53 @@ public class Statistics {
 	}
 	
 	/**
-	 * Obtains the sales of each product and its percentage
+	 * Obtains the sales of each product and its percentage regarding total revenues
 	 * 
 	 * @return a HashMap of each store product and its sales and percentage
 	 */
-	public HashMap<StoreProduct, String> getProductsPercentage(){
+	public HashMap<StoreProduct, String> getProductsTotalPercentage(){
 		HashMap<StoreProduct, String> productsPercentage = new HashMap<>();
 		for(StoreProduct p : this.getProductsBySales()) {
-			String data = "Sales: " + p.getSales() + " Percentage: " + this.Percentage(p) + "\n";
+			String data = "Sales: " + p.getSales() + " Percentage: " + this.TotalPercentage(p) + "% \n";
 			productsPercentage.put(p, data);
 		}
 		return productsPercentage;
 	}
 	
-	private double Percentage(StoreProduct p) {
+	/**
+	 * Obtains the sales of each product and its percentage regarding month revenues
+	 * 
+	 * @param m the month to calculate
+	 * @return a HashMap of each store product and its sales and percentage
+	 */
+	public HashMap<StoreProduct, String> getProductsTotalPercentage(Month m){
+		HashMap<StoreProduct, String> productsPercentage = new HashMap<>();
+		for(StoreProduct p : this.getProductsBySales()) {
+			String data = "Sales: " + p.getSales() + " Percentage: " + this.MonthPercentage(p, m) + "% \n";
+			productsPercentage.put(p, data);
+		}
+		return productsPercentage;
+	}
+	
+	/**
+	 * Calculates the percentage of a product regarding total revenue
+	 * 
+	 * @param p the store product
+	 * @return the percentage regarding total revenue
+	 */
+	private double TotalPercentage(StoreProduct p) {
 		return (p.getPrice()*p.getSales())/Statistics.total_revenue*100;
+	}
+	
+	/**
+	 * Calculates the percentage of a product regarding monthly revenue
+	 * 
+	 * @param p the store product
+	 * @param m the month to calculate of
+	 * @return the percentage regarding monthly revenue
+	 */
+	private double MonthPercentage(StoreProduct p, Month m) {
+		return (p.getPrice() * p.getSalesByMonth().get(m))/this.revenueByMonth.get(m)*100;
 	}
 	
 	/**

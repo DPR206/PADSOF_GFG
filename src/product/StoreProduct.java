@@ -6,7 +6,7 @@ import store.Pager;
 import store.Store;
 import user.RegisteredClient;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.util.*;
 
 /**
@@ -31,6 +31,7 @@ public abstract class StoreProduct extends Product {
     /** The date when the product was added to the cart */
     private LocalDate addedDate = null;
     private int sales;
+    private HashMap<Month, Integer> salesByMonth;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -66,6 +67,10 @@ public abstract class StoreProduct extends Product {
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
         this.sales = 0;
+        this.salesByMonth = new HashMap<Month, Integer>();
+		for (Month month : Month.values()) {
+            this.salesByMonth.put(month, 0);
+        }
         Store.getInstance().addStoreProduct(this);
     }
 
@@ -97,6 +102,10 @@ public abstract class StoreProduct extends Product {
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
         this.sales = 0;
+        this.salesByMonth = new HashMap<Month, Integer>();
+		for (Month month : Month.values()) {
+            this.salesByMonth.put(month, 0);
+        }
         Store.getInstance().addStoreProduct(this);
     }
 
@@ -180,17 +189,22 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Increases the number of sales by one
+     * @param date the date of the sale
      */
-    public void increaseSales() {
-        this.sales++;
+    public void increaseSales(LocalDate date) {
+        this.salesByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + 1);
+    	this.sales++;
     }
 
     /**
      * Increases the number of sales by a certain number
+     * 
      * @param i the number of sales made (and to increase)
+     * @param date the date of the sale
      */
-    public void increaseSales(int i) {
-        this.sales += i;
+    public void increaseSales(int i, LocalDate date) {
+    	this.salesByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + i);
+    	this.sales += i;
     }
 
     /**
@@ -341,6 +355,7 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Sets the number of sales of a product
+     * 
      * @param sales the sales to set
      */
     public void setSales(int sales) {
@@ -348,6 +363,24 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
+     * Obtains the sales per month
+     * 
+	 * @return the salesByMonth a HashMap with the sales per month
+	 */
+	public HashMap<Month, Integer> getSalesByMonth() {
+		return salesByMonth;
+	}
+
+	/**
+	 * Sets the number of sales per month
+	 * 
+	 * @param salesByMonth the salesByMonth to set
+	 */
+	public void setSalesByMonth(HashMap<Month, Integer> salesByMonth) {
+		this.salesByMonth = salesByMonth;
+	}
+
+	/**
      * It returns's the product's stock
      * @return the product's store
      */

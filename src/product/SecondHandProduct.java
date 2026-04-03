@@ -172,9 +172,9 @@ public class SecondHandProduct extends Product{
 	 * It prints the product's info
 	 */
 	@Override
-	public void printInfo() {
+	public void bigPrintInfo() {
 		/* [TYPE;ID;NAME;DESC;PHOTO];VAL_DATE;AVAILABLE;PAID_VAL;STATUS */
-		super.printInfo();
+		super.bigPrintInfo();
 		System.out.println("Conservation Status: " + this.status);
 	}
 

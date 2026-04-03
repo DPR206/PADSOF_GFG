@@ -18,8 +18,9 @@ public class MainApp {
     int chosenOption;
     /** The apps current user */
     User currentUser;
-    /** The current page's number, if a list is being browsed */
+    /** The current screen's page number, if a list is being browsed */
     int currentScreenPageNum = 0;
+    /** The previous screen's page number, if a list is being browsed */
     int previousScreenPageNum = 0;
 
     /**
@@ -54,7 +55,7 @@ public class MainApp {
                 loopSelector(UserType.UNREGISTERED_CLIENT);
                 break;
             case 2:
-                logger();
+                loggerLoop();
                 break;
             case 3:
                 signer();
@@ -88,7 +89,7 @@ public class MainApp {
             case REGISTERED_CLIENT -> registeredClientLoop();
             case EMPLOYEE -> employeeLoop();
             case MANAGER -> managerLoop();
-            default -> System.out.println("You shouldn't be able to see this º-º"); // Este NO debería saltar nunca, lo
+            default -> System.out.println("You shouldn't be able to see this :("); // Este NO debería saltar nunca, lo
             // pongo por si acaso
         }
     }
@@ -116,7 +117,7 @@ public class MainApp {
                 unregisteredClientOrderLoop();
                 break;
             case 2:
-                logger();
+                loggerLoop();
                 break;
             case 3:
                 signer();
@@ -420,18 +421,21 @@ public class MainApp {
         System.out.print("\n ---- cartSigner ---- \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();
-        signer();
+        /* Signer */
+        currentUser = Store.getInstance().signIn();
+        /* Signer */
         for (StoreProduct product : currrentCart.getProducts()) {
             currrentCart.addProduct(product);
         }
+        loopSelector(currentUser.getType());
     }
 
     /**
      * It handles the log-in and updates the current user accordingly
      * @throws IOException the io exception
      */
-    public void logger() throws IOException {
-        System.out.print("\n ---- logger ---- \n"); // Es para debug, borrar
+    public void loggerLoop() throws IOException {
+        System.out.print("\n ---- loggerLoop ---- \n"); // Es para debug, borrar
         System.out.print("Enter your username: ");
         String userName = scanner.next();
         System.out.print("Enter your password: ");
@@ -446,7 +450,7 @@ public class MainApp {
             int chosenOption2 = scanner.nextInt();
 
             if (chosenOption2 == 1) {
-                logger();
+                loggerLoop();
             } else {
                 main();
             }

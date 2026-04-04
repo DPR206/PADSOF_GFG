@@ -960,8 +960,119 @@ public class MainApp {
         // DUE
     }
 
-    private void generateStatistics() {
+    private void generateStatistics() throws IOException {
         System.out.print("\n ---- generateStatistics ---- \n"); // Es para debug, borrar
+        System.out.println("Which statistic do you wish to generate? (enter the nº)");
+        System.out.println("\t[1] List of store products by sales");
+        System.out.println("\t[2] List of clients by orders");
+        System.out.println("\t[3] List of clients by exchanges");
+        System.out.println("\t[4] List of revenue by month");
+        System.out.println("\t[5] List of categories by revenue");
+        System.out.println("\t[6] List of store products by sales with percentage regarding total revenues");
+        System.out.println("\t[7] List of store products by sales with percentage regarding total revenues on a " +
+                           "certain month");
+        System.out.println("\t[8] Store's total revenue");
+        System.out.println("\t[9] Store's total valuation's revenue");
+        System.out.println("\t[10] A certain category's revenue");
+        // No sé si es útil-> System.out.println("\t[11] A certain store product's revenue");
+        // No sé si es útil-> System.out.println("\t[12] A certain client's number of orders");
+        // No sé si es útil-> System.out.println("\t[13] A certain client's number of exchanges");
+        System.out.println("\t[11] <- Go back");
+        System.out.println("\t[12] <<- Go to main page");
+        System.out.println("\t[13] x Exit app");
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1:
+                productBySales();
+                break;
+            case 2:
+                clientsByOrders();
+                break;
+            case 3:
+                clientsByExchanges();
+                break;
+            case 4:
+                revenueByMonth();
+                break;
+            case 5:
+                categoriesByRevenue();
+                break;
+            case 6:
+                productBySalesWithPercentage();
+                break;
+            case 7:
+                productBySalesWithPercentageCertainMonth();
+                break;
+            case 8:
+                System.out.println("The store's total revenue is " + Statistics.getTotal_revenue() + "€");
+                break;
+            case 9:
+                System.out.println("The store's total revenue from valuations is " +
+                                   Statistics.getINSTANCE().getRevenue_valuation() + "€");
+                break;
+            case 10:
+                System.out.println("Which category do you want to see? (enter its name):");
+                String categoryName = scanner.next();
+                Category category = Store.getInstance().getCategoryFromName(categoryName);
+                if (category == null) {
+                    System.out.println("A category which such a name doesn't exist, reloading...");
+                    generateStatistics();
+                    break;
+                }
+                System.out.println("The " + categoryName + " category's total revenue is " +
+                                   Statistics.getINSTANCE().getRevenueByCategory(categoryName) + "€");
+                break;
+            case 11:
+                managerLoop();
+                break;
+            case 12:
+                main();
+                break;
+            case 13:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                generateStatistics();
+                break;
+        }
+    }
+
+    public void productBySales() {
+        System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
+        List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
+        Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
+        // DUE
+    }
+
+    public void clientsByOrders() {
+        System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    public void clientsByExchanges() {
+        System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    public void revenueByMonth() {
+        System.out.print("\n ---- revenueByMonth ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    public void categoriesByRevenue() {
+        System.out.print("\n ---- categoriesByRevenue ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    public void productBySalesWithPercentage() {
+        System.out.print("\n ---- productBySalesWithPercentage ---- \n"); // Es para debug, borrar
+        // DUE
+    }
+
+    public void productBySalesWithPercentageCertainMonth() {
+        System.out.print("\n ---- productBySalesWithPercentageCertainMonth ---- \n"); // Es para debug, borrar
         // DUE
     }
 

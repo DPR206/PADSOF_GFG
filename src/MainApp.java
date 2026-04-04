@@ -5,8 +5,7 @@ import user.*;
 
 import java.io.IOException;
 import java.time.*;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * The type Main app.
@@ -119,7 +118,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                resetCurrentPageNum();
+                pageNumGoForward();
                 unregisteredClientOrderLoop();
                 break;
             case 2:
@@ -141,9 +140,15 @@ public class MainApp {
         }
     }
 
-    private void resetCurrentPageNum() {
+    private void pageNumGoForward() { // Se ejecuta siempre que se salga de un paged loop
         this.previousScreenPageNum = this.currentScreenPageNum;
         this.currentScreenPageNum = 1;
+    }
+
+    private void pageNumGoBack() { // Se ejecuta siempre que se vuelva a un paged loop
+        int aux = previousScreenPageNum;
+        this.previousScreenPageNum = this.currentScreenPageNum;
+        this.currentScreenPageNum = aux;
     }
 
     /**
@@ -183,13 +188,15 @@ public class MainApp {
                 System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
                 System.out.println("Enter the number of the desired product:");
                 int productNum = scanner.nextInt();
-                resetCurrentPageNum();
-                unregisteredSeeProduct(productNum, this.currentScreenPageNum);
+                pageNumGoForward();
+                unregisteredSeeProduct(productNum);
                 break;
             case 2:
+                pageNumGoForward();
                 unregisteredSeeCart();
                 break;
             case 3:
+                pageNumGoForward();
                 signer();
                 break;
             case 4:
@@ -203,12 +210,15 @@ public class MainApp {
                 unregisteredClientOrderLoop();
                 break;
             case 6:
+                pageNumGoForward();
                 unregisteredClientOrderLoop();
                 break;
             case 7:
+                pageNumGoForward();
                 main();
                 break;
             case 8:
+                pageNumGoForward();
                 exit();
                 break;
             default:
@@ -254,9 +264,8 @@ public class MainApp {
      * It prints a certain product's info
      * @throws IOException the io exception
      */
-    private void unregisteredSeeProduct(int productNum, int pageNum) throws IOException {
+    private void unregisteredSeeProduct(int productNum) throws IOException {
         System.out.print("\n ---- unregisteredSeeProduct 2 ---- \n"); // Es para debug, borrar
-        this.currentScreenPageNum = pageNum;
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct();
         StoreProduct product = Pager.getInstance().getProductFromPage(products, this.currentScreenPageNum, productNum);
         product.bigPrintInfo();
@@ -273,7 +282,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
-                resetCurrentPageNum();
+                pageNumGoForward();
                 unregisteredSeeReviews(product, productNum);
                 break;
             case 2:
@@ -292,6 +301,7 @@ public class MainApp {
                 unregisteredClientOrderLoop();
                 break;
             case 5:
+                pageNumGoBack();
                 unregisteredClientOrderLoop();
                 break;
             case 6:
@@ -302,7 +312,7 @@ public class MainApp {
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredSeeProduct(productNum, this.currentScreenPageNum);
+                unregisteredSeeProduct(productNum);
                 break;
         }
 
@@ -340,6 +350,7 @@ public class MainApp {
 
         switch (chosenOption) {
             case 1:
+                pageNumGoForward();
                 signer();
                 break;
             case 2:
@@ -353,12 +364,15 @@ public class MainApp {
                 unregisteredSeeReviews(product, this.currentScreenPageNum);
                 break;
             case 4:
-                unregisteredSeeProduct(productNum, this.previousScreenPageNum);
+                pageNumGoForward();
+                unregisteredSeeProduct(productNum);
                 break;
             case 5:
+                pageNumGoForward();
                 main();
                 break;
             case 6:
+                pageNumGoForward();
                 exit();
                 break;
             default:
@@ -603,7 +617,7 @@ public class MainApp {
                 StoreProduct product =
                         Pager.getInstance().getProductFromPage(products, this.currentScreenPageNum, productNum);
                 ProductType type = product.getType();
-                resetCurrentPageNum();
+                pageNumGoForward();
 
                 switch (type) {
                     case COMIC:
@@ -630,12 +644,15 @@ public class MainApp {
                 manageStoreProducts();
                 break;
             case 4:
+                pageNumGoForward();
                 managerLoop();
                 break;
             case 5:
+                pageNumGoForward();
                 main();
                 break;
             case 6:
+                pageNumGoForward();
                 exit();
                 break;
             default:
@@ -715,6 +732,7 @@ public class MainApp {
                 comic.setYear(newYear);
                 break;
             case 11:
+                pageNumGoBack();
                 manageStoreProducts();
                 break;
             case 12:
@@ -796,6 +814,7 @@ public class MainApp {
                 game.setGameStyle(newGameStyle);
                 break;
             case 10:
+                pageNumGoBack();
                 manageStoreProducts();
                 break;
             case 11:
@@ -875,6 +894,7 @@ public class MainApp {
                 figurine.setDimension(newDimension);
                 break;
             case 10:
+                pageNumGoBack();
                 manageStoreProducts();
                 break;
             case 11:
@@ -1041,6 +1061,7 @@ public class MainApp {
 
     public void productBySales() {
         System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
+        System.out.println("Page: " + this.currentScreenPageNum);
         List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
         Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
         // DUE
@@ -1048,17 +1069,22 @@ public class MainApp {
 
     public void clientsByOrders() {
         System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
+        System.out.println("Page: " + this.currentScreenPageNum);
         // DUE
     }
 
     public void clientsByExchanges() {
         System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
+        System.out.println("Page: " + this.currentScreenPageNum);
         // DUE
     }
 
     public void revenueByMonth() {
         System.out.print("\n ---- revenueByMonth ---- \n"); // Es para debug, borrar
-        // DUE
+        HashMap<Month, Double> revenueByMonth = Statistics.getINSTANCE().getRevenueByMonth();
+        for (Map.Entry<Month, Double> entry : revenueByMonth.entrySet()) {
+            System.out.printf(entry.getKey() + ": " + entry.getValue() + "€");
+        }
     }
 
     public void categoriesByRevenue() {

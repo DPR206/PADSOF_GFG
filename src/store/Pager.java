@@ -2,6 +2,7 @@ package store;
 
 import product.Review;
 import product.StoreProduct;
+import user.RegisteredClient;
 
 import java.util.List;
 
@@ -65,8 +66,11 @@ public class Pager {
         }
     }
 
-    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    public void printRegisteredClientListPage(List<RegisteredClient> registeredClientList, int pageNum) {
+        // DUE
+    }
 
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     /**
      * It gets the product listed as n.º productNum in a certain page
      * @param storeProductList the list of products
@@ -84,12 +88,16 @@ public class Pager {
      * @param storeProductList the desired product list
      * @return the maximum number of pages that can be obtained from a list of products
      */
-    public int getProductMaxPageNum(List<StoreProduct> storeProductList) {
+    public int getStoreProductMaxPageNum(List<StoreProduct> storeProductList) {
         // DUE: Revisar esto
         if (storeProductList.size() % Parameter.getParam().getItemsPerPage() == 0) {
             return storeProductList.size() / Parameter.getParam().getItemsPerPage();
         }
         return (storeProductList.size() / Parameter.getParam().getItemsPerPage()) + 1;
+    }
+    
+    public int getRegisteredClientMaxPageNum(List<RegisteredClient> registeredClientList) {
+        return 0;// DUE
     }
 
     /**

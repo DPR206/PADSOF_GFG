@@ -173,7 +173,7 @@ public class MainApp {
         } else {
             System.out.println("\t[4] Reload page");
         }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getProductMaxPageNum(products)) {
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
             System.out.println("\t[5] Next page >");
         } else {
             System.out.println("\t[5] Reload page");
@@ -205,7 +205,7 @@ public class MainApp {
                 break;
             case 5:
                 this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getProductMaxPageNum(products) ?
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
                         this.currentScreenPageNum + 1 : this.currentScreenPageNum;
                 unregisteredClientOrderLoop();
                 break;
@@ -598,7 +598,7 @@ public class MainApp {
         } else {
             System.out.println("\t[2] Reload page");
         }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getProductMaxPageNum(products)) {
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
             System.out.println("\t[3] Next page >");
         } else {
             System.out.println("\t[3] Reload page");
@@ -639,7 +639,7 @@ public class MainApp {
                 break;
             case 3:
                 this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getProductMaxPageNum(products) ?
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
                         this.currentScreenPageNum + 1 : this.currentScreenPageNum;
                 manageStoreProducts();
                 break;
@@ -1059,24 +1059,160 @@ public class MainApp {
         }
     }
 
-    public void productBySales() {
+    public void productBySales() throws IOException {
         System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + this.currentScreenPageNum);
         List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
         Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
-        // DUE
+
+        System.out.println("What do you wish to do? (enter the nº)");
+        if ((this.currentScreenPageNum - 1) > 0) {
+            System.out.println("\t[1] < Previous page");
+        } else {
+            System.out.println("\t[1] Reload page");
+        }
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
+            System.out.println("\t[2] Next page >");
+        } else {
+            System.out.println("\t[2] Reload page");
+        }
+        System.out.println("\t[3] <- Go back");
+        System.out.println("\t[4] <<- Go to main page");
+        System.out.println("\t[5] x Exit app");
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1:
+                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                productBySales();
+                break;
+            case 2:
+                this.currentScreenPageNum =
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
+                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                productBySales();
+                break;
+            case 3:
+                pageNumGoForward();
+                generateStatistics();
+                break;
+            case 4:
+                pageNumGoForward();
+                main();
+                break;
+            case 5:
+                pageNumGoForward();
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                productBySales();
+                break;
+        }
     }
 
-    public void clientsByOrders() {
+    public void clientsByOrders() throws IOException {
         System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + this.currentScreenPageNum);
-        // DUE
+        List<RegisteredClient> clients = Statistics.getINSTANCE().getUsersMostOrders();
+        Pager.getInstance().printRegisteredClientListPage(clients, this.currentScreenPageNum);
+
+        System.out.println("What do you wish to do? (enter the nº)");
+        if ((this.currentScreenPageNum - 1) > 0) {
+            System.out.println("\t[1] < Previous page");
+        } else {
+            System.out.println("\t[1] Reload page");
+        }
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients)) {
+            System.out.println("\t[2] Next page >");
+        } else {
+            System.out.println("\t[2] Reload page");
+        }
+        System.out.println("\t[3] <- Go back");
+        System.out.println("\t[4] <<- Go to main page");
+        System.out.println("\t[5] x Exit app");
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1:
+                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                clientsByOrders();
+                break;
+            case 2:
+                this.currentScreenPageNum =
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients) ?
+                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                clientsByOrders();
+                break;
+            case 3:
+                pageNumGoForward();
+                clientsByOrders();
+                break;
+            case 4:
+                pageNumGoForward();
+                main();
+                break;
+            case 5:
+                pageNumGoForward();
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                clientsByOrders();
+                break;
+        }
     }
 
-    public void clientsByExchanges() {
+    public void clientsByExchanges() throws IOException {
         System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + this.currentScreenPageNum);
-        // DUE
+        List<RegisteredClient> clients = Statistics.getINSTANCE().getUsersMostExchanges();
+        Pager.getInstance().printRegisteredClientListPage(clients, this.currentScreenPageNum);
+
+        System.out.println("What do you wish to do? (enter the nº)");
+        if ((this.currentScreenPageNum - 1) > 0) {
+            System.out.println("\t[1] < Previous page");
+        } else {
+            System.out.println("\t[1] Reload page");
+        }
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients)) {
+            System.out.println("\t[2] Next page >");
+        } else {
+            System.out.println("\t[2] Reload page");
+        }
+        System.out.println("\t[3] <- Go back");
+        System.out.println("\t[4] <<- Go to main page");
+        System.out.println("\t[5] x Exit app");
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1:
+                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                clientsByExchanges();
+                break;
+            case 2:
+                this.currentScreenPageNum =
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients) ?
+                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                clientsByExchanges();
+                break;
+            case 3:
+                pageNumGoForward();
+                clientsByExchanges();
+                break;
+            case 4:
+                pageNumGoForward();
+                main();
+                break;
+            case 5:
+                pageNumGoForward();
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                clientsByExchanges();
+                break;
+        }
     }
 
     public void revenueByMonth() {

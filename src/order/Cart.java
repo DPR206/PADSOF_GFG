@@ -193,7 +193,7 @@ public class Cart {
     /**
      * It prints a cart's info
      */
-    public void printInfo() {
+    public void getPrintInfo() {
         System.out.print("Products: ");
         this.printProducts();
         System.out.print("Packs: ");

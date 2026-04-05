@@ -221,6 +221,12 @@ public abstract class Discount {
     public abstract List<StoreProduct> getProducts();
 
     /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public abstract String getPrintInfo();
+
+    /**
      * It gets the discount's start date
      * @return the discount's start date
      */

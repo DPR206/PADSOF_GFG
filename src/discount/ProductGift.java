@@ -86,12 +86,19 @@ public class ProductGift extends ProductDiscount implements GiftDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
+
     // DUE: createGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct
     // gift) {}
 
-    
-
     // DUE: public obtainDisc();
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**

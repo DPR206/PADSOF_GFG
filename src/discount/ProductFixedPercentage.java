@@ -80,11 +80,18 @@ public class ProductFixedPercentage extends ProductDiscount implements FixedPerc
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
+
     // DUE: createFixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {}
 
-    
-
     // DUE: public obtainDisc();
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**

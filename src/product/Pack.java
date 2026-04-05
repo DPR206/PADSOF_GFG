@@ -3,16 +3,12 @@
  */
 package product;
 
+import discount.*;
 import store.Store;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import discount.Discount;
-import discount.FixedPercentageDiscount;
-import discount.GiftDiscount;
-import discount.VolumeDiscount;
 
 /**
  * It implements the packs
@@ -122,6 +118,14 @@ public class Pack {
 	 */
 	public int getId() {
 		return id;
+	}
+
+	/**
+	 * It returns the pack's basic info
+     * @return the pack's basic info
+	 */
+	public String getPrintInfo(){
+		return "DUE";// DUE
 	}
 
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

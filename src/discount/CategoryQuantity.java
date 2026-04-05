@@ -55,7 +55,13 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

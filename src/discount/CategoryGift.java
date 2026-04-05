@@ -60,7 +60,13 @@ public class CategoryGift extends CategoryDiscount implements GiftDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

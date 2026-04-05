@@ -389,10 +389,10 @@ public class MainLoop {
      */
     private void unregisteredSeeCart() throws IOException {
         System.out.print("\n ---- unregisteredSeeCart ---- \n"); // Es para debug, borrar
-        ((UnregisteredClient) this.currentUser).getCart().printInfo();
+        ((UnregisteredClient) this.currentUser).getCart() .getPrintInfo();
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Place order");
-        System.out.println("\t[2] Go back"); // DUE: Cancelar productos por n.º de impresión (ver printInfo)
+        System.out.println("\t[2] Go back"); // DUE: Cancelar productos por n.º de impresión (ver getPrintInfo)
         int chosenOption2 = scanner.nextInt();
 
         if (chosenOption2 == 1) {
@@ -1310,7 +1310,7 @@ public class MainLoop {
 
     private void managerSeeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
         System.out.print("\n ---- managerSeeProfile ---- \n"); // Es para debug, borrar
-        this.currentUser.printInfo();
+        this.currentUser .getPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Change my password");

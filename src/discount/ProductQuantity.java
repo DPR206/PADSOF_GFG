@@ -86,7 +86,13 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

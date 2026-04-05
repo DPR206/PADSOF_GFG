@@ -86,7 +86,13 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

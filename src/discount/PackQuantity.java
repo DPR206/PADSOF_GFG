@@ -52,6 +52,15 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -61,8 +70,6 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
     public double getDeduction() {
         return this.deduction;
     }
-
-    
 
     /**
      * It allows the manager to change the quantity discount's discount

@@ -49,7 +49,13 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

@@ -130,7 +130,7 @@ public abstract class User {
     /**
      * It prints the user's info in a cyphered way
      */
-    public void printInfo() {
+    public void getPrintInfo() {
         // https://stackoverflow.com/questions/2804827/create-a-string-with-n-characters
         String cypheredPassword = new String(new char[this.pwd.length()]).replace('\0', '#');
 

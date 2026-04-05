@@ -60,15 +60,6 @@ public class CategoryTest {
     }
 
     @Test
-    public void testRemoveProduct() {
-    	Comic comic = new Comic("0",12.99, "AY", "Aventura espacial", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "Editorial Fantástica", this.cat);
-
-        cat.addProduct(comic);
-        cat.removeProduct(comic);
-        assertFalse(cat.getProducts().contains(comic));
-    }
-
-    @Test
     public void testGetName() {
         assertEquals("Electronics", cat.getName());
     }

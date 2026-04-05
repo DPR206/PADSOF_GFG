@@ -99,7 +99,7 @@ public class Category{
      * @throws NullPointerException name was null
      */
     public void setName(String newName) throws NullPointerException {
-        if (name == null) {
+        if (newName == null) {
             throw new NullPointerException("Name must not be null");
         }
         if (Store.getInstance().isCategoryInStore(newName)) {

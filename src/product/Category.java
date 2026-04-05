@@ -11,7 +11,7 @@ import java.util.List;
  * @version 1.4
  * @see Store
  */
-public class Category {
+public class Category{
     /** The category's name */
     public String name;
     /** The category's total revenue */

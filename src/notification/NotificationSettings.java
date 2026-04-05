@@ -5,6 +5,8 @@ package notification;
 
 import java.util.*;
 
+import user.Permission;
+
 /**
  * It implements the notification settings
  * 
@@ -36,7 +38,31 @@ public class NotificationSettings {
 			    NotificationType.CART, true,
 			    NotificationType.NEW_SECONDHAND_PRODUCT, true,
 			    NotificationType.PAYMENT, true,
-			    NotificationType.ORDER, true
+			    NotificationType.ORDER, true,
+			    NotificationType.EMPLOYEE_EXCHANGE, false,
+			    NotificationType.EMPLOYEE_ORDER, false,
+			    NotificationType.EMPLOYEE_VALUTAION, false
+		));
+	}
+	
+	/**
+	 * 
+	 * @param permission
+	 */
+	public NotificationSettings(Permission permission) {
+		
+		switch 
+		
+		this.interests = new HashMap<NotificationType, Boolean>(Map.of(
+				NotificationType.EXCHANGE, true,
+			    NotificationType.DISCOUNT, true,
+			    NotificationType.CART, true,
+			    NotificationType.NEW_SECONDHAND_PRODUCT, true,
+			    NotificationType.PAYMENT, true,
+			    NotificationType.ORDER, true,
+			    NotificationType.EMPLOYEE_EXCHANGE, false,
+			    NotificationType.EMPLOYEE_ORDER, false,
+			    NotificationType.EMPLOYEE_VALUTAION, false
 		));
 	}
 

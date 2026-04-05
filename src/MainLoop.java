@@ -1,5 +1,12 @@
 import order.Cart;
-import product.*;
+import product.Category;
+import product.Comic;
+import product.Figurine;
+import product.Game;
+import product.GameStyle;
+import product.ProductType;
+import product.StoreProduct;
+import productT.*;
 import store.*;
 import user.*;
 

@@ -3,7 +3,12 @@ package user;
 import exchange.Exchange;
 import order.Order;
 import order.OrderState;
-import product.*;
+import product.Category;
+import product.GameStyle;
+import product.Pack;
+import product.SecondHandProduct;
+import product.StoreProduct;
+import productT.*;
 import search.*;
 
 import java.time.Year;

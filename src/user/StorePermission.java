@@ -1,6 +1,5 @@
 package user;
 
-import product.*;
 import store.Store;
 
 import java.io.BufferedReader;
@@ -12,6 +11,15 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import product.Category;
+import product.Comic;
+import product.Figurine;
+import product.Game;
+import product.GameStyle;
+import product.Pack;
+import product.StoreProduct;
+import productT.*;
 
 
 /**

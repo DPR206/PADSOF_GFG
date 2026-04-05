@@ -4,7 +4,10 @@
 package user;
 
 import order.*;
-import product.*;
+import product.Pack;
+import product.SecondHandProduct;
+import product.StoreProduct;
+import productT.*;
 import exchange.*;
 import search.*;
 

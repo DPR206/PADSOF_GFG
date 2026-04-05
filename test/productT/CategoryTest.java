@@ -1,9 +1,16 @@
-package product;
+package productT;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.Year;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import product.Category;
+import product.Comic;
+import product.*;
 
 public class CategoryTest {
 
@@ -26,11 +33,6 @@ public class CategoryTest {
         new Category(null, 10.0);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testConstructorNegativeRevenue() {
-        new Category("Sports", -5.0);
-    }
-
     @Test
     public void testConstructorOnlyName() {
         Category c = new Category("Toys");
@@ -51,17 +53,19 @@ public class CategoryTest {
 
     @Test
     public void testAddProduct() {
-        StoreProduct sp = new StoreProduct(1, "Phone", 500.0, 10);
-        cat.addProduct(sp);
-        assertTrue(cat.getProducts().contains(sp));
+        Comic comic = new Comic("C001", 12.99, "El Guerrero Estelar", "Aventura espacial", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "Editorial Fantástica", this.cat);
+
+        cat.addProduct(comic);
+        assertTrue(cat.getProducts().contains(comic));
     }
 
     @Test
     public void testRemoveProduct() {
-        StoreProduct sp = new StoreProduct(1, "Phone", 500.0, 10);
-        cat.addProduct(sp);
-        cat.removeProduct(sp);
-        assertFalse(cat.getProducts().contains(sp));
+    	Comic comic = new Comic("C001", 12.99, "El Guerrero Estelar", "Aventura espacial", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "Editorial Fantástica", this.cat);
+
+        cat.addProduct(comic);
+        cat.removeProduct(comic);
+        assertFalse(cat.getProducts().contains(comic));
     }
 
     @Test

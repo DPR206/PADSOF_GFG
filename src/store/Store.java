@@ -3,7 +3,13 @@ package store;
 import exchange.Exchange;
 import exchange.Offer;
 import order.Order;
-import product.*;
+import product.Category;
+import product.Pack;
+import product.Product;
+import product.Review;
+import product.SecondHandProduct;
+import product.StoreProduct;
+import productT.*;
 import user.*;
 import utilities.Utility;
 

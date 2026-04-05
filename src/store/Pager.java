@@ -1,7 +1,11 @@
 package store;
 
 import discount.Discount;
-import product.*;
+import product.Category;
+import product.Pack;
+import product.Review;
+import product.StoreProduct;
+import productT.*;
 import user.Employee;
 import user.RegisteredClient;
 

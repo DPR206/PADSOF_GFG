@@ -2,7 +2,19 @@ package store;
 
 import exchange.*;
 import order.*;
-import product.*;
+import product.Category;
+import product.Comic;
+import product.ConservationStatus;
+import product.Figurine;
+import product.Game;
+import product.GameStyle;
+import product.Pack;
+import product.Product;
+import product.ProductType;
+import product.Review;
+import product.SecondHandProduct;
+import product.StoreProduct;
+import productT.*;
 import user.RegisteredClient;
 import user.User;
 

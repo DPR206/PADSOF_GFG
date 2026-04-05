@@ -1,6 +1,5 @@
 package order;
 
-import product.*;
 import user.RegisteredClient;
 
 import java.time.*;
@@ -8,6 +7,9 @@ import java.util.*;
 
 import discount.DiscountType;
 import discount.QuantityDiscount;
+import product.Pack;
+import product.StoreProduct;
+import productT.*;
 
 /**
  * Cart, array of products and packs the user has not paid yet

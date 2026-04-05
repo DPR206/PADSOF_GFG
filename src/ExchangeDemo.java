@@ -1,6 +1,9 @@
 import exchange.Exchange;
 import exchange.Offer;
-import product.*;
+import product.ConservationStatus;
+import product.ProductType;
+import product.SecondHandProduct;
+import productT.*;
 import user.*;
 
 // NOTE: Técnicamente, usaría store como fachada / base de datos

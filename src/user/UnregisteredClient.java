@@ -4,7 +4,10 @@
 package user;
 
 import order.Cart;
-import product.*;
+import product.Category;
+import product.Pack;
+import product.StoreProduct;
+import productT.*;
 import search.SearchType;
 import store.Store;
 

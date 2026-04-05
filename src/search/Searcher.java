@@ -2,7 +2,11 @@ package search;
 
 import exchange.Exchange;
 import order.Order;
-import product.*;
+import product.Category;
+import product.Pack;
+import product.SecondHandProduct;
+import product.StoreProduct;
+import productT.*;
 import user.Employee;
 
 import java.util.List;

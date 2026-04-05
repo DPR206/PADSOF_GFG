@@ -1,7 +1,10 @@
 package user;
 
 import discount.*;
-import product.*;
+import product.Category;
+import product.Pack;
+import product.StoreProduct;
+import productT.*;
 import store.Parameter;
 import store.Store;
 

@@ -1,11 +1,15 @@
 package discount;
 
-import product.*;
 import store.Store;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+
+import product.Category;
+import product.Pack;
+import product.StoreProduct;
+import productT.*;
 
 /**
  * It implements the general discount

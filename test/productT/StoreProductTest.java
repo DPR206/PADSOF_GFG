@@ -1,4 +1,4 @@
-package product;
+package productT;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -7,6 +7,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import order.Discount;
+import product.Category;
+import product.Review;
 import store.Store;
 import user.RegisteredClient;
 

@@ -5,10 +5,14 @@ package store;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import product.Category;
+import product.StoreProduct;
+import productT.*;
+
 import java.time.*;
 
 import user.RegisteredClient;
-import product.*;
 
 /**
  * It implements the statistics

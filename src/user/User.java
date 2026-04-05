@@ -58,7 +58,7 @@ public abstract class User {
      * @param newPwd, the password of the user
      */
     public void changePassword(String newPwd) {
-        this.pwd = pwd;
+        this.pwd = newPwd;
     }
 
     /**

@@ -37,6 +37,7 @@ public class Employee extends User {
     public Employee(String pwd, String userName, Permission p, boolean asc) {
         super(UserType.EMPLOYEE, pwd, userName, asc);
         this.perm = p;
+        this.notificationHistory = new NotificationHistory()
 
         if (p.getMeaning() == "store") {
             this.sp = new StorePermission();

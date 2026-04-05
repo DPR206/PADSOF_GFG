@@ -58,7 +58,7 @@ public abstract class User {
      * @param newPwd, the password of the user
      */
     public void changePassword(String newPwd) {
-        this.pwd = pwd;
+        this.pwd = newPwd;
     }
 
     /**
@@ -81,20 +81,35 @@ public abstract class User {
     public String getUserName() {
         return this.userName;
     }
-
+    
+    /**
+     * Changes the order of the search (ascendant or descendant)
+     *
+     *@param bool, determines the order (ascendant or descendant) on which the products appear
+     */
     public void changeSearchOrder(boolean bool) {
     	this.searching.changeProductOrder(bool);
     }
-
+    
+    /**
+     * Adds a new price filter to the user
+     *
+     *@param min, minimum price to search
+     *@param max, maximum price to search
+     */
     public void addPriceFilter(double min, double max){
-        PriceFilter filter = new PriceFilter(min, max);
         this.searching.getStoreSearcher().addPriceFilter(min, max);
     }
-
+    
+    /**
+     * Adds a new punctuation filter to the user
+     *
+     *@param min, minimum punctuation to search
+     *@param max, maximum punctuation to search
+     */
     public void addPunctuationFilter(int min, int max){
         this.searching.getStoreSearcher().addPunctuationFilter(min, max);
     }
-
 
     /**
      * It gets the user's user type
@@ -103,7 +118,11 @@ public abstract class User {
     public UserType getType() {
         return this.type;
     }
-
+    
+    /**
+     * It gets the user's actual ID (String)
+     * 
+     */
     public String getId() {
     	return this.actualID;
     }

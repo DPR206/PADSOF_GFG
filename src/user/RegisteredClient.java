@@ -31,6 +31,7 @@ public class RegisteredClient extends User {
     private OrderHistory orderHistory;
     private OfferHistory offerHistory;
     private NotificationHistory notificationHistory;
+    private NotificationSettings notificationSettings;
     private Searcher searcher;
     private int numOrders;
     private int numExchanges;
@@ -369,7 +370,7 @@ public class RegisteredClient extends User {
     
     public List<Notification> browseNotifications(){
     	List<Notification> notifications = new ArrayList<>();
-    	for(Notification n : this.notificationHistory.getNotifications())
+    	for(Notification n : this.notificationHistory.getNotificationsSorted())
     		if(n.isVisible() == true)
     			notifications.add(n);
     	return notifications;

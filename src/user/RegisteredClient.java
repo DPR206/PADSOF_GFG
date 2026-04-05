@@ -31,7 +31,6 @@ public class RegisteredClient extends User {
     private OrderHistory orderHistory;
     private OfferHistory offerHistory;
     private NotificationHistory notificationHistory;
-    private NotificationSettings notificationSettings;
     private Searcher searcher;
     private int numOrders;
     private int numExchanges;
@@ -91,6 +90,7 @@ public class RegisteredClient extends User {
         this.exchangeHistory = new ExchangeHistory(this);
         this.orderHistory = new OrderHistory(this);
         this.offerHistory = new OfferHistory(this);
+        this.notificationHistory = new NotificationHistory(this);
         this.wallet = new Wallet();
         this.searcher = new Searcher(new SearchStoreProducts(true));
         this.numExchanges = 0;

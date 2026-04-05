@@ -66,7 +66,7 @@ public class NotificationHistory {
 	 * @param owner the user associated to the notifications
 	 */
 	public NotificationHistory(User owner) {
-		this.notifications = Collections.emptySet();
+		this.notifications = new LinkedHashSet<>(notifications);
 		this.owner = owner;
 		this.settings = new NotificationSettings();
 	}

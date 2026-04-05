@@ -5,6 +5,7 @@ import order.Order;
 import order.OrderState;
 import product.*;
 import search.*;
+import notification.*;
 
 import java.time.LocalDate;
 import java.time.Year;
@@ -23,6 +24,7 @@ public class Employee extends User {
     private OrderPermission op;
     private StorePermission sp;
     private Permission perm;
+    private NotificationHistory notificationHistory;
 
     /*------------------------------------------------------CONSTRUCTOR-----------------------------------------------------------------------*/
 
@@ -35,6 +37,7 @@ public class Employee extends User {
     public Employee(String pwd, String userName, Permission p, boolean asc) {
         super(UserType.EMPLOYEE, pwd, userName, asc);
         this.perm = p;
+        this.notificationHistory = new NotificationHistory();
 
         if (p.getMeaning() == "store") {
             this.sp = new StorePermission();

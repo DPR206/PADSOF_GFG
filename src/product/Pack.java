@@ -148,7 +148,7 @@ public class Pack {
             case VOLUME:
                 VolumeDiscount volumeDisc = (VolumeDiscount) this.discount;
                 if (this.price > volumeDisc.getSpendingThreshold()) {
-                    return this.price - volumeDisc.getSpendingThreshold();
+                    return this.price - volumeDisc.getDeduction();
                 }
                 return this.price;
 		default:
@@ -267,10 +267,7 @@ public class Pack {
 	 * @return double, the raw price of the pack
 	 */
 	public double totalPrice() {
-		double total = 0;
-		for(StoreProduct sp: products)
-			total += sp.getPrice();
-		return total;
+		return this.price;
 	}
 
 	/**
@@ -294,6 +291,10 @@ public class Pack {
 	@Override
 	public String toString() {
 		/*ID;PRICE;PRODUCT_IDS;DATE_ADD_CART*/
-		return this.id + ";" + this.price + ";" + this.getPrintProducts() + ";" + this.products;
+		return this.id + ";" + this.price + ";" + this.getPrintProducts() + ";" + this.dateAddCart;
+	}
+
+	public double getOriginalPrice() {
+		returnn this.price;
 	}
 }

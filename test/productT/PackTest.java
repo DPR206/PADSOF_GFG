@@ -43,18 +43,6 @@ public class PackTest {
 	 }
 	 
 	 @Test
-	 public void setProductsTest() {
-		 Comic comic = new Comic("1",12.99, "alo", "algo2", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "ñe");
-		 Comic comic2 = new Comic("0",12.99, "alo2", "algo2", "foto2.png", 43.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "awa");
-		 List<StoreProduct> cosa = new ArrayList<>();
-		 cosa.add(comic);
-		 cosa.add(comic2);
-		 
-		 this.p.addArrayProducts((ArrayList<StoreProduct>) cosa);
-		 assertTrue(this.p.getProducts().contains(comic) && this.p.getProducts().contains(comic2));
-	 }
-	 
-	 @Test
 	 public void getCartDateTest() {
 		 LocalDate d = this.p.getDateAddCart();
 		 assertEquals(d.toString(), this.p.getDateAddCart().toString());
@@ -192,10 +180,7 @@ public class PackTest {
 	 
 	 @Test
 	 public void totalPriceTest() {
-		 double expected = 0;
-		 for (StoreProduct sp : this.p.getProducts()) {
-			 expected += sp.getPrice();
-		 }
+		 double expected = this.p.getPrice();
 		 assertEquals(expected, this.p.totalPrice(), 0.001);
 	 }
 	 
@@ -212,7 +197,7 @@ public class PackTest {
 	 
 	 @Test
 	 public void toStringTest() {
-		 String expected = this.p.getId() + ";" + this.p.getPrice() + ";" + this.p.getPrintProducts() + ";" + this.p.getProducts();
+		 String expected = this.p.getId() + ";" + this.p.getPrice() + ";" + this.p.getPrintProducts() + ";" + this.p.getDateAddCart();
 		 assertEquals(expected, this.p.toString());
 	 }
 	 

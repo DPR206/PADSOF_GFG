@@ -4,9 +4,7 @@
 package notification;
 
 import java.time.LocalDateTime;
-
-import product.SecondHandProduct;
-import productT.*;
+import product.*;
 
 /**
  * It implements the valuation notification for employees

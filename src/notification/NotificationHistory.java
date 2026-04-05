@@ -29,7 +29,7 @@ public class NotificationHistory {
 	 * @param settings the notification settings
 	 */
 	public NotificationHistory(Set<Notification> notifications, User owner, NotificationSettings settings) {
-		this.notifications = notifications;
+		this.notifications = new LinkedHashSet<>(notifications);
 		this.owner = owner;
 		this.settings = settings;
 	}
@@ -41,7 +41,7 @@ public class NotificationHistory {
 	 * @param settings the notification settings
 	 */
 	public NotificationHistory(User owner, NotificationSettings settings) {
-		this.notifications = Collections.emptySet();
+		this.notifications = new LinkedHashSet<>();
 		this.owner = owner;
 		this.settings = settings;
 	}
@@ -53,7 +53,7 @@ public class NotificationHistory {
 	 * @param owner the user associated to the notifications
 	 */
 	public NotificationHistory(Set<Notification> notifications, User owner) {
-		this.notifications = notifications;
+		this.notifications = new LinkedHashSet<>(notifications);
 		this.owner = owner;
 		this.settings = new NotificationSettings();
 	}
@@ -137,5 +137,15 @@ public class NotificationHistory {
 			n.setRead(true);
 	}
 	
+	/**
+	 * Obtains a list of notifications based on how recent they are
+	 * 
+	 * @return list of notifications
+	 */
+	public List<Notification> getNotificationsSorted(){
+		List<Notification> sortedList = new ArrayList<>(this.notifications);
+	    sortedList.sort(Comparator.comparing(Notification::getTimeMade).reversed());
+	    return sortedList;
+	}
 	 
 }

@@ -53,7 +53,7 @@ public class CategoryTest {
 
     @Test
     public void testAddProduct() {
-        Comic comic = new Comic("C001", 12.99, "El Guerrero Estelar", "Aventura espacial", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "Editorial Fantástica", this.cat);
+        Comic comic = new Comic("1",12.99, "alo", "algo2", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "Editorial Fantástica", this.cat);
 
         cat.addProduct(comic);
         assertTrue(cat.getProducts().contains(comic));
@@ -61,7 +61,7 @@ public class CategoryTest {
 
     @Test
     public void testRemoveProduct() {
-    	Comic comic = new Comic("C001", 12.99, "El Guerrero Estelar", "Aventura espacial", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "Editorial Fantástica", this.cat);
+    	Comic comic = new Comic("0",12.99, "AY", "Aventura espacial", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "Editorial Fantástica", this.cat);
 
         cat.addProduct(comic);
         cat.removeProduct(comic);

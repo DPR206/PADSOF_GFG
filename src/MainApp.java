@@ -1,27 +1,21 @@
-import order.Cart;
-import product.*;
-import store.*;
-import user.*;
-
 import java.io.IOException;
-import java.time.*;
-import java.util.*;
 
 /**
  * The type Main app.
  */
 public class MainApp {
-    private static  MainLoop ml = new MainLoop();
+    private static MainLoop ml = new MainLoop();
 
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
     public static void main() {
-    	try{
-    		ml.main();
-    	} catch (IOException io){
+        try {
+            ml.main();
+        } catch (IOException io) {
 
-    	} catch (IllegalArgumentException ia) {
+        } catch (IllegalArgumentException ia) {
 
-    	} catch(NullPointerException np) {
+        } catch (NullPointerException np) {
 
-    	}
-}
+        }
+    }
 }

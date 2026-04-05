@@ -290,10 +290,18 @@ public class RegisteredClient extends User {
     	
     }
     
+    public void reviewProduct(StoreProduct sp, Review review) {
+    	sp.addReview(this, review);
+    }
+    
+    public void reviewProduct(StoreProduct sp, int scoring, String comment) {
+    	Review r = new Review(scoring, comment, this);
+    	sp.addReview(this, r);
+    }
+    
     //requestValuation
     //makeAnOffer
     //browseNotifications
-    //review
 
     @Override
     public String toString() {

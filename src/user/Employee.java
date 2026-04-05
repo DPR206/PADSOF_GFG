@@ -6,6 +6,7 @@ import order.OrderState;
 import product.*;
 import search.*;
 
+import java.time.LocalDate;
 import java.time.Year;
 import java.util.*;
 
@@ -140,11 +141,28 @@ public class Employee extends User {
      * Gives a secondhand product a value
      * @param secondHandProduct
      * @param valuation
+     * @param status 
      *
      */
-    public boolean valuate(SecondHandProduct secondHandProduct, double valuation) {
+    public boolean valuate(SecondHandProduct secondHandProduct, double valuation, ConservationStatus status) {
         if (this.ep != null) {
-            ep.valuate(secondHandProduct, valuation);
+            ep.valuate(secondHandProduct, valuation, status);
+            return true;
+        }
+        System.err.println("You have no permission to do that...");
+        return false;
+    }
+    
+    /**
+     * Gives a secondhand product a value
+     * @param secondHandProduct
+     * @param valuation
+     * @param status 
+     *
+     */
+    public boolean valuate(SecondHandProduct secondHandProduct, double valuation, ConservationStatus status, LocalDate valuationDate) {
+        if (this.ep != null) {
+            ep.valuate(secondHandProduct, valuation, status, valuationDate);
             return true;
         }
         System.err.println("You have no permission to do that...");

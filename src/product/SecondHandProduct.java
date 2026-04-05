@@ -206,12 +206,6 @@ public class SecondHandProduct extends Product{
 		this.status = status;
 	}
 
-
-
-
-
-/*----------------------------------------------------------METHODS---------------------------------------------------------------------------*/
-
 	/**
 	 * Obtains the owner of the product
 	 *
@@ -265,6 +259,13 @@ public class SecondHandProduct extends Product{
 	public void setEstimatedPrice(double price) {
         this.setPrice(price);
     }
+	
+/*----------------------------------------------------METHODS-----------------------------------------------------*/
+	
+	public void requestValuation() {
+		
+	}
+	
 
 /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override

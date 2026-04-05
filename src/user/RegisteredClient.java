@@ -351,6 +351,7 @@ public class RegisteredClient extends User {
     	System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
     	TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
     	sp.setPaidValuation(true);
+    	//hacer notificacion empleado
     }
     
     public void reviewProduct(StoreProduct sp, Review review) {
@@ -366,11 +367,15 @@ public class RegisteredClient extends User {
     	
     }
     
-    /*public List<Notification> browseNotifications(){
-    	List<Notification>
-    }*/
+    public List<Notification> browseNotifications(){
+    	List<Notification> notifications = new ArrayList<>();
+    	for(Notification n : this.notificationHistory.getNotifications())
+    		if(n.isVisible() == true)
+    			notifications.add(n);
+    	return notifications;
+    }
     
-    //requestValuation
+    
     //makeAnOffer
     //browseNotifications
 

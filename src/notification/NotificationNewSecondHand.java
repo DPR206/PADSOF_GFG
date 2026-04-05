@@ -2,8 +2,7 @@ package notification;
 
 import java.time.*;
 
-import product.SecondHandProduct;
-import productT.*;
+import product.*;
 
 /**
  * It implements the new second-hand product notification

@@ -104,7 +104,7 @@ public class Pack {
 	 * @throws NullPointerException discount was null
 	 */
 	public void setDiscount(Discount newDiscount) throws NullPointerException {
-		if (discount == null) {
+		if (newDiscount == null) {
 			throw new NullPointerException("Discount cannot be null");
 		}
 

@@ -90,7 +90,13 @@ public class StorePermission {
         Figurine f = new Figurine(price, name, description, photo, stock, dimensions, brand, material, categories);
         this.s.addStoreProduct(f);
     }
-
+    
+    /**
+     * Adds new products to the store reading them from a file
+     * 
+     * @param filename, name of the file that contains the products
+     * 
+     */
     public boolean addProductByFile(String fileName) throws IOException {
         int stock, numCat;
         String name, desc, aux, type;
@@ -154,12 +160,25 @@ public class StorePermission {
 
         return true;
     }
-
+    
+    /**
+     * Adds a new pack to the store 
+     * 
+     * 
+     * @param price, price of the pack
+     * @param products, list of products that the pack contains
+     * @param date, date when the pack was created
+     * 
+     */
     public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
         Pack p = new Pack(price, products, date);
         s.addPack(p);
     }
-
+    
+    /**
+     * Gets the store instance
+     * 
+     */
     public Store getStore() {
         return this.s;
     }

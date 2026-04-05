@@ -10,7 +10,7 @@ import search.*;
 import store.Parameter;
 import notification.*;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.util.*;
 import es.uam.eps.padsof.telecard.*;
 
@@ -340,19 +340,26 @@ public class RegisteredClient extends User {
     }
     
     /**
-     * Requests a valuation for a second hand product
+     * 
      * @param sp
      * @param cardNumber
+     * @return
      * @throws InvalidCardNumberException
      * @throws FailedInternetConnectionException
      * @throws OrderRejectedException
      */
-    public void requestValuation(SecondHandProduct sp, String cardNumber) throws InvalidCardNumberException, 
+    public Notification requestValuation(SecondHandProduct sp, String cardNumber) throws InvalidCardNumberException, 
 	FailedInternetConnectionException, OrderRejectedException {
+    	
     	System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
     	TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
+    	
     	sp.setPaidValuation(true);
-    	//hacer notificacion empleado
+    	
+    	NotificationEmployeeValuation notification = new NotificationEmployeeValuation(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_VALUTAION);
+    	notification.FullNotification(sp);
+    	
+    	return notification;
     }
     
     public void reviewProduct(StoreProduct sp, Review review) {

@@ -212,7 +212,7 @@ public abstract class Notification {
 		long mins = duration.toMinutesPart(); 
 		long segs = duration.toSecondsPart();
 
-		return "Elapsed time: " + hours + "h " + mins + "m " + segs + "s";
+		return "Elapsed time: " + days + "day(s) " + hours + "h " + mins + "m " + segs + "s\n";
 	}
 	
 	/**

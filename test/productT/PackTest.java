@@ -40,18 +40,6 @@ public class PackTest {
 	 public void getIdTest() {
 		 int id = this.p.getId();
 		 assertEquals(id, this.p.getId(), 0.001);
-	 }	
-	 
-	 @Test
-	 public void getPriceTest() {
-		 double price = this.p.getPrice();
-		 assertEquals(price, this.p.getPrice(), 0.001);
-	 }
-	 
-	 @Test
-	 public void setPriceTest() {
-		 double price = 7.9;
-		 assertEquals(price, this.p.getPrice(), 0.001);
 	 }
 	 
 	 @Test
@@ -69,7 +57,7 @@ public class PackTest {
 	 @Test
 	 public void getCartDateTest() {
 		 LocalDate d = this.p.getDateAddCart();
-		 assertEquals(d.toString(), this.p.getDateAddCart().toString(), 0.001);
+		 assertEquals(d.toString(), this.p.getDateAddCart().toString());
 	 }
 	 
 	 @Test

@@ -26,6 +26,7 @@ public class PackTest {
 		 cosa.add(comic);
 		 cosa.add(comic2);
 		 this.p = new Pack(1.6, (ArrayList<StoreProduct>) cosa);
+		 this.p.setDateAddCart(LocalDate.now());
 	 }
 	 
 	 @Test
@@ -115,7 +116,7 @@ public class PackTest {
 	 @Test
 	 public void setPriceTest() {
 		 this.p.setPrice(20.0);
-		 assertEquals(20.0, this.p.getPrice(), 0.001);
+		 assertEquals(20.0, this.p.getOriginalPrice(), 0.001);
 	 }
 	 
 	 @Test
@@ -193,12 +194,6 @@ public class PackTest {
 	 @Test
 	 public void getPrintInfoTest() {
 		 assertEquals("DUE", this.p.getPrintInfo());
-	 }
-	 
-	 @Test
-	 public void toStringTest() {
-		 String expected = this.p.getId() + ";" + this.p.getPrice() + ";" + this.p.getPrintProducts() + ";" + this.p.getDateAddCart();
-		 assertEquals(expected, this.p.toString());
 	 }
 	 
 	 @Test

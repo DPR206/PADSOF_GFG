@@ -207,11 +207,12 @@ public abstract class Notification {
 	public String timeLog() {
 		Duration duration = Duration.between(timeReceived, LocalDateTime.now());
 
+		long days = duration.toDaysPart();
 		long hours = duration.toHoursPart();
 		long mins = duration.toMinutesPart(); 
 		long segs = duration.toSecondsPart();
 
-		return "Elapsed time: " + hours + "h " + mins + "m " + segs + "s";
+		return "Elapsed time: " + days + "day(s) " + hours + "h " + mins + "m " + segs + "s\n";
 	}
 	
 	/**

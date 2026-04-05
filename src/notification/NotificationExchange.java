@@ -105,9 +105,9 @@ public class NotificationExchange extends Notification implements NotificationIn
 	public String FullNotification(Offer o) {
 		String text = "Tu oferta para intercambiar " + o.getOriginProducts() + "por " + o.getDestinationProducts();
 		switch(o.getStatus()) {
-			case OfferStatus.ACCEPTED: text += " has been accepted. " + this.timeAndPlace(); break;
-			case OfferStatus.REJECTED: text += " has been rejected. You can make another offer or look for another exchange"; break;
-			case OfferStatus.EXPIRED: text += " has expired after " + Parameter.getParam().getOfferTime() 
+			case ACCEPTED: text += " has been accepted. " + this.timeAndPlace(); break;
+			case REJECTED: text += " has been rejected. You can make another offer or look for another exchange"; break;
+			case EXPIRED: text += " has expired after " + Parameter.getParam().getOfferTime() 
 												+ " have passed since its publication. You can make the same offer or a new one altogether"; 
 												break;
 			default: text = "Not valid\n";
@@ -126,9 +126,9 @@ public class NotificationExchange extends Notification implements NotificationIn
 	 */
 	public String SnippetNotification(Offer o) {
 		switch(o.getStatus()) {
-			case OfferStatus.ACCEPTED: this.setTitle("Your offer has been accepted\n"); break;
-			case OfferStatus.REJECTED: this.setTitle("Your offer has been rejected\n"); break;
-			case OfferStatus.EXPIRED: this.setTitle("Your offer has expired\n"); break;
+			case ACCEPTED: this.setTitle("Your offer has been accepted\n"); break;
+			case REJECTED: this.setTitle("Your offer has been rejected\n"); break;
+			case EXPIRED: this.setTitle("Your offer has expired\n"); break;
 			default: this.setTitle("Not valid\n");
 		}
 		

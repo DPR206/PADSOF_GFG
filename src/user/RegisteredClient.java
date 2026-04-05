@@ -7,9 +7,12 @@ import order.*;
 import product.*;
 import exchange.*;
 import search.*;
+import store.Parameter;
+import notification.*;
 
 import java.time.LocalDate;
 import java.util.*;
+import es.uam.eps.padsof.telecard.*;
 
 /**
  * It implements the registered client
@@ -27,11 +30,50 @@ public class RegisteredClient extends User {
     private Wallet wallet;
     private OrderHistory orderHistory;
     private OfferHistory offerHistory;
+    private NotificationHistory notificationHistory;
     private Searcher searcher;
     private int numOrders;
     private int numExchanges;
 
     //sugestioner
+    
+    /**
+	 * @param type
+	 * @param pwd
+	 * @param userName
+	 * @param actualID
+	 * @param asc
+	 * @param registerDate
+	 * @param dni
+	 * @param c
+	 * @param exchangeHistory
+	 * @param op
+	 * @param wallet
+	 * @param orderHistory
+	 * @param offerHistory
+	 * @param notificationHistory
+	 * @param searcher
+	 * @param numOrders
+	 * @param numExchanges
+	 */
+	public RegisteredClient(UserType type, String pwd, String userName, String actualID, boolean asc,
+			LocalDate registerDate, String dni, Cart c, ExchangeHistory exchangeHistory, OrderHistory op, Wallet wallet,
+			OrderHistory orderHistory, OfferHistory offerHistory, NotificationHistory notificationHistory,
+			Searcher searcher, int numOrders, int numExchanges) {
+		super(type, pwd, userName, actualID, asc);
+		this.registerDate = registerDate;
+		this.dni = dni;
+		this.c = c;
+		this.exchangeHistory = exchangeHistory;
+		this.op = op;
+		this.wallet = wallet;
+		this.orderHistory = orderHistory;
+		this.offerHistory = offerHistory;
+		this.notificationHistory = notificationHistory;
+		this.searcher = searcher;
+		this.numOrders = numOrders;
+		this.numExchanges = numExchanges;
+	}
 
     /**
      * Creates a new RegisteredClient
@@ -56,7 +98,8 @@ public class RegisteredClient extends User {
         this.getSearcher().setTypes(SearchType.S_SECOND_HAND, SearchType.S_STORE);
     }
 
-    /**
+
+	/**
      * Creates a new RegisteredCliente with a set registration date(today)
      * @param userName the user's name
      * @param dni      the user's dni
@@ -132,6 +175,15 @@ public class RegisteredClient extends User {
 	 */
 	public OfferHistory getOfferHistory() {
 		return offerHistory;
+	}
+
+	/**
+	 * Obtains the notification history
+	 * 
+	 * @return the notificationHistory the client's notification history
+	 */
+	public NotificationHistory getNotificationHistory() {
+		return notificationHistory;
 	}
 
 	/**
@@ -286,8 +338,19 @@ public class RegisteredClient extends User {
     	this.numExchanges += i;
     }
     
-    public void requestValuation(SecondHandProduct sp) {
-    	
+    /**
+     * Requests a valuation for a second hand product
+     * @param sp
+     * @param cardNumber
+     * @throws InvalidCardNumberException
+     * @throws FailedInternetConnectionException
+     * @throws OrderRejectedException
+     */
+    public void requestValuation(SecondHandProduct sp, String cardNumber) throws InvalidCardNumberException, 
+	FailedInternetConnectionException, OrderRejectedException {
+    	System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
+    	TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
+    	sp.setPaidValuation(true);
     }
     
     public void reviewProduct(StoreProduct sp, Review review) {
@@ -298,6 +361,14 @@ public class RegisteredClient extends User {
     	Review r = new Review(scoring, comment, this);
     	sp.addReview(this, r);
     }
+    
+    public void makeAnOffer() {
+    	
+    }
+    
+    /*public List<Notification> browseNotifications(){
+    	List<Notification>
+    }*/
     
     //requestValuation
     //makeAnOffer

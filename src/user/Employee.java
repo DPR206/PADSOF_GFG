@@ -13,7 +13,7 @@ import java.util.*;
 
 /**
  * It implements the employee
- * @author Sofía C.L.
+ * @author Sofía C.L. and Duna P.R.
  * @version 1.0
  * @see Employee
  */
@@ -37,7 +37,6 @@ public class Employee extends User {
     public Employee(String pwd, String userName, Permission p, boolean asc) {
         super(UserType.EMPLOYEE, pwd, userName, asc);
         this.perm = p;
-        this.notificationHistory = new NotificationHistory();
 
         if (p.getMeaning() == "store") {
             this.sp = new StorePermission();
@@ -54,8 +53,76 @@ public class Employee extends User {
             else if(this.sp == null && this.ep != null) this.getSearcher().setTypes(SearchType.S_EXCHANGE, SearchType.S_ORDER);
             else this.getSearcher().setTypes(SearchType.S_ORDER);
         }
+        
+        this.notificationHistory = new NotificationHistory(this);
     }
-    /*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------GETTERS AND SETTERS-------------------------------------------------------------*/
+    
+    /**
+   	 * @return the ep
+   	 */
+   	public ExchangePermission getEp() {
+   		return ep;
+   	}
+
+   	/**
+   	 * @param ep the ep to set
+   	 */
+   	public void setEp(ExchangePermission ep) {
+   		this.ep = ep;
+   	}
+
+   	/**
+   	 * @return the op
+   	 */
+   	public OrderPermission getOp() {
+   		return op;
+   	}
+
+   	/**
+   	 * @param op the op to set
+   	 */
+   	public void setOp(OrderPermission op) {
+   		this.op = op;
+   	}
+
+   	/**
+   	 * @return the sp
+   	 */
+   	public StorePermission getSp() {
+   		return sp;
+   	}
+
+   	/**
+   	 * @param sp the sp to set
+   	 */
+   	public void setSp(StorePermission sp) {
+   		this.sp = sp;
+   	}
+
+   	/**
+   	 * @return the perm
+   	 */
+   	public Permission getPerm() {
+   		return perm;
+   	}
+
+   	/**
+   	 * @param perm the perm to set
+   	 */
+   	public void setPerm(Permission perm) {
+   		this.perm = perm;
+   	}
+
+   	/**
+   	 * @return the notificationHistory
+   	 */
+   	public NotificationHistory getNotificationHistory() {
+   		return notificationHistory;
+   	}
+    
+/*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/
 
     /**
      * Adds and creates new comic
@@ -81,7 +148,7 @@ public class Employee extends User {
         return false;
     }
 
-    /**
+	/**
      * Adds and creates new game
      * @param price
      * @param name

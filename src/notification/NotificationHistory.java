@@ -55,7 +55,7 @@ public class NotificationHistory {
 	public NotificationHistory(Set<Notification> notifications, User owner) {
 		this.notifications = new LinkedHashSet<>(notifications);
 		this.owner = owner;
-		this.settings = new NotificationSettings();
+		this.settings = new NotificationSettings(owner);
 	}
 	
 	
@@ -68,7 +68,7 @@ public class NotificationHistory {
 	public NotificationHistory(User owner) {
 		this.notifications = new LinkedHashSet<>(notifications);
 		this.owner = owner;
-		this.settings = new NotificationSettings();
+		this.settings = new NotificationSettings(owner);
 	}
 
 	/**

@@ -5,7 +5,7 @@ package notification;
 
 import java.util.*;
 
-import user.Permission;
+import user.*;
 
 /**
  * It implements the notification settings
@@ -46,24 +46,63 @@ public class NotificationSettings {
 	}
 	
 	/**
+	 * Creates a new settings based on the type of user
 	 * 
-	 * @param permission
+	 * @param owner the user associated to the settings
 	 */
-	public NotificationSettings(Permission permission) {
+	public NotificationSettings(User owner) {
 		
-		switch 
-		
-		this.interests = new HashMap<NotificationType, Boolean>(Map.of(
-				NotificationType.EXCHANGE, true,
-			    NotificationType.DISCOUNT, true,
-			    NotificationType.CART, true,
-			    NotificationType.NEW_SECONDHAND_PRODUCT, true,
-			    NotificationType.PAYMENT, true,
-			    NotificationType.ORDER, true,
-			    NotificationType.EMPLOYEE_EXCHANGE, false,
-			    NotificationType.EMPLOYEE_ORDER, false,
-			    NotificationType.EMPLOYEE_VALUTAION, false
-		));
+		if(owner instanceof RegisteredClient)
+			this.interests = new HashMap<NotificationType, Boolean>(Map.of(
+					NotificationType.EXCHANGE, true,
+				    NotificationType.DISCOUNT, true,
+				    NotificationType.CART, true,
+				    NotificationType.NEW_SECONDHAND_PRODUCT, true,
+				    NotificationType.PAYMENT, true,
+				    NotificationType.ORDER, true,
+				    NotificationType.EMPLOYEE_EXCHANGE, false,
+				    NotificationType.EMPLOYEE_ORDER, false,
+				    NotificationType.EMPLOYEE_VALUTAION, false
+			));
+		else if(owner instanceof Employee employee)
+			switch(employee.getPerm()) {
+			case Permission.EXCHANGE: 
+				this.interests = new HashMap<NotificationType, Boolean>(Map.of(
+						NotificationType.EXCHANGE, false,
+					    NotificationType.DISCOUNT, false,
+					    NotificationType.CART, false,
+					    NotificationType.NEW_SECONDHAND_PRODUCT, false,
+					    NotificationType.PAYMENT, false,
+					    NotificationType.ORDER, false,
+					    NotificationType.EMPLOYEE_EXCHANGE, true,
+					    NotificationType.EMPLOYEE_ORDER, false,
+					    NotificationType.EMPLOYEE_VALUTAION, true
+				)); break;
+			case Permission.ORDER:
+				this.interests = new HashMap<NotificationType, Boolean>(Map.of(
+						NotificationType.EXCHANGE, false,
+					    NotificationType.DISCOUNT, false,
+					    NotificationType.CART, false,
+					    NotificationType.NEW_SECONDHAND_PRODUCT, false,
+					    NotificationType.PAYMENT, false,
+					    NotificationType.ORDER, false,
+					    NotificationType.EMPLOYEE_EXCHANGE, false,
+					    NotificationType.EMPLOYEE_ORDER, true,
+					    NotificationType.EMPLOYEE_VALUTAION, false
+				)); break;
+			default:
+				this.interests = new HashMap<NotificationType, Boolean>(Map.of(
+						NotificationType.EXCHANGE, false,
+					    NotificationType.DISCOUNT, false,
+					    NotificationType.CART, false,
+					    NotificationType.NEW_SECONDHAND_PRODUCT, false,
+					    NotificationType.PAYMENT, false,
+					    NotificationType.ORDER, false,
+					    NotificationType.EMPLOYEE_EXCHANGE, false,
+					    NotificationType.EMPLOYEE_ORDER, false,
+					    NotificationType.EMPLOYEE_VALUTAION, false
+				)); break;
+			}
 	}
 
 	/**

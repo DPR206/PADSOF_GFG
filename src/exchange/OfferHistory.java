@@ -29,7 +29,7 @@ public class OfferHistory {
             throw new NullPointerException("Owner is null");
         }
 
-        this(Collections.emptySet(), owner);
+        this(new HashSet<>(), owner);
     }
 
     /**

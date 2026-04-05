@@ -385,7 +385,6 @@ public class RegisteredClient extends User {
     
     
     //makeAnOffer
-    //browseNotifications
 
     @Override
     public String toString() {

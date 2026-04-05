@@ -1309,9 +1309,36 @@ public class MainApp {
         }
     }
 
-    private void managerSeeProfile() { // DUE: Que esto sea opción en todos los loops de manager:/
+    private void managerSeeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
         System.out.print("\n ---- managerSeeProfile ---- \n"); // Es para debug, borrar
-        // DUE
+        this.currentUser.printInfo();
+
+        System.out.println("What do you wish to do? (enter the nº)");
+        System.out.println("\t[1] Change my password");
+        System.out.println("\t[2] <- Go back");
+        System.out.println("\t[3] <<- Go to main page");
+        System.out.println("\t[4] x Exit app");
+        chosenOption = scanner.nextInt();
+        switch (chosenOption) {
+            case 1:
+                System.out.println("Enter new password:");
+                String newPassword = scanner.next();
+                this.currentUser.changePassword(newPassword);
+                break;
+            case 7:
+                managerLoop();
+                break;
+            case 8:
+                main();
+                break;
+            case 9:
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                managerSeeProfile();
+                break;
+        }
     }
 
     /**

@@ -107,4 +107,15 @@ public abstract class User {
     public String getId() {
     	return this.actualID;
     }
+
+    /**
+     * It prints the user's info in a cyphered way
+     */
+    public void printInfo() {
+        // https://stackoverflow.com/questions/2804827/create-a-string-with-n-characters
+        String cypheredPassword = new String(new char[this.pwd.length()]).replace('\0', '#');
+
+        System.out.print("Username" + this.userName);
+        System.out.println("Password:" + cypheredPassword + "\n");
+    }
 }

@@ -1,6 +1,5 @@
 package notification;
 
-import order.*;
 
 import java.time.LocalDateTime;
 

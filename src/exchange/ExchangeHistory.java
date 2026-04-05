@@ -31,7 +31,7 @@ public class ExchangeHistory {
 	 * @param owner the owner
 	 */
 	public ExchangeHistory(RegisteredClient owner){
-		this(Collections.emptySet(), owner);
+		this(new HashSet<>(), owner);
 	}
 
 /*------------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------*/

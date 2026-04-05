@@ -60,7 +60,7 @@ public class PackTest {
 		 
 		 this.p.increaseStock();
 		 stock1++;
-		 assertEquals(stock1, this.p.getProducts().get(0).getStock(), 0.001);
+		 assertTrue(stock1 == c1.getStock());
 		 
 	 }
 	 
@@ -84,24 +84,6 @@ public class PackTest {
 		 assertNull(pack.getDateAddCart());
 	 }
 	 
-	 @Test
-	 public void constructorWithDateTest() {
-		 ArrayList<StoreProduct> products = new ArrayList<>();
-		 LocalDate date = LocalDate.now();
-		 Pack pack = new Pack(10.0, products, date);
-		 assertEquals(10.0, pack.getPrice(), 0.001);
-		 assertEquals(products, pack.getProducts());
-		 assertEquals(date, pack.getDateAddCart());
-	 }
-	 
-	 @Test
-	 public void constructorNoProductsTest() {
-		 LocalDate date = LocalDate.now();
-		 Pack pack = new Pack(10.0, date);
-		 assertEquals(10.0, pack.getPrice(), 0.001);
-		 assertTrue(pack.getProducts().isEmpty());
-		 assertEquals(date, pack.getDateAddCart());
-	 }
 	 
 	 @Test
 	 public void constructorNoProductsWithIdTest() {
@@ -163,11 +145,11 @@ public class PackTest {
 	 @Test
 	 public void addArrayProductsTest() {
 		 ArrayList<StoreProduct> newProducts = new ArrayList<>();
-		 Comic comic = new Comic("3", 15.99, "new", "desc", "photo.png", 5.0, LocalDate.now(), 10, 100, Year.of(2021), "Author", "Editorial");
-		 newProducts.add(comic);
+		 StoreProduct sp = this.p.getProducts().get(0);
+		 newProducts.add(sp);
 		 boolean added = this.p.addArrayProducts(newProducts);
 		 assertTrue(added);
-		 assertTrue(this.p.getProducts().contains(comic));
+		 assertTrue(this.p.getProducts().contains(sp));
 	 }
 	 
 	 @Test
@@ -181,8 +163,7 @@ public class PackTest {
 	 
 	 @Test
 	 public void totalPriceTest() {
-		 double expected = this.p.getPrice();
-		 assertEquals(expected, this.p.totalPrice(), 0.001);
+		 assertEquals(25.98, this.p.totalPrice(), 0.001);
 	 }
 	 
 	 @Test

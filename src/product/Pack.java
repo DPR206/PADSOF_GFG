@@ -267,7 +267,10 @@ public class Pack {
 	 * @return double, the raw price of the pack
 	 */
 	public double totalPrice() {
-		return this.price;
+		double total = 0;
+		for(StoreProduct sp: products)
+			total += sp.getPrice();
+		return total;
 	}
 
 	/**
@@ -295,6 +298,6 @@ public class Pack {
 	}
 
 	public double getOriginalPrice() {
-		returnn this.price;
+		return this.price;
 	}
 }

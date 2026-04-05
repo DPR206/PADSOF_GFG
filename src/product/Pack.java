@@ -3,7 +3,6 @@
  */
 package product;
 
-import order.*;
 import store.Store;
 
 import java.time.LocalDate;
@@ -148,6 +147,8 @@ public class Pack {
                     return this.price - volumeDisc.getSpendingThreshold();
                 }
                 return this.price;
+		default:
+			break;
         }
         return price;
     }

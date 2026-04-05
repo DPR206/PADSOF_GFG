@@ -286,6 +286,10 @@ public class RegisteredClient extends User {
     	this.numExchanges += i;
     }
     
+    public void requestValuation(SecondHandProduct sp) {
+    	
+    }
+    
     //requestValuation
     //makeAnOffer
     //browseNotifications

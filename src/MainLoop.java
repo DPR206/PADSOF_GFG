@@ -267,7 +267,8 @@ public class MainLoop {
     private void unregisteredSeeProduct(int productNum) throws IOException {
         System.out.print("\n ---- unregisteredSeeProduct 2 ---- \n"); // Es para debug, borrar
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct();
-        StoreProduct product = Pager.getInstance().getProductFromPage(products, this.currentScreenPageNum, productNum);
+        StoreProduct product =
+                Pager.getInstance().selectStoreProductFromPage(products, this.currentScreenPageNum, productNum);
         product.bigPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
@@ -615,7 +616,7 @@ public class MainLoop {
                 int productNum = scanner.nextInt();
 
                 StoreProduct product =
-                        Pager.getInstance().getProductFromPage(products, this.currentScreenPageNum, productNum);
+                        Pager.getInstance().selectStoreProductFromPage(products, this.currentScreenPageNum, productNum);
                 ProductType type = product.getType();
                 pageNumGoForward();
 
@@ -931,7 +932,7 @@ public class MainLoop {
                 }
                 System.out.println("Enter the replacement category's name:");
                 newCategoryName = scanner.next();
-                newCategory = Store.getInstance().getCategoryFromName(categoryName);
+                newCategory = Store.getInstance().getCategoryFromName(newCategoryName);
                 if (newCategory == null) {
                     System.out.println("A category which such a name doesn't exist, reloading...");
                     managerCategoryChanger(storeProduct);
@@ -1114,8 +1115,7 @@ public class MainLoop {
     public void clientsByOrders() throws IOException {
         System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + this.currentScreenPageNum);
-        List<RegisteredClient> clients = Statistics.getINSTANCE().getUsersMostOrders();
-        Pager.getInstance().printRegisteredClientListPage(clients, this.currentScreenPageNum);
+        Pager.getInstance().printRegisteredClientListPage(this.currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         if ((this.currentScreenPageNum - 1) > 0) {
@@ -1123,7 +1123,7 @@ public class MainLoop {
         } else {
             System.out.println("\t[1] Reload page");
         }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients)) {
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum()) {
             System.out.println("\t[2] Next page >");
         } else {
             System.out.println("\t[2] Reload page");
@@ -1140,7 +1140,7 @@ public class MainLoop {
                 break;
             case 2:
                 this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients) ?
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum() ?
                         this.currentScreenPageNum + 1 : this.currentScreenPageNum;
                 clientsByOrders();
                 break;
@@ -1166,8 +1166,7 @@ public class MainLoop {
     public void clientsByExchanges() throws IOException {
         System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + this.currentScreenPageNum);
-        List<RegisteredClient> clients = Statistics.getINSTANCE().getUsersMostExchanges();
-        Pager.getInstance().printRegisteredClientListPage(clients, this.currentScreenPageNum);
+        Pager.getInstance().printRegisteredClientListPage(this.currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         if ((this.currentScreenPageNum - 1) > 0) {
@@ -1175,7 +1174,7 @@ public class MainLoop {
         } else {
             System.out.println("\t[1] Reload page");
         }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients)) {
+        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum()) {
             System.out.println("\t[2] Next page >");
         } else {
             System.out.println("\t[2] Reload page");
@@ -1192,7 +1191,7 @@ public class MainLoop {
                 break;
             case 2:
                 this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients) ?
+                        (this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum() ?
                         this.currentScreenPageNum + 1 : this.currentScreenPageNum;
                 clientsByExchanges();
                 break;

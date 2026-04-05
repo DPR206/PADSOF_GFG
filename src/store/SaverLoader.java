@@ -573,7 +573,7 @@ public class SaverLoader {
                 }
 
                 switch (type) {
-                    case ProductType.COMIC:
+                    case COMIC:
                         Comic comic =
                                 new Comic(id, price, name, description, photo, averagePunctuation, addedDate, stock,
                                         numPages, year, author, editorial, categories.toArray(new Category[0]));
@@ -585,7 +585,7 @@ public class SaverLoader {
                         }
 
                         break;
-                    case ProductType.FIGURINE:
+                    case FIGURINE:
                         Figurine figurine =
                                 new Figurine(id, price, name, description, photo, averagePunctuation, addedDate, stock,
                                         dimension, brand, material, categories.toArray(new Category[0]));
@@ -597,7 +597,7 @@ public class SaverLoader {
                         }
 
                         break;
-                    case ProductType.GAME:
+                    case GAME:
                         Game game = new Game(id, price, name, description, photo, averagePunctuation, addedDate, stock,
                                 numPlayers, ageRange, gameStyle, categories.toArray(new Category[0]));
 

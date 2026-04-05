@@ -70,9 +70,9 @@ public class NotificationOrder extends Notification implements NotificationInter
 	public String FullNotification(Order o) {
 		String text = "";
 		switch(o.getState()) {
-		 case OrderState.PAID: text += "Your order with price " + o.getPrice() + "has been paid successfully. "
+		 case PAID: text += "Your order with price " + o.getPrice() + "has been paid successfully. "
 		 								+ "Once your order is ready you will a receive a notification.\n"; break;
-		 case OrderState.READY_TO_PICKUP: text += "Your order is ready to pickup. Your pikcup code is: " + NotificationOrder.pickupCode;
+		 case READY_TO_PICKUP: text += "Your order is ready to pickup. Your pikcup code is: " + NotificationOrder.pickupCode;
 		 									pickupCode++;
 		 									break;
 		 default: text = "Not valid\n";
@@ -90,8 +90,8 @@ public class NotificationOrder extends Notification implements NotificationInter
 	public String SnippetNotification(Order o) {
 		String title = "Your order ";
 		switch(o.getState()) {
-			case OrderState.PAID: title += "has been paid\n"; break;
-			case OrderState.READY_TO_PICKUP: title += "is ready to pickup\n"; break;
+			case PAID: title += "has been paid\n"; break;
+			case READY_TO_PICKUP: title += "is ready to pickup\n"; break;
 			default: title = "Not valid\n";
 		}
 		this.setTitle(title);

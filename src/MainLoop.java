@@ -127,9 +127,12 @@ public class MainLoop {
             case 3:
                 signer();
                 break;
-            case 4, 5:
+            case 4:
                 main();
                 break;
+            case 5:
+            	main();
+            	break;
             case 6:
                 exit();
                 break;
@@ -567,9 +570,12 @@ public class MainLoop {
             case 8:
                 managerSeeProfile();
                 break;
-            case 9, 10:
+            case 9:
                 main();
                 break;
+            case 10:
+            	main();
+            	break;
             case 11:
                 exit();
                 break;

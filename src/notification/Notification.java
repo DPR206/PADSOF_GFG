@@ -207,7 +207,7 @@ public abstract class Notification {
 	public String timeLog() {
 		Duration duration = Duration.between(timeReceived, LocalDateTime.now());
 
-		long hours = duration.toHours();
+		long hours = duration.toHoursPart();
 		long mins = duration.toMinutesPart(); 
 		long segs = duration.toSecondsPart();
 

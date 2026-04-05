@@ -97,8 +97,6 @@ public class Exchange {
 
     /*-------------------------------------------------------------SETTERS AND GETTERS----------------------------------------------------------*/
 
-    /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
     /**
      * Obtains the total id of the exchanges
      * @return the totalId
@@ -138,8 +136,6 @@ public class Exchange {
     public void changeDate(LocalDateTime date) {
         this.setDate(date);
     }
-
-    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * The time when the exchange took place

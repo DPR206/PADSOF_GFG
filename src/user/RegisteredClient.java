@@ -362,7 +362,7 @@ public class RegisteredClient extends User {
     	return notification;
     }
     
-    /*public void reviewProduct(StoreProduct sp, Review review) {
+    public void reviewProduct(StoreProduct sp, Review review) {
     	sp.addReview(this, review);
     }
     
@@ -392,4 +392,4 @@ public class RegisteredClient extends User {
         return super.toString();
     }
 
-}*/
+}

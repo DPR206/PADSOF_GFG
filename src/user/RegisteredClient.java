@@ -108,12 +108,15 @@ public class RegisteredClient extends User {
     public RegisteredClient(String userName, String dni, String password, boolean asc) {
         this(userName, LocalDate.now(), dni, password, asc);
         
-        this.exchangeHistory = new ExchangeHistory(this);
-        this.orderHistory = new OrderHistory(this);
-        this.offerHistory = new OfferHistory(this);
-        this.notificationHistory = new NotificationHistory(this);
     }
-
+    
+    public void setHistories() {
+    	 this.exchangeHistory = new ExchangeHistory(this);
+         this.orderHistory = new OrderHistory(this);
+         this.offerHistory = new OfferHistory(this);
+         this.notificationHistory = new NotificationHistory(this);
+    }
+    
     /**
      * Obtains the client's registration date
      * @return the registerDate the registration date

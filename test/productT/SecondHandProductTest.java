@@ -13,11 +13,12 @@ import user.RegisteredClient;
 public class SecondHandProductTest {
 
     private SecondHandProduct shp;
-    private RegisteredClient owner;
+    private RegisteredClient owner; 
 
     @Before
     public void setUp() {
-        this.owner = new RegisteredClient("testuser", LocalDate.now(), "12345678A", "password", true);
+    	this.owner = new RegisteredClient("testuser", LocalDate.now(), "12345678A", "password", true);
+        this.owner.setHistories();
         this.shp = new SecondHandProduct("Test Product", "Description", "photo.png", ProductType.COMIC, this.owner);
     }
     

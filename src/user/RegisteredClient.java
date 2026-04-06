@@ -38,14 +38,16 @@ public class RegisteredClient extends User {
     // recommender
 
     /**
-	 * @param type
-	 * @param pwd
-	 * @param userName
-	 * @param actualID
-	 * @param asc
-	 * @param registerDate
-	 * @param dni
-	 * @param c
+     * Creates a new registered client
+     * 
+	 * @param type the type of user
+	 * @param pwd the password of the client
+	 * @param userName the user's nickname
+	 * @param actualID the client's id
+	 * @param asc if the search has ascending order
+	 * @param registerDate the date of registration
+	 * @param dni the user's dni
+	 * @param c 
 	 * @param exchangeHistory
 	 * @param op
 	 * @param wallet

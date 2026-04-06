@@ -26,7 +26,6 @@ public class RegisteredClient extends User {
     private String dni;
     private Cart c;
     private ExchangeHistory exchangeHistory;
-    private OrderHistory op;
     private Wallet wallet;
     private OrderHistory orderHistory;
     private OfferHistory offerHistory;
@@ -47,9 +46,8 @@ public class RegisteredClient extends User {
 	 * @param asc if the search has ascending order
 	 * @param registerDate the date of registration
 	 * @param dni the user's dni
-	 * @param c 
-	 * @param exchangeHistory
-	 * @param op
+	 * @param c the user's cart
+	 * @param exchangeHistory the user's exchange history 
 	 * @param wallet
 	 * @param orderHistory
 	 * @param offerHistory
@@ -59,7 +57,7 @@ public class RegisteredClient extends User {
 	 * @param numExchanges
 	 */
 	public RegisteredClient(UserType type, String pwd, String userName, String actualID, boolean asc,
-			LocalDate registerDate, String dni, Cart c, ExchangeHistory exchangeHistory, OrderHistory op, Wallet wallet,
+			LocalDate registerDate, String dni, Cart c, ExchangeHistory exchangeHistory, Wallet wallet,
 			OrderHistory orderHistory, OfferHistory offerHistory, NotificationHistory notificationHistory,
 			Searcher searcher, int numOrders, int numExchanges) {
 		super(type, pwd, userName, actualID, asc);
@@ -67,7 +65,6 @@ public class RegisteredClient extends User {
 		this.dni = dni;
 		this.c = c;
 		this.exchangeHistory = exchangeHistory;
-		this.op = op;
 		this.wallet = wallet;
 		this.orderHistory = orderHistory;
 		this.offerHistory = offerHistory;
@@ -171,7 +168,7 @@ public class RegisteredClient extends User {
      * @return the order history
      */
     public OrderHistory getOrderHistory(){
-        return this.op;
+        return this.orderHistory;
     }
 
 	/**

@@ -1,6 +1,10 @@
 package order;
 
-
+/**
+ * It defines the order's possible states
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public enum OrderState {
     PAID("paid"),
     IN_PREPARATION("inPreparation"),

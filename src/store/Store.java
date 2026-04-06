@@ -294,6 +294,10 @@ public class Store {
         this.secondHandProducts.remove(product.getName(), product);
     }
 
+    /**
+     * Adds a new pack
+     * @param p the new pack
+     */
     public void addPack(Pack p) {
         this.packs.add(p);
     }
@@ -306,6 +310,10 @@ public class Store {
         this.exchanges.add(e);
     }
 
+    /**
+     * Obtains the employees of the store
+     * @return
+     */
     public HashMap<String, Employee> getEmployees(){
     	return this.employees;
     }

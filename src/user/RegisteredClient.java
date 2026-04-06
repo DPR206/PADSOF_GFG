@@ -433,6 +433,16 @@ public class RegisteredClient extends User {
     			notifications.add(n);
     	return notifications;
     }
+    
+    /**
+     * Changes an interest in a type of notification
+     * 
+     * @param type the type of notification 
+     * @param interest true if interested, false if else
+     */
+    public void changeNotificationInterest(NotificationType type, boolean interest) {
+    	this.notificationHistory.getSettings().changeInterest(type, interest);
+    }
 
     /**
      * A string with the client's information

@@ -105,7 +105,8 @@ public class NotificationHistory {
 	 * @param notification the notification to add
 	 */
 	public void addNotification(Notification notification) {
-		this.notifications.add(notification);
+		if(this.settings.getInterests().get(notification.getType()))
+			this.notifications.add(notification);
 	}
 
 	/**
@@ -114,7 +115,10 @@ public class NotificationHistory {
 	 * @param notifications the notifications to add
 	 */
 	public void addNotifications(Set<Notification> notifications) {
-		this.notifications.addAll(notifications);
+		for(Notification n : notifications) {
+			if(this.settings.getInterests().get(n.getType()))
+				this.notifications.add(n);
+		}
 	}
 
 	/**

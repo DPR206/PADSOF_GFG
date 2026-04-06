@@ -174,17 +174,13 @@ public class Cart {
         double price = this.calculatePrice();
 
         Scanner sc = new Scanner(System.in);
-        String numeroTarjeta, CCV, fechaCad;
+        String numeroTarjeta;
 
         try {
             System.out.print("Introduce tu número de tarjeta: ");
             numeroTarjeta = sc.next();
             System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
             TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
-            System.out.print("Introduce tu CCV: ");
-            CCV = sc.next();
-            System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
-            fechaCad = sc.next();
 
             Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
 

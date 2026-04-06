@@ -7,8 +7,7 @@ import discount.*;
 import store.Store;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * It implements the packs
@@ -25,7 +24,7 @@ public class Pack {
 	private ArrayList<StoreProduct> products;
 	private LocalDate dateAddCart;
 	/** The pack's discount, if it has one */
-	private Discount discount = null;
+	private Discount discount;
 
 	/*---------------------------------------------------Constructors---------------------------------------------------------------*/
 
@@ -171,8 +170,8 @@ public class Pack {
 	 *
 	 * @return the products, the products included
 	 */
-	public ArrayList<StoreProduct> getProducts() {
-		return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
+	public List<StoreProduct> getProducts() {
+		return Collections.unmodifiableList(products);
 	}
 
 	/**

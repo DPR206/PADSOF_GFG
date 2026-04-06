@@ -35,7 +35,8 @@ public class NotificationSettings {
 		this.interests = new HashMap<NotificationType, Boolean>(Map.of(
 				NotificationType.EXCHANGE, true,
 			    NotificationType.DISCOUNT, true,
-			    NotificationType.CART, true,
+			    NotificationType.PRODUCT_CART, true,
+			    NotificationType.PACK_CART, true,
 			    NotificationType.NEW_SECONDHAND_PRODUCT, true,
 			    NotificationType.PAYMENT, true,
 			    NotificationType.ORDER, true,
@@ -56,7 +57,8 @@ public class NotificationSettings {
 			this.interests = new HashMap<NotificationType, Boolean>(Map.of(
 					NotificationType.EXCHANGE, true,
 				    NotificationType.DISCOUNT, true,
-				    NotificationType.CART, true,
+				    NotificationType.PRODUCT_CART, true,
+				    NotificationType.PACK_CART, true,
 				    NotificationType.NEW_SECONDHAND_PRODUCT, true,
 				    NotificationType.PAYMENT, true,
 				    NotificationType.ORDER, true,
@@ -70,7 +72,8 @@ public class NotificationSettings {
 				this.interests = new HashMap<NotificationType, Boolean>(Map.of(
 						NotificationType.EXCHANGE, false,
 					    NotificationType.DISCOUNT, false,
-					    NotificationType.CART, false,
+					    NotificationType.PRODUCT_CART, false,
+					    NotificationType.PACK_CART, false,
 					    NotificationType.NEW_SECONDHAND_PRODUCT, false,
 					    NotificationType.PAYMENT, false,
 					    NotificationType.ORDER, false,
@@ -82,7 +85,8 @@ public class NotificationSettings {
 				this.interests = new HashMap<NotificationType, Boolean>(Map.of(
 						NotificationType.EXCHANGE, false,
 					    NotificationType.DISCOUNT, false,
-					    NotificationType.CART, false,
+					    NotificationType.PRODUCT_CART, false,
+					    NotificationType.PACK_CART, false,
 					    NotificationType.NEW_SECONDHAND_PRODUCT, false,
 					    NotificationType.PAYMENT, false,
 					    NotificationType.ORDER, false,
@@ -94,7 +98,8 @@ public class NotificationSettings {
 				this.interests = new HashMap<NotificationType, Boolean>(Map.of(
 						NotificationType.EXCHANGE, false,
 					    NotificationType.DISCOUNT, false,
-					    NotificationType.CART, false,
+					    NotificationType.PRODUCT_CART, false,
+					    NotificationType.PACK_CART, false,
 					    NotificationType.NEW_SECONDHAND_PRODUCT, false,
 					    NotificationType.PAYMENT, false,
 					    NotificationType.ORDER, false,

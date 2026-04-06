@@ -7,6 +7,7 @@ import order.*;
 import product.*;
 import exchange.*;
 import search.*;
+import store.Store;
 import notification.*;
 
 import java.time.*;
@@ -254,6 +255,7 @@ public class RegisteredClient extends User {
      */
     public void addProductWallet(SecondHandProduct product) {
     	this.wallet.addProducts(product);
+    	Store.getInstance().addSecondHandProduct(product);
     }
 
     /**
@@ -263,6 +265,8 @@ public class RegisteredClient extends User {
      */
     public void removeProductWallet(SecondHandProduct...products) {
     	this.wallet.removeProducts(products);
+    	for(SecondHandProduct p : products)
+    		Store.getInstance().deleteSecondHandProduct(p);
     }
 
     /**

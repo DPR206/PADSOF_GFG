@@ -158,6 +158,7 @@ public class Cart {
         }
 
         wanted.decreaseStock();
+        wanted.setDateAddCart(LocalDate.now());
 
         return true;
     }
@@ -249,12 +250,20 @@ public class Cart {
     		LocalDate expiration = this.calculateExpiredDate(spi);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelProduct(spi);
+    			NotificationProductCart notificationP = new NotificationProductCart(LocalDateTime.now(), false, true, 
+    													NotificationType.PRODUCT_CART);
+    			notificationP.FullNotification(spi);
+    			this.owner.getNotificationHistory().addNotification(notificationP);
     		}
     	}
     	for(Pack p: packs) {
     		LocalDate expiration = this.calculateExpiredDatePacks(p);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelPack(p);
+    			NotificationPackCart notificationK = new NotificationPackCart(LocalDateTime.now(), false, true, 
+    													NotificationType.PACK_CART);
+    			notificationK.FullNotification(p);
+    			this.owner.getNotificationHistory().addNotification(notificationK);
     		}
     	}
     }
@@ -268,7 +277,7 @@ public class Cart {
     }
     
     public LocalDate calculateExpiredDate(StoreProduct sproducts) {
-    	Parameter p = p.getParam();
+    	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
     	
     	List<StoreProduct> products = new ArrayList<>(this.sp.keySet());
@@ -280,7 +289,7 @@ public class Cart {
     }
     
     public LocalDate calculateExpiredDatePacks(Pack pack) {
-    	Parameter p = p.getParam();
+    	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
     	
     	List<Pack> packs = new ArrayList<>(this.packs.keySet());

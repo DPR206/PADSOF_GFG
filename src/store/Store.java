@@ -277,6 +277,22 @@ public class Store {
     public void addSecondHandProduct(SecondHandProduct product) {
         this.secondHandProducts.put(product.getName(), product);
     }
+    
+    /**
+     * Deletes a new store product to the store
+     * @param product, the product
+     */
+    public void deleteStoreProduct(StoreProduct product) {
+        this.storeProducts.remove(product.getName(), product);
+    }
+
+    /**
+     * Deletes a new second hand product to the store
+     * @param product, the product
+     */
+    public void deleteSecondHandProduct(SecondHandProduct product) {
+        this.secondHandProducts.remove(product.getName(), product);
+    }
 
     public void addPack(Pack p) {
         this.packs.add(p);

@@ -1,37 +1,51 @@
 package main;
 
+import product.StoreProduct;
+import store.Pager;
 import store.Store;
 import user.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Loop.
+ */
 public abstract class Loop {
+    /** The current screen's page number, if a list is being browsed */
+    protected static int currentScreenPageNum = 0;
+    /** The previous screen's page number, if a list is being browsed */
+    protected static int previousScreenPageNum = 0;
+    /** The apps current user */
+    protected static User currentUser;
     /** The app's scanner tool */
     protected final Scanner scanner = new Scanner(System.in);
+    /** Access to various loops */
+    private final MainLoop mainLoop = MainLoop.getInstance();
+    private final UnregisteredClientLoop unregisteredClientLoop = UnregisteredClientLoop.getInstance();
+    private final RegisteredClientLoop registeredClientLoop = RegisteredClientLoop.getInstance();
+    private final ManagerLoop managerLoop = ManagerLoop.getInstance();
     /** The last chosen option when prompted */
     protected int chosenOption;
-    /** The current screen's page number, if a list is being browsed */
-    protected int currentScreenPageNum = 0;
-    /** The previous screen's page number, if a list is being browsed */
-    protected int previousScreenPageNum = 0;
-    /** The apps current user */
-    protected User currentUser;
 
-    private MainLoop mainLoop = MainLoop.getInstance();
-    private UnregisteredClientLoop unregisteredClientLoop = UnregisteredClientLoop.getInstance();
-    private RegisteredClientLoop registeredClientLoop = RegisteredClientLoop.getInstance();
-    private ManagerLoop managerLoop = ManagerLoop.getInstance();
-
+    /**
+     * It updates the previous and current page numbers when changing to a paged screen, allowing for the user to go
+     * back to the page they were viewing in the previous screen
+     */
     protected void pageNumGoForward() { // Se ejecuta siempre que se salga de un paged loop
-        this.previousScreenPageNum = this.currentScreenPageNum;
-        this.currentScreenPageNum = 1;
+        previousScreenPageNum = currentScreenPageNum;
+        currentScreenPageNum = 1;
     }
 
+    /**
+     * It updates the previous and current page numbers when exiting a paged screen, allowing for the user to go back to
+     * the page they were viewing in the previous screen
+     */
     protected void pageNumGoBack() { // Se ejecuta siempre que se vuelva a un paged loop
         int aux = previousScreenPageNum;
-        this.previousScreenPageNum = this.currentScreenPageNum;
-        this.currentScreenPageNum = aux;
+        previousScreenPageNum = currentScreenPageNum;
+        currentScreenPageNum = aux;
     }
 
     /**
@@ -49,8 +63,9 @@ public abstract class Loop {
         if (currentUser == null) {
             System.out.println("Invalid username or password :[");
             System.out.println("What do you wish to do? (enter the nº)");
-            System.out.println("\t[1] Try again");
-            System.out.println("\t[2] Go back");
+            int i = 1;
+            System.out.println("\t["+ i++ +"] Try again");
+            basicLoopPrinter(i);
             int chosenOption2 = scanner.nextInt();
 
             if (chosenOption2 == 1) {
@@ -72,6 +87,10 @@ public abstract class Loop {
         mainLoop.loopSelector();
     }
 
+    /**
+     * Shortcut to the Main Loop's main() method
+     * @throws IOException the io exception
+     */
     protected void main() throws IOException {
         mainLoop.main();
     }
@@ -122,5 +141,208 @@ public abstract class Loop {
 	                   .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
 	                           "discounts", "offers", "exchanges", "orders", "users");*/ // DUE
 
+    }
+
+    /* Paging stuff */
+
+    /**
+     * It allows for a user to switch to the previous page when viewing a list
+     */
+    protected void previousPage() {
+        currentScreenPageNum = (currentScreenPageNum - 1) > 0 ? currentScreenPageNum - 1 : 1;
+    }
+
+    /* Next Pages:
+        [x] Review
+        [x] Store Product
+        [x] Registered Client
+        [ ] Employee DUE
+        [ ] Pack DUE
+        [ ] Discount DUE
+        [ ] Category DUE
+     */
+
+    /**
+     * It allows for a user to switch to the next page when viewing a store product's list of reviews
+     * @param product the desired store products
+     */
+    protected void nextPageReview(StoreProduct product) {
+        currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product) ?
+                               currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing a list of store products
+     * @param products the list of store products
+     */
+    protected void nextPageStoreProduct(List<StoreProduct> products) {
+        currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
+                               currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing the store's list of registered clients
+     */
+    protected void nextPageRegisteredClient() {
+        currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum() ?
+                               currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
+     * It prints the previous page selection when the user is prompted to choose their next action
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     */
+    protected void previousPagePrinter(int optionNum) {
+        if ((currentScreenPageNum - 1) > 0) {
+            System.out.println("\t[" + optionNum + "] < Previous page");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /* Option printers:
+        [x] Review
+        [x] Store Product
+        [x] Registered Client
+        [x] Employee
+        [x] Pack
+        [x] Discount
+        [x] Category
+     */
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing a store
+     * product's list of reviews
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     * @param product   the desired product
+     */
+    protected void nextPagePrinterReview(int optionNum, StoreProduct product) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product)) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing a list of
+     * store products
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     * @param products  the list of products
+     */
+    protected void nextPagePrinterStoreProduct(int optionNum, List<StoreProduct> products) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
+     * store's list of registered clients
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     */
+    protected void nextPagePrinterRegisteredClient(int optionNum) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum()) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
+     * store's list of employees
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     */
+    protected void nextPagePrinterEmployee(int optionNum) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getEmployeeMaxPageNum()) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
+     * store's list of packs
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     */
+    protected void nextPagePrinterPack(int optionNum) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getPackMaxPageNum()) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
+     * store's list of discounts
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     */
+    protected void nextPagePrinterDiscount(int optionNum) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getDiscountMaxPageNum()) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
+     * store's list of categories
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     */
+    protected void nextPagePrinterCategory(int optionNum) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getCategoryMaxPageNum()) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /* Useful things */
+
+    /**
+     * It prints the selections: see notification, see profile, go back, go to main page, exit. Used when prompting the
+     * user, notification and profile options will only be printed it they can be chosen by the current user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void basicLoopPrinter(int firstOptionNum) {
+        if (currentUser.getType() == UserType.REGISTERED_CLIENT || currentUser.getType() == UserType.EMPLOYEE) {
+            System.out.println("\t[" + firstOptionNum++ + "] ");
+        }
+        if (currentUser.getType() != UserType.UNREGISTERED_CLIENT) {
+
+            System.out.println("\t[" + firstOptionNum++ + "] See profile");
+        }
+        System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
+        System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
+        System.out.println("\t[" + firstOptionNum + "] x Exit app");
+    }
+
+    /**
+     * It prints the selections: see notification, see profile, previous page, next page, go back, go to main page,
+     * exit. Used when prompting the user, notification and profile options will only be printed it they can be chosen
+     * by the current user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedLoopPrinter(int firstOptionNum) {
+        if (currentUser.getType() == UserType.REGISTERED_CLIENT || currentUser.getType() == UserType.EMPLOYEE) {
+            System.out.println("\t[" + firstOptionNum++ + "] ");
+        }
+        if (currentUser.getType() != UserType.UNREGISTERED_CLIENT) {
+
+            System.out.println("\t[" + firstOptionNum++ + "] See profile");
+        }
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterRegisteredClient(firstOptionNum);
+        firstOptionNum++;
+        System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
+        System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
+        System.out.println("\t[" + firstOptionNum + "] x Exit app");
     }
 }

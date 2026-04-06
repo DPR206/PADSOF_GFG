@@ -3,7 +3,8 @@ package notification;
 public enum NotificationType{
     EXCHANGE,
     DISCOUNT,
-    CART,
+    PRODUCT_CART,
+    PACK_CART,
     NEW_SECONDHAND_PRODUCT,
     PAYMENT,
     ORDER,

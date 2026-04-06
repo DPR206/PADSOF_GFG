@@ -70,7 +70,8 @@ public class NotificationOrder extends Notification implements NotificationInter
 		switch(o.getState()) {
 		 case PAID: text += "Your order with price " + o.getPrice() + "has been paid successfully. "
 		 								+ "Once your order is ready you will a receive a notification.\n"; break;
-		 case READY_TO_PICKUP: text += "Your order is ready to pickup. Your pickup code is: " + NotificationOrder.pickupCode;
+		 case READY_TO_PICKUP: text += "Your order is ready to pickup. Your pickup code is: " + NotificationOrder.pickupCode
+				 						+ ". Don't forget to bring your dni as well.\n";
 		 									pickupCode++;
 		 									break;
 		 default: text = "Not valid\n";

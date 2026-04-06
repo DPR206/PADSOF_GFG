@@ -9,6 +9,9 @@ import user.UnregisteredClient;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Unregistered client loop.
+ */
 public class UnregisteredClientLoop extends Loop {
     /** This loop's instance */
     private static UnregisteredClientLoop INSTANCE;
@@ -44,12 +47,11 @@ public class UnregisteredClientLoop extends Loop {
     void unregisteredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.println("\n ---- unregisteredClientLoop ---- \n");
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Browse products");
-        System.out.println("\t[2] Log in");
-        System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] <- Go back");
-        System.out.println("\t[5] <<- Go to main page");
-        System.out.println("\t[6] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Browse products");
+        System.out.println("\t[" + i++ + "] Log in");
+        System.out.println("\t[" + i++ + "] Sign up");
+        basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -84,28 +86,17 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void browseStore() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- browseStore ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
+        System.out.println("Page: " + currentScreenPageNum);
 
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
-        Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
+        Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] See a product");
-        System.out.println("\t[2] See my cart");
-        System.out.println("\t[3] Sign up");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[4] < Previous page");
-        } else {
-            System.out.println("\t[4] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
-            System.out.println("\t[5] Next page >");
-        } else {
-            System.out.println("\t[5] Reload page");
-        }
-        System.out.println("\t[6] <- Go back");
-        System.out.println("\t[7] <<- Go to main page");
-        System.out.println("\t[8] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] See a product");
+        System.out.println("\t[" + i++ + "] See my cart");
+        System.out.println("\t[" + i++ + "] Sign up");
+        pagedLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -125,13 +116,11 @@ public class UnregisteredClientLoop extends Loop {
                 signer();
                 break;
             case 4:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                previousPage();
                 browseStore();
                 break;
             case 5:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                nextPageStoreProduct(products);
                 browseStore();
                 break;
             case 6:
@@ -163,9 +152,10 @@ public class UnregisteredClientLoop extends Loop {
         System.out.print("\n ---- placeOrder ---- \n"); // Es para debug, borrar
         System.out.println("You must log in or sign up to proceed");
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Log in");
-        System.out.println("\t[2] Sign up");
-        System.out.println("\t[3] Go back");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Log in");
+        System.out.println("\t[" + i++ + "] Sign up");
+        basicLoopPrinter(i);
         int chosenOption3 = scanner.nextInt();
 
         switch (chosenOption3) {
@@ -186,24 +176,23 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     /**
-     * It prints a certain product's info
+     * It allows an unregistered client to see a certain product's info
      * @throws IOException the io exception
      */
     private void seeStoreProduct(int productNum) throws IOException {
         System.out.print("\n ---- seeStoreProduct 2 ---- \n"); // Es para debug, borrar
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct();
         StoreProduct product =
-                Pager.getInstance().selectStoreProductFromPage(products, this.currentScreenPageNum, productNum);
+                Pager.getInstance().selectStoreProductFromPage(products, currentScreenPageNum, productNum);
         product.bigPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] See reviews");
-        System.out.println("\t[2] See my cart");
-        System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] Add to cart");
-        System.out.println("\t[5] <- Go back");
-        System.out.println("\t[6] <<- Go to main page");
-        System.out.println("\t[7] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] See reviews");
+        System.out.println("\t[" + i++ + "] See my cart");
+        System.out.println("\t[" + i++ + "] Sign up");
+        System.out.println("\t[" + i++ + "] Add to cart");
+        basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -220,7 +209,7 @@ public class UnregisteredClientLoop extends Loop {
             case 4:
                 System.out.println("Enter the number of copies you desire");
                 int numProds = scanner.nextInt();
-                for (int i = 0; i < numProds; i++) {
+                for (int j = 0; j < numProds; j++) {
                     ((UnregisteredClient) currentUser).addCart(product);
                 }
                 System.out.println("Added " + numProds + " copies to your cart");
@@ -245,33 +234,19 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     /**
-     * See reviews.
+     * It allows an unregistered client to see a certain product's reviews
      * @param product the product
-     */
-    /*
-     * It prints a certain product's reviews
      */
     private void seeReviews(StoreProduct product, int productNum) throws IOException {
         System.out.print("\n ---- seeReviews ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
+        System.out.println("Page: " + currentScreenPageNum);
 
-        product.printReviews(this.currentScreenPageNum);
+        product.printReviews(currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Sign up");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[2] < Previous page");
-        } else {
-            System.out.println("\t[2] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product)) {
-            System.out.println("\t[3] Next page >");
-        } else {
-            System.out.println("\t[3] Reload page");
-        }
-        System.out.println("\t[4] <- Go back");
-        System.out.println("\t[5] <<- Go to main page");
-        System.out.println("\t[6] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Sign up");
+        pagedLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -280,14 +255,12 @@ public class UnregisteredClientLoop extends Loop {
                 signer();
                 break;
             case 2:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
-                seeReviews(product, this.currentScreenPageNum);
+                previousPage();
+                seeReviews(product, currentScreenPageNum);
                 break;
             case 3:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product) ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
-                seeReviews(product, this.currentScreenPageNum);
+                nextPageReview(product);
+                seeReviews(product, currentScreenPageNum);
                 break;
             case 4:
                 pageNumGoForward();
@@ -309,15 +282,16 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     /**
-     * It prints the current user's cart's products
+     * It allows an unregistered client to see their cart's products
      * @throws IOException the io exception
      */
     private void seeCart() throws IOException {
         System.out.print("\n ---- seeCart ---- \n"); // Es para debug, borrar
-        ((UnregisteredClient) this.currentUser).getCart().getPrintInfo();
+        ((UnregisteredClient) currentUser).getCart().getPrintInfo();
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Place order");
-        System.out.println("\t[2] Go back"); // DUE: Cancelar productos por n.º de impresión (ver getPrintInfo)
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Place order");
+        pagedLoopPrinter(i); // DUE el carrito debe ser paged
         int chosenOption2 = scanner.nextInt();
 
         if (chosenOption2 == 1) {
@@ -347,8 +321,9 @@ public class UnregisteredClientLoop extends Loop {
         if (currentUser == null) {
             System.out.println("Invalid username or password :[");
             System.out.println("What do you wish to do? (enter the nº)");
-            System.out.println("\t[1] Try again");
-            System.out.println("\t[2] Go back");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Try again");
+            basicLoopPrinter(i);
             int chosenOption2 = scanner.nextInt();
 
             if (chosenOption2 == 1) {

@@ -6,8 +6,10 @@ package product;
 import store.Parameter;
 import store.Store;
 import user.RegisteredClient;
+import notification.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import es.uam.eps.padsof.telecard.*;
@@ -276,6 +278,10 @@ public class SecondHandProduct extends Product{
 			TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
 		}
 		this.setPaidValuation(true);
+		
+		NotificationPayment notification = new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
+		notification.FullNotification("valuation");
+		this.owner.getNotificationHistory().addNotification(notification);
 	}
 	
 

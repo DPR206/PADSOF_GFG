@@ -4,12 +4,14 @@ import user.RegisteredClient;
 
 import java.time.*;
 import java.util.*;
+import es.uam.eps.padsof.telecard.*;
 
 import discount.DiscountType;
 import discount.QuantityDiscount;
 import product.Pack;
 import product.StoreProduct;
 import productT.*;
+import store.Parameter;
 
 /**
  * Cart, array of products and packs the user has not paid yet
@@ -160,16 +162,20 @@ public class Cart {
         return this.sp.size();
     }
 
-    public boolean payOrder() {
+    public boolean payOrder() throws InvalidCardNumberException, 
+	FailedInternetConnectionException, OrderRejectedException {
+    	
         double price = this.calculatePrice();
 
         Scanner sc = new Scanner(System.in);
-        String numeroTarjeta, CCV, fechaCad;
-        RegisteredClient rc;
+        String numeroTarjeta;//, CCV, fechaCad;
+        //RegisteredClient rc;
 
         try {
             System.out.print("Introduce tu número de tarjeta: ");
             numeroTarjeta = sc.next();
+            System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
+			TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
             //System.out.print("Introduce tu CCV: ");
             //CCV = sc.next();
             //System.out.print("Introduce tu fecha de caducidad de tarjeta: ");

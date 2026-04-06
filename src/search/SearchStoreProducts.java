@@ -163,7 +163,7 @@ public class SearchStoreProducts{
     private List<StoreProduct> filterByCategory(Category... c){ //para cada producto, buscar la categoría
         List<StoreProduct> aux = new ArrayList<>();
         List<StoreProduct> product = (List<StoreProduct>) this.s.getStoreProducts();
-        Category caux[];
+        Category[] caux;
 
         for(Category cat: c) {
         	/** Para cada categoría, busco productos que tengan ESA categoría*/
@@ -179,9 +179,8 @@ public class SearchStoreProducts{
         		}
         	}
         }
-        List<StoreProduct> toReturn = new ArrayList<>(new LinkedHashSet<>(aux));
 
-        return toReturn;
+        return new ArrayList<>(new LinkedHashSet<>(aux));
     }
 
     public void setAsc(boolean bool) {

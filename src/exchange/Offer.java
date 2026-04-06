@@ -1,11 +1,11 @@
 package exchange;
 
+import notification.NotificationExchange;
+import notification.NotificationType;
 import product.SecondHandProduct;
 import store.Parameter;
 import store.Store;
 import user.RegisteredClient;
-import notification.NotificationExchange;
-import notification.NotificationType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -131,7 +131,8 @@ public class Offer {
         LocalDate expirationDate = this.creationDate.plus(Parameter.getParam().getOfferTime());
         if (LocalDate.now().isAfter(expirationDate)) {
             this.status = OfferStatus.EXPIRED;
-            NotificationExchange notification = new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE);
+            NotificationExchange notification =
+                    new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE);
             notification.FullNotification(this);
             this.origin.getNotificationHistory().addNotification(notification);
         }
@@ -145,15 +146,18 @@ public class Offer {
         this.status = OfferStatus.ACCEPTED;
         return processOffer();
     }
+    // DUE: Que offer haga check de que se pueda aceptar y tal
 
     /**
      * It processes the offer exchange
      * @return the new exchange
      */
     public Exchange processOffer() {
-    	NotificationExchange notification = new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE, 
-    			Parameter.getParam().getStoreAddress(), 
-    			LocalDateTime.now().plus(Parameter.getParam().getExchangeTime()).withHour(17).withMinute(0).withSecond(0).withNano(0));
+        NotificationExchange notification =
+                new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE,
+                        Parameter.getParam().getStoreAddress(),
+                        LocalDateTime.now().plus(Parameter.getParam().getExchangeTime()).withHour(17).withMinute(0)
+                                     .withSecond(0).withNano(0));
         notification.FullNotification(this);
         this.origin.getNotificationHistory().addNotification(notification);
         this.destination.getNotificationHistory().addNotification(notification);
@@ -166,7 +170,8 @@ public class Offer {
      */
     public void rejectOffer() {
         this.status = OfferStatus.REJECTED;
-        NotificationExchange notification = new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE);
+        NotificationExchange notification =
+                new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE);
         notification.FullNotification(this);
         this.origin.getNotificationHistory().addNotification(notification);
     }

@@ -1,526 +1,37 @@
-import order.Cart;
+package main;
+
 import product.*;
 import store.*;
-import user.*;
+import user.Manager;
 
 import java.io.IOException;
 import java.time.*;
 import java.util.*;
 
-/**
- * The type Main app.
- */
-public class MainLoop {
-    private final Scanner scanner = new Scanner(System.in);
-    /** The last chosen option when prompted */
-    int chosenOption;
-    /** The apps current user */
-    User currentUser;
-    /** The current screen's page number, if a list is being browsed */
-    int currentScreenPageNum = 0;
-    /** The previous screen's page number, if a list is being browsed */
-    int previousScreenPageNum = 0;
+public class ManagerLoop extends Loop {
+    /** This loop's instance */
+    private static ManagerLoop INSTANCE;
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * The apps main loop
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
+     * The Registered client loop's constructor
      */
-    public void main() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- main ---- \n"); // Es para debug, borrar
-
-	        /*SaverLoader.getInstance()
-	                   .loadStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
-	                           "discounts", "offers", "exchanges", "orders", "users");*/ // DUE
-
-        // NOTE: Me hacía ilu :7
-        if (LocalTime.now().isBefore(LocalTime.of(17, 0))) {
-            System.out.println("Good morning!");
-        } else {
-            System.out.println("Good evening!");
-        }
-
-        System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Browse as unregistered client");
-        System.out.println("\t[2] Log in");
-        System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] Exit app");
-        chosenOption = scanner.nextInt();
-
-        switch (chosenOption) {
-            case 1:
-                loopSelector(UserType.UNREGISTERED_CLIENT);
-                break;
-            case 2:
-                loggerLoop();
-                break;
-            case 3:
-                signer();
-                break;
-            case 4:
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                main();
-                break;
-        }
+    ManagerLoop() {
 
     }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
-     * It chooses which loop will be triggered according to the current user
-     * @param userType the user type
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
+     * It gets the Manager loop's instance
+     * @return the Manager loop's instance
      */
-    private void loopSelector(UserType userType) throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- loopSelector ---- \n"); // Es para debug, borrar
-        if (currentUser == null) {
-            currentUser = new UnregisteredClient(true); // Podría ser un default de la tienda tmb aunque habría que
-            // limpiar el carro cada vez que se invoque, no sé qué es asc
+    protected static ManagerLoop getInstance() {
+        if (ManagerLoop.INSTANCE == null) {
+            ManagerLoop.INSTANCE = new ManagerLoop();
         }
-
-        switch (userType) {
-            case UNREGISTERED_CLIENT:
-                unregisteredClientLoop();
-            case REGISTERED_CLIENT:
-                registeredClientLoop();
-            case EMPLOYEE:
-                employeeLoop();
-            case MANAGER:
-                managerLoop();
-            default: // Este NO debería saltar nunca, lo pongo por si acaso
-                System.out.println("You shouldn't be able to see this :(");
-                main();
-                break;
-        }
-    }
-
-    /**
-     * The unregistered client's main loop
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
-     */
-    private void unregisteredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.println("\n ---- unregisteredClientLoop ---- \n");
-        System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Browse products");
-        System.out.println("\t[2] Log in");
-        System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] <- Go back");
-        System.out.println("\t[5] <<- Go to main page");
-        System.out.println("\t[6] x Exit app");
-        chosenOption = scanner.nextInt();
-
-        switch (chosenOption) {
-            case 1:
-                pageNumGoForward();
-                unregisteredBrowseStore();
-                break;
-            case 2:
-                loggerLoop();
-                break;
-            case 3:
-                signer();
-                break;
-            case 4:
-                main();
-                break;
-            case 5:
-                main();
-                break;
-            case 6:
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredClientLoop();
-                break;
-        }
-    }
-
-    private void pageNumGoForward() { // Se ejecuta siempre que se salga de un paged loop
-        this.previousScreenPageNum = this.currentScreenPageNum;
-        this.currentScreenPageNum = 1;
-    }
-
-    private void pageNumGoBack() { // Se ejecuta siempre que se vuelva a un paged loop
-        int aux = previousScreenPageNum;
-        this.previousScreenPageNum = this.currentScreenPageNum;
-        this.currentScreenPageNum = aux;
-    }
-
-    /**
-     * It allows an unregistered client to browse products and add them to their cart
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
-     */
-    private void unregisteredBrowseStore() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- unregisteredBrowseStore ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
-
-        List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
-        Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
-
-        System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] See a product");
-        System.out.println("\t[2] See my cart");
-        System.out.println("\t[3] Sign up");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[4] < Previous page");
-        } else {
-            System.out.println("\t[4] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
-            System.out.println("\t[5] Next page >");
-        } else {
-            System.out.println("\t[5] Reload page");
-        }
-        System.out.println("\t[6] <- Go back");
-        System.out.println("\t[7] <<- Go to main page");
-        System.out.println("\t[8] x Exit app");
-        chosenOption = scanner.nextInt();
-
-        switch (chosenOption) {
-            case 1:
-                System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
-                System.out.println("Enter the number of the desired product:");
-                int productNum = scanner.nextInt();
-                pageNumGoForward();
-                unregisteredSeeProduct(productNum);
-                break;
-            case 2:
-                pageNumGoForward();
-                unregisteredSeeCart();
-                break;
-            case 3:
-                pageNumGoForward();
-                signer();
-                break;
-            case 4:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
-                unregisteredBrowseStore();
-                break;
-            case 5:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
-                unregisteredBrowseStore();
-                break;
-            case 6:
-                pageNumGoForward();
-                unregisteredBrowseStore();
-                break;
-            case 7:
-                pageNumGoForward();
-                main();
-                break;
-            case 8:
-                pageNumGoForward();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredBrowseStore();
-                break;
-        }
-    }
-
-    /**
-     * It allows an unregistered client to place an order via log in or sign up
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
-     */
-    private void unregisteredClientPlaceOrder() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- unregisteredClientPlaceOrder ---- \n"); // Es para debug, borrar
-        System.out.println("You must log in or sign up to proceed");
-        System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Log in");
-        System.out.println("\t[2] Sign up");
-        System.out.println("\t[3] Go back");
-        int chosenOption3 = scanner.nextInt();
-
-        switch (chosenOption3) {
-            case 1:
-                cartLogger();
-                break;
-            case 2:
-                cartSigner();
-                break;
-            case 3:
-                unregisteredBrowseStore();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredClientLoop();
-                break;
-        }
-    }
-
-    /**
-     * It prints a certain product's info
-     * @throws IOException the io exception
-     */
-    private void unregisteredSeeProduct(int productNum) throws IOException {
-        System.out.print("\n ---- unregisteredSeeProduct 2 ---- \n"); // Es para debug, borrar
-        List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct();
-        StoreProduct product =
-                Pager.getInstance().selectStoreProductFromPage(products, this.currentScreenPageNum, productNum);
-        product.bigPrintInfo();
-
-        System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] See reviews");
-        System.out.println("\t[2] See my cart");
-        System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] Add to cart");
-        System.out.println("\t[5] <- Go back");
-        System.out.println("\t[6] <<- Go to main page");
-        System.out.println("\t[7] x Exit app");
-        chosenOption = scanner.nextInt();
-
-        switch (chosenOption) {
-            case 1:
-                pageNumGoForward();
-                unregisteredSeeReviews(product, productNum);
-                break;
-            case 2:
-                unregisteredSeeCart();
-                break;
-            case 3:
-                signer();
-                break;
-            case 4:
-                System.out.println("Enter the number of copies you desire");
-                int numProds = scanner.nextInt();
-                for (int i = 0; i < numProds; i++) {
-                    ((UnregisteredClient) currentUser).addCart(product);
-                }
-                System.out.println("Added " + numProds + " copies to your cart");
-                unregisteredBrowseStore();
-                break;
-            case 5:
-                pageNumGoBack();
-                unregisteredBrowseStore();
-                break;
-            case 6:
-                main();
-                break;
-            case 7:
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredSeeProduct(productNum);
-                break;
-        }
-
-    }
-
-    /**
-     * See reviews.
-     * @param product the product
-     */
-    /*
-     * It prints a certain product's reviews
-     */
-    private void unregisteredSeeReviews(StoreProduct product, int productNum) throws IOException {
-        System.out.print("\n ---- unregisteredSeeReviews ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
-
-        product.printReviews(this.currentScreenPageNum);
-
-        System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Sign up");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[2] < Previous page");
-        } else {
-            System.out.println("\t[2] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product)) {
-            System.out.println("\t[3] Next page >");
-        } else {
-            System.out.println("\t[3] Reload page");
-        }
-        System.out.println("\t[4] <- Go back");
-        System.out.println("\t[5] <<- Go to main page");
-        System.out.println("\t[6] x Exit app");
-        chosenOption = scanner.nextInt();
-
-        switch (chosenOption) {
-            case 1:
-                pageNumGoForward();
-                signer();
-                break;
-            case 2:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
-                unregisteredSeeReviews(product, this.currentScreenPageNum);
-                break;
-            case 3:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product) ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
-                unregisteredSeeReviews(product, this.currentScreenPageNum);
-                break;
-            case 4:
-                pageNumGoForward();
-                unregisteredSeeProduct(productNum);
-                break;
-            case 5:
-                pageNumGoForward();
-                main();
-                break;
-            case 6:
-                pageNumGoForward();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredSeeReviews(product, productNum);
-                break;
-        }
-    }
-
-    /**
-     * It prints the current user's cart's products
-     * @throws IOException the io exception
-     */
-    private void unregisteredSeeCart() throws IOException {
-        System.out.print("\n ---- unregisteredSeeCart ---- \n"); // Es para debug, borrar
-        ((UnregisteredClient) this.currentUser).getCart().getPrintInfo();
-        System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Place order");
-        System.out.println("\t[2] Go back"); // DUE: Cancelar productos por n.º de impresión (ver getPrintInfo)
-        int chosenOption2 = scanner.nextInt();
-
-        if (chosenOption2 == 1) {
-            unregisteredClientPlaceOrder();
-        } else {
-            unregisteredBrowseStore();
-        }
-    }
-
-    /**
-     * It handles the log-in whilst preserving the unregistered client's cart
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
-     */
-    private void cartLogger() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- cartLogger ---- \n"); // Es para debug, borrar
-        UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
-        Cart currrentCart = unregisteredClient.getCart();
-        /* Logger */
-        System.out.print("Enter your username: ");
-        String userName = scanner.next();
-        System.out.print("Enter your password: ");
-        String password = scanner.next();
-
-        currentUser = Store.getInstance().getUtility().logIn(userName, password);
-        if (currentUser == null) {
-            System.out.println("Invalid username or password :[");
-            System.out.println("What do you wish to do? (enter the nº)");
-            System.out.println("\t[1] Try again");
-            System.out.println("\t[2] Go back");
-            int chosenOption2 = scanner.nextInt();
-
-            if (chosenOption2 == 1) {
-                cartLogger();
-            } else {
-                unregisteredClientPlaceOrder();
-            }
-        }
-        /* Logger */
-        for (StoreProduct product : currrentCart.getProducts()) {
-            currrentCart.addProduct(product);
-        }
-        /* Logger */
-        loopSelector(currentUser.getType());
-        /* Logger */
-    }
-
-    /**
-     * It handles the sign-up whilst preserving the unregistered client's cart
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
-     */
-    private void cartSigner() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- cartSigner ---- \n"); // Es para debug, borrar
-        UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
-        Cart currrentCart = unregisteredClient.getCart();
-        /* Signer */
-        currentUser = Store.getInstance().signIn();
-        /* Signer */
-        for (StoreProduct product : currrentCart.getProducts()) {
-            currrentCart.addProduct(product);
-        }
-        loopSelector(currentUser.getType());
-    }
-
-    /**
-     * It handles the log-in and updates the current user accordingly
-     * @throws IOException the io exception
-     */
-    private void loggerLoop() throws IOException {
-        System.out.print("\n ---- loggerLoop ---- \n"); // Es para debug, borrar
-        System.out.print("Enter your username: ");
-        String userName = scanner.next();
-        System.out.print("Enter your password: ");
-        String password = scanner.next();
-
-        currentUser = Store.getInstance().getUtility().logIn(userName, password);
-        if (currentUser == null) {
-            System.out.println("Invalid username or password :[");
-            System.out.println("What do you wish to do? (enter the nº)");
-            System.out.println("\t[1] Try again");
-            System.out.println("\t[2] Go back");
-            int chosenOption2 = scanner.nextInt();
-
-            if (chosenOption2 == 1) {
-                loggerLoop();
-            } else {
-                main();
-            }
-        }
-        loopSelector(currentUser.getType());
-    }
-
-    /**
-     * It handles the sign-up and updates the current user accordingly
-     * @throws IOException the io exception
-     */
-    private void signer() throws IOException {
-        System.out.print("\n ---- signer ---- \n"); // Es para debug, borrar
-        currentUser = Store.getInstance().signIn();
-        loopSelector(currentUser.getType());
-    }
-
-    /**
-     * The registered client's main loop
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
-     */
-    private void registeredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- registeredClientLoop ---- \n"); // Es para debug, borrar
-        // DUE
-    }
-
-    /**
-     * The employee's main loop
-     * @throws IOException              the io exception
-     * @throws IllegalArgumentException the illegal argument exception
-     * @throws NullPointerException     the null pointer exception
-     */
-    private void employeeLoop() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- employeeLoop ---- \n"); // Es para debug, borrar
-        // DUE
+        return INSTANCE;
     }
 
     /**
@@ -529,7 +40,7 @@ public class MainLoop {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    private void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
+    void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- managerLoop ---- \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Manage packs");
@@ -553,7 +64,7 @@ public class MainLoop {
                 manageStoreProducts();
                 break;
             case 3:
-                managerAddStoreProduct();
+                addStoreProduct();
                 break;
             case 4:
                 manageEmployees();
@@ -568,7 +79,7 @@ public class MainLoop {
                 manageParameters();
                 break;
             case 8:
-                managerSeeProfile();
+                seeProfile();
                 break;
             case 9:
                 main();
@@ -628,13 +139,13 @@ public class MainLoop {
 
                 switch (type) {
                     case COMIC:
-                        managerManageComic((Comic) product);
+                        manageComic((Comic) product);
                     case GAME:
                         assert product instanceof Game;
-                        managerManageGame((Game) product);
+                        manageGame((Game) product);
                     case FIGURINE:
                         assert product instanceof Figurine;
-                        managerManageFigurine((Figurine) product);
+                        manageFigurine((Figurine) product);
                     default: // Este NO debería saltar nunca, lo pongo por si acaso
                         System.out.println("You shouldn't be able to see this :(");
                         manageStoreProducts();
@@ -671,8 +182,8 @@ public class MainLoop {
         }
     }
 
-    private void managerManageComic(Comic comic) throws IOException {
-        System.out.print("\n ---- managerManageComic ---- \n"); // Es para debug, borrar
+    private void manageComic(Comic comic) throws IOException {
+        System.out.print("\n ---- manageComic ---- \n"); // Es para debug, borrar
         comic.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
@@ -718,7 +229,7 @@ public class MainLoop {
                 comic.setStock(newStock);
                 break;
             case 6:
-                managerCategoryChanger(comic);
+                categoryChanger(comic);
                 break;
             case 7:
                 System.out.println("Enter the product's new Number of pages:");
@@ -752,13 +263,13 @@ public class MainLoop {
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                managerManageComic(comic);
+                manageComic(comic);
                 break;
         }
     }
 
-    private void managerManageGame(Game game) throws IOException {
-        System.out.print("\n ---- managerManageGame ---- \n"); // Es para debug, borrar
+    private void manageGame(Game game) throws IOException {
+        System.out.print("\n ---- manageGame ---- \n"); // Es para debug, borrar
         game.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
@@ -803,7 +314,7 @@ public class MainLoop {
                 game.setStock(newStock);
                 break;
             case 6:
-                managerCategoryChanger(game);
+                categoryChanger(game);
                 break;
             case 7:
                 System.out.println("Enter the product's new Number of players:");
@@ -834,13 +345,13 @@ public class MainLoop {
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                managerManageGame(game);
+                manageGame(game);
                 break;
         }
     }
 
-    private void managerManageFigurine(Figurine figurine) throws IOException {
-        System.out.print("\n ---- managerManageFigurine ---- \n"); // Es para debug, borrar
+    private void manageFigurine(Figurine figurine) throws IOException {
+        System.out.print("\n ---- manageFigurine ---- \n"); // Es para debug, borrar
         figurine.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
@@ -885,7 +396,7 @@ public class MainLoop {
                 figurine.setStock(newStock);
                 break;
             case 6:
-                managerCategoryChanger(figurine);
+                categoryChanger(figurine);
                 break;
             case 7:
                 System.out.println("Enter the product's new Brand:");
@@ -914,15 +425,15 @@ public class MainLoop {
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                managerManageFigurine(figurine);
+                manageFigurine(figurine);
                 break;
         }
     }
 
-    private void managerCategoryChanger(StoreProduct storeProduct) throws IOException {
+    private void categoryChanger(StoreProduct storeProduct) throws IOException {
         String categoryName, newCategoryName;
         Category category, newCategory;
-        System.out.print("\n ---- managerCategoryChanger ---- \n"); // Es para debug, borrar
+        System.out.print("\n ---- categoryChanger ---- \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Replace an existing product's category");
         System.out.println("\t[2] Add a new category to the product");
@@ -935,7 +446,7 @@ public class MainLoop {
                 category = Store.getInstance().getCategoryFromName(categoryName);
                 if (category == null) {
                     System.out.println("A category which such a name doesn't exist, reloading...");
-                    managerCategoryChanger(storeProduct);
+                    categoryChanger(storeProduct);
                     break;
                 }
                 System.out.println("Enter the replacement category's name:");
@@ -943,7 +454,7 @@ public class MainLoop {
                 newCategory = Store.getInstance().getCategoryFromName(newCategoryName);
                 if (newCategory == null) {
                     System.out.println("A category which such a name doesn't exist, reloading...");
-                    managerCategoryChanger(storeProduct);
+                    categoryChanger(storeProduct);
                     break;
                 }
                 storeProduct.removeCategory(category);
@@ -955,7 +466,7 @@ public class MainLoop {
                 category = Store.getInstance().getCategoryFromName(categoryName);
                 if (category == null) {
                     System.out.println("A category which such a name doesn't exist, reloading...");
-                    managerCategoryChanger(storeProduct);
+                    categoryChanger(storeProduct);
                     break;
                 }
                 storeProduct.addCategory(category);
@@ -966,21 +477,21 @@ public class MainLoop {
                 category = Store.getInstance().getCategoryFromName(categoryName);
                 if (category == null) {
                     System.out.println("A category which such a name doesn't exist, reloading...");
-                    managerCategoryChanger(storeProduct);
+                    categoryChanger(storeProduct);
                     break;
                 }
                 storeProduct.removeCategory(category);
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                managerCategoryChanger(storeProduct);
+                categoryChanger(storeProduct);
                 break;
         }
 
     }
 
-    private void managerAddStoreProduct() {
-        System.out.print("\n ---- managerAddStoreProduct ---- \n"); // Es para debug, borrar
+    private void addStoreProduct() {
+        System.out.print("\n ---- addStoreProduct ---- \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -1316,8 +827,8 @@ public class MainLoop {
         }
     }
 
-    private void managerSeeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
-        System.out.print("\n ---- managerSeeProfile ---- \n"); // Es para debug, borrar
+    private void seeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
+        System.out.print("\n ---- seeProfile ---- \n"); // Es para debug, borrar
         this.currentUser.getPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
@@ -1343,23 +854,8 @@ public class MainLoop {
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                managerSeeProfile();
+                seeProfile();
                 break;
         }
     }
-
-    /**
-     * It exists the app and saves the store
-     * @throws IOException the io exception
-     */
-    private void exit() throws IOException {
-        System.out.print("\n ---- exit ---- \n"); // Es para debug, borrar
-        System.out.println("See you soon!");
-
-	        /*SaverLoader.getInstance()
-	                   .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
-	                           "discounts", "offers", "exchanges", "orders", "users");*/ // DUE
-
-    }
-
 }

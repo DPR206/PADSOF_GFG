@@ -5,7 +5,7 @@ import user.RegisteredClient;
 import java.time.*;
 import java.util.*;
 import es.uam.eps.padsof.telecard.*;
-
+import notification.*;
 import discount.DiscountType;
 import discount.QuantityDiscount;
 import product.Pack;
@@ -184,6 +184,10 @@ public class Cart {
             Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
                     new ArrayList<>(this.packs.keySet()), this.owner);
             this.owner.getOrderHistory().addOrder(order);
+            
+            NotificationOrder notification = new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
+            notification.FullNotification(order);
+            this.owner.getNotificationHistory().addNotification(notification);
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {

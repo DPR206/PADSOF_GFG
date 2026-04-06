@@ -240,6 +240,24 @@ public class Cart {
             System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.packs.get(pack));
         }
     }
+    
+    public void cleanupOldProducts() {
+    	List<StoreProduct> sp = new ArrayList<>(this.getProducts());
+    	List<Pack> packs = new ArrayList<>(this.packs.keySet());
+    	
+    	for(StoreProduct spi: sp) {
+    		LocalDate expiration = this.calculateExpiredDate(spi);
+    		if(expiration.isBefore(LocalDate.now())) {
+    			this.cancelProduct(spi);
+    		}
+    	}
+    	for(Pack p: packs) {
+    		LocalDate expiration = this.calculateExpiredDatePacks(p);
+    		if(expiration.isBefore(LocalDate.now())) {
+    			this.cancelPack(p);
+    		}
+    	}
+    }
 
     /**
      * It gets the cart's products
@@ -260,4 +278,17 @@ public class Cart {
         }
     	return null;
     }
+    
+    public LocalDate calculateExpiredDatePacks(Pack pack) {
+    	Parameter p = p.getParam();
+    	Period timeToExist = p.getOrderTime();
+    	
+    	List<Pack> packs = new ArrayList<>(this.packs.keySet());
+    	
+    	for(Pack pck: packs) {
+    		if(pck.getId()== (pack.getId())) return pck.getDateAddCart().plus(timeToExist);
+        }
+    	return null;
+    }
+    
 }

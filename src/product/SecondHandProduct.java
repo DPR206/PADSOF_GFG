@@ -284,7 +284,8 @@ public class SecondHandProduct extends Product{
 			TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
 		}
 		this.setPaidValuation(true);
-		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now());
+		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now(), 
+											Collections.emptyList());
 		
 		NotificationPayment notification = new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
 		notification.FullNotification("valuation");

@@ -12,7 +12,10 @@ import notification.*;
 
 import java.time.*;
 import java.util.*;
-import es.uam.eps.padsof.telecard.*;
+
+import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
+import es.uam.eps.padsof.telecard.InvalidCardNumberException;
+import es.uam.eps.padsof.telecard.OrderRejectedException;
 
 /**
  * It implements the registered client
@@ -339,22 +342,22 @@ public class RegisteredClient extends User {
     	this.numExchanges += i;
     }
     
-    /**
-     * 
-     * @param sp
-     * @param cardNumber
-     * @return
-     * @throws InvalidCardNumberException
-     * @throws FailedInternetConnectionException
-     * @throws OrderRejectedException
-     */
-    public Notification requestValuation(SecondHandProduct sp, String cardNumber) throws InvalidCardNumberException, 
-	FailedInternetConnectionException, OrderRejectedException {
+   /**
+    * 
+    * @param sp
+    * @return
+    */
+    public Notification requestValuation(SecondHandProduct sp) {
     	
-    	System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
-    	TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
-    	
-    	sp.setPaidValuation(true);
+    	try {
+			sp.payValuation();
+		} catch (InvalidCardNumberException e) {
+			System.out.println("Invalid Card Number");
+		} catch (FailedInternetConnectionException e) {
+			System.out.println("Failed Internet Connection");
+		} catch (OrderRejectedException e) {
+			System.out.println("Order Rejected");
+		}
     	
     	NotificationEmployeeValuation notification = new NotificationEmployeeValuation(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_VALUTAION);
     	notification.FullNotification(sp);

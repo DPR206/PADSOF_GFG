@@ -170,10 +170,10 @@ public class Cart {
         try {
             System.out.print("Introduce tu número de tarjeta: ");
             numeroTarjeta = sc.next();
-            System.out.print("Introduce tu CCV: ");
-            CCV = sc.next();
-            System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
-            fechaCad = sc.next();
+            //System.out.print("Introduce tu CCV: ");
+            //CCV = sc.next();
+            //System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
+            //fechaCad = sc.next();
 
             Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
                     new ArrayList<>(this.packs.keySet()), this.owner);

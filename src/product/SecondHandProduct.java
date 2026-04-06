@@ -3,10 +3,14 @@
  */
 package product;
 
+import store.Parameter;
 import store.Store;
 import user.RegisteredClient;
 
 import java.time.LocalDate;
+import java.util.Scanner;
+
+import es.uam.eps.padsof.telecard.*;
 
 /**
  * It implements the second-hand products
@@ -262,8 +266,16 @@ public class SecondHandProduct extends Product{
 	
 /*----------------------------------------------------METHODS-----------------------------------------------------*/
 	
-	public void requestValuation() {
+	public void payValuation() throws InvalidCardNumberException, 
+	FailedInternetConnectionException, OrderRejectedException {
 		
+		try (Scanner sc = new Scanner(System.in)) {
+			System.out.print("Introduce tu número de tarjeta: ");
+			String cardNumber = sc.next();
+			System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
+			TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
+		}
+		this.setPaidValuation(true);
 	}
 	
 

@@ -1,10 +1,7 @@
 package user;
 
 import discount.*;
-import product.Category;
-import product.Pack;
-import product.StoreProduct;
-import productT.*;
+import product.*;
 import store.Parameter;
 import store.Store;
 
@@ -26,13 +23,15 @@ public class Manager extends User {
     /** no clue :v */
     private Parameter parameter;
 
-    private Manager(String pwd, String userName, StorePermission sp, Parameter p, boolean asc) {
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    private Manager(String pwd, String userName, StorePermission storePermission, Parameter p, boolean asc) {
         super(UserType.MANAGER, pwd, userName, asc);
 
-        this.sp = sp;
+        this.sp = storePermission;
         this.parameter = p;
     }
 
+/*----------------------------------------------------- MISC -----------------------------------------------------*/
     public static Manager getInstance() {
         if (Manager.INSTANCE == null) {
             Manager.INSTANCE = new Manager("password", "manager", new StorePermission(), Parameter.getParam(), true);
@@ -44,20 +43,10 @@ public class Manager extends User {
         return null; // DUE
     }
 
-    public Manager getIntializedManager() {
-        if (Manager.INSTANCE != null) {
-            return Manager.INSTANCE;
-        }
-        return null;
-    }
-
-
     public void addEmployee(String password, String userName, Permission permission) {
         Employee emp = new Employee(password, userName, permission, true);
         s.getEmployees().put(emp.getId(), emp);
     }
-
-    /* ---- DISCOUNTS ---- */
 
     /**
      * The fixed percentage discount's constructor with default id whose coverage is Category
@@ -72,6 +61,8 @@ public class Manager extends User {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
         return factory.createFixedPercentageDiscount(startDate, endDate, percentage);
     }
+
+    /* ---- DISCOUNTS ---- */
 
     /**
      * The gift discount's constructor with default id whose coverage is Category
@@ -315,5 +306,13 @@ public class Manager extends User {
      */
     public void changeItemsPerPage(int newItemsPerPage) {
         Parameter.getParam().changeItemsPerPage(newItemsPerPage);
+    }
+
+/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    public Manager getIntializedManager() {
+        if (Manager.INSTANCE != null) {
+            return Manager.INSTANCE;
+        }
+        return null;
     }
 }

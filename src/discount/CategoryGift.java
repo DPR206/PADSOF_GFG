@@ -22,52 +22,44 @@ public class CategoryGift extends CategoryDiscount implements GiftDiscount {
 
     /**
      * A gift discount's general constructor with categories
-     * @param id                the discount's id
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param gift              the product gifted to the client when a certain spending threshold is met
-     * @param categories        the discount's categories
+     * @param assignedId                the discount's id
+     * @param assignedStartDate         the date when the discount starts
+     * @param assignedEndDate           the date when the discount ends
+     * @param assignedSpendingThreshold the spending threshold that allows the discount to take place
+     * @param assignedGift              the product gifted to the client when a certain spending threshold is met
+     * @param assignedCategories        the discount's categories
      * @throws NullPointerException     the null pointer exception
      * @throws IllegalArgumentException the illegal argument exception
      */
-    public CategoryGift(String id, LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
-                        StoreProduct gift, Category... categories)
+    public CategoryGift(String assignedId, LocalDateTime assignedStartDate, LocalDateTime assignedEndDate,
+                        double assignedSpendingThreshold, StoreProduct assignedGift, Category... assignedCategories)
             throws NullPointerException, IllegalArgumentException {
-        super(id, DiscountType.GIFT, DiscountCoverage.CATEGORY, startDate, endDate);
-        this.addCategories(categories);
-        this.setSpendingThreshold(spendingThreshold);
-        this.setGift(gift);
+        super(assignedId, DiscountType.GIFT, DiscountCoverage.CATEGORY, assignedStartDate, assignedEndDate);
+        this.addCategories(assignedCategories);
+        this.setSpendingThreshold(assignedSpendingThreshold);
+        this.setGift(assignedGift);
     }
 
     /**
      * Instantiates a new gift discount with categories
-     * @param startDate         the date when the discount starts
-     * @param endDate           the date when the discount ends
-     * @param spendingThreshold the spending threshold that allows the discount to take place
-     * @param gift              the product gifted to the client when a certain spending threshold is met
-     * @param categories        the discount's categories
+     * @param assignedStartDate         the date when the discount starts
+     * @param assignedEndDate           the date when the discount ends
+     * @param assignedSpendingThreshold the spending threshold that allows the discount to take place
+     * @param assignedGift              the product gifted to the client when a certain spending threshold is met
+     * @param assignedCategories        the discount's categories
      * @throws NullPointerException     the null pointer exception
      * @throws IllegalArgumentException the illegal argument exception
      */
-    public CategoryGift(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct gift,
-                        Category... categories) throws NullPointerException, IllegalArgumentException {
-        super(DiscountType.GIFT, DiscountCoverage.CATEGORY, startDate, endDate);
-        this.addCategories(categories);
-        this.setSpendingThreshold(spendingThreshold);
-        this.setGift(gift);
+    public CategoryGift(LocalDateTime assignedStartDate, LocalDateTime assignedEndDate,
+                        double assignedSpendingThreshold, StoreProduct assignedGift, Category... assignedCategories)
+            throws NullPointerException, IllegalArgumentException {
+        super(DiscountType.GIFT, DiscountCoverage.CATEGORY, assignedStartDate, assignedEndDate);
+        this.addCategories(assignedCategories);
+        this.setSpendingThreshold(assignedSpendingThreshold);
+        this.setGift(assignedGift);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -91,6 +83,14 @@ public class CategoryGift extends CategoryDiscount implements GiftDiscount {
     }
 
     /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
+    }
+
+    /**
      * It gets the gift discount's gift spending threshold.
      * @return the gift discount's gift spending threshold
      */
@@ -100,14 +100,14 @@ public class CategoryGift extends CategoryDiscount implements GiftDiscount {
 
     /**
      * It allows the manager to change the gift discount's spending threshold
-     * @param spendingThreshold the new spending threshold
+     * @param assignedSpendingThreshold the new spending threshold
      * @throws IllegalArgumentException the spending threshold must be greater than 0
      */
-    public void setSpendingThreshold(double spendingThreshold) throws IllegalArgumentException {
-        if (spendingThreshold < 0) {
+    public void setSpendingThreshold(double assignedSpendingThreshold) throws IllegalArgumentException {
+        if (assignedSpendingThreshold < 0) {
             throw new IllegalArgumentException("The spending threshold must be greater than 0");
         }
-        this.spendingThreshold = spendingThreshold;
+        this.spendingThreshold = assignedSpendingThreshold;
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

@@ -4,6 +4,8 @@ import product.SecondHandProduct;
 import store.Parameter;
 import store.Store;
 import user.RegisteredClient;
+import notification.NotificationExchange;
+import notification.NotificationType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -61,6 +63,8 @@ public class Offer {
         this.status = status;
 
         Store.getInstance().getOffers().add(this);
+        this.origin.getOfferHistory().addOffer(this);
+        this.destination.getOfferHistory().addOffer(this);
     }
 
     /**
@@ -127,6 +131,9 @@ public class Offer {
         LocalDate expirationDate = this.creationDate.plus(Parameter.getParam().getOfferTime());
         if (LocalDate.now().isAfter(expirationDate)) {
             this.status = OfferStatus.EXPIRED;
+            NotificationExchange notification = new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE);
+            notification.FullNotification(this);
+            this.origin.getNotificationHistory().addNotification(notification);
         }
     }
 
@@ -144,6 +151,12 @@ public class Offer {
      * @return the new exchange
      */
     public Exchange processOffer() {
+    	NotificationExchange notification = new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE, 
+    			Parameter.getParam().getStoreAddress(), 
+    			LocalDateTime.now().plus(Parameter.getParam().getExchangeTime()).withHour(17).withMinute(0).withSecond(0).withNano(0));
+        notification.FullNotification(this);
+        this.origin.getNotificationHistory().addNotification(notification);
+        this.destination.getNotificationHistory().addNotification(notification);
         return new Exchange(LocalDateTime.now(), this.origin, this.products.get(this.origin), this.destination,
                 this.products.get(this.destination));
     }
@@ -153,6 +166,9 @@ public class Offer {
      */
     public void rejectOffer() {
         this.status = OfferStatus.REJECTED;
+        NotificationExchange notification = new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE);
+        notification.FullNotification(this);
+        this.origin.getNotificationHistory().addNotification(notification);
     }
 
     /**

@@ -42,7 +42,7 @@ public class OrderHistory {
 	/**
 	 * Obtains the owner of the order history
 	 *
-	 * @return the owner the owner of the order history
+	 * @return the owner of the order history
 	 */
 	public RegisteredClient getOwner() {
 		return owner;

@@ -13,22 +13,22 @@ public enum SearchType{
     S_PACK("pack"),
     S_EMPLOYEE("employee"),
     S_SECOND_HAND("second hand"),
-    S_VALORATION_PROD("valoration prod");
+    S_VALUATION_PROD("valuation prod");
 
-    private String theType;
+    private final String theType;
 
     /**
-	 * Creates the enum and initiates the atribute of the name of the type of search
+	 * Creates the enum and initializes the name of the type of search
 	 *
 	 * @param asc, determines if the searches are ascendant or descendant
-     * @param type, determines the type of search we are doing
+     * @param theType, determines the type of search we are doing
 	 */
-    private SearchType(String theType){
+    SearchType(String theType){
         this.theType = theType;
     }
 
     /**
-	 * Gets the the String of the type
+	 * Gets the String of the type
 	 *
 	 */
     public String getType(){

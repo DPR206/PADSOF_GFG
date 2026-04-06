@@ -13,13 +13,11 @@ import java.util.*;
   */
 public class BrowseSecondHandProducts{
 
-	Store s = Store.getInstance();
+	final Store s = Store.getInstance();
     private List<SecondHandProduct> products;
 
     /**
-	 * Creates the class
-	 *
-	 * @param s, sends the store to get all the second hand products available
+	 * Creates the class and sends the store to get all the second hand products available
 	 */
     public BrowseSecondHandProducts(){
 

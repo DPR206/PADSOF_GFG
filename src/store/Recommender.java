@@ -17,8 +17,7 @@ import static java.lang.Math.sqrt;
  */
 public class Recommender {
     private static final Recommender PARAM = new Recommender();
-    // NOTE: Por ambición e indecisión, primando la segunda, he decidido implementar ambos recomendadores de Moodle,
-    // rezad por mí y por nuestro código
+    // He decidido implementar los dos tipos, me falta el segundo
     HashMap<Category, Double> categoriesAndScores = new HashMap<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/

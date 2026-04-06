@@ -17,9 +17,7 @@ public class SearchOrder implements SearchID {
     private List<Order> orders;
 
     /**
-	 * Creates the class
-	 *
-	 * @param s, sends the store to get all the orders available
+	 * Creates the class and sends the store to get all the orders available
 	 */
     public SearchOrder(){
         this.orders = s.getOrders();

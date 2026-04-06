@@ -1,6 +1,7 @@
 package user;
 
 import search.*;
+import utilities.Utility;
 
 /**
  * It defines the user of the app
@@ -58,7 +59,16 @@ public abstract class User {
      * @param newPwd, the password of the user
      */
     public void changePassword(String newPwd) {
-        this.pwd = newPwd;
+    	Utility utility = new Utility();
+    	if(utility.securePassword(newPwd))
+    		this.pwd = newPwd;
+    	else
+    		System.out.println("Make sure your password has: \n "
+    				+ "-At least 8 characters\n"
+    				+ "-Upper case letters\n"
+    				+ "-Lower case letters\n"
+    				+ "-Numbers\n"
+    				+ "-Special characters\n");
     }
 
     /**

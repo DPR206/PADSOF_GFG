@@ -28,39 +28,39 @@ public class Figurine extends StoreProduct {
      * @param averagePunctuation the figurine's average punctuation
      * @param addedDate          the figurine's added date
      * @param stock              the figurine's stock
-     * @param dimension          the figurine's dimension
-     * @param brand              the figurine's brand
-     * @param material           the figurine's material
-     * @param categories         the figurine's categories
+     * @param assignedDimension  the figurine's dimension
+     * @param assignedBrand      the figurine's brand
+     * @param assignedMaterial   the figurine's material
+     * @param assignedCategories the figurine's categories
      */
     public Figurine(String id, double price, String name, String description, String photo, double averagePunctuation,
-                    LocalDate addedDate, int stock, String dimension, String brand, String material,
-                    Category... categories) {
+                    LocalDate addedDate, int stock, String assignedDimension, String assignedBrand,
+                    String assignedMaterial, Category... assignedCategories) {
         super(id, price, name, description, photo, averagePunctuation, addedDate, ProductType.FIGURINE, stock,
-                categories);
-        this.dimension = dimension;
-        this.brand = brand;
-        this.material = material;
+                assignedCategories);
+        this.dimension = assignedDimension;
+        this.brand = assignedBrand;
+        this.material = assignedMaterial;
     }
 
     /**
      * The figurine's constructor
-     * @param price       the figurine's price
-     * @param name        the figurine's name
-     * @param description the figurine's description
-     * @param photo       the figurine's photo's path
-     * @param stock       the figurine's stock
-     * @param dimension   the figurine's dimension
-     * @param brand       the figurine's brand
-     * @param material    the figurine's material
-     * @param categories  the figurine's categories
+     * @param price             the figurine's price
+     * @param name              the figurine's name
+     * @param description       the figurine's description
+     * @param photo             the figurine's photo
+     * @param stock             the figurine's stock
+     * @param assignedDimension the figurine's dimension
+     * @param assignedBrand     the figurine's brand
+     * @param assignedMaterial  the figurine's material
+     * @param categories        the figurine's categories
      */
-    public Figurine(double price, String name, String description, String photo, int stock, String dimension,
-                    String brand, String material, Category... categories) {
+    public Figurine(double price, String name, String description, String photo, int stock, String assignedDimension,
+                    String assignedBrand, String assignedMaterial, Category... categories) {
         super(price, name, description, photo, ProductType.FIGURINE, stock, categories);
-        this.dimension = dimension;
-        this.brand = brand;
-        this.material = material;
+        this.dimension = assignedDimension;
+        this.brand = assignedBrand;
+        this.material = assignedMaterial;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

@@ -4,14 +4,13 @@ import user.RegisteredClient;
 
 import java.time.*;
 import java.util.*;
+
 import es.uam.eps.padsof.telecard.*;
 import notification.*;
 import discount.DiscountType;
 import discount.QuantityDiscount;
 import product.Pack;
 import product.StoreProduct;
-import productT.*;
-import store.Parameter;
 
 /**
  * Cart, array of products and packs the user has not paid yet
@@ -26,32 +25,34 @@ public class Cart {
     private LocalDate modificationDate;
     private RegisteredClient owner;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Creates a new cart
-     * @param sp,               the store products
-     * @param packs,            the packs
-     * @param expired,          whether it's expired
-     * @param modificationDate, the last modification date
+     * @param assignedProducts,               the store products
+     * @param assignedPacks,            the packs
+     * @param assignedExpired,          whether it's expired
+     * @param assignedModificationDate, the last modification date
      */
-    public Cart(List<StoreProduct> sp, List<Pack> packs, boolean expired, LocalDate modificationDate) {
-        for (StoreProduct product : sp) {
+    public Cart(List<StoreProduct> assignedProducts, List<Pack> assignedPacks, boolean assignedExpired,
+                LocalDate assignedModificationDate) {
+        for (StoreProduct product : assignedProducts) {
             addProduct(product);
         }
-        for (Pack pack : packs) {
+        for (Pack pack : assignedPacks) {
             addPack(pack);
         }
-        this.expired = expired;
-        this.modificationDate = modificationDate;
+        this.expired = assignedExpired;
+        this.modificationDate = assignedModificationDate;
     }
 
     /**
      * Creates a new cart without content
-     * @param expired,          whether it's expired
-     * @param modificationDate, the last modification date
+     * @param assignedExpired,          whether it's expired
+     * @param assignedModificationDate, the last modification date
      */
-    public Cart(boolean expired, LocalDate modificationDate) {
-        this(Collections.emptyList(), Collections.emptyList(), expired, modificationDate);
+    public Cart(boolean assignedExpired, LocalDate assignedModificationDate) {
+        this(Collections.emptyList(), Collections.emptyList(), assignedExpired, assignedModificationDate);
     }
 
     /**
@@ -82,12 +83,12 @@ public class Cart {
         double aux = 0;
 
         for (StoreProduct spp : this.sp.keySet()) {
-            aux = spp.getPrice()*this.sp.get(spp) + aux;
+            aux = spp.getPrice() * this.sp.get(spp) + aux;
         }
 
         for (Pack p : this.packs.keySet()) {
             /* All other discounts + price */
-            aux = aux + p.getPrice()*this.packs.get(p);
+            aux = aux + p.getPrice() * this.packs.get(p);
             /* Quantity discount */
             if (p.getDiscount().getType() == DiscountType.QUANTITY) {
                 QuantityDiscount quantityDisc = (QuantityDiscount) p.getDiscount();
@@ -141,8 +142,8 @@ public class Cart {
         //this.packs.add(wanted); <- creo que mejor después
         List<StoreProduct> products = wanted.getProducts();
 
-        for (StoreProduct sp : products) {
-            if (sp.getStock() == 0) {
+        for (StoreProduct product : products) {
+            if (product.getStock() == 0) {
                 return false;
             }
         }
@@ -162,9 +163,9 @@ public class Cart {
         return this.sp.size();
     }
 
-    public boolean payOrder() throws InvalidCardNumberException, 
-	FailedInternetConnectionException, OrderRejectedException {
-    	
+    public boolean payOrder()
+            throws InvalidCardNumberException, FailedInternetConnectionException, OrderRejectedException {
+
         double price = this.calculatePrice();
 
         Scanner sc = new Scanner(System.in);
@@ -174,7 +175,7 @@ public class Cart {
             System.out.print("Introduce tu número de tarjeta: ");
             numeroTarjeta = sc.next();
             System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
-			TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
+            TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
             //System.out.print("Introduce tu CCV: ");
             //CCV = sc.next();
             //System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
@@ -183,8 +184,9 @@ public class Cart {
             Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
                     new ArrayList<>(this.packs.keySet()), this.owner);
             this.owner.getOrderHistory().addOrder(order);
-            
-            NotificationOrder notification = new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
+
+            NotificationOrder notification = new NotificationOrder(LocalDateTime.now(), false, true,
+                    NotificationType.ORDER);
             notification.FullNotification(order);
             this.owner.getNotificationHistory().addNotification(notification);
 
@@ -227,7 +229,7 @@ public class Cart {
     public void printPacks() { // DUE: Page / wrap this
         int i = 0;
         for (Pack pack : this.packs.keySet()) {
-            System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.sp.get(pack));
+            System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.packs.get(pack));
         }
     }
 
@@ -235,7 +237,7 @@ public class Cart {
      * It gets the cart's products
      * @return the cart's products
      */
-    public List<StoreProduct> getProducts(){
+    public List<StoreProduct> getProducts() {
         return new ArrayList<>(this.sp.keySet());
     }
 }

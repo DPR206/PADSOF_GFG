@@ -7,15 +7,12 @@ import order.*;
 import product.*;
 import exchange.*;
 import search.*;
-import store.Parameter;
 import notification.*;
 
 import java.time.*;
 import java.util.*;
 
-import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
-import es.uam.eps.padsof.telecard.InvalidCardNumberException;
-import es.uam.eps.padsof.telecard.OrderRejectedException;
+import es.uam.eps.padsof.telecard.*;
 
 /**
  * It implements the registered client
@@ -24,7 +21,7 @@ import es.uam.eps.padsof.telecard.OrderRejectedException;
  * @see User
  */
 public class RegisteredClient extends User {
-	
+
     private LocalDate registerDate;
     private String dni;
     private Cart c;
@@ -38,8 +35,8 @@ public class RegisteredClient extends User {
     private int numOrders;
     private int numExchanges;
 
-    //sugestioner
-    
+    // recommender
+
     /**
 	 * @param type
 	 * @param pwd
@@ -163,8 +160,7 @@ public class RegisteredClient extends User {
      * @param psswd the new password
      */
     public void changePassword(String psswd) {
-        //Tengo que hacer la comprobación de que la contraseña es segura
-        super.changePassword(psswd);
+    	super.changePassword(psswd);
     }
 
     /**
@@ -178,7 +174,7 @@ public class RegisteredClient extends User {
 
 	/**
 	 * Obtains the offer history
-	 * 
+	 *
 	 * @return the offer history
 	 */
 	public OfferHistory getOfferHistory() {
@@ -187,7 +183,7 @@ public class RegisteredClient extends User {
 
 	/**
 	 * Obtains the notification history
-	 * 
+	 *
 	 * @return the notificationHistory the client's notification history
 	 */
 	public NotificationHistory getNotificationHistory() {
@@ -196,7 +192,7 @@ public class RegisteredClient extends User {
 
 	/**
      * Obtains the cart of a client
-     * 
+     *
 	 * @return the cart
 	 */
 	public Cart getC() {
@@ -213,7 +209,7 @@ public class RegisteredClient extends User {
 
 	/**
 	 * Obtains the client's number of orders
-	 * 
+	 *
 	 * @return the number of orders
 	 */
 	public int getNumOrders() {
@@ -230,7 +226,7 @@ public class RegisteredClient extends User {
 
 	/**
 	 * Obtains the client's number of exchanges
-	 * 
+	 *
 	 * @return the number of exchanges
 	 */
 	public int getNumExchanges() {
@@ -239,13 +235,15 @@ public class RegisteredClient extends User {
 
 	/**
 	 * Sets the client's number of exchanges
-	 * 
+	 *
 	 * @param numExchanges the numExchanges to set
 	 */
 	public void setNumExchanges(int numExchanges) {
 		this.numExchanges = numExchanges;
 	}
 
+/*-----------------------------------------------------METHODS----------------------------------------------------------------*/	
+	
 	/**
      * Adds a new product to the wallet
      *
@@ -303,7 +301,7 @@ public class RegisteredClient extends User {
     	this.c.cancelPack(pack);
     }
 
-    
+
     public List<SecondHandProduct> searchSecondHandProducts() {
         return this.searcher.browseSecondHandProduct();
     }
@@ -319,40 +317,40 @@ public class RegisteredClient extends User {
     {
     	this.numOrders++;
     }
-    
+
     /**
      * Increases the number of orders
-     * 
+     *
      * @param i the number to increase
      */
     public void increaseNumOrders(int i) {
     	if(i > 0)
     		this.numOrders += i;
     }
-    
+
     /**
      * Increases the number of exchanges by 1
      */
     public void increaseNumExchanges() {
     	this.numExchanges++;
     }
-    
+
     /**
      * Increases the number of exchanges
-     * 
+     *
      * @param i the number to increase
      */
     public void increaseNumExchanges(int i) {
     	this.numExchanges += i;
     }
-    
+
    /**
-    * 
+    *
     * @param sp
     * @return
     */
     public Notification requestValuation(SecondHandProduct sp) {
-    	
+
     	try {
 			sp.payValuation();
 		} catch (InvalidCardNumberException e) {
@@ -362,39 +360,36 @@ public class RegisteredClient extends User {
 		} catch (OrderRejectedException e) {
 			System.out.println("Order Rejected");
 		}
-    	
-    	NotificationEmployeeValuation notification = new NotificationEmployeeValuation(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_VALUTAION);
+
+    	NotificationEmployeeValuation notification = new NotificationEmployeeValuation(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_VALUATION);
     	notification.FullNotification(sp);
-    	
+
     	return notification;
     }
-    
+
     public void reviewProduct(StoreProduct sp, Review review) {
     	sp.addReview(this, review);
     }
-    
+
     public void reviewProduct(StoreProduct sp, int scoring, String comment) {
     	Review r = new Review(scoring, comment, this);
     	sp.addReview(this, r);
     }
-    
+
     public void makeAnOffer() {
-    	
+		// DUE?
     }
-    
+
     public List<Notification> browseNotifications(){
     	List<Notification> notifications = new ArrayList<>();
     	for(Notification n : this.notificationHistory.getNotificationsSorted())
-    		if(n.isVisible() == true)
+    		if(n.isVisible())
     			notifications.add(n);
     	return notifications;
     }
-    
-    
-    //makeAnOffer
 
     @Override
-    public String toString() {
+    public String toString() { // DUE
         return super.toString();
     }
 

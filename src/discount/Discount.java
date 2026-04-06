@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-import productT.*;
-
 /**
  * It implements the general discount
  * @author Ana O.R.
@@ -38,40 +36,40 @@ public abstract class Discount {
 
     /**
      * Instantiates a new Discount with a certain id
-     * @param id        the discount's id
-     * @param type      the discount's type
-     * @param coverage  the coverage
-     * @param startDate the discount's start date
-     * @param endDate   the discount's end date
+     * @param assignedId        the discount's id
+     * @param assignedType      the discount's type
+     * @param assignedCoverage  the coverage
+     * @param assignedStartDate the discount's start date
+     * @param assignedEndDate   the discount's end date
      * @throws IllegalArgumentException the dates weren't valid
      */
-    public Discount(String id, DiscountType type, DiscountCoverage coverage, LocalDateTime startDate,
-                    LocalDateTime endDate) throws IllegalArgumentException {
-        this.id = id;
-        this.type = type;
-        this.coverage = coverage;
-        this.setStartDate(startDate);
-        this.setEndDate(endDate);
+    public Discount(String assignedId, DiscountType assignedType, DiscountCoverage assignedCoverage,
+                    LocalDateTime assignedStartDate, LocalDateTime assignedEndDate) throws IllegalArgumentException {
+        this.id = assignedId;
+        this.type = assignedType;
+        this.coverage = assignedCoverage;
+        this.setStartDate(assignedStartDate);
+        this.setEndDate(assignedEndDate);
 
         Store.getInstance().getDiscounts().add(this);
     }
 
     /**
      * Instantiates a new Discount
-     * @param type      the discount's type
-     * @param coverage  the coverage
-     * @param startDate the discount's start date
-     * @param endDate   the discount's end date
+     * @param assignedType      the discount's type
+     * @param assignedCoverage  the coverage
+     * @param assignedStartDate the discount's start date
+     * @param assignedEndDate   the discount's end date
      * @throws IllegalArgumentException the dates weren't valid
      */
-    public Discount(DiscountType type, DiscountCoverage coverage, LocalDateTime startDate, LocalDateTime endDate)
-            throws IllegalArgumentException {
+    public Discount(DiscountType assignedType, DiscountCoverage assignedCoverage, LocalDateTime assignedStartDate,
+                    LocalDateTime assignedEndDate) throws IllegalArgumentException {
 
-        this.id = type.getSymbol() + String.format("%06d", ++totalId);
-        this.type = type;
-        this.coverage = coverage;
-        this.setStartDate(startDate);
-        this.setEndDate(endDate);
+        this.id = assignedType.getSymbol() + String.format("%06d", ++totalId);
+        this.type = assignedType;
+        this.coverage = assignedCoverage;
+        this.setStartDate(assignedStartDate);
+        this.setEndDate(assignedEndDate);
 
         Store.getInstance().getDiscounts().add(this);
     }
@@ -104,7 +102,7 @@ public abstract class Discount {
         List<Discount> discounts = Store.getInstance().getDiscounts();
 
         for (Discount discount : discounts) {
-            if ((discount != this) && (!discount.getDisabled())) {
+            if ((discount != this) && (discount.getDisabled())) {
                 List<StoreProduct> alreadyAffectedProducts = discount.getProducts();
                 if (discount.getCoverage() == DiscountCoverage.PRODUCT) {
                     ProductDiscount productDiscount = (ProductDiscount) discount;
@@ -136,7 +134,7 @@ public abstract class Discount {
         List<Discount> discounts = Store.getInstance().getDiscounts();
 
         for (Discount discount : discounts) {
-            if ((discount != this) && (!discount.getDisabled())) {
+            if ((discount != this) && (discount.getDisabled())) {
                 if (!discount.getProducts().isEmpty()) {
                     return true;
                 }

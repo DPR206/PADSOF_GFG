@@ -23,50 +23,54 @@ public class Comic extends StoreProduct {
 
     /**
      * A comic's general constructor
-     * @param id                 the comic's id
-     * @param price              the comic's price
-     * @param name               the comic's name
-     * @param description        the comic's description
-     * @param photo              the comic's photo's path
-     * @param averagePunctuation the comic's average punctuation
-     * @param addedDate          the comic's added date
-     * @param stock              the comic's stock
-     * @param numPages           the comic's number of pages
-     * @param year               the comic's publishing year
-     * @param author             the comic's author
-     * @param editorial          the comic's editorial
-     * @param categories         the comic's categories
+     * @param assignedId                 the comic's id
+     * @param assignedPrice              the comic's price
+     * @param assignedName               the comic's name
+     * @param assignedDescription        the comic's description
+     * @param assignedPhoto              the comic's photo's path
+     * @param assignedAveragePunctuation the comic's average punctuation
+     * @param assignedAddedDate          the comic's added date
+     * @param assignedStock              the comic's stock
+     * @param assignedNumPages           the comic's number of pages
+     * @param assignedYear               the comic's publishing year
+     * @param assignedAuthor             the comic's author
+     * @param assignedEditorial          the comic's editorial
+     * @param assignedCategories         the comic's categories
      */
-    public Comic(String id, double price, String name, String description, String photo, double averagePunctuation,
-                 LocalDate addedDate, int stock, int numPages, Year year, String author, String editorial,
-                 Category... categories) {
-        super(id, price, name, description, photo, averagePunctuation, addedDate, ProductType.COMIC, stock, categories);
-        this.numPages = numPages;
-        this.year = year;
-        this.author = author;
-        this.editorial = editorial;
+    public Comic(String assignedId, double assignedPrice, String assignedName, String assignedDescription,
+                 String assignedPhoto, double assignedAveragePunctuation, LocalDate assignedAddedDate,
+                 int assignedStock, int assignedNumPages, Year assignedYear, String assignedAuthor,
+                 String assignedEditorial, Category... assignedCategories) {
+        super(assignedId, assignedPrice, assignedName, assignedDescription, assignedPhoto, assignedAveragePunctuation,
+                assignedAddedDate, ProductType.COMIC, assignedStock, assignedCategories);
+        this.numPages = assignedNumPages;
+        this.year = assignedYear;
+        this.author = assignedAuthor;
+        this.editorial = assignedEditorial;
     }
 
     /**
      * The comic's constructor
-     * @param price       the comic's price
-     * @param name        the comic's name
-     * @param description the comic's description
-     * @param photo       the comic's photo's path
-     * @param stock       the comic's stock
-     * @param numPages    the comic's number of pages
-     * @param year        the comic's publishing year
-     * @param author      the comic's author
-     * @param editorial   the comic's editorial
-     * @param categories  the comic's categories
+     * @param assignedPrice       the comic's price
+     * @param assignedName        the comic's name
+     * @param assignedDescription the comic's description
+     * @param assignedPhoto       the comic's photo's path
+     * @param assignedStock       the comic's stock
+     * @param assignedNumPages    the comic's number of pages
+     * @param assignedYear        the comic's publishing year
+     * @param assignedAuthor      the comic's author
+     * @param assignedEditorial   the comic's editorial
+     * @param assignedCategories  the comic's categories
      */
-    public Comic(double price, String name, String description, String photo, int stock, int numPages, Year year,
-                 String author, String editorial, Category... categories) {
-        super(price, name, description, photo, ProductType.COMIC, stock, categories);
-        this.numPages = numPages;
-        this.year = year;
-        this.author = author;
-        this.editorial = editorial;
+    public Comic(double assignedPrice, String assignedName, String assignedDescription, String assignedPhoto,
+                 int assignedStock, int assignedNumPages, Year assignedYear, String assignedAuthor,
+                 String assignedEditorial, Category... assignedCategories) {
+        super(assignedPrice, assignedName, assignedDescription, assignedPhoto, ProductType.COMIC, assignedStock,
+                assignedCategories);
+        this.numPages = assignedNumPages;
+        this.year = assignedYear;
+        this.author = assignedAuthor;
+        this.editorial = assignedEditorial;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

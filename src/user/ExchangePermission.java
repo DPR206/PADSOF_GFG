@@ -1,10 +1,10 @@
 package user;
 
-import java.time.LocalDate;
-
 import exchange.Exchange;
 import product.ConservationStatus;
 import product.SecondHandProduct;
+
+import java.time.LocalDate;
 
 /**
  * It implements the permission that allows an employee to manage Exchanges
@@ -43,45 +43,45 @@ public class ExchangePermission {
     /**
      * It allows an employee to set a price (valuation) to a second hand product
      * @param secondHandProduct the desired product
-     * @param valuation         the product's price
+     * @param valuationPrice         the product's price
      * @param status 			the product's conservation status
      * @throws IllegalArgumentException valuation was negative
      * @throws NullPointerException     second hand product was null
      */
-    public void valuate(SecondHandProduct secondHandProduct, double valuationprice, ConservationStatus status)
+    public void valuate(SecondHandProduct secondHandProduct, double valuationPrice, ConservationStatus status)
             throws IllegalArgumentException, NullPointerException {
         if (secondHandProduct == null) {
             throw new NullPointerException("Second Hand Product is null");
         }
-        if (valuationprice < 0) {
+        if (valuationPrice < 0) {
             throw new NullPointerException("Value cannot be negative");
         }
 
-        secondHandProduct.setEstimatedPrice(valuationprice);
+        secondHandProduct.setEstimatedPrice(valuationPrice);
         secondHandProduct.setStatus(status);
         secondHandProduct.setValuationDate(LocalDate.now());
         secondHandProduct.setAvailability(true);
     }
-    
+
     /**
      * It allows an employee to set a price (valuation) to a second hand product
      * @param secondHandProduct the desired product
-     * @param valuation         the product's price
+     * @param valuationPrice         the product's price
      * @param status 			the product's conservation status
-     * @param valuationDate 	the profuct's valuation date
+     * @param valuationDate 	the product's valuation date
      * @throws IllegalArgumentException valuation was negative
      * @throws NullPointerException     second hand product was null
      */
-    public void valuate(SecondHandProduct secondHandProduct, double valuationprice, ConservationStatus status, LocalDate valuationDate)
+    public void valuate(SecondHandProduct secondHandProduct, double valuationPrice, ConservationStatus status, LocalDate valuationDate)
             throws IllegalArgumentException, NullPointerException {
         if (secondHandProduct == null) {
             throw new NullPointerException("Second Hand Product is null");
         }
-        if (valuationprice < 0) {
+        if (valuationPrice < 0) {
             throw new NullPointerException("Value cannot be negative");
         }
 
-        secondHandProduct.setEstimatedPrice(valuationprice);
+        secondHandProduct.setEstimatedPrice(valuationPrice);
         secondHandProduct.setStatus(status);
         secondHandProduct.setValuationDate(valuationDate);
         secondHandProduct.setAvailability(true);

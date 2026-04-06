@@ -20,7 +20,7 @@ public class SearchStoreProducts{
 
 
     /**
-	 * Creates the class and initiates the filters as null in the beggining until the user changes them
+	 * Creates the class and initiates the filters as null in the beginning until the user changes them
 	 *
 	 * @param asc, determines if the searches are ascendant or descendant
      * @param type, determines the type of search we are doing
@@ -29,7 +29,7 @@ public class SearchStoreProducts{
         this.ascendant = asc;
         this.priceF = null;
         this.punctuationF = null;
-        this.s = this.s.getInstance();
+        this.s = Store.getInstance();
     }
 
     /**
@@ -67,14 +67,14 @@ public class SearchStoreProducts{
 
         pCs.retainAll(filtered);
 
-        if(this.ascendant == true){
+        if(this.ascendant){
             if(this.priceF != null && this.punctuationF != null){
                 pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation).thenComparing(StoreProduct::getPrice));
             }
-            else if(this.priceF != null && this.punctuationF == null){
+            else if(this.priceF != null /*&& this.punctuationF == null*/){
                 pCs.sort(Comparator.comparing(StoreProduct::getPrice));
             }
-            else if(this.priceF == null && this.punctuationF != null){
+            else if(/*this.priceF == null &&*/ this.punctuationF != null){
                 pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation));
             }
         }
@@ -82,10 +82,10 @@ public class SearchStoreProducts{
              if(this.priceF != null && this.punctuationF != null){
                 pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation).reversed().thenComparing(Comparator.comparingDouble(StoreProduct::getPrice).reversed()));
             }
-            else if(this.priceF != null && this.punctuationF == null){
+            else if(this.priceF != null /*&& this.punctuationF == null*/){
                 pCs.sort(Comparator.comparingDouble(StoreProduct::getPrice).reversed());
             }
-            else if(this.priceF == null && this.punctuationF != null){
+            else if(/*this.priceF == null &&*/ this.punctuationF != null){
                 pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation).reversed());
             }
         }
@@ -97,20 +97,22 @@ public class SearchStoreProducts{
 	 *
 	 */
     public List<StoreProduct> searchStoreProducts(){
-        List<StoreProduct> priced = null;
-        List<StoreProduct> punctuation = null;
+        List<StoreProduct> priced;
+        List<StoreProduct> punctuation;
 
         if(this.punctuationF != null && this.priceF != null){
             priced = this.filterByPrice();
             punctuation = this.filterByPrice();
-            priced.retainAll(punctuation);
-            return priced;
+            if (priced != null && punctuation != null) { // Me saltaba warning po rno hacer null check
+                priced.retainAll(punctuation);
+                return priced;
+            }
         }
         else if(this.punctuationF == null && this.priceF != null){
             punctuation = this.filterByPrice();
             return punctuation;
         }
-        else if(this.priceF == null && this.punctuationF != null){
+        else if(/*this.priceF == null &&*/ this.punctuationF != null){
             priced = this.filterByPrice();
             return priced;
         }

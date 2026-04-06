@@ -1,14 +1,12 @@
 package notification;
 
+import order.Order;
+
 import java.time.LocalDateTime;
-
-
-
-import order.*;
 
 /**
  * It implements the order notification
- * 
+ *
  * @author Duna P.R.
  * @version 1.2
  * @see Notification
@@ -17,10 +15,10 @@ import order.*;
 public class NotificationOrder extends Notification implements NotificationInterface<Order>{
 
 	static int pickupCode = 0;
-	
+
 	/**
 	 * Creates a new order notification with default timeMade (this moment) and no content
-	 * 
+	 *
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
@@ -32,7 +30,7 @@ public class NotificationOrder extends Notification implements NotificationInter
 
 	/**
 	 * Creates a new order notification with default timeMade (this moment)
-	 * 
+	 *
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
 	 * @param timeReceived the time it was received
@@ -46,7 +44,7 @@ public class NotificationOrder extends Notification implements NotificationInter
 
 	/**
 	 * Creates a new order notification
-	 * 
+	 *
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
 	 * @param timeMade the time it was made
@@ -63,7 +61,7 @@ public class NotificationOrder extends Notification implements NotificationInter
 	@Override
 	/**
 	 * Creates a complete notification
-	 * 
+	 *
 	 * @param o the new order
 	 * @return a string with the notification
 	 */
@@ -72,7 +70,7 @@ public class NotificationOrder extends Notification implements NotificationInter
 		switch(o.getState()) {
 		 case PAID: text += "Your order with price " + o.getPrice() + "has been paid successfully. "
 		 								+ "Once your order is ready you will a receive a notification.\n"; break;
-		 case READY_TO_PICKUP: text += "Your order is ready to pickup. Your pikcup code is: " + NotificationOrder.pickupCode;
+		 case READY_TO_PICKUP: text += "Your order is ready to pickup. Your pickup code is: " + NotificationOrder.pickupCode;
 		 									pickupCode++;
 		 									break;
 		 default: text = "Not valid\n";
@@ -83,7 +81,7 @@ public class NotificationOrder extends Notification implements NotificationInter
 	@Override
 	/**
 	 * Creates a snippet of the notification (title and time log)
-	 * 
+	 *
 	 * @param o the new order
 	 * @return a string with the snippet of the notification
 	 */
@@ -97,7 +95,7 @@ public class NotificationOrder extends Notification implements NotificationInter
 		this.setTitle(title);
 		return this.getTitle() + this.timeLog();
 	}
-	
-	
+
+
 
 }

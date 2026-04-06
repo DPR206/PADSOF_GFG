@@ -22,10 +22,10 @@ public enum GameStyle {
 
     /**
      * A game style's constructor
-     * @param formatedName the name that defines said enumeration
+     * @param assignedFormatedName the name that defines said enumeration
      */
-    GameStyle(String formatedName) {
-        this.formatedName = formatedName;
+    GameStyle(String assignedFormatedName) {
+        this.formatedName = assignedFormatedName;
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

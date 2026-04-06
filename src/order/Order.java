@@ -6,7 +6,6 @@ import product.StoreProduct;
 import user.RegisteredClient;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,8 +21,8 @@ public class Order {
     private LocalDateTime pickedUpDate;
 	private RegisteredClient owner;
 
-    private List<StoreProduct> sp = new ArrayList<>();
-    private List<Pack> p = new ArrayList<>();
+    private List<StoreProduct> sp;
+    private List<Pack> p;
     private OrderState state;
 
     /**

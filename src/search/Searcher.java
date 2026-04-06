@@ -6,7 +6,6 @@ import product.Category;
 import product.Pack;
 import product.SecondHandProduct;
 import product.StoreProduct;
-import productT.*;
 import user.Employee;
 
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
  * @see SearchStoreProducts
   */
 public class Searcher{
-    private SearchType types[];
+    private SearchType[] types;
     private SearchStoreProducts searchStore;
 
     private SearchPack packSearcher = new SearchPack();
@@ -141,7 +140,7 @@ public class Searcher{
     }
 
     /**
-	 * Linear search implemented to search for the searchtype on the array of searchTypes
+	 * Linear search implemented to search for the search type on the array of searchTypes
      *
 	 *@param t, the searchType we want to check if it's there or not
 	 */

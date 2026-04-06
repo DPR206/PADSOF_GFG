@@ -60,8 +60,15 @@ public abstract class User {
      */
     public void changePassword(String newPwd) {
     	Utility utility = new Utility();
-    	if(utility.securePassword(newPwd));
+    	if(utility.securePassword(newPwd))
     		this.pwd = newPwd;
+    	else
+    		System.out.println("Make sure your password has: \n "
+    				+ "-At least 8 characters\n"
+    				+ "-Upper case letters\n"
+    				+ "-Lower case letters\n"
+    				+ "-Numbers\n"
+    				+ "-Special characters\n");
     }
 
     /**

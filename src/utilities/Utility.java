@@ -1,7 +1,7 @@
 /**
  * It implements elements such a sign in method and login method which don't belong to either classes
- * @author Sofía C.L.
- * @version 1.0
+ * @author Sofía C.L. and Duna P.R.
+ * @version 1.1.
  */
 
 package utilities;
@@ -71,6 +71,37 @@ public class Utility {
     }
     
     public boolean securePassword(String psswd) {
+    	int upper = 0;
+    	int lower = 0;
+    	int numbers = 0;
+    	@SuppressWarnings("unused")
+		int spaces = 0;
+    	int specialCharacters = 0;
     	
+    	for(char c : psswd.toCharArray()) {
+    		if(Character.isUpperCase(c))
+    			upper++;
+    		else if(Character.isLowerCase(c))
+    			lower++;
+    		else if(Character.isDigit(c))
+    			numbers++;
+    		else if(Character.isWhitespace(c))
+    			spaces++;
+    		else
+    			specialCharacters++;
+    	}
+    	
+    	if(psswd.length()<8)
+    		return false;
+    	else if(upper<=0)
+    		return false;
+    	else if(lower<=0)
+    		return false;
+    	else if(numbers<=0)
+    		return false;
+    	else if(specialCharacters<=0)
+    		return false;
+    	else
+    		return true;
     }
 }

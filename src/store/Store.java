@@ -1,21 +1,13 @@
 package store;
 
-import exchange.Exchange;
-import exchange.Offer;
+import exchange.*;
 import order.Order;
-import product.Category;
-import product.Pack;
-import product.Product;
-import product.Review;
-import product.SecondHandProduct;
-import product.StoreProduct;
-import productT.*;
+import product.*;
 import user.*;
 import utilities.Utility;
+import discount.Discount;
 
 import java.util.*;
-
-import discount.Discount;
 
 // DUE: Falta el @see
 

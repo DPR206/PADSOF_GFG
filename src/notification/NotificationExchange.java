@@ -94,6 +94,23 @@ public class NotificationExchange extends Notification implements NotificationIn
 		this.address = null;
 		this.timeAndDate = null;
 	}
+	
+	/**
+	 * Creates a new exchange notification without title and text
+	 * 
+	 * @param timeReceived the time it was received
+	 * @param read whether the user has read it or not
+	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
+	 * @param type the type of notification
+	 * @param address the address of the place the exchange will take place at
+	 * @param timeAndDate the time and date of the exchange
+	 */
+	public NotificationExchange(LocalDateTime timeReceived, boolean read, boolean visible, NotificationType type,
+			String address, LocalDateTime timeAndDate) {
+		super(timeReceived, read, visible, type);
+		this.address = address;
+		this.timeAndDate = timeAndDate;
+	}
 
 	@Override
 	/**

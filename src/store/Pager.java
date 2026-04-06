@@ -1,7 +1,6 @@
 package store;
 
 import discount.Discount;
-import order.Cart;
 import product.*;
 import user.Employee;
 import user.RegisteredClient;
@@ -43,16 +42,6 @@ public class Pager {
     public static Pager getInstance() {
         return PARAM;
     }
-
-    /* PRINTS:
-        [x] Review
-        [x] Store Product
-        [x] Registered Client
-        [x] Employee
-        [x] Pack
-        [x] Discount
-        [x] Category
-     */
 
     /**
      * It prints a sub-list of another according to the desired page
@@ -149,16 +138,6 @@ public class Pager {
         }
     }
 
-    /* SELECTS:
-        [x] Category
-        [x] Discount
-        [x] Employee
-        [x] Pack
-        [x] Registered Client
-        [x] Review
-        [x] Store Product
-     */
-
     /**
      * It gets the category listed as n.º categoryNum in a certain page
      * @param pageNum     the desired page's number
@@ -237,16 +216,6 @@ public class Pager {
         List<StoreProduct> productListPage = pageStoreProductList(storeProductList, pageNum);
         return productListPage.get(productNum - 1); // Las listas se imprimen empezando por 1
     }
-
-    /* PAGERS:
-        [x] Category
-        [x] Discount
-        [x] Employee
-        [x] Pack
-        [x] Registered Client
-        [x] Review
-        [x] Store Product
-     */
 
     /**
      * It gets a sub-list of categories according to the desired page
@@ -340,16 +309,6 @@ public class Pager {
         return maxPageNum(categoryList.size());
     }
 
-    /* MAX GETTERS:
-        [x] Category
-        [x] Discount
-        [x] Employee
-        [x] Pack
-        [x] Registered Client
-        [x] Review
-        [x] Store Product
-     */
-
     /**
      * It gets the maximum number of pages that can be obtained from the store's discounts list
      * @return the maximum number of pages that can be obtained from the store's discounts list
@@ -413,15 +372,6 @@ public class Pager {
      */
     public int getStoreProductMaxPageNum(List<StoreProduct> storeProductList) {
         return maxPageNum(storeProductList.size());
-    }
-
-    /**
-     * It gets the maximum number of pages that can be obtained from a cart
-     * @param cart the desired cart
-     * @return the maximum number of pages that can be obtained from a cart
-     */
-    public int getStoreProductMaxPageNum(Cart cart) {
-        return maxPageNum(cart.getProducts().size() + cart.getPacks().size());
     }
 
     /**

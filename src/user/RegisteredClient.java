@@ -26,7 +26,6 @@ public class RegisteredClient extends User {
     private String dni;
     private Cart c;
     private ExchangeHistory exchangeHistory;
-    private OrderHistory op;
     private Wallet wallet;
     private OrderHistory orderHistory;
     private OfferHistory offerHistory;
@@ -38,26 +37,27 @@ public class RegisteredClient extends User {
     // recommender
 
     /**
-	 * @param type
-	 * @param pwd
-	 * @param userName
-	 * @param actualID
-	 * @param asc
-	 * @param registerDate
-	 * @param dni
-	 * @param c
-	 * @param exchangeHistory
-	 * @param op
-	 * @param wallet
-	 * @param orderHistory
-	 * @param offerHistory
-	 * @param notificationHistory
-	 * @param searcher
-	 * @param numOrders
-	 * @param numExchanges
+     * Creates a new registered client
+     * 
+	 * @param type the type of user
+	 * @param pwd the password of the client
+	 * @param userName the user's nickname
+	 * @param actualID the client's id
+	 * @param asc if the search has ascending order
+	 * @param registerDate the date of registration
+	 * @param dni the user's dni
+	 * @param c the user's cart
+	 * @param exchangeHistory the user's exchange history 
+	 * @param wallet the user's wallet
+	 * @param orderHistory the user's order history
+	 * @param offerHistory the user's offer history
+	 * @param notificationHistory the user's notification history
+	 * @param searcher the user's searcher
+	 * @param numOrders the user's number of orders
+	 * @param numExchanges the user's number of exchanges
 	 */
 	public RegisteredClient(UserType type, String pwd, String userName, String actualID, boolean asc,
-			LocalDate registerDate, String dni, Cart c, ExchangeHistory exchangeHistory, OrderHistory op, Wallet wallet,
+			LocalDate registerDate, String dni, Cart c, ExchangeHistory exchangeHistory, Wallet wallet,
 			OrderHistory orderHistory, OfferHistory offerHistory, NotificationHistory notificationHistory,
 			Searcher searcher, int numOrders, int numExchanges) {
 		super(type, pwd, userName, actualID, asc);
@@ -65,7 +65,6 @@ public class RegisteredClient extends User {
 		this.dni = dni;
 		this.c = c;
 		this.exchangeHistory = exchangeHistory;
-		this.op = op;
 		this.wallet = wallet;
 		this.orderHistory = orderHistory;
 		this.offerHistory = offerHistory;
@@ -91,6 +90,7 @@ public class RegisteredClient extends User {
         this.searcher = new Searcher(new SearchStoreProducts(true));
         this.numExchanges = 0;
         this.numOrders = 0;
+        this.setHistories();
 
         this.getSearcher().setTypes(SearchType.S_SECOND_HAND, SearchType.S_STORE);
     }
@@ -107,6 +107,9 @@ public class RegisteredClient extends User {
         
     }
     
+    /**
+     * Creates the client's new histories
+     */
     public void setHistories() {
     	 this.exchangeHistory = new ExchangeHistory(this);
          this.orderHistory = new OrderHistory(this);
@@ -169,7 +172,7 @@ public class RegisteredClient extends User {
      * @return the order history
      */
     public OrderHistory getOrderHistory(){
-        return this.op;
+        return this.orderHistory;
     }
 
 	/**
@@ -345,9 +348,9 @@ public class RegisteredClient extends User {
     }
 
    /**
-    *
-    * @param sp
-    * @return
+    * Requests a valuation for a second-hand product
+    * @param sp the second-hand product to evaluate
+    * @return the employee notification for the valuation
     */
     public Notification requestValuation(SecondHandProduct sp) {
 
@@ -367,15 +370,34 @@ public class RegisteredClient extends User {
     	return notification;
     }
 
+    /**
+     * Adds a review to a store product
+     * 
+     * @param sp the store product bought
+     * @param review the review of the product
+     */
     public void reviewProduct(StoreProduct sp, Review review) {
     	sp.addReview(this, review);
     }
 
+    /**
+     * Creates a review for a store product
+     * @param sp the store product bought
+     * @param scoring the scoring from 0 to 5
+     * @param comment the comment on the product
+     */
     public void reviewProduct(StoreProduct sp, int scoring, String comment) {
-    	Review r = new Review(scoring, comment, this);
-    	sp.addReview(this, r);
+    	if(scoring >= 0  && scoring <= 5) {
+    		Review r = new Review(scoring, comment, this);
+    		sp.addReview(this, r);
+    	}
     }
 
+    /**
+     * Makes an offer for a second-hand product
+     * @param theirProduct the product the client is interested in
+     * @param myProducts the products the clients offers
+     */
     public void makeAnOfferOneProduct(SecondHandProduct theirProduct, SecondHandProduct...myProducts) {
 		ArrayList<SecondHandProduct> originProducts = new ArrayList<>(List.of(myProducts));
 		ArrayList<SecondHandProduct> destinationProducts = new ArrayList<>(List.of(theirProduct));
@@ -384,12 +406,22 @@ public class RegisteredClient extends User {
     	theirProduct.getOwner().getOfferHistory().addOffer(offer);
     }
     
+    /**
+     * Makes an offer for several second-hand products
+     * @param theirProducts the products the client is interested in
+     * @param myProducts the products the client offers
+     */
     public void makeAnOffer(ArrayList<SecondHandProduct> theirProducts, ArrayList<SecondHandProduct> myProducts) {
     	Offer offer = new Offer(this, theirProducts.getFirst().getOwner(), myProducts, theirProducts);
     	this.getOfferHistory().addOffer(offer);
     	theirProducts.getFirst().getOwner().getOfferHistory().addOffer(offer);
     }
 
+    /**
+     * The notifications of the client
+     * 
+     * @return a list with all the notifications that haven't been erased order by most recent
+     */
     public List<Notification> browseNotifications(){
     	List<Notification> notifications = new ArrayList<>();
     	for(Notification n : this.notificationHistory.getNotificationsSorted())
@@ -398,9 +430,18 @@ public class RegisteredClient extends User {
     	return notifications;
     }
 
+    /**
+     * A string with the client's information
+     * 
+     * @return a string with the client's information
+     */
     @Override
-    public String toString() { // DUE
-        return super.toString();
-    }
+	public String toString() {
+		return "RegisteredClient [registerDate=" + registerDate + ", dni=" + dni + ", c=" + c + ", exchangeHistory="
+				+ exchangeHistory + ", wallet=" + wallet + ", orderHistory=" + orderHistory + ", offerHistory="
+				+ offerHistory + ", notificationHistory=" + notificationHistory + ", searcher=" + searcher
+				+ ", numOrders=" + numOrders + ", numExchanges=" + numExchanges + ", toString()=" + super.toString()
+				+ "]";
+	}
 
 }

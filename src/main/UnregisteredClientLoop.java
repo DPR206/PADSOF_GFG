@@ -9,6 +9,9 @@ import user.UnregisteredClient;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Unregistered client loop.
+ */
 public class UnregisteredClientLoop extends Loop {
     /** This loop's instance */
     private static UnregisteredClientLoop INSTANCE;
@@ -84,21 +87,17 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void browseStore() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n ---- browseStore ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
+        System.out.println("Page: " + currentScreenPageNum);
 
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
-        Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
+        Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] See a product");
         System.out.println("\t[2] See my cart");
         System.out.println("\t[3] Sign up");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[4] < Previous page");
-        } else {
-            System.out.println("\t[4] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
+        previousPagePrinter(4);
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
             System.out.println("\t[5] Next page >");
         } else {
             System.out.println("\t[5] Reload page");
@@ -125,13 +124,11 @@ public class UnregisteredClientLoop extends Loop {
                 signer();
                 break;
             case 4:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                previousPage();
                 browseStore();
                 break;
             case 5:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                nextPageStoreProduct(products);
                 browseStore();
                 break;
             case 6:
@@ -186,14 +183,14 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     /**
-     * It prints a certain product's info
+     * It allows an unregistered client to see a certain product's info
      * @throws IOException the io exception
      */
     private void seeStoreProduct(int productNum) throws IOException {
         System.out.print("\n ---- seeStoreProduct 2 ---- \n"); // Es para debug, borrar
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct();
         StoreProduct product =
-                Pager.getInstance().selectStoreProductFromPage(products, this.currentScreenPageNum, productNum);
+                Pager.getInstance().selectStoreProductFromPage(products, currentScreenPageNum, productNum);
         product.bigPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
@@ -245,26 +242,19 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     /**
-     * See reviews.
+     * It allows an unregistered client to see a certain product's reviews
      * @param product the product
-     */
-    /*
-     * It prints a certain product's reviews
      */
     private void seeReviews(StoreProduct product, int productNum) throws IOException {
         System.out.print("\n ---- seeReviews ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
+        System.out.println("Page: " + currentScreenPageNum);
 
-        product.printReviews(this.currentScreenPageNum);
+        product.printReviews(currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Sign up");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[2] < Previous page");
-        } else {
-            System.out.println("\t[2] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product)) {
+        previousPagePrinter(2);
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product)) {
             System.out.println("\t[3] Next page >");
         } else {
             System.out.println("\t[3] Reload page");
@@ -280,14 +270,12 @@ public class UnregisteredClientLoop extends Loop {
                 signer();
                 break;
             case 2:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
-                seeReviews(product, this.currentScreenPageNum);
+                previousPage();
+                seeReviews(product, currentScreenPageNum);
                 break;
             case 3:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product) ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
-                seeReviews(product, this.currentScreenPageNum);
+                nextPageReview(product);
+                seeReviews(product, currentScreenPageNum);
                 break;
             case 4:
                 pageNumGoForward();
@@ -309,12 +297,12 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     /**
-     * It prints the current user's cart's products
+     * It allows an unregistered client to see their cart's products
      * @throws IOException the io exception
      */
     private void seeCart() throws IOException {
         System.out.print("\n ---- seeCart ---- \n"); // Es para debug, borrar
-        ((UnregisteredClient) this.currentUser).getCart().getPrintInfo();
+        ((UnregisteredClient) currentUser).getCart().getPrintInfo();
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Place order");
         System.out.println("\t[2] Go back"); // DUE: Cancelar productos por n.º de impresión (ver getPrintInfo)

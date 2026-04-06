@@ -8,7 +8,13 @@ import java.io.IOException;
 import java.time.*;
 import java.util.*;
 
+/**
+ * The type Manager loop.
+ */
 public class ManagerLoop extends Loop {
+    // DUE: Muy importante!! -> No te olvides de hacer que se puedan escoger las cosas por nº de lista o ID
+    // DUE: Manager puede añadir productos subiendo archivos, creo que eso no estaba acabado
+
     /** This loop's instance */
     private static ManagerLoop INSTANCE;
 
@@ -81,10 +87,7 @@ public class ManagerLoop extends Loop {
             case 8:
                 seeProfile();
                 break;
-            case 9:
-                main();
-                break;
-            case 10:
+            case 9, 10:
                 main();
                 break;
             case 11:
@@ -97,30 +100,28 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to manage the store's packs
+     */
     private void managePacks() {
         System.out.print("\n ---- managePacks ---- \n"); // Es para debug, borrar
         // DUE
     }
 
+    /**
+     * It allows the manager to manage the store's store products
+     */
     private void manageStoreProducts() throws IOException {
         System.out.print("\n ---- manageStoreProducts ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
+        System.out.println("Page: " + currentScreenPageNum);
 
         List<StoreProduct> products = ((Manager) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
-        Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
+        Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Manage a product");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[2] < Previous page");
-        } else {
-            System.out.println("\t[2] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
-            System.out.println("\t[3] Next page >");
-        } else {
-            System.out.println("\t[3] Reload page");
-        }
+        previousPagePrinter(2);
+        nextPagePrinterStoreProduct(3, products);
         System.out.println("\t[4] <- Go back");
         System.out.println("\t[5] <<- Go to main page");
         System.out.println("\t[6] x Exit app");
@@ -133,7 +134,7 @@ public class ManagerLoop extends Loop {
                 int productNum = scanner.nextInt();
 
                 StoreProduct product =
-                        Pager.getInstance().selectStoreProductFromPage(products, this.currentScreenPageNum, productNum);
+                        Pager.getInstance().selectStoreProductFromPage(products, currentScreenPageNum, productNum);
                 ProductType type = product.getType();
                 pageNumGoForward();
 
@@ -154,13 +155,11 @@ public class ManagerLoop extends Loop {
 
                 break;
             case 2:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                previousPage();
                 manageStoreProducts();
                 break;
             case 3:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                nextPageStoreProduct(products);
                 manageStoreProducts();
                 break;
             case 4:
@@ -182,6 +181,11 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to tweak a comic's information
+     * @param comic the desired comic
+     * @throws IOException the io exception
+     */
     private void manageComic(Comic comic) throws IOException {
         System.out.print("\n ---- manageComic ---- \n"); // Es para debug, borrar
         comic.printAllInfo();
@@ -268,6 +272,11 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to tweak a game's information
+     * @param game the desired game
+     * @throws IOException the io exception
+     */
     private void manageGame(Game game) throws IOException {
         System.out.print("\n ---- manageGame ---- \n"); // Es para debug, borrar
         game.printAllInfo();
@@ -350,6 +359,11 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to tweak a figurine's information
+     * @param figurine the desired figurine
+     * @throws IOException the io exception
+     */
     private void manageFigurine(Figurine figurine) throws IOException {
         System.out.print("\n ---- manageFigurine ---- \n"); // Es para debug, borrar
         figurine.printAllInfo();
@@ -430,7 +444,11 @@ public class ManagerLoop extends Loop {
         }
     }
 
-    private void categoryChanger(StoreProduct storeProduct) throws IOException {
+    /**
+     * It allows a manager to tweak a store product's categories
+     * @param storeProduct the desired store product
+     */
+    private void categoryChanger(StoreProduct storeProduct) {
         String categoryName, newCategoryName;
         Category category, newCategory;
         System.out.print("\n ---- categoryChanger ---- \n"); // Es para debug, borrar
@@ -490,16 +508,26 @@ public class ManagerLoop extends Loop {
 
     }
 
+    /**
+     * It allows the manager to add a store product to the store
+     */
     private void addStoreProduct() {
         System.out.print("\n ---- addStoreProduct ---- \n"); // Es para debug, borrar
         // DUE
     }
 
+    /**
+     * It allows the manager to manage the store's employees
+     */
     private void manageEmployees() {
         System.out.print("\n ---- manageEmployees ---- \n"); // Es para debug, borrar
         // DUE
     }
 
+    /**
+     * It allows the manager to generate several statistics
+     * @throws IOException the io exception
+     */
     private void generateStatistics() throws IOException {
         System.out.print("\n ---- generateStatistics ---- \n"); // Es para debug, borrar
         System.out.println("Which statistic do you wish to generate? (enter the nº)");
@@ -579,23 +607,19 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to see the store's store products by their sales
+     * @throws IOException the io exception
+     */
     public void productBySales() throws IOException {
         System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
+        System.out.println("Page: " + currentScreenPageNum);
         List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
-        Pager.getInstance().printStoreProductListPage(products, this.currentScreenPageNum);
+        Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[1] < Previous page");
-        } else {
-            System.out.println("\t[1] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
-            System.out.println("\t[2] Next page >");
-        } else {
-            System.out.println("\t[2] Reload page");
-        }
+        previousPagePrinter(2);
+        nextPagePrinterStoreProduct(3, products);
         System.out.println("\t[3] <- Go back");
         System.out.println("\t[4] <<- Go to main page");
         System.out.println("\t[5] x Exit app");
@@ -603,13 +627,11 @@ public class ManagerLoop extends Loop {
 
         switch (chosenOption) {
             case 1:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                previousPage();
                 productBySales();
                 break;
             case 2:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                nextPageStoreProduct(products);
                 productBySales();
                 break;
             case 3:
@@ -631,22 +653,18 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to see the store's registered clients by number of orders
+     * @throws IOException the io exception
+     */
     public void clientsByOrders() throws IOException {
         System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
-        Pager.getInstance().printRegisteredClientListPage(this.currentScreenPageNum);
+        System.out.println("Page: " + currentScreenPageNum);
+        Pager.getInstance().printRegisteredClientListPage(currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[1] < Previous page");
-        } else {
-            System.out.println("\t[1] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum()) {
-            System.out.println("\t[2] Next page >");
-        } else {
-            System.out.println("\t[2] Reload page");
-        }
+        previousPagePrinter(1);
+        nextPagePrinterRegisteredClient(2);
         System.out.println("\t[3] <- Go back");
         System.out.println("\t[4] <<- Go to main page");
         System.out.println("\t[5] x Exit app");
@@ -654,13 +672,11 @@ public class ManagerLoop extends Loop {
 
         switch (chosenOption) {
             case 1:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                previousPage();
                 clientsByOrders();
                 break;
             case 2:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum() ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                nextPageRegisteredClient();
                 clientsByOrders();
                 break;
             case 3:
@@ -682,18 +698,18 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to see the store's registered clients by number of exchanges
+     * @throws IOException the io exception
+     */
     public void clientsByExchanges() throws IOException {
         System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + this.currentScreenPageNum);
-        Pager.getInstance().printRegisteredClientListPage(this.currentScreenPageNum);
+        System.out.println("Page: " + currentScreenPageNum);
+        Pager.getInstance().printRegisteredClientListPage(currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
-        if ((this.currentScreenPageNum - 1) > 0) {
-            System.out.println("\t[1] < Previous page");
-        } else {
-            System.out.println("\t[1] Reload page");
-        }
-        if ((this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum()) {
+        previousPagePrinter(1);
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum()) {
             System.out.println("\t[2] Next page >");
         } else {
             System.out.println("\t[2] Reload page");
@@ -705,13 +721,11 @@ public class ManagerLoop extends Loop {
 
         switch (chosenOption) {
             case 1:
-                this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
+                previousPage();
                 clientsByExchanges();
                 break;
             case 2:
-                this.currentScreenPageNum =
-                        (this.currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum() ?
-                        this.currentScreenPageNum + 1 : this.currentScreenPageNum;
+                nextPageRegisteredClient();
                 clientsByExchanges();
                 break;
             case 3:
@@ -733,6 +747,9 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to see the store's revenue by month
+     */
     public void revenueByMonth() {
         System.out.print("\n ---- revenueByMonth ---- \n"); // Es para debug, borrar
         HashMap<Month, Double> revenueByMonth = Statistics.getINSTANCE().getRevenueByMonth();
@@ -741,26 +758,42 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to see the store's categories by revenue
+     */
     public void categoriesByRevenue() {
         System.out.print("\n ---- categoriesByRevenue ---- \n"); // Es para debug, borrar
         // DUE
     }
 
+    /**
+     * It allows the manager to see the store's store products by sales, with their percentage over the overall sales
+     */
     public void productBySalesWithPercentage() {
         System.out.print("\n ---- productBySalesWithPercentage ---- \n"); // Es para debug, borrar
         // DUE
     }
 
+    /**
+     * It allows the manager to see the store's store products by sales, with their percentage over the overall sales,
+     * on a certain month
+     */
     public void productBySalesWithPercentageCertainMonth() {
         System.out.print("\n ---- productBySalesWithPercentageCertainMonth ---- \n"); // Es para debug, borrar
         // DUE
     }
 
+    /**
+     * It allows the manager to manage the store's discounts
+     */
     private void manageDiscounts() {
         System.out.print("\n ---- manageDiscounts ---- \n"); // Es para debug, borrar
         // DUE
     }
 
+    /**
+     * It allows the manager to manage the store's parameters
+     */
     private void manageParameters() throws IOException {
         System.out.print("\n ---- manageParameters ---- \n"); // Es para debug, borrar
         Manager manager = (Manager) currentUser;
@@ -827,9 +860,12 @@ public class ManagerLoop extends Loop {
         }
     }
 
+    /**
+     * It allows the manager to see its profile and change their password
+     */
     private void seeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
         System.out.print("\n ---- seeProfile ---- \n"); // Es para debug, borrar
-        this.currentUser.getPrintInfo();
+        currentUser.getPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Change my password");
@@ -841,7 +877,7 @@ public class ManagerLoop extends Loop {
             case 1:
                 System.out.println("Enter new password:");
                 String newPassword = scanner.next();
-                this.currentUser.changePassword(newPassword);
+                currentUser.changePassword(newPassword);
                 break;
             case 7:
                 managerLoop();

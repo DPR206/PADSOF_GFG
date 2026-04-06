@@ -129,6 +129,8 @@ public class Exchange {
      */
     public void changeExchanged(boolean newExchanged) {
         this.setExchanged(newExchanged);
+        this.origin.increaseNumExchanges();
+        this.destination.increaseNumExchanges();
     }
 
     /**

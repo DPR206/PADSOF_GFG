@@ -9,5 +9,8 @@
  * Games can be of four different styles: cards, dice, gameboard and miniature. Furthermore, new products can be
  * contained in packs which are a group of products that sell for a lower price than the sum of its contents' prices.
  * Discounts can be applied to both packs and store products.
+ * 
+ * @author Ana O.R., Sofía C.L. and Duna P.R.
+ * @version 3.5.
  */
 package product;

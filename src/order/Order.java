@@ -66,6 +66,7 @@ public class Order {
     }
 
 	/**
+	 * Obtains the id of the order
 	 * @return the id
 	 */
 	public int getId() {
@@ -73,6 +74,7 @@ public class Order {
 	}
 
 	/**
+	 * Sets the id of the order
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
@@ -80,6 +82,7 @@ public class Order {
 	}
 
 	/**
+	 * Obtains the price of the order
 	 * @return the price
 	 */
 	public double getPrice() {
@@ -87,6 +90,7 @@ public class Order {
 	}
 
 	/**
+	 * Sets the price of the order
 	 * @param price the price to set
 	 */
 	public void setPrice(double price) {
@@ -94,45 +98,55 @@ public class Order {
 	}
 
 	/**
-	 * @return the sp
+	 * Obtains the store products in the order
+	 * @return the list of store products
 	 */
 	public List<StoreProduct> getSp() {
 		return sp;
 	}
 
 	/**
-	 * @param sp the sp to set
+	 * Sets the store products in the order
+	 * @param sp the list of store products to set
 	 */
 	public void setSp(List<StoreProduct> sp) {
 		this.sp = sp;
 	}
 
 	/**
-	 * @return the p
+	 * Obtains the packs in the order
+	 * @return the list of packs
 	 */
 	public List<Pack> getP() {
 		return p;
 	}
 
+	/**
+	 * Obtains the owner of the order
+	 * @return the registered client that owns the order
+	 */
 	public RegisteredClient getOwner(){
 		return this.owner;
 	}
 
 	/**
-	 * @param p the p to set
+	 * Sets the packs in the order
+	 * @param p the list of packs to set
 	 */
 	public void setP(List<Pack> p) {
 		this.p = p;
 	}
 
 	/**
-	 * @return the state
+	 * Obtains the state of the order
+	 * @return the state the order's state
 	 */
 	public OrderState getState() {
 		return state;
 	}
 
 	/**
+	 * Sets the order's state
 	 * @param state the state to set
 	 */
 	public void setState(OrderState state) {
@@ -140,6 +154,7 @@ public class Order {
 	}
 
 	/**
+	 * Obtains the date the order was picked up
 	 * @return the pickedUpDate
 	 */
 	public LocalDateTime getPickedUpDate() {

@@ -1,11 +1,13 @@
 package notification;
 
 /**
+ * /**
  * It implements the notification interface
  * 
  * @author Duna P.R.
  * @version 1.0
  * 
+ * @param <T> The object the notification is about
  */
 public interface NotificationInterface<T>{
 	

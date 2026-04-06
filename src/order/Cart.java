@@ -250,13 +250,20 @@ public class Cart {
     		LocalDate expiration = this.calculateExpiredDate(spi);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelProduct(spi);
-    			
+    			NotificationProductCart notificationP = new NotificationProductCart(LocalDateTime.now(), false, true, 
+    													NotificationType.PRODUCT_CART);
+    			notificationP.FullNotification(spi);
+    			this.owner.getNotificationHistory().addNotification(notificationP);
     		}
     	}
     	for(Pack p: packs) {
     		LocalDate expiration = this.calculateExpiredDatePacks(p);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelPack(p);
+    			NotificationPackCart notificationK = new NotificationPackCart(LocalDateTime.now(), false, true, 
+    													NotificationType.PACK_CART);
+    			notificationK.FullNotification(p);
+    			this.owner.getNotificationHistory().addNotification(notificationK);
     		}
     	}
     }

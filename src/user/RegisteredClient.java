@@ -372,7 +372,7 @@ public class RegisteredClient extends User {
     	sp.addReview(this, r);
     }
 
-    public void makeAnOffer(SecondHandProduct theirProduct, SecondHandProduct...myProducts) {
+    public void makeAnOfferOneProduct(SecondHandProduct theirProduct, SecondHandProduct...myProducts) {
 		ArrayList<SecondHandProduct> originProducts = new ArrayList<>(List.of(myProducts));
 		ArrayList<SecondHandProduct> destinationProducts = new ArrayList<>(List.of(theirProduct));
     	Offer offer = new Offer(this, theirProduct.getOwner(), originProducts, destinationProducts);

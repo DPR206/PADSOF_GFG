@@ -66,7 +66,7 @@ public class RegisteredClient extends User {
 		this.c = c;
 		this.exchangeHistory = exchangeHistory;
 		this.wallet = wallet;
-		this.orderHistory = orderHistory;
+		this.setOrderHistory(orderHistory);
 		this.offerHistory = offerHistory;
 		this.notificationHistory = notificationHistory;
 		this.searcher = searcher;
@@ -112,7 +112,7 @@ public class RegisteredClient extends User {
      */
     public void setHistories() {
     	 this.exchangeHistory = new ExchangeHistory(this);
-         this.orderHistory = new OrderHistory(this);
+         this.setOrderHistory(new OrderHistory(this));
          this.offerHistory = new OfferHistory(this);
          this.notificationHistory = new NotificationHistory(this);
     }
@@ -438,7 +438,7 @@ public class RegisteredClient extends User {
     @Override
 	public String toString() {
 		return "RegisteredClient [registerDate=" + registerDate + ", dni=" + dni + ", c=" + c + ", exchangeHistory="
-				+ exchangeHistory + ", wallet=" + wallet + ", orderHistory=" + orderHistory + ", offerHistory="
+				+ exchangeHistory + ", wallet=" + wallet + ", orderHistory=" + getOrderHistory() + ", offerHistory="
 				+ offerHistory + ", notificationHistory=" + notificationHistory + ", searcher=" + searcher
 				+ ", numOrders=" + numOrders + ", numExchanges=" + numExchanges + ", toString()=" + super.toString()
 				+ "]";

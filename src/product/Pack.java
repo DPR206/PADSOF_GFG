@@ -101,6 +101,14 @@ public class Pack {
 	}
 
 	/**
+	 * It gets the pack's info
+	 * @return the pack's info
+	 */
+	public String getPrintInfo() {
+		return "DUE"; // DUE
+	}
+
+	/**
 	 * It allows an employee to add discounts to packs (Discounts is in charge of making sure they don't overlap)
 	 * @param newDiscount the new discount to be applied
 	 * @throws NullPointerException discount was null
@@ -123,11 +131,10 @@ public class Pack {
 	}
 
 	/**
-	 * It returns the pack's basic info
-     * @return the pack's basic info
+	 * It prints the pack's info when seen individually
 	 */
-	public String getPrintInfo(){
-		return "DUE";// DUE
+	public void bigPrintInfo(){
+		// DUE
 	}
 
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

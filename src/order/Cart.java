@@ -403,4 +403,12 @@ public class Cart {
         Pager.getInstance().printPackListPage(this.getPacks(), pageNum);
     }
 
+    /**
+     * It gets the maximum number of pages that can be obtained from the cart's pack list
+     * @return the maximum number of pages that can be obtained from the cart's pack list
+     */
+    public int getPackMaxPageNum() {
+        return Pager.getInstance().getPackMaxPageNum(this.getPacks());
+    }
+
 }

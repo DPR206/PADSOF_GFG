@@ -1,5 +1,6 @@
 package main;
 
+import order.Cart;
 import product.StoreProduct;
 import store.Pager;
 import store.Store;
@@ -19,8 +20,6 @@ public abstract class Loop {
     protected static int previousScreenPageNum = 0;
     /** The apps current user */
     protected static User currentUser;
-    /** The app's scanner tool */
-    protected final Scanner scanner = new Scanner(System.in);
     /** Access to various loops */
     private final MainLoop mainLoop = MainLoop.getInstance();
     private final UnregisteredClientLoop unregisteredClientLoop = UnregisteredClientLoop.getInstance();
@@ -61,6 +60,7 @@ public abstract class Loop {
      * @throws IOException the io exception
      */
     protected void logger() throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- logger ---- \n"); // Es para debug, borrar
         System.out.print("Enter your username: ");
         String userName = scanner.next();
@@ -202,7 +202,7 @@ public abstract class Loop {
      * It allows for a user to switch to the next page when viewing the store's list of registered clients
      */
     protected void nextPageRegisteredClient() {
-        currentScreenPageNum = (currentScreenPageNum + 1) < Store.getInstance().getRegisteredClientMaxPageNum() ? // DUE
+        currentScreenPageNum = (currentScreenPageNum + 1) < Store.getInstance().getRegisteredClientMaxPageNum() ?
                                currentScreenPageNum + 1 : currentScreenPageNum;
     }
 
@@ -216,8 +216,9 @@ public abstract class Loop {
     /**
      * It allows for a user to switch to the next page when viewing the store's list of packs
      */
-    protected void nextPageCartPack() {
-        // DUE
+    protected void nextPageCartPack(Cart cart) {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < cart.getPackMaxPageNum() ? currentScreenPageNum + 1 : currentScreenPageNum;
     }
 
     /**

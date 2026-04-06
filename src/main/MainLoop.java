@@ -4,6 +4,7 @@ import user.UnregisteredClient;
 
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.Scanner;
 
 /**
  * The type Main app.
@@ -41,6 +42,7 @@ public class MainLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     protected void main() throws IOException, IllegalArgumentException, NullPointerException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- main ---- \n"); // Es para debug, borrar
 
         /*SaverLoader.getInstance()

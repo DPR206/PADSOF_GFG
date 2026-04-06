@@ -47,6 +47,7 @@ public class ManagerLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- managerLoop ---- \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Manage packs");
@@ -112,6 +113,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to manage the store's store products
      */
     private void manageStoreProducts() throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- manageStoreProducts ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + currentScreenPageNum);
 
@@ -187,6 +189,7 @@ public class ManagerLoop extends Loop {
      * @throws IOException the io exception
      */
     private void manageComic(Comic comic) throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- manageComic ---- \n"); // Es para debug, borrar
         comic.printAllInfo();
 
@@ -278,6 +281,7 @@ public class ManagerLoop extends Loop {
      * @throws IOException the io exception
      */
     private void manageGame(Game game) throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- manageGame ---- \n"); // Es para debug, borrar
         game.printAllInfo();
 
@@ -365,6 +369,7 @@ public class ManagerLoop extends Loop {
      * @throws IOException the io exception
      */
     private void manageFigurine(Figurine figurine) throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- manageFigurine ---- \n"); // Es para debug, borrar
         figurine.printAllInfo();
 
@@ -449,6 +454,7 @@ public class ManagerLoop extends Loop {
      * @param storeProduct the desired store product
      */
     private void categoryChanger(StoreProduct storeProduct) {
+        Scanner scanner = new Scanner(System.in);
         String categoryName, newCategoryName;
         Category category, newCategory;
         System.out.print("\n ---- categoryChanger ---- \n"); // Es para debug, borrar
@@ -529,6 +535,7 @@ public class ManagerLoop extends Loop {
      * @throws IOException the io exception
      */
     private void generateStatistics() throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- generateStatistics ---- \n"); // Es para debug, borrar
         System.out.println("Which statistic do you wish to generate? (enter the nº)");
         System.out.println("\t[1] List of store products by sales");
@@ -612,6 +619,7 @@ public class ManagerLoop extends Loop {
      * @throws IOException the io exception
      */
     public void productBySales() throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + currentScreenPageNum);
         List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
@@ -658,6 +666,7 @@ public class ManagerLoop extends Loop {
      * @throws IOException the io exception
      */
     public void clientsByOrders() throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + currentScreenPageNum);
         Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
@@ -703,6 +712,7 @@ public class ManagerLoop extends Loop {
      * @throws IOException the io exception
      */
     public void clientsByExchanges() throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + currentScreenPageNum);
         Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
@@ -791,6 +801,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to manage the store's parameters
      */
     private void manageParameters() throws IOException {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- manageParameters ---- \n"); // Es para debug, borrar
         Manager manager = (Manager) currentUser;
         System.out.println("What do you wish to change? (enter the nº)");
@@ -860,6 +871,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see its profile and change their password
      */
     private void seeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
+        Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- seeProfile ---- \n"); // Es para debug, borrar
         currentUser.getPrintInfo();
 

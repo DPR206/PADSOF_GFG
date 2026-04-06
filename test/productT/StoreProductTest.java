@@ -1,19 +1,20 @@
 package productT;
 
+import product.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
-
+import java.time.Month;
+import java.time.Year;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import product.Category;
-import product.Comic;
-import product.*;
+
 
 public class StoreProductTest {
 
@@ -22,8 +23,8 @@ public class StoreProductTest {
 
 	@Before
 	public void setUp() {
-		category = new Category("Fiction");
-		comic = new Comic(12.99, "Test Comic", "Description", "photo.png", 4, 120, Year.of(2020), "Author", "Editorial", category);
+		this.category = new Category("Fiction");
+		this.comic = new Comic(12.99, "Test Comic", "Description", "photo.png", 4, 120, Year.of(2020), "Author", "Editorial", category);
 	}
 	
 
@@ -197,5 +198,4 @@ public class StoreProductTest {
 		assertNotNull(str);
 		assertTrue(str.contains("Test Comic")); // Should contain name
 	}
-
 }

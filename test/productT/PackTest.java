@@ -2,6 +2,7 @@ package productT;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -76,7 +77,7 @@ public class PackTest {
 	 public void constructorDefaultIdTest() {
 		 ArrayList<StoreProduct> products = new ArrayList<>();
 		 Pack pack = new Pack(10.0, products);
-		 assertEquals(10.0, pack.getPrice()1);
+		 assertEquals(10.0, pack.getPrice());
 		 assertEquals(products, pack.getProducts());
 		 assertNull(pack.getDateAddCart());
 	 }

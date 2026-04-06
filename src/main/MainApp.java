@@ -1,15 +1,15 @@
+package main;
 
 import java.io.IOException;
-
 
 /**
  * The type Main app.
  */
 public class MainApp {
-    private static MainLoop ml = new MainLoop();
+    private static final MainLoop ml = MainLoop.getInstance();
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-    public static void main() {
+    public static void main() throws IOException, IllegalArgumentException, NullPointerException {
         try {
             ml.main();
         } catch (IOException io) {

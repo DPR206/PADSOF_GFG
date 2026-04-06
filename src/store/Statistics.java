@@ -10,7 +10,6 @@ import user.RegisteredClient;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * It implements the statistics
@@ -32,7 +31,7 @@ public class Statistics {
 	 * Statistics' constructor
 	 */
 	private Statistics() {
-		this.revenueByMonth = new HashMap<Month, Double>();
+		this.revenueByMonth = new HashMap<>();
 		for (Month month : Month.values()) {
             this.revenueByMonth.put(month, 0.0);
         }
@@ -190,7 +189,7 @@ public class Statistics {
 	 */
 	public List<StoreProduct> getProductsBySales() {
 		return this.storeProducts.stream().sorted(Comparator.comparingInt(StoreProduct::getSales).reversed())
-                                 .collect(Collectors.toUnmodifiableList());
+                                 .toList();
 	}
 
 	/**
@@ -267,7 +266,7 @@ public class Statistics {
         return this.clients.stream() //Obtain data
                            .sorted(Comparator.comparingInt(
                                                      RegisteredClient::getNumOrders) //Compare based on the number of orders (type int)
-                                             .reversed()).collect(Collectors.toUnmodifiableList());
+                                             .reversed()).toList();
 	}
 
 	/**
@@ -289,7 +288,7 @@ public class Statistics {
 	 */
 	public List<RegisteredClient> getUsersMostExchanges(){
 		return this.clients.stream().sorted(Comparator.comparingInt(RegisteredClient::getNumExchanges).reversed())
-                           .collect(Collectors.toUnmodifiableList());
+                           .toList();
 	}
 
 	/**

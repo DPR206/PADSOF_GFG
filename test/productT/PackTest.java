@@ -1,16 +1,21 @@
 package productT;
 
+<<<<<<< HEAD
 
 import static org.junit.jupiter.api.Assertions.*;
 
+=======
+import discount.*;
+>>>>>>> branch 'main' of https://github.com/DPR206/PADSOF_GFG.git
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import product.*;
 
 import java.time.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import discount.*;
-import product.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PackTest {
 

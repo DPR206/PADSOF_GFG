@@ -47,12 +47,11 @@ public class UnregisteredClientLoop extends Loop {
     void unregisteredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.println("\n ---- unregisteredClientLoop ---- \n");
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Browse products");
-        System.out.println("\t[2] Log in");
-        System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] <- Go back");
-        System.out.println("\t[5] <<- Go to main page");
-        System.out.println("\t[6] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Browse products");
+        System.out.println("\t[" + i++ + "] Log in");
+        System.out.println("\t[" + i++ + "] Sign up");
+        basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -93,18 +92,11 @@ public class UnregisteredClientLoop extends Loop {
         Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] See a product");
-        System.out.println("\t[2] See my cart");
-        System.out.println("\t[3] Sign up");
-        previousPagePrinter(4);
-        if ((currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products)) {
-            System.out.println("\t[5] Next page >");
-        } else {
-            System.out.println("\t[5] Reload page");
-        }
-        System.out.println("\t[6] <- Go back");
-        System.out.println("\t[7] <<- Go to main page");
-        System.out.println("\t[8] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] See a product");
+        System.out.println("\t[" + i++ + "] See my cart");
+        System.out.println("\t[" + i++ + "] Sign up");
+        pagedLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -160,9 +152,10 @@ public class UnregisteredClientLoop extends Loop {
         System.out.print("\n ---- placeOrder ---- \n"); // Es para debug, borrar
         System.out.println("You must log in or sign up to proceed");
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Log in");
-        System.out.println("\t[2] Sign up");
-        System.out.println("\t[3] Go back");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Log in");
+        System.out.println("\t[" + i++ + "] Sign up");
+        basicLoopPrinter(i);
         int chosenOption3 = scanner.nextInt();
 
         switch (chosenOption3) {
@@ -194,13 +187,12 @@ public class UnregisteredClientLoop extends Loop {
         product.bigPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] See reviews");
-        System.out.println("\t[2] See my cart");
-        System.out.println("\t[3] Sign up");
-        System.out.println("\t[4] Add to cart");
-        System.out.println("\t[5] <- Go back");
-        System.out.println("\t[6] <<- Go to main page");
-        System.out.println("\t[7] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] See reviews");
+        System.out.println("\t[" + i++ + "] See my cart");
+        System.out.println("\t[" + i++ + "] Sign up");
+        System.out.println("\t[" + i++ + "] Add to cart");
+        basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -217,7 +209,7 @@ public class UnregisteredClientLoop extends Loop {
             case 4:
                 System.out.println("Enter the number of copies you desire");
                 int numProds = scanner.nextInt();
-                for (int i = 0; i < numProds; i++) {
+                for (int j = 0; j < numProds; j++) {
                     ((UnregisteredClient) currentUser).addCart(product);
                 }
                 System.out.println("Added " + numProds + " copies to your cart");
@@ -252,16 +244,9 @@ public class UnregisteredClientLoop extends Loop {
         product.printReviews(currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Sign up");
-        previousPagePrinter(2);
-        if ((currentScreenPageNum + 1) < Pager.getInstance().getReviewMaxPageNum(product)) {
-            System.out.println("\t[3] Next page >");
-        } else {
-            System.out.println("\t[3] Reload page");
-        }
-        System.out.println("\t[4] <- Go back");
-        System.out.println("\t[5] <<- Go to main page");
-        System.out.println("\t[6] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Sign up");
+        pagedLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -304,8 +289,9 @@ public class UnregisteredClientLoop extends Loop {
         System.out.print("\n ---- seeCart ---- \n"); // Es para debug, borrar
         ((UnregisteredClient) currentUser).getCart().getPrintInfo();
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Place order");
-        System.out.println("\t[2] Go back"); // DUE: Cancelar productos por n.º de impresión (ver getPrintInfo)
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Place order");
+        pagedLoopPrinter(i); // DUE el carrito debe ser paged
         int chosenOption2 = scanner.nextInt();
 
         if (chosenOption2 == 1) {
@@ -335,8 +321,9 @@ public class UnregisteredClientLoop extends Loop {
         if (currentUser == null) {
             System.out.println("Invalid username or password :[");
             System.out.println("What do you wish to do? (enter the nº)");
-            System.out.println("\t[1] Try again");
-            System.out.println("\t[2] Go back");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Try again");
+            basicLoopPrinter(i);
             int chosenOption2 = scanner.nextInt();
 
             if (chosenOption2 == 1) {

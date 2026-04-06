@@ -1,14 +1,13 @@
 
 package order;
 
+import product.Pack;
+import product.StoreProduct;
 import user.RegisteredClient;
 
 import java.time.LocalDateTime;
-import java.util.*;
-
-import product.Pack;
-import product.StoreProduct;
-import productT.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * It implements the order paid by the client

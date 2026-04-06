@@ -1,14 +1,12 @@
 package discount;
 
+import product.*;
 import store.Store;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-import product.Category;
-import product.Pack;
-import product.StoreProduct;
 import productT.*;
 
 /**
@@ -219,16 +217,16 @@ public abstract class Discount {
     }
 
     /**
-     * It gets the store products affected by this discount
-     * @return the store products affected by this discount
-     */
-    public abstract List<StoreProduct> getProducts();
-
-    /**
      * It returns the discount's basic info
      * @return the discount's basic info
      */
     public abstract String getPrintInfo();
+
+    /**
+     * It gets the store products affected by this discount
+     * @return the store products affected by this discount
+     */
+    public abstract List<StoreProduct> getProducts();
 
     /**
      * It gets the discount's start date

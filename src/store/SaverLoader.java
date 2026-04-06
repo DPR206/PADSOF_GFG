@@ -1,29 +1,17 @@
 package store;
 
+import discount.Discount;
+import discount.DiscountType;
 import exchange.*;
-import order.*;
-import product.Category;
-import product.Comic;
-import product.ConservationStatus;
-import product.Figurine;
-import product.Game;
-import product.GameStyle;
-import product.Pack;
-import product.Product;
-import product.ProductType;
-import product.Review;
-import product.SecondHandProduct;
-import product.StoreProduct;
-import productT.*;
+import order.Order;
+import product.*;
 import user.RegisteredClient;
 import user.User;
+import productT.*;
 
 import java.io.*;
 import java.time.*;
 import java.util.*;
-
-import discount.Discount;
-import discount.DiscountType;
 
 /**
  * It implements the store's saver and loader

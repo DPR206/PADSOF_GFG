@@ -1,13 +1,10 @@
 package store;
 
 import discount.Discount;
-import product.Category;
-import product.Pack;
-import product.Review;
-import product.StoreProduct;
-import productT.*;
+import product.*;
 import user.Employee;
 import user.RegisteredClient;
+import productT.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,11 @@ import java.util.List;
  * @version 1.0
  * @see Review
  * @see StoreProduct
+ * @see RegisteredClient
+ * @see Employee
+ * @see Pack
+ * @see Discount
+ * @see Category
  */
 public class Pager {
     private static final Pager PARAM = new Pager();

@@ -148,8 +148,6 @@ public class Offer {
                 this.products.get(this.destination));
     }
 
-    // DUE: createNotification
-
     /**
      * It allows a client to reject an incoming offer
      */

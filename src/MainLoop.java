@@ -1,12 +1,5 @@
 import order.Cart;
-import product.Category;
-import product.Comic;
-import product.Figurine;
-import product.Game;
-import product.GameStyle;
-import product.ProductType;
-import product.StoreProduct;
-import productT.*;
+import product.*;
 import store.*;
 import user.*;
 
@@ -126,7 +119,7 @@ public class MainLoop {
         switch (chosenOption) {
             case 1:
                 pageNumGoForward();
-                unregisteredClientOrderLoop();
+                unregisteredBrowseStore();
                 break;
             case 2:
                 loggerLoop();
@@ -138,8 +131,8 @@ public class MainLoop {
                 main();
                 break;
             case 5:
-            	main();
-            	break;
+                main();
+                break;
             case 6:
                 exit();
                 break;
@@ -167,8 +160,8 @@ public class MainLoop {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    private void unregisteredClientOrderLoop() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- unregisteredClientOrderLoop ---- \n"); // Es para debug, borrar
+    private void unregisteredBrowseStore() throws IOException, IllegalArgumentException, NullPointerException {
+        System.out.print("\n ---- unregisteredBrowseStore ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + this.currentScreenPageNum);
 
         List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
@@ -211,17 +204,17 @@ public class MainLoop {
                 break;
             case 4:
                 this.currentScreenPageNum = (this.currentScreenPageNum - 1) > 0 ? this.currentScreenPageNum - 1 : 1;
-                unregisteredClientOrderLoop();
+                unregisteredBrowseStore();
                 break;
             case 5:
                 this.currentScreenPageNum =
                         (this.currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
                         this.currentScreenPageNum + 1 : this.currentScreenPageNum;
-                unregisteredClientOrderLoop();
+                unregisteredBrowseStore();
                 break;
             case 6:
                 pageNumGoForward();
-                unregisteredClientOrderLoop();
+                unregisteredBrowseStore();
                 break;
             case 7:
                 pageNumGoForward();
@@ -233,7 +226,7 @@ public class MainLoop {
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredClientOrderLoop();
+                unregisteredBrowseStore();
                 break;
         }
     }
@@ -261,7 +254,7 @@ public class MainLoop {
                 cartSigner();
                 break;
             case 3:
-                unregisteredClientOrderLoop();
+                unregisteredBrowseStore();
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
@@ -309,11 +302,11 @@ public class MainLoop {
                     ((UnregisteredClient) currentUser).addCart(product);
                 }
                 System.out.println("Added " + numProds + " copies to your cart");
-                unregisteredClientOrderLoop();
+                unregisteredBrowseStore();
                 break;
             case 5:
                 pageNumGoBack();
-                unregisteredClientOrderLoop();
+                unregisteredBrowseStore();
                 break;
             case 6:
                 main();
@@ -399,7 +392,7 @@ public class MainLoop {
      */
     private void unregisteredSeeCart() throws IOException {
         System.out.print("\n ---- unregisteredSeeCart ---- \n"); // Es para debug, borrar
-        ((UnregisteredClient) this.currentUser).getCart() .getPrintInfo();
+        ((UnregisteredClient) this.currentUser).getCart().getPrintInfo();
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Place order");
         System.out.println("\t[2] Go back"); // DUE: Cancelar productos por n.º de impresión (ver getPrintInfo)
@@ -408,7 +401,7 @@ public class MainLoop {
         if (chosenOption2 == 1) {
             unregisteredClientPlaceOrder();
         } else {
-            unregisteredClientOrderLoop();
+            unregisteredBrowseStore();
         }
     }
 
@@ -581,8 +574,8 @@ public class MainLoop {
                 main();
                 break;
             case 10:
-            	main();
-            	break;
+                main();
+                break;
             case 11:
                 exit();
                 break;
@@ -1323,7 +1316,7 @@ public class MainLoop {
 
     private void managerSeeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
         System.out.print("\n ---- managerSeeProfile ---- \n"); // Es para debug, borrar
-        this.currentUser .getPrintInfo();
+        this.currentUser.getPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
         System.out.println("\t[1] Change my password");

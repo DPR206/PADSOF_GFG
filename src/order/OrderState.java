@@ -12,7 +12,7 @@ public enum OrderState {
         this.state = state;
     }
 
-    private String getString(){
+    public String getString(){
         return this.state;
     }
 }

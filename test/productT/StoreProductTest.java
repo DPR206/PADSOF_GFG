@@ -1,27 +1,20 @@
 package productT;
 
 import product.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.time.*;
 import java.util.HashMap;
-
-import org.junit.Before;
-import org.junit.Test;
-
-
 
 public class StoreProductTest {
 
 	private Comic comic;
 	private Category category;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		this.category = new Category("Fiction");
 		this.comic = new Comic(12.99, "Test Comic", "Description", "photo.png", 4, 120, Year.of(2020), "Author", "Editorial", category);
@@ -47,9 +40,11 @@ public class StoreProductTest {
 		assertEquals(0, comic.getStock()); 
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void decreaseStockNegativeTest() {
-		comic.decreaseStock(-1);
+	@Test
+	void decreaseStockNegativeTest() {
+	    assertThrows(IllegalArgumentException.class, () -> {
+	        comic.decreaseStock(-1);
+	    });
 	}
 
 	@Test
@@ -59,9 +54,11 @@ public class StoreProductTest {
 		assertEquals(initial + 10, comic.getStock());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void increaseStockNegativeTest() {
-		comic.increaseStock(-1);
+	@Test
+	void increaseStockNegativeTest() {
+	    assertThrows(IllegalArgumentException.class, () -> {
+	        comic.increaseStock(-1);
+	    });
 	}
 
 	@Test
@@ -121,9 +118,11 @@ public class StoreProductTest {
 		assertEquals(100, comic.getStock());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void setStockNegativeTest() {
-		comic.setStock(-1);
+	@Test
+	void setStockNegativeTest() {
+	    assertThrows(IllegalArgumentException.class, () -> {
+	        comic.setStock(-1);
+	    });
 	}
 
 	@Test

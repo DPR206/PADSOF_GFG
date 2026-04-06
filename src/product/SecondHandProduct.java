@@ -267,7 +267,13 @@ public class SecondHandProduct extends Product{
     }
 	
 /*----------------------------------------------------METHODS-----------------------------------------------------*/
-	
+	/**
+	 * Pays the valuation of a second-hand product
+	 * 
+	 * @throws InvalidCardNumberException the card number was invalid
+	 * @throws FailedInternetConnectionException the Internet connection failed
+	 * @throws OrderRejectedException the order was rejected
+	 */
 	public void payValuation() throws InvalidCardNumberException, 
 	FailedInternetConnectionException, OrderRejectedException {
 		
@@ -282,6 +288,11 @@ public class SecondHandProduct extends Product{
 		NotificationPayment notification = new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
 		notification.FullNotification("valuation");
 		this.owner.getNotificationHistory().addNotification(notification);
+		
+		NotificationEmployeeValuation notification2 = new NotificationEmployeeValuation (LocalDateTime.now(), false, true, 
+														NotificationType.EMPLOYEE_VALUATION);
+		notification2.FullNotification(this);
+		Store.getInstance().sendNotificationEmployees(notification2);
 	}
 	
 

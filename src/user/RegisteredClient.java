@@ -7,6 +7,7 @@ import order.*;
 import product.*;
 import exchange.*;
 import search.*;
+import store.Store;
 import notification.*;
 
 import java.time.*;
@@ -66,7 +67,7 @@ public class RegisteredClient extends User {
 		this.c = c;
 		this.exchangeHistory = exchangeHistory;
 		this.wallet = wallet;
-		this.orderHistory = orderHistory;
+		this.setOrderHistory(orderHistory);
 		this.offerHistory = offerHistory;
 		this.notificationHistory = notificationHistory;
 		this.searcher = searcher;
@@ -112,7 +113,7 @@ public class RegisteredClient extends User {
      */
     public void setHistories() {
     	 this.exchangeHistory = new ExchangeHistory(this);
-         this.orderHistory = new OrderHistory(this);
+    	 this.orderHistory = new OrderHistory(this);
          this.offerHistory = new OfferHistory(this);
          this.notificationHistory = new NotificationHistory(this);
     }
@@ -254,6 +255,7 @@ public class RegisteredClient extends User {
      */
     public void addProductWallet(SecondHandProduct product) {
     	this.wallet.addProducts(product);
+    	Store.getInstance().addSecondHandProduct(product);
     }
 
     /**
@@ -263,6 +265,8 @@ public class RegisteredClient extends User {
      */
     public void removeProductWallet(SecondHandProduct...products) {
     	this.wallet.removeProducts(products);
+    	for(SecondHandProduct p : products)
+    		Store.getInstance().deleteSecondHandProduct(p);
     }
 
     /**
@@ -350,9 +354,8 @@ public class RegisteredClient extends User {
    /**
     * Requests a valuation for a second-hand product
     * @param sp the second-hand product to evaluate
-    * @return the employee notification for the valuation
     */
-    public Notification requestValuation(SecondHandProduct sp) {
+    public void requestValuation(SecondHandProduct sp) {
 
     	try {
 			sp.payValuation();
@@ -366,8 +369,7 @@ public class RegisteredClient extends User {
 
     	NotificationEmployeeValuation notification = new NotificationEmployeeValuation(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_VALUATION);
     	notification.FullNotification(sp);
-
-    	return notification;
+    	Store.getInstance().sendNotificationEmployees(notification);
     }
 
     /**
@@ -429,6 +431,16 @@ public class RegisteredClient extends User {
     			notifications.add(n);
     	return notifications;
     }
+    
+    /**
+     * Changes an interest in a type of notification
+     * 
+     * @param type the type of notification 
+     * @param interest true if interested, false if else
+     */
+    public void changeNotificationInterest(NotificationType type, boolean interest) {
+    	this.notificationHistory.getSettings().changeInterest(type, interest);
+    }
 
     /**
      * A string with the client's information
@@ -438,7 +450,7 @@ public class RegisteredClient extends User {
     @Override
 	public String toString() {
 		return "RegisteredClient [registerDate=" + registerDate + ", dni=" + dni + ", c=" + c + ", exchangeHistory="
-				+ exchangeHistory + ", wallet=" + wallet + ", orderHistory=" + orderHistory + ", offerHistory="
+				+ exchangeHistory + ", wallet=" + wallet + ", orderHistory=" + getOrderHistory() + ", offerHistory="
 				+ offerHistory + ", notificationHistory=" + notificationHistory + ", searcher=" + searcher
 				+ ", numOrders=" + numOrders + ", numExchanges=" + numExchanges + ", toString()=" + super.toString()
 				+ "]";

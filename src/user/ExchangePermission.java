@@ -87,5 +87,4 @@ public class ExchangePermission {
         secondHandProduct.setAvailability(true);
     }
 
-    // DUE: Realizar búsquedas
 }

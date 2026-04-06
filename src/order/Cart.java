@@ -1,6 +1,7 @@
 package order;
 
 import store.Parameter;
+import store.Store;
 import user.RegisteredClient;
 
 import java.time.*;
@@ -158,6 +159,7 @@ public class Cart {
         }
 
         wanted.decreaseStock();
+        wanted.setDateAddCart(LocalDate.now());
 
         return true;
     }
@@ -193,6 +195,11 @@ public class Cart {
             notification.FullNotification(order);
             this.owner.getNotificationHistory().addNotification(notification);
             this.owner.increaseNumOrders();
+            
+            NotificationEmployeeOrder notification2 = new NotificationEmployeeOrder(LocalDateTime.now(), false, true, 
+            											NotificationType.EMPLOYEE_ORDER);
+            notification2.FullNotification(order);
+            Store.getInstance().sendNotificationEmployees(notification2);
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {
@@ -249,12 +256,20 @@ public class Cart {
     		LocalDate expiration = this.calculateExpiredDate(spi);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelProduct(spi);
+    			NotificationProductCart notificationP = new NotificationProductCart(LocalDateTime.now(), false, true, 
+    													NotificationType.PRODUCT_CART);
+    			notificationP.FullNotification(spi);
+    			this.owner.getNotificationHistory().addNotification(notificationP);
     		}
     	}
     	for(Pack p: packs) {
     		LocalDate expiration = this.calculateExpiredDatePacks(p);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelPack(p);
+    			NotificationPackCart notificationK = new NotificationPackCart(LocalDateTime.now(), false, true, 
+    													NotificationType.PACK_CART);
+    			notificationK.FullNotification(p);
+    			this.owner.getNotificationHistory().addNotification(notificationK);
     		}
     	}
     }
@@ -268,7 +283,7 @@ public class Cart {
     }
     
     public LocalDate calculateExpiredDate(StoreProduct sproducts) {
-    	Parameter p = p.getParam();
+    	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
     	
     	List<StoreProduct> products = new ArrayList<>(this.sp.keySet());
@@ -280,7 +295,7 @@ public class Cart {
     }
     
     public LocalDate calculateExpiredDatePacks(Pack pack) {
-    	Parameter p = p.getParam();
+    	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
     	
     	List<Pack> packs = new ArrayList<>(this.packs.keySet());

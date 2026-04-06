@@ -1,6 +1,8 @@
 package user;
 
 import discount.*;
+import exchange.Exchange;
+import order.Order;
 import product.*;
 import search.SearchType;
 import search.Searcher;
@@ -412,7 +414,46 @@ public class Manager extends User {
         Parameter.getParam().changeItemsPerPage(newItemsPerPage);
     }
     
-  
+    /**
+     * Searches for the pack based on the id
+     *
+     * @param id, id of the pack
+     *
+     */
+    public Pack searchPackByID(int id){
+        return this.getSearcher().searchPackByID(id);
+    }
+    
+
+    /**
+     * Searches for the employee based on the id
+     *
+     * @param id, id of the employee
+     *
+     */
+    public Employee searchEmployeeByID(int id){
+        return this.getSearcher().searchEmployeeByID(id);
+    }
+    
+    /**
+     * Searches for the order based on the id
+     *
+     * @param id, id of the order
+     *
+     */
+    public Order searchOrderByID(int id){
+        return this.getSearcher().searchOrderByID(id);
+    }
+
+    /**
+     * Searches for the exchange based on the id
+     *
+     * @param id, id of the exchange
+     *
+     */
+    public Exchange searchExchangeByID(int id){
+        return this.getSearcher().searchExchangeByID(id);
+    }
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     public Manager getIntializedManager() {
         if (Manager.INSTANCE != null) {

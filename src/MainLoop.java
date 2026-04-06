@@ -630,8 +630,10 @@ public class MainLoop {
                     case COMIC:
                         managerManageComic((Comic) product);
                     case GAME:
+                        assert product instanceof Game;
                         managerManageGame((Game) product);
                     case FIGURINE:
+                        assert product instanceof Figurine;
                         managerManageFigurine((Figurine) product);
                     default: // Este NO debería saltar nunca, lo pongo por si acaso
                         System.out.println("You shouldn't be able to see this :(");

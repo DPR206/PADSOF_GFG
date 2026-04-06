@@ -17,9 +17,7 @@ public class SearchPack implements SearchID {
 
     private List<Pack> packs;
     /**
-	 * Creates the class
-	 *
-	 * @param s, sends the store to get all the packs available
+	 * Creates the class and sends the store to get all the packs available
 	 */
     public SearchPack(){
         this.packs = s.getPacks();

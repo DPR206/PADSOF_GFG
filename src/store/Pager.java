@@ -4,7 +4,6 @@ import discount.Discount;
 import product.*;
 import user.Employee;
 import user.RegisteredClient;
-import productT.*;
 
 import java.util.ArrayList;
 import java.util.List;

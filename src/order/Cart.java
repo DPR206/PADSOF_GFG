@@ -11,7 +11,6 @@ import discount.DiscountType;
 import discount.QuantityDiscount;
 import product.Pack;
 import product.StoreProduct;
-import store.Parameter;
 
 /**
  * Cart, array of products and packs the user has not paid yet
@@ -230,7 +229,7 @@ public class Cart {
     public void printPacks() { // DUE: Page / wrap this
         int i = 0;
         for (Pack pack : this.packs.keySet()) {
-            System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.sp.get(pack));
+            System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.packs.get(pack));
         }
     }
 

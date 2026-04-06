@@ -17,9 +17,7 @@ public class SearchEmployee implements SearchID{
     private Store s = Store.getInstance();
     private List<Employee> users;
      /**
-	 * Creates the class
-	 *
-	 * @param s, the store to create the list of users
+	 * Creates the class and uses the store to create the list of users
 	 */
     public SearchEmployee(){
         this.users = new ArrayList<>(s.getEmployees().values());

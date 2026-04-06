@@ -38,19 +38,21 @@ public class Employee extends User {
         super(UserType.EMPLOYEE, pwd, userName, asc);
         this.perm = p;
 
-        if (p.getMeaning() == "store") {
+        if (p.getMeaning().contentEquals("store")) {
             this.sp = new StorePermission();
             this.getSearcher().setTypes(SearchType.S_STORE);
 
-        } else if (p.getMeaning() == "exchange") {
+        } else if (p.getMeaning().contentEquals("exchange")) {
             this.ep = new ExchangePermission();
             if(this.sp != null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE);
             else this.getSearcher().setTypes(SearchType.S_EXCHANGE);
         } else {
             this.op = new OrderPermission();
             if(this.sp != null && this.ep != null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE, SearchType.S_ORDER);
-            else if(this.sp != null && this.ep == null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_ORDER);
-            else if(this.sp == null && this.ep != null) this.getSearcher().setTypes(SearchType.S_EXCHANGE, SearchType.S_ORDER);
+            else if(this.sp != null /*&& this.ep == null*/) this.getSearcher().setTypes(SearchType.S_STORE,
+                    SearchType.S_ORDER);
+            else if(/*this.sp == null &&*/ this.ep != null) this.getSearcher().setTypes(SearchType.S_EXCHANGE,
+                    SearchType.S_ORDER);
             else this.getSearcher().setTypes(SearchType.S_ORDER);
         }
 

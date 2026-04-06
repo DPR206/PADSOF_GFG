@@ -6,9 +6,9 @@ public enum OrderState {
     READY_TO_PICKUP("readyToPickup"),
     PICKED_UP("pickedUp");
 
-    private String state;
+    private final String state;
 
-    private OrderState(String state){
+    OrderState(String state){
         this.state = state;
     }
 

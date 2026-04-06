@@ -27,7 +27,7 @@ public class Utility {
 
         try {
 
-            while (aux == false) {
+            while (!aux) {
 
                 System.out.print("Introduce tu usuario: ");
                 userName = sc.next();
@@ -63,7 +63,7 @@ public class Utility {
 
         if (Store.getInstance().getUsers().containsKey(userName)) {
             u = Store.getInstance().getUsers().get(userName);
-            if (u.getPassword() == pwd) {
+            if (Objects.equals(u.getPassword(), pwd)) {
                 return u;
             }
         }

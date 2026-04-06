@@ -9,5 +9,5 @@ public enum NotificationType{
     ORDER,
     EMPLOYEE_ORDER,
     EMPLOYEE_VALUATION,
-    EMPLOYEE_EXCHANGE;
+    EMPLOYEE_EXCHANGE
 }

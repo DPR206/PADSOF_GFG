@@ -182,7 +182,7 @@ public abstract class Notification {
 	/**
 	 * Obtains the type of notification
 	 *
-	 * @return the type the type of notification
+	 * @return the type of notification
 	 */
 	public NotificationType getType() {
 		return type;
@@ -202,7 +202,7 @@ public abstract class Notification {
 
 
 	/**
-	 * Calculates the the amount of time that has passed since the user received the notification
+	 * Calculates the amount of time that has passed since the user received the notification
 	 *
 	 * @return a string with the amount of time since the notification was received (hh/mm/ss)
 	 */
@@ -218,9 +218,9 @@ public abstract class Notification {
 	}
 
 	/**
-	 * The sign off of all the store notifications
+	 * The sign-off of all the store notifications
 	 *
-	 * @return a string with the store sign off
+	 * @return a string with the store sign-off
 	 */
 	public String signOff() {
 		return "Thank you for using our services\n";

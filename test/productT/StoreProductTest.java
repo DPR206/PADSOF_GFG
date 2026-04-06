@@ -6,15 +6,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.util.HashMap;
+
 
 import org.junit.Before;
 import org.junit.Test;
 
 import product.Category;
 import product.Comic;
+import product.*;
 
 public class StoreProductTest {
 

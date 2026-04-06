@@ -152,7 +152,8 @@ public class Offer {
      */
     public Exchange processOffer() {
     	NotificationExchange notification = new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE, 
-    			Parameter.getParam().getStoreAddress(), LocalDateTime.now().plus(Parameter.getParam().getExchangeTime()).withHour(17));
+    			Parameter.getParam().getStoreAddress(), 
+    			LocalDateTime.now().plus(Parameter.getParam().getExchangeTime()).withHour(17).withMinute(0).withSecond(0).withNano(0));
         notification.FullNotification(this);
         this.origin.getNotificationHistory().addNotification(notification);
         this.destination.getNotificationHistory().addNotification(notification);

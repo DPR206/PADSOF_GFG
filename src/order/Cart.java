@@ -189,6 +189,7 @@ public class Cart {
                     NotificationType.ORDER);
             notification.FullNotification(order);
             this.owner.getNotificationHistory().addNotification(notification);
+            this.owner.increaseNumOrders();
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {

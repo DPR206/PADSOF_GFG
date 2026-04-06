@@ -74,7 +74,7 @@ public class NotificationDiscount extends Notification implements NotificationIn
 		else if(o.getProducts().isEmpty())
 			text += ". This discount doesn't apply to a specific set of products.\n";
 		else
-			text += o.getProducts();
+			text += ". This discount doesn't apply to a specific set of products: " + o.getProducts() + "\n";
 
 		this.setText(text);
 

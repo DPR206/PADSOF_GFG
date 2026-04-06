@@ -145,7 +145,7 @@ public class Statistics {
 	 * @param date the date the revenue took place
 	 * @param products the products that were affected in the revenue (if there were any)
 	 */
-	public void addRevenue(Double quantity, RevenueType type, LocalDate date, StoreProduct...products) {
+	public void addRevenue(Double quantity, RevenueType type, LocalDate date, List<StoreProduct> products) {
 		this.revenueByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + quantity);
 		Statistics.total_revenue += quantity;
 		if(type == RevenueType.VALUATION)

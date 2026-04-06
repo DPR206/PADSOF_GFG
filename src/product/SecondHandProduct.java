@@ -3,14 +3,14 @@
  */
 package product;
 
-import store.Parameter;
+import store.*;
 import store.Store;
 import user.RegisteredClient;
 import notification.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Scanner;
+import java.util.*;
 
 import es.uam.eps.padsof.telecard.*;
 
@@ -267,7 +267,13 @@ public class SecondHandProduct extends Product{
     }
 	
 /*----------------------------------------------------METHODS-----------------------------------------------------*/
-	
+	/**
+	 * Pays the valuation of a second-hand product
+	 * 
+	 * @throws InvalidCardNumberException the card number was invalid
+	 * @throws FailedInternetConnectionException the Internet connection failed
+	 * @throws OrderRejectedException the order was rejected
+	 */
 	public void payValuation() throws InvalidCardNumberException, 
 	FailedInternetConnectionException, OrderRejectedException {
 		
@@ -278,10 +284,17 @@ public class SecondHandProduct extends Product{
 			TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
 		}
 		this.setPaidValuation(true);
+		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now(), 
+											Collections.emptyList());
 		
 		NotificationPayment notification = new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
 		notification.FullNotification("valuation");
 		this.owner.getNotificationHistory().addNotification(notification);
+		
+		NotificationEmployeeValuation notification2 = new NotificationEmployeeValuation (LocalDateTime.now(), false, true, 
+														NotificationType.EMPLOYEE_VALUATION);
+		notification2.FullNotification(this);
+		Store.getInstance().sendNotificationEmployees(notification2);
 	}
 	
 

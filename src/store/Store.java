@@ -6,7 +6,9 @@ import product.*;
 import user.*;
 import utilities.Utility;
 import discount.Discount;
+import notification.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 // DUE: Falta el @see
@@ -292,8 +294,16 @@ public class Store {
      */
     public void deleteSecondHandProduct(SecondHandProduct product) {
         this.secondHandProducts.remove(product.getName(), product);
+        NotificationNewSecondHand notification = new NotificationNewSecondHand(LocalDateTime.now(), false, true, 
+        											NotificationType.NEW_SECONDHAND_PRODUCT);
+        notification.FullNotification(product);
+        this.sendNotificationClients(notification);
     }
 
+    /**
+     * Adds a new pack
+     * @param p the new pack
+     */
     public void addPack(Pack p) {
         this.packs.add(p);
     }
@@ -305,7 +315,31 @@ public class Store {
     public void addExchange(Exchange e) {
         this.exchanges.add(e);
     }
+   
+    /**
+     * Sends the notifications to the clients
+     * @param n the notification to send (if interested)
+     */
+    public void sendNotificationClients(Notification n) {
+    	ArrayList<RegisteredClient> clients = new ArrayList<>(this.getRegisteredClients().values());
+    	for(RegisteredClient client : clients)
+    		client.getNotificationHistory().addNotification(n);
+    }
+    
+    /**
+     * Sends the notifications to the employees
+     * @param n the notification to send (if interested)
+     */
+    public void sendNotificationEmployees(Notification n) {
+    	ArrayList<Employee> employees = new ArrayList<>(this.getEmployees().values());
+    	for(Employee employee : employees)
+    		employee.getNotificationHistory().addNotification(n);
+    }
 
+    /**
+     * Obtains the employees of the store
+     * @return a hash map with the employees
+     */
     public HashMap<String, Employee> getEmployees(){
     	return this.employees;
     }

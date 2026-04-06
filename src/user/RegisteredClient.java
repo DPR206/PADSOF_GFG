@@ -354,9 +354,8 @@ public class RegisteredClient extends User {
    /**
     * Requests a valuation for a second-hand product
     * @param sp the second-hand product to evaluate
-    * @return the employee notification for the valuation
     */
-    public Notification requestValuation(SecondHandProduct sp) {
+    public void requestValuation(SecondHandProduct sp) {
 
     	try {
 			sp.payValuation();
@@ -370,8 +369,7 @@ public class RegisteredClient extends User {
 
     	NotificationEmployeeValuation notification = new NotificationEmployeeValuation(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_VALUATION);
     	notification.FullNotification(sp);
-
-    	return notification;
+    	Store.getInstance().sendNotificationEmployees(notification);
     }
 
     /**
@@ -432,6 +430,16 @@ public class RegisteredClient extends User {
     		if(n.isVisible())
     			notifications.add(n);
     	return notifications;
+    }
+    
+    /**
+     * Changes an interest in a type of notification
+     * 
+     * @param type the type of notification 
+     * @param interest true if interested, false if else
+     */
+    public void changeNotificationInterest(NotificationType type, boolean interest) {
+    	this.notificationHistory.getSettings().changeInterest(type, interest);
     }
 
     /**

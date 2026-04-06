@@ -1,12 +1,13 @@
 package order;
 
-import store.Parameter;
+import store.*;
 import user.RegisteredClient;
 
 import java.time.*;
 import java.util.*;
 
 import es.uam.eps.padsof.telecard.*;
+
 import notification.*;
 import discount.DiscountType;
 import discount.QuantityDiscount;
@@ -184,6 +185,8 @@ public class Cart {
             CCV = sc.next();
             System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
             fechaCad = sc.next();
+            
+            Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
 
             Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
                     new ArrayList<>(this.packs.keySet()), this.owner);
@@ -194,6 +197,11 @@ public class Cart {
             notification.FullNotification(order);
             this.owner.getNotificationHistory().addNotification(notification);
             this.owner.increaseNumOrders();
+            
+            NotificationEmployeeOrder notification2 = new NotificationEmployeeOrder(LocalDateTime.now(), false, true, 
+            											NotificationType.EMPLOYEE_ORDER);
+            notification2.FullNotification(order);
+            Store.getInstance().sendNotificationEmployees(notification2);
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {

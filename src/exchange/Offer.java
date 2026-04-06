@@ -1,7 +1,6 @@
 package exchange;
 
-import notification.NotificationExchange;
-import notification.NotificationType;
+import notification.*;
 import product.SecondHandProduct;
 import store.Parameter;
 import store.Store;
@@ -161,8 +160,15 @@ public class Offer {
         notification.FullNotification(this);
         this.origin.getNotificationHistory().addNotification(notification);
         this.destination.getNotificationHistory().addNotification(notification);
-        return new Exchange(LocalDateTime.now(), this.origin, this.products.get(this.origin), this.destination,
+        
+        NotificationEmployeeExchange notification2 = new NotificationEmployeeExchange(LocalDateTime.now(), false, true, 
+        											NotificationType.EMPLOYEE_EXCHANGE);
+        Exchange newExchange = new Exchange(LocalDateTime.now(), this.origin, this.products.get(this.origin), this.destination,
                 this.products.get(this.destination));
+        notification2.FullNotification(newExchange);
+        Store.getInstance().sendNotificationEmployees(notification2);
+        
+        return newExchange;
     }
 
     /**

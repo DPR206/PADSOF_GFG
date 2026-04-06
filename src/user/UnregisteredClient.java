@@ -7,7 +7,6 @@ import order.Cart;
 import product.Category;
 import product.Pack;
 import product.StoreProduct;
-import productT.*;
 import search.SearchType;
 import store.Store;
 
@@ -83,7 +82,7 @@ public class UnregisteredClient extends User {
     public Cart getCart(){
         return this.c;
     }
-    
+
     /**
      * Searches for the store products
      * @return the store product based on the filters
@@ -91,12 +90,12 @@ public class UnregisteredClient extends User {
     public List<StoreProduct> searchStoreProduct(){
         return this.getSearcher().searchStoreProducts();
     }
-    
+
     /**
      * Searches for the store products based on the category
-     * 
+     *
      * @param c, the categories we want our searched products to belong to
-     * 
+     *
      * @return the store product based on the filters
      */
     public List<StoreProduct> searchStoreProductByCategory(Category... c){

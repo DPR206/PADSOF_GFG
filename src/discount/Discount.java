@@ -102,7 +102,7 @@ public abstract class Discount {
         List<Discount> discounts = Store.getInstance().getDiscounts();
 
         for (Discount discount : discounts) {
-            if ((discount != this) && (!discount.getDisabled())) {
+            if ((discount != this) && (discount.getDisabled())) {
                 List<StoreProduct> alreadyAffectedProducts = discount.getProducts();
                 if (discount.getCoverage() == DiscountCoverage.PRODUCT) {
                     ProductDiscount productDiscount = (ProductDiscount) discount;
@@ -134,7 +134,7 @@ public abstract class Discount {
         List<Discount> discounts = Store.getInstance().getDiscounts();
 
         for (Discount discount : discounts) {
-            if ((discount != this) && (!discount.getDisabled())) {
+            if ((discount != this) && (discount.getDisabled())) {
                 if (!discount.getProducts().isEmpty()) {
                     return true;
                 }

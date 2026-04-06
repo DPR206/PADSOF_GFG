@@ -13,7 +13,7 @@ import java.util.*;
   */
 public class BrowseSecondHandProducts{
 
-	Store s = Store.getInstance();
+	final Store s = Store.getInstance();
     private List<SecondHandProduct> products;
 
     /**

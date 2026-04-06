@@ -381,7 +381,7 @@ public class RegisteredClient extends User {
     public List<Notification> browseNotifications(){
     	List<Notification> notifications = new ArrayList<>();
     	for(Notification n : this.notificationHistory.getNotificationsSorted())
-    		if(n.isVisible() == true)
+    		if(n.isVisible())
     			notifications.add(n);
     	return notifications;
     }

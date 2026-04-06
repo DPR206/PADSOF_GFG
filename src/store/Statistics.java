@@ -189,10 +189,8 @@ public class Statistics {
 	 * @return a list of store products
 	 */
 	public List<StoreProduct> getProductsBySales() {
-		return Collections.unmodifiableList(this.storeProducts.stream()
-					.sorted(Comparator.comparingInt(StoreProduct::getSales)
-					.reversed())
-					.collect(Collectors.toList()));
+		return this.storeProducts.stream().sorted(Comparator.comparingInt(StoreProduct::getSales).reversed())
+                                 .collect(Collectors.toUnmodifiableList());
 	}
 
 	/**
@@ -264,10 +262,12 @@ public class Statistics {
 	 */
 	public List<RegisteredClient> getUsersMostOrders()
 	{
-		return Collections.unmodifiableList(this.clients.stream() //Obtain data
-							.sorted(Comparator.comparingInt(RegisteredClient::getNumOrders) //Compare based on the number of orders (type int)
-							.reversed()) //Descending order
-							.collect(Collectors.toList()) /*Make the result a list*/);
+        //Descending order
+        /*Make the result a list*/
+        return this.clients.stream() //Obtain data
+                           .sorted(Comparator.comparingInt(
+                                                     RegisteredClient::getNumOrders) //Compare based on the number of orders (type int)
+                                             .reversed()).collect(Collectors.toUnmodifiableList());
 	}
 
 	/**
@@ -288,10 +288,8 @@ public class Statistics {
 	 * @return  a descending list of registered clients
 	 */
 	public List<RegisteredClient> getUsersMostExchanges(){
-		return Collections.unmodifiableList(this.clients.stream()
-							.sorted(Comparator.comparingInt(RegisteredClient::getNumExchanges)
-							.reversed())
-							.collect(Collectors.toList()));
+		return this.clients.stream().sorted(Comparator.comparingInt(RegisteredClient::getNumExchanges).reversed())
+                           .collect(Collectors.toUnmodifiableList());
 	}
 
 	/**

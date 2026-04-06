@@ -23,7 +23,7 @@ public class Pack {
 	private int id;
 	private double price;
 	private ArrayList<StoreProduct> products;
-	private LocalDate dateAddCart = null;
+	private LocalDate dateAddCart;
 	/** The pack's discount, if it has one */
 	private Discount discount = null;
 

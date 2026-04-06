@@ -1,26 +1,12 @@
 package user;
 
+import product.*;
 import store.Store;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-
-import product.Category;
-import product.Comic;
-import product.Figurine;
-import product.Game;
-import product.GameStyle;
-import product.Pack;
-import product.StoreProduct;
-import productT.*;
-
+import java.util.*;
 
 /**
  * It implements the store permission of the store
@@ -38,10 +24,10 @@ public class StorePermission {
     public StorePermission() {
         this.s = Store.getInstance();
     }
-    
+
     /**
      * Adds a new comic to the store
-     * 
+     *
      * @param price, price of the comic
      * @param name, name of the comic to add
      * @param description, description of the comic
@@ -51,17 +37,17 @@ public class StorePermission {
      * @param year, the year it was published
      * @param editorial, the editorial that edited the comic
      * @param categories, all the categories it belongs too
-     * 
+     *
      */
     public void addComic(double price, String name, String description, String photo, int stock, int numPages,
                          Year year, String author, String editorial, Category... categories) {
         Comic c = new Comic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
         this.s.addStoreProduct(c);
     }
-    
+
     /**
      * Adds a new game to the store
-     * 
+     *
      * @param price, price of the comic
      * @param name, name of the comic to add
      * @param description, description of the comic
@@ -71,17 +57,17 @@ public class StorePermission {
      * @param ageRange, the ages allowed to play this game
      * @param gameStyle, game style of said game
      * @param categories, all the categories it belongs too
-     * 
+     *
      */
     public void addGame(double price, String name, String description, String photo, int stock, int numPlayers,
                         String ageRange, GameStyle gameStyle, Category... categories) {
         Game g = new Game(price, name, description, photo, stock, numPlayers, ageRange, gameStyle, categories);
         this.s.addStoreProduct(g);
     }
-    
+
     /**
      * Adds a new figurine to the store
-     * 
+     *
      * @param price, price of the comic
      * @param name, name of the comic to add
      * @param description, description of the comic
@@ -91,26 +77,26 @@ public class StorePermission {
      * @param brand, brand it belongs to
      * @param material, material of the figurine
      * @param categories, all the categories it belongs too
-     * 
+     *
      */
     public void addFigurine(double price, String name, String description, String photo, int stock, String dimensions,
                             String brand, String material, Category... categories) {
         Figurine f = new Figurine(price, name, description, photo, stock, dimensions, brand, material, categories);
         this.s.addStoreProduct(f);
     }
-    
+
     /**
      * Adds new products to the store reading them from a file
-     * 
+     *
      * @param filename, name of the file that contains the products
-     * 
+     *
      */
     public boolean addProductByFile(String fileName) throws IOException {
         int stock, numCat;
         String name, desc, aux, type;
         double price;
         String line;
-        int i = 0;
+        int i;
         Category auxC;
         try (BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
 
@@ -168,24 +154,24 @@ public class StorePermission {
 
         return true;
     }
-    
+
     /**
-     * Adds a new pack to the store 
-     * 
-     * 
+     * Adds a new pack to the store
+     *
+     *
      * @param price, price of the pack
      * @param products, list of products that the pack contains
      * @param date, date when the pack was created
-     * 
+     *
      */
     public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
         Pack p = new Pack(price, products, date);
         s.addPack(p);
     }
-    
+
     /**
      * Gets the store instance
-     * 
+     *
      */
     public Store getStore() {
         return this.s;

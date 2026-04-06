@@ -7,7 +7,6 @@ import order.*;
 import product.*;
 import exchange.*;
 import search.*;
-import store.Parameter;
 import notification.*;
 
 import java.time.*;
@@ -159,8 +158,7 @@ public class RegisteredClient extends User {
      * @param psswd the new password
      */
     public void changePassword(String psswd) {
-        //Tengo que hacer la comprobación de que la contraseña es segura
-        super.changePassword(psswd);
+    	super.changePassword(psswd);
     }
 
     /**
@@ -242,6 +240,8 @@ public class RegisteredClient extends User {
 		this.numExchanges = numExchanges;
 	}
 
+/*-----------------------------------------------------METHODS----------------------------------------------------------------*/	
+	
 	/**
      * Adds a new product to the wallet
      *
@@ -385,9 +385,6 @@ public class RegisteredClient extends User {
     			notifications.add(n);
     	return notifications;
     }
-
-
-    //makeAnOffer
 
     @Override
     public String toString() { // DUE

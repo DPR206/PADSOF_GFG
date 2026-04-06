@@ -69,4 +69,8 @@ public class Utility {
         }
         return null;
     }
+    
+    public boolean securePassword(String psswd) {
+    	
+    }
 }

@@ -12,7 +12,7 @@ import java.time.*;
  */
 public class Parameter {
 
-	private static final Parameter PARAM = new Parameter();
+	private static Parameter PARAM = new Parameter();
 
 	private Period OfferTime;
 	private Period OrderTime;
@@ -106,6 +106,7 @@ public class Parameter {
 	 * @return the param, the parameter of the store
 	 */
 	public static Parameter getParam() {
+		if(PARAM == null) PARAM = new Parameter();
 		return PARAM;
 	}
 

@@ -17,6 +17,7 @@ public class SecondHandProductTest {
 
     @Before
     public void setUp() {
+        store.Store.getInstance();
     	this.owner = new RegisteredClient("testuser", LocalDate.now(), "12345678A", "password", true);
         this.owner.setHistories();
         this.shp = new SecondHandProduct("Test Product", "Description", "photo.png", ProductType.COMIC, this.owner);

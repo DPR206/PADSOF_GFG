@@ -372,8 +372,18 @@ public class RegisteredClient extends User {
     	sp.addReview(this, r);
     }
 
-    public void makeAnOffer() {
-		// DUE?
+    public void makeAnOffer(SecondHandProduct theirProduct, SecondHandProduct...myProducts) {
+		ArrayList<SecondHandProduct> originProducts = new ArrayList<>(List.of(myProducts));
+		ArrayList<SecondHandProduct> destinationProducts = new ArrayList<>(List.of(theirProduct));
+    	Offer offer = new Offer(this, theirProduct.getOwner(), originProducts, destinationProducts);
+    	this.getOfferHistory().addOffer(offer);
+    	theirProduct.getOwner().getOfferHistory().addOffer(offer);
+    }
+    
+    public void makeAnOffer(ArrayList<SecondHandProduct> theirProducts, ArrayList<SecondHandProduct> myProducts) {
+    	Offer offer = new Offer(this, theirProducts.getFirst().getOwner(), myProducts, theirProducts);
+    	this.getOfferHistory().addOffer(offer);
+    	theirProducts.getFirst().getOwner().getOfferHistory().addOffer(offer);
     }
 
     public List<Notification> browseNotifications(){

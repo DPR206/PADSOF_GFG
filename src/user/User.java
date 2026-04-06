@@ -28,6 +28,7 @@ public abstract class User {
      * @param pwd,      the password of the user
      * @param userName, the username of the user
      * @param actualID, the ID of the user
+     * @param asc the products' order in the search
      */
     public User(UserType type,String pwd, String userName, String actualID, boolean asc) {
         this.type = type;
@@ -42,6 +43,7 @@ public abstract class User {
      * @param type the user's user type
      * @param pwd,      the password of the user
      * @param userName, the username of the user
+     * @param asc the products' order in the search
      */
     public User(UserType type, String pwd, String userName, boolean asc) {
         this(type, pwd, userName, type.getSymbol() + String.format("%06d", ++totalId), asc);
@@ -72,21 +74,25 @@ public abstract class User {
     }
 
     /**
-     * Gets the password of the user
-     *
-     *
+     * Obtains the password of the user
+     * 
+     * @return the user's password
      */
     public String getPassword() {
         return this.pwd;
     }
 
+    /**
+     * Obtains the user's searcher
+     * @return the user's searcher
+     */
     public Searcher getSearcher(){
         return this.searching;
     }
+    
     /**
      * Gets the username of the user
-     *
-     *
+     * @return the user's name
      */
     public String getUserName() {
         return this.userName;
@@ -95,7 +101,7 @@ public abstract class User {
     /**
      * Changes the order of the search (ascendant or descendant)
      *
-     *@param bool, determines the order (ascendant or descendant) on which the products appear
+     * @param bool, determines the order (ascendant or descendant) on which the products appear
      */
     public void changeSearchOrder(boolean bool) {
     	this.searching.changeProductOrder(bool);
@@ -132,6 +138,7 @@ public abstract class User {
     /**
      * It gets the user's actual ID (String)
      * 
+     * @return the user's id
      */
     public String getId() {
     	return this.actualID;

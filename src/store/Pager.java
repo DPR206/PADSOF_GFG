@@ -43,16 +43,6 @@ public class Pager {
         return PARAM;
     }
 
-    /* PRINTS:
-        [x] Review
-        [x] Store Product
-        [x] Registered Client
-        [x] Employee
-        [x] Pack
-        [x] Discount
-        [x] Category
-     */
-
     /**
      * It prints a sub-list of another according to the desired page
      * @param reviewList the list of reviews
@@ -148,16 +138,6 @@ public class Pager {
         }
     }
 
-    /* SELECTS:
-        [x] Category
-        [x] Discount
-        [x] Employee
-        [x] Pack
-        [x] Registered Client
-        [x] Review
-        [x] Store Product
-     */
-
     /**
      * It gets the category listed as n.º categoryNum in a certain page
      * @param pageNum     the desired page's number
@@ -237,16 +217,6 @@ public class Pager {
         return productListPage.get(productNum - 1); // Las listas se imprimen empezando por 1
     }
 
-    /* PAGERS:
-        [x] Category
-        [x] Discount
-        [x] Employee
-        [x] Pack
-        [x] Registered Client
-        [x] Review
-        [x] Store Product
-     */
-
     /**
      * It gets a sub-list of categories according to the desired page
      * @param pageNum the desired page's number
@@ -254,10 +224,7 @@ public class Pager {
      */
     public List<Category> pageCategoryList(int pageNum) {
         List<Category> categoryList = new ArrayList<>(Store.getInstance().getCategories().values());
-        int itemsPerPage = Parameter.getParam().getItemsPerPage();
-        int from = (itemsPerPage - 1) * pageNum;
-        int to = Math.min(categoryList.size(), (pageNum * itemsPerPage) - 1);
-        return categoryList.subList(from, to);
+        return categoryList.subList(getFrom(pageNum), getTo(pageNum, categoryList.size()));
     }
 
     /**
@@ -267,10 +234,7 @@ public class Pager {
      */
     public List<Discount> pageDiscountList(int pageNum) {
         List<Discount> discountList = Store.getInstance().getDiscounts();
-        int itemsPerPage = Parameter.getParam().getItemsPerPage();
-        int from = (itemsPerPage - 1) * pageNum;
-        int to = Math.min(discountList.size(), (pageNum * itemsPerPage) - 1);
-        return discountList.subList(from, to);
+        return discountList.subList(getFrom(pageNum), getTo(pageNum, discountList.size()));
     }
 
     /**
@@ -280,10 +244,7 @@ public class Pager {
      */
     public List<Employee> pageEmployeeList(int pageNum) {
         List<Employee> employeeList = new ArrayList<>(Store.getInstance().getEmployees().values());
-        int itemsPerPage = Parameter.getParam().getItemsPerPage();
-        int from = (itemsPerPage - 1) * pageNum;
-        int to = Math.min(employeeList.size(), (pageNum * itemsPerPage) - 1);
-        return employeeList.subList(from, to);
+        return employeeList.subList(getFrom(pageNum), getTo(pageNum, employeeList.size()));
     }
 
     /**
@@ -293,10 +254,7 @@ public class Pager {
      */
     public List<Pack> pagePackList(int pageNum) {
         List<Pack> packList = Store.getInstance().getPacks();
-        int itemsPerPage = Parameter.getParam().getItemsPerPage();
-        int from = (itemsPerPage - 1) * pageNum;
-        int to = Math.min(packList.size(), (pageNum * itemsPerPage) - 1);
-        return packList.subList(from, to);
+        return packList.subList(getFrom(pageNum), getTo(pageNum, packList.size()));
     }
 
     /**
@@ -307,10 +265,7 @@ public class Pager {
     public List<RegisteredClient> pageRegisteredClientList(int pageNum) {
         List<RegisteredClient> registeredClientList =
                 new ArrayList<>(Store.getInstance().getRegisteredClients().values());
-        int itemsPerPage = Parameter.getParam().getItemsPerPage();
-        int from = (itemsPerPage - 1) * pageNum;
-        int to = Math.min(registeredClientList.size(), (pageNum * itemsPerPage) - 1);
-        return registeredClientList.subList(from, to);
+        return registeredClientList.subList(getFrom(pageNum), getTo(pageNum, registeredClientList.size()));
     }
 
     /**
@@ -333,35 +288,25 @@ public class Pager {
      * @return the desired page
      */
     public List<StoreProduct> pageStoreProductList(List<StoreProduct> storeProductList, int pageNum) {
-        int itemsPerPage = Parameter.getParam().getItemsPerPage();
-        int from = (itemsPerPage - 1) * pageNum;
-        int to = Math.min(storeProductList.size(), (pageNum * itemsPerPage) - 1);
-        return storeProductList.subList(from, to);
+        return storeProductList.subList(getFrom(pageNum), getTo(pageNum, storeProductList.size()));
+    }
+
+    private int maxPageNum(int size) {
+        if (size % Parameter.getParam().getItemsPerPage() == 0) {
+            return size / Parameter.getParam().getItemsPerPage();
+        }
+        return (size / Parameter.getParam().getItemsPerPage()) + 1;
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-
-    /* MAX GETTERS:
-        [x] Category
-        [x] Discount
-        [x] Employee
-        [x] Pack
-        [x] Registered Client
-        [x] Review
-        [x] Store Product
-     */
 
     /**
      * It gets the maximum number of pages that can be obtained from the store's categories list
      * @return the maximum number of pages that can be obtained from the store's categories list
      */
     public int getCategoryMaxPageNum() {
-        // DUE: Revisar esto
         List<Category> categoryList = new ArrayList<>(Store.getInstance().getCategories().values());
-        if (categoryList.size() % Parameter.getParam().getItemsPerPage() == 0) {
-            return categoryList.size() / Parameter.getParam().getItemsPerPage();
-        }
-        return (categoryList.size() / Parameter.getParam().getItemsPerPage()) + 1;
+        return maxPageNum(categoryList.size());
     }
 
     /**
@@ -369,12 +314,8 @@ public class Pager {
      * @return the maximum number of pages that can be obtained from the store's discounts list
      */
     public int getDiscountMaxPageNum() {
-        // DUE: Revisar esto
         List<Discount> discountList = Store.getInstance().getDiscounts();
-        if (discountList.size() % Parameter.getParam().getItemsPerPage() == 0) {
-            return discountList.size() / Parameter.getParam().getItemsPerPage();
-        }
-        return (discountList.size() / Parameter.getParam().getItemsPerPage()) + 1;
+        return maxPageNum(discountList.size());
     }
 
     /**
@@ -382,12 +323,18 @@ public class Pager {
      * @return the maximum number of pages that can be obtained from the store's employees list
      */
     public int getEmployeeMaxPageNum() {
-        // DUE: Revisar esto
         List<Employee> employeeList = new ArrayList<>(Store.getInstance().getEmployees().values());
-        if (employeeList.size() % Parameter.getParam().getItemsPerPage() == 0) {
-            return employeeList.size() / Parameter.getParam().getItemsPerPage();
-        }
-        return (employeeList.size() / Parameter.getParam().getItemsPerPage()) + 1;
+        return maxPageNum(employeeList.size());
+    }
+
+    /**
+     * Auxiliary function to calculate at which index a page starts
+     * @param pageNum the desired page number
+     * @return the index at which the page starts
+     */
+    public int getFrom(int pageNum) {
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        return (itemsPerPage - 1) * pageNum;
     }
 
     /**
@@ -395,12 +342,8 @@ public class Pager {
      * @return the maximum number of pages that can be obtained from the store's packs list
      */
     public int getPackMaxPageNum() {
-        // DUE: Revisar esto
         List<Pack> packList = Store.getInstance().getPacks();
-        if (packList.size() % Parameter.getParam().getItemsPerPage() == 0) {
-            return packList.size() / Parameter.getParam().getItemsPerPage();
-        }
-        return (packList.size() / Parameter.getParam().getItemsPerPage()) + 1;
+        return maxPageNum(packList.size());
     }
 
     /**
@@ -408,13 +351,9 @@ public class Pager {
      * @return the maximum number of pages that can be obtained from the registered client's list
      */
     public int getRegisteredClientMaxPageNum() {
-        // DUE: Revisar esto
         List<RegisteredClient> registeredClientList =
                 new ArrayList<>(Store.getInstance().getRegisteredClients().values());
-        if (registeredClientList.size() % Parameter.getParam().getItemsPerPage() == 0) {
-            return registeredClientList.size() / Parameter.getParam().getItemsPerPage();
-        }
-        return (registeredClientList.size() / Parameter.getParam().getItemsPerPage()) + 1;
+        return maxPageNum(registeredClientList.size());
     }
 
     /**
@@ -423,12 +362,7 @@ public class Pager {
      * @return the maximum number of pages that can be obtained from a product's list of reviews
      */
     public int getReviewMaxPageNum(StoreProduct storeProduct) {
-        // DUE: Revisar esto
-        List<Review> reviews = storeProduct.getReviewsList();
-        if (reviews.size() % (Parameter.getParam().getItemsPerPage() / 2) == 0) {
-            return reviews.size() / (Parameter.getParam().getItemsPerPage() / 2);
-        }
-        return (reviews.size() / (Parameter.getParam().getItemsPerPage() / 2)) + 1;
+        return maxPageNum(storeProduct.getReviewsList().size());
     }
 
     /**
@@ -437,10 +371,17 @@ public class Pager {
      * @return the maximum number of pages that can be obtained from a list of products
      */
     public int getStoreProductMaxPageNum(List<StoreProduct> storeProductList) {
-        // DUE: Revisar esto
-        if (storeProductList.size() % Parameter.getParam().getItemsPerPage() == 0) {
-            return storeProductList.size() / Parameter.getParam().getItemsPerPage();
-        }
-        return (storeProductList.size() / Parameter.getParam().getItemsPerPage()) + 1;
+        return maxPageNum(storeProductList.size());
+    }
+
+    /**
+     * Auxiliary function to calculate at which index a page ends
+     * @param pageNum the desired page number
+     * @param size    the list's size
+     * @return the index at which the page ends
+     */
+    public int getTo(int pageNum, int size) {
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        return Math.min(size, (pageNum * itemsPerPage) - 1);
     }
 }

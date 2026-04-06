@@ -22,10 +22,10 @@ public enum DiscountCoverage {
 
     /**
      * A discount type's constructor
-     * @param symbol the symbol that defines said enumeration
+     * @param assignedSymbol the symbol that defines said enumeration
      */
-    DiscountCoverage(String symbol) {
-        this.symbol = symbol;
+    DiscountCoverage(String assignedSymbol) {
+        this.symbol = assignedSymbol;
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

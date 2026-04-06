@@ -68,10 +68,10 @@ public class ComposedPack extends Pack {
     /**
      * Changes the packs within the composed pack
      *
-     * @param packs the packs to set
+     * @param newPacks the packs to set
      */
-    public void setPacks(HashSet<Pack> packs) {
-        this.packs = packs;
+    public void setPacks(HashSet<Pack> newPacks) {
+        this.packs = newPacks;
     }
 
     /*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/

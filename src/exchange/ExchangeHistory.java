@@ -18,20 +18,20 @@ public class ExchangeHistory {
 
 	/**
 	 * Creates an exchange history
-	 * @param exchanges the exchanges
-	 * @param owner     the owner
+	 * @param assignedExchanges the exchanges
+	 * @param assignedOwner     the owner
 	 */
-	public ExchangeHistory(Set<Exchange> exchanges, RegisteredClient owner) {
-		this.exchanges = new HashSet<Exchange>(exchanges);
-		this.owner = owner;
+	public ExchangeHistory(Set<Exchange> assignedExchanges, RegisteredClient assignedOwner) {
+		this.exchanges = new HashSet<Exchange>(assignedExchanges);
+		this.owner = assignedOwner;
 	}
 
 	/**
 	 * Creates an empty exchange history
-	 * @param owner the owner
+	 * @param assignedOwner the owner
 	 */
-	public ExchangeHistory(RegisteredClient owner){
-		this(new HashSet<>(), owner);
+	public ExchangeHistory(RegisteredClient assignedOwner){
+		this(new HashSet<>(), assignedOwner);
 	}
 
 /*------------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------*/

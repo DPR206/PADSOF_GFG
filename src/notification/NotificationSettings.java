@@ -41,7 +41,7 @@ public class NotificationSettings {
 			    NotificationType.ORDER, true,
 			    NotificationType.EMPLOYEE_EXCHANGE, false,
 			    NotificationType.EMPLOYEE_ORDER, false,
-			    NotificationType.EMPLOYEE_VALUTAION, false
+			    NotificationType.EMPLOYEE_VALUATION, false
 		));
 	}
 	
@@ -62,7 +62,7 @@ public class NotificationSettings {
 				    NotificationType.ORDER, true,
 				    NotificationType.EMPLOYEE_EXCHANGE, false,
 				    NotificationType.EMPLOYEE_ORDER, false,
-				    NotificationType.EMPLOYEE_VALUTAION, false
+				    NotificationType.EMPLOYEE_VALUATION, false
 			));
 		else if(owner instanceof Employee employee)
 			switch(employee.getPerm()) {
@@ -76,7 +76,7 @@ public class NotificationSettings {
 					    NotificationType.ORDER, false,
 					    NotificationType.EMPLOYEE_EXCHANGE, true,
 					    NotificationType.EMPLOYEE_ORDER, false,
-					    NotificationType.EMPLOYEE_VALUTAION, true
+					    NotificationType.EMPLOYEE_VALUATION, true
 				)); break;
 			case Permission.ORDER:
 				this.interests = new HashMap<NotificationType, Boolean>(Map.of(
@@ -88,7 +88,7 @@ public class NotificationSettings {
 					    NotificationType.ORDER, false,
 					    NotificationType.EMPLOYEE_EXCHANGE, false,
 					    NotificationType.EMPLOYEE_ORDER, true,
-					    NotificationType.EMPLOYEE_VALUTAION, false
+					    NotificationType.EMPLOYEE_VALUATION, false
 				)); break;
 			default:
 				this.interests = new HashMap<NotificationType, Boolean>(Map.of(
@@ -100,7 +100,7 @@ public class NotificationSettings {
 					    NotificationType.ORDER, false,
 					    NotificationType.EMPLOYEE_EXCHANGE, false,
 					    NotificationType.EMPLOYEE_ORDER, false,
-					    NotificationType.EMPLOYEE_VALUTAION, false
+					    NotificationType.EMPLOYEE_VALUATION, false
 				)); break;
 			}
 	}
@@ -131,7 +131,7 @@ public class NotificationSettings {
 	 */
 	public void changeInterest(NotificationType type, Boolean interest) {
 		if(type != NotificationType.PAYMENT && NotificationType.ORDER != type && NotificationType.EMPLOYEE_EXCHANGE != type
-		   && NotificationType.EMPLOYEE_ORDER != type && NotificationType.EMPLOYEE_VALUTAION != type)
+		   && NotificationType.EMPLOYEE_ORDER != type && NotificationType.EMPLOYEE_VALUATION != type)
 			this.interests.put(type, interest);
 	}
 	

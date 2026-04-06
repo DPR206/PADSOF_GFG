@@ -69,7 +69,7 @@ public class StorePermission {
      * @param stock, number of items available on the store
      * @param numPlayers, number of players the game allows
      * @param ageRange, the ages allowed to play this game
-     * @param gameStyle, gamestyle of said game
+     * @param gameStyle, game style of said game
      * @param categories, all the categories it belongs too
      * 
      */

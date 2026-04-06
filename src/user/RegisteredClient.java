@@ -87,10 +87,6 @@ public class RegisteredClient extends User {
         this.registerDate = registerDate;
         this.dni = dni;
         this.c = new Cart();
-        this.exchangeHistory = new ExchangeHistory(this);
-        this.orderHistory = new OrderHistory(this);
-        this.offerHistory = new OfferHistory(this);
-        this.notificationHistory = new NotificationHistory(this);
         this.wallet = new Wallet();
         this.searcher = new Searcher(new SearchStoreProducts(true));
         this.numExchanges = 0;
@@ -108,8 +104,16 @@ public class RegisteredClient extends User {
      */
     public RegisteredClient(String userName, String dni, String password, boolean asc) {
         this(userName, LocalDate.now(), dni, password, asc);
+        
     }
-
+    
+    public void setHistories() {
+    	 this.exchangeHistory = new ExchangeHistory(this);
+         this.orderHistory = new OrderHistory(this);
+         this.offerHistory = new OfferHistory(this);
+         this.notificationHistory = new NotificationHistory(this);
+    }
+    
     /**
      * Obtains the client's registration date
      * @return the registerDate the registration date

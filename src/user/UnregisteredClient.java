@@ -4,15 +4,14 @@
 package user;
 
 import order.Cart;
-import product.*;
+import product.Category;
+import product.Pack;
+import product.StoreProduct;
+import productT.*;
 import search.SearchType;
 import store.Store;
 
 import java.util.List;
-
-import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
-import es.uam.eps.padsof.telecard.InvalidCardNumberException;
-import es.uam.eps.padsof.telecard.OrderRejectedException;
 
 /**
  * It implements the unregistered client
@@ -38,16 +37,8 @@ public class UnregisteredClient extends User {
 
     public void buy() {
 
-    	this.s.signIn();
-        try {
-			this.c.payOrder(); //inicia sesión
-		} catch (InvalidCardNumberException e) {
-			System.out.println("Invalid card number");
-		} catch (FailedInternetConnectionException e) {
-			System.out.println("Failed internet connection");
-		} catch (OrderRejectedException e) {
-			System.out.println("Order rejected");
-		}
+        //this.c.payOrder(); //inicia sesión
+        this.s.signIn();
     }
 
     /**
@@ -92,7 +83,7 @@ public class UnregisteredClient extends User {
     public Cart getCart(){
         return this.c;
     }
-
+    
     /**
      * Searches for the store products
      * @return the store product based on the filters
@@ -100,12 +91,12 @@ public class UnregisteredClient extends User {
     public List<StoreProduct> searchStoreProduct(){
         return this.getSearcher().searchStoreProducts();
     }
-
+    
     /**
      * Searches for the store products based on the category
-     *
+     * 
      * @param c, the categories we want our searched products to belong to
-     *
+     * 
      * @return the store product based on the filters
      */
     public List<StoreProduct> searchStoreProductByCategory(Category... c){

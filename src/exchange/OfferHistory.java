@@ -2,7 +2,10 @@ package exchange;
 
 import user.RegisteredClient;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Description: It implements the offer history
@@ -14,7 +17,7 @@ public class OfferHistory {
     /** The offer's owner */
     private final RegisteredClient owner;
     /** The offer history's offers */
-    private Set<Offer> offers;
+    private Set<Offer> offers = new HashSet<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

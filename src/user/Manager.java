@@ -2,11 +2,16 @@ package user;
 
 import discount.*;
 import product.*;
+import search.SearchType;
+import search.Searcher;
+import search.SearchStoreProducts;
 import store.Parameter;
 import store.Store;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.Year;
 import java.util.List;
 
 /**
@@ -20,15 +25,18 @@ public class Manager extends User {
     private final Store s = Store.getInstance();
     /** Store permission necessary for the manager to do its functions */
     private StorePermission sp;
-    /** no clue :v */
+    
     private Parameter parameter;
+    
 
 /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     private Manager(String pwd, String userName, StorePermission storePermission, Parameter p, boolean asc) {
         super(UserType.MANAGER, pwd, userName, asc);
 
-        this.sp = storePermission;
         this.parameter = p;
+        this.sp = new StorePermission();
+        
+        this.getSearcher().setTypes(SearchType.S_STORE);
     }
 
 /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -38,11 +46,107 @@ public class Manager extends User {
         }
         return Manager.INSTANCE;
     }
-
+    
+    /**
+     * Searches for the store products based on the filters
+     * @return the products
+     */
     public List<StoreProduct> searchStoreProduct() {
-        return null; // DUE
+        return this.getSearcher().searchStoreProducts();
     }
-
+    
+    /**
+     * Searches for the store products based on the filters and categories
+     * @return the products
+     */
+    public List<StoreProduct> searchStoreProductCategory(Category...categories){
+    	return this.getSearcher().searchByCategory(categories);
+    }
+    
+    /**
+     * Adds and creates new figurine
+     * @param price
+     * @param name
+     * @param description
+     * @param photo
+     * @param stock
+     * @param dimensions
+     * @param brand
+     * @param material
+     * @param categories
+     *
+     */
+    public boolean addFigurine(double price, String name, String description, String photo, int stock, String dimensions, String brand, String material, Category... categories) {
+        if (this.sp != null) {
+            this.sp.addFigurine(price, name, description, photo, stock, dimensions, brand, material, categories);
+            return true;
+        }
+        System.err.println("You have no permission to do that...");
+        return false;
+    }
+    
+    public boolean addProductFromFile(String filename) {
+    	try {
+			return this.sp.addProductByFile(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return false;
+    }
+    
+    /**
+     * Adds and creates new game
+     * @param price
+     * @param name
+     * @param description
+     * @param photo
+     * @param stock
+     * @param numPlayers
+     * @param ageRange
+     * @param categories
+     *
+     */
+    public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers,
+        String ageRange, GameStyle gameStyle, Category... categories) {
+		if (this.sp != null) {
+			this.sp.addGame(price, name, description, photo, stock, numPlayers, ageRange, gameStyle, categories);
+			return true;
+		}
+		System.err.println("You have no permission to do that...");
+		return false;
+	}
+    
+    /**
+     * Adds and creates new comic
+     * @param price
+     * @param name
+     * @param description
+     * @param photo
+     * @param stock
+     * @param numPages
+     * @param year
+     * @param author
+     * @param categories
+     * @param editorial
+     *
+     */
+    public boolean addComic(double price, String name, String description, String photo, int stock, int numPages,
+        Year year, String author, String editorial, Category... categories) {
+		if (this.sp != null) {
+			this.sp.addComic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
+			return true;
+		}
+		System.err.println("You have no permission to do that...");
+		return false;
+    }
+    /**
+     * Adds a new employee
+     * 
+     *  @param password, the password of the employee
+     *  @param userName, the username of the employee
+     *  @param permission, the permission it has
+     */
+     
     public void addEmployee(String password, String userName, Permission permission) {
         Employee emp = new Employee(password, userName, permission, true);
         s.getEmployees().put(emp.getId(), emp);
@@ -307,7 +411,8 @@ public class Manager extends User {
     public void changeItemsPerPage(int newItemsPerPage) {
         Parameter.getParam().changeItemsPerPage(newItemsPerPage);
     }
-
+    
+  
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     public Manager getIntializedManager() {
         if (Manager.INSTANCE != null) {

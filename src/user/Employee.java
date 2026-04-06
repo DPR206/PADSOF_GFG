@@ -7,6 +7,7 @@ import product.*;
 import search.*;
 import notification.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.*;
@@ -193,6 +194,20 @@ public class Employee extends User {
         System.err.println("You have no permission to do that...");
         return false;
     }
+    /**
+     * Adds and creates new products from a file
+     * 
+     * @param filename
+     *
+     */
+    public boolean addProductFromFile(String filename) {
+    	try {
+			return this.sp.addProductByFile(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return false;
+    }
 
     /**
      * Manages exchange
@@ -283,15 +298,22 @@ public class Employee extends User {
     public Pack searchPackByID(int id){
         return this.getSearcher().searchPackByID(id);
     }
-
-    public Employee searchEmployeeByID(int id){
-        return this.getSearcher().searchEmployeeByID(id);
-    }
+    
 
     /**
      * Searches for the employee based on the id
      *
      * @param id, id of the employee
+     *
+     */
+    public Employee searchEmployeeByID(int id){
+        return this.getSearcher().searchEmployeeByID(id);
+    }
+    
+    /**
+     * Searches for the order based on the id
+     *
+     * @param id, id of the order
      *
      */
     public Order searchOrderByID(int id){

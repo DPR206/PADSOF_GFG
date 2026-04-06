@@ -1,26 +1,24 @@
 package productT;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import product.Category;
+import product.Comic;
 
 import java.time.LocalDate;
 import java.time.Year;
 
-import org.junit.*;
-
-import product.Category;
-import product.Comic;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ComicTest {
 
 	private Comic c;
-	
+
 	@Before
 	public void setUp() {
 		 c = new Comic("1", 12.99, "Test Comic", "Description", "photo.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Author", "Editorial", new Category("algo"));
 	}
-	
+
 	@Test
 	public void getAuthorTest() {
 		String author = this.c.getAuthor();
@@ -56,7 +54,7 @@ public class ComicTest {
         Year y = this.c.getYear();
         assertEquals(y, this.c.getYear());
     }
-	
+
 	@Test
 	public void setYearTest() {
         this.c.setYear(Year.of(2000));

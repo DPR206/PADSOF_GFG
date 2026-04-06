@@ -12,9 +12,7 @@ import notification.*;
 import java.time.*;
 import java.util.*;
 
-import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
-import es.uam.eps.padsof.telecard.InvalidCardNumberException;
-import es.uam.eps.padsof.telecard.OrderRejectedException;
+import es.uam.eps.padsof.telecard.*;
 
 /**
  * It implements the registered client

@@ -1,11 +1,10 @@
 package productT;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import product.*;
 import user.RegisteredClient;
@@ -15,7 +14,7 @@ public class SecondHandProductTest {
     private SecondHandProduct shp;
     private RegisteredClient owner; 
 
-    @Before
+    @BeforeEach
     public void setUp() {
         store.Store.getInstance();
     	this.owner = new RegisteredClient("testuser", LocalDate.now(), "12345678A", "password", true);

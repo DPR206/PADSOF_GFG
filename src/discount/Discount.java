@@ -68,6 +68,8 @@ public abstract class Discount {
         this.id = assignedType.getSymbol() + String.format("%06d", ++totalId);
         this.type = assignedType;
         this.coverage = assignedCoverage;
+        this.startDate = assignedStartDate;
+        this.endDate = assignedEndDate;
         this.setStartDate(assignedStartDate);
         this.setEndDate(assignedEndDate);
 

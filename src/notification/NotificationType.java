@@ -8,6 +8,6 @@ public enum NotificationType{
     PAYMENT,
     ORDER,
     EMPLOYEE_ORDER,
-    EMPLOYEE_VALUTAION,
+    EMPLOYEE_VALUATION,
     EMPLOYEE_EXCHANGE;
 }

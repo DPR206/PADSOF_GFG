@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 /**
  * It implements the payment notification
- * 
+ *
  * @author Duna P.R.
  * @version 1.2
  * @see Notification
@@ -14,7 +14,7 @@ public class NotificationPayment extends Notification implements NotificationInt
 
 	/**
 	 * Creates a new payment notification with default timeMade (this moment) and no content
-	 * 
+	 *
 	 * @param timeReceived the time it was received
 	 * @param read whether the user has read it or not
 	 * @param visible if the notification has been erased by the user (thus no longer visible for them)
@@ -26,7 +26,7 @@ public class NotificationPayment extends Notification implements NotificationInt
 
 	/**
 	 * Creates a new payment notification with default timeMade (this moment)
-	 * 
+	 *
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
 	 * @param timeReceived the time it was received
@@ -40,7 +40,7 @@ public class NotificationPayment extends Notification implements NotificationInt
 
 	/**
 	 * Creates a new payment notification
-	 * 
+	 *
 	 * @param title the tile of the notification
 	 * @param text the message in the notification
 	 * @param timeMade the time it was made
@@ -57,7 +57,7 @@ public class NotificationPayment extends Notification implements NotificationInt
 	@Override
 	/**
 	 * Creates a complete notification
-	 * 
+	 *
 	 * @param o the concept of payment
 	 * @return a string with the notification
 	 */
@@ -70,15 +70,15 @@ public class NotificationPayment extends Notification implements NotificationInt
 	@Override
 	/**
 	 * Creates a snippet of the notification (title and time log)
-	 * 
+	 *
 	 * @param o the concept of payment
 	 * @return a string with the snippet of the notification
 	 */
 	public String SnippetNotification(String o) {
-		this.setTitle("Your payment was succesful\n");
+		this.setTitle("Your payment was successful\n");
 		return this.getTitle() + this.timeLog();
 	}
-	
-	
-	
+
+
+
 }

@@ -11,7 +11,7 @@ import java.util.List;
  * @version 1.4
  * @see Store
  */
-public class Category{
+public class Category {
     /** The category's name */
     public String name;
     /** The category's total revenue */
@@ -23,33 +23,33 @@ public class Category{
 
     /**
      * Category's full constructor
-     * @param name    the new category's name
-     * @param revenue the category's revenue
+     * @param assignedName    the new category's name
+     * @param assignedRevenue the category's revenue
      * @throws IllegalArgumentException revenue was negative or category already existed
      * @throws NullPointerException     store or name were null
      */
-    public Category(String name, double revenue) throws IllegalArgumentException, NullPointerException {
-        if (name == null) {
+    public Category(String assignedName, double assignedRevenue) throws IllegalArgumentException, NullPointerException {
+        if (assignedName == null) {
             throw new NullPointerException("Name must not be null");
         }
-        if (revenue < 0) {
+        if (assignedRevenue < 0) {
             throw new NullPointerException("Revenue must not be negative");
         }
 
-        this.name = name;
-        this.revenue = revenue;
+        this.name = assignedName;
+        this.revenue = assignedRevenue;
 
         Store.getInstance().getCategories().put(this.name, this);
     }
 
     /**
      * Category's constructor
-     * @param name the new category's name
+     * @param assignedName the new category's name
      * @throws IllegalArgumentException category already existed
      * @throws NullPointerException     store or name were null
      */
-    public Category(String name) throws IllegalArgumentException, NullPointerException {
-        this(name, 0);
+    public Category(String assignedName) throws IllegalArgumentException, NullPointerException {
+        this(assignedName, 0);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -127,10 +127,10 @@ public class Category{
 
     /**
      * Sets the revenue of a category
-     * @param revenue the revenue to set
+     * @param newRevenue the revenue to set
      */
-    public void setRevenue(double revenue) {
-        this.revenue = revenue;
+    public void setRevenue(double newRevenue) {
+        this.revenue = newRevenue;
     }
 
 

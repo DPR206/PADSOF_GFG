@@ -20,10 +20,10 @@ public class CategoryDiscountFactory implements DiscountFactory {
 
     /**
      * Instantiates a new Category discount factory
-     * @param targetCategories the desired categories
+     * @param assignedCategories the desired categories
      */
-    public CategoryDiscountFactory(Category... targetCategories) {
-        this.targetCategories = targetCategories;
+    public CategoryDiscountFactory(Category... assignedCategories) {
+        this.targetCategories = assignedCategories;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

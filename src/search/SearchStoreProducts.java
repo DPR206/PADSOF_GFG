@@ -20,7 +20,7 @@ public class SearchStoreProducts{
 
 
     /**
-	 * Creates the class and initiates the filters as null in the beggining until the user changes them
+	 * Creates the class and initiates the filters as null in the beginning until the user changes them
 	 *
 	 * @param asc, determines if the searches are ascendant or descendant
      * @param type, determines the type of search we are doing

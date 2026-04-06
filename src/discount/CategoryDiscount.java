@@ -22,38 +22,38 @@ public abstract class CategoryDiscount extends Discount {
 
     /**
      * A Category discount's general constructor
-     * @param id        the discount's id
-     * @param type      the discount's type
-     * @param coverage  the discount's coverage
-     * @param startDate the discount's start date
-     * @param endDate   the discount's end date
+     * @param assignedId        the discount's id
+     * @param assignedType      the discount's type
+     * @param assignedCoverage  the discount's coverage
+     * @param assignedStartDate the discount's start date
+     * @param assignedEndDate   the discount's end date
      */
-    public CategoryDiscount(String id, DiscountType type, DiscountCoverage coverage, LocalDateTime startDate,
-                            LocalDateTime endDate) {
-        super(id, type, coverage, startDate, endDate);
+    public CategoryDiscount(String assignedId, DiscountType assignedType, DiscountCoverage assignedCoverage,
+                            LocalDateTime assignedStartDate, LocalDateTime assignedEndDate) {
+        super(assignedId, assignedType, assignedCoverage, assignedStartDate, assignedEndDate);
     }
 
     /**
      * A Category discount's constructor with default id
-     * @param type      the discount's type
-     * @param coverage  the discount's coverage
-     * @param startDate the discount's start date
-     * @param endDate   the discount's end date
+     * @param assignedType      the discount's type
+     * @param assignedCoverage  the discount's coverage
+     * @param assignedStartDate the discount's start date
+     * @param endDate           the discount's end date
      */
-    public CategoryDiscount(DiscountType type, DiscountCoverage coverage, LocalDateTime startDate,
-                            LocalDateTime endDate) {
-        super(type, coverage, startDate, endDate);
+    public CategoryDiscount(DiscountType assignedType, DiscountCoverage assignedCoverage,
+                            LocalDateTime assignedStartDate, LocalDateTime endDate) {
+        super(assignedType, assignedCoverage, assignedStartDate, endDate);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * It adds categories to the discount
-     * @param categories the desired categories
+     * @param newCategories the desired categories
      * @throws IllegalArgumentException the desired discount was conflicting
      */
-    public void addCategories(Category... categories) throws IllegalArgumentException {
-        for (Category category : categories) {
+    public void addCategories(Category... newCategories) throws IllegalArgumentException {
+        for (Category category : newCategories) {
             if (conflictingDisc(category.getProducts())) {
                 throw new IllegalArgumentException("The desired discount was conflicting");
             }

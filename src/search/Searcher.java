@@ -141,7 +141,7 @@ public class Searcher{
     }
 
     /**
-	 * Linear search implemented to search for the searchtype on the array of searchTypes
+	 * Linear search implemented to search for the search type on the array of searchTypes
      *
 	 *@param t, the searchType we want to check if it's there or not
 	 */

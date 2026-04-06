@@ -20,49 +20,41 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
 
     /**
      * A quantity discount's general constructor with categories
-     * @param id           the discount's id
-     * @param startDate    the date when the discount starts
-     * @param endDate      the date when the discount ends
-     * @param numThreshold the amount of products in a cart from which the discount can take place
-     * @param deduction    the amount of money the discount deducts from the order's final price
-     * @param categories   the discount's categories
+     * @param assignedId           the discount's id
+     * @param assignedStartDate    the date when the discount starts
+     * @param assignedEndDate      the date when the discount ends
+     * @param assignedNumThreshold the amount of products in a cart from which the discount can take place
+     * @param assignedDeduction    the amount of money the discount deducts from the order's final price
+     * @param assignedCategories   the discount's categories
      * @throws IllegalArgumentException the illegal argument exception
      */
-    public CategoryQuantity(String id, LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
-                            double deduction, Category... categories) throws IllegalArgumentException {
-        super(id, DiscountType.QUANTITY, DiscountCoverage.CATEGORY, startDate, endDate);
-        this.addCategories(categories);
-        this.setNumThreshold(numThreshold);
-        this.setDeduction(deduction);
+    public CategoryQuantity(String assignedId, LocalDateTime assignedStartDate, LocalDateTime assignedEndDate,
+                            int assignedNumThreshold, double assignedDeduction, Category... assignedCategories)
+            throws IllegalArgumentException {
+        super(assignedId, DiscountType.QUANTITY, DiscountCoverage.CATEGORY, assignedStartDate, assignedEndDate);
+        this.addCategories(assignedCategories);
+        this.setNumThreshold(assignedNumThreshold);
+        this.setDeduction(assignedDeduction);
     }
 
     /**
      * Instantiates a new quantity discount with categories
-     * @param startDate    the date when the discount starts
-     * @param endDate      the date when the discount ends
-     * @param numThreshold the amount of products in a cart from which the discount can take place
-     * @param deduction    the amount of money the discount deducts from the order's final price
-     * @param categories   the discount's categories
+     * @param assignedStartDate    the date when the discount starts
+     * @param assignedEndDate      the date when the discount ends
+     * @param assignedNumThreshold the amount of products in a cart from which the discount can take place
+     * @param assignedDeduction    the amount of money the discount deducts from the order's final price
+     * @param assignedCategories   the discount's categories
      * @throws IllegalArgumentException the illegal argument exception
      */
-    public CategoryQuantity(LocalDateTime startDate, LocalDateTime endDate, int numThreshold, double deduction,
-                            Category... categories) throws IllegalArgumentException {
-        super(DiscountType.QUANTITY, DiscountCoverage.CATEGORY, startDate, endDate);
-        this.addCategories(categories);
-        this.setNumThreshold(numThreshold);
-        this.setDeduction(deduction);
+    public CategoryQuantity(LocalDateTime assignedStartDate, LocalDateTime assignedEndDate, int assignedNumThreshold,
+                            double assignedDeduction, Category... assignedCategories) throws IllegalArgumentException {
+        super(DiscountType.QUANTITY, DiscountCoverage.CATEGORY, assignedStartDate, assignedEndDate);
+        this.addCategories(assignedCategories);
+        this.setNumThreshold(assignedNumThreshold);
+        this.setDeduction(assignedDeduction);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -96,13 +88,21 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
     /**
      * It allows the manager to change the quantity discount's amount of products in a cart from which the discount can
      * take place
-     * @param numThreshold the new amount of products in a cart from which the discount can take place
+     * @param newNumThreshold the new amount of products in a cart from which the discount can take place
      */
-    public void setNumThreshold(int numThreshold) throws IllegalArgumentException {
-        if (numThreshold <= 0) {
+    public void setNumThreshold(int newNumThreshold) throws IllegalArgumentException {
+        if (newNumThreshold <= 0) {
             throw new IllegalArgumentException("The number of units must be greater than 0");
         }
-        this.numThreshold = numThreshold;
+        this.numThreshold = newNumThreshold;
+    }
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
     }
 
     /**

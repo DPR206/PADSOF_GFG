@@ -53,12 +53,12 @@ public class Employee extends User {
             else if(this.sp == null && this.ep != null) this.getSearcher().setTypes(SearchType.S_EXCHANGE, SearchType.S_ORDER);
             else this.getSearcher().setTypes(SearchType.S_ORDER);
         }
-        
+
         this.notificationHistory = new NotificationHistory(this);
     }
 
 /*---------------------------------------------------GETTERS AND SETTERS-------------------------------------------------------------*/
-    
+
     /**
    	 * @return the ep
    	 */
@@ -67,10 +67,10 @@ public class Employee extends User {
    	}
 
    	/**
-   	 * @param ep the ep to set
+   	 * @param newEp the ep to set
    	 */
-   	public void setEp(ExchangePermission ep) {
-   		this.ep = ep;
+   	public void setEp(ExchangePermission newEp) {
+   		this.ep = newEp;
    	}
 
    	/**
@@ -81,10 +81,10 @@ public class Employee extends User {
    	}
 
    	/**
-   	 * @param op the op to set
+   	 * @param newOp the op to set
    	 */
-   	public void setOp(OrderPermission op) {
-   		this.op = op;
+   	public void setOp(OrderPermission newOp) {
+   		this.op = newOp;
    	}
 
    	/**
@@ -95,10 +95,10 @@ public class Employee extends User {
    	}
 
    	/**
-   	 * @param sp the sp to set
+   	 * @param newSp the sp to set
    	 */
-   	public void setSp(StorePermission sp) {
-   		this.sp = sp;
+   	public void setSp(StorePermission newSp) {
+   		this.sp = newSp;
    	}
 
    	/**
@@ -109,10 +109,10 @@ public class Employee extends User {
    	}
 
    	/**
-   	 * @param perm the perm to set
+   	 * @param newPerm the perm to set
    	 */
-   	public void setPerm(Permission perm) {
-   		this.perm = perm;
+   	public void setPerm(Permission newPerm) {
+   		this.perm = newPerm;
    	}
 
    	/**
@@ -121,7 +121,7 @@ public class Employee extends User {
    	public NotificationHistory getNotificationHistory() {
    		return notificationHistory;
    	}
-    
+
 /*---------------------------------------------------METHODS--------------------------------------------------------------------------------*/
 
     /**
@@ -211,7 +211,7 @@ public class Employee extends User {
      * Gives a secondhand product a value
      * @param secondHandProduct
      * @param valuation
-     * @param status 
+     * @param status
      *
      */
     public boolean valuate(SecondHandProduct secondHandProduct, double valuation, ConservationStatus status) {
@@ -222,12 +222,12 @@ public class Employee extends User {
         System.err.println("You have no permission to do that...");
         return false;
     }
-    
+
     /**
      * Gives a secondhand product a value
      * @param secondHandProduct
      * @param valuation
-     * @param status 
+     * @param status
      *
      */
     public boolean valuate(SecondHandProduct secondHandProduct, double valuation, ConservationStatus status, LocalDate valuationDate) {

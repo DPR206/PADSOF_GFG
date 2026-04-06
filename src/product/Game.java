@@ -28,38 +28,38 @@ public class Game extends StoreProduct {
      * @param averagePunctuation the game's average punctuation
      * @param addedDate          the game's added date
      * @param stock              the game's stock
-     * @param numPlayers         the game's num players
-     * @param ageRange           the game's age range
-     * @param gameStyle          the game's style
+     * @param assignedNumPlayers the game's num players
+     * @param assignedAgeRange   the game's age range
+     * @param assignedGameStyle  the game's style
      * @param categories         the game's categories
      */
     public Game(String id, double price, String name, String description, String photo, double averagePunctuation,
-                LocalDate addedDate, int stock, int numPlayers, String ageRange, GameStyle gameStyle,
-                Category... categories) {
+                LocalDate addedDate, int stock, int assignedNumPlayers, String assignedAgeRange,
+                GameStyle assignedGameStyle, Category... categories) {
         super(id, price, name, description, photo, averagePunctuation, addedDate, ProductType.GAME, stock, categories);
-        this.numPlayers = numPlayers;
-        this.ageRange = ageRange;
-        this.gameStyle = gameStyle;
+        this.numPlayers = assignedNumPlayers;
+        this.ageRange = assignedAgeRange;
+        this.gameStyle = assignedGameStyle;
     }
 
     /**
      * The game's constructor
-     * @param price       the game's price
-     * @param name        the game's name
-     * @param description the game's description
-     * @param photo       the game's photo's path
-     * @param stock       the game's stock
-     * @param numPlayers  the game's num players
-     * @param ageRange    the game's age range
-     * @param gameStyle   the game's style
-     * @param categories  the game's categories
+     * @param price              the game's price
+     * @param name               the game's name
+     * @param description        the game's description
+     * @param photo              the game's photo's path
+     * @param stock              the game's stock
+     * @param assignedNumPlayers the game's num players
+     * @param assignedAgeRange   the game's age range
+     * @param assignedGameStyle  the game's style
+     * @param categories         the game's categories
      */
-    public Game(double price, String name, String description, String photo, int stock, int numPlayers, String ageRange,
-                GameStyle gameStyle, Category... categories) {
+    public Game(double price, String name, String description, String photo, int stock, int assignedNumPlayers,
+                String assignedAgeRange, GameStyle assignedGameStyle, Category... categories) {
         super(price, name, description, photo, ProductType.GAME, stock, categories);
-        this.numPlayers = numPlayers;
-        this.ageRange = ageRange;
-        this.gameStyle = gameStyle;
+        this.numPlayers = assignedNumPlayers;
+        this.ageRange = assignedAgeRange;
+        this.gameStyle = assignedGameStyle;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

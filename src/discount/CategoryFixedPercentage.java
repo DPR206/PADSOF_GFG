@@ -18,45 +18,38 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
 
     /**
      * A fixed percentage discount's general constructor with categories
-     * @param id         the discount's id
-     * @param startDate  the date when the discount starts
-     * @param endDate    the date when the discount ends
-     * @param percentage the percentage deducted from a product's price
-     * @param categories the discount's categories
+     * @param assignedId         the discount's id
+     * @param assignedStartDate  the date when the discount starts
+     * @param assignedEndDate    the date when the discount ends
+     * @param assignedPercentage the percentage deducted from a product's price
+     * @param assignedCategories the discount's categories
      * @throws IllegalArgumentException the percentage wasn't between 0 and 100, 0 not included
      */
-    public CategoryFixedPercentage(String id, LocalDateTime startDate, LocalDateTime endDate, double percentage,
-                                   Category... categories) throws IllegalArgumentException {
-        super(id, DiscountType.FIXED_PERCENTAGE, DiscountCoverage.CATEGORY, startDate, endDate);
-        this.addCategories(categories);
-        this.setPercentage(percentage);
+    public CategoryFixedPercentage(String assignedId, LocalDateTime assignedStartDate, LocalDateTime assignedEndDate,
+                                   double assignedPercentage, Category... assignedCategories)
+            throws IllegalArgumentException {
+        super(assignedId, DiscountType.FIXED_PERCENTAGE, DiscountCoverage.CATEGORY, assignedStartDate, assignedEndDate);
+        this.addCategories(assignedCategories);
+        this.setPercentage(assignedPercentage);
     }
 
     /**
      * Instantiates a new fixed percentage discount with categories
-     * @param startDate  the date when the discount starts
-     * @param endDate    the date when the discount ends
-     * @param percentage the percentage deducted from a product's price
-     * @param categories the discount's categories
+     * @param assignedStartDate  the date when the discount starts
+     * @param assignedEndDate    the date when the discount ends
+     * @param assignedPercentage the percentage deducted from a product's price
+     * @param assignedCategories the discount's categories
      * @throws IllegalArgumentException the percentage wasn't between 0 and 100, 0 not included
      */
-    public CategoryFixedPercentage(LocalDateTime startDate, LocalDateTime endDate, double percentage,
-                                   Category... categories) throws IllegalArgumentException {
-        super(DiscountType.FIXED_PERCENTAGE, DiscountCoverage.CATEGORY, startDate, endDate);
-        this.addCategories(categories);
-        this.setPercentage(percentage);
+    public CategoryFixedPercentage(LocalDateTime assignedStartDate, LocalDateTime assignedEndDate,
+                                   double assignedPercentage, Category... assignedCategories)
+            throws IllegalArgumentException {
+        super(DiscountType.FIXED_PERCENTAGE, DiscountCoverage.CATEGORY, assignedStartDate, assignedEndDate);
+        this.addCategories(assignedCategories);
+        this.setPercentage(assignedPercentage);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -78,6 +71,14 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
         }
 
         this.percentage = newPercentage;
+    }
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "DUE"; // DUE
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

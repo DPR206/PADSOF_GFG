@@ -35,47 +35,48 @@ public class Exchange {
 
     /**
      * An exchange's general constructor
-     * @param id        the id
-     * @param date      the date
-     * @param exchanged the exchanged
-     * @param user1     the user 1
-     * @param products1 the products 1
-     * @param user2     the user 2
-     * @param products2 the products 2
+     * @param assignedId        the id
+     * @param assignedDate      the date
+     * @param assignedExchanged the exchanged
+     * @param assignedUser1     the user 1
+     * @param assignedProducts1 the products 1
+     * @param assignedUser2     the user 2
+     * @param assignedProducts2 the products 2
      */
-    public Exchange(int id, LocalDateTime date, boolean exchanged, RegisteredClient user1,
-                    ArrayList<SecondHandProduct> products1, RegisteredClient user2,
-                    ArrayList<SecondHandProduct> products2) {
+    public Exchange(int assignedId, LocalDateTime assignedDate, boolean assignedExchanged,
+                    RegisteredClient assignedUser1,
+                    ArrayList<SecondHandProduct> assignedProducts1, RegisteredClient assignedUser2,
+                    ArrayList<SecondHandProduct> assignedProducts2) {
 
-        this.id = id;
-        this.date = date;
-        this.exchanged = exchanged;
-        this.origin = user1;
-        this.productos_propietario.put(user1, products1);
-        this.destination = user2;
-        this.productos_propietario.put(user2, products2);
+        this.id = assignedId;
+        this.date = assignedDate;
+        this.exchanged = assignedExchanged;
+        this.origin = assignedUser1;
+        this.productos_propietario.put(assignedUser1, assignedProducts1);
+        this.destination = assignedUser2;
+        this.productos_propietario.put(assignedUser2, assignedProducts2);
 
         Store.getInstance().addExchange(this);
     }
 
     /**
      * Creates a new exchange
-     * @param date      the date
-     * @param exchanged the exchanged
-     * @param user1     the user 1
-     * @param products1 the products 1
-     * @param user2     the user 2
-     * @param products2 the products 2
+     * @param assignedDate      the date
+     * @param assignedExchanged the exchanged
+     * @param assignedUser1     the user 1
+     * @param assignedProducts1 the products 1
+     * @param assignedProducts2     the user 2
+     * @param assignedUser2 the products 2
      */
-    public Exchange(LocalDateTime date, boolean exchanged, RegisteredClient user1,
-                    ArrayList<SecondHandProduct> products1, RegisteredClient user2,
-                    ArrayList<SecondHandProduct> products2) {
-        this.date = date;
-        this.exchanged = exchanged;
-        this.origin = user1;
-        this.productos_propietario.put(user1, products1);
-        this.destination = user2;
-        this.productos_propietario.put(user2, products2);
+    public Exchange(LocalDateTime assignedDate, boolean assignedExchanged, RegisteredClient assignedUser1,
+                    ArrayList<SecondHandProduct> assignedProducts1, RegisteredClient assignedUser2,
+                    ArrayList<SecondHandProduct> assignedProducts2) {
+        this.date = assignedDate;
+        this.exchanged = assignedExchanged;
+        this.origin = assignedUser1;
+        this.productos_propietario.put(assignedUser1, assignedProducts1);
+        this.destination = assignedUser2;
+        this.productos_propietario.put(assignedUser2, assignedProducts2);
         this.id = totalId;
         totalId++;
         Store.getInstance().addExchange(this);
@@ -83,15 +84,16 @@ public class Exchange {
 
     /**
      * Creates an exchange with the date
-     * @param date      the date
-     * @param user1     the user 1
-     * @param products1 the products 1
-     * @param user2     the user 2
-     * @param products2 the products 2
+     * @param assignedDate      the date
+     * @param assignedUser1     the user 1
+     * @param assignedProducts1 the products 1
+     * @param assignedUser2     the user 2
+     * @param assignedProducts2 the products 2
      */
-    public Exchange(LocalDateTime date, RegisteredClient user1, ArrayList<SecondHandProduct> products1,
-                    RegisteredClient user2, ArrayList<SecondHandProduct> products2) {
-        this(date, false, user1, products1, user2, products2);
+    public Exchange(LocalDateTime assignedDate, RegisteredClient assignedUser1,
+                    ArrayList<SecondHandProduct> assignedProducts1,
+                    RegisteredClient assignedUser2, ArrayList<SecondHandProduct> assignedProducts2) {
+        this(assignedDate, false, assignedUser1, assignedProducts1, assignedUser2, assignedProducts2);
     }
 
 
@@ -115,26 +117,26 @@ public class Exchange {
 
     /**
      * Sets the state of the exchange
-     * @param exchanged the exchanged to set
+     * @param newExchanged the exchanged to set
      */
-    public void setExchanged(boolean exchanged) {
-        this.exchanged = exchanged;
+    public void setExchanged(boolean newExchanged) {
+        this.exchanged = newExchanged;
     }
 
     /**
      * Changes if the exchange was done
-     * @param exchanged the exchanged
+     * @param newExchanged the exchanged
      */
-    public void changeExchanged(boolean exchanged) {
-        this.setExchanged(exchanged);
+    public void changeExchanged(boolean newExchanged) {
+        this.setExchanged(newExchanged);
     }
 
     /**
      * Changes the date of the exchange
-     * @param date the date
+     * @param newDate the date
      */
-    public void changeDate(LocalDateTime date) {
-        this.setDate(date);
+    public void changeDate(LocalDateTime newDate) {
+        this.setDate(newDate);
     }
 
     /**
@@ -147,10 +149,10 @@ public class Exchange {
 
     /**
      * Sets the date of the exchange
-     * @param date the date to set
+     * @param newDate the date to set
      */
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDate(LocalDateTime newDate) {
+        this.date = newDate;
     }
 
     /*---------------------------------------------------------------METHODS--------------------------------------------------------------------*/

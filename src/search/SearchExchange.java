@@ -34,7 +34,7 @@ public class SearchExchange implements SearchID{
     }
 
      /**
-	 * Searches the exchange based on a sent id
+	 * Searches the exchange based on a certain id
 	 *
 	 * @param id, the id of the exchange that the user wants to search
 	 */

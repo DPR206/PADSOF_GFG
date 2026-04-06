@@ -11,7 +11,7 @@ public class PriceFilter{
     /**
 	 * Creates a new price filter
 	 *
-	 * @param min, minimun price wanted
+	 * @param min, minimum price wanted
 	 * @param max, maximum price wanted
 	 */
     public PriceFilter(double min, double max){
@@ -19,7 +19,7 @@ public class PriceFilter{
         this.max = max;
     }
     /**
-	 * Gets the minimun
+	 * Gets the minimum
 	 *
 	 */
     public double getMin(){

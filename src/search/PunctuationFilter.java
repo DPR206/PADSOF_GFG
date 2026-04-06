@@ -19,14 +19,14 @@ public class PunctuationFilter{
         this.max = max;
     }
     /**
-	 * Gets the minimun punctuation
+	 * Gets the minimum punctuation
 	 *
 	 */
     public int getMin(){
         return this.min;
     }
     /**
-	 * Gets the maximun punctuation
+	 * Gets the maximum punctuation
 	 *
 	 */
     public int getMax(){

@@ -2,8 +2,7 @@ package exchange;
 
 import user.RegisteredClient;
 
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Description: It implements the offer history

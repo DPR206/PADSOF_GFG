@@ -55,7 +55,7 @@ public class Parameter {
 	}
 
 	/**
-	 * Sets the expire time of an offer
+	 * Sets the expiration time of an offer
 	 *
 	 * @param offerTime the offerTime to set
 	 */
@@ -64,7 +64,7 @@ public class Parameter {
 	}
 
 	/**
-	 * Obtains the expire time of an order
+	 * Obtains the expiration time of an order
 	 * @return the orderTime, the expiration time of an order
 	 */
 	public Period getOrderTime() {

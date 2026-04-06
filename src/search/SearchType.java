@@ -21,7 +21,7 @@ public enum SearchType{
 	 * Creates the enum and initializes the name of the type of search
 	 *
 	 * @param asc, determines if the searches are ascendant or descendant
-     * @param type, determines the type of search we are doing
+     * @param theType, determines the type of search we are doing
 	 */
     SearchType(String theType){
         this.theType = theType;

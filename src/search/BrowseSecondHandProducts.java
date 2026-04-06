@@ -17,9 +17,7 @@ public class BrowseSecondHandProducts{
     private List<SecondHandProduct> products;
 
     /**
-	 * Creates the class
-	 *
-	 * @param s, sends the store to get all the second hand products available
+	 * Creates the class and sends the store to get all the second hand products available
 	 */
     public BrowseSecondHandProducts(){
 

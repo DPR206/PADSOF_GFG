@@ -16,9 +16,7 @@ public class SearchExchange implements SearchID{
     private List<Exchange> exchanges;
 
      /**
-	 * Creates the class
-	 *
-	 * @param s, the store to create the list of exchanges
+	 * Creates the class and uses the store to create the list of exchanges
 	 */
     public SearchExchange(){
         this.exchanges = s.getExchanges();

@@ -88,7 +88,7 @@ public class StorePermission {
     /**
      * Adds new products to the store reading them from a file
      *
-     * @param filename, name of the file that contains the products
+     * @param fileName, name of the file that contains the products
      *
      */
     public boolean addProductByFile(String fileName) throws IOException {

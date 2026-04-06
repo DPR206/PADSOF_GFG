@@ -90,10 +90,6 @@ public class RegisteredClient extends User {
         this.registerDate = registerDate;
         this.dni = dni;
         this.c = new Cart();
-        this.exchangeHistory = null;//new ExchangeHistory(this);
-        this.orderHistory = null; // new OrderHistory(this);
-        this.offerHistory = null; //new OfferHistory(this);
-        this.notificationHistory = null; //new NotificationHistory(this);
         this.wallet = new Wallet();
         this.searcher = new Searcher(new SearchStoreProducts(true));
         this.numExchanges = 0;

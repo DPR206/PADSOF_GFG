@@ -158,6 +158,7 @@ public class Cart {
         }
 
         wanted.decreaseStock();
+        wanted.setDateAddCart(LocalDate.now());
 
         return true;
     }
@@ -249,6 +250,7 @@ public class Cart {
     		LocalDate expiration = this.calculateExpiredDate(spi);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelProduct(spi);
+    			
     		}
     	}
     	for(Pack p: packs) {

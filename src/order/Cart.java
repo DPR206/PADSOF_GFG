@@ -169,7 +169,6 @@ public class Cart {
 
         Scanner sc = new Scanner(System.in);
         String numeroTarjeta;//, CCV, fechaCad;
-        //RegisteredClient rc;
 
         try {
             System.out.print("Introduce tu número de tarjeta: ");

@@ -48,7 +48,7 @@ public abstract class Discount {
         this.id = assignedId;
         this.type = assignedType;
         this.coverage = assignedCoverage;
-        this.setStartDate(assignedStartDate);
+        this.startDate = assignedStartDate;
         this.setEndDate(assignedEndDate);
 
         Store.getInstance().getDiscounts().add(this);
@@ -69,8 +69,6 @@ public abstract class Discount {
         this.type = assignedType;
         this.coverage = assignedCoverage;
         this.startDate = assignedStartDate;
-        this.endDate = assignedEndDate;
-        this.setStartDate(assignedStartDate);
         this.setEndDate(assignedEndDate);
 
         Store.getInstance().getDiscounts().add(this);

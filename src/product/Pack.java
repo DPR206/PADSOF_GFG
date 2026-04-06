@@ -134,6 +134,10 @@ public class Pack {
      * @return the pack's price
      */
     public double getPrice() {
+		if (this.discount == null) {
+			return this.price; // TEST_FIX
+		}
+
         switch (this.discount.getType()) {
             case FIXED_PERCENTAGE:
                 FixedPercentageDiscount fixedPerDisc = (FixedPercentageDiscount) this.discount;
@@ -170,8 +174,9 @@ public class Pack {
 	 *
 	 * @return the products, the products included
 	 */
-	public List<StoreProduct> getProducts() {
-		return Collections.unmodifiableList(products);
+	public ArrayList<StoreProduct> getProducts() {
+		// Prueba: return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
+		return this.products; // TEST_FIX
 	}
 
 	/**

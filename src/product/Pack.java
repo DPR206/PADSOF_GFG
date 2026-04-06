@@ -34,6 +34,7 @@ public class Pack {
 	 * @param id, the pack's id
 	 * @param price, the pack's price
 	 * @param products, the products the pack contains
+	 * @param date the date it was added to the cart
 	 */
 	public Pack(int id, double price, ArrayList<StoreProduct> products, LocalDate date) {
 		this.id = id;
@@ -60,6 +61,7 @@ public class Pack {
 	 *
 	 * @param price, price of the pack
 	 * @param products, the products the pack contains
+	 * @param date the date it was added to the cart
 	 */
 	public Pack(double price, ArrayList<StoreProduct> products, LocalDate date) {
 		this(totalId, price, products, date);
@@ -70,7 +72,7 @@ public class Pack {
 	 * Creates a new pack with no products
 	 *
 	 * @param price, price of the pack
-	 * @param date, the products the pack contains
+	 * @param date, the date it was added to the cart
 	 */
 	public Pack(double price, LocalDate date) {
 		this(totalId, price, new ArrayList<StoreProduct>(), date);
@@ -80,6 +82,7 @@ public class Pack {
 	/**
 	 * Creates a new pack with no products
 	 *
+	 * @param id, the pack's id
 	 * @param price, price of the pack
 	 * @param date, the products the pack contains
 	 */

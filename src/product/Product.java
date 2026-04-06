@@ -87,6 +87,8 @@ public abstract class Product {
 
     /**
      * It prints the product's info when showcased as list
+     * 
+     * @return the product's info
      */
     public String smallPrintInfo() {
         return "Name: " + this.name + ", Price: [" + this.price + "]€";

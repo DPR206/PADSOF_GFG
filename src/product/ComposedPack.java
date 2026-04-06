@@ -22,10 +22,10 @@ public class ComposedPack extends Pack {
     /**
      * Creates a new composed pack
      *
-     * @param id
-     * @param price
-     * @param newPacks
-     * @param date
+     * @param id the pack's id
+     * @param price the pack's price
+     * @param newPacks the pack's it contains
+     * @param date the date it was added to the cart
      */
     public ComposedPack(int id, double price, HashSet<Pack> newPacks, LocalDate date) {
         super(id, price, date);
@@ -35,9 +35,9 @@ public class ComposedPack extends Pack {
     /**
      * Creates a new composed pack with default id
      *
-     * @param newPacks
-     * @param price
-     * @param date
+     * @param newPacks the pack's it contains
+     * @param price the pack's price
+     * @param date the date it was added to the cart
      */
     public ComposedPack(HashSet<Pack> newPacks, double price, LocalDate date) {
         super(price, date);

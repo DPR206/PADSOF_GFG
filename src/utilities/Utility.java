@@ -1,8 +1,3 @@
-/**
- * It implements elements such a sign in method and login method which don't belong to either classes
- * @author Sofía C.L. and Duna P.R.
- * @version 1.1.
- */
 
 package utilities;
 
@@ -11,10 +6,23 @@ import user.*;
 
 import java.util.*;
 
+/**
+ * It implements elements such a sign in method and login method which don't belong to either classes
+ * @author Sofía C.L. and Duna P.R.
+ * @version 1.1.
+ */
 public class Utility {
-    public Utility() {
-    }
+	
+	/**
+	 * Creates a new utility
+	 */
+    public Utility() {}
 
+    /**
+     * The sign in process
+     * 
+     * @return a new user
+     */
     public User signIn() {
         Scanner sc = new Scanner(System.in);
         String userName = null, pwd, dni;
@@ -58,6 +66,13 @@ public class Utility {
         }
     }
 
+    /**
+     * The log in process
+     * 
+     * @param userName the user's name
+     * @param pwd the user's password
+     * @return the associated user (if there is one)
+     */
     public User logIn(String userName, String pwd) {
         User u;
 
@@ -70,6 +85,12 @@ public class Utility {
         return null;
     }
     
+    /**
+     * Checks if a password is secure
+     * 
+     * @param psswd the password to chech
+     * @return true if the password is safe, false if else
+     */
     public boolean securePassword(String psswd) {
     	int upper = 0;
     	int lower = 0;

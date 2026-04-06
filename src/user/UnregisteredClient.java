@@ -4,14 +4,15 @@
 package user;
 
 import order.Cart;
-import product.Category;
-import product.Pack;
-import product.StoreProduct;
-import productT.*;
+import product.*;
 import search.SearchType;
 import store.Store;
 
 import java.util.List;
+
+import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
+import es.uam.eps.padsof.telecard.InvalidCardNumberException;
+import es.uam.eps.padsof.telecard.OrderRejectedException;
 
 /**
  * It implements the unregistered client
@@ -37,8 +38,16 @@ public class UnregisteredClient extends User {
 
     public void buy() {
 
-        this.c.payOrder(); //inicia sesión
-        this.s.signIn();
+    	this.s.signIn();
+        try {
+			this.c.payOrder(); //inicia sesión
+		} catch (InvalidCardNumberException e) {
+			System.out.println("Invalid card number");
+		} catch (FailedInternetConnectionException e) {
+			System.out.println("Failed internet connection");
+		} catch (OrderRejectedException e) {
+			System.out.println("Order rejected");
+		}
     }
 
     /**

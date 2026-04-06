@@ -1,6 +1,8 @@
 package order;
 
 import store.Parameter;
+import store.RevenueType;
+import store.Statistics;
 import store.Store;
 import user.RegisteredClient;
 
@@ -185,6 +187,8 @@ public class Cart {
             CCV = sc.next();
             System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
             fechaCad = sc.next();
+            
+            Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
 
             Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
                     new ArrayList<>(this.packs.keySet()), this.owner);

@@ -3,14 +3,14 @@
  */
 package product;
 
-import store.Parameter;
+import store.*;
 import store.Store;
 import user.RegisteredClient;
 import notification.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Scanner;
+import java.util.*;
 
 import es.uam.eps.padsof.telecard.*;
 
@@ -284,6 +284,7 @@ public class SecondHandProduct extends Product{
 			TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
 		}
 		this.setPaidValuation(true);
+		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now());
 		
 		NotificationPayment notification = new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
 		notification.FullNotification("valuation");

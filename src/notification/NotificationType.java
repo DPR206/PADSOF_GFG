@@ -1,5 +1,10 @@
 package notification;
 
+/**
+ * It defines the types of notifications
+ * @author Duna P.R.
+ * @version 1.3.
+ */
 public enum NotificationType{
     EXCHANGE,
     DISCOUNT,

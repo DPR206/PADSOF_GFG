@@ -112,7 +112,7 @@ public class RegisteredClient extends User {
      */
     public void setHistories() {
     	 this.exchangeHistory = new ExchangeHistory(this);
-         this.setOrderHistory(new OrderHistory(this));
+    	 this.orderHistory = new OrderHistory(this);
          this.offerHistory = new OfferHistory(this);
          this.notificationHistory = new NotificationHistory(this);
     }

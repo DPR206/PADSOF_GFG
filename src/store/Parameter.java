@@ -263,7 +263,10 @@ public class Parameter {
 	 * @return the parameter's info
 	 */
 	@Override
-	public String toString(){
-		return this.OfferTime + ";" + this.OrderTime + ";" + this.valuationCost;
+	public String toString() {
+		return "Parameter [OfferTime=" + OfferTime + ", OrderTime=" + OrderTime + ", valuationCost=" + valuationCost
+				+ ", storeAddress=" + storeAddress + ", ExchangeTime=" + ExchangeTime + ", scoreAParam=" + scoreAParam
+				+ ", scoreBParam=" + scoreBParam + ", itemsPerPage=" + itemsPerPage + "]";
 	}
+	
 }

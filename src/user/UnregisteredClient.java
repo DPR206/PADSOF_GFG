@@ -37,7 +37,7 @@ public class UnregisteredClient extends User {
 
     public void buy() {
 
-        this.c.payOrder(); //inicia sesión
+        //this.c.payOrder(); //inicia sesión
         this.s.signIn();
     }
 

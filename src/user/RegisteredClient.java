@@ -90,10 +90,10 @@ public class RegisteredClient extends User {
         this.registerDate = registerDate;
         this.dni = dni;
         this.c = new Cart();
-        this.exchangeHistory = new ExchangeHistory(this);
-        this.orderHistory = new OrderHistory(this);
-        this.offerHistory = new OfferHistory(this);
-        this.notificationHistory = new NotificationHistory(this);
+        this.exchangeHistory = null;//new ExchangeHistory(this);
+        this.orderHistory = null; // new OrderHistory(this);
+        this.offerHistory = null; //new OfferHistory(this);
+        this.notificationHistory = null; //new NotificationHistory(this);
         this.wallet = new Wallet();
         this.searcher = new Searcher(new SearchStoreProducts(true));
         this.numExchanges = 0;
@@ -111,6 +111,11 @@ public class RegisteredClient extends User {
      */
     public RegisteredClient(String userName, String dni, String password, boolean asc) {
         this(userName, LocalDate.now(), dni, password, asc);
+        
+        this.exchangeHistory = new ExchangeHistory(this);
+        this.orderHistory = new OrderHistory(this);
+        this.offerHistory = new OfferHistory(this);
+        this.notificationHistory = new NotificationHistory(this);
     }
 
     /**

@@ -1,104 +1,101 @@
 package productT;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
 
-class SecondHandProductTest {
+import org.junit.Before;
+import org.junit.Test;
 
+import product.*;
+import user.RegisteredClient;
+
+public class SecondHandProductTest {
+
+    private SecondHandProduct shp;
+    private RegisteredClient owner;
+
+    @Before
+    public void setUp() {
+        this.owner = new RegisteredClient("testuser", LocalDate.now(), "12345678A", "password", true);
+        this.shp = new SecondHandProduct("Test Product", "Description", "photo.png", ProductType.COMIC, this.owner);
+    }
+    
     @Test
-    void changePrice() {
+    public void getValuationDate() {
+        assertNull(this.shp.getValuationDate());
     }
 
     @Test
-    void changeName() {
+    public void setValuationDate() {
+        LocalDate date = LocalDate.now();
+        shp.setValuationDate(date);
+        assertEquals(date, shp.getValuationDate());
     }
 
     @Test
-    void changeDescription() {
+    public void isAvailable() {
+        assertFalse(shp.isAvailable()); // Default false
     }
 
     @Test
-    void changePhoto() {
+    public void setAvailable() {
+        shp.setAvailable(true);
+        assertTrue(shp.isAvailable());
     }
 
     @Test
-    void changeType() {
+    public void isPaidValuation() {
+        assertFalse(shp.isPaidValuation()); // Default false
     }
 
     @Test
-    void getId() {
+    public void setPaidValuation() {
+        shp.setPaidValuation(true);
+        assertTrue(shp.isPaidValuation());
     }
 
     @Test
-    void getPrice() {
+    public void getStatus() {
+        assertNull(shp.getStatus()); // Initially null
     }
 
     @Test
-    void getName() {
+    public void setStatus() {
+        shp.setStatus(ConservationStatus.VERY_GOOD);
+        assertEquals(ConservationStatus.VERY_GOOD, shp.getStatus());
     }
 
     @Test
-    void getDescription() {
+    public void changeEstimatedPrice() {
+        shp.setEstimatedPrice(20.0);
+        assertEquals(20.0, shp.getPrice(), 0.001);
     }
 
     @Test
-    void getPhoto() {
+    public void changeConservationStatus() {
+        shp.setConservationStatus(ConservationStatus.PERFECT);
+        assertEquals(ConservationStatus.PERFECT, shp.getStatus());
     }
 
     @Test
-    void getType() {
+    public void changeAvailability() {
+        shp.setAvailability(true);
+        assertTrue(shp.isAvailable());
     }
 
     @Test
-    void getValuationDate() {
+    public void valuationWasPaid() {
+        shp.valuationWasPaid();
+        assertTrue(shp.isPaidValuation());
     }
 
     @Test
-    void setValuationDate() {
+    public void valuate() {
+        shp.valuate(25.0, ConservationStatus.SLIGHTLY_USED);
+        assertEquals(25.0, shp.getPrice(), 0.001);
+        assertEquals(ConservationStatus.SLIGHTLY_USED, shp.getStatus());
+        assertNotNull(shp.getValuationDate());
     }
 
-    @Test
-    void isAvailable() {
-    }
-
-    @Test
-    void setAvailable() {
-    }
-
-    @Test
-    void isPaidValuation() {
-    }
-
-    @Test
-    void setPaidValuation() {
-    }
-
-    @Test
-    void getStatus() {
-    }
-
-    @Test
-    void setStatus() {
-    }
-
-    @Test
-    void changeEstimatedPrice() {
-    }
-
-    @Test
-    void changeConservationStatus() {
-    }
-
-    @Test
-    void changeAvailability() {
-    }
-
-    @Test
-    void valuationWasPaid() {
-    }
-
-    @Test
-    void valuate() {
-    }
 }

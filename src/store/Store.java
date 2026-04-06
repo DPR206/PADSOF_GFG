@@ -279,7 +279,7 @@ public class Store {
     public void addSecondHandProduct(SecondHandProduct product) {
         this.secondHandProducts.put(product.getName(), product);
     }
-    
+
     /**
      * Deletes a new store product to the store
      * @param product, the product
@@ -294,7 +294,7 @@ public class Store {
      */
     public void deleteSecondHandProduct(SecondHandProduct product) {
         this.secondHandProducts.remove(product.getName(), product);
-        NotificationNewSecondHand notification = new NotificationNewSecondHand(LocalDateTime.now(), false, true, 
+        NotificationNewSecondHand notification = new NotificationNewSecondHand(LocalDateTime.now(), false, true,
         											NotificationType.NEW_SECONDHAND_PRODUCT);
         notification.FullNotification(product);
         this.sendNotificationClients(notification);
@@ -315,7 +315,7 @@ public class Store {
     public void addExchange(Exchange e) {
         this.exchanges.add(e);
     }
-   
+
     /**
      * Sends the notifications to the clients
      * @param n the notification to send (if interested)
@@ -325,7 +325,7 @@ public class Store {
     	for(RegisteredClient client : clients)
     		client.getNotificationHistory().addNotification(n);
     }
-    
+
     /**
      * Sends the notifications to the employees
      * @param n the notification to send (if interested)
@@ -342,5 +342,97 @@ public class Store {
      */
     public HashMap<String, Employee> getEmployees(){
     	return this.employees;
+    }
+
+    /**
+     * It prints a sub-list of another according to the desired page
+     * @param pageNum the desired page's number
+     */
+    public void printRegisteredClientListPage(int pageNum) {
+        Pager.getInstance()
+             .printRegisteredClientListPage(new ArrayList<>(Store.getInstance().getRegisteredClients().values()),
+                     pageNum);
+        // DUE: getRegisteredClientList vendría bien
+    }
+
+    /**
+     * It prints a sub-list of another according to the desired page
+     * @param pageNum the desired page's number
+     */
+    public void printEmployeeListPage(int pageNum) {
+        Pager.getInstance()
+             .printEmployeeListPage(new ArrayList<>(Store.getInstance().getEmployees().values()), pageNum);
+        // DUE: getEmployeeList vendría bien
+    }
+
+    /**
+     * It prints a sub-list of another according to the desired page
+     * @param pageNum the desired page's number
+     */
+    public void printPackListPage(int pageNum) {
+        Pager.getInstance().printPackListPage(this.packs, pageNum);
+    }
+
+    /**
+     * It prints a sub-list of another according to the desired page
+     * @param pageNum the desired page's number
+     */
+    public void printDiscountListPage(int pageNum) {
+        Pager.getInstance().printDiscountListPage(this.discounts, pageNum);
+    }
+
+    /**
+     * It prints a sub-list of categories according to the desired page
+     * @param pageNum the desired page's number
+     */
+    public void printCategoryListPage(int pageNum) {
+        Pager.getInstance()
+             .printCategoryListPage(new ArrayList<>(Store.getInstance().getCategories().values()), pageNum);
+        // DUE: getCategoryList vendría bien
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's registered client list
+     * @return the maximum number of pages that can be obtained from the store's registered client list
+     */
+    public int getRegisteredClientMaxPageNum() {
+        return Pager.getInstance().getRegisteredClientMaxPageNum(
+                new ArrayList<>(Store.getInstance().getRegisteredClients().values()));
+        // DUE: getRegisteredClientList vendría bien
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's employee  list
+     * @return the maximum number of pages that can be obtained from the store's employee  list
+     */
+    public int getEmployeeMaxPageNum() {
+        return Pager.getInstance().getEmployeeMaxPageNum(
+                new ArrayList<>(Store.getInstance().getEmployees().values()));
+        // DUE: getRegisteredClientList vendría bien
+    }
+
+     /**
+     * It gets the maximum number of pages that can be obtained from the store's pack list
+     * @return the maximum number of pages that can be obtained from the store's pack list
+     */
+    public int getPackMaxPageNum() {
+        return Pager.getInstance().getPackMaxPageNum(this.packs);
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's discount list
+     * @return the maximum number of pages that can be obtained from the store's discount list
+     */
+    public int getDiscountMaxPageNum() {
+        return Pager.getInstance().getDiscountMaxPageNum(this.discounts);
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's categories list
+     * @return the maximum number of pages that can be obtained from the store's categories list
+     */
+    public int getCategoryMaxPageNum() {
+        return Pager.getInstance().getCategoryMaxPageNum(new ArrayList<>(Store.getInstance().getCategories().values()));
+        // DUE: getCategoryList vendría bien
     }
 }

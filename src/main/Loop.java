@@ -175,7 +175,7 @@ public abstract class Loop {
         [x] Store Product
         [x] Registered Client
         [ ] Employee DUE
-        [ ] Pack DUE
+        [x] Pack
         [ ] Discount DUE
         [ ] Category DUE
      */
@@ -202,8 +202,22 @@ public abstract class Loop {
      * It allows for a user to switch to the next page when viewing the store's list of registered clients
      */
     protected void nextPageRegisteredClient() {
-        currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum() ?
+        currentScreenPageNum = (currentScreenPageNum + 1) < Store.getInstance().getRegisteredClientMaxPageNum() ? // DUE
                                currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing the store's list of packs
+     */
+    protected void nextPageStorePack() {
+        // DUE
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing the store's list of packs
+     */
+    protected void nextPageCartPack() {
+        // DUE
     }
 
     /**
@@ -262,7 +276,7 @@ public abstract class Loop {
      * @param optionNum the number that will resemble the previous page action in the prompt
      */
     protected void nextPagePrinterRegisteredClient(int optionNum) {
-        if ((currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum()) {
+        if ((currentScreenPageNum + 1) < Store.getInstance().getRegisteredClientMaxPageNum()) {
             System.out.println("\t[" + optionNum + "] Next page >");
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");
@@ -275,7 +289,7 @@ public abstract class Loop {
      * @param optionNum the number that will resemble the previous page action in the prompt
      */
     protected void nextPagePrinterEmployee(int optionNum) {
-        if ((currentScreenPageNum + 1) < Pager.getInstance().getEmployeeMaxPageNum()) {
+        if ((currentScreenPageNum + 1) < Store.getInstance().getEmployeeMaxPageNum()) {
             System.out.println("\t[" + optionNum + "] Next page >");
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");
@@ -287,8 +301,8 @@ public abstract class Loop {
      * store's list of packs
      * @param optionNum the number that will resemble the previous page action in the prompt
      */
-    protected void nextPagePrinterPack(int optionNum) {
-        if ((currentScreenPageNum + 1) < Pager.getInstance().getPackMaxPageNum()) {
+    protected void nextPagePrinterStorePack(int optionNum) {
+        if ((currentScreenPageNum + 1) < Store.getInstance().getPackMaxPageNum()) {
             System.out.println("\t[" + optionNum + "] Next page >");
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");
@@ -301,7 +315,7 @@ public abstract class Loop {
      * @param optionNum the number that will resemble the previous page action in the prompt
      */
     protected void nextPagePrinterDiscount(int optionNum) {
-        if ((currentScreenPageNum + 1) < Pager.getInstance().getDiscountMaxPageNum()) {
+        if ((currentScreenPageNum + 1) < Store.getInstance().getDiscountMaxPageNum()) {
             System.out.println("\t[" + optionNum + "] Next page >");
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");
@@ -314,7 +328,7 @@ public abstract class Loop {
      * @param optionNum the number that will resemble the previous page action in the prompt
      */
     protected void nextPagePrinterCategory(int optionNum) {
-        if ((currentScreenPageNum + 1) < Pager.getInstance().getCategoryMaxPageNum()) {
+        if ((currentScreenPageNum + 1) < Store.getInstance().getCategoryMaxPageNum()) {
             System.out.println("\t[" + optionNum + "] Next page >");
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");

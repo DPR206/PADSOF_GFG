@@ -5,7 +5,6 @@ import product.*;
 import user.Employee;
 import user.RegisteredClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +33,8 @@ public class Pager {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+    // DUE: Idealmente, no se le pasan listas directamente desde los loops si no que se invocan esto métodos desde la
+    //  clase que posea dicha lista, si sobrevivo al resto lo implemento <- Estoy en ello
 
     /**
      * Obtains the pager
@@ -77,8 +78,8 @@ public class Pager {
      * It prints a sub-list of another according to the desired page
      * @param pageNum the desired page's number
      */
-    public void printRegisteredClientListPage(int pageNum) {
-        List<RegisteredClient> registeredClientPage = pageRegisteredClientList(pageNum);
+    public void printRegisteredClientListPage(List<RegisteredClient> clients, int pageNum) {
+        List<RegisteredClient> registeredClientPage = pageRegisteredClientList(clients, pageNum);
         int i = 1;
 
         for (RegisteredClient client : registeredClientPage) {
@@ -90,8 +91,8 @@ public class Pager {
      * It prints a sub-list of another according to the desired page
      * @param pageNum the desired page's number
      */
-    public void printEmployeeListPage(int pageNum) {
-        List<Employee> employeeListPage = pageEmployeeList(pageNum);
+    public void printEmployeeListPage(List<Employee> employees, int pageNum) {
+        List<Employee> employeeListPage = pageEmployeeList(employees, pageNum);
         int i = 1;
 
         for (Employee employee : employeeListPage) {
@@ -101,10 +102,11 @@ public class Pager {
 
     /**
      * It prints a sub-list of another according to the desired page
-     * @param pageNum the desired page's number
+     * @param packList the desired pack list
+     * @param pageNum  the desired page's number
      */
-    public void printPackListPage(int pageNum) {
-        List<Pack> packListPage = pagePackList(pageNum);
+    public void printPackListPage(List<Pack> packList, int pageNum) {
+        List<Pack> packListPage = pagePackList(packList, pageNum);
         int i = 1;
 
         for (Pack pack : packListPage) {
@@ -116,8 +118,7 @@ public class Pager {
      * It prints a sub-list of another according to the desired page
      * @param pageNum the desired page's number
      */
-    public void printDiscountListPage(int pageNum) {
-        List<Discount> discountListPage = pageDiscountList(pageNum);
+    public void printDiscountListPage(List<Discount> discountListPage, int pageNum) {
         int i = 1;
 
         for (Discount discount : discountListPage) {
@@ -129,8 +130,7 @@ public class Pager {
      * It prints a sub-list of categories according to the desired page
      * @param pageNum the desired page's number
      */
-    public void printCategoryListPage(int pageNum) {
-        List<Category> categoryPage = pageCategoryList(pageNum);
+    public void printCategoryListPage(List<Category> categoryPage, int pageNum) {
         int i = 1;
 
         for (Category category : categoryPage) {
@@ -144,8 +144,7 @@ public class Pager {
      * @param categoryNum the desired category's n.º
      * @return the desired category
      */
-    public Category selectCategoryFromPage(int pageNum, int categoryNum) {
-        List<Category> categoryListPage = pageCategoryList(pageNum);
+    public Category selectCategoryFromPage(List<Category> categoryListPage, int pageNum, int categoryNum) {
         return categoryListPage.get(categoryNum - 1);
     }
 
@@ -155,8 +154,7 @@ public class Pager {
      * @param discountNum the desired discount's n.º
      * @return the desired discount
      */
-    public Discount selectDiscountFromPage(int pageNum, int discountNum) {
-        List<Discount> discountListPage = pageDiscountList(pageNum);
+    public Discount selectDiscountFromPage(List<Discount> discountListPage, int pageNum, int discountNum) {
         return discountListPage.get(discountNum - 1);
     }
 
@@ -166,19 +164,20 @@ public class Pager {
      * @param clientNum the desired employee's n.º
      * @return the desired employee
      */
-    public Employee selectEmployeeFromPage(int pageNum, int clientNum) {
-        List<Employee> employeeListPage = pageEmployeeList(pageNum);
+    public Employee selectEmployeeFromPage(List<Employee> employees, int pageNum, int clientNum) {
+        List<Employee> employeeListPage = pageEmployeeList(employees, pageNum);
         return employeeListPage.get(clientNum - 1);
     }
 
     /**
      * It gets the pack listed as n.º packNum in a certain page
-     * @param pageNum the desired page's number
-     * @param packNum the desired pack's n.º
+     * @param packList the desired pack list
+     * @param pageNum  the desired page's number
+     * @param packNum  the desired pack's n.º
      * @return the desired pack
      */
-    public Pack selectPackFromPage(int pageNum, int packNum) {
-        List<Pack> packListPage = pagePackList(pageNum);
+    public Pack selectPackFromPage(List<Pack> packList, int pageNum, int packNum) {
+        List<Pack> packListPage = pagePackList(packList, pageNum);
         return packListPage.get(packNum - 1);
     }
 
@@ -188,8 +187,8 @@ public class Pager {
      * @param clientNum the desired client's n.º
      * @return the desired registered client
      */
-    public RegisteredClient selectRegisteredClientFromPage(int pageNum, int clientNum) {
-        List<RegisteredClient> registeredClientListPage = pageRegisteredClientList(pageNum);
+    public RegisteredClient selectRegisteredClientFromPage(List<RegisteredClient> clients, int pageNum, int clientNum) {
+        List<RegisteredClient> registeredClientListPage = pageRegisteredClientList(clients, pageNum);
         return registeredClientListPage.get(clientNum - 1);
     }
 
@@ -222,8 +221,7 @@ public class Pager {
      * @param pageNum the desired page's number
      * @return the desired page
      */
-    public List<Category> pageCategoryList(int pageNum) {
-        List<Category> categoryList = new ArrayList<>(Store.getInstance().getCategories().values());
+    public List<Category> pageCategoryList(List<Category> categoryList, int pageNum) {
         return categoryList.subList(getFrom(pageNum), getTo(pageNum, categoryList.size()));
     }
 
@@ -232,8 +230,7 @@ public class Pager {
      * @param pageNum the desired page's number
      * @return the desired page
      */
-    public List<Discount> pageDiscountList(int pageNum) {
-        List<Discount> discountList = Store.getInstance().getDiscounts();
+    public List<Discount> pageDiscountList(List<Discount> discountList, int pageNum) {
         return discountList.subList(getFrom(pageNum), getTo(pageNum, discountList.size()));
     }
 
@@ -242,18 +239,17 @@ public class Pager {
      * @param pageNum the desired page's number
      * @return the desired page
      */
-    public List<Employee> pageEmployeeList(int pageNum) {
-        List<Employee> employeeList = new ArrayList<>(Store.getInstance().getEmployees().values());
+    public List<Employee> pageEmployeeList(List<Employee> employeeList, int pageNum) {
         return employeeList.subList(getFrom(pageNum), getTo(pageNum, employeeList.size()));
     }
 
     /**
      * It gets a sub-list of packs according to the desired page
-     * @param pageNum the desired page's number
+     * @param packList the desired pack list
+     * @param pageNum  the desired page's number
      * @return the desired page
      */
-    public List<Pack> pagePackList(int pageNum) {
-        List<Pack> packList = Store.getInstance().getPacks();
+    public List<Pack> pagePackList(List<Pack> packList, int pageNum) {
         return packList.subList(getFrom(pageNum), getTo(pageNum, packList.size()));
     }
 
@@ -262,9 +258,7 @@ public class Pager {
      * @param pageNum the desired page's number
      * @return the desired page
      */
-    public List<RegisteredClient> pageRegisteredClientList(int pageNum) {
-        List<RegisteredClient> registeredClientList =
-                new ArrayList<>(Store.getInstance().getRegisteredClients().values());
+    public List<RegisteredClient> pageRegisteredClientList(List<RegisteredClient> registeredClientList, int pageNum) {
         return registeredClientList.subList(getFrom(pageNum), getTo(pageNum, registeredClientList.size()));
     }
 
@@ -304,8 +298,7 @@ public class Pager {
      * It gets the maximum number of pages that can be obtained from the store's categories list
      * @return the maximum number of pages that can be obtained from the store's categories list
      */
-    public int getCategoryMaxPageNum() {
-        List<Category> categoryList = new ArrayList<>(Store.getInstance().getCategories().values());
+    public int getCategoryMaxPageNum(List<Category> categoryList) {
         return maxPageNum(categoryList.size());
     }
 
@@ -313,8 +306,7 @@ public class Pager {
      * It gets the maximum number of pages that can be obtained from the store's discounts list
      * @return the maximum number of pages that can be obtained from the store's discounts list
      */
-    public int getDiscountMaxPageNum() {
-        List<Discount> discountList = Store.getInstance().getDiscounts();
+    public int getDiscountMaxPageNum(List<Discount> discountList) {
         return maxPageNum(discountList.size());
     }
 
@@ -322,8 +314,7 @@ public class Pager {
      * It gets the maximum number of pages that can be obtained from the store's employees list
      * @return the maximum number of pages that can be obtained from the store's employees list
      */
-    public int getEmployeeMaxPageNum() {
-        List<Employee> employeeList = new ArrayList<>(Store.getInstance().getEmployees().values());
+    public int getEmployeeMaxPageNum(List<Employee> employeeList) {
         return maxPageNum(employeeList.size());
     }
 
@@ -341,8 +332,7 @@ public class Pager {
      * It gets the maximum number of pages that can be obtained from the store's packs list
      * @return the maximum number of pages that can be obtained from the store's packs list
      */
-    public int getPackMaxPageNum() {
-        List<Pack> packList = Store.getInstance().getPacks();
+    public int getPackMaxPageNum(List<Pack> packList) {
         return maxPageNum(packList.size());
     }
 
@@ -350,9 +340,7 @@ public class Pager {
      * It gets the maximum number of pages that can be obtained from the registered client's list
      * @return the maximum number of pages that can be obtained from the registered client's list
      */
-    public int getRegisteredClientMaxPageNum() {
-        List<RegisteredClient> registeredClientList =
-                new ArrayList<>(Store.getInstance().getRegisteredClients().values());
+    public int getRegisteredClientMaxPageNum(List<RegisteredClient> registeredClientList) {
         return maxPageNum(registeredClientList.size());
     }
 

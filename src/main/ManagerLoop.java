@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class ManagerLoop extends Loop {
     // DUE: Muy importante!! -> No te olvides de hacer que se puedan escoger las cosas por nº de lista o ID
-    // DUE: Manager puede añadir productos subiendo archivos, creo que eso no estaba acabado
+    // DUE: Revisar cosas del Pager para que sea POO
 
     /** This loop's instance */
     private static ManagerLoop INSTANCE;
@@ -660,7 +660,7 @@ public class ManagerLoop extends Loop {
     public void clientsByOrders() throws IOException {
         System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + currentScreenPageNum);
-        Pager.getInstance().printRegisteredClientListPage(currentScreenPageNum);
+        Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         previousPagePrinter(1);
@@ -705,15 +705,11 @@ public class ManagerLoop extends Loop {
     public void clientsByExchanges() throws IOException {
         System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + currentScreenPageNum);
-        Pager.getInstance().printRegisteredClientListPage(currentScreenPageNum);
+        Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         previousPagePrinter(1);
-        if ((currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum()) {
-            System.out.println("\t[2] Next page >");
-        } else {
-            System.out.println("\t[2] Reload page");
-        }
+        nextPagePrinterRegisteredClient(2);
         System.out.println("\t[3] <- Go back");
         System.out.println("\t[4] <<- Go to main page");
         System.out.println("\t[5] x Exit app");

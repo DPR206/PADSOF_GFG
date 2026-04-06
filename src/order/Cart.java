@@ -68,7 +68,7 @@ public class Cart {
 
     /**
      * Obtains whether the cart is expired
-     * 
+     *
      * @return true if the cart has expired, false if else
      */
     public boolean getExpired() {
@@ -77,7 +77,7 @@ public class Cart {
 
     /**
      * Sets whether the cart is expired
-     * 
+     *
      * @param exp true if the cart has expired, false if else
      */
     public void setExpired(boolean exp) {
@@ -102,7 +102,7 @@ public class Cart {
 
     /**
      * It calculates the price of the cart
-     * 
+     *
      * @return the cart's price
      */
     public double calculatePrice() {
@@ -130,7 +130,7 @@ public class Cart {
 
     /**
      * It cancels a product in the cart
-     * 
+     *
      * @param toCancel the store product to cancel
      */
     public void cancelProduct(StoreProduct toCancel) {
@@ -146,7 +146,7 @@ public class Cart {
 
     /**
      * It cancels a pack in the cart
-     * 
+     *
      * @param p the pack to cancel
      */
     public void cancelPack(Pack p) {
@@ -162,7 +162,7 @@ public class Cart {
 
     /**
      * Adds a product to the cart
-     * 
+     *
      * @param wanted the store product to add
      */
     public void addProduct(StoreProduct wanted) {
@@ -182,7 +182,7 @@ public class Cart {
 
     /**
      * Adds a pack to the cart
-     * 
+     *
      * @param wanted the pack to add
      * @return true if the pack was added, false if else
      */
@@ -210,7 +210,7 @@ public class Cart {
 
     /**
      * Obtains the amount of products in the cart
-     * 
+     *
      * @return the number of products
      */
     public int getProductAmount() {
@@ -219,7 +219,7 @@ public class Cart {
 
     /**
      * It pays the cart
-     * 
+     *
      * @return true if the cart was paid, if not a message will be printed
      * @throws InvalidCardNumberException the card number wasn't valid
      * @throws FailedInternetConnectionException the Internet connection failed
@@ -308,7 +308,7 @@ public class Cart {
     }
 
     /**
-     * It removes the products and packs that have expired 
+     * It removes the products and packs that have expired
      */
     public void cleanupOldProducts() {
     	List<StoreProduct> sp = new ArrayList<>(this.getProducts());
@@ -384,6 +384,23 @@ public class Cart {
     		if(pck.getId()== (pack.getId())) return pck.getDateAddCart().plus(timeToExist);
         }
     	return null;
+    }
+
+
+    /**
+     * It prints a sub-list of the cart's store products according to the desired page
+     * @param pageNum          the desired page's number
+     */
+    public void printStoreProductListPage(int pageNum) {
+        Pager.getInstance().printStoreProductListPage(this.getProducts(), pageNum);
+    }
+
+    /**
+     * It prints a sub-list of the cart's packs according to the desired page
+     * @param pageNum          the desired page's number
+     */
+    public void printPackListPage(int pageNum) {
+        Pager.getInstance().printPackListPage(this.getPacks(), pageNum);
     }
 
 }

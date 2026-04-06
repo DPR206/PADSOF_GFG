@@ -66,22 +66,45 @@ public class Cart {
         this(false, LocalDate.now());
     }
 
+    /**
+     * Obtains whether the cart is expired
+     * 
+     * @return true if the cart has expired, false if else
+     */
     public boolean getExpired() {
         return this.expired;
     }
 
+    /**
+     * Sets whether the cart is expired
+     * 
+     * @param exp true if the cart has expired, false if else
+     */
     public void setExpired(boolean exp) {
         this.expired = exp;
     }
 
+    /**
+     * Obtains the last modification date of the cart
+     * @return the modification date
+     */
     public LocalDate getModificationDate() {
         return this.modificationDate;
     }
 
+    /**
+     * Sets the modification date
+     * @param ld the local date of modification
+     */
     public void setModificationDate(LocalDate ld) {
         this.modificationDate = ld;
     }
 
+    /**
+     * It calculates the price of the cart
+     * 
+     * @return the cart's price
+     */
     public double calculatePrice() {
         // DUE: Cálculo de descuentos sobre los productos (packs hecho)
         double aux = 0;
@@ -105,6 +128,11 @@ public class Cart {
         return aux;
     }
 
+    /**
+     * It cancels a product in the cart
+     * 
+     * @param toCancel the store product to cancel
+     */
     public void cancelProduct(StoreProduct toCancel) {
         if (this.sp.containsKey(toCancel)) {
             if (this.sp.get(toCancel) == 1) {
@@ -116,6 +144,11 @@ public class Cart {
         }
     }
 
+    /**
+     * It cancels a pack in the cart
+     * 
+     * @param p the pack to cancel
+     */
     public void cancelPack(Pack p) {
         if (this.packs.containsKey(p)) {
             if (this.packs.get(p) == 1) {
@@ -127,6 +160,11 @@ public class Cart {
         }
     }
 
+    /**
+     * Adds a product to the cart
+     * 
+     * @param wanted the store product to add
+     */
     public void addProduct(StoreProduct wanted) {
 
         if (wanted.getStock() == 0) {
@@ -142,6 +180,12 @@ public class Cart {
         wanted.setAddedDate(LocalDate.now());
     }
 
+    /**
+     * Adds a pack to the cart
+     * 
+     * @param wanted the pack to add
+     * @return true if the pack was added, false if else
+     */
     public boolean addPack(Pack wanted) {
         //this.packs.add(wanted); <- creo que mejor después
         List<StoreProduct> products = wanted.getProducts();
@@ -164,10 +208,23 @@ public class Cart {
         return true;
     }
 
+    /**
+     * Obtains the amount of products in the cart
+     * 
+     * @return the number of products
+     */
     public int getProductAmount() {
         return this.sp.size();
     }
 
+    /**
+     * It pays the cart
+     * 
+     * @return true if the cart was paid, if not a message will be printed
+     * @throws InvalidCardNumberException the card number wasn't valid
+     * @throws FailedInternetConnectionException the Internet connection failed
+     * @throws OrderRejectedException the order was rejected
+     */
     public boolean payOrder()
             throws InvalidCardNumberException, FailedInternetConnectionException, OrderRejectedException {
 
@@ -212,6 +269,10 @@ public class Cart {
         return true;
     }
 
+    /**
+     * Obtains the creation date of the cart
+     * @return the cart's creation date
+     */
     public LocalDate getCreationDate(){
     	return this.creationDate;
     }
@@ -246,6 +307,9 @@ public class Cart {
         }
     }
 
+    /**
+     * It removes the products and packs that have expired 
+     */
     public void cleanupOldProducts() {
     	List<StoreProduct> sp = new ArrayList<>(this.getProducts());
     	List<Pack> packs = new ArrayList<>(this.packs.keySet());
@@ -288,6 +352,11 @@ public class Cart {
         return new ArrayList<>(this.packs.keySet());
     }
 
+    /**
+     * It calculates the expired date of the product
+     * @param sproducts the store product in the cart
+     * @return the date of expiration
+     */
     public LocalDate calculateExpiredDate(StoreProduct sproducts) {
     	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
@@ -300,6 +369,11 @@ public class Cart {
     	return null;
     }
 
+    /**
+     * It calculates the expired date of the packs
+     * @param pack the pack in the cart
+     * @return the date of expiration
+     */
     public LocalDate calculateExpiredDatePacks(Pack pack) {
     	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();

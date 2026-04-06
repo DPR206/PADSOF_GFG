@@ -1,5 +1,6 @@
 package order;
 
+import store.Parameter;
 import user.RegisteredClient;
 
 import java.time.*;
@@ -24,6 +25,7 @@ public class Cart {
     private boolean expired;
     private LocalDate modificationDate;
     private RegisteredClient owner;
+    private LocalDate creationDate;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -44,6 +46,7 @@ public class Cart {
         }
         this.expired = assignedExpired;
         this.modificationDate = assignedModificationDate;
+        this.creationDate = LocalDate.now();
     }
 
     /**
@@ -108,7 +111,7 @@ public class Cart {
             } else {
                 this.sp.put(toCancel, this.sp.get(toCancel) - 1);
             }
-            toCancel.decreaseStock(1);
+            toCancel.increaseStock(1);
         }
     }
 
@@ -119,7 +122,7 @@ public class Cart {
             } else {
                 this.packs.put(p, this.packs.get(p) - 1);
             }
-            p.decreaseStock();
+            p.increaseStock();
         }
     }
 
@@ -169,17 +172,17 @@ public class Cart {
         double price = this.calculatePrice();
 
         Scanner sc = new Scanner(System.in);
-        String numeroTarjeta;//, CCV, fechaCad;
+        String numeroTarjeta, CCV, fechaCad;
 
         try {
             System.out.print("Introduce tu número de tarjeta: ");
             numeroTarjeta = sc.next();
             System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
             TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
-            //System.out.print("Introduce tu CCV: ");
-            //CCV = sc.next();
-            //System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
-            //fechaCad = sc.next();
+            System.out.print("Introduce tu CCV: ");
+            CCV = sc.next();
+            System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
+            fechaCad = sc.next();
 
             Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
                     new ArrayList<>(this.packs.keySet()), this.owner);
@@ -202,6 +205,10 @@ public class Cart {
         this.sp.clear();
 
         return true;
+    }
+    
+    public LocalDate getCreationDate(){
+    	return this.creationDate;
     }
 
     /**
@@ -233,6 +240,24 @@ public class Cart {
             System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.packs.get(pack));
         }
     }
+    
+    public void cleanupOldProducts() {
+    	List<StoreProduct> sp = new ArrayList<>(this.getProducts());
+    	List<Pack> packs = new ArrayList<>(this.packs.keySet());
+    	
+    	for(StoreProduct spi: sp) {
+    		LocalDate expiration = this.calculateExpiredDate(spi);
+    		if(expiration.isBefore(LocalDate.now())) {
+    			this.cancelProduct(spi);
+    		}
+    	}
+    	for(Pack p: packs) {
+    		LocalDate expiration = this.calculateExpiredDatePacks(p);
+    		if(expiration.isBefore(LocalDate.now())) {
+    			this.cancelPack(p);
+    		}
+    	}
+    }
 
     /**
      * It gets the cart's products
@@ -241,4 +266,29 @@ public class Cart {
     public List<StoreProduct> getProducts() {
         return new ArrayList<>(this.sp.keySet());
     }
+    
+    public LocalDate calculateExpiredDate(StoreProduct sproducts) {
+    	Parameter p = p.getParam();
+    	Period timeToExist = p.getOrderTime();
+    	
+    	List<StoreProduct> products = new ArrayList<>(this.sp.keySet());
+    	
+    	for(StoreProduct pdct: products) {
+    		if(pdct.getId().equals(sproducts.getId())) return sproducts.getAddedDate().plus(timeToExist);
+        }
+    	return null;
+    }
+    
+    public LocalDate calculateExpiredDatePacks(Pack pack) {
+    	Parameter p = p.getParam();
+    	Period timeToExist = p.getOrderTime();
+    	
+    	List<Pack> packs = new ArrayList<>(this.packs.keySet());
+    	
+    	for(Pack pck: packs) {
+    		if(pck.getId()== (pack.getId())) return pck.getDateAddCart().plus(timeToExist);
+        }
+    	return null;
+    }
+    
 }

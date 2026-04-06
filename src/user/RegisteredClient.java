@@ -3,17 +3,19 @@
  */
 package user;
 
-import order.*;
-import product.*;
+import es.uam.eps.padsof.telecard.*;
 import exchange.*;
+import notification.*;
+import order.Cart;
+import order.OrderHistory;
+import product.*;
 import search.*;
 import store.Store;
-import notification.*;
 
-import java.time.*;
-import java.util.*;
-
-import es.uam.eps.padsof.telecard.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * It implements the registered client
@@ -39,7 +41,7 @@ public class RegisteredClient extends User {
 
     /**
      * Creates a new registered client
-     * 
+     *
 	 * @param type the type of user
 	 * @param pwd the password of the client
 	 * @param userName the user's nickname
@@ -48,7 +50,7 @@ public class RegisteredClient extends User {
 	 * @param registerDate the date of registration
 	 * @param dni the user's dni
 	 * @param c the user's cart
-	 * @param exchangeHistory the user's exchange history 
+	 * @param exchangeHistory the user's exchange history
 	 * @param wallet the user's wallet
 	 * @param orderHistory the user's order history
 	 * @param offerHistory the user's offer history
@@ -75,7 +77,15 @@ public class RegisteredClient extends User {
 		this.numExchanges = numExchanges;
 	}
 
-    /**
+	/**
+	 * It sets the registered client's order history
+	 * @param newOrderHistory the registered client's new order history
+	 */
+	private void setOrderHistory(OrderHistory newOrderHistory) {
+		this.orderHistory = newOrderHistory; // TEST_FIX
+	}
+
+	/**
      * Creates a new RegisteredClient
      * @param userName     the user's name
      * @param registerDate the registration date
@@ -105,9 +115,9 @@ public class RegisteredClient extends User {
      */
     public RegisteredClient(String userName, String dni, String password, boolean asc) {
         this(userName, LocalDate.now(), dni, password, asc);
-        
+
     }
-    
+
     /**
      * Creates the client's new histories
      */
@@ -117,7 +127,7 @@ public class RegisteredClient extends User {
          this.offerHistory = new OfferHistory(this);
          this.notificationHistory = new NotificationHistory(this);
     }
-    
+
     /**
      * Obtains the client's registration date
      * @return the registerDate the registration date
@@ -246,8 +256,8 @@ public class RegisteredClient extends User {
 		this.numExchanges = numExchanges;
 	}
 
-/*-----------------------------------------------------METHODS----------------------------------------------------------------*/	
-	
+/*-----------------------------------------------------METHODS----------------------------------------------------------------*/
+
 	/**
      * Adds a new product to the wallet
      *
@@ -374,7 +384,7 @@ public class RegisteredClient extends User {
 
     /**
      * Adds a review to a store product
-     * 
+     *
      * @param sp the store product bought
      * @param review the review of the product
      */
@@ -407,7 +417,7 @@ public class RegisteredClient extends User {
     	this.getOfferHistory().addOffer(offer);
     	theirProduct.getOwner().getOfferHistory().addOffer(offer);
     }
-    
+
     /**
      * Makes an offer for several second-hand products
      * @param theirProducts the products the client is interested in
@@ -421,7 +431,7 @@ public class RegisteredClient extends User {
 
     /**
      * The notifications of the client
-     * 
+     *
      * @return a list with all the notifications that haven't been erased order by most recent
      */
     public List<Notification> browseNotifications(){
@@ -431,11 +441,11 @@ public class RegisteredClient extends User {
     			notifications.add(n);
     	return notifications;
     }
-    
+
     /**
      * Changes an interest in a type of notification
-     * 
-     * @param type the type of notification 
+     *
+     * @param type the type of notification
      * @param interest true if interested, false if else
      */
     public void changeNotificationInterest(NotificationType type, boolean interest) {
@@ -444,7 +454,7 @@ public class RegisteredClient extends User {
 
     /**
      * A string with the client's information
-     * 
+     *
      * @return a string with the client's information
      */
     @Override

@@ -8,7 +8,6 @@ import store.Store;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * It implements the packs
@@ -135,6 +134,10 @@ public class Pack {
      * @return the pack's price
      */
     public double getPrice() {
+		if (this.discount == null) {
+			return this.price;
+		}
+
         switch (this.discount.getType()) {
             case FIXED_PERCENTAGE:
                 FixedPercentageDiscount fixedPerDisc = (FixedPercentageDiscount) this.discount;
@@ -172,7 +175,8 @@ public class Pack {
 	 * @return the products, the products included
 	 */
 	public ArrayList<StoreProduct> getProducts() {
-		return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
+		// Prueba: return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
+		return this.products; // TEST_FIX
 	}
 
 	/**

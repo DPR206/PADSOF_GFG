@@ -268,7 +268,7 @@ public class Cart {
     }
     
     public LocalDate calculateExpiredDate(StoreProduct sproducts) {
-    	Parameter p = p.getParam();
+    	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
     	
     	List<StoreProduct> products = new ArrayList<>(this.sp.keySet());
@@ -280,7 +280,7 @@ public class Cart {
     }
     
     public LocalDate calculateExpiredDatePacks(Pack pack) {
-    	Parameter p = p.getParam();
+    	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
     	
     	List<Pack> packs = new ArrayList<>(this.packs.keySet());

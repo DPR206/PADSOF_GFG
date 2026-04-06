@@ -17,6 +17,8 @@ public class Parameter {
 	private Period OfferTime;
 	private Period OrderTime;
 	private double valuationCost;
+	private String storeAddress;
+	private Period ExchangeTime;
 	/**
 	 * Param a for the recommender following: weightedScore = (a*score + b)
 	 */
@@ -37,7 +39,9 @@ public class Parameter {
 	private Parameter() {
 		OfferTime = Period.ofDays(5);
 		OrderTime = Period.ofDays(7);
+		ExchangeTime = Period.ofDays(7);
 		this.valuationCost = 10;
+		this.storeAddress = "C/ GFG nº20";
 		/* scoreWeight = a*<score> + b */
 		this.scoreAParam = 0.5;
 		this.scoreBParam = 0.5;
@@ -152,8 +156,42 @@ public class Parameter {
     private void setItemsPerPage(int newItemsPerPage) {
 		this.itemsPerPage = newItemsPerPage;
 	}
+    
+    /**
+     * Obtains the store's address
+	 * @return the storeAddress
+	 */
+	public String getStoreAddress() {
+		return storeAddress;
+	}
+
+	/**
+	 * Sets the store's address
+	 * @param storeAddress the storeAddress to set
+	 */
+	private void setStoreAddress(String storeAddress) {
+		this.storeAddress = storeAddress;
+	}
+
+	/**
+	 * Obtains the amount of time it will pass before the exchange is done
+	 * @return the exchangeTime
+	 */
+	public Period getExchangeTime() {
+		return ExchangeTime;
+	}
+
+	/**
+	 * Sets the time it will pass since the offer is accepted and the exchange is done
+	 * @param exchangeTime the exchangeTime to set
+	 */
+	private void setExchangeTime(Period exchangeTime) {
+		ExchangeTime = exchangeTime;
+	}
 
 	/*------------------------------------------------------------------METHODS------------------------------------------------------------------*/
+
+	
 
 	/**
 	 * Change the expiration of an offer
@@ -169,6 +207,14 @@ public class Parameter {
 	 */
 	public void changeOrderTime(Period newOrderTime) {
 		this.setOrderTime(newOrderTime);
+	}
+	
+	/**
+	 * Changes the time it will pass since the offer is accepted and the exchange is done
+	 * @param newExchangeTime the new exchange time
+	 */
+	public void changeExchangeTime(Period newExchangeTime) {
+		this.setExchangeTime(newExchangeTime);
 	}
 
 	/**
@@ -201,6 +247,15 @@ public class Parameter {
 	 */
 	public void changeItemsPerPage(int newItemsPerPage) {
 		this.setItemsPerPage(newItemsPerPage);
+	}
+	
+	/**
+	 * It changes the store's address
+	 * 
+	 * @param newAddress the new address to set
+	 */
+	public void changeAddress(String newAddress) {
+		this.setStoreAddress(newAddress);
 	}
 
 	/**

@@ -1,21 +1,21 @@
 package productT;
 
-import discount.*;
-import org.junit.Before;
-import org.junit.Test;
-import product.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static org.junit.Assert.*;
+import discount.*;
+import product.*;
 
 public class PackTest {
 
 	private Pack p;
 
-	 @Before
+	 @BeforeEach
 	 public void setUp() {
 		 Comic comic = new Comic("1",12.99, "alo", "algo2", "foto.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "ñe");
 		 Comic comic2 = new Comic("0",12.99, "alo2", "algo2", "foto2.png", 43.5, LocalDate.now(), 50, 120, Year.of(2020), "Juan Pérez", "awa");
@@ -31,14 +31,13 @@ public class PackTest {
 
 		 Discount discount =  new PackFixedPercentage(LocalDateTime.now(), LocalDateTime.now(), 0.90, this.p);
 		 this.p.setDiscount(discount);
-		 System.out.println(this.p.getDiscount());
 		 assertEquals(discount.getId(), this.p.getDiscount().getId(), "F000000");
 	 }
 
 	 @Test
 	 public void getIdTest() {
 		 int id = this.p.getId();
-		 assertEquals(id, this.p.getId(), 0.001);
+		 assertEquals(id, this.p.getId());
 	 }
 
 	 @Test
@@ -68,7 +67,7 @@ public class PackTest {
 		 LocalDate date = LocalDate.now();
 		 Pack pack = new Pack(5, 10.0, products, date);
 		 assertEquals(5, pack.getId());
-		 assertEquals(10.0, pack.getPrice(), 0.001);
+		 assertEquals(10.0, pack.getPrice());
 		 assertEquals(products, pack.getProducts());
 		 assertEquals(date, pack.getDateAddCart());
 	 }
@@ -77,7 +76,7 @@ public class PackTest {
 	 public void constructorDefaultIdTest() {
 		 ArrayList<StoreProduct> products = new ArrayList<>();
 		 Pack pack = new Pack(10.0, products);
-		 assertEquals(10.0, pack.getPrice(), 0.001);
+		 assertEquals(10.0, pack.getPrice()1);
 		 assertEquals(products, pack.getProducts());
 		 assertNull(pack.getDateAddCart());
 	 }
@@ -88,7 +87,7 @@ public class PackTest {
 		 LocalDate date = LocalDate.now();
 		 Pack pack = new Pack(5, 10.0, date);
 		 assertEquals(5, pack.getId());
-		 assertEquals(10.0, pack.getPrice(), 0.001);
+		 assertEquals(10.0, pack.getPrice());
 		 assertTrue(pack.getProducts().isEmpty());
 		 assertEquals(date, pack.getDateAddCart());
 	 }
@@ -96,7 +95,7 @@ public class PackTest {
 	 @Test
 	 public void setPriceTest() {
 		 this.p.setPrice(20.0);
-		 assertEquals(20.0, this.p.getOriginalPrice(), 0.001);
+		 assertEquals(20.0, this.p.getOriginalPrice());
 	 }
 
 	 @Test
@@ -161,7 +160,7 @@ public class PackTest {
 
 	 @Test
 	 public void totalPriceTest() {
-		 assertEquals(25.98, this.p.totalPrice(), 0.001);
+		 assertEquals(25.98, this.p.totalPrice());
 	 }
 
 	 @Test
@@ -181,7 +180,7 @@ public class PackTest {
 		 PackFixedPercentage discount = new PackFixedPercentage(LocalDateTime.now(), LocalDateTime.now().plusDays(1), 0.1, this.p);
 		 this.p.setDiscount(discount);
 		 double expected = 20.0 - (20.0 * 0.1);
-		 assertEquals(expected, this.p.getPrice(), 0.001);
+		 assertEquals(expected, this.p.getPrice());
 	 }
 
 	 @Test
@@ -192,7 +191,7 @@ public class PackTest {
 		 this.p.setDiscount(discount);
 		 // Assuming price > threshold, gift added
 		 double expected = 15.0;
-		 assertEquals(expected, this.p.getPrice(), 0.001);
+		 assertEquals(expected, this.p.getPrice());
 		 assertTrue(this.p.getProducts().contains(gift));
 	 }
 
@@ -202,6 +201,6 @@ public class PackTest {
 		 PackVolume discount = new PackVolume(LocalDateTime.now(), LocalDateTime.now().plusDays(1), 10.0, 5.0, this.p);
 		 this.p.setDiscount(discount);
 		 double expected = 15.0 - 5.0; // since 15 > 10
-		 assertEquals(expected, this.p.getPrice(), 0.001);
+		 assertEquals(expected, this.p.getPrice());
 	 }
 }

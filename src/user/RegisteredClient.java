@@ -69,7 +69,7 @@ public class RegisteredClient extends User {
 		this.c = c;
 		this.exchangeHistory = exchangeHistory;
 		this.wallet = wallet;
-		this.setOrderHistory(orderHistory);
+		this.orderHistory = orderHistory;
 		this.offerHistory = offerHistory;
 		this.notificationHistory = notificationHistory;
 		this.searcher = searcher;

@@ -7,7 +7,7 @@ import discount.*;
 import store.Store;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * It implements the packs
@@ -24,7 +24,7 @@ public class Pack {
 	private ArrayList<StoreProduct> products;
 	private LocalDate dateAddCart;
 	/** The pack's discount, if it has one */
-	private Discount discount = null;
+	private Discount discount;
 
 	/*---------------------------------------------------Constructors---------------------------------------------------------------*/
 
@@ -135,7 +135,7 @@ public class Pack {
      */
     public double getPrice() {
 		if (this.discount == null) {
-			return this.price;
+			return this.price; // TEST_FIX
 		}
 
         switch (this.discount.getType()) {

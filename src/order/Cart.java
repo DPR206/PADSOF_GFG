@@ -1,6 +1,7 @@
 package order;
 
 import store.Parameter;
+import store.Store;
 import user.RegisteredClient;
 
 import java.time.*;
@@ -194,6 +195,11 @@ public class Cart {
             notification.FullNotification(order);
             this.owner.getNotificationHistory().addNotification(notification);
             this.owner.increaseNumOrders();
+            
+            NotificationEmployeeOrder notification2 = new NotificationEmployeeOrder(LocalDateTime.now(), false, true, 
+            											NotificationType.EMPLOYEE_ORDER);
+            notification2.FullNotification(order);
+            Store.getInstance().sendNotificationEmployees(notification2);
 
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {

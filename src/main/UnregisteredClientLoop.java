@@ -4,6 +4,7 @@ import order.Cart;
 import product.StoreProduct;
 import store.Pager;
 import store.Store;
+import user.RegisteredClient;
 import user.UnregisteredClient;
 
 import java.io.IOException;
@@ -55,20 +56,20 @@ public class UnregisteredClientLoop extends Loop {
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
-            case 1:
-                pageNumGoForward();
+            case 1: /* Browse products */
+                enterPagedScreen();
                 browseStore();
                 break;
-            case 2:
-                loggerLoop();
+            case 2: /* Log in */
+                logger();
                 break;
-            case 3:
+            case 3: /* Sign up */
                 signer();
                 break;
-            case 4, 5:
+            case 4, 5: /* Go back */ /* Go to main page */
                 main();
                 break;
-            case 6:
+            case 6: /* Exit */
                 exit();
                 break;
             default:
@@ -88,11 +89,12 @@ public class UnregisteredClientLoop extends Loop {
         System.out.print("\n ---- browseStore ---- \n"); // Es para debug, borrar
         System.out.println("Page: " + currentScreenPageNum);
 
-        List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
+        List<StoreProduct> products = ((UnregisteredClient) currentUser).searchStoreProduct();
         Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
 
         System.out.println("What do you wish to do? (enter the nº)");
         int i = 1;
+        System.out.println("\t[" + i++ + "] Filter search");
         System.out.println("\t[" + i++ + "] See a product");
         System.out.println("\t[" + i++ + "] See my cart");
         System.out.println("\t[" + i++ + "] Sign up");
@@ -100,39 +102,42 @@ public class UnregisteredClientLoop extends Loop {
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
-            case 1:
+            case 1: /* Filter search */
+                System.out.println("Not yet implemented"); // DUE: Filter search
+                break;
+            case 2: /* See a product */
                 System.out.print("\n ---- seeStoreProduct ---- \n"); // Es para debug, borrar
                 System.out.println("Enter the number of the desired product:");
                 int productNum = scanner.nextInt();
-                pageNumGoForward();
+                leavePagedScreen();
                 seeStoreProduct(productNum);
                 break;
-            case 2:
-                pageNumGoForward();
+            case 3: /* See my cart */
+                leavePagedScreen();
                 seeCart();
                 break;
-            case 3:
-                pageNumGoForward();
+            case 4: /* Sign up */
+                leavePagedScreen();
                 signer();
                 break;
-            case 4:
+            case 5: /* Previous page */
                 previousPage();
                 browseStore();
                 break;
-            case 5:
+            case 6: /* Next page */
                 nextPageStoreProduct(products);
                 browseStore();
                 break;
-            case 6:
-                pageNumGoForward();
-                browseStore();
+            case 7: /* Go back */
+                leavePagedScreen();
+                unregisteredClientLoop();
                 break;
-            case 7:
-                pageNumGoForward();
+            case 8: /* Go to main page */
+                leavePagedScreen();
                 main();
                 break;
-            case 8:
-                pageNumGoForward();
+            case 9: /* Exit */
+                leavePagedScreen();
                 exit();
                 break;
             default:
@@ -143,7 +148,7 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     /**
-     * It allows an unregistered client to place an order via log in or sign up
+     * It allows an unregistered client to place an order via log-in or sign-up
      * @throws IOException              the io exception
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
@@ -159,18 +164,25 @@ public class UnregisteredClientLoop extends Loop {
         int chosenOption3 = scanner.nextInt();
 
         switch (chosenOption3) {
-            case 1:
+            case 1: /* Log in */
                 cartLogger();
                 break;
-            case 2:
+            case 2: /* Sign up */
                 cartSigner();
                 break;
-            case 3:
-                browseStore();
+            case 3: /* Go back */
+                returnToPagedScreen();
+                seeCart();
+                break;
+            case 4: /* Go to main page */
+                main();
+                break;
+            case 5: /* Exit */
+                exit();
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredClientLoop();
+                placeOrder();
                 break;
         }
     }
@@ -196,17 +208,18 @@ public class UnregisteredClientLoop extends Loop {
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
-            case 1:
-                pageNumGoForward();
+            case 1: /* See reviews */
+                enterPagedScreen();
                 seeReviews(product, productNum);
                 break;
-            case 2:
+            case 2: /* See my cart */
+                enterPagedScreen();
                 seeCart();
                 break;
-            case 3:
+            case 3: /* Sign up */
                 signer();
                 break;
-            case 4:
+            case 4: /* Add to cart */
                 System.out.println("Enter the number of copies you desire");
                 int numProds = scanner.nextInt();
                 for (int j = 0; j < numProds; j++) {
@@ -215,14 +228,14 @@ public class UnregisteredClientLoop extends Loop {
                 System.out.println("Added " + numProds + " copies to your cart");
                 browseStore();
                 break;
-            case 5:
-                pageNumGoBack();
+            case 5: /* Go back */
+                returnToPagedScreen();
                 browseStore();
                 break;
-            case 6:
+            case 6: /* Go to main page */
                 main();
                 break;
-            case 7:
+            case 7: /* Exit */
                 exit();
                 break;
             default:
@@ -235,7 +248,7 @@ public class UnregisteredClientLoop extends Loop {
 
     /**
      * It allows an unregistered client to see a certain product's reviews
-     * @param product the product
+     * @param product the desired product
      */
     private void seeReviews(StoreProduct product, int productNum) throws IOException {
         System.out.print("\n ---- seeReviews ---- \n"); // Es para debug, borrar
@@ -250,28 +263,28 @@ public class UnregisteredClientLoop extends Loop {
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
-            case 1:
-                pageNumGoForward();
+            case 1: /* Sign up */
+                leavePagedScreen();
                 signer();
                 break;
-            case 2:
+            case 2: /* Previous page */
                 previousPage();
                 seeReviews(product, currentScreenPageNum);
                 break;
-            case 3:
+            case 3: /* Next page */
                 nextPageReview(product);
                 seeReviews(product, currentScreenPageNum);
                 break;
-            case 4:
-                pageNumGoForward();
+            case 4: /* Go back */
+                leavePagedScreen();
                 seeStoreProduct(productNum);
                 break;
-            case 5:
-                pageNumGoForward();
+            case 5: /* Go to main page */
+                leavePagedScreen();
                 main();
                 break;
-            case 6:
-                pageNumGoForward();
+            case 6: /* Exit */
+                leavePagedScreen();
                 exit();
                 break;
             default:
@@ -287,17 +300,46 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void seeCart() throws IOException {
         System.out.print("\n ---- seeCart ---- \n"); // Es para debug, borrar
-        ((UnregisteredClient) currentUser).getCart().getPrintInfo();
+        // DUE: printCartListPage()
         System.out.println("What do you wish to do? (enter the nº)");
         int i = 1;
         System.out.println("\t[" + i++ + "] Place order");
-        pagedLoopPrinter(i); // DUE el carrito debe ser paged
-        int chosenOption2 = scanner.nextInt();
+        System.out.println("\t[" + i++ + "] See an item");
+        pagedLoopPrinter(i);
+        chosenOption = scanner.nextInt();
 
-        if (chosenOption2 == 1) {
-            placeOrder();
-        } else {
-            browseStore();
+        switch (chosenOption) {
+            case 1: /* Place order */
+                placeOrder();
+                break;
+            case 2: /* See an item */
+                // DUE: selectItemfromCartPage()
+                // DUE: seeCartItem
+                break;
+            case 3: /* Previous page */
+                previousPage();
+                seeCart();
+                break;
+            case 4: /* Next page */
+                // DUE: nextPageCart();
+                seeCart();
+                break;
+            case 5: /* Go back */
+                returnToPagedScreen();
+                browseStore();
+                break;
+            case 6: /* Go to main page */
+                leavePagedScreen();
+                main();
+                break;
+            case 7: /* Exit */
+                leavePagedScreen();
+                exit();
+                break;
+            default:
+                System.out.println("Uh oh, something went wrong :/, reloading...");
+                seeCart();
+                break;
         }
     }
 
@@ -311,7 +353,7 @@ public class UnregisteredClientLoop extends Loop {
         System.out.print("\n ---- cartLogger ---- \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();
-        /* Logger */
+
         System.out.print("Enter your username: ");
         String userName = scanner.next();
         System.out.print("Enter your password: ");
@@ -324,21 +366,34 @@ public class UnregisteredClientLoop extends Loop {
             int i = 1;
             System.out.println("\t[" + i++ + "] Try again");
             basicLoopPrinter(i);
-            int chosenOption2 = scanner.nextInt();
+            chosenOption = scanner.nextInt();
 
-            if (chosenOption2 == 1) {
-                cartLogger();
-            } else {
-                placeOrder();
+            switch (chosenOption) {
+                case 1: /* Try again */
+                    cartLogger();
+                    break;
+                case 2: /* Go back */
+                    placeOrder();
+                    break;
+                case 3: /* Go to main page */
+                    main();
+                    break;
+                case 4: /* Exit */
+                    exit();
+                    break;
+                default:
+                    System.out.println("Uh oh, something went wrong :/, reloading...");
+                    cartLogger();
+                    break;
             }
         }
-        /* Logger */
+
+        /* Cart preservation */
         for (StoreProduct product : currrentCart.getProducts()) {
-            currrentCart.addProduct(product);
+            ((RegisteredClient) currentUser).addCart(product);
         }
-        /* Logger */
+
         loopSelector();
-        /* Logger */
     }
 
     /**
@@ -351,12 +406,14 @@ public class UnregisteredClientLoop extends Loop {
         System.out.print("\n ---- cartSigner ---- \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();
-        /* Signer */
+
         currentUser = Store.getInstance().signIn();
-        /* Signer */
+
+        /* Cart preservation */
         for (StoreProduct product : currrentCart.getProducts()) {
-            currrentCart.addProduct(product);
+            ((RegisteredClient) currentUser).addCart(product);
         }
+
         loopSelector();
     }
 }

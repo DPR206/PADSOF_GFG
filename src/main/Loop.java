@@ -30,19 +30,27 @@ public abstract class Loop {
     protected int chosenOption;
 
     /**
-     * It updates the previous and current page numbers when changing to a paged screen, allowing for the user to go
-     * back to the page they were viewing in the previous screen
+     * It updates the previous and current page numbers when leaving a paged screen, allowing for the user to go back to
+     * the page they were viewing in the previous screen
      */
-    protected void pageNumGoForward() { // Se ejecuta siempre que se salga de un paged loop
+    protected void leavePagedScreen() {
         previousScreenPageNum = currentScreenPageNum;
         currentScreenPageNum = 1;
     }
 
     /**
-     * It updates the previous and current page numbers when exiting a paged screen, allowing for the user to go back to
-     * the page they were viewing in the previous screen
+     * It updates the previous and current page numbers when entering a paged screen for the first time, allowing for
+     * the user to go back to the page they were viewing in the previous screen
      */
-    protected void pageNumGoBack() { // Se ejecuta siempre que se vuelva a un paged loop
+    protected void enterPagedScreen() {
+        leavePagedScreen();
+    }
+
+    /**
+     * It updates the previous and current page numbers when going back to a paged screen, allowing for the user to go
+     * back to the page they were viewing in the previous screen
+     */
+    protected void returnToPagedScreen() {
         int aux = previousScreenPageNum;
         previousScreenPageNum = currentScreenPageNum;
         currentScreenPageNum = aux;
@@ -52,8 +60,8 @@ public abstract class Loop {
      * It handles the log-in and updates the current user accordingly
      * @throws IOException the io exception
      */
-    protected void loggerLoop() throws IOException {
-        System.out.print("\n ---- loggerLoop ---- \n"); // Es para debug, borrar
+    protected void logger() throws IOException {
+        System.out.print("\n ---- logger ---- \n"); // Es para debug, borrar
         System.out.print("Enter your username: ");
         String userName = scanner.next();
         System.out.print("Enter your password: ");
@@ -64,14 +72,24 @@ public abstract class Loop {
             System.out.println("Invalid username or password :[");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            System.out.println("\t["+ i++ +"] Try again");
+            System.out.println("\t[" + i++ + "] Try again");
             basicLoopPrinter(i);
-            int chosenOption2 = scanner.nextInt();
+            chosenOption = scanner.nextInt();
 
-            if (chosenOption2 == 1) {
-                loggerLoop();
-            } else {
-                main();
+            switch (chosenOption) {
+                case 1: /* Try again */
+                    logger();
+                    break;
+                case 2, 3: /* Go back */ /* Go to main page */
+                    main();
+                    break;
+                case 4: /* Exit */
+                    exit();
+                    break;
+                default:
+                    System.out.println("Uh oh, something went wrong :/, reloading...");
+                    logger();
+                    break;
             }
         }
         loopSelector();

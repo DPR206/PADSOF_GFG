@@ -185,7 +185,7 @@ public class Cart {
             CCV = sc.next();
             System.out.print("Introduce tu fecha de caducidad de tarjeta: ");
             fechaCad = sc.next();
-            
+
             Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
 
             Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
@@ -197,8 +197,8 @@ public class Cart {
             notification.FullNotification(order);
             this.owner.getNotificationHistory().addNotification(notification);
             this.owner.increaseNumOrders();
-            
-            NotificationEmployeeOrder notification2 = new NotificationEmployeeOrder(LocalDateTime.now(), false, true, 
+
+            NotificationEmployeeOrder notification2 = new NotificationEmployeeOrder(LocalDateTime.now(), false, true,
             											NotificationType.EMPLOYEE_ORDER);
             notification2.FullNotification(order);
             Store.getInstance().sendNotificationEmployees(notification2);
@@ -215,7 +215,7 @@ public class Cart {
 
         return true;
     }
-    
+
     public LocalDate getCreationDate(){
     	return this.creationDate;
     }
@@ -249,16 +249,16 @@ public class Cart {
             System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.packs.get(pack));
         }
     }
-    
+
     public void cleanupOldProducts() {
     	List<StoreProduct> sp = new ArrayList<>(this.getProducts());
     	List<Pack> packs = new ArrayList<>(this.packs.keySet());
-    	
+
     	for(StoreProduct spi: sp) {
     		LocalDate expiration = this.calculateExpiredDate(spi);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelProduct(spi);
-    			NotificationProductCart notificationP = new NotificationProductCart(LocalDateTime.now(), false, true, 
+    			NotificationProductCart notificationP = new NotificationProductCart(LocalDateTime.now(), false, true,
     													NotificationType.PRODUCT_CART);
     			notificationP.FullNotification(spi);
     			this.owner.getNotificationHistory().addNotification(notificationP);
@@ -268,7 +268,7 @@ public class Cart {
     		LocalDate expiration = this.calculateExpiredDatePacks(p);
     		if(expiration.isBefore(LocalDate.now())) {
     			this.cancelPack(p);
-    			NotificationPackCart notificationK = new NotificationPackCart(LocalDateTime.now(), false, true, 
+    			NotificationPackCart notificationK = new NotificationPackCart(LocalDateTime.now(), false, true,
     													NotificationType.PACK_CART);
     			notificationK.FullNotification(p);
     			this.owner.getNotificationHistory().addNotification(notificationK);
@@ -283,29 +283,37 @@ public class Cart {
     public List<StoreProduct> getProducts() {
         return new ArrayList<>(this.sp.keySet());
     }
-    
+
+    /**
+     * It gets the cart's packs
+     * @return the cart's packs
+     */
+    public List<Pack> getPacks() {
+        return new ArrayList<>(this.packs.keySet());
+    }
+
     public LocalDate calculateExpiredDate(StoreProduct sproducts) {
     	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
-    	
+
     	List<StoreProduct> products = new ArrayList<>(this.sp.keySet());
-    	
+
     	for(StoreProduct pdct: products) {
     		if(pdct.getId().equals(sproducts.getId())) return sproducts.getAddedDate().plus(timeToExist);
         }
     	return null;
     }
-    
+
     public LocalDate calculateExpiredDatePacks(Pack pack) {
     	Parameter p = Parameter.getParam();
     	Period timeToExist = p.getOrderTime();
-    	
+
     	List<Pack> packs = new ArrayList<>(this.packs.keySet());
-    	
+
     	for(Pack pck: packs) {
     		if(pck.getId()== (pack.getId())) return pck.getDateAddCart().plus(timeToExist);
         }
     	return null;
     }
-    
+
 }

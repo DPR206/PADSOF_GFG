@@ -136,7 +136,7 @@ public class ManagerLoop extends Loop {
                 StoreProduct product =
                         Pager.getInstance().selectStoreProductFromPage(products, currentScreenPageNum, productNum);
                 ProductType type = product.getType();
-                pageNumGoForward();
+                leavePagedScreen();
 
                 switch (type) {
                     case COMIC:
@@ -163,15 +163,15 @@ public class ManagerLoop extends Loop {
                 manageStoreProducts();
                 break;
             case 4:
-                pageNumGoForward();
+                leavePagedScreen();
                 managerLoop();
                 break;
             case 5:
-                pageNumGoForward();
+                leavePagedScreen();
                 main();
                 break;
             case 6:
-                pageNumGoForward();
+                leavePagedScreen();
                 exit();
                 break;
             default:
@@ -256,7 +256,7 @@ public class ManagerLoop extends Loop {
                 comic.setYear(newYear);
                 break;
             case 11:
-                pageNumGoBack();
+                returnToPagedScreen();
                 manageStoreProducts();
                 break;
             case 12:
@@ -343,7 +343,7 @@ public class ManagerLoop extends Loop {
                 game.setGameStyle(newGameStyle);
                 break;
             case 10:
-                pageNumGoBack();
+                returnToPagedScreen();
                 manageStoreProducts();
                 break;
             case 11:
@@ -428,7 +428,7 @@ public class ManagerLoop extends Loop {
                 figurine.setDimension(newDimension);
                 break;
             case 10:
-                pageNumGoBack();
+                returnToPagedScreen();
                 manageStoreProducts();
                 break;
             case 11:
@@ -635,15 +635,15 @@ public class ManagerLoop extends Loop {
                 productBySales();
                 break;
             case 3:
-                pageNumGoForward();
+                leavePagedScreen();
                 generateStatistics();
                 break;
             case 4:
-                pageNumGoForward();
+                leavePagedScreen();
                 main();
                 break;
             case 5:
-                pageNumGoForward();
+                leavePagedScreen();
                 exit();
                 break;
             default:
@@ -680,15 +680,15 @@ public class ManagerLoop extends Loop {
                 clientsByOrders();
                 break;
             case 3:
-                pageNumGoForward();
+                leavePagedScreen();
                 clientsByOrders();
                 break;
             case 4:
-                pageNumGoForward();
+                leavePagedScreen();
                 main();
                 break;
             case 5:
-                pageNumGoForward();
+                leavePagedScreen();
                 exit();
                 break;
             default:
@@ -729,15 +729,15 @@ public class ManagerLoop extends Loop {
                 clientsByExchanges();
                 break;
             case 3:
-                pageNumGoForward();
+                leavePagedScreen();
                 clientsByExchanges();
                 break;
             case 4:
-                pageNumGoForward();
+                leavePagedScreen();
                 main();
                 break;
             case 5:
-                pageNumGoForward();
+                leavePagedScreen();
                 exit();
                 break;
             default:

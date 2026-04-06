@@ -67,7 +67,7 @@ public class MainLoop extends Loop {
                 loopSelector();
                 break;
             case 2:
-                loggerLoop();
+                logger();
                 break;
             case 3:
                 signer();

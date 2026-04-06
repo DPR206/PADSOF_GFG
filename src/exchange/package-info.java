@@ -4,5 +4,8 @@
  * the products they want to exchange, if the receiver accepts it, the offer becomes an exchange. The exchange can be
  * set as exchanged by an employee and will be logged in both client's exchange histories. An offer can have several
  * statutes according to the receiver's response, amongst other things.
+ * 
+ * @author Ana O.R. and Duna P.R.
+ * @version 2.5.
  */
 package exchange;

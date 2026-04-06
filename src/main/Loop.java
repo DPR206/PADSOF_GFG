@@ -63,8 +63,9 @@ public abstract class Loop {
         if (currentUser == null) {
             System.out.println("Invalid username or password :[");
             System.out.println("What do you wish to do? (enter the nº)");
-            System.out.println("\t[1] Try again");
-            System.out.println("\t[2] Go back");
+            int i = 1;
+            System.out.println("\t["+ i++ +"] Try again");
+            basicLoopPrinter(i);
             int chosenOption2 = scanner.nextInt();
 
             if (chosenOption2 == 1) {
@@ -300,5 +301,48 @@ public abstract class Loop {
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");
         }
+    }
+
+    /* Useful things */
+
+    /**
+     * It prints the selections: see notification, see profile, go back, go to main page, exit. Used when prompting the
+     * user, notification and profile options will only be printed it they can be chosen by the current user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void basicLoopPrinter(int firstOptionNum) {
+        if (currentUser.getType() == UserType.REGISTERED_CLIENT || currentUser.getType() == UserType.EMPLOYEE) {
+            System.out.println("\t[" + firstOptionNum++ + "] ");
+        }
+        if (currentUser.getType() != UserType.UNREGISTERED_CLIENT) {
+
+            System.out.println("\t[" + firstOptionNum++ + "] See profile");
+        }
+        System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
+        System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
+        System.out.println("\t[" + firstOptionNum + "] x Exit app");
+    }
+
+    /**
+     * It prints the selections: see notification, see profile, previous page, next page, go back, go to main page,
+     * exit. Used when prompting the user, notification and profile options will only be printed it they can be chosen
+     * by the current user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedLoopPrinter(int firstOptionNum) {
+        if (currentUser.getType() == UserType.REGISTERED_CLIENT || currentUser.getType() == UserType.EMPLOYEE) {
+            System.out.println("\t[" + firstOptionNum++ + "] ");
+        }
+        if (currentUser.getType() != UserType.UNREGISTERED_CLIENT) {
+
+            System.out.println("\t[" + firstOptionNum++ + "] See profile");
+        }
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterRegisteredClient(firstOptionNum);
+        firstOptionNum++;
+        System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
+        System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
+        System.out.println("\t[" + firstOptionNum + "] x Exit app");
     }
 }

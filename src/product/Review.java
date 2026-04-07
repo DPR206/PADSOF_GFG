@@ -11,6 +11,7 @@ import user.RegisteredClient;
  * @see user.User
  */
 public class Review {
+	 /** ID counter for the reviews */
 	public static int totalId = -1;
 	private final int id;
 	private int scoring;
@@ -20,6 +21,7 @@ public class Review {
 	/**
 	 * A review's complete constructor
 	 *
+	 * @param id the review's id
 	 * @param scoring, the punctuation given to a product
 	 * @param comment, the comment about the product
 	 */

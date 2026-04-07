@@ -74,13 +74,13 @@ public class MainLoop extends Loop {
             case 3:
                 signer();
                 break;
-            case 4:
+            default:
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                main();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
         }
 
     }

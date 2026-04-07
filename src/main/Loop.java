@@ -21,10 +21,10 @@ public abstract class Loop {
     /** The apps current user */
     protected static User currentUser;
     /** Access to various loops */
-    private final MainLoop mainLoop = MainLoop.getInstance();
-    private final UnregisteredClientLoop unregisteredClientLoop = UnregisteredClientLoop.getInstance();
-    private final RegisteredClientLoop registeredClientLoop = RegisteredClientLoop.getInstance();
-    private final ManagerLoop managerLoop = ManagerLoop.getInstance();
+    // Resulta que esto es un crimen contra la humanidad -> private final MainLoop MainLoop.getInstance() = MainLoop.getInstance();
+    // Resulta que esto es un crimen contra la humanidad -> private final UnregisteredClientLoop unregisteredClientLoop = UnregisteredClientLoop.getInstance();
+    // Resulta que esto es un crimen contra la humanidad -> private final RegisteredClientLoop registeredClientLoop = RegisteredClientLoop.getInstance();
+    // Resulta que esto es un crimen contra la humanidad -> private final ManagerLoop managerLoop = ManagerLoop.getInstance();
     /** The last chosen option when prompted */
     protected int chosenOption;
 
@@ -69,28 +69,28 @@ public abstract class Loop {
 
         currentUser = Store.getInstance().getUtility().logIn(userName, password);
         if (currentUser == null) {
-            System.out.println("Invalid username or password :[");
-            System.out.println("What do you wish to do? (enter the nº)");
-            int i = 1;
-            System.out.println("\t[" + i++ + "] Try again");
-            basicLoopPrinter(i);
-            chosenOption = scanner.nextInt();
+            // Trozos de mis sueños rotos: System.out.println("Invalid username or password :[");
+            // Trozos de mis sueños rotos: System.out.println("What do you wish to do? (enter the nº)");
+            // Trozos de mis sueños rotos: int i = 1;
+            // Trozos de mis sueños rotos: System.out.println("\t[" + i++ + "] Try again");
+            // Trozos de mis sueños rotos: basicLoopPrinter(i);
+            // Trozos de mis sueños rotos: chosenOption = scanner.nextInt();
 
-            switch (chosenOption) {
-                case 1: /* Try again */
-                    logger();
-                    break;
-                case 2, 3: /* Go back */ /* Go to main page */
-                    main();
-                    break;
-                case 4: /* Exit */
-                    exit();
-                    break;
-                default:
-                    System.out.println("Uh oh, something went wrong :/, reloading...");
-                    logger();
-                    break;
-            }
+            // Trozos de mis sueños rotos: switch (chosenOption) {
+            // Trozos de mis sueños rotos: case 1: /* Try again */
+            // Trozos de mis sueños rotos: logger();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 2, 3: /* Go back */ /* Go to main page */
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 2: /* Exit */
+            exit();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos: logger();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: }
         }
         loopSelector();
     }
@@ -102,7 +102,7 @@ public abstract class Loop {
     protected void signer() throws IOException {
         System.out.print("\n ---- signer ---- \n"); // Es para debug, borrar
         currentUser = Store.getInstance().signIn();
-        mainLoop.loopSelector();
+        MainLoop.getInstance().loopSelector();
     }
 
     /**
@@ -110,7 +110,7 @@ public abstract class Loop {
      * @throws IOException the io exception
      */
     protected void main() throws IOException {
-        mainLoop.main();
+        MainLoop.getInstance().main();
     }
 
     /**
@@ -129,16 +129,16 @@ public abstract class Loop {
 
         switch (userType) {
             case UNREGISTERED_CLIENT:
-                unregisteredClientLoop.unregisteredClientLoop();
+                UnregisteredClientLoop.getInstance().unregisteredClientLoop();
                 break;
             case REGISTERED_CLIENT:
-                registeredClientLoop.registeredClientLoop();
+                RegisteredClientLoop.getInstance().registeredClientLoop();
                 break;
             case EMPLOYEE:
                 // DUE employeeLoop();
                 break;
             case MANAGER:
-                managerLoop.managerLoop();
+                ManagerLoop.getInstance().managerLoop();
                 break;
             default: // Este NO debería saltar nunca, lo pongo por si acaso
                 System.out.println("You shouldn't be able to see this :(");
@@ -351,8 +351,8 @@ public abstract class Loop {
 
             System.out.println("\t[" + firstOptionNum++ + "] See profile");
         }
-        System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
-        System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
+        // Trozos de mis sueños rotos: System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
+        // Trozos de mis sueños rotos: System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
         System.out.println("\t[" + firstOptionNum + "] x Exit app");
     }
 
@@ -374,8 +374,8 @@ public abstract class Loop {
         firstOptionNum++;
         nextPagePrinterRegisteredClient(firstOptionNum);
         firstOptionNum++;
-        System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
-        System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
+        // Trozos de mis sueños rotos: System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
+        // Trozos de mis sueños rotos: System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
         System.out.println("\t[" + firstOptionNum + "] x Exit app");
     }
 }

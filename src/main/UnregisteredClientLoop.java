@@ -62,7 +62,7 @@ public class UnregisteredClientLoop extends Loop {
 
         switch (chosenOption) {
             case 1: /* Browse products */
-                enterPagedScreen();
+                // Trozos de mis sueños rotos: enterPagedScreen();
                 browseStore();
                 break;
             case 2: /* Log in */
@@ -71,16 +71,16 @@ public class UnregisteredClientLoop extends Loop {
             case 3: /* Sign up */
                 signer();
                 break;
-            case 4, 5: /* Go back */ /* Go to main page */
-                main();
-                break;
-            case 6: /* Exit */
+            // Trozos de mis sueños rotos: case 4, 5: /* Go back */ /* Go to main page */
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default: /* Exit */
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                unregisteredClientLoop();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos: unregisteredClientLoop();
+            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -92,73 +92,76 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void browseStore() throws IOException, IllegalArgumentException, NullPointerException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- browseStore ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + currentScreenPageNum);
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            System.out.print("\n ---- browseStore ---- \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
 
-        if (filteredStore.isEmpty()) { // Si no hay filtros se muestran todos los productos
-            this.filteredStore = ((UnregisteredClient) currentUser).searchStoreProduct();
-        }
-        Pager.getInstance().printStoreProductListPage(filteredStore, currentScreenPageNum);
+            if (filteredStore.isEmpty()) { // Si no hay filtros se muestran todos los productos
+                this.filteredStore = ((UnregisteredClient) currentUser).searchStoreProduct();
+            }
+            Pager.getInstance().printStoreProductListPage(filteredStore, currentScreenPageNum);
 
-        System.out.println("What do you wish to do? (enter the nº)");
-        int i = 1;
-        System.out.println("\t[" + i++ + "] Add a filter to the search");
-        System.out.println("\t[" + i++ + "] See a product");
-        System.out.println("\t[" + i++ + "] See my cart");
-        System.out.println("\t[" + i++ + "] Log in");
-        System.out.println("\t[" + i++ + "] Sign up");
-        pagedLoopPrinter(i);
-        chosenOption = scanner.nextInt();
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Add a filter to the search");
+            System.out.println("\t[" + i++ + "] See a product");
+            System.out.println("\t[" + i++ + "] See my cart");
+            System.out.println("\t[" + i++ + "] Log in");
+            System.out.println("\t[" + i++ + "] Sign up");
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1: /* Filter search */
-                this.filteredStore = filterSearch();
-                System.out.println("Applying filters...");
-                browseStore();
-                break;
-            case 2: /* See a product */
-                System.out.print("\n ---- seeStoreProduct ---- \n"); // Es para debug, borrar
-                System.out.println("Enter the number of the desired product:");
-                this.productNum = scanner.nextInt();
-                leavePagedScreen();
-                seeStoreProduct();
-                break;
-            case 3: /* See my cart */
-                leavePagedScreen();
-                seeCart();
-                break;
-            case 4: /* Log in*/
-                leavePagedScreen();
-                logger();
-                break;
-            case 5: /* Sign up */
-                leavePagedScreen();
-                signer();
-                break;
-            case 6: /* Previous page */
-                previousPage();
-                browseStore();
-                break;
-            case 7: /* Next page */
-                nextPageStoreProduct(this.filteredStore);
-                browseStore();
-                break;
-            case 8: /* Go back */
-                leavePagedScreen();
-                unregisteredClientLoop();
-                break;
-            case 9: /* Go to main page */
-                leavePagedScreen();
-                main();
-                break;
-            case 10: /* Exit */
-                leavePagedScreen();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                browseStore();
-                break;
+            switch (chosenOption) {
+                case 1: /* Filter search */
+                    this.filteredStore = filterSearch();
+                    System.out.println("Applying filters...");
+                    // Trozos de mis sueños rotos: browseStore();
+                    break;
+                case 2: /* See a product */
+                    System.out.print("\n ---- seeStoreProduct ---- \n"); // Es para debug, borrar
+                    System.out.println("Enter the number of the desired product:");
+                    this.productNum = scanner.nextInt();
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    seeStoreProduct();
+                    break;
+                case 3: /* See my cart */
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    seeCart();
+                    break;
+                case 4: /* Log in*/
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    logger();
+                    break;
+                case 5: /* Sign up */
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    signer();
+                    break;
+                case 6: /* Previous page */
+                    previousPage();
+                    //browseStore();
+                    break;
+                case 7: /* Next page */
+                    nextPageStoreProduct(this.filteredStore);
+                    //browseStore();
+                    break;
+                // Trozos de mis sueños rotos: case 8: /* Go back */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: unregisteredClientLoop();
+                // Trozos de mis sueños rotos: break;
+                // Trozos de mis sueños rotos: case 9: /* Go to main page */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: main();
+                // Trozos de mis sueños rotos: break;
+                default: /* Exit */
+                    // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                    exitMenu = true;
+                    break;
+                // Trozos de mis sueños rotos: default:
+                // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+                // Trozos de mis sueños rotos: browseStore();
+                // Trozos de mis sueños rotos: break;
+            }
         }
     }
 
@@ -192,7 +195,8 @@ public class UnregisteredClientLoop extends Loop {
                     Category category = Store.getInstance().getCategoryFromName(categoryName);
                     if (category == null) {
                         System.out.println("A category which such a name doesn't exist, reloading...");
-                        return filterSearch();
+                        // Trozos de mis sueños rotos: return filterSearch();
+                        exit();
                     }
                     categories.add(category);
                 }
@@ -204,7 +208,8 @@ public class UnregisteredClientLoop extends Loop {
                 int maxPrice = scanner.nextInt();
                 if (maxPrice < minPrice) {
                     System.out.println("Maximum price must be greater or equal to minimum price, reloading...");
-                    return filterSearch();
+                    // Trozos de mis sueños rotos: return filterSearch();
+                    exit();
                 }
                 currentUser.addPriceFilter(minPrice, maxPrice);
                 break;
@@ -215,7 +220,8 @@ public class UnregisteredClientLoop extends Loop {
                 int maxScore = scanner.nextInt();
                 if (maxScore < minScore) {
                     System.out.println("Maximum score must be greater or equal to minimum score, reloading...");
-                    return filterSearch();
+                    // Trozos de mis sueños rotos: return filterSearch();
+                    exit();
                 }
                 currentUser.addPunctuationFilter(minScore, maxScore);
                 break;
@@ -227,18 +233,18 @@ public class UnregisteredClientLoop extends Loop {
             case 6: /* Sign up */
                 signer();
                 break;
-            case 7: /* Go back */
-                browseStore();
-                break;
-            case 8: /* Go to main page */
-                main();
-                break;
-            case 9: /* Exit */
+            // Trozos de mis sueños rotos: case 7: /* Go back */
+            // Trozos de mis sueños rotos:  browseStore();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 8: /* Go to main page */
+            // Trozos de mis sueños rotos:   main();
+            // Trozos de mis sueños rotos: break;
+            default: /* Exit */
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                return filterSearch();
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  return filterSearch();
         }
 
         return ((UnregisteredClient) currentUser).searchStoreProductByCategory(categories.toArray(new Category[0]));
@@ -268,20 +274,20 @@ public class UnregisteredClientLoop extends Loop {
             case 2: /* Sign up */
                 cartSigner();
                 break;
-            case 3: /* Go back */
-                returnToPagedScreen();
-                seeCart();
-                break;
-            case 4: /* Go to main page */
-                main();
-                break;
-            case 5: /* Exit */
+            // Trozos de mis sueños rotos: case 3: /* Go back */
+            // Trozos de mis sueños rotos:    returnToPagedScreen();
+            // Trozos de mis sueños rotos:  seeCart();
+            // Trozos de mis sueños rotos:   break;
+            // Trozos de mis sueños rotos: case 4: /* Go to main page */
+            // Trozos de mis sueños rotos:  main();
+            // Trozos de mis sueños rotos:  break;
+            default: /* Exit */
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                placeOrder();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  placeOrder();
+            // Trozos de mis sueños rotos:  break;
         }
     }
 
@@ -308,11 +314,11 @@ public class UnregisteredClientLoop extends Loop {
 
         switch (chosenOption) {
             case 1: /* See reviews */
-                enterPagedScreen();
+                // Trozos de mis sueños rotos: enterPagedScreen();
                 seeReviews();
                 break;
             case 2: /* See my cart */
-                enterPagedScreen();
+                // Trozos de mis sueños rotos: enterPagedScreen();
                 seeCart();
                 break;
             case 3: /* Log in */
@@ -328,22 +334,22 @@ public class UnregisteredClientLoop extends Loop {
                     ((UnregisteredClient) currentUser).addCart(product);
                 }
                 System.out.println("Added " + numProds + " copies to your cart");
-                browseStore();
+                // Trozos de mis sueños rotos: browseStore();
                 break;
-            case 6: /* Go back */
-                returnToPagedScreen();
-                browseStore();
-                break;
-            case 7: /* Go to main page */
-                main();
-                break;
-            case 8: /* Exit */
+            // Trozos de mis sueños rotos: case 6: /* Go back */
+            // Trozos de mis sueños rotos:   returnToPagedScreen();
+            // Trozos de mis sueños rotos:  browseStore();
+            // Trozos de mis sueños rotos:  break;
+            // Trozos de mis sueños rotos: case 7: /* Go to main page */
+            // Trozos de mis sueños rotos:  main();
+            // Trozos de mis sueños rotos:  break;
+            default: /* Exit */
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                seeStoreProduct();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:   System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  seeStoreProduct();
+            // Trozos de mis sueños rotos:  break;
         }
 
     }
@@ -353,53 +359,56 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void seeReviews() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- seeReviews ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + currentScreenPageNum);
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            System.out.print("\n ---- seeReviews ---- \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
 
-        StoreProduct product =
-                Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, productNum);
-        product.printReviews(currentScreenPageNum);
+            StoreProduct product =
+                    Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, productNum);
+            product.printReviews(currentScreenPageNum);
 
-        System.out.println("What do you wish to do? (enter the nº)");
-        int i = 1;
-        System.out.println("\t[" + i++ + "] Log in");
-        System.out.println("\t[" + i++ + "] Sign up");
-        pagedLoopPrinter(i);
-        chosenOption = scanner.nextInt();
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Log in");
+            System.out.println("\t[" + i++ + "] Sign up");
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1: /* Log in */
-                leavePagedScreen();
-                logger();
-                break;
-            case 2: /* Sign up */
-                leavePagedScreen();
-                signer();
-                break;
-            case 3: /* Previous page */
-                previousPage();
-                seeReviews();
-                break;
-            case 4: /* Next page */
-                nextPageReview(product);
-                seeReviews();
-                break;
-            case 5: /* Go back */
-                leavePagedScreen();
-                seeStoreProduct();
-                break;
-            case 6: /* Go to main page */
-                leavePagedScreen();
-                main();
-                break;
-            case 7: /* Exit */
-                leavePagedScreen();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                seeReviews();
-                break;
+            switch (chosenOption) {
+                case 1: /* Log in */
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    logger();
+                    break;
+                case 2: /* Sign up */
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    signer();
+                    break;
+                case 3: /* Previous page */
+                    previousPage();
+                    //seeReviews();
+                    break;
+                case 4: /* Next page */
+                    nextPageReview(product);
+                    //seeReviews();
+                    break;
+                // Trozos de mis sueños rotos: case 5: /* Go back */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: seeStoreProduct();
+                // Trozos de mis sueños rotos: break;
+                // Trozos de mis sueños rotos: case 6: /* Go to main page */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos:  main();
+                // Trozos de mis sueños rotos: break;
+                default: /* Exit */
+                    // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                    exitMenu = true;
+                    break;
+                // Trozos de mis sueños rotos: default:
+                // Trozos de mis sueños rotos:   System.out.println("Uh oh, something went wrong :/, reloading...");
+                // Trozos de mis sueños rotos:  seeReviews();
+                // Trozos de mis sueños rotos:  break;
+            }
         }
     }
 
@@ -425,11 +434,11 @@ public class UnregisteredClientLoop extends Loop {
                 placeOrder();
                 break;
             case 2: /* See products */
-                enterPagedScreen();
+                // Trozos de mis sueños rotos: enterPagedScreen();
                 browseCartProducts();
                 break;
             case 3: /* See packs */
-                enterPagedScreen();
+                // Trozos de mis sueños rotos: enterPagedScreen();
                 browseCartPacks();
                 break;
             case 4: /* Log in */
@@ -438,80 +447,84 @@ public class UnregisteredClientLoop extends Loop {
             case 5: /* Sign up */
                 cartSigner();
                 break;
-            case 6: /* Go back */
-                returnToPagedScreen();
-                browseStore();
-                break;
-            case 7: /* Go to main page */
-                leavePagedScreen();
-                main();
-                break;
-            case 8: /* Exit */
-                leavePagedScreen();
+            // Trozos de mis sueños rotos: case 6: /* Go back */
+            // Trozos de mis sueños rotos: returnToPagedScreen();
+            // Trozos de mis sueños rotos: browseStore();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 7: /* Go to main page */
+            // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default: /* Exit */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                seeCart();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:   System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  seeCart();
+            // Trozos de mis sueños rotos:  break;
         }
     }
 
     public void browseCartProducts() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- browseCartProducts ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + currentScreenPageNum);
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            System.out.print("\n ---- browseCartProducts ---- \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
 
-        ((UnregisteredClient) currentUser).getCart().printStoreProductListPage(currentScreenPageNum);
+            ((UnregisteredClient) currentUser).getCart().printStoreProductListPage(currentScreenPageNum);
 
-        System.out.println("What do you wish to do? (enter the nº)");
-        int i = 1;
-        System.out.println("\t[" + i++ + "] See a product");
-        System.out.println("\t[" + i++ + "] Log in");
-        System.out.println("\t[" + i++ + "] Sign up");
-        pagedLoopPrinter(i);
-        chosenOption = scanner.nextInt();
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] See a product");
+            System.out.println("\t[" + i++ + "] Log in");
+            System.out.println("\t[" + i++ + "] Sign up");
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1: /* See a product */
-                System.out.print("\n ---- seeCartProduct ---- \n"); // Es para debug, borrar
-                System.out.println("Enter the number of the desired product:");
-                this.productNum = scanner.nextInt();
-                leavePagedScreen();
-                seeCartProduct();
-                break;
-            case 2: /* Log in */
-                leavePagedScreen();
-                logger();
-                break;
-            case 3: /* Sign up */
-                leavePagedScreen();
-                signer();
-                break;
-            case 4: /* Previous page */
-                previousPage();
-                browseCartProducts();
-                break;
-            case 5: /* Next page */
-                nextPageStoreProduct(((UnregisteredClient) currentUser).getCart().getProducts()); // DUE: Revisar esto
-                browseCartProducts();
-                break;
-            case 6: /* Go back */
-                leavePagedScreen();
-                seeCart();
-                break;
-            case 7: /* Go to main page */
-                leavePagedScreen();
-                main();
-                break;
-            case 8: /* Exit */
-                leavePagedScreen();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                browseCartProducts();
-                break;
+            switch (chosenOption) {
+                case 1: /* See a product */
+                    System.out.print("\n ---- seeCartProduct ---- \n"); // Es para debug, borrar
+                    System.out.println("Enter the number of the desired product:");
+                    this.productNum = scanner.nextInt();
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    seeCartProduct();
+                    break;
+                case 2: /* Log in */
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    logger();
+                    break;
+                case 3: /* Sign up */
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    signer();
+                    break;
+                case 4: /* Previous page */
+                    previousPage();
+                    //browseCartProducts();
+                    break;
+                case 5: /* Next page */
+                    nextPageStoreProduct(
+                            ((UnregisteredClient) currentUser).getCart().getProducts()); // DUE: Revisar esto
+                    //browseCartProducts();
+                    break;
+                // Trozos de mis sueños rotos: case 6: /* Go back */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: seeCart();
+                // Trozos de mis sueños rotos: break;
+                // Trozos de mis sueños rotos: case 7: /* Go to main page */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: main();
+                // Trozos de mis sueños rotos: break;
+                default: /* Exit */
+                    // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                    exitMenu = true;
+                    break;
+                // Trozos de mis sueños rotos: default:
+                // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
+                // Trozos de mis sueños rotos: browseCartProducts();
+                // Trozos de mis sueños rotos: break;
+            }
         }
     }
 
@@ -537,7 +550,7 @@ public class UnregisteredClientLoop extends Loop {
                 break;
             case 2: /* Add another one */
                 ((UnregisteredClient) currentUser).addCart(product);
-                seeCart();
+                // Trozos de mis sueños rotos: seeCart();
                 break;
             case 3: /* Log in */
                 logger();
@@ -545,79 +558,82 @@ public class UnregisteredClientLoop extends Loop {
             case 4: /* Sign up */
                 signer();
                 break;
-            case 5: /* Go back */
-                returnToPagedScreen();
-                browseCartProducts();
-                break;
-            case 6: /* Go to main page */
-                main();
-                break;
-            case 7: /* Exit */
+            // Trozos de mis sueños rotos: case 5: /* Go back */
+            // Trozos de mis sueños rotos: returnToPagedScreen();
+            // Trozos de mis sueños rotos: browseCartProducts();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 6: /* Go to main page */
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default: /* Exit */
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                seeCartProduct();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  seeCartProduct();
+            // Trozos de mis sueños rotos:  break;
         }
 
     }
 
     public void browseCartPacks() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- browseCartPacks ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + currentScreenPageNum);
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            System.out.print("\n ---- browseCartPacks ---- \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
 
-        ((UnregisteredClient) currentUser).getCart().printPackListPage(currentScreenPageNum);
+            ((UnregisteredClient) currentUser).getCart().printPackListPage(currentScreenPageNum);
 
-        System.out.println("What do you wish to do? (enter the nº)");
-        int i = 1;
-        System.out.println("\t[" + i++ + "] See a pack");
-        System.out.println("\t[" + i++ + "] Log in");
-        System.out.println("\t[" + i++ + "] Sign up");
-        pagedLoopPrinter(i);
-        chosenOption = scanner.nextInt();
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] See a pack");
+            System.out.println("\t[" + i++ + "] Log in");
+            System.out.println("\t[" + i++ + "] Sign up");
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1: /* See a product */
-                System.out.print("\n ---- seeCartPack ---- \n"); // Es para debug, borrar
-                System.out.println("Enter the number of the desired product:");
-                this.productNum = scanner.nextInt();
-                leavePagedScreen();
-                seeCartPack();
-                break;
-            case 2: /* Log in */
-                leavePagedScreen();
-                logger();
-                break;
-            case 3: /* Sign up */
-                leavePagedScreen();
-                signer();
-                break;
-            case 4: /* Previous page */
-                previousPage();
-                browseCartPacks();
-                break;
-            case 5: /* Next page */
-                nextPageCartPack(((UnregisteredClient) currentUser).getCart());
-                browseCartPacks();
-                break;
-            case 6: /* Go back */
-                leavePagedScreen();
-                seeCart();
-                break;
-            case 7: /* Go to main page */
-                leavePagedScreen();
-                main();
-                break;
-            case 8: /* Exit */
-                leavePagedScreen();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                browseCartPacks();
-                break;
+            switch (chosenOption) {
+                case 1: /* See a product */
+                    System.out.print("\n ---- seeCartPack ---- \n"); // Es para debug, borrar
+                    System.out.println("Enter the number of the desired product:");
+                    this.productNum = scanner.nextInt();
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    seeCartPack();
+                    break;
+                case 2: /* Log in */
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    logger();
+                    break;
+                case 3: /* Sign up */
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    signer();
+                    break;
+                case 4: /* Previous page */
+                    previousPage();
+                    //browseCartPacks();
+                    break;
+                case 5: /* Next page */
+                    nextPageCartPack(((UnregisteredClient) currentUser).getCart());
+                    //browseCartPacks();
+                    break;
+                // Trozos de mis sueños rotos: case 6: /* Go back */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: seeCart();
+                // Trozos de mis sueños rotos: break;
+                // Trozos de mis sueños rotos: case 7: /* Go to main page */
+                // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: main();
+                // Trozos de mis sueños rotos: break;
+                default: /* Exit */
+                    // Trozos de mis sueños rotos: // Trozos de mis sueños rotos: leavePagedScreen();
+                    exit();
+                    break;
+                // Trozos de mis sueños rotos: default:
+                // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+                // Trozos de mis sueños rotos:  browseCartPacks();
+                // Trozos de mis sueños rotos: break;
+            }
         }
     }
 
@@ -643,7 +659,7 @@ public class UnregisteredClientLoop extends Loop {
                 break;
             case 2: /* Add another one */
                 ((UnregisteredClient) currentUser).addCart(pack);
-                seeCart();
+                // Trozos de mis sueños rotos: seeCart();
                 break;
             case 3: /* Log in */
                 logger();
@@ -651,20 +667,20 @@ public class UnregisteredClientLoop extends Loop {
             case 4: /* Sign up */
                 signer();
                 break;
-            case 5: /* Go back */
-                returnToPagedScreen();
-                browseCartPacks();
-                break;
-            case 6: /* Go to main page */
-                main();
-                break;
-            case 7: /* Exit */
+            // Trozos de mis sueños rotos: case 5: /* Go back */
+            // Trozos de mis sueños rotos: returnToPagedScreen();
+            // Trozos de mis sueños rotos: browseCartPacks();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 6: /* Go to main page */
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default: /* Exit */
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                seeCartPack();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:   System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  seeCartPack();
+            // Trozos de mis sueños rotos:  break;
         }
     }
 
@@ -687,31 +703,31 @@ public class UnregisteredClientLoop extends Loop {
 
         currentUser = Store.getInstance().getUtility().logIn(userName, password);
         if (currentUser == null) {
-            System.out.println("Invalid username or password :[");
-            System.out.println("What do you wish to do? (enter the nº)");
-            int i = 1;
-            System.out.println("\t[" + i++ + "] Try again");
-            basicLoopPrinter(i);
-            chosenOption = scanner.nextInt();
+            // Trozos de mis sueños rotos: System.out.println("Invalid username or password :[");
+            // Trozos de mis sueños rotos: System.out.println("What do you wish to do? (enter the nº)");
+            // Trozos de mis sueños rotos: int i = 1;
+            // Trozos de mis sueños rotos: System.out.println("\t[" + i++ + "] Try again");
+            // Trozos de mis sueños rotos: basicLoopPrinter(i);
+            // Trozos de mis sueños rotos: chosenOption = scanner.nextInt();
 
-            switch (chosenOption) {
-                case 1: /* Try again */
-                    cartLogger();
-                    break;
-                case 2: /* Go back */
-                    placeOrder();
-                    break;
-                case 3: /* Go to main page */
-                    main();
-                    break;
-                case 4: /* Exit */
-                    exit();
-                    break;
-                default:
-                    System.out.println("Uh oh, something went wrong :/, reloading...");
-                    cartLogger();
-                    break;
-            }
+            // Trozos de mis sueños rotos: switch (chosenOption) {
+            // Trozos de mis sueños rotos: case 1: /* Try again */
+            // Trozos de mis sueños rotos: cartLogger();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 2: /* Go back */
+            // Trozos de mis sueños rotos: placeOrder();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 3: /* Go to main page */
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 2: /* Exit */
+            exit();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong:/, reloading...");
+            // Trozos de mis sueños rotos: cartLogger();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: }
         }
 
         /* Cart preservation */

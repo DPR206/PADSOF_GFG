@@ -50,17 +50,16 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- managerLoop ---- \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Manage packs");
-        System.out.println("\t[2] Manage store products");
-        System.out.println("\t[3] Add store products");
-        System.out.println("\t[4] Manage employees");
-        System.out.println("\t[5] Generate statistics");
-        System.out.println("\t[6] Manage discounts");
-        System.out.println("\t[7] Manage parameters");
-        System.out.println("\t[8] See profile");
-        System.out.println("\t[9] <- Go back");
-        System.out.println("\t[10] <<- Go to main page");
-        System.out.println("\t[11] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Manage packs");
+        System.out.println("\t[" + i++ + "] Manage store products");
+        System.out.println("\t[" + i++ + "] Add store products");
+        System.out.println("\t[" + i++ + "] Manage employees");
+        System.out.println("\t[" + i++ + "] Generate statistics");
+        System.out.println("\t[" + i++ + "] Manage discounts");
+        System.out.println("\t[" + i++ + "] Manage parameters");
+        System.out.println("\t[" + i++ + "] See profile");
+        basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -88,16 +87,16 @@ public class ManagerLoop extends Loop {
             case 8:
                 seeProfile();
                 break;
-            case 9, 10:
-                main();
-                break;
-            case 11:
+            // Trozos de mis sueños rotos: case 9, 10:
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default:
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                managerLoop();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos: managerLoop();
+            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -114,72 +113,74 @@ public class ManagerLoop extends Loop {
      */
     private void manageStoreProducts() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- manageStoreProducts ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + currentScreenPageNum);
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            System.out.print("\n ---- manageStoreProducts ---- \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
 
-        List<StoreProduct> products = ((Manager) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
-        Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
+            List<StoreProduct> products = ((Manager) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
+            Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
 
-        System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Manage a product");
-        previousPagePrinter(2);
-        nextPagePrinterStoreProduct(3, products);
-        System.out.println("\t[4] <- Go back");
-        System.out.println("\t[5] <<- Go to main page");
-        System.out.println("\t[6] x Exit app");
-        chosenOption = scanner.nextInt();
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Manage a product");
+            previousPagePrinter(2);
+            nextPagePrinterStoreProduct(3, products);
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1:
-                System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
-                System.out.println("Enter the number of the desired product:");
-                int productNum = scanner.nextInt();
+            switch (chosenOption) {
+                case 1:
+                    System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
+                    System.out.println("Enter the number of the desired product:");
+                    int productNum = scanner.nextInt();
 
-                StoreProduct product =
-                        Pager.getInstance().selectStoreProductFromPage(products, currentScreenPageNum, productNum);
-                ProductType type = product.getType();
-                leavePagedScreen();
+                    StoreProduct product =
+                            Pager.getInstance().selectStoreProductFromPage(products, currentScreenPageNum, productNum);
+                    ProductType type = product.getType();
+                    leavePagedScreen();
 
-                switch (type) {
-                    case COMIC:
-                        manageComic((Comic) product);
-                    case GAME:
-                        assert product instanceof Game;
-                        manageGame((Game) product);
-                    case FIGURINE:
-                        assert product instanceof Figurine;
-                        manageFigurine((Figurine) product);
-                    default: // Este NO debería saltar nunca, lo pongo por si acaso
-                        System.out.println("You shouldn't be able to see this :(");
-                        manageStoreProducts();
-                        break;
-                }
+                    switch (type) {
+                        case COMIC:
+                            manageComic((Comic) product);
+                        case GAME:
+                            assert product instanceof Game;
+                            manageGame((Game) product);
+                        case FIGURINE:
+                            assert product instanceof Figurine;
+                            manageFigurine((Figurine) product);
+                        default: // Este NO debería saltar nunca, lo pongo por si acaso
+                            System.out.println("You shouldn't be able to see this :(");
+                            //manageStoreProducts();
+                            break;
+                    }
 
-                break;
-            case 2:
-                previousPage();
-                manageStoreProducts();
-                break;
-            case 3:
-                nextPageStoreProduct(products);
-                manageStoreProducts();
-                break;
-            case 4:
-                leavePagedScreen();
-                managerLoop();
-                break;
-            case 5:
-                leavePagedScreen();
-                main();
-                break;
-            case 6:
-                leavePagedScreen();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                manageStoreProducts();
-                break;
+                    break;
+                case 2:
+                    previousPage();
+                    //manageStoreProducts();
+                    break;
+                case 3:
+                    nextPageStoreProduct(products);
+                    //manageStoreProducts();
+                    break;
+                // Trozos de mis sueños rotos: case 4:
+                // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: managerLoop();
+                // Trozos de mis sueños rotos: break;
+                // Trozos de mis sueños rotos: case 5:
+                // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: main();
+                // Trozos de mis sueños rotos: break;
+                default:
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    exitMenu = true;
+                    break;
+                // Trozos de mis sueños rotos: default:
+                // Trozos de mis sueños rotos:   System.out.println("Uh oh, something went wrong :/, reloading...");
+                // Trozos de mis sueños rotos:  manageStoreProducts();
+                // Trozos de mis sueños rotos:  break;
+            }
         }
     }
 
@@ -190,23 +191,23 @@ public class ManagerLoop extends Loop {
      */
     private void manageComic(Comic comic) throws IOException {
         Scanner scanner = new Scanner(System.in);
+        boolean exitMenu = false;
         System.out.print("\n ---- manageComic ---- \n"); // Es para debug, borrar
         comic.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
-        System.out.println("\t[1] Name");
-        System.out.println("\t[2] Description");
-        System.out.println("\t[3] Price");
-        System.out.println("\t[4] Photo");
-        System.out.println("\t[5] Stock");
-        System.out.println("\t[6] Categories");
-        System.out.println("\t[7] Number of pages");
-        System.out.println("\t[8] Author");
-        System.out.println("\t[9] Editorial");
-        System.out.println("\t[10] Publishing year");
-        System.out.println("\t[11] <- Go back");
-        System.out.println("\t[12] <<- Go to main page");
-        System.out.println("\t[13] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Name");
+        System.out.println("\t[" + i++ + "] Description");
+        System.out.println("\t[" + i++ + "] Price");
+        System.out.println("\t[" + i++ + "] Photo");
+        System.out.println("\t[" + i++ + "] Stock");
+        System.out.println("\t[" + i++ + "] Categories");
+        System.out.println("\t[" + i++ + "] Number of pages");
+        System.out.println("\t[" + i++ + "] Author");
+        System.out.println("\t[" + i++ + "] Editorial");
+        System.out.println("\t[" + i++ + "] Publishing year");
+        basicLoopPrinter(i);
         int chosenOption3 = scanner.nextInt();
 
         switch (chosenOption3) {
@@ -258,20 +259,20 @@ public class ManagerLoop extends Loop {
                 Year newYear = Year.parse(scanner.next());
                 comic.setYear(newYear);
                 break;
-            case 11:
-                returnToPagedScreen();
-                manageStoreProducts();
-                break;
-            case 12:
-                main();
-                break;
-            case 13:
+            // Trozos de mis sueños rotos: case 11:
+            // Trozos de mis sueños rotos: returnToPagedScreen();
+            // Trozos de mis sueños rotos: manageStoreProducts();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 12:
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default:
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                manageComic(comic);
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:   System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  manageComic(comic);
+            // Trozos de mis sueños rotos:  break;
         }
     }
 
@@ -286,18 +287,17 @@ public class ManagerLoop extends Loop {
         game.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
-        System.out.println("\t[1] Name");
-        System.out.println("\t[2] Description");
-        System.out.println("\t[3] Price");
-        System.out.println("\t[4] Photo");
-        System.out.println("\t[5] Stock");
-        System.out.println("\t[6] Categories");
-        System.out.println("\t[7] Number of players");
-        System.out.println("\t[8] Age range");
-        System.out.println("\t[9] Game Style");
-        System.out.println("\t[10] <- Go back");
-        System.out.println("\t[11] <<- Go to main page");
-        System.out.println("\t[12] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Name");
+        System.out.println("\t[" + i++ + "] Description");
+        System.out.println("\t[" + i++ + "] Price");
+        System.out.println("\t[" + i++ + "] Photo");
+        System.out.println("\t[" + i++ + "] Stock");
+        System.out.println("\t[" + i++ + "] Categories");
+        System.out.println("\t[" + i++ + "] Number of players");
+        System.out.println("\t[" + i++ + "] Age range");
+        System.out.println("\t[" + i++ + "] Game Style");
+        basicLoopPrinter(i);
         int chosenOption3 = scanner.nextInt();
 
         switch (chosenOption3) {
@@ -346,20 +346,20 @@ public class ManagerLoop extends Loop {
                 GameStyle newGameStyle = GameStyle.valueOf(scanner.next());
                 game.setGameStyle(newGameStyle);
                 break;
-            case 10:
-                returnToPagedScreen();
-                manageStoreProducts();
-                break;
-            case 11:
-                main();
-                break;
-            case 12:
+            // Trozos de mis sueños rotos: case 10:
+            // Trozos de mis sueños rotos: returnToPagedScreen();
+            // Trozos de mis sueños rotos: manageStoreProducts();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 11:
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default:
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                manageGame(game);
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  manageGame(game);
+            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -374,18 +374,17 @@ public class ManagerLoop extends Loop {
         figurine.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
-        System.out.println("\t[1] Name");
-        System.out.println("\t[2] Description");
-        System.out.println("\t[3] Price");
-        System.out.println("\t[4] Photo");
-        System.out.println("\t[5] Stock");
-        System.out.println("\t[6] Categories");
-        System.out.println("\t[7] Brand");
-        System.out.println("\t[8] Material");
-        System.out.println("\t[9] Dimensions");
-        System.out.println("\t[10] <- Go back");
-        System.out.println("\t[11] <<- Go to main page");
-        System.out.println("\t[12] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Name");
+        System.out.println("\t[" + i++ + "] Description");
+        System.out.println("\t[" + i++ + "] Price");
+        System.out.println("\t[" + i++ + "] Photo");
+        System.out.println("\t[" + i++ + "] Stock");
+        System.out.println("\t[" + i++ + "] Categories");
+        System.out.println("\t[" + i++ + "] Brand");
+        System.out.println("\t[" + i++ + "] Material");
+        System.out.println("\t[" + i++ + "] Dimensions");
+        basicLoopPrinter(i);
         int chosenOption3 = scanner.nextInt();
 
         switch (chosenOption3) {
@@ -432,20 +431,20 @@ public class ManagerLoop extends Loop {
                 String newDimension = scanner.next();
                 figurine.setDimension(newDimension);
                 break;
-            case 10:
-                returnToPagedScreen();
-                manageStoreProducts();
-                break;
-            case 11:
-                main();
-                break;
-            case 12:
+            // Trozos de mis sueños rotos: case 10:
+            // Trozos de mis sueños rotos: returnToPagedScreen();
+            // Trozos de mis sueños rotos: manageStoreProducts();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 11:
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default:
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                manageFigurine(figurine);
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos: manageFigurine(figurine);
+            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -453,15 +452,16 @@ public class ManagerLoop extends Loop {
      * It allows a manager to tweak a store product's categories
      * @param storeProduct the desired store product
      */
-    private void categoryChanger(StoreProduct storeProduct) {
+    private void categoryChanger(StoreProduct storeProduct) throws IOException {
         Scanner scanner = new Scanner(System.in);
         String categoryName, newCategoryName;
         Category category, newCategory;
         System.out.print("\n ---- categoryChanger ---- \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Replace an existing product's category");
-        System.out.println("\t[2] Add a new category to the product");
-        System.out.println("\t[3] Remove a product's category");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Replace an existing product's category");
+        System.out.println("\t[" + i++ + "] Add a new category to the product");
+        System.out.println("\t[" + i + "] Remove a product's category");
         chosenOption = scanner.nextInt();
         switch (chosenOption) {
             case 1:
@@ -469,16 +469,18 @@ public class ManagerLoop extends Loop {
                 categoryName = scanner.next();
                 category = Store.getInstance().getCategoryFromName(categoryName);
                 if (category == null) {
-                    System.out.println("A category which such a name doesn't exist, reloading...");
-                    categoryChanger(storeProduct);
+                    //System.out.println("A category which such a name doesn't exist, reloading...");
+                    //categoryChanger(storeProduct);
+                    exit(); // idk anymore
                     break;
                 }
                 System.out.println("Enter the replacement category's name:");
                 newCategoryName = scanner.next();
                 newCategory = Store.getInstance().getCategoryFromName(newCategoryName);
                 if (newCategory == null) {
-                    System.out.println("A category which such a name doesn't exist, reloading...");
-                    categoryChanger(storeProduct);
+                    //System.out.println("A category which such a name doesn't exist, reloading...");
+                    //categoryChanger(storeProduct);
+                    exit(); // idk anymore
                     break;
                 }
                 storeProduct.removeCategory(category);
@@ -489,8 +491,9 @@ public class ManagerLoop extends Loop {
                 categoryName = scanner.next();
                 category = Store.getInstance().getCategoryFromName(categoryName);
                 if (category == null) {
-                    System.out.println("A category which such a name doesn't exist, reloading...");
-                    categoryChanger(storeProduct);
+                    //System.out.println("A category which such a name doesn't exist, reloading...");
+                    //categoryChanger(storeProduct);
+                    exit(); // idk anymore
                     break;
                 }
                 storeProduct.addCategory(category);
@@ -500,15 +503,17 @@ public class ManagerLoop extends Loop {
                 categoryName = scanner.next();
                 category = Store.getInstance().getCategoryFromName(categoryName);
                 if (category == null) {
-                    System.out.println("A category which such a name doesn't exist, reloading...");
-                    categoryChanger(storeProduct);
+                    //System.out.println("A category which such a name doesn't exist, reloading...");
+                    //categoryChanger(storeProduct);
+                    exit(); // idk anymore
                     break;
                 }
                 storeProduct.removeCategory(category);
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                categoryChanger(storeProduct);
+                // Trozos de mis sueños rotos: categoryChanger(storeProduct);
+                exit();
                 break;
         }
 
@@ -538,23 +543,23 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n ---- generateStatistics ---- \n"); // Es para debug, borrar
         System.out.println("Which statistic do you wish to generate? (enter the nº)");
-        System.out.println("\t[1] List of store products by sales");
-        System.out.println("\t[2] List of clients by orders");
-        System.out.println("\t[3] List of clients by exchanges");
-        System.out.println("\t[4] List of revenue by month");
-        System.out.println("\t[5] List of categories by revenue");
-        System.out.println("\t[6] List of store products by sales with percentage regarding total revenues");
-        System.out.println("\t[7] List of store products by sales with percentage regarding total revenues on a " +
-                           "certain month");
-        System.out.println("\t[8] Store's total revenue");
-        System.out.println("\t[9] Store's total valuation's revenue");
-        System.out.println("\t[10] A certain category's revenue");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] List of store products by sales");
+        System.out.println("\t[" + i++ + "] List of clients by orders");
+        System.out.println("\t[" + i++ + "] List of clients by exchanges");
+        System.out.println("\t[" + i++ + "] List of revenue by month");
+        System.out.println("\t[" + i++ + "] List of categories by revenue");
+        System.out.println("\t[" + i++ + "] List of store products by sales with percentage regarding total revenues");
+        System.out.println(
+                "\t[" + i++ + "] List of store products by sales with percentage regarding total revenues on a " +
+                "certain month");
+        System.out.println("\t[" + i++ + "] Store's total revenue");
+        System.out.println("\t[" + i++ + "] Store's total valuation's revenue");
+        System.out.println("\t[" + i++ + "] A certain category's revenue");
         // No sé si es útil-> System.out.println("\t[11] A certain store product's revenue");
         // No sé si es útil-> System.out.println("\t[12] A certain client's number of orders");
         // No sé si es útil-> System.out.println("\t[13] A certain client's number of exchanges");
-        System.out.println("\t[11] <- Go back");
-        System.out.println("\t[12] <<- Go to main page");
-        System.out.println("\t[13] x Exit app");
+        basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
@@ -592,25 +597,25 @@ public class ManagerLoop extends Loop {
                 Category category = Store.getInstance().getCategoryFromName(categoryName);
                 if (category == null) {
                     System.out.println("A category which such a name doesn't exist, reloading...");
-                    generateStatistics();
+                    //generateStatistics();
                     break;
                 }
                 System.out.println("The " + categoryName + " category's total revenue is " +
                                    Statistics.getINSTANCE().getRevenueByCategory(categoryName) + "€");
                 break;
-            case 11:
-                managerLoop();
-                break;
-            case 12:
-                main();
-                break;
-            case 13:
+            // Trozos de mis sueños rotos: case 11:
+            // Trozos de mis sueños rotos: managerLoop();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 12:
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default:
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                generateStatistics();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos: generateStatistics();
+            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -620,44 +625,44 @@ public class ManagerLoop extends Loop {
      */
     public void productBySales() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + currentScreenPageNum);
-        List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
-        Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
+            List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
+            Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
 
-        System.out.println("What do you wish to do? (enter the nº)");
-        previousPagePrinter(2);
-        nextPagePrinterStoreProduct(3, products);
-        System.out.println("\t[3] <- Go back");
-        System.out.println("\t[4] <<- Go to main page");
-        System.out.println("\t[5] x Exit app");
-        chosenOption = scanner.nextInt();
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1:
-                previousPage();
-                productBySales();
-                break;
-            case 2:
-                nextPageStoreProduct(products);
-                productBySales();
-                break;
-            case 3:
-                leavePagedScreen();
-                generateStatistics();
-                break;
-            case 4:
-                leavePagedScreen();
-                main();
-                break;
-            case 5:
-                leavePagedScreen();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                productBySales();
-                break;
+            switch (chosenOption) {
+                case 1:
+                    previousPage();
+                    //productBySales();
+                    break;
+                case 2:
+                    nextPageStoreProduct(products);
+                    //productBySales();
+                    break;
+                // Trozos de mis sueños rotos: case 3:
+                // Trozos de mis sueños rotos:   leavePagedScreen();
+                // Trozos de mis sueños rotos:  generateStatistics();
+                // Trozos de mis sueños rotos:   break;
+                // Trozos de mis sueños rotos: case 4:
+                // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: main();
+                // Trozos de mis sueños rotos: break;
+                default:
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    exitMenu = true;
+                    break;
+                // Trozos de mis sueños rotos: default:
+                // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
+                // Trozos de mis sueños rotos: productBySales();
+                // Trozos de mis sueños rotos: break;
+            }
         }
     }
 
@@ -667,43 +672,43 @@ public class ManagerLoop extends Loop {
      */
     public void clientsByOrders() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + currentScreenPageNum);
-        Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
+            Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
 
-        System.out.println("What do you wish to do? (enter the nº)");
-        previousPagePrinter(1);
-        nextPagePrinterRegisteredClient(2);
-        System.out.println("\t[3] <- Go back");
-        System.out.println("\t[4] <<- Go to main page");
-        System.out.println("\t[5] x Exit app");
-        chosenOption = scanner.nextInt();
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1:
-                previousPage();
-                clientsByOrders();
-                break;
-            case 2:
-                nextPageRegisteredClient();
-                clientsByOrders();
-                break;
-            case 3:
-                leavePagedScreen();
-                clientsByOrders();
-                break;
-            case 4:
-                leavePagedScreen();
-                main();
-                break;
-            case 5:
-                leavePagedScreen();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                clientsByOrders();
-                break;
+            switch (chosenOption) {
+                case 1:
+                    previousPage();
+                    //clientsByOrders();
+                    break;
+                case 2:
+                    nextPageRegisteredClient();
+                    //clientsByOrders();
+                    break;
+                // Trozos de mis sueños rotos: case 3:
+                // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: clientsByOrders();
+                // Trozos de mis sueños rotos: break;
+                // Trozos de mis sueños rotos: case 4:
+                // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: main();
+                // Trozos de mis sueños rotos: break;
+                default:
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    exitMenu = true;
+                    break;
+                // Trozos de mis sueños rotos: default:
+                // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
+                // Trozos de mis sueños rotos: clientsByOrders();
+                // Trozos de mis sueños rotos: break;
+            }
         }
     }
 
@@ -713,43 +718,43 @@ public class ManagerLoop extends Loop {
      */
     public void clientsByExchanges() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
-        System.out.println("Page: " + currentScreenPageNum);
-        Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
+            Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
 
-        System.out.println("What do you wish to do? (enter the nº)");
-        previousPagePrinter(1);
-        nextPagePrinterRegisteredClient(2);
-        System.out.println("\t[3] <- Go back");
-        System.out.println("\t[4] <<- Go to main page");
-        System.out.println("\t[5] x Exit app");
-        chosenOption = scanner.nextInt();
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1:
-                previousPage();
-                clientsByExchanges();
-                break;
-            case 2:
-                nextPageRegisteredClient();
-                clientsByExchanges();
-                break;
-            case 3:
-                leavePagedScreen();
-                clientsByExchanges();
-                break;
-            case 4:
-                leavePagedScreen();
-                main();
-                break;
-            case 5:
-                leavePagedScreen();
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                clientsByExchanges();
-                break;
+            switch (chosenOption) {
+                case 1:
+                    previousPage();
+                    //clientsByExchanges();
+                    break;
+                case 2:
+                    nextPageRegisteredClient();
+                    //clientsByExchanges();
+                    break;
+                // Trozos de mis sueños rotos: case 3:
+                // Trozos de mis sueños rotos:  leavePagedScreen();
+                // Trozos de mis sueños rotos: clientsByExchanges();
+                // Trozos de mis sueños rotos: break;
+                // Trozos de mis sueños rotos: case 4:
+                // Trozos de mis sueños rotos: leavePagedScreen();
+                // Trozos de mis sueños rotos: main();
+                // Trozos de mis sueños rotos: break;
+                default:
+                    // Trozos de mis sueños rotos: leavePagedScreen();
+                    exitMenu = true;
+                    break;
+                // Trozos de mis sueños rotos: default:
+                // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+                // Trozos de mis sueños rotos: clientsByExchanges();
+                // Trozos de mis sueños rotos:  break;
+            }
         }
     }
 
@@ -805,19 +810,18 @@ public class ManagerLoop extends Loop {
         System.out.print("\n ---- manageParameters ---- \n"); // Es para debug, borrar
         Manager manager = (Manager) currentUser;
         System.out.println("What do you wish to change? (enter the nº)");
-        System.out.println("\t[1] Items per page: [" + Parameter.getParam().getItemsPerPage() + "]");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Items per page: [" + Parameter.getParam().getItemsPerPage() + "]");
         System.out.println(
-                "\t[2] Score a parameter: [" + Parameter.getParam().getScoreAParam() + "] <- scoreWeight = " +
+                "\t[" + i++ + "] Score a parameter: [" + Parameter.getParam().getScoreAParam() + "] <- scoreWeight = " +
                 "a*<score> + b");
         System.out.println(
-                "\t[3] Score b parameter: [" + Parameter.getParam().getScoreBParam() + "] <- scoreWeight = " +
+                "\t[" + i++ + "] Score b parameter: [" + Parameter.getParam().getScoreBParam() + "] <- scoreWeight = " +
                 "a*<score> + b");
-        System.out.println("\t[4] Offer time: [" + Parameter.getParam().getOfferTime() + "]");
-        System.out.println("\t[5] Order time: [" + Parameter.getParam().getOrderTime() + "]");
-        System.out.println("\t[6] Valuation cost: [" + Parameter.getParam().getValuationCost() + "]");
-        System.out.println("\t[7] <- Go back");
-        System.out.println("\t[8] <<- Go to main page");
-        System.out.println("\t[9] x Exit app");
+        System.out.println("\t[" + i++ + "] Offer time: [" + Parameter.getParam().getOfferTime() + "]");
+        System.out.println("\t[" + i++ + "] Order time: [" + Parameter.getParam().getOrderTime() + "]");
+        System.out.println("\t[" + i++ + "] Valuation cost: [" + Parameter.getParam().getValuationCost() + "]");
+        basicLoopPrinter(i);
         int chosenOption3 = scanner.nextInt();
 
         switch (chosenOption3) {
@@ -851,19 +855,19 @@ public class ManagerLoop extends Loop {
                 double newValuationCost = scanner.nextDouble();
                 manager.changeValuationCost(newValuationCost);
                 break;
-            case 7:
-                managerLoop();
-                break;
-            case 8:
-                main();
-                break;
-            case 9:
+            // Trozos de mis sueños rotos: case 7:
+            // Trozos de mis sueños rotos: managerLoop();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 8:
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            default:
                 exit();
                 break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                manageParameters();
-                break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
+            // Trozos de mis sueños rotos:  manageParameters();
+            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -876,30 +880,32 @@ public class ManagerLoop extends Loop {
         currentUser.getPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");
-        System.out.println("\t[1] Change my password");
-        System.out.println("\t[2] <- Go back");
-        System.out.println("\t[3] <<- Go to main page");
-        System.out.println("\t[4] x Exit app");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Change my password");
+        basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
-        switch (chosenOption) {
-            case 1:
-                System.out.println("Enter new password:");
-                String newPassword = scanner.next();
-                currentUser.changePassword(newPassword);
-                break;
-            case 7:
-                managerLoop();
-                break;
-            case 8:
-                main();
-                break;
-            case 9:
-                exit();
-                break;
-            default:
-                System.out.println("Uh oh, something went wrong :/, reloading...");
-                seeProfile();
-                break;
+        // Trozos de mis sueños rotos: switch (chosenOption) {
+        // Trozos de mis sueños rotos: case 1:
+        if (chosenOption == 1) {
+            System.out.println("Enter new password:");
+            String newPassword = scanner.next();
+            currentUser.changePassword(newPassword);
+        } else {
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 7:
+            // Trozos de mis sueños rotos: managerLoop();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: case 8:
+            // Trozos de mis sueños rotos: main();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: default: // DUE Revisar nums
+            exit();
+            // Trozos de mis sueños rotos: break;
+            // Trozos de mis sueños rotos: default:
+            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong:/, reloading...");
+            // Trozos de mis sueños rotos:  seeProfile();
+            // Trozos de mis sueños rotos: break;
         }
+
     }
 }

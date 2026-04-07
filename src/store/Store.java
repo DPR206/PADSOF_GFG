@@ -14,8 +14,8 @@ import java.util.*;
 
 /**
  * It implements the store
- * @author Sofía C. and Ana O.R.
- * @version 1.5
+ * @author Sofía C., Ana O.R. and Duna P.R.
+ * @version 1.6
  * @see Parameter
  * @see Utility
  * @see Manager
@@ -117,7 +117,14 @@ public class Store {
      * @return a new user
      */
     public User signIn() {
-        return utility.signIn();
+        User user = utility.signIn();
+        //if(user instanceof Employee)
+        //	this.employees.put(user.getUserName(), (Employee) user);
+        //else if(user instanceof RegisteredClient)
+        //	this.registeredClients.put(user.getUserName(), (RegisteredClient) user);
+        //else if(user instanceof Manager)
+        //	this.manager = (Manager) user;
+        return user;
     }
 
     /**
@@ -172,6 +179,14 @@ public class Store {
     public void addPack(Pack p) {
         this.packs.add(p);
     }
+    
+    /**
+     * Deletes a pack from the store
+     * @param p the pack to remove
+     */
+    public void deletePack(Pack p) {
+    	this.packs.remove(p);
+    }
 
     /**
      * Adds a new exchange to the store
@@ -187,6 +202,62 @@ public class Store {
      */
     public void addCategory(Category c) {
     	this.categories.put(c.getName(), c);
+    }
+    
+    /**
+     * Deletes a category from the store
+     * @param c the category to delete
+     */
+    public void deleteCategory(Category c) {
+    	this.categories.remove(c.name);
+    }
+    
+    /**
+     * Adds a discount to the store
+     * @param d the discount to add
+     */
+    public void addDiscount(Discount d) {
+    	this.discounts.add(d);
+    }
+    
+    /**
+     * Deletes a discount from the store
+     * @param d the discount to delete
+     */
+    public void deleteDiscount(Discount d) {
+    	this.discounts.remove(d);
+    }
+    
+    /**
+     * Adds an order to the store
+     * @param o the order to add
+     */
+    public void addOrder(Order o) {
+    	this.orders.add(o);
+    }
+    
+    /**
+     * Adds an offer to the store
+     * @param o the offer to add
+     */
+    public void addOffer(Offer o) {
+    	this.offers.add(o);
+    }
+    
+   /**
+    * Deletes an offer from the store
+    * @param o the offer to delete
+    */
+    public void deleteOffer(Offer o) {
+    	this.offers.remove(o);
+    }
+    
+    /**
+     * Adds a review to the store
+     * @param r the review to add
+     */
+    public void addReview(Review r) {
+    	this.reviews.add(r);
     }
 
     /**

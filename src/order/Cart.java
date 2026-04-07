@@ -1,18 +1,16 @@
 package order;
 
+import discount.DiscountType;
+import discount.QuantityDiscount;
+import es.uam.eps.padsof.telecard.*;
+import notification.*;
+import product.Pack;
+import product.StoreProduct;
 import store.*;
 import user.RegisteredClient;
 
 import java.time.*;
 import java.util.*;
-
-import es.uam.eps.padsof.telecard.*;
-
-import notification.*;
-import discount.DiscountType;
-import discount.QuantityDiscount;
-import product.Pack;
-import product.StoreProduct;
 
 /**
  * Cart, array of products and packs the user has not paid yet
@@ -32,7 +30,7 @@ public class Cart {
 
     /**
      * Creates a new cart
-     * @param assignedProducts,               the store products
+     * @param assignedProducts,         the store products
      * @param assignedPacks,            the packs
      * @param assignedExpired,          whether it's expired
      * @param assignedModificationDate, the last modification date
@@ -67,42 +65,7 @@ public class Cart {
     }
 
     /**
-     * Obtains whether the cart is expired
-     *
-     * @return true if the cart has expired, false if else
-     */
-    public boolean getExpired() {
-        return this.expired;
-    }
-
-    /**
-     * Sets whether the cart is expired
-     *
-     * @param exp true if the cart has expired, false if else
-     */
-    public void setExpired(boolean exp) {
-        this.expired = exp;
-    }
-
-    /**
-     * Obtains the last modification date of the cart
-     * @return the modification date
-     */
-    public LocalDate getModificationDate() {
-        return this.modificationDate;
-    }
-
-    /**
-     * Sets the modification date
-     * @param ld the local date of modification
-     */
-    public void setModificationDate(LocalDate ld) {
-        this.modificationDate = ld;
-    }
-
-    /**
      * It calculates the price of the cart
-     *
      * @return the cart's price
      */
     public double calculatePrice() {
@@ -115,7 +78,7 @@ public class Cart {
 
         for (Pack p : this.packs.keySet()) {
             /* All other discounts + price */
-            aux = aux + p.getPrice() * this.packs.get(p);
+            aux = aux + p.getDiscountedPrice() * this.packs.get(p);
             /* Quantity discount */
             if (p.getDiscount().getType() == DiscountType.QUANTITY) {
                 QuantityDiscount quantityDisc = (QuantityDiscount) p.getDiscount();
@@ -130,7 +93,6 @@ public class Cart {
 
     /**
      * It cancels a product in the cart
-     *
      * @param toCancel the store product to cancel
      */
     public void cancelProduct(StoreProduct toCancel) {
@@ -146,7 +108,6 @@ public class Cart {
 
     /**
      * It cancels a pack in the cart
-     *
      * @param p the pack to cancel
      */
     public void cancelPack(Pack p) {
@@ -162,7 +123,6 @@ public class Cart {
 
     /**
      * Adds a product to the cart
-     *
      * @param wanted the store product to add
      */
     public void addProduct(StoreProduct wanted) {
@@ -182,7 +142,6 @@ public class Cart {
 
     /**
      * Adds a pack to the cart
-     *
      * @param wanted the pack to add
      * @return true if the pack was added, false if else
      */
@@ -209,21 +168,11 @@ public class Cart {
     }
 
     /**
-     * Obtains the amount of products in the cart
-     *
-     * @return the number of products
-     */
-    public int getProductAmount() {
-        return this.sp.size();
-    }
-
-    /**
      * It pays the cart
-     *
      * @return true if the cart was paid, if not a message will be printed
-     * @throws InvalidCardNumberException the card number wasn't valid
+     * @throws InvalidCardNumberException        the card number wasn't valid
      * @throws FailedInternetConnectionException the Internet connection failed
-     * @throws OrderRejectedException the order was rejected
+     * @throws OrderRejectedException            the order was rejected
      */
     public boolean payOrder()
             throws InvalidCardNumberException, FailedInternetConnectionException, OrderRejectedException {
@@ -245,14 +194,14 @@ public class Cart {
                     new ArrayList<>(this.packs.keySet()), this.owner);
             this.owner.getOrderHistory().addOrder(order);
 
-            NotificationOrder notification = new NotificationOrder(LocalDateTime.now(), false, true,
-                    NotificationType.ORDER);
+            NotificationOrder notification =
+                    new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
             notification.FullNotification(order);
             this.owner.getNotificationHistory().addNotification(notification);
             this.owner.increaseNumOrders();
 
-            NotificationEmployeeOrder notification2 = new NotificationEmployeeOrder(LocalDateTime.now(), false, true,
-            											NotificationType.EMPLOYEE_ORDER);
+            NotificationEmployeeOrder notification2 =
+                    new NotificationEmployeeOrder(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_ORDER);
             notification2.FullNotification(order);
             Store.getInstance().sendNotificationEmployees(notification2);
 
@@ -267,24 +216,6 @@ public class Cart {
         this.sp.clear();
 
         return true;
-    }
-
-    /**
-     * Obtains the creation date of the cart
-     * @return the cart's creation date
-     */
-    public LocalDate getCreationDate(){
-    	return this.creationDate;
-    }
-
-    /**
-     * It prints a cart's info
-     */
-    public void getPrintInfo() {
-        System.out.print("Products: ");
-        this.printProducts();
-        System.out.print("Packs: ");
-        this.printPacks();
     }
 
     /**
@@ -311,37 +242,132 @@ public class Cart {
      * It removes the products and packs that have expired
      */
     public void cleanupOldProducts() {
-    	List<StoreProduct> sp = new ArrayList<>(this.getProducts());
-    	List<Pack> packs = new ArrayList<>(this.packs.keySet());
+        List<StoreProduct> sp = new ArrayList<>(this.getProducts());
+        List<Pack> packs = new ArrayList<>(this.packs.keySet());
 
-    	for(StoreProduct spi: sp) {
-    		LocalDate expiration = this.calculateExpiredDate(spi);
-    		if(expiration.isBefore(LocalDate.now())) {
-    			this.cancelProduct(spi);
-    			NotificationProductCart notificationP = new NotificationProductCart(LocalDateTime.now(), false, true,
-    													NotificationType.PRODUCT_CART);
-    			notificationP.FullNotification(spi);
-    			this.owner.getNotificationHistory().addNotification(notificationP);
-    		}
-    	}
-    	for(Pack p: packs) {
-    		LocalDate expiration = this.calculateExpiredDatePacks(p);
-    		if(expiration.isBefore(LocalDate.now())) {
-    			this.cancelPack(p);
-    			NotificationPackCart notificationK = new NotificationPackCart(LocalDateTime.now(), false, true,
-    													NotificationType.PACK_CART);
-    			notificationK.FullNotification(p);
-    			this.owner.getNotificationHistory().addNotification(notificationK);
-    		}
-    	}
+        for (StoreProduct spi : sp) {
+            LocalDate expiration = this.calculateExpiredDate(spi);
+            if (expiration.isBefore(LocalDate.now())) {
+                this.cancelProduct(spi);
+                NotificationProductCart notificationP =
+                        new NotificationProductCart(LocalDateTime.now(), false, true, NotificationType.PRODUCT_CART);
+                notificationP.FullNotification(spi);
+                this.owner.getNotificationHistory().addNotification(notificationP);
+            }
+        }
+        for (Pack p : packs) {
+            LocalDate expiration = this.calculateExpiredDatePacks(p);
+            if (expiration.isBefore(LocalDate.now())) {
+                this.cancelPack(p);
+                NotificationPackCart notificationK =
+                        new NotificationPackCart(LocalDateTime.now(), false, true, NotificationType.PACK_CART);
+                notificationK.FullNotification(p);
+                this.owner.getNotificationHistory().addNotification(notificationK);
+            }
+        }
     }
 
     /**
-     * It gets the cart's products
-     * @return the cart's products
+     * It calculates the expired date of the product
+     * @param sproducts the store product in the cart
+     * @return the date of expiration
      */
-    public List<StoreProduct> getProducts() {
-        return new ArrayList<>(this.sp.keySet());
+    public LocalDate calculateExpiredDate(StoreProduct sproducts) {
+        Parameter p = Parameter.getParam();
+        Period timeToExist = p.getOrderTime();
+
+        List<StoreProduct> products = new ArrayList<>(this.sp.keySet());
+
+        for (StoreProduct pdct : products) {
+            if (pdct.getId().equals(sproducts.getId())) {
+                return sproducts.getAddedDate().plus(timeToExist);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * It calculates the expired date of the packs
+     * @param pack the pack in the cart
+     * @return the date of expiration
+     */
+    public LocalDate calculateExpiredDatePacks(Pack pack) {
+        Parameter p = Parameter.getParam();
+        Period timeToExist = p.getOrderTime();
+
+        List<Pack> packs = new ArrayList<>(this.packs.keySet());
+
+        for (Pack pck : packs) {
+            if (pck.getId() == (pack.getId())) {
+                return pck.getDateAddCart().plus(timeToExist);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * It prints a sub-list of the cart's store products according to the desired page
+     * @param pageNum the desired page's number
+     */
+    public void printStoreProductListPage(int pageNum) {
+        Pager.getInstance().printStoreProductListPage(this.getProducts(), pageNum);
+    }
+
+    /**
+     * It prints a sub-list of the cart's packs according to the desired page
+     * @param pageNum the desired page's number
+     */
+    public void printPackListPage(int pageNum) {
+        Pager.getInstance().printPackListPage(this.getPacks(), pageNum);
+    }
+
+/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /**
+     * Obtains the creation date of the cart
+     * @return the cart's creation date
+     */
+    public LocalDate getCreationDate() {
+        return this.creationDate;
+    }
+
+    /**
+     * Obtains whether the cart is expired
+     * @return true if the cart has expired, false if else
+     */
+    public boolean getExpired() {
+        return this.expired;
+    }
+
+    /**
+     * Sets whether the cart is expired
+     * @param exp true if the cart has expired, false if else
+     */
+    public void setExpired(boolean exp) {
+        this.expired = exp;
+    }
+
+    /**
+     * Obtains the last modification date of the cart
+     * @return the modification date
+     */
+    public LocalDate getModificationDate() {
+        return this.modificationDate;
+    }
+
+    /**
+     * Sets the modification date
+     * @param ld the local date of modification
+     */
+    public void setModificationDate(LocalDate ld) {
+        this.modificationDate = ld;
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the cart's pack list
+     * @return the maximum number of pages that can be obtained from the cart's pack list
+     */
+    public int getPackMaxPageNum() {
+        return Pager.getInstance().getPackMaxPageNum(this.getPacks());
     }
 
     /**
@@ -353,62 +379,29 @@ public class Cart {
     }
 
     /**
-     * It calculates the expired date of the product
-     * @param sproducts the store product in the cart
-     * @return the date of expiration
+     * It prints a cart's info
      */
-    public LocalDate calculateExpiredDate(StoreProduct sproducts) {
-    	Parameter p = Parameter.getParam();
-    	Period timeToExist = p.getOrderTime();
-
-    	List<StoreProduct> products = new ArrayList<>(this.sp.keySet());
-
-    	for(StoreProduct pdct: products) {
-    		if(pdct.getId().equals(sproducts.getId())) return sproducts.getAddedDate().plus(timeToExist);
-        }
-    	return null;
+    public void getPrintInfo() {
+        System.out.print("Products: ");
+        this.printProducts();
+        System.out.print("Packs: ");
+        this.printPacks();
     }
 
     /**
-     * It calculates the expired date of the packs
-     * @param pack the pack in the cart
-     * @return the date of expiration
+     * Obtains the amount of products in the cart
+     * @return the number of products
      */
-    public LocalDate calculateExpiredDatePacks(Pack pack) {
-    	Parameter p = Parameter.getParam();
-    	Period timeToExist = p.getOrderTime();
-
-    	List<Pack> packs = new ArrayList<>(this.packs.keySet());
-
-    	for(Pack pck: packs) {
-    		if(pck.getId()== (pack.getId())) return pck.getDateAddCart().plus(timeToExist);
-        }
-    	return null;
-    }
-
-
-    /**
-     * It prints a sub-list of the cart's store products according to the desired page
-     * @param pageNum          the desired page's number
-     */
-    public void printStoreProductListPage(int pageNum) {
-        Pager.getInstance().printStoreProductListPage(this.getProducts(), pageNum);
+    public int getProductAmount() {
+        return this.sp.size();
     }
 
     /**
-     * It prints a sub-list of the cart's packs according to the desired page
-     * @param pageNum          the desired page's number
+     * It gets the cart's products
+     * @return the cart's products
      */
-    public void printPackListPage(int pageNum) {
-        Pager.getInstance().printPackListPage(this.getPacks(), pageNum);
-    }
-
-    /**
-     * It gets the maximum number of pages that can be obtained from the cart's pack list
-     * @return the maximum number of pages that can be obtained from the cart's pack list
-     */
-    public int getPackMaxPageNum() {
-        return Pager.getInstance().getPackMaxPageNum(this.getPacks());
+    public List<StoreProduct> getProducts() {
+        return new ArrayList<>(this.sp.keySet());
     }
 
 }

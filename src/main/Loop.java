@@ -15,9 +15,9 @@ import java.util.Scanner;
  */
 public abstract class Loop {
     /** The current screen's page number, if a list is being browsed */
-    protected static int currentScreenPageNum = 0;
+    protected static int currentScreenPageNum = 1;
     /** The previous screen's page number, if a list is being browsed */
-    protected static int previousScreenPageNum = 0;
+    protected static int previousScreenPageNum = 1;
     /** The apps current user */
     protected static User currentUser;
     /** The last chosen option when prompted */
@@ -56,7 +56,7 @@ public abstract class Loop {
      */
     protected void logger() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- logger ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< logger >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.print("Enter your username: ");
         String userName = scanner.next();
         System.out.print("Enter your password: ");
@@ -74,7 +74,7 @@ public abstract class Loop {
      * @throws IOException the io exception
      */
     protected void signer() throws IOException {
-        System.out.print("\n ---- signer ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< signer >>>>>>>>>> \n"); // Es para debug, borrar
         currentUser = Store.getInstance().signIn();
         MainLoop.getInstance().loopSelector();
     }
@@ -94,7 +94,7 @@ public abstract class Loop {
      * @throws NullPointerException     the null pointer exception
      */
     protected void loopSelector() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- loopSelector ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< loopSelector >>>>>>>>>> \n"); // Es para debug, borrar
         UserType userType = currentUser.getType();
         if (currentUser == null) {
             currentUser = new UnregisteredClient(true); // Podría ser un default de la tienda tmb aunque habría que
@@ -126,7 +126,7 @@ public abstract class Loop {
      * @throws IOException the io exception
      */
     protected void exit() throws IOException {
-        System.out.print("\n ---- exit ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< exit >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("See you soon!");
 
 	        /*SaverLoader.getInstance()
@@ -184,7 +184,9 @@ public abstract class Loop {
      * It allows for a user to switch to the next page when viewing the store's list of packs
      */
     protected void nextPageStorePack() {
-        // DUE
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getPackMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
     }
 
     /**
@@ -315,28 +317,21 @@ public abstract class Loop {
 
             System.out.println("\t[" + firstOptionNum++ + "] See profile");
         }
-        System.out.println("\t[" + firstOptionNum + "] x Exit app");
+        System.out.println("\t[" + firstOptionNum++ + "] x Exit app");
         System.out.println("\t[" + firstOptionNum + "] x Go back");
     }
 
     /**
-     * It prints the selections: see notification, see profile, previous page, next page, exit, go back. Used when
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
      * prompting the user, notification and profile options will only be printed it they can be chosen by the current
      * user
      * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
      */
     protected void pagedLoopPrinter(int firstOptionNum) {
-        if (currentUser.getType() == UserType.REGISTERED_CLIENT || currentUser.getType() == UserType.EMPLOYEE) {
-            System.out.println("\t[" + firstOptionNum++ + "] ");
-        }
-        if (currentUser.getType() != UserType.UNREGISTERED_CLIENT) {
-
-            System.out.println("\t[" + firstOptionNum++ + "] See profile");
-        }
         previousPagePrinter(firstOptionNum);
         firstOptionNum++;
         nextPagePrinterRegisteredClient(firstOptionNum);
         firstOptionNum++;
-        System.out.println("\t[" + firstOptionNum + "] x Exit app");
+        basicLoopPrinter(firstOptionNum);
     }
 }

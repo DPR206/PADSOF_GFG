@@ -1,9 +1,11 @@
 package main;
 
+import user.StorePermission;
 import user.UnregisteredClient;
 
 import java.io.IOException;
 import java.time.LocalTime;
+import java.time.Year;
 import java.util.Scanner;
 
 /**
@@ -43,12 +45,20 @@ public class MainLoop extends Loop {
      */
     protected void main() throws IOException, IllegalArgumentException, NullPointerException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- main ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< main >>>>>>>>>> \n"); // Es para debug, borrar
 
         /*SaverLoader.getInstance()
                    .loadStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
                            "discounts", "offers", "exchanges", "orders", "users"); // DUE*/
 
+        /* BORRAR: */
+        System.out.println("Adding products...");
+        StorePermission storePermission = new StorePermission();
+        //storePermission.addProductByFile("resources\\productos.csv");
+        storePermission.addComic(3.5, "Batman", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
+                "ComicInc");
+        storePermission.addFigurine(6.43, "Funko pop", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+        /* BORRAR */
         System.out.println("\n<<<<<<< Welcome to Gifts for Geeks >>>>>>>\n");
         if (LocalTime.now().isBefore(LocalTime.of(17, 0))) {
             System.out.println("Good morning!");

@@ -1,14 +1,15 @@
 package productT;
 
-import static org.junit.jupiter.api.Assertions.*;
+import discount.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import discount.*;
 import product.*;
 
 import java.time.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PackTest {
 
@@ -170,7 +171,7 @@ public class PackTest {
 
 	 @Test
 	 public void getPrintInfoTest() {
-		 assertEquals("DUE", this.p.getPrintInfo());
+		 assertEquals("Price: 1.6€, products in this pack: alo,alo2,", this.p.getPrintInfo());
 	 }
 
 	 @Test
@@ -179,7 +180,7 @@ public class PackTest {
 		 PackFixedPercentage discount = new PackFixedPercentage(LocalDateTime.now(), LocalDateTime.now().plusDays(1), 0.1, this.p);
 		 this.p.setDiscount(discount);
 		 double expected = 20.0 - (20.0 * 0.1);
-		 assertEquals(expected, this.p.getPrice());
+		 assertEquals(expected, this.p.getDiscountedPrice());
 	 }
 
 	 @Test
@@ -190,7 +191,7 @@ public class PackTest {
 		 this.p.setDiscount(discount);
 		 // Assuming price > threshold, gift added
 		 double expected = 15.0;
-		 assertEquals(expected, this.p.getPrice());
+		 assertEquals(expected, this.p.getDiscountedPrice());
 		 assertTrue(this.p.getProducts().contains(gift));
 	 }
 
@@ -200,6 +201,6 @@ public class PackTest {
 		 PackVolume discount = new PackVolume(LocalDateTime.now(), LocalDateTime.now().plusDays(1), 10.0, 5.0, this.p);
 		 this.p.setDiscount(discount);
 		 double expected = 15.0 - 5.0; // since 15 > 10
-		 assertEquals(expected, this.p.getPrice());
+		 assertEquals(expected, this.p.getDiscountedPrice());
 	 }
 }

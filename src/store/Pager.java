@@ -68,9 +68,8 @@ public class Pager {
     public void printStoreProductListPage(List<StoreProduct> storeProductList, int pageNum) {
         List<StoreProduct> productListPage = pageStoreProductList(storeProductList, pageNum);
         int i = 1;
-
         for (StoreProduct product : productListPage) {
-            System.out.println(i + ". " + product.smallPrintInfo());
+            System.out.println(i++ + ". " + product.smallPrintInfo());
         }
     }
 
@@ -83,7 +82,7 @@ public class Pager {
         int i = 1;
 
         for (RegisteredClient client : registeredClientPage) {
-            System.out.println(i + ". " + client.getUserName());
+            System.out.println(i++ + ". " + client.getUserName());
         }
     }
 
@@ -96,7 +95,7 @@ public class Pager {
         int i = 1;
 
         for (Employee employee : employeeListPage) {
-            System.out.println(i + ". " + employee.getUserName());
+            System.out.println(i++ + ". " + employee.getUserName());
         }
     }
 
@@ -110,7 +109,7 @@ public class Pager {
         int i = 1;
 
         for (Pack pack : packListPage) {
-            System.out.println(i + ". " + pack.getPrintInfo());
+            System.out.println(i++ + ". " + pack.getPrintInfo());
         }
     }
 
@@ -122,7 +121,7 @@ public class Pager {
         int i = 1;
 
         for (Discount discount : discountListPage) {
-            System.out.println(i + ". " + discount.getPrintInfo());
+            System.out.println(i++ + ". " + discount.getPrintInfo());
         }
     }
 
@@ -134,7 +133,7 @@ public class Pager {
         int i = 1;
 
         for (Category category : categoryPage) {
-            System.out.println(i + ". " + category.getName());
+            System.out.println(i++ + ". " + category.getName());
         }
     }
 
@@ -222,6 +221,10 @@ public class Pager {
      * @return the desired page
      */
     public List<Category> pageCategoryList(List<Category> categoryList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
         return categoryList.subList(getFrom(pageNum), getTo(pageNum, categoryList.size()));
     }
 
@@ -231,6 +234,10 @@ public class Pager {
      * @return the desired page
      */
     public List<Discount> pageDiscountList(List<Discount> discountList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
         return discountList.subList(getFrom(pageNum), getTo(pageNum, discountList.size()));
     }
 
@@ -240,6 +247,10 @@ public class Pager {
      * @return the desired page
      */
     public List<Employee> pageEmployeeList(List<Employee> employeeList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
         return employeeList.subList(getFrom(pageNum), getTo(pageNum, employeeList.size()));
     }
 
@@ -250,6 +261,10 @@ public class Pager {
      * @return the desired page
      */
     public List<Pack> pagePackList(List<Pack> packList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
         return packList.subList(getFrom(pageNum), getTo(pageNum, packList.size()));
     }
 
@@ -259,6 +274,10 @@ public class Pager {
      * @return the desired page
      */
     public List<RegisteredClient> pageRegisteredClientList(List<RegisteredClient> registeredClientList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
         return registeredClientList.subList(getFrom(pageNum), getTo(pageNum, registeredClientList.size()));
     }
 
@@ -269,6 +288,10 @@ public class Pager {
      * @return the desired page
      */
     public List<Review> pageReviewList(List<Review> reviewList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
         int itemsPerPage = Parameter.getParam().getItemsPerPage() / 2; // Cada review ocupa dos líneas
         int from = (itemsPerPage - 1) * pageNum;
         int to = Math.min(reviewList.size(), (pageNum * itemsPerPage) - 1);
@@ -282,6 +305,10 @@ public class Pager {
      * @return the desired page
      */
     public List<StoreProduct> pageStoreProductList(List<StoreProduct> storeProductList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
         return storeProductList.subList(getFrom(pageNum), getTo(pageNum, storeProductList.size()));
     }
 
@@ -325,7 +352,10 @@ public class Pager {
      */
     public int getFrom(int pageNum) {
         int itemsPerPage = Parameter.getParam().getItemsPerPage();
-        return (itemsPerPage - 1) * pageNum;
+        if (pageNum == 1) {
+            return 0;
+        }
+        return (itemsPerPage * (pageNum - 1) - 1);
     }
 
     /**
@@ -365,11 +395,11 @@ public class Pager {
     /**
      * Auxiliary function to calculate at which index a page ends
      * @param pageNum the desired page number
-     * @param size    the list's size
+     * @param size    the page's list's size
      * @return the index at which the page ends
      */
     public int getTo(int pageNum, int size) {
         int itemsPerPage = Parameter.getParam().getItemsPerPage();
-        return Math.min(size, (pageNum * itemsPerPage) - 1);
+        return Math.min(size, getFrom(pageNum) + itemsPerPage);
     }
 }

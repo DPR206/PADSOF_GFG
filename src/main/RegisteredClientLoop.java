@@ -35,7 +35,7 @@ public class RegisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     void registeredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
-        System.out.print("\n ---- registeredClientLoop ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< registeredClientLoop >>>>>>>>>> \n"); // Es para debug, borrar
         // DUE
     }
 }

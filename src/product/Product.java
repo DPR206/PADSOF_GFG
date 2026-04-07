@@ -73,6 +73,7 @@ public abstract class Product {
      */
     public void bigPrintInfo() {
         /* TYPE;ID;PRICE;NAME;DESC;PHOTO */
+        System.out.println("ID: " + id);
         System.out.println("Name: " + this.name);
         System.out.println("Description: " + this.description); // Idealmente, haría wrapping
         System.out.println("Price: [" + this.price + "]€");
@@ -87,11 +88,10 @@ public abstract class Product {
 
     /**
      * It prints the product's info when showcased as list
-     *
      * @return the product's info
      */
     public String smallPrintInfo() {
-        return "Name: " + this.name + ", Price: [" + this.price + "]€";
+        return "#" + this.id + " Name: " + this.name + ", Price: [" + this.price + "]€";
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

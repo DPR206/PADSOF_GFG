@@ -20,6 +20,8 @@ public abstract class Loop {
     protected static int previousScreenPageNum = 1;
     /** The apps current user */
     protected static User currentUser;
+    /** Whether the app has been exited or not */
+    protected static boolean appExited = false;
     /** The last chosen option when prompted */
     protected int chosenOption;
 
@@ -128,6 +130,8 @@ public abstract class Loop {
     protected void exit() throws IOException {
         System.out.print("\n <<<<<<<<<< exit >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("See you soon!");
+        appExited = true;
+        System.out.print("appExited=" + appExited + "\n");
 
 	        /*SaverLoader.getInstance()
 	                   .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",

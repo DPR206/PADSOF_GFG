@@ -16,7 +16,7 @@ import java.util.*;
 public class UnregisteredClientLoop extends Loop {
     /** This loop's instance */
     private static UnregisteredClientLoop INSTANCE;
-    private int productNum = 1;
+    private int itemNum = 1;
     private List<StoreProduct> filteredStore = null;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -50,6 +50,9 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     void unregisteredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -89,6 +92,9 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     private void browseStore() throws IOException, IllegalArgumentException, NullPointerException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -117,11 +123,36 @@ public class UnregisteredClientLoop extends Loop {
                     break;
                 case 2: /* See a product */
                     System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
-                    System.out.println("Enter the number of the desired product:");
-                    this.productNum = scanner.nextInt();
+                    System.out.println("Do you wish to select it via: ID or list number?");
+                    System.out.println("[1] List number");
+                    System.out.println("[2] ID");
+                    int chosenOption2 = scanner.nextInt();
 
-                    leavePagedScreen();
-                    seeStoreProduct();
+                    switch (chosenOption2) {
+                        case 1:
+                            System.out.println("Enter the number of the desired product:");
+                            this.itemNum = scanner.nextInt();
+                            System.out.println("PageNum=" + currentScreenPageNum + "itemNum=" + itemNum);
+                            leavePagedScreen();
+                            seeStoreProduct();
+                            break;
+                        case 2:
+                            System.out.println("Enter the ID of the desired product:");
+                            String productID = scanner.next();
+                            int index = Pager.getInstance().getStoreProductIndex(filteredStore, productID);
+                            if (index != -1) {
+                                currentScreenPageNum = Pager.getInstance().getPageNumFromIndex(index);
+                                itemNum = Pager.getInstance().getItemNumFromIndex(index);
+
+                                leavePagedScreen();
+                                seeStoreProduct();
+                                break;
+                            }
+                            System.out.println("The ID wasn't valid");
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                    }
                     break;
                 case 3: /* See my cart */
                     leavePagedScreen();
@@ -154,6 +185,9 @@ public class UnregisteredClientLoop extends Loop {
      * @return the filtered list of store products
      */
     public List<StoreProduct> filterSearch() throws IOException {
+        if (appExited) {
+            return null;
+        }
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose which filter you wish to apply next (those already applied will be reset)");
         int i = 1;
@@ -238,6 +272,9 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     private void placeOrder() throws IOException, IllegalArgumentException, NullPointerException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -272,12 +309,15 @@ public class UnregisteredClientLoop extends Loop {
      * @throws IOException the io exception
      */
     private void seeStoreProduct() throws IOException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
             System.out.print("\n <<<<<<<<<< seeStoreProduct 2 >>>>>>>>>> \n"); // Es para debug, borrar
             StoreProduct product =
-                    Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, productNum);
+                    Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, itemNum);
             product.bigPrintInfo();
 
             System.out.println("What do you wish to do? (enter the nº)");
@@ -326,6 +366,9 @@ public class UnregisteredClientLoop extends Loop {
      * It allows an unregistered client to see a certain product's reviews
      */
     private void browseReviews() throws IOException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -333,7 +376,7 @@ public class UnregisteredClientLoop extends Loop {
             System.out.println("Page: " + currentScreenPageNum);
 
             StoreProduct product =
-                    Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, productNum);
+                    Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, itemNum);
             product.printReviews(currentScreenPageNum);
 
             System.out.println("What do you wish to do? (enter the nº)");
@@ -371,6 +414,9 @@ public class UnregisteredClientLoop extends Loop {
      * @throws IOException the io exception
      */
     private void seeCart() throws IOException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -413,6 +459,9 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     public void browseCartProducts() throws IOException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -433,7 +482,7 @@ public class UnregisteredClientLoop extends Loop {
                 case 1: /* See a product */
                     System.out.print("\n <<<<<<<<<< seeCartProduct >>>>>>>>>> \n"); // Es para debug, borrar
                     System.out.println("Enter the number of the desired product:");
-                    this.productNum = scanner.nextInt();
+                    this.itemNum = scanner.nextInt();
 
                     leavePagedScreen();
                     seeCartProduct();
@@ -462,12 +511,15 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     public void seeCartProduct() throws IOException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
             System.out.print("\n <<<<<<<<<< seeCartProduct 2 >>>>>>>>>> \n"); // Es para debug, borrar
             StoreProduct product =
-                    Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, productNum);
+                    Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, itemNum);
             product.bigPrintInfo();
 
             System.out.println("What do you wish to do? (enter the nº)");
@@ -506,6 +558,9 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     public void browseCartPacks() throws IOException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -526,7 +581,7 @@ public class UnregisteredClientLoop extends Loop {
                 case 1: /* See a product */
                     System.out.print("\n <<<<<<<<<< seeCartPack >>>>>>>>>> \n"); // Es para debug, borrar
                     System.out.println("Enter the number of the desired product:");
-                    this.productNum = scanner.nextInt();
+                    this.itemNum = scanner.nextInt();
 
                     leavePagedScreen();
                     seeCartPack();
@@ -554,13 +609,16 @@ public class UnregisteredClientLoop extends Loop {
     }
 
     public void seeCartPack() throws IOException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
             System.out.print("\n <<<<<<<<<< seeCartProduct 2 >>>>>>>>>> \n"); // Es para debug, borrar
             Pack pack = Pager.getInstance()
                              .selectPackFromPage((((UnregisteredClient) currentUser).getCart().getPacks()),
-                                     currentScreenPageNum, productNum);
+                                     currentScreenPageNum, itemNum);
             pack.bigPrintInfo();
 
             System.out.println("What do you wish to do? (enter the nº)");
@@ -603,6 +661,9 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     private void cartLogger() throws IOException, IllegalArgumentException, NullPointerException {
+        if (appExited) {
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -636,6 +697,9 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     private void cartSigner() throws IOException, IllegalArgumentException, NullPointerException {
+        if (appExited) {
+            return;
+        }
         System.out.print("\n <<<<<<<<<< cartSigner >>>>>>>>>> \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();

@@ -20,11 +20,6 @@ public abstract class Loop {
     protected static int previousScreenPageNum = 0;
     /** The apps current user */
     protected static User currentUser;
-    /** Access to various loops */
-    // Resulta que esto es un crimen contra la humanidad -> private final MainLoop MainLoop.getInstance() = MainLoop.getInstance();
-    // Resulta que esto es un crimen contra la humanidad -> private final UnregisteredClientLoop unregisteredClientLoop = UnregisteredClientLoop.getInstance();
-    // Resulta que esto es un crimen contra la humanidad -> private final RegisteredClientLoop registeredClientLoop = RegisteredClientLoop.getInstance();
-    // Resulta que esto es un crimen contra la humanidad -> private final ManagerLoop managerLoop = ManagerLoop.getInstance();
     /** The last chosen option when prompted */
     protected int chosenOption;
 
@@ -69,28 +64,7 @@ public abstract class Loop {
 
         currentUser = Store.getInstance().getUtility().logIn(userName, password);
         if (currentUser == null) {
-            // Trozos de mis sueños rotos: System.out.println("Invalid username or password :[");
-            // Trozos de mis sueños rotos: System.out.println("What do you wish to do? (enter the nº)");
-            // Trozos de mis sueños rotos: int i = 1;
-            // Trozos de mis sueños rotos: System.out.println("\t[" + i++ + "] Try again");
-            // Trozos de mis sueños rotos: basicLoopPrinter(i);
-            // Trozos de mis sueños rotos: chosenOption = scanner.nextInt();
-
-            // Trozos de mis sueños rotos: switch (chosenOption) {
-            // Trozos de mis sueños rotos: case 1: /* Try again */
-            // Trozos de mis sueños rotos: logger();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 2, 3: /* Go back */ /* Go to main page */
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 2: /* Exit */
             exit();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
-            // Trozos de mis sueños rotos: logger();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: }
         }
         loopSelector();
     }

@@ -77,10 +77,6 @@ public class MainLoop extends Loop {
             default:
                 exit();
                 break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
         }
 
     }

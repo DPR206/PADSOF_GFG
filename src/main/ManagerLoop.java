@@ -87,16 +87,9 @@ public class ManagerLoop extends Loop {
             case 8:
                 seeProfile();
                 break;
-            // Trozos de mis sueños rotos: case 9, 10:
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
             default:
                 exit();
                 break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
-            // Trozos de mis sueños rotos: managerLoop();
-            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -164,22 +157,9 @@ public class ManagerLoop extends Loop {
                     nextPageStoreProduct(products);
                     //manageStoreProducts();
                     break;
-                // Trozos de mis sueños rotos: case 4:
-                // Trozos de mis sueños rotos: leavePagedScreen();
-                // Trozos de mis sueños rotos: managerLoop();
-                // Trozos de mis sueños rotos: break;
-                // Trozos de mis sueños rotos: case 5:
-                // Trozos de mis sueños rotos: leavePagedScreen();
-                // Trozos de mis sueños rotos: main();
-                // Trozos de mis sueños rotos: break;
                 default:
-                    // Trozos de mis sueños rotos: leavePagedScreen();
                     exitMenu = true;
                     break;
-                // Trozos de mis sueños rotos: default:
-                // Trozos de mis sueños rotos:   System.out.println("Uh oh, something went wrong :/, reloading...");
-                // Trozos de mis sueños rotos:  manageStoreProducts();
-                // Trozos de mis sueños rotos:  break;
             }
         }
     }
@@ -259,20 +239,9 @@ public class ManagerLoop extends Loop {
                 Year newYear = Year.parse(scanner.next());
                 comic.setYear(newYear);
                 break;
-            // Trozos de mis sueños rotos: case 11:
-            // Trozos de mis sueños rotos: returnToPagedScreen();
-            // Trozos de mis sueños rotos: manageStoreProducts();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 12:
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
             default:
                 exit();
                 break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos:   System.out.println("Uh oh, something went wrong :/, reloading...");
-            // Trozos de mis sueños rotos:  manageComic(comic);
-            // Trozos de mis sueños rotos:  break;
         }
     }
 
@@ -346,20 +315,9 @@ public class ManagerLoop extends Loop {
                 GameStyle newGameStyle = GameStyle.valueOf(scanner.next());
                 game.setGameStyle(newGameStyle);
                 break;
-            // Trozos de mis sueños rotos: case 10:
-            // Trozos de mis sueños rotos: returnToPagedScreen();
-            // Trozos de mis sueños rotos: manageStoreProducts();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 11:
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
             default:
                 exit();
                 break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
-            // Trozos de mis sueños rotos:  manageGame(game);
-            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -431,20 +389,9 @@ public class ManagerLoop extends Loop {
                 String newDimension = scanner.next();
                 figurine.setDimension(newDimension);
                 break;
-            // Trozos de mis sueños rotos: case 10:
-            // Trozos de mis sueños rotos: returnToPagedScreen();
-            // Trozos de mis sueños rotos: manageStoreProducts();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 11:
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
             default:
                 exit();
                 break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
-            // Trozos de mis sueños rotos: manageFigurine(figurine);
-            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -512,7 +459,6 @@ public class ManagerLoop extends Loop {
                 break;
             default:
                 System.out.println("Uh oh, something went wrong :/, reloading...");
-                // Trozos de mis sueños rotos: categoryChanger(storeProduct);
                 exit();
                 break;
         }
@@ -603,19 +549,9 @@ public class ManagerLoop extends Loop {
                 System.out.println("The " + categoryName + " category's total revenue is " +
                                    Statistics.getINSTANCE().getRevenueByCategory(categoryName) + "€");
                 break;
-            // Trozos de mis sueños rotos: case 11:
-            // Trozos de mis sueños rotos: managerLoop();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 12:
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
             default:
                 exit();
                 break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
-            // Trozos de mis sueños rotos: generateStatistics();
-            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -646,22 +582,9 @@ public class ManagerLoop extends Loop {
                     nextPageStoreProduct(products);
                     //productBySales();
                     break;
-                // Trozos de mis sueños rotos: case 3:
-                // Trozos de mis sueños rotos:   leavePagedScreen();
-                // Trozos de mis sueños rotos:  generateStatistics();
-                // Trozos de mis sueños rotos:   break;
-                // Trozos de mis sueños rotos: case 4:
-                // Trozos de mis sueños rotos: leavePagedScreen();
-                // Trozos de mis sueños rotos: main();
-                // Trozos de mis sueños rotos: break;
                 default:
-                    // Trozos de mis sueños rotos: leavePagedScreen();
                     exitMenu = true;
                     break;
-                // Trozos de mis sueños rotos: default:
-                // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
-                // Trozos de mis sueños rotos: productBySales();
-                // Trozos de mis sueños rotos: break;
             }
         }
     }
@@ -692,22 +615,9 @@ public class ManagerLoop extends Loop {
                     nextPageRegisteredClient();
                     //clientsByOrders();
                     break;
-                // Trozos de mis sueños rotos: case 3:
-                // Trozos de mis sueños rotos: leavePagedScreen();
-                // Trozos de mis sueños rotos: clientsByOrders();
-                // Trozos de mis sueños rotos: break;
-                // Trozos de mis sueños rotos: case 4:
-                // Trozos de mis sueños rotos: leavePagedScreen();
-                // Trozos de mis sueños rotos: main();
-                // Trozos de mis sueños rotos: break;
                 default:
-                    // Trozos de mis sueños rotos: leavePagedScreen();
                     exitMenu = true;
                     break;
-                // Trozos de mis sueños rotos: default:
-                // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong :/, reloading...");
-                // Trozos de mis sueños rotos: clientsByOrders();
-                // Trozos de mis sueños rotos: break;
             }
         }
     }
@@ -738,22 +648,9 @@ public class ManagerLoop extends Loop {
                     nextPageRegisteredClient();
                     //clientsByExchanges();
                     break;
-                // Trozos de mis sueños rotos: case 3:
-                // Trozos de mis sueños rotos:  leavePagedScreen();
-                // Trozos de mis sueños rotos: clientsByExchanges();
-                // Trozos de mis sueños rotos: break;
-                // Trozos de mis sueños rotos: case 4:
-                // Trozos de mis sueños rotos: leavePagedScreen();
-                // Trozos de mis sueños rotos: main();
-                // Trozos de mis sueños rotos: break;
                 default:
-                    // Trozos de mis sueños rotos: leavePagedScreen();
                     exitMenu = true;
                     break;
-                // Trozos de mis sueños rotos: default:
-                // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
-                // Trozos de mis sueños rotos: clientsByExchanges();
-                // Trozos de mis sueños rotos:  break;
             }
         }
     }
@@ -855,19 +752,9 @@ public class ManagerLoop extends Loop {
                 double newValuationCost = scanner.nextDouble();
                 manager.changeValuationCost(newValuationCost);
                 break;
-            // Trozos de mis sueños rotos: case 7:
-            // Trozos de mis sueños rotos: managerLoop();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 8:
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
             default:
                 exit();
                 break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos:  System.out.println("Uh oh, something went wrong :/, reloading...");
-            // Trozos de mis sueños rotos:  manageParameters();
-            // Trozos de mis sueños rotos: break;
         }
     }
 
@@ -884,27 +771,12 @@ public class ManagerLoop extends Loop {
         System.out.println("\t[" + i++ + "] Change my password");
         basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
-        // Trozos de mis sueños rotos: switch (chosenOption) {
-        // Trozos de mis sueños rotos: case 1:
         if (chosenOption == 1) {
             System.out.println("Enter new password:");
             String newPassword = scanner.next();
             currentUser.changePassword(newPassword);
         } else {
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 7:
-            // Trozos de mis sueños rotos: managerLoop();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: case 8:
-            // Trozos de mis sueños rotos: main();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: default: // DUE Revisar nums
             exit();
-            // Trozos de mis sueños rotos: break;
-            // Trozos de mis sueños rotos: default:
-            // Trozos de mis sueños rotos: System.out.println("Uh oh, something went wrong:/, reloading...");
-            // Trozos de mis sueños rotos:  seeProfile();
-            // Trozos de mis sueños rotos: break;
         }
 
     }

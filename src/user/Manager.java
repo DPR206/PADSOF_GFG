@@ -33,12 +33,12 @@ public class Manager extends User {
 
 /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     /**
-     * 
-     * @param pwd
-     * @param userName
-     * @param storePermission
-     * @param p
-     * @param asc
+     * Creates a manager
+     * @param pwd the password
+     * @param userName the user's name
+     * @param storePermission the store permission
+     * @param p the parameters of the store
+     * @param asc the results' order in the search
      */
     private Manager(String pwd, String userName, StorePermission storePermission, Parameter p, boolean asc) {
         super(UserType.MANAGER, pwd, userName, asc);
@@ -51,8 +51,8 @@ public class Manager extends User {
 
 /*----------------------------------------------------- MISC -----------------------------------------------------*/
     /**
-     * 
-     * @return
+     * Obtains the maneger's instance
+     * @return the manager of the store
      */
     public static Manager getInstance() {
         if (Manager.INSTANCE == null) {
@@ -479,7 +479,7 @@ public class Manager extends User {
     }
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     /**
-     * Obtains the maneger's instance
+     * Obtains the maneger's (and creates one if there wasn't one)
      * @return the manager of the store
      */
     public Manager getIntializedManager() {

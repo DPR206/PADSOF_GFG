@@ -28,7 +28,7 @@ public abstract class User {
      * @param pwd,      the password of the user
      * @param userName, the username of the user
      * @param actualID, the ID of the user
-     * @param asc the products' order in the search
+     * @param asc the results' order in the search
      */
     public User(UserType type,String pwd, String userName, String actualID, boolean asc) {
         this.type = type;
@@ -43,7 +43,7 @@ public abstract class User {
      * @param type the user's user type
      * @param pwd,      the password of the user
      * @param userName, the username of the user
-     * @param asc the products' order in the search
+     * @param asc the results' order in the search
      */
     public User(UserType type, String pwd, String userName, boolean asc) {
         this(type, pwd, userName, type.getSymbol() + String.format("%06d", ++totalId), asc);

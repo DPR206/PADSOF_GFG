@@ -164,7 +164,7 @@ public class SecondHandProduct extends Product{
 	}
 
 	/**
-	 * Makes a valuation of a second-hand product
+	 * Makes a valuation of a second-hand product with default valuation date
 	 *
 	 * @param estimatedPrice, the estimated price
 	 * @param status, the conservation status
@@ -173,6 +173,27 @@ public class SecondHandProduct extends Product{
 		this.setEstimatedPrice(estimatedPrice);
 		this.setConservationStatus(status);
 		this.valuationDate = LocalDate.now();
+		NotificationNewSecondHand notification = new NotificationNewSecondHand(LocalDateTime.now(), false, true,
+                NotificationType.NEW_SECONDHAND_PRODUCT);
+        notification.FullNotification(this);
+        Store.getInstance().sendNotificationClients(notification);
+	}
+	
+	/**
+	 * Makes a valuation of a second-hand product
+	 *
+	 * @param estimatedPrice, the estimated price
+	 * @param status, the conservation status
+	 * @param date the valuation date
+	 */
+	public void valuate(double estimatedPrice, ConservationStatus status, LocalDate date) {
+		this.setEstimatedPrice(estimatedPrice);
+		this.setConservationStatus(status);
+		this.setValuationDate(date);
+		NotificationNewSecondHand notification = new NotificationNewSecondHand(LocalDateTime.now(), false, true,
+                NotificationType.NEW_SECONDHAND_PRODUCT);
+        notification.FullNotification(this);
+        Store.getInstance().sendNotificationClients(notification);
 	}
 
 	/**

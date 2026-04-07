@@ -57,8 +57,7 @@ public class ExchangePermission {
             throw new NullPointerException("Value cannot be negative");
         }
 
-        secondHandProduct.setEstimatedPrice(valuationPrice);
-        secondHandProduct.setStatus(status);
+        secondHandProduct.valuate(valuationPrice, status);
         secondHandProduct.setValuationDate(LocalDate.now());
         secondHandProduct.setAvailability(true);
     }
@@ -81,9 +80,7 @@ public class ExchangePermission {
             throw new NullPointerException("Value cannot be negative");
         }
 
-        secondHandProduct.setEstimatedPrice(valuationPrice);
-        secondHandProduct.setStatus(status);
-        secondHandProduct.setValuationDate(valuationDate);
+        secondHandProduct.valuate(valuationPrice, status, valuationDate);
         secondHandProduct.setAvailability(true);
     }
 

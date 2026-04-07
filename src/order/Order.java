@@ -3,6 +3,7 @@ package order;
 
 import product.Pack;
 import product.StoreProduct;
+import store.Store;
 import user.RegisteredClient;
 
 import java.time.LocalDateTime;
@@ -43,6 +44,8 @@ public class Order {
         this.sp = sp;
         this.p = p;
 		this.owner = owner;
+		
+		Store.getInstance().addOrder(this);
     }
 
     /**

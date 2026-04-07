@@ -3,7 +3,9 @@ package main;
 import java.io.IOException;
 
 /**
- * The type Main app.
+ * It implements the main app
+ * @author Sofía C.L.
+ * @version 1.0
  */
 public class MainApp {
     private static final MainLoop ml = MainLoop.getInstance();

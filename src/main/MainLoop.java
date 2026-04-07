@@ -9,7 +9,9 @@ import java.time.Year;
 import java.util.Scanner;
 
 /**
- * The type Main app.
+ * It implements the app's main loop
+ * @author Ana O.R.
+ * @version 1.0
  */
 public class MainLoop extends Loop {
     /** This loop's instance */

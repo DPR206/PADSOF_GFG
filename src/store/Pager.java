@@ -6,6 +6,7 @@ import user.Employee;
 import user.RegisteredClient;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * It implements the store's pager, used for dividing big lists into small sub-lists of a desired size (lines-wise),
@@ -389,6 +390,23 @@ public class Pager {
     }
 
     /**
+     * It gets the paged index belonging to an employee with a certain username in a list
+     * @param employees      the desired list of employees
+     * @param wantedUsername the username of the desired employee
+     * @return the paged index belonging to an employee with a certain username in a list
+     */
+    public int getEmployeeIndex(List<Employee> employees, String wantedUsername) {
+        for (int j = 0; j < employees.size(); j++) {
+            String username = employees.get(j).getUserName();
+
+            if (Objects.equals(wantedUsername, username)) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * It gets the maximum number of pages that can be obtained from the store's employees list
      * @param employeeList the employee list
      * @return the maximum number of pages that can be obtained from the store's employees list
@@ -427,14 +445,7 @@ public class Pager {
      * @return the index belonging to a pack with a certain id in a list
      */
     public int getPackIndex(List<Pack> packs, int wantedId) {
-        for (int j = 0; j < packs.size(); j++) {
-            int packId = packs.get(j).getId();
-
-            if (wantedId == packId) {
-                return j;
-            }
-        }
-        return -1;
+        return 0;
     }
 
     /**

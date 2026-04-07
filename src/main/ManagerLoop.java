@@ -2,19 +2,18 @@ package main;
 
 import product.*;
 import store.*;
-import user.Manager;
+import user.*;
 
 import java.io.IOException;
 import java.time.*;
 import java.util.*;
 
 /**
- * The type Manager loop.
+ * It implements the manager's loop
+ * @author Ana O.R.
+ * @version 1.0
  */
 public class ManagerLoop extends Loop {
-    // DUE: Muy importante!! -> No te olvides de hacer que se puedan escoger las cosas por nº de lista o ID
-    // DUE: Revisar cosas del Pager para que sea POO
-
     /** This loop's instance */
     private static ManagerLoop INSTANCE;
     /** The store's filtered list of products */
@@ -107,7 +106,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< nombre >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< managePacks >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage a pack");
@@ -131,7 +130,7 @@ public class ManagerLoop extends Loop {
                             managePack();
                             break;
                         case 2:
-                            System.out.println("Enter the ID of the desired ###:");
+                            System.out.println("Enter the ID of the desired pack:");
                             int packID = scanner.nextInt();
                             int index = Store.getInstance().getPackIndex(packID);
                             if (index != -1) {
@@ -192,7 +191,12 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< nombre >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< managePack >>>>>>>>>> \n"); // Es para debug, borrar
+
+            Pack pack = Pager.getInstance()
+                             .selectPackFromPage(Store.getInstance().getPacks(), currentScreenPageNum, itemNum);
+            pack.bigPrintInfo();
+
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage price");
@@ -201,15 +205,22 @@ public class ManagerLoop extends Loop {
             basicLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
+            String id;
             switch (chosenOption) {
                 case 1: /* Manage price */
-                    // DUE
+                    System.out.println("Enter the new price:");
+                    double price = scanner.nextDouble();
+                    pack.setPrice(price);
                     break;
                 case 2: /* Add a product */
-                    // DUE
+                    System.out.println("Enter the new product's id:");
+                    id = scanner.next();
+                    pack.addProduct(Store.getInstance().getStoreProductFromId(id));
                     break;
                 case 3: /* Remove a product */
-                    // DUE
+                    System.out.println("Enter the new product's id:");
+                    id = scanner.next();
+                    pack.eliminateProduct(Store.getInstance().getStoreProductFromId(id));
                     break;
                 case 4: /* See profile */
                     seeProfile();
@@ -637,7 +648,7 @@ public class ManagerLoop extends Loop {
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
             String categoryName, newCategoryName;
-            Category category, newCategory;
+            Category category = null, newCategory = null;
             System.out.print("\n <<<<<<<<<< categoryChanger >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
@@ -645,50 +656,57 @@ public class ManagerLoop extends Loop {
             System.out.println("\t[" + i++ + "] Add a new category to the product");
             System.out.println("\t[" + i + "] Remove a product's category");
             chosenOption = scanner.nextInt();
+
+            boolean stop = false;
             switch (chosenOption) {
                 case 1:
-                    System.out.println("Which category do you want to change? (enter its name):");
-                    categoryName = scanner.next();
-                    category = Store.getInstance().getCategoryFromName(categoryName);
-                    if (category == null) {
-                        //System.out.println("A category which such a name doesn't exist, reloading...");
-                        //categoryChanger(storeProduct);
-                        exit(); // idk anymore
-                        break;
+                    while (!appExited && !stop) {
+                        System.out.println("Which category do you want to change? (enter its name):");
+                        categoryName = scanner.next();
+                        category = Store.getInstance().getCategoryFromName(categoryName);
+                        if (category == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                        } else {
+                            stop = true;
+                        }
                     }
-                    System.out.println("Enter the replacement category's name:");
-                    newCategoryName = scanner.next();
-                    newCategory = Store.getInstance().getCategoryFromName(newCategoryName);
-                    if (newCategory == null) {
-                        //System.out.println("A category which such a name doesn't exist, reloading...");
-                        //categoryChanger(storeProduct);
-                        exit(); // idk anymore
-                        break;
+                    stop = false;
+                    while (!appExited && !stop) {
+                        System.out.println("Enter the replacement category's name:");
+                        newCategoryName = scanner.next();
+                        newCategory = Store.getInstance().getCategoryFromName(newCategoryName);
+                        if (newCategory == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                        } else {
+                            stop = true;
+                        }
                     }
                     storeProduct.removeCategory(category);
                     storeProduct.addCategory(newCategory);
                     break;
                 case 2:
-                    System.out.println("Which category do you want to add? (enter its name):");
-                    categoryName = scanner.next();
-                    category = Store.getInstance().getCategoryFromName(categoryName);
-                    if (category == null) {
-                        //System.out.println("A category which such a name doesn't exist, reloading...");
-                        //categoryChanger(storeProduct);
-                        exit(); // idk anymore
-                        break;
+                    while (!appExited && !stop) {
+                        System.out.println("Which category do you want to add? (enter its name):");
+                        categoryName = scanner.next();
+                        category = Store.getInstance().getCategoryFromName(categoryName);
+                        if (category == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                        } else {
+                            stop = true;
+                        }
                     }
                     storeProduct.addCategory(category);
                     break;
                 case 3:
-                    System.out.println("Which category do you want to add? (enter its name):");
-                    categoryName = scanner.next();
-                    category = Store.getInstance().getCategoryFromName(categoryName);
-                    if (category == null) {
-                        //System.out.println("A category which such a name doesn't exist, reloading...");
-                        //categoryChanger(storeProduct);
-                        exit(); // idk anymore
-                        break;
+                    while (!appExited && !stop) {
+                        System.out.println("Which category do you want to add? (enter its name):");
+                        categoryName = scanner.next();
+                        category = Store.getInstance().getCategoryFromName(categoryName);
+                        if (category == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                        } else {
+                            stop = true;
+                        }
                     }
                     storeProduct.removeCategory(category);
                     break;
@@ -708,17 +726,287 @@ public class ManagerLoop extends Loop {
     /**
      * It allows the manager to add a store product to the store
      */
-    private void addStoreProduct() {
-        System.out.print("\n <<<<<<<<<< addStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
-        // DUE
+    private void addStoreProduct() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.println("\n <<<<<<<<<< addStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Add a comic manually");
+            System.out.println("\t[" + i++ + "] Add a game manually");
+            System.out.println("\t[" + i++ + "] Add a figurine manually");
+            System.out.println("\t[" + i++ + "] Add products via file upload");
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            double price;
+            int stock;
+            String name, description, photo;
+            boolean stop = false;
+            List<Category> categories = new ArrayList<>();
+            switch (chosenOption) {
+                case 1: /* Add a comic manually */
+                    System.out.println("Enter the comic's price:");
+                    price = scanner.nextDouble();
+                    System.out.println("Enter the comic's name:");
+                    name = scanner.next();
+                    System.out.println("Enter the comic's description:");
+                    description = scanner.next();
+                    System.out.println("Enter the comic photo's path:");
+                    photo = scanner.next();
+                    System.out.println("Enter the comic's stock:");
+                    stock = scanner.nextInt();
+                    System.out.println("Enter the comic's number of pages:");
+                    int numPages = scanner.nextInt();
+                    System.out.println("Enter the comic's year:");
+                    Year year = Year.parse(scanner.next());
+                    System.out.println("Enter the comic's author:");
+                    String author = scanner.next();
+                    System.out.println("Enter the comic's editorial:");
+                    String editorial = scanner.next();
+                    while (!appExited && !stop) {
+                        System.out.println(
+                                "Enter the comic's category (type \"stop\" to apply the ones entered so far):");
+                        String categoryName = scanner.next();
+                        if (categoryName.equals("stop")) {
+                            stop = true;
+                        }
+                        Category category = Store.getInstance().getCategoryFromName(categoryName);
+                        if (category == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                        } else {
+                            categories.add(category);
+                        }
+                    }
+                    ((Manager) currentUser).addComic(price, name, description, photo, stock, numPages, year, author,
+                            editorial, categories.toArray(new Category[0]));
+                    break;
+                case 2: /* Add a game manually */
+                    System.out.println("Enter the game's price:");
+                    price = scanner.nextDouble();
+                    System.out.println("Enter the game's name:");
+                    name = scanner.next();
+                    System.out.println("Enter the game's description:");
+                    description = scanner.next();
+                    System.out.println("Enter the game photo's path:");
+                    photo = scanner.next();
+                    System.out.println("Enter the game's stock:");
+                    stock = scanner.nextInt();
+                    System.out.println("Enter the game's number of players:");
+                    int numPlayers = scanner.nextInt();
+                    System.out.println("Enter the game's age range:");
+                    String ageRange = scanner.next();
+                    System.out.println("Enter the product 's Game Style (" + GameStyle.CARDS.getFormatedName() + "/" +
+                                       GameStyle.DICE.getFormatedName() + "/" + GameStyle.GAMEBOARD.getFormatedName() +
+                                       "/" + GameStyle.MINIATURE.getFormatedName() + "):");
+                    GameStyle gameStyle = GameStyle.valueOf(scanner.next());
+                    while (!appExited && !stop) {
+                        System.out.println(
+                                "Enter the game's category (type \"stop\" to apply the ones entered so far):");
+                        String categoryName = scanner.next();
+                        if (categoryName.equals("stop")) {
+                            stop = true;
+                        }
+                        Category category = Store.getInstance().getCategoryFromName(categoryName);
+                        if (category == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                        } else {
+                            categories.add(category);
+                        }
+                    }
+                    ((Manager) currentUser).addGame(price, name, description, photo, stock, numPlayers, ageRange,
+                            gameStyle, categories.toArray(new Category[0]));
+                    break;
+                case 3: /* Add a figurine manually */
+                    System.out.println("Enter the figurine's price:");
+                    price = scanner.nextDouble();
+                    System.out.println("Enter the figurine's name:");
+                    name = scanner.next();
+                    System.out.println("Enter the figurine's description:");
+                    description = scanner.next();
+                    System.out.println("Enter the figurine photo's path:");
+                    photo = scanner.next();
+                    System.out.println("Enter the figurine's stock:");
+                    stock = scanner.nextInt();
+                    System.out.println("Enter the figurine's dimensions:");
+                    String dimensions = scanner.next();
+                    System.out.println("Enter the figurine's brand:");
+                    String brand = scanner.next();
+                    System.out.println("Enter the figurine's material:");
+                    String material = scanner.next();
+                    while (!appExited && !stop) {
+                        System.out.println(
+                                "Enter the figurine's category (type \"stop\" to apply the ones entered so far):");
+                        String categoryName = scanner.next();
+                        if (categoryName.equals("stop")) {
+                            stop = true;
+                        }
+                        Category category = Store.getInstance().getCategoryFromName(categoryName);
+                        if (category == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                        } else {
+                            categories.add(category);
+                        }
+                    }
+                    ((Manager) currentUser).addFigurine(price, name, description, photo, stock, dimensions, brand,
+                            material, categories.toArray(new Category[0]));
+                    break;
+                case 4:
+                    System.out.println("Enter the file's name (without the extension):");
+                    String fileName = scanner.next();
+                    fileName = "resources\\" + fileName + ".csv";
+                    ((Manager) currentUser).addProductFromFile(fileName);
+                    break;
+                case 6: /* See profile */
+                    seeProfile();
+                    break;
+                case 7: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
     }
 
     /**
      * It allows the manager to manage the store's employees
      */
-    private void manageEmployees() {
-        System.out.print("\n <<<<<<<<<< manageEmployees >>>>>>>>>> \n"); // Es para debug, borrar
-        // DUE
+    private void manageEmployees() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.println("\n <<<<<<<<<< manageEmployees >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Manage an employee");
+            System.out.println("\t[" + i++ + "] Add an employee");
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Manage an employee */
+                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.println("Do you wish to select it via: ID or list number?");
+                    System.out.println("[1] List number");
+                    System.out.println("[2] Username");
+                    int chosenOption2 = scanner.nextInt();
+
+                    switch (chosenOption2) {
+                        case 1:
+                            System.out.println("Enter the number of the desired employee:");
+                            this.itemNum = scanner.nextInt();
+                            leavePagedScreen();
+                            manageEmployee();
+                            break;
+                        case 2:
+                            System.out.println("Enter the username of the desired employee:");
+                            String username = scanner.next();
+                            int index = Store.getInstance().getEmployeeIndex(username);
+                            if (index != -1) {
+                                currentScreenPageNum = Pager.getInstance().getPageNumFromIndex(index);
+                                itemNum = Pager.getInstance().getItemNumFromIndex(index);
+
+                                leavePagedScreen();
+                                manageEmployee();
+                                break;
+                            }
+                            System.out.println("The ID wasn't valid");
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                    }
+                    break;
+                case 2: /* Add an employee */
+                    System.out.println("Enter the employee's password:");
+                    String password = scanner.next();
+                    System.out.println("Enter the employee's username:");
+                    String username = scanner.next();
+                    System.out.println("Enter the employee's Permission (" + Permission.EXCHANGE.getMeaning() + "/" +
+                                       Permission.ORDER.getMeaning() + "/" + Permission.STORE.getMeaning() + "):");
+                    Permission permission = Permission.valueOf(scanner.next());
+                    ((Manager) currentUser).addEmployee(password, username, permission);
+                    break;
+                case 3: /* Previous page */
+                    previousPage();
+                    break;
+                case 4: /* Next page */
+                    nextPageEmployee();
+                    break;
+                case 5: /* See profile */
+                    seeProfile();
+                    break;
+                case 6: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * It allows the manager to manage a certain employee
+     */
+    private void manageEmployee() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.print("\n <<<<<<<<<< seeStoreProduct 2 >>>>>>>>>> \n"); // Es para debug, borrar
+            Employee employee = Store.getInstance().selectEmployeeFromPage(currentScreenPageNum, itemNum);
+            employee.printInfo();
+
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Change password");
+            System.out.println("\t[" + i++ + "] Add a permission");
+            System.out.println("\t[" + i++ + "] Remove a permission");
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Change password */
+                    System.out.println("Enter the employee's new password:");
+                    String newPassword = scanner.next();
+                    employee.changePassword(newPassword);
+                    break;
+                case 3: /* Add a permission */
+                    System.out.println(
+                            "Enter the employee's new Permission (" + Permission.EXCHANGE.getMeaning() + "/" +
+                            Permission.ORDER.getMeaning() + "/" + Permission.STORE.getMeaning() + "):");
+                    Permission permission = Permission.valueOf(scanner.next());
+                    switch (permission) {
+                        case EXCHANGE:
+                            employee.setEp(new ExchangePermission());
+                            break;
+                        case ORDER:
+                            employee.setOp(new OrderPermission(true));
+                            break;
+                        case STORE:
+                            employee.setSp(new StorePermission());
+                            break;
+                        default:
+                            System.out.println("Invalid permission");
+                            break;
+                    }
+                    break;
+                case 4: /* Remove a permission */
+                    signer();
+                    break;
+                case 5: /* See profile */
+                    seeProfile();
+                    break;
+                case 6: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
     }
 
     /**
@@ -745,49 +1033,53 @@ public class ManagerLoop extends Loop {
             System.out.println("\t[" + i++ + "] Store's total revenue");
             System.out.println("\t[" + i++ + "] Store's total valuation's revenue");
             System.out.println("\t[" + i++ + "] A certain category's revenue");
-            // No sé si es útil-> System.out.println("\t[11] A certain store product's revenue");
-            // No sé si es útil-> System.out.println("\t[12] A certain client's number of orders");
-            // No sé si es útil-> System.out.println("\t[13] A certain client's number of exchanges");
             basicLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
-                case 1:
+                case 1: /* List of store products by sales */
                     productBySales();
                     break;
-                case 2:
+                case 2: /* List of clients by orders */
                     clientsByOrders();
                     break;
-                case 3:
+                case 3: /* List of clients by exchanges */
                     clientsByExchanges();
                     break;
-                case 4:
+                case 4: /* List of revenue by month */
                     revenueByMonth();
                     break;
-                case 5:
+                case 5: /* List of categories by revenue */
                     categoriesByRevenue();
                     break;
-                case 6:
+                case 6: /* List of store products by sales with percentage regarding total revenues */
                     productBySalesWithPercentage();
                     break;
-                case 7:
+                case 7: /* List of store products by sales with percentage regarding total revenues on a certain
+                month */
                     productBySalesWithPercentageCertainMonth();
                     break;
-                case 8:
+                case 8: /* Store's total revenue */
                     System.out.println("The store's total revenue is " + Statistics.getTotal_revenue() + "€");
                     break;
-                case 9:
+                case 9: /* Store's total valuation's revenue */
                     System.out.println("The store's total revenue from valuations is " +
                                        Statistics.getINSTANCE().getRevenue_valuation() + "€");
                     break;
-                case 10:
-                    System.out.println("Which category do you want to see? (enter its name):");
-                    String categoryName = scanner.next();
-                    Category category = Store.getInstance().getCategoryFromName(categoryName);
-                    if (category == null) {
-                        System.out.println("A category which such a name doesn't exist, reloading...");
-                        //generateStatistics();
-                        break;
+                case 10: /* A certain category's revenue */
+                    boolean stop = false;
+                    String categoryName = null;
+                    Category category;
+                    while (!stop) {
+                        System.out.println("Which category do you want to see? (enter its name):");
+                        categoryName = scanner.next();
+                        category = Store.getInstance().getCategoryFromName(categoryName);
+                        if (category == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                            break;
+                        } else {
+                            stop = true;
+                        }
                     }
                     System.out.println("The " + categoryName + " category's total revenue is " +
                                        Statistics.getINSTANCE().getRevenueByCategory(categoryName) + "€");
@@ -824,13 +1116,11 @@ public class ManagerLoop extends Loop {
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
-                case 1:
+                case 1: /* Previous page */
                     previousPage();
-                    //productBySales();
                     break;
-                case 2:
+                case 2: /* Next page */
                     nextPageStoreProduct(products);
-                    //productBySales();
                     break;
                 case 3: /* See profile */
                     seeProfile();
@@ -866,11 +1156,9 @@ public class ManagerLoop extends Loop {
             switch (chosenOption) {
                 case 1:
                     previousPage();
-                    //clientsByOrders();
                     break;
                 case 2:
                     nextPageRegisteredClient();
-                    //clientsByOrders();
                     break;
                 case 3: /* See profile */
                     seeProfile();
@@ -906,11 +1194,9 @@ public class ManagerLoop extends Loop {
             switch (chosenOption) {
                 case 1:
                     previousPage();
-                    //clientsByExchanges();
                     break;
                 case 2:
                     nextPageRegisteredClient();
-                    //clientsByExchanges();
                     break;
                 case 3: /* See profile */
                     seeProfile();
@@ -1049,7 +1335,7 @@ public class ManagerLoop extends Loop {
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
             System.out.print("\n <<<<<<<<<< seeProfile >>>>>>>>>> \n"); // Es para debug, borrar
-            currentUser.getPrintInfo();
+            currentUser.printInfo();
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;

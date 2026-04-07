@@ -2,7 +2,7 @@ private void nombre(){
     Scanner scanner = new Scanner(System.in);
     boolean exitLoop = false;
     while (!appExited && !exitLoop) {
-        System.out.println("\n <<<<<<<<<< nombre >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.println("\n <<<<<<<<<< DUE >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
         int i = 1;
         System.out.println("\t[" + i++ + "] ");// DUE

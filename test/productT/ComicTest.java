@@ -1,13 +1,11 @@
 package productT;
 
-import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Year;
-
-import org.junit.*;
 
 import product.Category;
 import product.Comic;
@@ -16,7 +14,7 @@ public class ComicTest {
 
 	private Comic c;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		 c = new Comic("1", 12.99, "Test Comic", "Description", "photo.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Author", "Editorial", new Category("algo"));
 	}

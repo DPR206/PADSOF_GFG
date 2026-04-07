@@ -5,7 +5,7 @@ import store.Store;
 
 import java.util.List;
 
-//**
+/**
  * This class implements a search mechanism to find orders by their ID.
  *
  * <p>It retrieves all available orders from the {@link Store} and

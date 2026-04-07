@@ -75,7 +75,7 @@ public abstract class User {
 
     /**
      * Obtains the password of the user
-     * 
+     *
      * @return the user's password
      */
     public String getPassword() {
@@ -89,7 +89,7 @@ public abstract class User {
     public Searcher getSearcher(){
         return this.searching;
     }
-    
+
     /**
      * Gets the username of the user
      * @return the user's name
@@ -97,7 +97,7 @@ public abstract class User {
     public String getUserName() {
         return this.userName;
     }
-    
+
     /**
      * Changes the order of the search (ascendant or descendant)
      *
@@ -106,7 +106,14 @@ public abstract class User {
     public void changeSearchOrder(boolean bool) {
     	this.searching.changeProductOrder(bool);
     }
-    
+
+    /**
+     * It toggles the search order between ascending and descending
+     */
+    public void toggleSearchOrder() {
+        this.searching.toggleProductOrder();
+    }
+
     /**
      * Adds a new price filter to the user
      *
@@ -116,7 +123,7 @@ public abstract class User {
     public void addPriceFilter(double min, double max){
         this.searching.getStoreSearcher().addPriceFilter(min, max);
     }
-    
+
     /**
      * Adds a new punctuation filter to the user
      *
@@ -134,10 +141,10 @@ public abstract class User {
     public UserType getType() {
         return this.type;
     }
-    
+
     /**
      * It gets the user's actual ID (String)
-     * 
+     *
      * @return the user's id
      */
     public String getId() {

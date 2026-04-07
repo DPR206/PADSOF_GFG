@@ -235,7 +235,7 @@ public class ManagerLoop extends Loop {
             System.out.println("Page: " + currentScreenPageNum);
 
             if (filteredStore == null) { // Si no hay filtros se muestran todos los productos
-                this.filteredStore = ((Manager) currentUser).searchStoreProduct();
+                this.filteredStore = ((Manager) currentUser).searchStoreProducts();
             }
             Pager.getInstance().printStoreProductListPage(filteredStore, currentScreenPageNum);
 
@@ -359,17 +359,15 @@ public class ManagerLoop extends Loop {
                 }
                 break;
             case 4: /* Change search order */
-                currentUser.changeSearchOrder(false); // DUE: Debería toggle it con !currentBool o algo así
+                currentUser.toggleSearchOrder();
             case 5: /* Exit */
                 exit();
                 break;
             default: /* Go back */
-                exit();
                 break;
         }
 
-        return null; // DUE: return ((Manager) currentUser).searchStoreProductByCategory(categories.toArray(new
-        // Category[0]));
+        return ((Manager) currentUser).searchStoreProductByCategory(categories.toArray(new Category[0]));
     }
 
     /**

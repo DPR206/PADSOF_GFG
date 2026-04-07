@@ -177,4 +177,11 @@ public class Searcher{
     public void changeProductOrder(boolean bool) {
         this.searchStore.setAsc(bool);
     }
+
+    /**
+     * It toggles the searcher's order between ascending and descending
+     */
+    public void toggleProductOrder() {
+        this.searchStore.toggleOrder();
+    }
 }

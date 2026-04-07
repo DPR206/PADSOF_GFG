@@ -14,7 +14,7 @@ import java.util.*;
  * optional category constraints. Results can be sorted in ascending or descending order.</p>
  *
  * <p>Typically used within {@link Searcher} for store product searches.</p>
- * 
+ *
  * @author Sofía C.L.
  * @version 1.4
  * @see Searcher
@@ -160,7 +160,7 @@ public class SearchStoreProducts{
 
         if(this.punctuationF != null){
             for(StoreProduct p: fromStore){
-                if(p.getAveragePunctuation() >= this.punctuationF.getMin() && 
+                if(p.getAveragePunctuation() >= this.punctuationF.getMin() &&
                    p.getAveragePunctuation() <= this.punctuationF.getMax()){
                     aux.add(p);
                 }
@@ -202,5 +202,12 @@ public class SearchStoreProducts{
      */
     public void setAsc(boolean bool) {
         this.ascendant = bool;
+    }
+
+    /**
+     * It toggles the searcher's order between ascending and descending
+     */
+    public void toggleOrder(){
+        this.ascendant = !this.ascendant;
     }
 }

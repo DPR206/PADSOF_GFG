@@ -236,7 +236,7 @@ public class UnregisteredClientLoop extends Loop {
                 }
                 break;
             case 4: /* Change search order */
-                currentUser.changeSearchOrder(false); // DUE: Debería toggle it con !currentBool o algo así
+                currentUser.toggleSearchOrder();
             case 5: /* Log in */
                 logger();
                 break;

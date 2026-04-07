@@ -544,6 +544,23 @@ public class Manager extends User {
         this.sp.addPack(price, products, date);
     }
 
+    /**
+     * Searches for the store products
+     * @return the store product based on the filters
+     */
+    public List<StoreProduct> searchStoreProducts(){
+        return this.sp.searchStoreProducts();
+    }
+
+    /**
+     * Searches for the store products based on the category
+     * @param c, the categories we want our searched products to belong to
+     * @return the store product based on the filters
+     */
+    public List<StoreProduct> searchStoreProductByCategory(Category... c){
+        return this.sp.searchStoreProductByCategory(c);
+    }
+
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     /**
      * Obtains the maneger's (and creates one if there wasn't one)

@@ -1,6 +1,8 @@
 package user;
 
 import product.*;
+import search.SearchStoreProducts;
+import search.Searcher;
 import store.Store;
 
 import java.io.*;
@@ -16,6 +18,8 @@ import java.util.*;
  */
 public class StorePermission {
     private Store s; //creo que debería tener acceso al store si la va a modificar
+    /** The permission's searcher */
+    private Searcher searching;
 
     /**
      * Constructor of the class
@@ -23,6 +27,7 @@ public class StorePermission {
      */
     public StorePermission() {
         this.s = Store.getInstance();
+        this.searching = new Searcher(new SearchStoreProducts(true));
     }
 
     /**
@@ -181,5 +186,22 @@ public class StorePermission {
      */
     public Store getStore() {
         return this.s;
+    }
+
+    /**
+     * Searches for the store products
+     * @return the store product based on the filters
+     */
+    public List<StoreProduct> searchStoreProducts(){
+        return this.searching.searchStoreProducts();
+    }
+
+    /**
+     * Searches for the store products based on the category
+     * @param c, the categories we want our searched products to belong to
+     * @return the store product based on the filters
+     */
+    public List<StoreProduct> searchStoreProductByCategory(Category... c){
+        return this.searching.searchByCategory(c);
     }
 }

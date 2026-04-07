@@ -323,7 +323,7 @@ public abstract class Loop {
             System.out.println("\t[" + firstOptionNum++ + "] See profile");
         }
         System.out.println("\t[" + firstOptionNum++ + "] x Exit app");
-        System.out.println("\t[" + firstOptionNum + "] x Go back");
+        System.out.println("\t[" + firstOptionNum + "] <- Go back");
     }
 
     /**

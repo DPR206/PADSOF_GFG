@@ -20,11 +20,11 @@ public class MainApp {
         try {
             ml.main();
         } catch (IOException io) {
-
+            throw new IOException(io.getMessage());
         } catch (IllegalArgumentException ia) {
-
+            throw new IllegalArgumentException(ia.getMessage());
         } catch (NullPointerException np) {
-
+            throw new NullPointerException(np.getMessage());
         }
     }
 }

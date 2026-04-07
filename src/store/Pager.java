@@ -50,6 +50,11 @@ public class Pager {
      * @param pageNum    the desired page's number
      */
     public void printReviewListPage(List<Review> reviewList, int pageNum) {
+        if (reviewList == null || reviewList.isEmpty()) {
+            System.out.println("There are no reviews");
+            return;
+        }
+
         List<Review> reviewListPage = pageReviewList(reviewList, pageNum);
         int i = 1;
 
@@ -66,6 +71,11 @@ public class Pager {
      * @param pageNum          the desired page's number
      */
     public void printStoreProductListPage(List<StoreProduct> storeProductList, int pageNum) {
+        if (storeProductList == null || storeProductList.isEmpty()) {
+            System.out.println("There are no store products");
+            return;
+        }
+
         List<StoreProduct> productListPage = pageStoreProductList(storeProductList, pageNum);
         int i = 1;
         for (StoreProduct product : productListPage) {
@@ -79,6 +89,11 @@ public class Pager {
      * @param pageNum the desired page's number
      */
     public void printRegisteredClientListPage(List<RegisteredClient> clients, int pageNum) {
+        if (clients == null || clients.isEmpty()) {
+            System.out.println("There are no registered clients");
+            return;
+        }
+
         List<RegisteredClient> registeredClientPage = pageRegisteredClientList(clients, pageNum);
         int i = 1;
 
@@ -93,6 +108,11 @@ public class Pager {
      * @param pageNum   the desired page's number
      */
     public void printEmployeeListPage(List<Employee> employees, int pageNum) {
+        if (employees == null || employees.isEmpty()) {
+            System.out.println("There are no employees");
+            return;
+        }
+
         List<Employee> employeeListPage = pageEmployeeList(employees, pageNum);
         int i = 1;
 
@@ -107,6 +127,11 @@ public class Pager {
      * @param pageNum  the desired page's number
      */
     public void printPackListPage(List<Pack> packList, int pageNum) {
+        if (packList == null || packList.isEmpty()) {
+            System.out.println("There are no packs");
+            return;
+        }
+
         List<Pack> packListPage = pagePackList(packList, pageNum);
         int i = 1;
 
@@ -117,10 +142,16 @@ public class Pager {
 
     /**
      * It prints a sub-list of another according to the desired page
-     * @param discountListPage the discount list page
-     * @param pageNum          the desired page's number
+     * @param discountList the discount list
+     * @param pageNum      the desired page's number
      */
-    public void printDiscountListPage(List<Discount> discountListPage, int pageNum) {
+    public void printDiscountListPage(List<Discount> discountList, int pageNum) {
+        if (discountList == null || discountList.isEmpty()) {
+            System.out.println("There are no discounts");
+            return;
+        }
+
+        List<Discount> discountListPage = pageDiscountList(discountList, pageNum);
         int i = 1;
 
         for (Discount discount : discountListPage) {
@@ -130,13 +161,19 @@ public class Pager {
 
     /**
      * It prints a sub-list of categories according to the desired page
-     * @param categoryPage the category page
+     * @param categoryList the category list
      * @param pageNum      the desired page's number
      */
-    public void printCategoryListPage(List<Category> categoryPage, int pageNum) {
+    public void printCategoryListPage(List<Category> categoryList, int pageNum) {
+        if (categoryList == null || categoryList.isEmpty()) {
+            System.out.println("There are no categories");
+            return;
+        }
+
+        List<Category> categoryListPage = pageCategoryList(categoryList, pageNum);
         int i = 1;
 
-        for (Category category : categoryPage) {
+        for (Category category : categoryList) {
             System.out.println(i++ + ". " + category.getName());
         }
     }

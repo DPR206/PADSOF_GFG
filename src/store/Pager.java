@@ -26,7 +26,7 @@ public class Pager {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * A Pager's constructor
+     * The pager's constructor
      */
     Pager() {
 
@@ -37,7 +37,7 @@ public class Pager {
     //  clase que posea dicha lista, si sobrevivo al resto lo implemento <- Estoy en ello
 
     /**
-     * Obtains the pager
+     * It gets the pager's instance
      * @return the store's pager
      */
     public static Pager getInstance() {
@@ -359,11 +359,31 @@ public class Pager {
     }
 
     /**
+     * It gets the item number corresponding to a certain list's index
+     * @param index the desired index
+     * @return the item number corresponding to a certain list's index
+     */
+    public int getItemNumFromIndex(int index) {
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        return ((index % itemsPerPage) + 1);
+    }
+
+    /**
      * It gets the maximum number of pages that can be obtained from the store's packs list
      * @return the maximum number of pages that can be obtained from the store's packs list
      */
     public int getPackMaxPageNum(List<Pack> packList) {
         return maxPageNum(packList.size());
+    }
+
+    /**
+     * It gets the page number corresponding to a certain list's index
+     * @param index the desired index
+     * @return the page number corresponding to a certain list's index
+     */
+    public int getPageNumFromIndex(int index) {
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        return (index / itemsPerPage) + 1;
     }
 
     /**
@@ -381,6 +401,23 @@ public class Pager {
      */
     public int getReviewMaxPageNum(StoreProduct storeProduct) {
         return maxPageNum(storeProduct.getReviewsList().size());
+    }
+
+    /**
+     * It gets the index belonging to a store product with a certain id in a list
+     * @param products the desired list of store products
+     * @param wantedId the id of the desired store product
+     * @return the index belonging to a store product with a certain id in a list
+     */
+    public int getStoreProductIndex(List<StoreProduct> products, String wantedId) {
+        for (int j = 0; j < products.size(); j++) {
+            String productId = products.get(j).getId();
+
+            if (wantedId.equals(productId)) {
+                return j;
+            }
+        }
+        return -1;
     }
 
     /**

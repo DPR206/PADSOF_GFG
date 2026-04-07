@@ -163,6 +163,7 @@ public class Manager extends User {
 		System.err.println("You have no permission to do that...");
 		return false;
     }
+
     /**
      * Adds a new employee
      *
@@ -170,7 +171,6 @@ public class Manager extends User {
      *  @param userName, the username of the employee
      *  @param permission, the permission it has
      */
-
     public void addEmployee(String password, String userName, Permission permission) {
         Employee emp = new Employee(password, userName, permission, true);
         s.getEmployees().put(emp.getId(), emp);

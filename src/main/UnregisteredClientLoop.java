@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * The type Unregistered client loop.
+ * It implements the unregistered client's loop
+ * @author Ana O.R.
+ * @version 1.0
  */
 public class UnregisteredClientLoop extends Loop {
     /** This loop's instance */

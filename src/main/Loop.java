@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The type Loop.
+ * It implements the general loop
+ * @author Ana O.R.
+ * @version 1.0
  */
 public abstract class Loop {
     /** The current screen's page number, if a list is being browsed */
@@ -150,16 +152,6 @@ public abstract class Loop {
         currentScreenPageNum = (currentScreenPageNum - 1) > 0 ? currentScreenPageNum - 1 : 1;
     }
 
-    /* Next Pages:
-        [x] Review
-        [x] Store Product
-        [x] Registered Client
-        [ ] Employee DUE
-        [x] Pack
-        [ ] Discount DUE
-        [ ] Category DUE
-     */
-
     /**
      * It allows for a user to switch to the next page when viewing a store product's list of reviews
      * @param product the desired store products
@@ -187,11 +179,38 @@ public abstract class Loop {
     }
 
     /**
+     * It allows for a user to switch to the next page when viewing the store's list of employees
+     */
+    protected void nextPageEmployee() {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getEmployeeMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
+    }
+
+    /**
      * It allows for a user to switch to the next page when viewing the store's list of packs
      */
     protected void nextPageStorePack() {
         currentScreenPageNum =
                 (currentScreenPageNum + 1) < Store.getInstance().getPackMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing the store's list of discounts
+     */
+    protected void nextPageStoreDiscount() {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getDiscountMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing the store's list of categories
+     */
+    protected void nextPageCategory() {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getCategoryMaxPageNum() ? currentScreenPageNum + 1 :
                 currentScreenPageNum;
     }
 

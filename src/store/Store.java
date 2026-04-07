@@ -3,7 +3,7 @@ package store;
 import discount.Discount;
 import exchange.Exchange;
 import exchange.Offer;
-import notification.*;
+import notification.Notification;
 import order.Order;
 import product.*;
 import user.*;
@@ -309,6 +309,16 @@ public class Store {
         Pager.getInstance().printCategoryListPage(this.getCategoryList(), pageNum);
     }
 
+    /**
+     * It gets the employee listed as n.º clientNum in a certain page
+     * @param pageNum   the desired page's number
+     * @param clientNum the desired employee's n.º
+     * @return the desired employee
+     */
+    public Employee selectEmployeeFromPage(int pageNum, int clientNum) {
+        return Pager.getInstance().selectEmployeeFromPage(this.getEmployeeList(), pageNum, clientNum);
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -362,6 +372,15 @@ public class Store {
      */
     public List<Discount> getDiscounts() {
         return this.discounts;
+    }
+
+    /**
+     * It gets the paged index belonging to an employee with a certain username
+     * @param wantedUsername the username of the desired employee
+     * @return the paged index belonging to an employee with a certain username
+     */
+    public int getEmployeeIndex(String wantedUsername) {
+        return Pager.getInstance().getEmployeeIndex(this.getEmployeeList(), wantedUsername);
     }
 
     /**

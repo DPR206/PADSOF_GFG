@@ -3,7 +3,9 @@ package main;
 import java.io.IOException;
 
 /**
- * The type Registered client loop.
+ * It implements the registered client's loop
+ * @author Ana O.R.
+ * @version 1.0
  */
 public class RegisteredClientLoop extends Loop {
     /** This loop's instance */

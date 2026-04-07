@@ -208,6 +208,7 @@ public class Employee extends User {
         System.err.println("You have no permission to do that...");
         return false;
     }
+    
     /**
      * Adds and creates new products from a file
      *

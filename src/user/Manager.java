@@ -32,6 +32,14 @@ public class Manager extends User {
     
 
 /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /**
+     * 
+     * @param pwd
+     * @param userName
+     * @param storePermission
+     * @param p
+     * @param asc
+     */
     private Manager(String pwd, String userName, StorePermission storePermission, Parameter p, boolean asc) {
         super(UserType.MANAGER, pwd, userName, asc);
 
@@ -42,6 +50,10 @@ public class Manager extends User {
     }
 
 /*----------------------------------------------------- MISC -----------------------------------------------------*/
+    /**
+     * 
+     * @return
+     */
     public static Manager getInstance() {
         if (Manager.INSTANCE == null) {
             Manager.INSTANCE = new Manager("password", "manager", new StorePermission(), Parameter.getParam(), true);
@@ -51,7 +63,7 @@ public class Manager extends User {
     
     /**
      * Searches for the store products based on the filters
-     * @return the products
+     * @return the products the list of products found
      */
     public List<StoreProduct> searchStoreProduct() {
         return this.getSearcher().searchStoreProducts();
@@ -59,7 +71,8 @@ public class Manager extends User {
     
     /**
      * Searches for the store products based on the filters and categories
-     * @return the products
+     * @param categories the categories to filter by
+     * @return the products the list of products found
      */
     public List<StoreProduct> searchStoreProductCategory(Category...categories){
     	return this.getSearcher().searchByCategory(categories);
@@ -67,16 +80,17 @@ public class Manager extends User {
     
     /**
      * Adds and creates new figurine
-     * @param price
-     * @param name
-     * @param description
-     * @param photo
-     * @param stock
-     * @param dimensions
-     * @param brand
-     * @param material
-     * @param categories
+     * @param price the price of the figurine
+     * @param name the name of the figurine
+     * @param description  the description of the figurine
+     * @param photo the photo of the figurine
+     * @param stock the figurine's stock
+     * @param dimensions the figurine's dimensions
+     * @param brand the figurine's brand
+     * @param material the figurine's material
+     * @param categories the figurine's categories
      *
+     * @return true if the figurine was added, false if else
      */
     public boolean addFigurine(double price, String name, String description, String photo, int stock, String dimensions, String brand, String material, Category... categories) {
         if (this.sp != null) {
@@ -87,6 +101,12 @@ public class Manager extends User {
         return false;
     }
     
+    /**
+     * Adds and creates new products from a file
+     *
+     * @param filename the name of the file
+     * @return true if the product's were added successfully, false if else
+     */
     public boolean addProductFromFile(String filename) {
     	try {
 			return this.sp.addProductByFile(filename);
@@ -98,15 +118,17 @@ public class Manager extends User {
     
     /**
      * Adds and creates new game
-     * @param price
-     * @param name
-     * @param description
-     * @param photo
-     * @param stock
-     * @param numPlayers
-     * @param ageRange
-     * @param categories
+     * @param price the price of the game
+     * @param name the name of the game
+     * @param description the description of the game
+     * @param photo the photo of the comic
+     * @param stock the game's stock
+     * @param numPlayers the game's number of players
+     * @param ageRange the game's age range
+     * @param gameStyle the style of the game
+     * @param categories the game's categories
      *
+     * @return true if the game was added, false if else
      */
     public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers,
         String ageRange, GameStyle gameStyle, Category... categories) {
@@ -120,17 +142,18 @@ public class Manager extends User {
     
     /**
      * Adds and creates new comic
-     * @param price
-     * @param name
-     * @param description
-     * @param photo
-     * @param stock
-     * @param numPages
-     * @param year
-     * @param author
-     * @param categories
-     * @param editorial
+     * @param price the price of the comic
+     * @param name the name of the comic
+     * @param description the description of the comic
+     * @param photo the photo of the comic
+     * @param stock the comic's stock
+     * @param numPages the comic's number of pages
+     * @param year the year of publication
+     * @param author the comic's author
+     * @param editorial the comic's editorial
+     * @param categories the comic's categories
      *
+     * @return true if the comic was added, false if else
      */
     public boolean addComic(double price, String name, String description, String photo, int stock, int numPages,
         Year year, String author, String editorial, Category... categories) {
@@ -418,7 +441,7 @@ public class Manager extends User {
      * Searches for the pack based on the id
      *
      * @param id, id of the pack
-     *
+     * @return the pack with said id
      */
     public Pack searchPackByID(int id){
         return this.getSearcher().searchPackByID(id);
@@ -429,7 +452,7 @@ public class Manager extends User {
      * Searches for the employee based on the id
      *
      * @param id, id of the employee
-     *
+     * @return the employee with said id
      */
     public Employee searchEmployeeByID(int id){
         return this.getSearcher().searchEmployeeByID(id);
@@ -439,7 +462,7 @@ public class Manager extends User {
      * Searches for the order based on the id
      *
      * @param id, id of the order
-     *
+     * @return the order with said id
      */
     public Order searchOrderByID(int id){
         return this.getSearcher().searchOrderByID(id);
@@ -449,12 +472,16 @@ public class Manager extends User {
      * Searches for the exchange based on the id
      *
      * @param id, id of the exchange
-     *
+     * @return the exchange with said id
      */
     public Exchange searchExchangeByID(int id){
         return this.getSearcher().searchExchangeByID(id);
     }
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /**
+     * Obtains the maneger's instance
+     * @return the manager of the store
+     */
     public Manager getIntializedManager() {
         if (Manager.INSTANCE != null) {
             return Manager.INSTANCE;

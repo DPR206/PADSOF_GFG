@@ -101,6 +101,20 @@ public abstract class ProductDiscount extends Discount {
     }
 
     /**
+     * It returns the discount's categories in a text-bubble-friendly manner
+     * @return a string containing the discount's store products
+     */
+    public String getPrintNameStoreProducts() {
+        StringBuilder sb = new StringBuilder();
+
+        for (StoreProduct product : this.products) {
+            sb.append(product.getName()).append(",");
+        }
+
+        return sb.toString();
+    }
+
+    /**
      * It returns the discount's products in a save-file-friendly manner
      * @return a string containing the discount's products' id
      */

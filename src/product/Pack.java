@@ -7,7 +7,7 @@ import discount.*;
 import store.Store;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * It implements the packs
@@ -16,137 +16,213 @@ import java.util.*;
  * @see store.Store
  */
 public class Pack {
-	static public int totalId = 0;
+    static public int totalId = 0;
 
-	/** */
-	private int id;
-	private double price;
-	private ArrayList<StoreProduct> products;
-	private LocalDate dateAddCart;
-	/** The pack's discount, if it has one */
-	private Discount discount;
+    /**  */
+    private int id;
+    private double price;
+    private ArrayList<StoreProduct> products;
+    private LocalDate dateAddCart;
+    /** The pack's discount, if it has one */
+    private Discount discount;
 
-	/*---------------------------------------------------Constructors---------------------------------------------------------------*/
+    /*---------------------------------------------------Constructors---------------------------------------------------------------*/
 
-	/**
-	 * Creates a new pack
-	 *
-	 * @param id, the pack's id
-	 * @param price, the pack's price
-	 * @param products, the products the pack contains
-	 * @param date the date it was added to the cart
-	 */
-	public Pack(int id, double price, ArrayList<StoreProduct> products, LocalDate date) {
-		this.id = id;
-		this.price = price;
-		this.products = products;
-		this.dateAddCart = date;
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
-		Store.getInstance().getPacks().add(this);
-	}
+    /**
+     * Creates a new pack
+     * @param id,       the pack's id
+     * @param price,    the pack's price
+     * @param products, the products the pack contains
+     * @param date      the date it was added to the cart
+     */
+    public Pack(int id, double price, ArrayList<StoreProduct> products, LocalDate date) {
+        this.id = id;
+        this.price = price;
+        this.products = products;
+        this.dateAddCart = date;
 
-	/**
-	 * Creates a new pack with default id and date
-	 *
-	 * @param price, price of the pack
-	 * @param products, the products the pack contains
-	 */
-	public Pack(double price, ArrayList<StoreProduct> products) {
-		this(totalId, price, products, null);
-		totalId++;
-	}
+        Store.getInstance().getPacks().add(this);
+    }
 
-	/**
-	 * Creates a new pack with default id
-	 *
-	 * @param price, price of the pack
-	 * @param products, the products the pack contains
-	 * @param date the date it was added to the cart
-	 */
-	public Pack(double price, ArrayList<StoreProduct> products, LocalDate date) {
-		this(totalId, price, products, date);
-		totalId++;
-	}
+    /**
+     * Creates a new pack with default id and date
+     * @param price,    price of the pack
+     * @param products, the products the pack contains
+     */
+    public Pack(double price, ArrayList<StoreProduct> products) {
+        this(totalId, price, products, null);
+        totalId++;
+    }
 
-	/**
-	 * Creates a new pack with no products
-	 *
-	 * @param price, price of the pack
-	 * @param date, the date it was added to the cart
-	 */
-	public Pack(double price, LocalDate date) {
-		this(totalId, price, new ArrayList<StoreProduct>(), date);
-		totalId++;
-	}
+    /**
+     * Creates a new pack with default id
+     * @param price,    price of the pack
+     * @param products, the products the pack contains
+     * @param date      the date it was added to the cart
+     */
+    public Pack(double price, ArrayList<StoreProduct> products, LocalDate date) {
+        this(totalId, price, products, date);
+        totalId++;
+    }
 
-	/**
-	 * Creates a new pack with no products
-	 *
-	 * @param id, the pack's id
-	 * @param price, price of the pack
-	 * @param date, the products the pack contains
-	 */
-	public Pack(int id, double price, LocalDate date) {
-		this(id, price, new ArrayList<StoreProduct>(), date);
-	}
+    /**
+     * Creates a new pack with no products
+     * @param price, price of the pack
+     * @param date,  the date it was added to the cart
+     */
+    public Pack(double price, LocalDate date) {
+        this(totalId, price, new ArrayList<StoreProduct>(), date);
+        totalId++;
+    }
 
-	/*----------------------------------------------------Getters and Setters---------------------------------------------------------------*/
+    /**
+     * Creates a new pack with no products
+     * @param id,    the pack's id
+     * @param price, price of the pack
+     * @param date,  the products the pack contains
+     */
+    public Pack(int id, double price, LocalDate date) {
+        this(id, price, new ArrayList<StoreProduct>(), date);
+    }
 
-	/**
-	 * It gets the pack's discount
-	 * @return the pack's discount
-	 */
-	public Discount getDiscount() {
-		return this.discount;
-	}
+    /*----------------------------------------------------Getters and Setters---------------------------------------------------------------*/
 
-	/**
-	 * It gets the pack's info
-	 * @return the pack's info
-	 */
-	public String getPrintInfo() {
-		return "DUE"; // DUE
-	}
+    /**
+     * It prints the pack's info when seen individually
+     */
+    public void bigPrintInfo() {
+        System.out.println(this.getPrintInfo()); // Idealmente, haría wrapping
+    }
 
-	/**
-	 * It allows an employee to add discounts to packs (Discounts is in charge of making sure they don't overlap)
-	 * @param newDiscount the new discount to be applied
-	 * @throws NullPointerException discount was null
-	 */
-	public void setDiscount(Discount newDiscount) throws NullPointerException {
-		if (newDiscount == null) {
-			throw new NullPointerException("Discount cannot be null");
-		}
+    /**
+     * Decreases the stock of the products included in the pack
+     */
+    public void decreaseStock() {
+        for (StoreProduct sp : products) {
+            sp.decreaseStock(1);
+        }
+    }
 
-		this.discount = newDiscount;
-	}
+    /**
+     * Increases the stock of the products included in the pack
+     */
+    public void increaseStock() {
+        for (StoreProduct sp : products) {
+            sp.increaseStock(1);
+        }
+    }
 
-	/**
-	 * Obtains the pack's id
-	 *
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
+    /**
+     * Adds a new product to the pack
+     * @param sp, store product to add
+     * @return true if the collection was changed successfully, false if not
+     */
+    public boolean addProduct(StoreProduct sp) {
+        return products.add(sp);
+    }
 
-	/**
-	 * It prints the pack's info when seen individually
-	 */
-	public void bigPrintInfo(){
-		// DUE
-	}
+    /**
+     * Eliminates a product from the pack
+     * @param sp, store product to eliminate
+     * @return true if the product was eliminated correctly, false if not
+     */
+    public boolean eliminateProduct(StoreProduct sp) {
+        return products.remove(sp);
+    }
 
-/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /**
+     * Adds a new collection of products to the pack
+     * @param newProducts, the store products to add
+     * @return true if the products were added correctly, false if not
+     */
+    public boolean addArrayProducts(ArrayList<StoreProduct> newProducts) {
+        return products.addAll(newProducts);
+    }
+
+    /**
+     * Eliminates a collection of store products
+     * @param productsRemove, the store products to remove
+     * @return true if the products were removed correctly, false if not
+     */
+    public boolean eliminateArrayProducts(ArrayList<StoreProduct> productsRemove) {
+        return products.removeAll(productsRemove);
+    }
+
+    /**
+     * Obtains the raw price of all the products in the pack
+     * @return double, the raw price of the pack
+     */
+    public double totalPrice() {
+        double total = 0;
+        for (StoreProduct sp : products) {
+            total += sp.getPrice();
+        }
+        return total;
+    }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * Obtains the date the pack was added to the cart
+     * @return the dateAddCart
+     */
+    public LocalDate getDateAddCart() {
+        return dateAddCart;
+    }
+
+    /**
+     * Sets the date the pack was added to the cart
+     * @param dateAddCart the dateAddCart to set
+     */
+    public void setDateAddCart(LocalDate dateAddCart) {
+        this.dateAddCart = dateAddCart;
+    }
+
+    /**
+     * It gets the pack's discount
+     * @return the pack's discount
+     */
+    public Discount getDiscount() {
+        return this.discount;
+    }
+
+    /**
+     * It allows an employee to add discounts to packs (Discounts is in charge of making sure they don't overlap)
+     * @param newDiscount the new discount to be applied
+     * @throws NullPointerException discount was null
+     */
+    public void setDiscount(Discount newDiscount) throws NullPointerException {
+        if (newDiscount == null) {
+            throw new NullPointerException("Discount cannot be null");
+        }
+
+        this.discount = newDiscount;
+    }
+
+    /*-----------------------------------------------------Methods------------------------------------------------------------------*/
+
+    /**
+     * Obtains the pack's id
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    public double getOriginalPrice() {
+        return this.price;
+    }
 
     /**
      * Applies the pack's discounts (except quantity) and obtains the packs price
      * @return the pack's price
      */
     public double getPrice() {
-		if (this.discount == null) {
-			return this.price; // TEST_FIX
-		}
+        if (this.discount == null) {
+            return this.price; // TEST_FIX
+        }
 
         switch (this.discount.getType()) {
             case FIXED_PERCENTAGE:
@@ -164,154 +240,82 @@ public class Pack {
                     return this.price - volumeDisc.getDeduction();
                 }
                 return this.price;
-		default:
-			break;
+            default:
+                break;
         }
         return price;
     }
 
-	/**
-	 * Sets the packs price
-	 *
-	 * @param price the price to set
-	 */
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    /**
+     * Sets the packs price
+     * @param price the price to set
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-	/**
-	 * Obtains the products inside the pack
-	 *
-	 * @return the products, the products included
-	 */
-	public ArrayList<StoreProduct> getProducts() {
-		// Prueba: return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
-		return this.products; // TEST_FIX
-	}
+    /**
+     * It gets the pack's info
+     * @return the pack's info
+     */
+    public String getPrintInfo() {
+        return "Price: " + this.price + "€ , products in this pack:" + this.getPrintNameStoreProducts();
+    }
 
-	/**
-	 * Changes the array of products inside the pack
-	 *
-	 * @param products the products to set
-	 */
-	public void setProducts(ArrayList<StoreProduct> products) {
-		this.products = products;
-	}
+    /**
+     * It returns the discount's categories in a text-bubble-friendly manner
+     * @return a string containing the discount's store products
+     */
+    public String getPrintNameStoreProducts() {
+        StringBuilder sb = new StringBuilder();
 
-	/**
-	 * Obtains the date the pack was added to the cart
-	 *
-	 * @return the dateAddCart
-	 */
-	public LocalDate getDateAddCart() {
-		return dateAddCart;
-	}
+        for (StoreProduct product : this.products) {
+            sb.append(product.getName()).append(",");
+        }
 
-	/**
-	 * Sets the date the pack was added to the cart
-	 *
-	 * @param dateAddCart the dateAddCart to set
-	 */
-	public void setDateAddCart(LocalDate dateAddCart) {
-		this.dateAddCart = dateAddCart;
-	}
+        return sb.toString();
+    }
 
-	/*-----------------------------------------------------Methods------------------------------------------------------------------*/
+    /**
+     * It returns the pack's products in a save-file-friendly manner
+     * @return a string containing the pack's products
+     */
+    public String getPrintProducts() {
+        StringBuilder sb = new StringBuilder();
 
-	/**
-	 * Decreases the stock of the products included in the pack
-	 */
-	public void decreaseStock() {
-		for(StoreProduct sp:products)
-			sp.decreaseStock(1);
-	}
+        for (StoreProduct product : products) {
+            sb.append(product.getId()).append(",");
+        }
 
-	/**
-	 * Increases the stock of the products included in the pack
-	 */
-	public void increaseStock() {
-		for(StoreProduct sp: products)
-			sp.increaseStock(1);
-	}
+        return sb.toString();
+    }
 
-	/**
-	 * Adds a new product to the pack
-	 *
-	 * @param sp, store product to add
-	 * @return true if the collection was changed successfully, false if not
-	 */
-	public boolean addProduct(StoreProduct sp) {
-		return products.add(sp);
-	}
+    /**
+     * Obtains the products inside the pack
+     * @return the products, the products included
+     */
+    public ArrayList<StoreProduct> getProducts() {
+        // Prueba: return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
+        return this.products; // TEST_FIX
+    }
 
-	/**
-	 * Eliminates a product from the pack
-	 *
-	 * @param sp, store product to eliminate
-	 * @return true if the product was eliminated correctly, false if not
-	 */
-	public boolean eliminateProduct(StoreProduct sp) {
-		return products.remove(sp);
-	}
+    /**
+     * Changes the array of products inside the pack
+     * @param products the products to set
+     */
+    public void setProducts(ArrayList<StoreProduct> products) {
+        this.products = products;
+    }
 
-	/**
-	 * Adds a new collection of products to the pack
-	 *
-	 * @param newProducts, the store products to add
-	 * @return true if the products were added correctly, false if not
-	 */
-	public boolean addArrayProducts(ArrayList<StoreProduct> newProducts) {
-		return products.addAll(newProducts);
-	}
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 
-	/**
-	 * Eliminates a collection of store products
-	 *
-	 * @param productsRemove, the store products to remove
-	 * @return true if the products were removed correctly, false if not
-	 */
-	public boolean eliminateArrayProducts(ArrayList<StoreProduct> productsRemove) {
-		return products.removeAll(productsRemove);
-	}
-
-
-	/**
-	 * Obtains the raw price of all the products in the pack
-	 *
-	 * @return double, the raw price of the pack
-	 */
-	public double totalPrice() {
-		double total = 0;
-		for(StoreProduct sp: products)
-			total += sp.getPrice();
-		return total;
-	}
-
-	/**
-	 * It returns the pack's products in a save-file-friendly manner
-	 * @return a string containing the pack's products
-	 */
-	public String getPrintProducts() {
-		StringBuilder sb = new StringBuilder();
-
-		for (StoreProduct product : products) {
-			sb.append(product.getId()).append(",");
-		}
-
-		return sb.toString();
-	}
-
-	/**
-	 * Written information of a pack
-	 * @return String, information of a pack
-	 */
-	@Override
-	public String toString() {
-		/*ID;PRICE;PRODUCT_IDS;DATE_ADD_CART*/
-		return this.id + ";" + this.price + ";" + this.getPrintProducts() + ";" + this.dateAddCart;
-	}
-
-	public double getOriginalPrice() {
-		return this.price;
-	}
+    /**
+     * Written information of a pack
+     * @return String, information of a pack
+     */
+    @Override
+    public String toString() {
+        /*ID;PRICE;PRODUCT_IDS;DATE_ADD_CART*/
+        return this.id + ";" + this.price + ";" + this.getPrintProducts() + ";" + this.dateAddCart;
+    }
 }

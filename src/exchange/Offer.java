@@ -142,10 +142,12 @@ public class Offer {
      * @return the offer's resulting exchange
      */
     public Exchange acceptOffer() {
-        this.status = OfferStatus.ACCEPTED;
-        return processOffer();
+        if (this.status == OfferStatus.PENDING) {
+            this.status = OfferStatus.ACCEPTED;
+            return processOffer();
+        }
+        return null;
     }
-    // DUE: Que offer haga check de que se pueda aceptar y tal
 
     /**
      * It processes the offer exchange
@@ -160,14 +162,15 @@ public class Offer {
         notification.FullNotification(this);
         this.origin.getNotificationHistory().addNotification(notification);
         this.destination.getNotificationHistory().addNotification(notification);
-        
-        NotificationEmployeeExchange notification2 = new NotificationEmployeeExchange(LocalDateTime.now(), false, true, 
-        											NotificationType.EMPLOYEE_EXCHANGE);
-        Exchange newExchange = new Exchange(LocalDateTime.now(), this.origin, this.products.get(this.origin), this.destination,
-                this.products.get(this.destination));
+
+        NotificationEmployeeExchange notification2 =
+                new NotificationEmployeeExchange(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_EXCHANGE);
+        Exchange newExchange =
+                new Exchange(LocalDateTime.now(), this.origin, this.products.get(this.origin), this.destination,
+                        this.products.get(this.destination));
         notification2.FullNotification(newExchange);
         Store.getInstance().sendNotificationEmployees(notification2);
-        
+
         return newExchange;
     }
 
@@ -175,18 +178,22 @@ public class Offer {
      * It allows a client to reject an incoming offer
      */
     public void rejectOffer() {
-        this.status = OfferStatus.REJECTED;
-        NotificationExchange notification =
-                new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE);
-        notification.FullNotification(this);
-        this.origin.getNotificationHistory().addNotification(notification);
+        if (this.status == OfferStatus.PENDING) {
+            this.status = OfferStatus.REJECTED;
+            NotificationExchange notification =
+                    new NotificationExchange(LocalDateTime.now(), false, true, NotificationType.EXCHANGE);
+            notification.FullNotification(this);
+            this.origin.getNotificationHistory().addNotification(notification);
+        }
     }
 
     /**
      * It allows a client to cancel an offer they made
      */
     public void cancelOffer() {
-        this.status = OfferStatus.CANCELED;
+        if (this.status == OfferStatus.PENDING) {
+            this.status = OfferStatus.CANCELED;
+        }
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

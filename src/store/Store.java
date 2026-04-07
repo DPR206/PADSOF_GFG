@@ -12,12 +12,25 @@ import utilities.Utility;
 import java.time.LocalDateTime;
 import java.util.*;
 
-// DUE: Falta el @see
-
 /**
  * It implements the store
  * @author Sofía C. and Ana O.R.
  * @version 1.0
+ * @see Parameter
+ * @see Utility
+ * @see Manager
+ * @see Discount
+ * @see Offer
+ * @see Review
+ * @see Exchange
+ * @see Order
+ * @see Pack
+ * @see Category
+ * @see StoreProduct
+ * @see SecondHandProduct
+ * @see User
+ * @see RegisteredClient
+ * @see Employee
  */
 public class Store {
     private static Store INSTANCE = null;

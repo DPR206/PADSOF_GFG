@@ -83,6 +83,20 @@ public abstract class CategoryDiscount extends Discount {
     }
 
     /**
+     * It returns the discount's categories in a save-file-friendly manner
+     * @return a string containing the game's categories
+     */
+    public String getPrintCategories() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Category category : this.categories) {
+            sb.append(category.getName()).append(",");
+        }
+
+        return sb.toString();
+    }
+
+    /**
      * It gets the discount's products
      * @return the discount's products
      */

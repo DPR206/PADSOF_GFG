@@ -78,7 +78,7 @@ public class CategoryFixedPercentage extends CategoryDiscount implements FixedPe
      * @return the discount's basic info
      */
     public String getPrintInfo() {
-        return "DUE"; // DUE
+        return "-" + this.percentage + "% discount applied over the categories:" + this.getPrintCategories();
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

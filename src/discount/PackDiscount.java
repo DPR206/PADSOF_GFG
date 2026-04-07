@@ -82,6 +82,20 @@ public abstract class PackDiscount extends Discount {
     }
 
     /**
+     * It returns the discount's categories in a save-file-friendly manner
+     * @return a string containing the game's categories
+     */
+    public String getPrintPacks() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Pack pack : this.packs) {
+            sb.append(pack.getId()).append(",");
+        }
+
+        return sb.toString();
+    }
+
+    /**
      * It gets the discount's products
      * @return the discount's products
      */

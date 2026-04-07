@@ -48,7 +48,7 @@ public class Employee extends User {
             if(this.sp != null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE);
             else this.getSearcher().setTypes(SearchType.S_EXCHANGE);
         } else {
-            this.op = new OrderPermission();
+            this.op = new OrderPermission(true);
             if(this.sp != null && this.ep != null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE, SearchType.S_ORDER);
             else if(this.sp != null /*&& this.ep == null*/) this.getSearcher().setTypes(SearchType.S_STORE,
                     SearchType.S_ORDER);
@@ -196,7 +196,7 @@ public class Employee extends User {
     }
     /**
      * Adds and creates new products from a file
-     * 
+     *
      * @param filename
      *
      */
@@ -298,7 +298,7 @@ public class Employee extends User {
     public Pack searchPackByID(int id){
         return this.getSearcher().searchPackByID(id);
     }
-    
+
 
     /**
      * Searches for the employee based on the id
@@ -309,7 +309,7 @@ public class Employee extends User {
     public Employee searchEmployeeByID(int id){
         return this.getSearcher().searchEmployeeByID(id);
     }
-    
+
     /**
      * Searches for the order based on the id
      *

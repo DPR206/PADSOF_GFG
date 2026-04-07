@@ -102,7 +102,8 @@ public class CategoryQuantity extends CategoryDiscount implements QuantityDiscou
      * @return the discount's basic info
      */
     public String getPrintInfo() {
-        return "DUE"; // DUE
+        return "-" + this.deduction + "€ if you buy more than " + this.numThreshold + " units of any products " +
+               "belonging to the categories: " + this.getPrintCategories();
     }
 
     /**

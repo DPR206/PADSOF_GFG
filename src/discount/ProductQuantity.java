@@ -85,15 +85,6 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -127,6 +118,15 @@ public class ProductQuantity extends ProductDiscount implements QuantityDiscount
      */
     public void setNumThreshold(int numThreshold) {
         this.numThreshold = numThreshold;
+    }
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "-" + this.deduction + "€ if you buy more than " + this.numThreshold + " units of the products: " +
+               this.getPrintNameStoreProducts();
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

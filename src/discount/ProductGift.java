@@ -85,20 +85,6 @@ public class ProductGift extends ProductDiscount implements GiftDiscount {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
-    // DUE: createGiftDisc(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold, StoreProduct
-    // gift) {}
-
-    // DUE: public obtainDisc();
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -115,6 +101,15 @@ public class ProductGift extends ProductDiscount implements GiftDiscount {
      */
     public void setGift(StoreProduct newGift) {
         this.gift = newGift;
+    }
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "Free " + this.gift.getName() + " if you spend over " + this.spendingThreshold + "€ on the products: " +
+               this.getPrintNameStoreProducts();
     }
 
     /**

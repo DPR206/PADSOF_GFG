@@ -2,6 +2,8 @@ package user;
 
 import order.Order;
 import order.OrderState;
+import search.SearchStoreProducts;
+import search.Searcher;
 
 /**
  * It implements the permission that allows an employee to manage Orders
@@ -10,14 +12,17 @@ import order.OrderState;
  * @see Order
  */
 public class OrderPermission {
+    /** The user's searcher */
+    private Searcher searching;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Constructor for an order permission
+     * @param asc whether the searcher will search in ascending or descending order
      */
-    public OrderPermission() {
-        // NOTE: Very complex constructor I know
+    public OrderPermission(boolean asc) {
+        this.searching = new Searcher(new SearchStoreProducts(asc));
     }
 
     /*--------------------------------------------------- MISC ----------------------------------------------------*/
@@ -36,5 +41,22 @@ public class OrderPermission {
         order.setStatus(status);
     }
 
-    // DUE: Realizar búsquedas
+    /**
+     * Searches for the order based on the id
+     * @param id the id
+     * @return the order
+     */
+    public Order searchOrderByID(int id) {
+        return this.getSearcher().searchOrderByID(id);
+    }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * Obtains the order permission's searcher
+     * @return the order permission's searcher
+     */
+    public Searcher getSearcher() {
+        return this.searching;
+    }
 }

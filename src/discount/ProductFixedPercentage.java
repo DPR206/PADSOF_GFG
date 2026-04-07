@@ -79,19 +79,6 @@ public class ProductFixedPercentage extends ProductDiscount implements FixedPerc
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
-    // DUE: createFixedPerDisc(LocalDateTime startDate, LocalDateTime endDate, double percentage) {}
-
-    // DUE: public obtainDisc();
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -115,9 +102,17 @@ public class ProductFixedPercentage extends ProductDiscount implements FixedPerc
         this.percentage = newPercentage;
     }
 
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "-" + this.percentage + "% discount applied over the products: " + this.getPrintNameStoreProducts();
+    }
+
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override
-    public String toString() {
+    public String toString() { // DUE
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];<PERCENTAGE>;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION */
         return super.toString() + ";" + this.percentage + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" /*numThreshold
          */ + ";" /*deduction*/;

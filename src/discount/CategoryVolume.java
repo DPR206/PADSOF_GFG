@@ -83,7 +83,8 @@ public class CategoryVolume extends CategoryDiscount implements VolumeDiscount {
      * @return the discount's basic info
      */
     public String getPrintInfo() {
-        return "DUE"; // DUE
+        return "-" + this.deduction + "€ if you spend over " + this.spendingThreshold + "€ on the " + "categories:" +
+               this.getPrintCategories();
     }
 
     /**

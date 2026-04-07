@@ -53,7 +53,6 @@ public class Recommender {
         }
 
         /* Step 1: Product representation -> All products p can be represented as a vector of categories v(p) */
-        // DUE: Revisar eso de "categorías jerárquicas"
         Map<StoreProduct, double[]> productVectors = new HashMap<>();
         for (StoreProduct product : Store.getInstance().getStoreProducts().values()) {
             double[] productVector = new double[categories.size()];

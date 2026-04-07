@@ -85,17 +85,7 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-
     /**
      * It gets the volume discount's deduction
      * @return the volume discount's deduction
@@ -110,6 +100,15 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
      */
     public void setDeduction(double newDeduction) {
         this.deduction = newDeduction;
+    }
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "-" + this.deduction + "€ if you spend over " + this.spendingThreshold + "€ on the products: " +
+               this.getPrintNameStoreProducts();
     }
 
     /**
@@ -130,7 +129,7 @@ public class ProductVolume extends ProductDiscount implements VolumeDiscount {
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override
-    public String toString() {
+    public String toString() { // DUE
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];PERCENTAGE;GIFT;<SPENDING_THRESHOLD>;NUM_PRODS;
         <DEDUCTION> */
         return super.toString() + ";"  /*percentage*/ + ";"  /*gift*/ + ";" + this.spendingThreshold +

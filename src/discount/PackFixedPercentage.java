@@ -48,15 +48,6 @@ public class PackFixedPercentage extends PackDiscount implements FixedPercentage
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -78,6 +69,14 @@ public class PackFixedPercentage extends PackDiscount implements FixedPercentage
         }
 
         this.percentage = newPercentage;
+    }
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "-" + this.percentage + "% discount applied over the packs with id: " + this.getPrintPacks();
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

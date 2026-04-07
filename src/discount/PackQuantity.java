@@ -52,17 +52,7 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-
     /**
      * It gets the quantity discount's discount
      * @return the quantity discount's discount
@@ -94,6 +84,15 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
      */
     public void setNumThreshold(int newNumThreshold) {
         this.numThreshold = newNumThreshold;
+    }
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "-" + this.deduction + "€ if you buy more than " + this.numThreshold + " units of the packs with id: " +
+               this.getPrintPacks();
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

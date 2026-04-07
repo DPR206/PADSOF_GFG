@@ -87,7 +87,8 @@ public class CategoryGift extends CategoryDiscount implements GiftDiscount {
      * @return the discount's basic info
      */
     public String getPrintInfo() {
-        return "DUE"; // DUE
+        return "Free " + this.gift.getName() + " if you spend over " + this.spendingThreshold + "€ on the " +
+               "categories:" + this.getPrintCategories();
     }
 
     /**

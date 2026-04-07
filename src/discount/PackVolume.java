@@ -17,6 +17,7 @@ public class PackVolume extends PackDiscount implements VolumeDiscount {
     private double deduction;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * A volume discount's general constructor with packs
      * @param id                the discount's id
@@ -51,14 +52,6 @@ public class PackVolume extends PackDiscount implements VolumeDiscount {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-    /**
-     * It returns the discount's basic info
-     * @return the discount's basic info
-     */
-    public String getPrintInfo() {
-        return "DUE"; // DUE
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -75,6 +68,15 @@ public class PackVolume extends PackDiscount implements VolumeDiscount {
      */
     public void setDeduction(double newDeduction) {
         this.deduction = newDeduction;
+    }
+
+    /**
+     * It returns the discount's basic info
+     * @return the discount's basic info
+     */
+    public String getPrintInfo() {
+        return "-" + this.deduction + "€ if you spend over " + this.spendingThreshold + "€ on the packs with id: " +
+               this.getPrintPacks();
     }
 
     /**

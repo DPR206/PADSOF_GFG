@@ -6,8 +6,11 @@ package user;
  * @version 1.0
  */
 public enum Permission{
+	/** Permission to perform store actions */
     STORE("store"),
+    /** Permission to perform order actions */
     ORDER("order"),
+    /** Permission to perform exchange actions */
     EXCHANGE("exchange");
 
 	/**
@@ -25,7 +28,7 @@ public enum Permission{
 
     /**
      * Gets the meaning
-     *
+     * @return a string with the meaning
      */
     public String getMeaning(){
         return this.meaning;

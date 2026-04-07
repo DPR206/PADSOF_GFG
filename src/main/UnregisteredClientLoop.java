@@ -183,6 +183,7 @@ public class UnregisteredClientLoop extends Loop {
     /**
      * It allows the unregistered client to filter the store's store products
      * @return the filtered list of store products
+     * @throws IOException the io exception
      */
     public List<StoreProduct> filterSearch() throws IOException {
         if (appExited) {
@@ -458,6 +459,10 @@ public class UnregisteredClientLoop extends Loop {
         }
     }
 
+    /**
+     * It allows an unregistered client to browse their cart's products
+     * @throws IOException the io exception
+     */
     public void browseCartProducts() throws IOException {
         if (appExited) {
             return;
@@ -510,6 +515,10 @@ public class UnregisteredClientLoop extends Loop {
         }
     }
 
+    /**
+     * It allows an unregistered client to see a product from their cart
+     * @throws IOException the io exception
+     */
     public void seeCartProduct() throws IOException {
         if (appExited) {
             return;
@@ -557,6 +566,10 @@ public class UnregisteredClientLoop extends Loop {
 
     }
 
+    /**
+     * It allows an unregistered client to see their cart's packs
+     * @throws IOException the io exception
+     */
     public void browseCartPacks() throws IOException {
         if (appExited) {
             return;
@@ -608,6 +621,10 @@ public class UnregisteredClientLoop extends Loop {
         }
     }
 
+    /**
+     * It allows an unregistered client to see a pack from their cart
+     * @throws IOException the io exception
+     */
     public void seeCartPack() throws IOException {
         if (appExited) {
             return;

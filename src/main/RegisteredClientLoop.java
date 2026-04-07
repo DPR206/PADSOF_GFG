@@ -2,6 +2,9 @@ package main;
 
 import java.io.IOException;
 
+/**
+ * The type Registered client loop.
+ */
 public class RegisteredClientLoop extends Loop {
     /** This loop's instance */
     private static RegisteredClientLoop INSTANCE;

@@ -75,6 +75,7 @@ public class Pager {
 
     /**
      * It prints a sub-list of another according to the desired page
+     * @param clients the clients
      * @param pageNum the desired page's number
      */
     public void printRegisteredClientListPage(List<RegisteredClient> clients, int pageNum) {
@@ -88,7 +89,8 @@ public class Pager {
 
     /**
      * It prints a sub-list of another according to the desired page
-     * @param pageNum the desired page's number
+     * @param employees the employees
+     * @param pageNum   the desired page's number
      */
     public void printEmployeeListPage(List<Employee> employees, int pageNum) {
         List<Employee> employeeListPage = pageEmployeeList(employees, pageNum);
@@ -115,7 +117,8 @@ public class Pager {
 
     /**
      * It prints a sub-list of another according to the desired page
-     * @param pageNum the desired page's number
+     * @param discountListPage the discount list page
+     * @param pageNum          the desired page's number
      */
     public void printDiscountListPage(List<Discount> discountListPage, int pageNum) {
         int i = 1;
@@ -127,7 +130,8 @@ public class Pager {
 
     /**
      * It prints a sub-list of categories according to the desired page
-     * @param pageNum the desired page's number
+     * @param categoryPage the category page
+     * @param pageNum      the desired page's number
      */
     public void printCategoryListPage(List<Category> categoryPage, int pageNum) {
         int i = 1;
@@ -139,8 +143,9 @@ public class Pager {
 
     /**
      * It gets the category listed as n.º categoryNum in a certain page
-     * @param pageNum     the desired page's number
-     * @param categoryNum the desired category's n.º
+     * @param categoryListPage the category list page
+     * @param pageNum          the desired page's number
+     * @param categoryNum      the desired category's n.º
      * @return the desired category
      */
     public Category selectCategoryFromPage(List<Category> categoryListPage, int pageNum, int categoryNum) {
@@ -149,8 +154,9 @@ public class Pager {
 
     /**
      * It gets the discount listed as n.º discountNum in a certain page
-     * @param pageNum     the desired page's number
-     * @param discountNum the desired discount's n.º
+     * @param discountListPage the discount list page
+     * @param pageNum          the desired page's number
+     * @param discountNum      the desired discount's n.º
      * @return the desired discount
      */
     public Discount selectDiscountFromPage(List<Discount> discountListPage, int pageNum, int discountNum) {
@@ -159,6 +165,7 @@ public class Pager {
 
     /**
      * It gets the employee listed as n.º clientNum in a certain page
+     * @param employees the employees
      * @param pageNum   the desired page's number
      * @param clientNum the desired employee's n.º
      * @return the desired employee
@@ -182,6 +189,7 @@ public class Pager {
 
     /**
      * It gets the registered client listed as n.º clientNum in a certain page
+     * @param clients   the clients
      * @param pageNum   the desired page's number
      * @param clientNum the desired client's n.º
      * @return the desired registered client
@@ -217,7 +225,8 @@ public class Pager {
 
     /**
      * It gets a sub-list of categories according to the desired page
-     * @param pageNum the desired page's number
+     * @param categoryList the category list
+     * @param pageNum      the desired page's number
      * @return the desired page
      */
     public List<Category> pageCategoryList(List<Category> categoryList, int pageNum) {
@@ -230,7 +239,8 @@ public class Pager {
 
     /**
      * It gets a sub-list of discounts according to the desired page
-     * @param pageNum the desired page's number
+     * @param discountList the discount list
+     * @param pageNum      the desired page's number
      * @return the desired page
      */
     public List<Discount> pageDiscountList(List<Discount> discountList, int pageNum) {
@@ -243,7 +253,8 @@ public class Pager {
 
     /**
      * It gets a sub-list of employees according to the desired page
-     * @param pageNum the desired page's number
+     * @param employeeList the employee list
+     * @param pageNum      the desired page's number
      * @return the desired page
      */
     public List<Employee> pageEmployeeList(List<Employee> employeeList, int pageNum) {
@@ -270,7 +281,8 @@ public class Pager {
 
     /**
      * It gets a sub-list of registered clients according to the desired page
-     * @param pageNum the desired page's number
+     * @param registeredClientList the registered client list
+     * @param pageNum              the desired page's number
      * @return the desired page
      */
     public List<RegisteredClient> pageRegisteredClientList(List<RegisteredClient> registeredClientList, int pageNum) {
@@ -323,6 +335,7 @@ public class Pager {
 
     /**
      * It gets the maximum number of pages that can be obtained from the store's categories list
+     * @param categoryList the category list
      * @return the maximum number of pages that can be obtained from the store's categories list
      */
     public int getCategoryMaxPageNum(List<Category> categoryList) {
@@ -331,6 +344,7 @@ public class Pager {
 
     /**
      * It gets the maximum number of pages that can be obtained from the store's discounts list
+     * @param discountList the discount list
      * @return the maximum number of pages that can be obtained from the store's discounts list
      */
     public int getDiscountMaxPageNum(List<Discount> discountList) {
@@ -339,6 +353,7 @@ public class Pager {
 
     /**
      * It gets the maximum number of pages that can be obtained from the store's employees list
+     * @param employeeList the employee list
      * @return the maximum number of pages that can be obtained from the store's employees list
      */
     public int getEmployeeMaxPageNum(List<Employee> employeeList) {
@@ -370,6 +385,7 @@ public class Pager {
 
     /**
      * It gets the maximum number of pages that can be obtained from the store's packs list
+     * @param packList the pack list
      * @return the maximum number of pages that can be obtained from the store's packs list
      */
     public int getPackMaxPageNum(List<Pack> packList) {
@@ -388,6 +404,7 @@ public class Pager {
 
     /**
      * It gets the maximum number of pages that can be obtained from the registered client's list
+     * @param registeredClientList the registered client list
      * @return the maximum number of pages that can be obtained from the registered client's list
      */
     public int getRegisteredClientMaxPageNum(List<RegisteredClient> registeredClientList) {

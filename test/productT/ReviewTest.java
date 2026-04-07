@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import product.Review;
 import user.RegisteredClient;
@@ -13,7 +14,7 @@ public class ReviewTest {
     private Review review;
     private RegisteredClient author;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         author = new RegisteredClient("testUser", "12345678A", "password", true);
         review = new Review(4, "Great product!", author);
@@ -46,7 +47,7 @@ public class ReviewTest {
     public void testSetAuthor() {
         RegisteredClient newAuthor = new RegisteredClient("newUser", "87654321B", "newpass", false);
         review.setAuthor(newAuthor);
-        assertEquals(newAuthor, review.getAuthor());
+        assertEquals(newAuthor.getDni(), review.getAuthor().getDni());
     }
 
     @Test

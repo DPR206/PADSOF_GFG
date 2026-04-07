@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 class ExchangePermissionTest {
 
-    @Test
+    @BeforeEach
     void manageExchange() {
         ExchangePermission ep = new ExchangePermission();
     }

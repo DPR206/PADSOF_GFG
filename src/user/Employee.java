@@ -31,9 +31,10 @@ public class Employee extends User {
 
     /**
      * Creates a new employee
-     * @param pwd
-     * @param userName
-     * @param p
+     * @param pwd the password of the employee
+     * @param userName the employee's username
+     * @param p the employee's permission
+     * @param asc the products' order in the search
      */
     public Employee(String pwd, String userName, Permission p, boolean asc) {
         super(UserType.EMPLOYEE, pwd, userName, asc);
@@ -63,62 +64,71 @@ public class Employee extends User {
 /*---------------------------------------------------GETTERS AND SETTERS-------------------------------------------------------------*/
 
     /**
-   	 * @return the ep
+     * Obtains the employee's exchange permission
+   	 * @return the exchange permission
    	 */
    	public ExchangePermission getEp() {
    		return ep;
    	}
 
    	/**
-   	 * @param newEp the ep to set
+   	 * Sets the exchange permission
+   	 * @param newEp the exchange permission to set
    	 */
    	public void setEp(ExchangePermission newEp) {
    		this.ep = newEp;
    	}
 
    	/**
-   	 * @return the op
+   	 * Obtains the employee's order permission
+   	 * @return the order permission
    	 */
    	public OrderPermission getOp() {
    		return op;
    	}
 
    	/**
-   	 * @param newOp the op to set
+   	 * Sets the order permission
+   	 * @param newOp the order permission to set
    	 */
    	public void setOp(OrderPermission newOp) {
    		this.op = newOp;
    	}
 
    	/**
-   	 * @return the sp
+   	 * Obtains the employee's store permission
+   	 * @return the store permission
    	 */
    	public StorePermission getSp() {
    		return sp;
    	}
 
    	/**
-   	 * @param newSp the sp to set
+   	 * Sets the order permission
+   	 * @param newSp the store permission to set
    	 */
    	public void setSp(StorePermission newSp) {
    		this.sp = newSp;
    	}
 
    	/**
-   	 * @return the perm
+   	 * Obtains the employee's permission
+   	 * @return the permission
    	 */
    	public Permission getPerm() {
    		return perm;
    	}
 
    	/**
-   	 * @param newPerm the perm to set
+   	 * Sets the employee's permission
+   	 * @param newPerm the permission to set
    	 */
    	public void setPerm(Permission newPerm) {
    		this.perm = newPerm;
    	}
 
    	/**
+   	 * Obtains the notification history
    	 * @return the notificationHistory
    	 */
    	public NotificationHistory getNotificationHistory() {
@@ -129,16 +139,16 @@ public class Employee extends User {
 
     /**
      * Adds and creates new comic
-     * @param price
-     * @param name
-     * @param description
-     * @param photo
-     * @param stock
-     * @param numPages
-     * @param year
-     * @param author
-     * @param categories
-     * @param editorial
+     * @param price the price of the comic
+     * @param name the name of the comic
+     * @param description the description of the comic
+     * @param photo the photo of the comic
+     * @param stock the comic's stock
+     * @param numPages the comic's number of pages
+     * @param year the year of publication
+     * @param author the comic's author
+     * @param editorial the comic's editorial
+     * @param categories the comic's categories
      *
      */
     public boolean addComic(double price, String name, String description, String photo, int stock, int numPages,
@@ -153,14 +163,14 @@ public class Employee extends User {
 
 	/**
      * Adds and creates new game
-     * @param price
-     * @param name
-     * @param description
-     * @param photo
-     * @param stock
-     * @param numPlayers
-     * @param ageRange
-     * @param categories
+     * @param price the price of the game
+     * @param name the name of the game
+     * @param description the description of the game
+     * @param photo the photo of the comic
+     * @param stock the game's stock
+     * @param numPlayers the game's number of players
+     * @param ageRange the game's age range
+     * @param categories the game's categories
      *
      */
     public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers,
@@ -175,15 +185,15 @@ public class Employee extends User {
 
     /**
      * Adds and creates new figurine
-     * @param price
-     * @param name
-     * @param description
-     * @param photo
-     * @param stock
-     * @param dimensions
-     * @param brand
-     * @param material
-     * @param categories
+     * @param price the price of the figurine
+     * @param name the name of the figurine
+     * @param description  the description of the figurine
+     * @param photo the photo of the figurine
+     * @param stock the figurine's stock
+     * @param dimensions the figurine's dimensions
+     * @param brand the figurine's brand
+     * @param material the figurine's material
+     * @param categories the figurine's categories
      *
      */
     public boolean addFigurine(double price, String name, String description, String photo, int stock, String dimensions, String brand, String material, Category... categories) {
@@ -197,8 +207,8 @@ public class Employee extends User {
     /**
      * Adds and creates new products from a file
      *
-     * @param filename
-     *
+     * @param filename the name of the file
+     * @return true if the product's were added successfully, false if else
      */
     public boolean addProductFromFile(String filename) {
     	try {
@@ -211,8 +221,8 @@ public class Employee extends User {
 
     /**
      * Manages exchange
-     * @param exchange
-     * @param e
+     * @param exchange the exchange to manage
+     * @param e whether the exchange has been done or not
      *
      */
     public boolean manageExchange(Exchange exchange, boolean e) {
@@ -226,9 +236,9 @@ public class Employee extends User {
 
     /**
      * Gives a secondhand product a value
-     * @param secondHandProduct
-     * @param valuation
-     * @param status
+     * @param secondHandProduct the second-hand product to value
+     * @param valuation the valuation(price)
+     * @param status the conservation status
      *
      */
     public boolean valuate(SecondHandProduct secondHandProduct, double valuation, ConservationStatus status) {
@@ -242,10 +252,10 @@ public class Employee extends User {
 
     /**
      * Gives a secondhand product a value
-     * @param secondHandProduct
-     * @param valuation
-     * @param status
-     *
+     * @param secondHandProduct the second-hand product to value
+     * @param valuation the valuation(price)
+     * @param status the conservation status
+     * @param valuationDate the date of valuation
      */
     public boolean valuate(SecondHandProduct secondHandProduct, double valuation, ConservationStatus status, LocalDate valuationDate) {
         if (this.ep != null) {
@@ -258,8 +268,8 @@ public class Employee extends User {
 
     /**
      * Gives an order a status and manages it
-     * @param o
-     * @param status
+     * @param o the order to manage
+     * @param status the order's status
      *
      */
     public boolean manageOrder(Order o, OrderState status) {
@@ -273,7 +283,7 @@ public class Employee extends User {
 
     /**
      * Searches for the store products based on the filters
-     *
+     * @return the results in a list of store products
      */
      public List<StoreProduct> searchStoreProduct(){
         return this.getSearcher().searchStoreProducts();
@@ -283,7 +293,7 @@ public class Employee extends User {
      * Searches for the store products based on the filters and the categories
      *
      * @param c, the array of categories
-     *
+     * @return the results in a list of store products
      */
     public List<StoreProduct> searchStoreProductByCategory(Category... c){
         return this.getSearcher().searchByCategory(c);
@@ -293,7 +303,7 @@ public class Employee extends User {
      * Searches for the pack based on the id
      *
      * @param id, id of the pack
-     *
+     * @return the pack with said id
      */
     public Pack searchPackByID(int id){
         return this.getSearcher().searchPackByID(id);
@@ -304,7 +314,7 @@ public class Employee extends User {
      * Searches for the employee based on the id
      *
      * @param id, id of the employee
-     *
+     * @return the employee with said id
      */
     public Employee searchEmployeeByID(int id){
         return this.getSearcher().searchEmployeeByID(id);
@@ -314,7 +324,7 @@ public class Employee extends User {
      * Searches for the order based on the id
      *
      * @param id, id of the order
-     *
+     * @return the order with said id
      */
     public Order searchOrderByID(int id){
         return this.getSearcher().searchOrderByID(id);
@@ -324,9 +334,21 @@ public class Employee extends User {
      * Searches for the exchange based on the id
      *
      * @param id, id of the exchange
-     *
+     * @return the exchange with said id
      */
     public Exchange searchExchangeByID(int id){
         return this.getSearcher().searchExchangeByID(id);
+    }
+    
+    /**
+     * The notifications of the employee
+     *
+     * @return a list with all the notifications ordered by most recent
+     */
+    public List<Notification> browseNotifications(){
+    	List<Notification> notifications = new ArrayList<>();
+    	for(Notification n : this.notificationHistory.getNotificationsSorted())
+    		notifications.add(n);
+    	return notifications;
     }
 }

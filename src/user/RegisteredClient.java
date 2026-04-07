@@ -91,6 +91,7 @@ public class RegisteredClient extends User {
      * @param registerDate the registration date
      * @param dni          the user's dni
      * @param password     the user's password
+     * @param asc the products' order in the search
      */
     public RegisteredClient(String userName, LocalDate registerDate, String dni, String password, boolean asc) {
         super(UserType.REGISTERED_CLIENT, password, userName, asc);
@@ -112,6 +113,7 @@ public class RegisteredClient extends User {
      * @param userName the user's name
      * @param dni      the user's dni
      * @param password the user's password
+     * @param asc the products' order in the search
      */
     public RegisteredClient(String userName, String dni, String password, boolean asc) {
         this(userName, LocalDate.now(), dni, password, asc);
@@ -432,7 +434,7 @@ public class RegisteredClient extends User {
     /**
      * The notifications of the client
      *
-     * @return a list with all the notifications that haven't been erased order by most recent
+     * @return a list with all the notifications that haven't been erased ordered by most recent
      */
     public List<Notification> browseNotifications(){
     	List<Notification> notifications = new ArrayList<>();

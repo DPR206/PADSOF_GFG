@@ -35,6 +35,7 @@ public class StorePermission {
      * @param stock, number of items available on the store
      * @param numPages, number of pages of the comic
      * @param year, the year it was published
+     * @param author the comic's author
      * @param editorial, the editorial that edited the comic
      * @param categories, all the categories it belongs too
      *
@@ -89,7 +90,8 @@ public class StorePermission {
      * Adds new products to the store reading them from a file
      *
      * @param fileName, name of the file that contains the products
-     *
+     * @return true if the products were added false if else
+     * @throws IOException error while reading the file
      */
     public boolean addProductByFile(String fileName) throws IOException {
         int stock;
@@ -175,6 +177,7 @@ public class StorePermission {
     /**
      * Gets the store instance
      *
+     * @return the store
      */
     public Store getStore() {
         return this.s;

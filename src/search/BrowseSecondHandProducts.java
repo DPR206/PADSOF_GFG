@@ -28,7 +28,7 @@ public class BrowseSecondHandProducts{
 
      /**
 	 * Returns all the second hand products ordered in alphabetical order
-	 *
+	 * @return a list with the second-hand products found
 	 */
     public List<SecondHandProduct> searchSecondHandProducts(){
         this.products.sort(Comparator.comparing(SecondHandProduct::getName));

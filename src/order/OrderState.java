@@ -21,6 +21,10 @@ public enum OrderState {
         this.state = state;
     }
 
+    /**
+     * Obtains the order's state in a string
+     * @return a string with the order state
+     */
     public String getString(){
         return this.state;
     }

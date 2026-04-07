@@ -23,7 +23,9 @@ public abstract class Loop {
     /** Whether the app has been exited or not */
     protected static boolean appExited = false;
     /** The last chosen option when prompted */
-    protected int chosenOption;
+    protected int chosenOption = 2;
+    /** The chosen item's number when selecting from a list */
+    protected int itemNum = 1;
 
     /**
      * It updates the previous and current page numbers when leaving a paged screen, allowing for the user to go back to
@@ -316,7 +318,7 @@ public abstract class Loop {
      */
     protected void basicLoopPrinter(int firstOptionNum) {
         if (currentUser.getType() == UserType.REGISTERED_CLIENT || currentUser.getType() == UserType.EMPLOYEE) {
-            System.out.println("\t[" + firstOptionNum++ + "] ");
+            System.out.println("\t[" + firstOptionNum++ + "] See notifications");
         }
         if (currentUser.getType() != UserType.UNREGISTERED_CLIENT) {
 

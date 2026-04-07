@@ -17,6 +17,8 @@ public class ManagerLoop extends Loop {
 
     /** This loop's instance */
     private static ManagerLoop INSTANCE;
+    /** The store's filtered list of products */
+    private List<StoreProduct> filteredStore = null;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -48,57 +50,146 @@ public class ManagerLoop extends Loop {
      */
     void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n <<<<<<<<<< managerLoop >>>>>>>>>> \n"); // Es para debug, borrar
-        System.out.println("What do you wish to do? (enter the nº)");
-        int i = 1;
-        System.out.println("\t[" + i++ + "] Manage packs");
-        System.out.println("\t[" + i++ + "] Manage store products");
-        System.out.println("\t[" + i++ + "] Add store products");
-        System.out.println("\t[" + i++ + "] Manage employees");
-        System.out.println("\t[" + i++ + "] Generate statistics");
-        System.out.println("\t[" + i++ + "] Manage discounts");
-        System.out.println("\t[" + i++ + "] Manage parameters");
-        System.out.println("\t[" + i++ + "] See profile");
-        basicLoopPrinter(i);
-        chosenOption = scanner.nextInt();
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.print("\n <<<<<<<<<< managerLoop >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Manage packs");
+            System.out.println("\t[" + i++ + "] Manage store products");
+            System.out.println("\t[" + i++ + "] Add store products");
+            System.out.println("\t[" + i++ + "] Manage employees");
+            System.out.println("\t[" + i++ + "] Generate statistics");
+            System.out.println("\t[" + i++ + "] Manage discounts");
+            System.out.println("\t[" + i++ + "] Manage parameters");
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
 
-        switch (chosenOption) {
-            case 1:
-                managePacks();
-                break;
-            case 2:
-                manageStoreProducts();
-                break;
-            case 3:
-                addStoreProduct();
-                break;
-            case 4:
-                manageEmployees();
-                break;
-            case 5:
-                generateStatistics();
-                break;
-            case 6:
-                manageDiscounts();
-                break;
-            case 7:
-                manageParameters();
-                break;
-            case 8:
-                seeProfile();
-                break;
-            default: /* Go back */
-                exit();
-                break;
+            switch (chosenOption) {
+                case 1: /* Manage packs */
+                    managePacks();
+                    break;
+                case 2: /* Manage store products */
+                    manageStoreProducts();
+                    break;
+                case 3: /* Add store product */
+                    addStoreProduct();
+                    break;
+                case 4: /* Manage employees */
+                    manageEmployees();
+                    break;
+                case 5: /* Generate statistics */
+                    generateStatistics();
+                    break;
+                case 6: /* Manage discounts */
+                    manageDiscounts();
+                    break;
+                case 7: /* Manage parameters */
+                    manageParameters();
+                    break;
+                case 8: /* See profile */
+                    seeProfile();
+                    break;
+                case 9: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
         }
     }
 
     /**
      * It allows the manager to manage the store's packs
      */
-    private void managePacks() {
-        System.out.print("\n <<<<<<<<<< managePacks >>>>>>>>>> \n"); // Es para debug, borrar
-        // DUE
+    private void managePacks() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.println("\n <<<<<<<<<< nombre >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Manage a pack");
+            System.out.println("\t[" + i++ + "] Add a pack");
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Manage a pack */
+                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.println("Do you wish to select it via: ID or list number?");
+                    System.out.println("[1] List number");
+                    System.out.println("[2] ID");
+                    int chosenOption2 = scanner.nextInt();
+
+                    switch (chosenOption2) {
+                        case 1:
+                            System.out.println("Enter the number of the desired pack:");
+                            this.itemNum = scanner.nextInt();
+                            leavePagedScreen();
+                            managePack();
+                            break;
+                        case 2:
+                            System.out.println("Enter the ID of the desired ###:");
+                            int packID = scanner.nextInt();
+                            int index = Store.getInstance().getPackIndex(packID);
+                            if (index != -1) {
+                                currentScreenPageNum = Pager.getInstance().getPageNumFromIndex(index);
+                                itemNum = Pager.getInstance().getItemNumFromIndex(index);
+
+                                leavePagedScreen();
+                                managePack();
+                                break;
+                            }
+                            System.out.println("The ID wasn't valid");
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                    }
+                    break;
+                case 2: /* Add a pack */
+                    double price;
+                    ArrayList<StoreProduct> products = new ArrayList<>();
+                    boolean stop = false;
+                    while (!appExited && !stop) {
+                        // DUE: Podría ser un bucle de visualización paginado aparte
+                        System.out.println("Enter the desired store product's id (type \"stop\" to use the ones " +
+                                           "entered so far):");
+                        String productId = scanner.next();
+                        if (productId.equals("stop")) {
+                            stop = true;
+                        }
+                        StoreProduct product = Store.getInstance().getStoreProductFromId(productId);
+                        if (product == null) {
+                            System.out.println("A category which such a name doesn't exist, reloading...");
+                        } else {
+                            products.add(product);
+                        }
+                    }
+                    System.out.println("Enter the desired price:");
+                    price = scanner.nextDouble();
+                    ((Manager) currentUser).addPack(price, products, LocalDate.now());
+                    System.out.println("The pack was added to the store");
+                    break;
+                case 3: /* See profile */
+                    seeProfile();
+                    break;
+                case 4: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * It allows the manager to manage a certain pack
+     */
+    private void managePack() {
+        //DUE
     }
 
     /**

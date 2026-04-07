@@ -2,19 +2,17 @@ package user;
 
 import discount.*;
 import exchange.Exchange;
-import notification.*;
+import notification.NotificationDiscount;
+import notification.NotificationType;
 import order.Order;
 import product.*;
 import search.SearchType;
-import search.Searcher;
-import search.SearchStoreProducts;
 import store.Parameter;
 import store.Store;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.Year;
+import java.time.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,9 +26,9 @@ public class Manager extends User {
     private final Store s = Store.getInstance();
     /** Store permission necessary for the manager to do its functions */
     private StorePermission sp;
-    
+
     private Parameter parameter;
-    
+
 
 /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     /**
@@ -46,7 +44,7 @@ public class Manager extends User {
 
         this.parameter = p;
         this.sp = new StorePermission();
-        
+
         this.getSearcher().setTypes(SearchType.S_STORE);
     }
 
@@ -61,7 +59,7 @@ public class Manager extends User {
         }
         return Manager.INSTANCE;
     }
-    
+
     /**
      * Searches for the store products based on the filters
      * @return the products the list of products found
@@ -69,7 +67,7 @@ public class Manager extends User {
     public List<StoreProduct> searchStoreProduct() {
         return this.getSearcher().searchStoreProducts();
     }
-    
+
     /**
      * Searches for the store products based on the filters and categories
      * @param categories the categories to filter by
@@ -78,7 +76,7 @@ public class Manager extends User {
     public List<StoreProduct> searchStoreProductCategory(Category...categories){
     	return this.getSearcher().searchByCategory(categories);
     }
-    
+
     /**
      * Adds and creates new figurine
      * @param price the price of the figurine
@@ -101,7 +99,7 @@ public class Manager extends User {
         System.err.println("You have no permission to do that...");
         return false;
     }
-    
+
     /**
      * Adds and creates new products from a file
      *
@@ -116,7 +114,7 @@ public class Manager extends User {
 		}
     	return false;
     }
-    
+
     /**
      * Adds and creates new game
      * @param price the price of the game
@@ -140,7 +138,7 @@ public class Manager extends User {
 		System.err.println("You have no permission to do that...");
 		return false;
 	}
-    
+
     /**
      * Adds and creates new comic
      * @param price the price of the comic
@@ -167,17 +165,17 @@ public class Manager extends User {
     }
     /**
      * Adds a new employee
-     * 
+     *
      *  @param password, the password of the employee
      *  @param userName, the username of the employee
      *  @param permission, the permission it has
      */
-     
+
     public void addEmployee(String password, String userName, Permission permission) {
         Employee emp = new Employee(password, userName, permission, true);
         s.getEmployees().put(emp.getId(), emp);
     }
-    
+
     /* ---- DISCOUNTS ---- */
 
     /**
@@ -352,7 +350,7 @@ public class Manager extends User {
             factory = new ProductDiscountFactory(products);
             discount = new ProductFixedPercentage(startDate, endDate, percentage, products);
         }
-        
+
         NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
@@ -406,7 +404,7 @@ public class Manager extends User {
 
         if (overWholeStore) {
             factory = new ProductDiscountFactory(true);
-            discount = new ProductQuantity(startDate, endDate, numThreshold, deduction, overWholeStore);
+            discount = new ProductQuantity(startDate, endDate, numThreshold, deduction, true);
         } else {
             factory = new ProductDiscountFactory(products);
             discount = new ProductQuantity(startDate, endDate, numThreshold, deduction, products);
@@ -494,7 +492,7 @@ public class Manager extends User {
     public void changeItemsPerPage(int newItemsPerPage) {
         Parameter.getParam().changeItemsPerPage(newItemsPerPage);
     }
-    
+
     /**
      * Searches for the pack based on the id
      *
@@ -504,7 +502,7 @@ public class Manager extends User {
     public Pack searchPackByID(int id){
         return this.getSearcher().searchPackByID(id);
     }
-    
+
 
     /**
      * Searches for the employee based on the id
@@ -515,7 +513,7 @@ public class Manager extends User {
     public Employee searchEmployeeByID(int id){
         return this.getSearcher().searchEmployeeByID(id);
     }
-    
+
     /**
      * Searches for the order based on the id
      *
@@ -528,13 +526,24 @@ public class Manager extends User {
 
     /**
      * Searches for the exchange based on the id
-     *
+     *h
      * @param id, id of the exchange
      * @return the exchange with said id
      */
     public Exchange searchExchangeByID(int id){
         return this.getSearcher().searchExchangeByID(id);
     }
+
+    /**
+     * It allows a manager to add a pack to the store
+     * @param price,    price of the pack
+     * @param products, list of products that the pack contains
+     * @param date,     date when the pack was created
+     */
+    public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
+        this.sp.addPack(price, products, date);
+    }
+
 /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     /**
      * Obtains the maneger's (and creates one if there wasn't one)

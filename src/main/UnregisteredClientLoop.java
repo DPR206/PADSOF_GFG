@@ -16,8 +16,6 @@ import java.util.*;
 public class UnregisteredClientLoop extends Loop {
     /** This loop's instance */
     private static UnregisteredClientLoop INSTANCE;
-    /** The chosen item's number when selecting from a list */
-    private int itemNum = 1;
     /** The store's filtered list of products */
     private List<StoreProduct> filteredStore = null;
 
@@ -126,7 +124,6 @@ public class UnregisteredClientLoop extends Loop {
                         case 1:
                             System.out.println("Enter the number of the desired product:");
                             this.itemNum = scanner.nextInt();
-                            System.out.println("PageNum=" + currentScreenPageNum + "itemNum=" + itemNum);
                             leavePagedScreen();
                             seeStoreProduct();
                             break;
@@ -196,7 +193,7 @@ public class UnregisteredClientLoop extends Loop {
         boolean stop = false;
         switch (chosenOption) {
             case 1: /* Filter by categories */
-                while (!stop) {
+                while (!appExited && !stop) {
                     System.out.println("Enter the desired category (type \"stop\" to apply the ones entered so far):");
                     String categoryName = scanner.next();
                     if (categoryName.equals("stop")) {
@@ -211,7 +208,7 @@ public class UnregisteredClientLoop extends Loop {
                 }
                 break;
             case 2: /* Filter by price */
-                while (!stop) {
+                while (!appExited && !stop) {
                     System.out.println("Enter the minimum desired price:");
                     int minPrice = scanner.nextInt();
                     System.out.println("Enter the maximum desired price:");
@@ -225,7 +222,7 @@ public class UnregisteredClientLoop extends Loop {
                 }
                 break;
             case 3: /* Filter by review score */
-                while (!stop) {
+                while (!appExited && !stop) {
                     System.out.println("Enter the minimum desired review score:");
                     int minScore = scanner.nextInt();
                     System.out.println("Enter the maximum desired review score:");

@@ -1,0 +1,65 @@
+private void nombre(){
+    Scanner scanner = new Scanner(System.in);
+    boolean exitLoop = false;
+    while (!appExited && !exitLoop) {
+        System.out.println("\n <<<<<<<<<< nombre >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.println("What do you wish to do? (enter the nº)");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] ");// DUE
+        System.out.println("\t[" + i++ + "] ");// DUE
+        System.out.println("\t[" + i++ + "] Sign up");
+        basicLoopPrinter(i); // DUE: Change
+        chosenOption = scanner.nextInt();
+
+        switch (chosenOption) {
+            case 1: /* DUE */
+                // DUE
+                break;
+            case 2: /* DUE */
+                // DUE
+                break;
+            case 3: /* DUE */
+                // DUE
+                break;
+            case 4: /* Exit */
+                exit();
+                break;
+            default: /* Go back */
+                exitLoop = true;
+                break;
+        }
+    }
+}
+
+ITEM SELECTION:
+System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+System.out.println("Do you wish to select it via: ID or list number?");
+System.out.println("[1] List number");
+System.out.println("[2] ID");
+int chosenOption2 = scanner.nextInt();
+
+switch (chosenOption2) {
+    case 1:
+        System.out.println("Enter the number of the desired ###:"); // DUE
+        this.itemNum = scanner.nextInt();
+        leavePagedScreen();
+        seeStoreProduct(); // DUE
+        break;
+    case 2:
+        System.out.println("Enter the ID of the desired ###:"); // DUE
+        String productID = scanner.next();
+        int index = Pager.getInstance().getStoreProductIndex(filteredStore, productID); //DUE
+        if (index != -1) {
+            currentScreenPageNum = Pager.getInstance().getPageNumFromIndex(index);
+            itemNum = Pager.getInstance().getItemNumFromIndex(index);
+
+            leavePagedScreen();
+            seeStoreProduct(); // DUE
+            break;
+        }
+        System.out.println("The ID wasn't valid");
+        break;
+    default:
+        System.out.println("Invalid option");
+}
+break;

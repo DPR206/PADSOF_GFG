@@ -421,6 +421,23 @@ public class Pager {
     }
 
     /**
+     * It gets the paged index belonging to a pack with a certain id in a list
+     * @param packs    the desired list of packs
+     * @param wantedId the id of the desired pack
+     * @return the index belonging to a pack with a certain id in a list
+     */
+    public int getPackIndex(List<Pack> packs, int wantedId) {
+        for (int j = 0; j < packs.size(); j++) {
+            int packId = packs.get(j).getId();
+
+            if (wantedId == packId) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * It gets the maximum number of pages that can be obtained from the store's packs list
      * @param packList the pack list
      * @return the maximum number of pages that can be obtained from the store's packs list
@@ -458,7 +475,7 @@ public class Pager {
     }
 
     /**
-     * It gets the index belonging to a store product with a certain id in a list
+     * It gets the paged index belonging to a store product with a certain id in a list
      * @param products the desired list of store products
      * @param wantedId the id of the desired store product
      * @return the index belonging to a store product with a certain id in a list

@@ -90,7 +90,6 @@ public class Store {
 
     /**
      * Logs in a user
-     * 
      * @return the associated user
      */
     public User logIn() {
@@ -113,7 +112,6 @@ public class Store {
 
     /**
      * Signs in a user
-     *
      * @return a new user
      */
     public User signIn() {
@@ -179,13 +177,13 @@ public class Store {
     public void addPack(Pack p) {
         this.packs.add(p);
     }
-    
+
     /**
      * Deletes a pack from the store
      * @param p the pack to remove
      */
     public void deletePack(Pack p) {
-    	this.packs.remove(p);
+        this.packs.remove(p);
     }
 
     /**
@@ -195,69 +193,69 @@ public class Store {
     public void addExchange(Exchange e) {
         this.exchanges.add(e);
     }
-    
+
     /**
      * Adds a category to the store
      * @param c the category to add
      */
     public void addCategory(Category c) {
-    	this.categories.put(c.getName(), c);
+        this.categories.put(c.getName(), c);
     }
-    
+
     /**
      * Deletes a category from the store
      * @param c the category to delete
      */
     public void deleteCategory(Category c) {
-    	this.categories.remove(c.name);
+        this.categories.remove(c.name);
     }
-    
+
     /**
      * Adds a discount to the store
      * @param d the discount to add
      */
     public void addDiscount(Discount d) {
-    	this.discounts.add(d);
+        this.discounts.add(d);
     }
-    
+
     /**
      * Deletes a discount from the store
      * @param d the discount to delete
      */
     public void deleteDiscount(Discount d) {
-    	this.discounts.remove(d);
+        this.discounts.remove(d);
     }
-    
+
     /**
      * Adds an order to the store
      * @param o the order to add
      */
     public void addOrder(Order o) {
-    	this.orders.add(o);
+        this.orders.add(o);
     }
-    
+
     /**
      * Adds an offer to the store
      * @param o the offer to add
      */
     public void addOffer(Offer o) {
-    	this.offers.add(o);
+        this.offers.add(o);
     }
-    
-   /**
-    * Deletes an offer from the store
-    * @param o the offer to delete
-    */
+
+    /**
+     * Deletes an offer from the store
+     * @param o the offer to delete
+     */
     public void deleteOffer(Offer o) {
-    	this.offers.remove(o);
+        this.offers.remove(o);
     }
-    
+
     /**
      * Adds a review to the store
      * @param r the review to add
      */
     public void addReview(Review r) {
-    	this.reviews.add(r);
+        this.reviews.add(r);
     }
 
     /**
@@ -326,7 +324,6 @@ public class Store {
 
     /**
      * Gets the list of the categories of the store
-     *
      * @return a hash map of the categories and their names
      */
     public HashMap<String, Category> getCategories() {
@@ -412,7 +409,6 @@ public class Store {
 
     /**
      * Gets the manager of the store
-     *
      * @return the manager of the store
      */
     public Manager getManager() {
@@ -421,8 +417,7 @@ public class Store {
 
     /**
      * Gets the list of the offers of the store
-     *
-     * @return a list with the offers 
+     * @return a list with the offers
      */
     public List<Offer> getOffers() {
         return this.offers;
@@ -430,10 +425,19 @@ public class Store {
 
     /**
      * Gets the list of the orders done in the store
-     * @return a list with the orders 
+     * @return a list with the orders
      */
     public List<Order> getOrders() {
         return this.orders;
+    }
+
+    /**
+     * It gets the paged index belonging to a pack with a certain id in the store
+     * @param packID the id of the desired pack
+     * @return the index belonging to a pack with a certain id in the store
+     */
+    public int getPackIndex(int packID) {
+        return Pager.getInstance().getPackIndex(this.packs, packID);
     }
 
     /**
@@ -446,7 +450,7 @@ public class Store {
 
     /**
      * Gets the list of the packs of the store
-     * @return a list with the packs 
+     * @return a list with the packs
      */
     public List<Pack> getPacks() {
         return this.packs;

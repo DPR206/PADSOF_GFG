@@ -29,6 +29,7 @@ public enum SearchType{
 
     /**
 	 * Gets the String of the type
+     * @return the String of the type of search
 	 *
 	 */
     public String getType(){

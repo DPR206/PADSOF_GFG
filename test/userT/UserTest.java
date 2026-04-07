@@ -1,66 +1,66 @@
 package userT;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import user.UnregisteredClient;
 import user.UserType;
 
-public class UserTest {
+class UserTest {
 
     private UnregisteredClient unregisteredClient;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         unregisteredClient = new UnregisteredClient(true);
     }
 
     @Test
-    public void testGetUserName() {
+    void testGetUserName() {
         assertNull(unregisteredClient.getUserName());
     }
 
     @Test
-    public void testGetPassword() {
+    void testGetPassword() {
         assertNull(unregisteredClient.getPassword());
     }
 
     @Test
-    public void testGetType() {
+    void testGetType() {
         assertEquals(UserType.UNREGISTERED_CLIENT, unregisteredClient.getType());
     }
 
     @Test
-    public void testGetId() {
+    void testGetId() {
         assertNotNull(unregisteredClient.getId());
         assertTrue(unregisteredClient.getId().startsWith("U"));
     }
 
     @Test
-    public void testChangeSearchOrder() {
+    void testChangeSearchOrder() {
         unregisteredClient.changeSearchOrder(false);
         unregisteredClient.changeSearchOrder(true);
     }
 
     @Test
-    public void testAddPriceFilter() {
+    void testAddPriceFilter() {
         unregisteredClient.addPriceFilter(5.0, 100.0);
     }
 
     @Test
-    public void testAddPunctuationFilter() {
+    void testAddPunctuationFilter() {
         unregisteredClient.addPunctuationFilter(1, 4);
     }
 
     @Test
-    public void testGetCart() {
+    void testGetCart() {
         assertNotNull(unregisteredClient.getCart());
     }
 
     @Test
-    public void testSearchStoreProduct() {
+    void testSearchStoreProduct() {
         assertNotNull(unregisteredClient.searchStoreProduct());
     }
 }

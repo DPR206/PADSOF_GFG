@@ -1,6 +1,6 @@
 package product;
 
-import discount.Discount;
+import discount.*;
 import order.Order;
 import store.Pager;
 import store.Store;
@@ -69,7 +69,7 @@ public abstract class StoreProduct extends Product {
         }
         this.sales = 0;
         this.salesByMonth = new HashMap<Month, Integer>();
-		for (Month month : Month.values()) {
+        for (Month month : Month.values()) {
             this.salesByMonth.put(month, 0);
         }
         Store.getInstance().addStoreProduct(this);
@@ -104,7 +104,7 @@ public abstract class StoreProduct extends Product {
         }
         this.sales = 0;
         this.salesByMonth = new HashMap<Month, Integer>();
-		for (Month month : Month.values()) {
+        for (Month month : Month.values()) {
             this.salesByMonth.put(month, 0);
         }
         Store.getInstance().addStoreProduct(this);
@@ -194,18 +194,17 @@ public abstract class StoreProduct extends Product {
      */
     public void increaseSales(LocalDate date) {
         this.salesByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + 1);
-    	this.sales++;
+        this.sales++;
     }
 
     /**
      * Increases the number of sales by a certain number
-     *
-     * @param i the number of sales made (and to increase)
+     * @param i    the number of sales made (and to increase)
      * @param date the date of the sale
      */
     public void increaseSales(int i, LocalDate date) {
-    	this.salesByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + i);
-    	this.sales += i;
+        this.salesByMonth.computeIfPresent(date.getMonth(), (month, currentValue) -> currentValue + i);
+        this.sales += i;
     }
 
     /**
@@ -312,6 +311,21 @@ public abstract class StoreProduct extends Product {
     }
 
     /**
+     * It gets the product's price with any fixed percentage discounts applied
+     * @return the product's price with any fixed percentage discounts applied
+     */
+    public double getDiscountedPrice() {
+        if (this.discount.getType() == DiscountType.FIXED_PERCENTAGE) {
+            if (this.discount.getCoverage() == DiscountCoverage.PRODUCT) {
+                return this.getPrice() - this.getPrice() * ((ProductFixedPercentage) this.discount).getPercentage();
+            } else {
+                return this.getPrice() - this.getPrice() * ((CategoryFixedPercentage) this.discount).getPercentage();
+            }
+        }
+        return this.getPrice();
+    }
+
+    /**
      * It returns the product's categories in a save-file-friendly manner
      * @return a string containing the game's categories
      */
@@ -366,7 +380,6 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Sets the number of sales of a product
-     *
      * @param sales the sales to set
      */
     public void setSales(int sales) {
@@ -375,23 +388,21 @@ public abstract class StoreProduct extends Product {
 
     /**
      * Obtains the sales per month
-     *
-	 * @return the salesByMonth a HashMap with the sales per month
-	 */
-	public HashMap<Month, Integer> getSalesByMonth() {
-		return salesByMonth;
-	}
+     * @return the salesByMonth a HashMap with the sales per month
+     */
+    public HashMap<Month, Integer> getSalesByMonth() {
+        return salesByMonth;
+    }
 
-	/**
-	 * Sets the number of sales per month
-	 *
-	 * @param salesByMonth the salesByMonth to set
-	 */
-	public void setSalesByMonth(HashMap<Month, Integer> salesByMonth) {
-		this.salesByMonth = salesByMonth;
-	}
+    /**
+     * Sets the number of sales per month
+     * @param salesByMonth the salesByMonth to set
+     */
+    public void setSalesByMonth(HashMap<Month, Integer> salesByMonth) {
+        this.salesByMonth = salesByMonth;
+    }
 
-	/**
+    /**
      * It returns's the product's stock
      * @return the product's store
      */

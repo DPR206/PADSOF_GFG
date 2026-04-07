@@ -124,7 +124,7 @@ public abstract class Loop {
     }
 
     /**
-     * It exists the app and saves the store
+     * It exits the app and saves the store
      * @throws IOException the io exception
      */
     protected void exit() throws IOException {
@@ -195,6 +195,7 @@ public abstract class Loop {
 
     /**
      * It allows for a user to switch to the next page when viewing the store's list of packs
+     * @param cart the cart
      */
     protected void nextPageCartPack(Cart cart) {
         currentScreenPageNum =

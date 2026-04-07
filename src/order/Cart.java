@@ -1,7 +1,6 @@
 package order;
 
-import discount.DiscountType;
-import discount.QuantityDiscount;
+import discount.*;
 import es.uam.eps.padsof.telecard.*;
 import notification.*;
 import product.Pack;
@@ -69,11 +68,66 @@ public class Cart {
      * @return the cart's price
      */
     public double calculatePrice() {
-        // DUE: Cálculo de descuentos sobre los productos (packs hecho)
         double aux = 0;
+        List<Discount> discounts = new ArrayList<>();
 
         for (StoreProduct spp : this.sp.keySet()) {
-            aux = spp.getPrice() * this.sp.get(spp) + aux;
+            aux = spp.getDiscountedPrice() * this.sp.get(spp) + aux; /* Fixed percentage */
+            /* Busco el resto de descuentos */
+            if (spp.getDiscount() != null && spp.getDiscount().getType() != DiscountType.FIXED_PERCENTAGE) {
+                if (!discounts.contains(spp.getDiscount())) {
+                    discounts.add(spp.getDiscount());
+                }
+            }
+        }
+
+        /* Estudio el resto de descuentos */
+        for (Discount discount : discounts) {
+            if (discount.getCoverage() == DiscountCoverage.PRODUCT) {
+                List<StoreProduct> products = ((ProductDiscount) discount).getProducts();
+                switch (discount.getType()) {
+                    case QUANTITY:
+                        if (calculateNumUnits(products) >= ((ProductQuantity) discount).getNumThreshold()) {
+                            aux = aux - ((ProductQuantity) discount).getDeduction();
+                        }
+                    case VOLUME:
+                        if (calculateSpentAmount(products) >= ((ProductVolume) discount).getSpendingThreshold()) {
+                            aux = aux - ((ProductVolume) discount).getDeduction();
+                        }
+                    case GIFT:
+                        if (calculateSpentAmount(products) >= ((ProductGift) discount).getSpendingThreshold()) {
+                            aux = aux - ((ProductGift) discount).getGift().getDiscountedPrice();
+                            if (!this.sp.containsKey(((ProductGift) discount).getGift())) {
+                                this.sp.put(((ProductGift) discount).getGift(), 1);
+                            } else {
+                                this.sp.put(((ProductGift) discount).getGift(),
+                                        this.sp.get(((ProductGift) discount).getGift()) + 1);
+                            }
+                        }
+                }
+            } else {
+                List<StoreProduct> products = ((CategoryDiscount) discount).getProducts();
+                switch (discount.getType()) {
+                    case QUANTITY:
+                        if (calculateNumUnits(products) >= ((CategoryQuantity) discount).getNumThreshold()) {
+                            aux = aux - ((CategoryQuantity) discount).getDeduction();
+                        }
+                    case VOLUME:
+                        if (calculateSpentAmount(products) >= ((CategoryVolume) discount).getSpendingThreshold()) {
+                            aux = aux - ((CategoryVolume) discount).getDeduction();
+                        }
+                    case GIFT:
+                        if (calculateSpentAmount(products) >= ((CategoryGift) discount).getSpendingThreshold()) {
+                            aux = aux - ((CategoryGift) discount).getGift().getDiscountedPrice();
+                            if (!this.sp.containsKey(((CategoryGift) discount).getGift())) {
+                                this.sp.put(((CategoryGift) discount).getGift(), 1);
+                            } else {
+                                this.sp.put(((CategoryGift) discount).getGift(),
+                                        this.sp.get(((CategoryGift) discount).getGift()) + 1);
+                            }
+                        }
+                }
+            }
         }
 
         for (Pack p : this.packs.keySet()) {
@@ -89,6 +143,36 @@ public class Cart {
         }
 
         return aux;
+    }
+
+    /**
+     * Calculates the amount o money spent of products that appear in a certain list
+     * @param products the desired products
+     * @return the amount o money spent of products that appear in a certain list
+     */
+    private double calculateSpentAmount(List<StoreProduct> products) {
+        double spent = 0.0;
+        for (StoreProduct spp : products) {
+            if (this.getProducts().contains(spp)) {
+                spent = spent + spp.getPrice() * this.sp.get(spp);
+            }
+        }
+        return spent;
+    }
+
+    /**
+     * Calculates the amount of bought units of products that appear in a certain list
+     * @param products the desired products
+     * @return the amount of bought units of products that appear in a certain list
+     */
+    private double calculateNumUnits(List<StoreProduct> products) {
+        int units = 0;
+        for (StoreProduct spp : products) {
+            if (this.getProducts().contains(spp)) {
+                units = units + this.sp.get(spp);
+            }
+        }
+        return units;
     }
 
     /**
@@ -321,7 +405,8 @@ public class Cart {
         Pager.getInstance().printPackListPage(this.getPacks(), pageNum);
     }
 
-/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * Obtains the creation date of the cart
      * @return the cart's creation date

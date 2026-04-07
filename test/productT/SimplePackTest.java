@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import product.Category;
 import product.Comic;
@@ -20,13 +21,13 @@ public class SimplePackTest {
     private ArrayList<StoreProduct> products;
     private SimplePack simplePack;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Category category = new Category("Fiction", 0.0);
-        comic = new Comic(12.99, "Test Comic", "Description", "photo.png", 10, 120, Year.of(2020), "Author", "Editorial", category);
-        products = new ArrayList<>();
-        products.add(comic);
-        simplePack = new SimplePack(25.99, products);
+        this.comic = new Comic(12.99, "Test Comic", "Description", "photo.png", 10, 120, Year.of(2020), "Author", "Editorial", category);
+        this.products = new ArrayList<>();
+        this.products.add(comic);
+        this.simplePack = new SimplePack(25.99, products);
     }
 
     @Test
@@ -76,13 +77,13 @@ public class SimplePackTest {
     }
 
     @Test
-    void testGetProducts() {
+    public void testGetProducts() {
         assertEquals(products, simplePack.getProducts());
         assertEquals(1, simplePack.getProducts().size());
     }
 
     @Test
-    void testSetProducts() {
+    public void testSetProducts() {
         ArrayList<StoreProduct> newProducts = new ArrayList<>();
         newProducts.add(comic);
         simplePack.setProducts(newProducts);
@@ -90,7 +91,7 @@ public class SimplePackTest {
     }
 
     @Test
-    void testAddProduct() {
+    public void testAddProduct() {
         Category category2 = new Category("Adventure", 0.0);
         Comic comic2 = new Comic(15.99, "Test Comic 2", "Description 2", "photo2.png", 5, 100, Year.of(2021), "Author2", "Editorial2", category2);
         assertTrue(simplePack.addProduct(comic2));
@@ -99,7 +100,7 @@ public class SimplePackTest {
     }
 
     @Test
-    void testEliminateProduct() {
+    public void testEliminateProduct() {
         assertTrue(simplePack.eliminateProduct(comic));
         assertEquals(0, simplePack.getProducts().size());
         assertFalse(simplePack.getProducts().contains(comic));
@@ -111,14 +112,14 @@ public class SimplePackTest {
     }
 
     @Test
-    void testDecreaseStock() {
+    public void testDecreaseStock() {
         int initialStock = comic.getStock();
         simplePack.decreaseStock();
         assertEquals(initialStock - 1, comic.getStock());
     }
 
     @Test
-    void testIncreaseStock() {
+    public void testIncreaseStock() {
         int initialStock = comic.getStock();
         simplePack.increaseStock();
         assertEquals(initialStock + 1, comic.getStock());

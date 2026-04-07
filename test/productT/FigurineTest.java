@@ -3,6 +3,7 @@ package productT;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import product.*;
 
@@ -10,7 +11,7 @@ class FigurineTest {
 
 	private Figurine f;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		this.f = new Figurine(12.0, "Something", "yuh", "test.png", 1, "2x3x4cm", "DC Comics", "Plastic", new Category("test"));
 	}

@@ -9,6 +9,7 @@ import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import product.Category;
 import product.Comic;
@@ -24,7 +25,7 @@ public class ComposedPackTest {
     private HashSet<Pack> packs;
     private ComposedPack composedPack;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Category category = new Category("Fiction", 0.0);
         comic1 = new Comic(12.99, "Test Comic 1", "Description 1", "photo1.png", 10, 120, Year.of(2020), "Author1", "Editorial1", category);

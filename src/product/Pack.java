@@ -12,13 +12,13 @@ import java.util.ArrayList;
 /**
  * It implements the packs
  * @author Duna P.R.
- * @version 1.1
+ * @version 1.2.
  * @see store.Store
  */
 public class Pack {
+	/** The number of id's generated for packs*/
     static public int totalId = 0;
 
-    /**  */
     private int id;
     private double price;
     private ArrayList<StoreProduct> products;
@@ -26,7 +26,6 @@ public class Pack {
     /** The pack's discount, if it has one */
     private Discount discount;
 
-    /*---------------------------------------------------Constructors---------------------------------------------------------------*/
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -211,6 +210,10 @@ public class Pack {
         return id;
     }
 
+    /**
+     * Obtains the pack's price without discounts
+     * @return the pack's original price
+     */
     public double getOriginalPrice() {
         return this.price;
     }

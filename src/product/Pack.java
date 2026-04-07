@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @see store.Store
  */
 public class Pack {
-	/** The number of id's generated for packs*/
+    /** The number of id's generated for packs */
     static public int totalId = 0;
 
     private int id;
@@ -85,8 +85,6 @@ public class Pack {
     public Pack(int id, double price, LocalDate date) {
         this(id, price, new ArrayList<StoreProduct>(), date);
     }
-
-    /*----------------------------------------------------Getters and Setters---------------------------------------------------------------*/
 
     /**
      * It prints the pack's info when seen individually
@@ -161,6 +159,8 @@ public class Pack {
         return total;
     }
 
+    /*----------------------------------------------------Getters and Setters---------------------------------------------------------------*/
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -203,28 +203,12 @@ public class Pack {
     /*-----------------------------------------------------Methods------------------------------------------------------------------*/
 
     /**
-     * Obtains the pack's id
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Obtains the pack's price without discounts
-     * @return the pack's original price
-     */
-    public double getOriginalPrice() {
-        return this.price;
-    }
-
-    /**
      * Applies the pack's discounts (except quantity) and obtains the packs price
      * @return the pack's price
      */
-    public double getPrice() {
+    public double getDiscountedPrice() {
         if (this.discount == null) {
-            return this.price; // TEST_FIX
+            return this.price;
         }
 
         switch (this.discount.getType()) {
@@ -250,6 +234,30 @@ public class Pack {
     }
 
     /**
+     * Obtains the pack's id
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Obtains the pack's price without discounts
+     * @return the pack's original price
+     */
+    public double getOriginalPrice() {
+        return this.price;
+    }
+
+    /**
+     * It gets the pack's original price
+     * @return the pack's original price
+     */
+    public double getPrice() {
+        return this.price;
+    }
+
+    /**
      * Sets the packs price
      * @param price the price to set
      */
@@ -262,7 +270,7 @@ public class Pack {
      * @return the pack's info
      */
     public String getPrintInfo() {
-        return "Price: " + this.price + "€ , products in this pack:" + this.getPrintNameStoreProducts();
+        return "Price: " + this.price + "€, products in this pack: " + this.getPrintNameStoreProducts();
     }
 
     /**
@@ -298,7 +306,8 @@ public class Pack {
      * @return the products, the products included
      */
     public ArrayList<StoreProduct> getProducts() {
-        // Prueba: return (ArrayList<StoreProduct>) Collections.unmodifiableList(products);
+        //return (ArrayList<StoreProduct>) Collections.unmodifiableList(products); // java.lang.ClassCastException:
+        // class java.util.Collections$UnmodifiableRandomAccessList cannot be cast to class java.util.ArrayList
         return this.products; // TEST_FIX
     }
 

@@ -147,7 +147,7 @@ public class UnregisteredClientLoop extends Loop {
      * It allows the unregistered client to filter the store's store products
      * @return the filtered list of store products
      */
-    public List<StoreProduct> filterSearch() throws IOException { // DUE: Revisar este "loop"
+    public List<StoreProduct> filterSearch() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose which filter you wish to apply next (those already applied will be reset)");
         int i = 1;

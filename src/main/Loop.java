@@ -184,7 +184,9 @@ public abstract class Loop {
      * It allows for a user to switch to the next page when viewing the store's list of packs
      */
     protected void nextPageStorePack() {
-        // DUE
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getPackMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
     }
 
     /**

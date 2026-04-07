@@ -36,6 +36,7 @@ public class SecondHandProduct extends Product{
 	/**
 	 * A second-hand product's general constructor
 	 *
+	 * @param id the exchange's id
 	 * @param estimatedPrice, the estimated price of the product
 	 * @param name, the name of the product
 	 * @param description, the description of the product

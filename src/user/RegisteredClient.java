@@ -321,10 +321,18 @@ public class RegisteredClient extends User {
     }
 
 
+    /**
+     * Searches for the second-hand products
+     * @return the results in a list of second-hand products
+     */
     public List<SecondHandProduct> searchSecondHandProducts() {
         return this.searcher.browseSecondHandProduct();
     }
 
+    /**
+     * Searches for the store products based on the filters
+     * @return the results in a list of store products
+     */
     public List<StoreProduct> searchStoreProduct() {
         return this.searcher.searchStoreProducts();
     }
@@ -361,6 +369,21 @@ public class RegisteredClient extends User {
      */
     public void increaseNumExchanges(int i) {
     	this.numExchanges += i;
+    }
+    
+    /**
+     * Makes the buying process of the cart
+     */
+    public void buy() {
+        try {
+			this.c.payOrder();
+		} catch (InvalidCardNumberException e) {
+			e.printStackTrace();
+		} catch (FailedInternetConnectionException e) {
+			e.printStackTrace();
+		} catch (OrderRejectedException e) {
+			e.printStackTrace();
+		}
     }
 
    /**

@@ -10,6 +10,10 @@ import store.Store;
 
 import java.util.List;
 
+import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
+import es.uam.eps.padsof.telecard.InvalidCardNumberException;
+import es.uam.eps.padsof.telecard.OrderRejectedException;
+
 /**
  * It implements the unregistered client
  * @author Duna P.R.
@@ -21,9 +25,10 @@ public class UnregisteredClient extends User {
     private Cart c;
     private Store s;
 
-    /**
-     * Creates a new unregistered client
-     */
+   /**
+    * Creates a new unregistered client
+    * @param asc the products' order in the search
+    */
     public UnregisteredClient(boolean asc) {
         super(UserType.UNREGISTERED_CLIENT, null, null, asc);
     	c = new Cart();
@@ -32,10 +37,20 @@ public class UnregisteredClient extends User {
         this.getSearcher().setTypes(SearchType.S_STORE);
     }
 
+    /**
+     * Makes the buying process of the cart
+     */
     public void buy() {
-
-        //this.c.payOrder(); //inicia sesión
         this.s.signIn();
+        try {
+			this.c.payOrder();
+		} catch (InvalidCardNumberException e) {
+			e.printStackTrace();
+		} catch (FailedInternetConnectionException e) {
+			e.printStackTrace();
+		} catch (OrderRejectedException e) {
+			e.printStackTrace();
+		}
     }
 
     /**

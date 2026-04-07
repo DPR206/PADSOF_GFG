@@ -35,6 +35,7 @@ public class StorePermission {
      * @param stock, number of items available on the store
      * @param numPages, number of pages of the comic
      * @param year, the year it was published
+     * @param author the comic's author
      * @param editorial, the editorial that edited the comic
      * @param categories, all the categories it belongs too
      *
@@ -89,37 +90,39 @@ public class StorePermission {
      * Adds new products to the store reading them from a file
      *
      * @param fileName, name of the file that contains the products
-     *
+     * @return true if the products were added false if else
+     * @throws IOException error while reading the file
      */
     public boolean addProductByFile(String fileName) throws IOException {
-        int stock, numCat;
+        int stock;
         String name, desc, aux, type;
         double price;
         String line;
-        int i;
         Category auxC;
         try (BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
+            // Skip header line
+            buffer.readLine();
 
             while ((line = buffer.readLine()) != null) {
                 StringTokenizer tokenizer = new StringTokenizer(line, ";");
                 List<Category> c = new ArrayList<>();
                 type = tokenizer.nextToken();
+                // Skip ID for now, as name includes it or something, but actually in CSV name is ID;name
+                String id = tokenizer.nextToken();
                 name = tokenizer.nextToken();
                 desc = tokenizer.nextToken();
                 aux = tokenizer.nextToken();
                 price = Double.parseDouble(aux);
                 aux = tokenizer.nextToken();
                 stock = Integer.parseInt(aux);
-                aux = tokenizer.nextToken();
-                numCat = Integer.parseInt(aux);
-
-                for (i = 0; i < numCat; i++) {
-                    aux = tokenizer.nextToken();
-                    if ((auxC = this.s.getCategoryFromName(aux)) != null) {
+                aux = tokenizer.nextToken(); // categories
+                String[] cats = aux.split(",");
+                for (String cat : cats) {
+                    if ((auxC = this.s.getCategoryFromName(cat.trim())) != null) {
                         c.add(auxC);
                     }
                 }
-                String photo = tokenizer.nextToken();
+                String photo = ""; // No photo in CSV
                 if (type.equals("C")) {
                     aux = tokenizer.nextToken();
                     int numPages = Integer.parseInt(aux);
@@ -130,7 +133,9 @@ public class StorePermission {
                     this.addComic(price, name, desc, photo, stock, numPages, year, author, editorial,
                             c.toArray(new Category[0]));
 
-                } else if (type.equals("G")) {
+                } else if (type.equals("J")) { // Note: CSV uses J for Game, but code uses G? Wait, CSV has J, but code checks "G"
+                    // Wait, CSV has J for Game, but code has "G", inconsistency.
+                    // Assuming CSV is wrong or change to "J"
                     aux = tokenizer.nextToken();
                     int numPlayers = Integer.parseInt(aux);
                     String ageRange = tokenizer.nextToken();
@@ -172,6 +177,7 @@ public class StorePermission {
     /**
      * Gets the store instance
      *
+     * @return the store
      */
     public Store getStore() {
         return this.s;

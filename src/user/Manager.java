@@ -2,6 +2,7 @@ package user;
 
 import discount.*;
 import exchange.Exchange;
+import notification.*;
 import order.Order;
 import product.*;
 import search.SearchType;
@@ -176,6 +177,8 @@ public class Manager extends User {
         Employee emp = new Employee(password, userName, permission, true);
         s.getEmployees().put(emp.getId(), emp);
     }
+    
+    /* ---- DISCOUNTS ---- */
 
     /**
      * The fixed percentage discount's constructor with default id whose coverage is Category
@@ -188,10 +191,12 @@ public class Manager extends User {
     public FixedPercentageDiscount createFixedPercentageDiscount(LocalDateTime startDate, LocalDateTime endDate,
                                                                  double percentage, Category... categories) {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
+        Discount discount = new CategoryFixedPercentage(startDate, endDate, percentage, categories);
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createFixedPercentageDiscount(startDate, endDate, percentage);
     }
-
-    /* ---- DISCOUNTS ---- */
 
     /**
      * The gift discount's constructor with default id whose coverage is Category
@@ -205,6 +210,10 @@ public class Manager extends User {
     public GiftDiscount createGiftDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                                            StoreProduct gift, Category... categories) {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
+        Discount discount = new CategoryGift(startDate, endDate, spendingThreshold, gift, categories);
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createGiftDiscount(startDate, endDate, spendingThreshold, gift);
     }
 
@@ -220,6 +229,10 @@ public class Manager extends User {
     public QuantityDiscount createQuantityDiscount(LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
                                                    double deduction, Category... categories) {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
+        Discount discount = new CategoryQuantity(startDate, endDate, numThreshold, deduction, categories);
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createQuantityDiscount(startDate, endDate, numThreshold, deduction);
     }
 
@@ -235,6 +248,10 @@ public class Manager extends User {
     public VolumeDiscount createVolumeDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                                                double deduction, Category... categories) {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
+        Discount discount = new CategoryVolume(startDate, endDate, spendingThreshold, deduction, categories);
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createVolumeDiscount(startDate, endDate, spendingThreshold, deduction);
     }
 
@@ -249,6 +266,10 @@ public class Manager extends User {
     public FixedPercentageDiscount createFixedPercentageDiscount(LocalDateTime startDate, LocalDateTime endDate,
                                                                  double percentage, Pack... packs) {
         PackDiscountFactory factory = new PackDiscountFactory(packs);
+        Discount discount = new PackFixedPercentage(startDate, endDate, percentage, packs);
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createFixedPercentageDiscount(startDate, endDate, percentage);
     }
 
@@ -264,6 +285,10 @@ public class Manager extends User {
     public GiftDiscount createGiftDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                                            StoreProduct gift, Pack... packs) {
         PackDiscountFactory factory = new PackDiscountFactory(packs);
+        Discount discount = new PackGift(startDate, endDate, spendingThreshold, gift, packs);
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createGiftDiscount(startDate, endDate, spendingThreshold, gift);
     }
 
@@ -279,6 +304,10 @@ public class Manager extends User {
     public QuantityDiscount createQuantityDiscount(LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
                                                    double deduction, Pack... packs) {
         PackDiscountFactory factory = new PackDiscountFactory(packs);
+        Discount discount = new PackQuantity(startDate, endDate, numThreshold, deduction, packs);
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createQuantityDiscount(startDate, endDate, numThreshold, deduction);
     }
 
@@ -294,6 +323,10 @@ public class Manager extends User {
     public VolumeDiscount createVolumeDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                                                double deduction, Pack... packs) {
         PackDiscountFactory factory = new PackDiscountFactory(packs);
+        Discount discount = new PackVolume(startDate, endDate, spendingThreshold, deduction, packs);
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createVolumeDiscount(startDate, endDate, spendingThreshold, deduction);
     }
 
@@ -310,12 +343,19 @@ public class Manager extends User {
                                                                 double percentage, boolean overWholeStore,
                                                                 StoreProduct... products) {
         ProductDiscountFactory factory;
+        Discount discount;
 
         if (overWholeStore) {
             factory = new ProductDiscountFactory(true);
+            discount = new ProductFixedPercentage(startDate, endDate, percentage, overWholeStore);
         } else {
             factory = new ProductDiscountFactory(products);
+            discount = new ProductFixedPercentage(startDate, endDate, percentage, products);
         }
+        
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
 
         return factory.createFixedPercentageDiscount(startDate, endDate, percentage);
     }
@@ -333,13 +373,19 @@ public class Manager extends User {
     public ProductGift createGiftDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                                           StoreProduct gift, boolean overWholeStore, StoreProduct... products) {
         ProductDiscountFactory factory;
+        Discount discount;
 
         if (overWholeStore) {
             factory = new ProductDiscountFactory(true);
+            discount = new ProductGift(startDate, endDate, spendingThreshold, gift, overWholeStore);
         } else {
             factory = new ProductDiscountFactory(products);
+            discount = new ProductGift(startDate, endDate, spendingThreshold, gift, products);
         }
 
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createGiftDiscount(startDate, endDate, spendingThreshold, gift);
     }
 
@@ -356,13 +402,19 @@ public class Manager extends User {
     public ProductQuantity createQuantityDiscount(LocalDateTime startDate, LocalDateTime endDate, int numThreshold,
                                                   double deduction, boolean overWholeStore, StoreProduct... products) {
         ProductDiscountFactory factory;
+        Discount discount;
 
         if (overWholeStore) {
             factory = new ProductDiscountFactory(true);
+            discount = new ProductQuantity(startDate, endDate, numThreshold, deduction, overWholeStore);
         } else {
             factory = new ProductDiscountFactory(products);
+            discount = new ProductQuantity(startDate, endDate, numThreshold, deduction, products);
         }
 
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createQuantityDiscount(startDate, endDate, numThreshold, deduction);
     }
 
@@ -379,13 +431,19 @@ public class Manager extends User {
     public ProductVolume createVolumeDiscount(LocalDateTime startDate, LocalDateTime endDate, double spendingThreshold,
                                               double deduction, boolean overWholeStore, StoreProduct... products) {
         ProductDiscountFactory factory;
+        Discount discount;
 
         if (overWholeStore) {
             factory = new ProductDiscountFactory(true);
+            discount = new ProductVolume(startDate, endDate, spendingThreshold, deduction, overWholeStore);
         } else {
             factory = new ProductDiscountFactory(products);
+            discount = new ProductVolume(startDate, endDate, spendingThreshold, deduction, products);
         }
 
+        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        notification.FullNotification(discount);
+        Store.getInstance().sendNotificationClients(notification);
         return factory.createVolumeDiscount(startDate, endDate, spendingThreshold, deduction);
     }
 

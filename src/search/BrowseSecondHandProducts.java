@@ -6,31 +6,43 @@ import store.Store;
 import java.util.*;
 
 /**
- * It implements the second hand product search
+ * This class provides functionality to browse and retrieve
+ * second-hand products available in the store.
+ * <p>
+ * It obtains the products from the {@link Store} singleton instance
+ * and allows sorting them alphabetically by name.
+ * </p>
+ *
  * @author Sofía C.L.
- * @version 1.3
+ * @version 1.4
  * @see SearchStoreProducts
-  */
-public class BrowseSecondHandProducts{
+ */
+public class BrowseSecondHandProducts {
 
-	final Store s = Store.getInstance();
+    /**
+     * Singleton instance of the store.
+     */
+    private final Store s = Store.getInstance();
+
+    /**
+     * List of second-hand products available in the store.
+     */
     private List<SecondHandProduct> products;
 
     /**
-	 * Creates the class and sends the store to get all the second hand products available
-	 */
-    public BrowseSecondHandProducts(){
-
-        this.products = new ArrayList<>(s.getSecondHandProducts().values());
-
+     * Constructs a BrowseSecondHandProducts object and initializes
+     * the list of second-hand products from the store.
+     */
+    public BrowseSecondHandProducts() {
         this.products = new ArrayList<>(s.getSecondHandProducts().values());
     }
 
-     /**
-	 * Returns all the second hand products ordered in alphabetical order
-	 *
-	 */
-    public List<SecondHandProduct> searchSecondHandProducts(){
+    /**
+     * Retrieves all second-hand products sorted in alphabetical order by name.
+     *
+     * @return a {@link List} of {@link SecondHandProduct} sorted alphabetically
+     */
+    public List<SecondHandProduct> searchSecondHandProducts() {
         this.products.sort(Comparator.comparing(SecondHandProduct::getName));
         return this.products;
     }

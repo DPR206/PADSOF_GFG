@@ -150,6 +150,7 @@ public class Employee extends User {
      * @param editorial the comic's editorial
      * @param categories the comic's categories
      *
+     * @return true if the comic was added, false if else
      */
     public boolean addComic(double price, String name, String description, String photo, int stock, int numPages,
                             Year year, String author, String editorial, Category... categories) {
@@ -170,8 +171,10 @@ public class Employee extends User {
      * @param stock the game's stock
      * @param numPlayers the game's number of players
      * @param ageRange the game's age range
+     * @param gameStyle the style of the game
      * @param categories the game's categories
      *
+     * @return true if the game was added, false if else
      */
     public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers,
                            String ageRange, GameStyle gameStyle, Category... categories) {
@@ -195,6 +198,7 @@ public class Employee extends User {
      * @param material the figurine's material
      * @param categories the figurine's categories
      *
+     * @return true if the figurine was added, false if else
      */
     public boolean addFigurine(double price, String name, String description, String photo, int stock, String dimensions, String brand, String material, Category... categories) {
         if (this.sp != null) {
@@ -224,6 +228,7 @@ public class Employee extends User {
      * @param exchange the exchange to manage
      * @param e whether the exchange has been done or not
      *
+     * @return true if the order could be managed, false if else
      */
     public boolean manageExchange(Exchange exchange, boolean e) {
         if (this.ep != null) {
@@ -240,6 +245,7 @@ public class Employee extends User {
      * @param valuation the valuation(price)
      * @param status the conservation status
      *
+     * @return true if the product could be evaluated, false if else
      */
     public boolean valuate(SecondHandProduct secondHandProduct, double valuation, ConservationStatus status) {
         if (this.ep != null) {
@@ -256,6 +262,8 @@ public class Employee extends User {
      * @param valuation the valuation(price)
      * @param status the conservation status
      * @param valuationDate the date of valuation
+     * 
+     * @return true if the product could be evaluated, false if else
      */
     public boolean valuate(SecondHandProduct secondHandProduct, double valuation, ConservationStatus status, LocalDate valuationDate) {
         if (this.ep != null) {
@@ -271,6 +279,7 @@ public class Employee extends User {
      * @param o the order to manage
      * @param status the order's status
      *
+     * @return true if the order could be managed, false if else
      */
     public boolean manageOrder(Order o, OrderState status) {
         if (this.op != null) {

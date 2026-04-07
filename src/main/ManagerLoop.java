@@ -48,7 +48,7 @@ public class ManagerLoop extends Loop {
      */
     void managerLoop() throws IOException, IllegalArgumentException, NullPointerException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- managerLoop ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< managerLoop >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
         int i = 1;
         System.out.println("\t[" + i++ + "] Manage packs");
@@ -97,7 +97,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to manage the store's packs
      */
     private void managePacks() {
-        System.out.print("\n ---- managePacks ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< managePacks >>>>>>>>>> \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -108,7 +108,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
-            System.out.print("\n ---- manageStoreProducts ---- \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageStoreProducts >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
 
             List<StoreProduct> products = ((Manager) currentUser).searchStoreProduct(); // DUE: Añadir filtrado
@@ -124,7 +124,7 @@ public class ManagerLoop extends Loop {
 
             switch (chosenOption) {
                 case 1:
-                    System.out.print("\n ---- unregisteredSeeProduct ---- \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< unregisteredSeeProduct >>>>>>>>>> \n"); // Es para debug, borrar
                     System.out.println("Enter the number of the desired product:");
                     int productNum = scanner.nextInt();
 
@@ -172,7 +172,7 @@ public class ManagerLoop extends Loop {
     private void manageComic(Comic comic) throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
-        System.out.print("\n ---- manageComic ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< manageComic >>>>>>>>>> \n"); // Es para debug, borrar
         comic.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
@@ -252,7 +252,7 @@ public class ManagerLoop extends Loop {
      */
     private void manageGame(Game game) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- manageGame ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< manageGame >>>>>>>>>> \n"); // Es para debug, borrar
         game.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
@@ -328,7 +328,7 @@ public class ManagerLoop extends Loop {
      */
     private void manageFigurine(Figurine figurine) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- manageFigurine ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< manageFigurine >>>>>>>>>> \n"); // Es para debug, borrar
         figurine.printAllInfo();
 
         System.out.println("What do you wish to change? (enter the nº)");
@@ -403,7 +403,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         String categoryName, newCategoryName;
         Category category, newCategory;
-        System.out.print("\n ---- categoryChanger ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< categoryChanger >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
         int i = 1;
         System.out.println("\t[" + i++ + "] Replace an existing product's category");
@@ -469,7 +469,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to add a store product to the store
      */
     private void addStoreProduct() {
-        System.out.print("\n ---- addStoreProduct ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< addStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -477,7 +477,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to manage the store's employees
      */
     private void manageEmployees() {
-        System.out.print("\n ---- manageEmployees ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< manageEmployees >>>>>>>>>> \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -487,7 +487,7 @@ public class ManagerLoop extends Loop {
      */
     private void generateStatistics() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- generateStatistics ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< generateStatistics >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("Which statistic do you wish to generate? (enter the nº)");
         int i = 1;
         System.out.println("\t[" + i++ + "] List of store products by sales");
@@ -563,7 +563,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
-            System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< productBySales >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
             List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
             Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
@@ -597,7 +597,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
-            System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< clientsByOrders >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
             Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
 
@@ -630,7 +630,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
-            System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< clientsByExchanges >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
             Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
 
@@ -659,7 +659,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's revenue by month
      */
     public void revenueByMonth() {
-        System.out.print("\n ---- revenueByMonth ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< revenueByMonth >>>>>>>>>> \n"); // Es para debug, borrar
         HashMap<Month, Double> revenueByMonth = Statistics.getINSTANCE().getRevenueByMonth();
         for (Map.Entry<Month, Double> entry : revenueByMonth.entrySet()) {
             System.out.printf(entry.getKey() + ": " + entry.getValue() + "€");
@@ -670,7 +670,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's categories by revenue
      */
     public void categoriesByRevenue() {
-        System.out.print("\n ---- categoriesByRevenue ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< categoriesByRevenue >>>>>>>>>> \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -678,7 +678,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's store products by sales, with their percentage over the overall sales
      */
     public void productBySalesWithPercentage() {
-        System.out.print("\n ---- productBySalesWithPercentage ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< productBySalesWithPercentage >>>>>>>>>> \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -687,7 +687,8 @@ public class ManagerLoop extends Loop {
      * on a certain month
      */
     public void productBySalesWithPercentageCertainMonth() {
-        System.out.print("\n ---- productBySalesWithPercentageCertainMonth ---- \n"); // Es para debug, borrar
+        System.out.print(
+                "\n <<<<<<<<<< productBySalesWithPercentageCertainMonth >>>>>>>>>> \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -695,7 +696,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to manage the store's discounts
      */
     private void manageDiscounts() {
-        System.out.print("\n ---- manageDiscounts ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< manageDiscounts >>>>>>>>>> \n"); // Es para debug, borrar
         // DUE
     }
 
@@ -704,7 +705,7 @@ public class ManagerLoop extends Loop {
      */
     private void manageParameters() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- manageParameters ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< manageParameters >>>>>>>>>> \n"); // Es para debug, borrar
         Manager manager = (Manager) currentUser;
         System.out.println("What do you wish to change? (enter the nº)");
         int i = 1;
@@ -763,7 +764,7 @@ public class ManagerLoop extends Loop {
      */
     private void seeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n ---- seeProfile ---- \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< seeProfile >>>>>>>>>> \n"); // Es para debug, borrar
         currentUser.getPrintInfo();
 
         System.out.println("What do you wish to do? (enter the nº)");

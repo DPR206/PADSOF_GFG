@@ -1,27 +1,27 @@
 package productT;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import product.Category;
 import product.Comic;
 import product.SimplePack;
 import product.StoreProduct;
 
-class SimplePackTest {
+public class SimplePackTest {
 
     private Comic comic;
     private ArrayList<StoreProduct> products;
     private SimplePack simplePack;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         Category category = new Category("Fiction", 0.0);
         comic = new Comic(12.99, "Test Comic", "Description", "photo.png", 10, 120, Year.of(2020), "Author", "Editorial", category);
         products = new ArrayList<>();
@@ -30,49 +30,49 @@ class SimplePackTest {
     }
 
     @Test
-    void testConstructorWithPriceAndProducts() {
+    public void testConstructorWithPriceAndProducts() {
         SimplePack pack = new SimplePack(25.99, products);
-        assertEquals(25.99, pack.getPrice());
+        assertEquals(25.99, pack.getPrice(), 0.01);
         assertEquals(1, pack.getProducts().size());
         assertEquals(comic, pack.getProducts().get(0));
     }
 
     @Test
-    void testConstructorWithPriceProductsAndDate() {
+    public void testConstructorWithPriceProductsAndDate() {
         LocalDate date = LocalDate.now();
         SimplePack pack = new SimplePack(25.99, products, date);
-        assertEquals(25.99, pack.getPrice());
+        assertEquals(25.99, pack.getPrice(), 0.01);
         assertEquals(date, pack.getDateAddCart());
         assertEquals(1, pack.getProducts().size());
     }
 
     @Test
-    void testConstructorWithIdPriceAndProducts() {
+    public void testConstructorWithIdPriceAndProducts() {
         SimplePack pack = new SimplePack(1, 25.99, products);
         assertEquals(1, pack.getId());
-        assertEquals(25.99, pack.getPrice());
+        assertEquals(25.99, pack.getPrice(), 0.01);
         assertEquals(1, pack.getProducts().size());
     }
 
     @Test
-    void testConstructorWithIdPriceProductsAndDate() {
+    public void testConstructorWithIdPriceProductsAndDate() {
         LocalDate date = LocalDate.now();
         SimplePack pack = new SimplePack(1, 25.99, products, date);
         assertEquals(1, pack.getId());
-        assertEquals(25.99, pack.getPrice());
+        assertEquals(25.99, pack.getPrice(), 0.01);
         assertEquals(date, pack.getDateAddCart());
         assertEquals(1, pack.getProducts().size());
     }
 
     @Test
-    void testGetPrice() {
-        assertEquals(25.99, simplePack.getPrice());
+    public void testGetPrice() {
+        assertEquals(25.99, simplePack.getPrice(), 0.01);
     }
 
     @Test
-    void testSetPrice() {
+    public void testSetPrice() {
         simplePack.setPrice(30.99);
-        assertEquals(30.99, simplePack.getPrice());
+        assertEquals(30.99, simplePack.getPrice(), 0.01);
     }
 
     @Test
@@ -106,8 +106,8 @@ class SimplePackTest {
     }
 
     @Test
-    void testTotalPrice() {
-        assertEquals(12.99, simplePack.totalPrice());
+    public void testTotalPrice() {
+        assertEquals(12.99, simplePack.totalPrice(), 0.01);
     }
 
     @Test

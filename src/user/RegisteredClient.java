@@ -378,11 +378,11 @@ public class RegisteredClient extends User {
         try {
 			this.c.payOrder();
 		} catch (InvalidCardNumberException e) {
-			e.printStackTrace();
+			System.out.println("Invalid card number");
 		} catch (FailedInternetConnectionException e) {
-			e.printStackTrace();
+			System.out.println("Failed Internet connection");
 		} catch (OrderRejectedException e) {
-			e.printStackTrace();
+			System.out.println("Order rejected");
 		}
     }
 

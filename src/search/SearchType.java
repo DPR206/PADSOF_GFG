@@ -7,12 +7,19 @@ package search;
     * @see Searcher
     */
 public enum SearchType{
+	/** A search made within the store */
     S_STORE("store"),
+    /** A search made within the orders */
     S_ORDER("order"),
+    /** A search made within the exchanges */
     S_EXCHANGE("exchange"),
+    /** A search made within the packs */
     S_PACK("pack"),
+    /** A search made within the employees */
     S_EMPLOYEE("employee"),
+    /** A search made within the second-hand products */
     S_SECOND_HAND("second hand"),
+    /** A search made within the valuation products */
     S_VALUATION_PROD("valuation prod");
 
     private final String theType;

@@ -180,6 +180,14 @@ public class Store {
     public void addExchange(Exchange e) {
         this.exchanges.add(e);
     }
+    
+    /**
+     * Adds a category to the store
+     * @param c the category to add
+     */
+    public void addCategory(Category c) {
+    	this.categories.put(c.getName(), c);
+    }
 
     /**
      * Sends the notifications to the clients

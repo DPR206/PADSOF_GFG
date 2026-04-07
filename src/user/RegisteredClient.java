@@ -10,6 +10,7 @@ import order.Cart;
 import order.OrderHistory;
 import product.*;
 import search.*;
+import store.Recommender;
 import store.Store;
 
 import java.time.LocalDate;
@@ -36,8 +37,6 @@ public class RegisteredClient extends User {
     private Searcher searcher;
     private int numOrders;
     private int numExchanges;
-
-    // recommender
 
     /**
      * Creates a new registered client
@@ -370,7 +369,7 @@ public class RegisteredClient extends User {
     public void increaseNumExchanges(int i) {
     	this.numExchanges += i;
     }
-    
+
     /**
      * Makes the buying process of the cart
      */
@@ -466,6 +465,14 @@ public class RegisteredClient extends User {
     			notifications.add(n);
     	return notifications;
     }
+
+	/**
+	 * It allows the registered client to browse recommendations on products imilar to those they bought previously
+	 * @return the recommendation
+	 */
+	public List<StoreProduct> browseSimilarProducts() {
+		return Recommender.getInstance().recommendSimilarProducts(this);
+	}
 
     /**
      * Changes an interest in a type of notification

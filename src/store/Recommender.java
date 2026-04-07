@@ -42,10 +42,10 @@ public class Recommender {
     /**
      * It recommends products which are similar to those bought by a client, excluding those who were already bought
      * @param client the desired client
-     * @param K      the maximum number of products to return
      * @return the top-K recommended products
      */
-    public List<StoreProduct> recommendSimilarProducts(RegisteredClient client, int K) { /* 1st method */
+    public List<StoreProduct> recommendSimilarProducts(RegisteredClient client) { /* 1st method */
+        int K = Parameter.getParam().getkRecommend();
         List<Category> categories = new ArrayList<>(Store.getInstance().getCategories().values());
         Map<StoreProduct, Double> productsAndRatings = getPurchasedProducts(client);
         if (productsAndRatings.isEmpty()) {

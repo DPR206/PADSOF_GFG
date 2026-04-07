@@ -20,6 +20,10 @@ public class Parameter {
 	private String storeAddress;
 	private Period ExchangeTime;
 	/**
+     * The maximum number of products the recommender will return
+     */
+	private int kRecommend;
+	/**
 	 * Param a for the recommender following: weightedScore = (a*score + b)
 	 */
 	private double scoreAParam;
@@ -157,7 +161,7 @@ public class Parameter {
     private void setItemsPerPage(int newItemsPerPage) {
 		this.itemsPerPage = newItemsPerPage;
 	}
-    
+
     /**
      * Obtains the store's address
 	 * @return the storeAddress
@@ -190,9 +194,25 @@ public class Parameter {
 		ExchangeTime = exchangeTime;
 	}
 
-	/*------------------------------------------------------------------METHODS------------------------------------------------------------------*/
+    /**
+     * Gets the maximum number of products the recommender will return
+     * @return the maximum number of products the recommender will return
+     */
+    public int getkRecommend() {
+        return kRecommend;
+    }
 
-	
+    /**
+     * Sets the maximum number of products the recommender will return
+     * @param newKRecommend the new maximum number of products the recommender will return
+     */
+    public void setkRecommend(int newKRecommend) {
+        this.kRecommend = newKRecommend;
+    }
+
+    /*------------------------------------------------------------------METHODS------------------------------------------------------------------*/
+
+
 
 	/**
 	 * Change the expiration of an offer
@@ -209,7 +229,7 @@ public class Parameter {
 	public void changeOrderTime(Period newOrderTime) {
 		this.setOrderTime(newOrderTime);
 	}
-	
+
 	/**
 	 * Changes the time it will pass since the offer is accepted and the exchange is done
 	 * @param newExchangeTime the new exchange time
@@ -249,10 +269,10 @@ public class Parameter {
 	public void changeItemsPerPage(int newItemsPerPage) {
 		this.setItemsPerPage(newItemsPerPage);
 	}
-	
+
 	/**
 	 * It changes the store's address
-	 * 
+	 *
 	 * @param newAddress the new address to set
 	 */
 	public void changeAddress(String newAddress) {
@@ -269,5 +289,5 @@ public class Parameter {
 				+ ", storeAddress=" + storeAddress + ", ExchangeTime=" + ExchangeTime + ", scoreAParam=" + scoreAParam
 				+ ", scoreBParam=" + scoreBParam + ", itemsPerPage=" + itemsPerPage + "]";
 	}
-	
+
 }

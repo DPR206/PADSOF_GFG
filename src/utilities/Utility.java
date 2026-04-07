@@ -56,6 +56,7 @@ public class Utility {
 
             u = rc;
             users.put(u.getUserName(), u);
+            Store.getInstance().getRegisteredClients().put(userName, rc);
             return u;
 
         } catch (InputMismatchException e) {
@@ -88,7 +89,7 @@ public class Utility {
     /**
      * Checks if a password is secure
      * 
-     * @param psswd the password to chech
+     * @param psswd the password to check
      * @return true if the password is safe, false if else
      */
     public boolean securePassword(String psswd) {

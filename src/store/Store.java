@@ -9,7 +9,6 @@ import product.*;
 import user.*;
 import utilities.Utility;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -116,12 +115,6 @@ public class Store {
      */
     public User signIn() {
         User user = utility.signIn();
-        //if(user instanceof Employee)
-        //	this.employees.put(user.getUserName(), (Employee) user);
-        //else if(user instanceof RegisteredClient)
-        //	this.registeredClients.put(user.getUserName(), (RegisteredClient) user);
-        //else if(user instanceof Manager)
-        //	this.manager = (Manager) user;
         return user;
     }
 
@@ -139,7 +132,7 @@ public class Store {
      * @param product, the new product
      */
     public void addStoreProduct(StoreProduct product) {
-        this.storeProducts.put(product.getName(), product);
+        this.storeProducts.put(product.getId(), product);
     }
 
     /**
@@ -147,7 +140,7 @@ public class Store {
      * @param product, the new product
      */
     public void addSecondHandProduct(SecondHandProduct product) {
-        this.secondHandProducts.put(product.getName(), product);
+        this.secondHandProducts.put(product.getId(), product);
     }
 
     /**
@@ -155,7 +148,7 @@ public class Store {
      * @param product, the product
      */
     public void deleteStoreProduct(StoreProduct product) {
-        this.storeProducts.remove(product.getName(), product);
+        this.storeProducts.remove(product.getId(), product);
     }
 
     /**
@@ -163,11 +156,7 @@ public class Store {
      * @param product, the product
      */
     public void deleteSecondHandProduct(SecondHandProduct product) {
-        this.secondHandProducts.remove(product.getName(), product);
-        NotificationNewSecondHand notification = new NotificationNewSecondHand(LocalDateTime.now(), false, true,
-                NotificationType.NEW_SECONDHAND_PRODUCT);
-        notification.FullNotification(product);
-        this.sendNotificationClients(notification);
+        this.secondHandProducts.remove(product.getId(), product);
     }
 
     /**
@@ -490,7 +479,7 @@ public class Store {
 
     /**
      * Gets the list of the store's registered clients
-     * @return a hash map of the registered clients and their names
+     * @return a hash map of the registered clients and their ids
      */
     public HashMap<String, RegisteredClient> getRegisteredClients() {
         return this.registeredClients;
@@ -518,7 +507,7 @@ public class Store {
 
     /**
      * Gets the list of the second hand products available in the store
-     * @return a hash map of the second-hand products and their names
+     * @return a hash map of the second-hand products and their ids
      */
     public HashMap<String, SecondHandProduct> getSecondHandProducts() {
         return this.secondHandProducts;
@@ -546,7 +535,7 @@ public class Store {
 
     /**
      * Gets the list of the store products available in the store
-     * @return a hash map of the store products and their names
+     * @return a hash map of the store products and their ids
      */
     public HashMap<String, StoreProduct> getStoreProducts() {
         return this.storeProducts;

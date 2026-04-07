@@ -3,6 +3,7 @@
  */
 package product;
 
+import store.Store;
 import user.RegisteredClient;
 /**
  * It implements the reviews
@@ -29,6 +30,8 @@ public class Review {
 		this.id = id;
 		this.scoring = scoring;
 		this.comment = comment;
+		
+		Store.getInstance().addReview(this);
 	}
 
 	/**
@@ -43,6 +46,8 @@ public class Review {
 		this.scoring = scoring;
 		this.comment = comment;
 		this.author = author;
+		
+		Store.getInstance().addReview(this);
 	}
 
 	/**

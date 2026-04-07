@@ -17,7 +17,6 @@ import static java.lang.Math.sqrt;
  */
 public class Recommender {
     private static final Recommender PARAM = new Recommender();
-    // He decidido implementar los dos tipos, me falta el segundo
     HashMap<Category, Double> categoriesAndScores = new HashMap<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/

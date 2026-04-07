@@ -31,7 +31,8 @@ public class OfferHistory {
             throw new NullPointerException("Owner is null");
         }
 
-        this(new HashSet<>(), owner);
+        this.offers = new HashSet<>();
+        this.owner = owner;
     }
 
     /**

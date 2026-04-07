@@ -87,7 +87,7 @@ public class ManagerLoop extends Loop {
             case 8:
                 seeProfile();
                 break;
-            default:
+            default: /* Go back */
                 exit();
                 break;
         }
@@ -106,8 +106,8 @@ public class ManagerLoop extends Loop {
      */
     private void manageStoreProducts() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        boolean exitMenu = false;
-        while (!exitMenu) {
+        boolean exitLoop = false;
+        while (!exitLoop) {
             System.out.print("\n ---- manageStoreProducts ---- \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
 
@@ -142,7 +142,7 @@ public class ManagerLoop extends Loop {
                         case FIGURINE:
                             assert product instanceof Figurine;
                             manageFigurine((Figurine) product);
-                        default: // Este NO debería saltar nunca, lo pongo por si acaso
+                        default: /* Go back */ // Este NO debería saltar nunca, lo pongo por si acaso
                             System.out.println("You shouldn't be able to see this :(");
                             //manageStoreProducts();
                             break;
@@ -157,8 +157,8 @@ public class ManagerLoop extends Loop {
                     nextPageStoreProduct(products);
                     //manageStoreProducts();
                     break;
-                default:
-                    exitMenu = true;
+                default: /* Go back */
+                    exitLoop = true;
                     break;
             }
         }
@@ -171,7 +171,7 @@ public class ManagerLoop extends Loop {
      */
     private void manageComic(Comic comic) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        boolean exitMenu = false;
+        boolean exitLoop = false;
         System.out.print("\n ---- manageComic ---- \n"); // Es para debug, borrar
         comic.printAllInfo();
 
@@ -239,7 +239,7 @@ public class ManagerLoop extends Loop {
                 Year newYear = Year.parse(scanner.next());
                 comic.setYear(newYear);
                 break;
-            default:
+            default: /* Go back */
                 exit();
                 break;
         }
@@ -315,7 +315,7 @@ public class ManagerLoop extends Loop {
                 GameStyle newGameStyle = GameStyle.valueOf(scanner.next());
                 game.setGameStyle(newGameStyle);
                 break;
-            default:
+            default: /* Go back */
                 exit();
                 break;
         }
@@ -389,7 +389,7 @@ public class ManagerLoop extends Loop {
                 String newDimension = scanner.next();
                 figurine.setDimension(newDimension);
                 break;
-            default:
+            default: /* Go back */
                 exit();
                 break;
         }
@@ -457,7 +457,7 @@ public class ManagerLoop extends Loop {
                 }
                 storeProduct.removeCategory(category);
                 break;
-            default:
+            default: /* Go back */
                 System.out.println("Uh oh, something went wrong :/, reloading...");
                 exit();
                 break;
@@ -549,7 +549,7 @@ public class ManagerLoop extends Loop {
                 System.out.println("The " + categoryName + " category's total revenue is " +
                                    Statistics.getINSTANCE().getRevenueByCategory(categoryName) + "€");
                 break;
-            default:
+            default: /* Go back */
                 exit();
                 break;
         }
@@ -561,8 +561,8 @@ public class ManagerLoop extends Loop {
      */
     public void productBySales() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        boolean exitMenu = false;
-        while (!exitMenu) {
+        boolean exitLoop = false;
+        while (!exitLoop) {
             System.out.print("\n ---- productBySales ---- \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
             List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
@@ -582,8 +582,8 @@ public class ManagerLoop extends Loop {
                     nextPageStoreProduct(products);
                     //productBySales();
                     break;
-                default:
-                    exitMenu = true;
+                default: /* Go back */
+                    exitLoop = true;
                     break;
             }
         }
@@ -595,8 +595,8 @@ public class ManagerLoop extends Loop {
      */
     public void clientsByOrders() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        boolean exitMenu = false;
-        while (!exitMenu) {
+        boolean exitLoop = false;
+        while (!exitLoop) {
             System.out.print("\n ---- clientsByOrders ---- \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
             Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
@@ -615,8 +615,8 @@ public class ManagerLoop extends Loop {
                     nextPageRegisteredClient();
                     //clientsByOrders();
                     break;
-                default:
-                    exitMenu = true;
+                default: /* Go back */
+                    exitLoop = true;
                     break;
             }
         }
@@ -628,8 +628,8 @@ public class ManagerLoop extends Loop {
      */
     public void clientsByExchanges() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        boolean exitMenu = false;
-        while (!exitMenu) {
+        boolean exitLoop = false;
+        while (!exitLoop) {
             System.out.print("\n ---- clientsByExchanges ---- \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
             Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
@@ -648,8 +648,8 @@ public class ManagerLoop extends Loop {
                     nextPageRegisteredClient();
                     //clientsByExchanges();
                     break;
-                default:
-                    exitMenu = true;
+                default: /* Go back */
+                    exitLoop = true;
                     break;
             }
         }
@@ -752,7 +752,7 @@ public class ManagerLoop extends Loop {
                 double newValuationCost = scanner.nextDouble();
                 manager.changeValuationCost(newValuationCost);
                 break;
-            default:
+            default: /* Go back */
                 exit();
                 break;
         }

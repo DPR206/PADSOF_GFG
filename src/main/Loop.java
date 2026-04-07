@@ -114,7 +114,7 @@ public abstract class Loop {
             case MANAGER:
                 ManagerLoop.getInstance().managerLoop();
                 break;
-            default: // Este NO debería saltar nunca, lo pongo por si acaso
+            default: /* Go back */ // Este NO debería saltar nunca, lo pongo por si acaso
                 System.out.println("You shouldn't be able to see this :(");
                 main();
                 break;
@@ -206,16 +206,6 @@ public abstract class Loop {
             System.out.println("\t[" + optionNum + "] Reload page");
         }
     }
-
-    /* Option printers:
-        [x] Review
-        [x] Store Product
-        [x] Registered Client
-        [x] Employee
-        [x] Pack
-        [x] Discount
-        [x] Category
-     */
 
     /**
      * It prints the next page selection when the user is prompted to choose their next action whilst viewing a store
@@ -313,8 +303,8 @@ public abstract class Loop {
     /* Useful things */
 
     /**
-     * It prints the selections: see notification, see profile, go back, go to main page, exit. Used when prompting the
-     * user, notification and profile options will only be printed it they can be chosen by the current user
+     * It prints the selections: see notification, see profile, exit, go back. Used when prompting the user,
+     * notification and profile options will only be printed it they can be chosen by the current user
      * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
      */
     protected void basicLoopPrinter(int firstOptionNum) {
@@ -325,15 +315,14 @@ public abstract class Loop {
 
             System.out.println("\t[" + firstOptionNum++ + "] See profile");
         }
-        // Trozos de mis sueños rotos: System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
-        // Trozos de mis sueños rotos: System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
         System.out.println("\t[" + firstOptionNum + "] x Exit app");
+        System.out.println("\t[" + firstOptionNum + "] x Go back");
     }
 
     /**
-     * It prints the selections: see notification, see profile, previous page, next page, go back, go to main page,
-     * exit. Used when prompting the user, notification and profile options will only be printed it they can be chosen
-     * by the current user
+     * It prints the selections: see notification, see profile, previous page, next page, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
      * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
      */
     protected void pagedLoopPrinter(int firstOptionNum) {
@@ -348,8 +337,6 @@ public abstract class Loop {
         firstOptionNum++;
         nextPagePrinterRegisteredClient(firstOptionNum);
         firstOptionNum++;
-        // Trozos de mis sueños rotos: System.out.println("\t[" + firstOptionNum++ + "] <- Go back");
-        // Trozos de mis sueños rotos: System.out.println("\t[" + firstOptionNum++ + "] <<- Go to main page");
         System.out.println("\t[" + firstOptionNum + "] x Exit app");
     }
 }

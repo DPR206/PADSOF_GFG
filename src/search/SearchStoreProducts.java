@@ -23,7 +23,7 @@ public class SearchStoreProducts{
 	 * Creates the class and initiates the filters as null in the beginning until the user changes them
 	 *
 	 * @param asc, determines if the searches are ascendant or descendant
-     * @param type, determines the type of search we are doing
+     *  type, determines the type of search we are doing
 	 */
     public SearchStoreProducts(boolean asc){
         this.ascendant = asc;
@@ -117,7 +117,7 @@ public class SearchStoreProducts{
             return priced;
         }
         /*caso donde no hay ningún filtro */
-        return (List<StoreProduct>) this.s.getStoreProducts();
+        return s.getStoreProductList();
     }
 
      /**

@@ -74,10 +74,12 @@ public class MainLoop extends Loop {
             case 3:
                 signer();
                 break;
-            default:
+            default: /* Go back */
                 exit();
                 break;
         }
+
+        exit();
 
     }
 }

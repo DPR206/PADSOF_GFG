@@ -4,29 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import product.Review;
-import user.RegisteredClient;
 
 public class ReviewTest {
 
     private Review review;
-    private RegisteredClient author;
 
-    @BeforeEach
+    @Before
     public void setUp() {
-        author = new RegisteredClient("testUser", "12345678A", "password", true);
-        review = new Review(4, "Great product!", author);
-    }
-
-    @Test
-    public void testConstructorWithScoringCommentAuthor() {
-        Review r = new Review(5, "Excellent!", author);
-        assertEquals(5, r.getScoring());
-        assertEquals("Excellent!", r.getComment());
-        assertEquals(author, r.getAuthor());
-        assertTrue(r.getId() >= 0);
+        review = new Review(1, 4, "Great product!");
     }
 
     @Test
@@ -39,20 +26,8 @@ public class ReviewTest {
     }
 
     @Test
-    public void testGetAuthor() {
-        assertEquals(author, review.getAuthor());
-    }
-
-    @Test
-    public void testSetAuthor() {
-        RegisteredClient newAuthor = new RegisteredClient("newUser", "87654321B", "newpass", false);
-        review.setAuthor(newAuthor);
-        assertEquals(newAuthor.getDni(), review.getAuthor().getDni());
-    }
-
-    @Test
     public void testGetId() {
-        assertTrue(review.getId() >= 0);
+        assertEquals(1, review.getId());
     }
 
     @Test

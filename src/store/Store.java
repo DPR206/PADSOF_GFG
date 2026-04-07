@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * It implements the store
  * @author Sofía C. and Ana O.R.
- * @version 1.0
+ * @version 1.5
  * @see Parameter
  * @see Utility
  * @see Manager
@@ -79,7 +79,7 @@ public class Store {
 
     /**
      * Gets the Instance of the Store
-     *
+     * @return the store
      */
     public static Store getInstance() {
         if (Store.INSTANCE == null) {
@@ -90,7 +90,8 @@ public class Store {
 
     /**
      * Logs in a user
-     *
+     * 
+     * @return the associated user
      */
     public User logIn() {
         try (Scanner sc = new Scanner(System.in)) {
@@ -113,6 +114,7 @@ public class Store {
     /**
      * Signs in a user
      *
+     * @return a new user
      */
     public User signIn() {
         return utility.signIn();
@@ -246,6 +248,7 @@ public class Store {
     /**
      * Gets the list of the categories of the store
      *
+     * @return a hash map of the categories and their names
      */
     public HashMap<String, Category> getCategories() {
         return this.categories;
@@ -254,6 +257,7 @@ public class Store {
     /**
      * Gets the category by its name
      * @param name the category's name
+     * @return the category with that name
      */
     public Category getCategoryFromName(String name) {
         if (this.categories.containsKey(name)) {
@@ -288,6 +292,7 @@ public class Store {
 
     /**
      * Gets the list of the discounts of the store
+     * @return a list with the discounts
      *
      */
     public List<Discount> getDiscounts() {
@@ -320,7 +325,7 @@ public class Store {
 
     /**
      * Gets the list of the exchanges of the store
-     *
+     * @return a list with the exchanges
      */
     public List<Exchange> getExchanges() {
         return this.exchanges;
@@ -329,6 +334,7 @@ public class Store {
     /**
      * Gets the manager of the store
      *
+     * @return the manager of the store
      */
     public Manager getManager() {
         return this.manager;
@@ -337,6 +343,7 @@ public class Store {
     /**
      * Gets the list of the offers of the store
      *
+     * @return a list with the offers 
      */
     public List<Offer> getOffers() {
         return this.offers;
@@ -344,7 +351,7 @@ public class Store {
 
     /**
      * Gets the list of the orders done in the store
-     *
+     * @return a list with the orders 
      */
     public List<Order> getOrders() {
         return this.orders;
@@ -360,7 +367,7 @@ public class Store {
 
     /**
      * Gets the list of the packs of the store
-     *
+     * @return a list with the packs 
      */
     public List<Pack> getPacks() {
         return this.packs;
@@ -400,7 +407,7 @@ public class Store {
 
     /**
      * Gets the list of the store's registered clients
-     *
+     * @return a hash map of the registered clients and their names
      */
     public HashMap<String, RegisteredClient> getRegisteredClients() {
         return this.registeredClients;
@@ -408,7 +415,7 @@ public class Store {
 
     /**
      * Gets the list of the reviews of the store
-     *
+     * @return a list of the reviews
      */
     public List<Review> getReviews() {
         return this.reviews;
@@ -428,7 +435,7 @@ public class Store {
 
     /**
      * Gets the list of the second hand products available in the store
-     *
+     * @return a hash map of the second-hand products and their names
      */
     public HashMap<String, SecondHandProduct> getSecondHandProducts() {
         return this.secondHandProducts;
@@ -456,7 +463,7 @@ public class Store {
 
     /**
      * Gets the list of the store products available in the store
-     *
+     * @return a hash map of the store products and their names
      */
     public HashMap<String, StoreProduct> getStoreProducts() {
         return this.storeProducts;
@@ -464,7 +471,7 @@ public class Store {
 
     /**
      * Gets the list of the users of the store
-     *
+     * @return a map of the users and their names
      */
     public Map<String, User> getUsers() {
         return this.users;

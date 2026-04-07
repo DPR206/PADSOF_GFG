@@ -14,6 +14,7 @@ import java.util.List;
  * @version 1.0
  */
 public class Order {
+	/** ID counter for the orders */
     static public int totalId = 0;
 
     private int id;
@@ -27,8 +28,12 @@ public class Order {
 
     /**
      * Creates an order for when it hasn't been picked up
-     * @param id,    the unique number of the order
-     * @param price, total price paid of the order
+     * @param id  the unique number of the order
+     * @param price total price paid of the order
+     * @param state the order's state
+     * @param sp the store products in the order
+     * @param p the packs in the order
+     * @param owner the owner of the order
      */
     public Order(int id, double price, OrderState state, List<StoreProduct> sp, List<Pack> p, RegisteredClient owner) {
         this.id = id;
@@ -42,8 +47,12 @@ public class Order {
 
     /**
      * Creates an order for when it hasn't been picked up
-     * @param price, total price paid of the order
-	 */
+     * @param price total price paid of the order
+     * @param state the order's state
+     * @param sp the store products in the order
+     * @param p the packs in the order
+     * @param owner the owner of the order
+     */
     public Order(double price, OrderState state, List<StoreProduct> sp, List<Pack> p, RegisteredClient owner){
         this(Order.totalId, price, state, sp, p, owner);
         Order.totalId++;

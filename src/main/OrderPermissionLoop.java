@@ -93,6 +93,7 @@ public class OrderPermissionLoop extends Loop {
                     break;
                 case 5: /* Browse notifications */
                     EmployeeLoop.getInstance().browseNotifications();
+                    break;
                 case 6: /* See profile */
                     EmployeeLoop.getInstance().seeProfile();
                     break;
@@ -137,6 +138,7 @@ public class OrderPermissionLoop extends Loop {
                     break;
                 case 2: /* Browse notifications */
                     EmployeeLoop.getInstance().browseNotifications();
+                    break;
                 case 3: /* See profile */
                     EmployeeLoop.getInstance().seeProfile();
                     break;

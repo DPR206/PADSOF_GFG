@@ -57,7 +57,9 @@ public class PackTest {
 
 		 this.p.increaseStock();
 		 stock1++;
-		 assertTrue(stock1 == c1.getStock());
+		 stock2++;
+		 assertEquals(stock1, c1.getStock());
+		 assertEquals(stock2, c2.getStock());
 
 	 }
 

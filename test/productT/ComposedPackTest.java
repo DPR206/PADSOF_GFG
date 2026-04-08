@@ -1,22 +1,15 @@
 package productT;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-
-import product.Category;
-import product.Comic;
-import product.ComposedPack;
-import product.Pack;
-import product.SimplePack;
-import product.StoreProduct;
+import product.*;
 
 public class ComposedPackTest {
 

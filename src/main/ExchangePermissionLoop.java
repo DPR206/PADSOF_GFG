@@ -55,7 +55,7 @@ public class ExchangePermissionLoop extends Loop {
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage an exchange");
             System.out.println("\t[" + i++ + "] Valuate a product");
-            pagedLoopPrinter(i);
+            pagedSecondHandLoopPrinter(i, products);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -172,7 +172,7 @@ public class ExchangePermissionLoop extends Loop {
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Valuate a product");
-            pagedLoopPrinter(i);
+            pagedSecondHandLoopPrinter(i, products);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {

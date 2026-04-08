@@ -187,6 +187,20 @@ public abstract class Loop {
     }
 
     /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedSecondHandLoopPrinter(int firstOptionNum, List<SecondHandProduct> products) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterSecondHandProduct(firstOptionNum, products);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
+    }
+
+    /**
      * It allows for a user to switch to the next page when viewing the store's list of registered clients
      */
     protected void nextPageRegisteredClient() {
@@ -302,6 +316,20 @@ public abstract class Loop {
     }
 
     /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedReviewLoopPrinter(int firstOptionNum, StoreProduct product) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterReview(firstOptionNum, product);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
+    }
+
+    /**
      * It prints the next page selection when the user is prompted to choose their next action whilst viewing a list of
      * store products
      * @param optionNum the number that will resemble the previous page action in the prompt
@@ -313,6 +341,34 @@ public abstract class Loop {
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");
         }
+    }
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing a list of
+     * store products
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     * @param products  the list of products
+     */
+    protected void nextPagePrinterSecondHandProduct(int optionNum, List<SecondHandProduct> products) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getSecondHandProductMaxPageNum(products)) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedStoreProductLoopPrinter(int firstOptionNum, List<StoreProduct> products) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterStoreProduct(firstOptionNum, products);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
     }
 
     /**
@@ -329,6 +385,20 @@ public abstract class Loop {
     }
 
     /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedRegisteredClientLoopPrinter(int firstOptionNum) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterRegisteredClient(firstOptionNum);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
+    }
+
+    /**
      * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
      * store's list of employees
      * @param optionNum the number that will resemble the previous page action in the prompt
@@ -342,16 +412,57 @@ public abstract class Loop {
     }
 
     /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedEmployeeLoopPrinter(int firstOptionNum) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterEmployee(firstOptionNum);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
+    }
+
+    /**
      * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
      * store's list of packs
      * @param optionNum the number that will resemble the previous page action in the prompt
      */
-    protected void nextPagePrinterStorePack(int optionNum) {
+    protected void nextPagePrinterPack(int optionNum) {
         if ((currentScreenPageNum + 1) < Store.getInstance().getPackMaxPageNum()) {
             System.out.println("\t[" + optionNum + "] Next page >");
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");
         }
+    }
+
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
+     * store's list of packs
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     */
+    protected void nextPagePrinterPack(int optionNum, List<Pack> packList) {
+        if ((currentScreenPageNum + 1) < Pager.getInstance().getPackMaxPageNum(packList)) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
+    /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedPackLoopPrinter(int firstOptionNum, List<Pack> packs) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterPack(firstOptionNum, packs);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
     }
 
     /**
@@ -368,6 +479,20 @@ public abstract class Loop {
     }
 
     /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedDiscountLoopPrinter(int firstOptionNum) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterDiscount(firstOptionNum);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
+    }
+
+    /**
      * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
      * store's list of categories
      * @param optionNum the number that will resemble the previous page action in the prompt
@@ -381,6 +506,20 @@ public abstract class Loop {
     }
 
     /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedCategoryLoopPrinter(int firstOptionNum) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterCategory(firstOptionNum);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
+    }
+
+    /**
      * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
      * store's list of orders
      * @param optionNum the number that will resemble the previous page action in the prompt
@@ -391,6 +530,20 @@ public abstract class Loop {
         } else {
             System.out.println("\t[" + optionNum + "] Reload page");
         }
+    }
+
+    /**
+     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
+     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
+     * user
+     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     */
+    protected void pagedOrderLoopPrinter(int firstOptionNum) {
+        previousPagePrinter(firstOptionNum);
+        firstOptionNum++;
+        nextPagePrinterOrder(firstOptionNum);
+        firstOptionNum++;
+        basicLoopPrinter(firstOptionNum);
     }
 
     /* Useful things */
@@ -410,19 +563,5 @@ public abstract class Loop {
         }
         System.out.println("\t[" + firstOptionNum++ + "] x Exit app");
         System.out.println("\t[" + firstOptionNum + "] <- Go back");
-    }
-
-    /**
-     * It prints the selections: previous page, next page, see notification, see profile, exit, go back. Used when
-     * prompting the user, notification and profile options will only be printed it they can be chosen by the current
-     * user
-     * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
-     */
-    protected void pagedLoopPrinter(int firstOptionNum) {
-        previousPagePrinter(firstOptionNum);
-        firstOptionNum++;
-        nextPagePrinterRegisteredClient(firstOptionNum); // DUE Cambiar esto para todos
-        firstOptionNum++;
-        basicLoopPrinter(firstOptionNum);
     }
 }

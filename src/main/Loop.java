@@ -241,6 +241,15 @@ public abstract class Loop {
     }
 
     /**
+     * It allows for a user to switch to the next page when viewing the store's list of exchanges
+     */
+    protected void nextPageExchange() {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getExchangeMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
+    }
+
+    /**
      * It allows for a user to switch to the next page when viewing the store's list of packs
      * @param cart the cart
      */

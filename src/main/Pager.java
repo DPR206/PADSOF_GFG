@@ -1,6 +1,7 @@
 package main;
 
 import discount.Discount;
+import exchange.Exchange;
 import order.Order;
 import product.*;
 import store.Parameter;
@@ -254,6 +255,18 @@ public class Pager {
     }
 
     /**
+     * It gets the exchange listed as n.º exchangeNum in a certain page
+     * @param exchanges   the exchanges
+     * @param pageNum     the desired page's number
+     * @param exchangeNum the desired exchange's n.º
+     * @return the desired exchange
+     */
+    public Exchange selectExchangeFromPage(List<Exchange> exchanges, int pageNum, int exchangeNum) {
+        List<Exchange> exchangeListPage = pageExchangeList(exchanges, pageNum);
+        return exchangeListPage.get(exchangeNum - 1);
+    }
+
+    /**
      * It gets the employee listed as n.º clientNum in a certain page
      * @param employees the employees
      * @param pageNum   the desired page's number
@@ -353,6 +366,20 @@ public class Pager {
         }
 
         return orderList.subList(getFrom(pageNum), getTo(pageNum, orderList.size()));
+    }
+
+    /**
+     * It gets a sub-list of exchanges according to the desired page
+     * @param exchangeList the exchange list
+     * @param pageNum      the desired page's number
+     * @return the desired page
+     */
+    public List<Exchange> pageExchangeList(List<Exchange> exchangeList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
+        return exchangeList.subList(getFrom(pageNum), getTo(pageNum, exchangeList.size()));
     }
 
     /**
@@ -496,6 +523,32 @@ public class Pager {
      */
     public int getEmployeeMaxPageNum(List<Employee> employeeList) {
         return maxPageNum(employeeList.size());
+    }
+
+    /**
+     * It gets the paged index belonging to an exchange with a certain id in a list
+     * @param exchanges the desired list of exchanges
+     * @param wantedId  the id of the desired pack
+     * @return the index belonging to an order with a certain id in a list
+     */
+    public int getExchangeIndex(List<Exchange> exchanges, int wantedId) {
+        for (int j = 0; j < exchanges.size(); j++) {
+            int exchangeId = exchanges.get(j).getId();
+
+            if (wantedId == exchangeId) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's exchange list
+     * @param exchangeList the exchange list
+     * @return the maximum number of pages that can be obtained from the store's exchange list
+     */
+    public int getExchangeMaxPageNum(List<Exchange> exchangeList) {
+        return maxPageNum(exchangeList.size());
     }
 
     /**

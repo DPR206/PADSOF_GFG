@@ -9,8 +9,11 @@ import notification.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Year;
 import java.util.*;
+
+import discount.Discount;
 
 /**
  * It implements the employee
@@ -361,4 +364,202 @@ public class Employee extends User {
     		notifications.add(n);
     	return notifications;
     }
+    
+    /**
+     * Changes the price of a pack
+     *
+     *
+     * @param p, the pack to search
+     * @param price, new price of the pack
+     *
+     */
+    public void setPackPrice(Pack p, double price) {
+    	if(this.sp != null) this.sp.setPackPrice(p, price);
+    }
+    
+    /**
+     * Changes the discount of a pack
+     *
+     *
+     * @param p, the pack to search
+     * @param discount, new discount of the pack
+     *
+     */
+    public void setPackDiscount(Pack p, Discount discount) {
+    	if(this.sp != null) this.sp.setPackDiscount(p, discount);
+    }
+    
+    /**
+     * Adds a product to the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the store product to add
+     *
+     */
+    public void PackAddProduct(Pack p, StoreProduct sp) {
+    	if(this.sp != null) this.sp.PackAddProduct(p, sp);
+    }
+    
+    /**
+     * Adds a list of products to the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param lsp, the list of store product to add
+     *
+     */
+    public void PackAddListProducts(Pack p, ArrayList<StoreProduct> lsp) {
+    	if(this.sp != null) this.sp.PackAddListProducts(p, lsp);
+    }
+    
+    public void DeleteProductFromPack(Pack p, StoreProduct sp) {
+    	if(this.sp != null) this.sp.DeleteProductFromPack(p, sp);
+    }
+    
+    /**
+     * Deletes a list of store products from the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the list of store products to delete
+     *
+     */
+    public void DeleteListOfProductFromPack(Pack p, ArrayList<StoreProduct> sp) {
+    	if(this.sp != null) this.sp.DeleteListOfProductFromPack(p, sp);
+    }
+    
+    /**
+     * Sets the list of products of the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the list of store products to add
+     *
+     */
+    public void setPackProducts(Pack p, ArrayList<StoreProduct> sp) {
+    	if(this.sp != null) this.sp.setPackProducts(p, sp);
+    }
+    
+    
+    /**
+     * Sets the categories of a product.
+     *
+     * @param sp the product to update
+     * @param categories the categories to assign
+     */
+    public void setCategories(StoreProduct sp, HashMap<String, Category> categories) {
+       this.sp.setCategories(sp, categories);
+    }
+
+    /**
+     * Adds categories to a product.
+     *
+     * @param sp the product to update
+     * @param categories the categories to add
+     */
+    public void addCategories(StoreProduct sp, Category... categories) {
+    	if(this.sp != null) this.sp.addCategories(sp, categories);
+    }
+
+    /**
+     * Removes categories from a product.
+     *
+     * @param sp the product to update
+     * @param categories the categories to remove
+     */
+    public void removeCategories(StoreProduct sp, Category... categories) {
+    	if(this.sp != null) this.sp.removeCategories(sp, categories);
+    }
+
+    /**
+     * Sets the description of a product.
+     *
+     * @param sp the product to update
+     * @param desc the new description
+     */
+    public void setDescription(StoreProduct sp, String desc) {
+    	if(this.sp != null) this.sp.setDescription(sp, desc);
+    }
+
+    /**
+     * Sets the discount of a product.
+     *
+     * @param sp the product to update
+     * @param disc the discount to apply
+     */
+    public void setDiscount(StoreProduct sp, Discount disc) {
+       this.sp.setDiscount(sp, disc);
+    }
+
+    /**
+     * Sets the name of a product.
+     *
+     * @param sp the product to update
+     * @param name the new name
+     */
+    public void setName(StoreProduct sp, String name) {
+    	if(this.sp != null) this.sp.setName(sp, name);
+    }
+
+    /**
+     * Sets the photo of a product.
+     *
+     * @param sp the product to update
+     * @param photo the photo reference
+     */
+    public void setPhoto(StoreProduct sp, String photo) {
+    	if(this.sp != null) this.sp.setPhoto(sp, photo);
+    }
+
+    /**
+     * Sets the price of a product.
+     *
+     * @param sp the product to update
+     * @param price the new price
+     */
+    public void setPrice(StoreProduct sp, double price) {
+    	if(this.sp != null) this.sp.setPrice(sp, price);
+    }
+
+    /**
+     * Sets the total sales of a product.
+     *
+     * @param sp the product to update
+     * @param sales the number of sales
+     */
+    public void setSales(StoreProduct sp, int sales) {
+    	if(this.sp != null) this.sp.setSales(sp, sales);
+    }
+
+    /**
+     * Sets the monthly sales of a product.
+     *
+     * @param sp the product to update
+     * @param sales the sales by month
+     */
+    public void setSalesByMonth(StoreProduct sp, HashMap<Month, Integer> sales) {
+    	if(this.sp != null) this.sp.setSalesByMonth(sp, sales);
+    }
+
+    /**
+     * Sets the stock of a product.
+     *
+     * @param sp the product to update
+     * @param stock the available stock
+     */
+    public void setStock(StoreProduct sp, int stock) {
+    	if(this.sp != null) this.sp.setStock(sp, stock);
+    }
+
+    /**
+     * Sets the type of a product.
+     *
+     * @param sp the product to update
+     * @param pt the product type
+     */
+    public void setType(StoreProduct sp, ProductType pt) {
+    	if(this.sp != null) this.sp.setType(sp, pt);
+    }
+
 }

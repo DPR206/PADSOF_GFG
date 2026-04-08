@@ -7,8 +7,11 @@ import store.Store;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Year;
 import java.util.*;
+
+import discount.Discount;
 
 /**
  * It implements the store permission of the store
@@ -98,7 +101,8 @@ public class StorePermission {
      * @return true if the products were added false if else
      * @throws IOException error while reading the file
      */
-    public boolean addProductByFile(String fileName) throws IOException {
+    @SuppressWarnings("unused")
+	public boolean addProductByFile(String fileName) throws IOException {
         int stock;
         String name, desc, aux, type;
         double price;
@@ -195,7 +199,118 @@ public class StorePermission {
     public List<StoreProduct> searchStoreProducts(){
         return this.searching.searchStoreProducts();
     }
-
+    
+    /**
+     * Changes the price of a pack
+     *
+     *
+     * @param p, the pack to search
+     * @param price, new price of the pack
+     *
+     */
+    public void setPackPrice(Pack p, double price) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.setPrice(price);
+    		}
+    	}
+    }
+    
+    /**
+     * Changes the discount of a pack
+     *
+     *
+     * @param p, the pack to search
+     * @param discount, new discount of the pack
+     *
+     */
+    public void setPackDiscount(Pack p, Discount discount) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.setDiscount(discount);
+    		}
+    	}
+    }
+    
+    /**
+     * Adds a product to the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the store product to add
+     *
+     */
+    public void PackAddProduct(Pack p, StoreProduct sp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.addProduct(sp);
+    		}
+    	}
+    }
+    
+    /**
+     * Adds a list of products to the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param lsp, the list of store product to add
+     *
+     */
+    public void PackAddListProducts(Pack p, ArrayList<StoreProduct> lsp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.addArrayProducts(lsp);
+    		}
+    	}
+    }
+    
+    public void DeleteProductFromPack(Pack p, StoreProduct sp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.eliminateProduct(sp);
+    		}
+    	}
+    }
+    
+    /**
+     * Deletes a list of store products from the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the list of store products to delete
+     *
+     */
+    public void DeleteListOfProductFromPack(Pack p, ArrayList<StoreProduct> sp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.eliminateArrayProducts(sp);
+    		}
+    	}
+    }
+    
+    /**
+     * Sets the list of products of the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the list of store products to add
+     *
+     */
+    public void setPackProducts(Pack p, ArrayList<StoreProduct> sp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.setProducts(sp);
+    		}
+    	}
+    }
+    
     /**
      * Searches for the store products based on the category
      * @param c, the categories we want our searched products to belong to
@@ -204,4 +319,185 @@ public class StorePermission {
     public List<StoreProduct> searchStoreProductByCategory(Category... c){
         return this.searching.searchByCategory(c);
     }
+    
+    /**
+     * Sets the categories of a product.
+     *
+     * @param sp the product to update
+     * @param categories the categories to assign
+     */
+    public void setCategories(StoreProduct sp, HashMap<String, Category> categories) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setCategories(categories);
+            }
+        }
+    }
+
+    /**
+     * Adds categories to a product.
+     *
+     * @param sp the product to update
+     * @param categories the categories to add
+     */
+    public void addCategories(StoreProduct sp, Category... categories) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.addCategory(categories);
+            }
+        }
+    }
+
+    /**
+     * Removes categories from a product.
+     *
+     * @param sp the product to update
+     * @param categories the categories to remove
+     */
+    public void removeCategories(StoreProduct sp, Category... categories) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.removeCategory(categories);
+            }
+        }
+    }
+
+    /**
+     * Sets the description of a product.
+     *
+     * @param sp the product to update
+     * @param desc the new description
+     */
+    public void setDescription(StoreProduct sp, String desc) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setDescription(desc);
+            }
+        }
+    }
+
+    /**
+     * Sets the discount of a product.
+     *
+     * @param sp the product to update
+     * @param disc the discount to apply
+     */
+    public void setDiscount(StoreProduct sp, Discount disc) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setDiscount(disc);
+            }
+        }
+    }
+
+    /**
+     * Sets the name of a product.
+     *
+     * @param sp the product to update
+     * @param name the new name
+     */
+    public void setName(StoreProduct sp, String name) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setName(name);
+            }
+        }
+    }
+
+    /**
+     * Sets the photo of a product.
+     *
+     * @param sp the product to update
+     * @param photo the photo reference
+     */
+    public void setPhoto(StoreProduct sp, String photo) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setPhoto(photo);
+            }
+        }
+    }
+
+    /**
+     * Sets the price of a product.
+     *
+     * @param sp the product to update
+     * @param price the new price
+     */
+    public void setPrice(StoreProduct sp, double price) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setPrice(price);
+            }
+        }
+    }
+
+    /**
+     * Sets the total sales of a product.
+     *
+     * @param sp the product to update
+     * @param sales the number of sales
+     */
+    public void setSales(StoreProduct sp, int sales) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setSales(sales);
+            }
+        }
+    }
+
+    /**
+     * Sets the monthly sales of a product.
+     *
+     * @param sp the product to update
+     * @param sales the sales by month
+     */
+    public void setSalesByMonth(StoreProduct sp, HashMap<Month, Integer> sales) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setSalesByMonth(sales);
+            }
+        }
+    }
+
+    /**
+     * Sets the stock of a product.
+     *
+     * @param sp the product to update
+     * @param stock the available stock
+     */
+    public void setStock(StoreProduct sp, int stock) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setStock(stock);
+            }
+        }
+    }
+
+    /**
+     * Sets the type of a product.
+     *
+     * @param sp the product to update
+     * @param pt the product type
+     */
+    public void setType(StoreProduct sp, ProductType pt) {
+        List<StoreProduct> lsp = s.getStoreProductList();
+        for(StoreProduct spp: lsp) {
+            if(spp.equals(sp)) {
+                sp.setType(pt);
+            }
+        }
+    }
+
 }

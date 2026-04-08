@@ -1,5 +1,6 @@
 package main;
 
+import discount.*;
 import product.*;
 import store.*;
 import user.*;
@@ -888,7 +889,7 @@ public class ManagerLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Manage an employee */
-                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< manageEmployee >>>>>>>>>> \n"); // Es para debug, borrar
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] Username");
@@ -955,7 +956,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeStoreProduct 2 >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageEmployee 2 >>>>>>>>>> \n"); // Es para debug, borrar
             Employee employee = Store.getInstance().selectEmployeeFromPage(currentScreenPageNum, itemNum);
             employee.printInfo();
 
@@ -1146,7 +1147,8 @@ public class ManagerLoop extends Loop {
         while (!appExited && !exitLoop) {
             System.out.print("\n <<<<<<<<<< clientsByOrders >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
-            Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
+            List<RegisteredClient> users = new ArrayList<>(Statistics.getINSTANCE().getUsersMostOrders());
+            Pager.getInstance().printRegisteredClientListPage(users, currentScreenPageNum);
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
@@ -1154,11 +1156,11 @@ public class ManagerLoop extends Loop {
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
-                case 1:
+                case 1: /* Previous page */
                     previousPage();
                     break;
-                case 2:
-                    nextPageRegisteredClient();
+                case 2: /* Next page */
+                    nextPageRegisteredClient(users);
                     break;
                 case 3: /* See profile */
                     seeProfile();
@@ -1184,7 +1186,8 @@ public class ManagerLoop extends Loop {
         while (!appExited && !exitLoop) {
             System.out.print("\n <<<<<<<<<< clientsByExchanges >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
-            Store.getInstance().printRegisteredClientListPage(currentScreenPageNum);
+            List<RegisteredClient> users = new ArrayList<>(Statistics.getINSTANCE().getUsersMostExchanges());
+            Pager.getInstance().printRegisteredClientListPage(users, currentScreenPageNum);
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
@@ -1192,11 +1195,120 @@ public class ManagerLoop extends Loop {
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
-                case 1:
+                case 1: /* Previous page */
                     previousPage();
                     break;
-                case 2:
-                    nextPageRegisteredClient();
+                case 2: /* Next page */
+                    nextPageRegisteredClient(users);
+                    break;
+                case 3: /* See profile */
+                    seeProfile();
+                    break;
+                case 4: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * It allows the manager to see the store's revenue by month
+     * @throws IOException the io exception
+     */
+    public void revenueByMonth() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.print("\n <<<<<<<<<< revenueByMonth >>>>>>>>>> \n"); // Es para debug, borrar
+            HashMap<Month, Double> revenueByMonth = Statistics.getINSTANCE().getRevenueByMonth();
+            for (Map.Entry<Month, Double> entry : revenueByMonth.entrySet()) {
+                System.out.printf(entry.getKey() + ": " + entry.getValue() + "€");
+            }
+
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* See profile */
+                    seeProfile();
+                    break;
+                case 2: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * It allows the manager to see the store's categories by revenue
+     * @throws IOException the io exception
+     */
+    public void categoriesByRevenue() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.print("\n <<<<<<<<<< categoriesByRevenue >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
+            HashMap<Category, Double> categories = Statistics.getINSTANCE().getRevenueAllCategories();
+            Pager.getInstance().printCategoryHashMapPage(categories, currentScreenPageNum);
+
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Previous page */
+                    previousPage();
+                    break;
+                case 2: /* Next page */
+                    nextPageCategory(new ArrayList<>(categories.keySet()));
+                    break;
+                case 3: /* See profile */
+                    seeProfile();
+                    break;
+                case 4: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * It allows the manager to see the store's store products by sales, with their percentage over the overall sales
+     * @throws IOException the io exception
+     */
+    public void productBySalesWithPercentage() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.print("\n <<<<<<<<<< productBySalesWithPercentage >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
+            HashMap<StoreProduct, String> products = Statistics.getINSTANCE().getProductsTotalPercentage();
+            Pager.getInstance().printStoreProductHashMapPage(products, currentScreenPageNum);
+
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Previous page */
+                    previousPage();
+                    break;
+                case 2: /* Next page */
+                    nextPageStoreProduct(new ArrayList<>(products.keySet()));
                     break;
                 case 3: /* See profile */
                     seeProfile();
@@ -1213,56 +1325,348 @@ public class ManagerLoop extends Loop {
     }
 
     /**
-     * It allows the manager to see the store's revenue by month
+     * It allows the manager to see the store's store products by sales, with their percentage over the overall sales,
+     * on a certain month
+     * @throws IOException the io exception
      */
-    public void revenueByMonth() {
+    public void productBySalesWithPercentageCertainMonth() throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< revenueByMonth >>>>>>>>>> \n"); // Es para debug, borrar
-            HashMap<Month, Double> revenueByMonth = Statistics.getINSTANCE().getRevenueByMonth();
-            for (Map.Entry<Month, Double> entry : revenueByMonth.entrySet()) {
-                System.out.printf(entry.getKey() + ": " + entry.getValue() + "€");
-            } // DUE
+            System.out.print(
+                    "\n <<<<<<<<<< productBySalesWithPercentageCertainMonth >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
+
+            System.out.println("Which month do you want to see? (January/February...)");
+            Month month = Month.valueOf(scanner.next());
+
+            HashMap<StoreProduct, String> products = Statistics.getINSTANCE().getProductsTotalPercentage(month);
+            Pager.getInstance().printStoreProductHashMapPage(products, currentScreenPageNum);
+
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Previous page */
+                    previousPage();
+                    break;
+                case 2: /* Next page */
+                    nextPageStoreProduct(new ArrayList<>(products.keySet()));
+                    break;
+                case 3: /* See profile */
+                    seeProfile();
+                    break;
+                case 4: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+
         }
     }
 
     /**
-     * It allows the manager to see the store's categories by revenue
-     */
-    public void categoriesByRevenue() {
-        System.out.print("\n <<<<<<<<<< categoriesByRevenue >>>>>>>>>> \n"); // Es para debug, borrar
-        // DUE
-    }
-
-    /**
-     * It allows the manager to see the store's store products by sales, with their percentage over the overall sales
-     */
-    public void productBySalesWithPercentage() {
-        System.out.print("\n <<<<<<<<<< productBySalesWithPercentage >>>>>>>>>> \n"); // Es para debug, borrar
-        // DUE
-    }
-
-    /**
-     * It allows the manager to see the store's store products by sales, with their percentage over the overall sales,
-     * on a certain month
-     */
-    public void productBySalesWithPercentageCertainMonth() {
-        System.out.print(
-                "\n <<<<<<<<<< productBySalesWithPercentageCertainMonth >>>>>>>>>> \n"); // Es para debug, borrar
-        // DUE
-    }
-
-    /**
      * It allows the manager to manage the store's discounts
+     * @throws IOException the io exception
      */
-    private void manageDiscounts() {
-        System.out.print("\n <<<<<<<<<< manageDiscounts >>>>>>>>>> \n"); // Es para debug, borrar
+    private void manageDiscounts() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.println("\n <<<<<<<<<< manageDiscounts >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Manage a discount");
+            System.out.println("\t[" + i++ + "] Add a discount");
+            pagedLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Manage an employee */
+                    System.out.print("\n <<<<<<<<<< manageDiscount >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.println("Do you wish to select it via: ID or list number?");
+                    System.out.println("[1] List number");
+                    System.out.println("[2] Username");
+                    int chosenOption2 = scanner.nextInt();
+
+                    switch (chosenOption2) {
+                        case 1:
+                            System.out.println("Enter the number of the desired discount:");
+                            this.itemNum = scanner.nextInt();
+                            leavePagedScreen();
+                            manageDiscount();
+                            break;
+                        case 2:
+                            System.out.println("Enter the ID of the desired discount:");
+                            String discountId = scanner.next();
+                            int index = Store.getInstance().getDiscountIndex(discountId);
+                            if (index != -1) {
+                                currentScreenPageNum = Pager.getInstance().getPageNumFromIndex(index);
+                                itemNum = Pager.getInstance().getItemNumFromIndex(index);
+
+                                leavePagedScreen();
+                                manageDiscount();
+                                break;
+                            }
+                            System.out.println("The ID wasn't valid");
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                    }
+                    break;
+                case 2: /* Add a discount */
+                    System.out.println("Enter the discount's start date: (example: 2007-12-03T10:15:30.)");
+                    LocalDateTime startDate = LocalDateTime.parse(scanner.next());
+                    System.out.println("Enter the discount's end date:");
+                    LocalDateTime endDate = LocalDateTime.parse(scanner.next());
+
+                    System.out.println("What type of discount do you want to create?");
+                    int j = 1;
+                    System.out.println("\t[" + j++ + "] Fixed percentage");
+                    System.out.println("\t[" + j++ + "] Gift");
+                    System.out.println("\t[" + j++ + "] Quantity");
+                    System.out.println("\t[" + j + "] Volume");
+                    int chosenOption3 = scanner.nextInt();
+
+                    double percentage, spendingThreshold, deduction;
+                    int numThreshold;
+                    StoreProduct gift;
+                    switch (chosenOption3) {
+                        case 1: /* Fixed percentage */
+                            System.out.println("Enter the discount's percentage:");
+                            percentage = scanner.nextDouble();
+
+                            switch (askDiscountCoverage()) {
+                                case PRODUCT:
+                                    System.out.println("Will the discount affect the whole store? (y/n)");
+                                    String answer = scanner.next();
+                                    if (answer.equalsIgnoreCase("y")) {
+                                        new ProductFixedPercentage(startDate, endDate, percentage, true);
+                                    } else {
+                                        new ProductFixedPercentage(startDate, endDate, percentage,
+                                                askDiscountProducts().toArray(new StoreProduct[0]));
+                                    }
+                                    break;
+                                case PACK:
+                                    new PackFixedPercentage(startDate, endDate, percentage,
+                                            askDiscountPacks().toArray(new Pack[0]));
+                                case CATEGORY:
+                                    new CategoryFixedPercentage(startDate, endDate, percentage,
+                                            askDiscountCategories().toArray(new Category[0]));
+                                default:
+                                    System.out.println("Invalid option");
+                            }
+                        case 2: /* Gift */
+                            System.out.println("Enter the discount's spending threshold");
+                            spendingThreshold = scanner.nextDouble();
+                            System.out.println("Enter the gift's Id");
+                            String giftId = scanner.next();
+                            gift = Store.getInstance().getStoreProductFromId(giftId);
+
+                            switch (askDiscountCoverage()) {
+                                case PRODUCT:
+                                    System.out.println("Will the discount affect the whole store? (y/n)");
+                                    String answer = scanner.next();
+                                    if (answer.equalsIgnoreCase("y")) {
+                                        new ProductGift(startDate, endDate, spendingThreshold, gift, true);
+                                    } else {
+                                        new ProductGift(startDate, endDate, spendingThreshold, gift,
+                                                askDiscountProducts().toArray(new StoreProduct[0]));
+                                    }
+                                    break;
+                                case PACK:
+                                    new PackGift(startDate, endDate, spendingThreshold, gift,
+                                            askDiscountPacks().toArray(new Pack[0]));
+                                case CATEGORY:
+                                    new CategoryGift(startDate, endDate, spendingThreshold, gift,
+                                            askDiscountCategories().toArray(new Category[0]));
+                                default:
+                                    System.out.println("Invalid option");
+                            }
+                        case 3: /* Quantity */
+                            System.out.println("Enter the discount's number of units threshold:");
+                            numThreshold = scanner.nextInt();
+                            System.out.println("Enter the discount's deduction:");
+                            deduction = scanner.nextDouble();
+
+                            switch (askDiscountCoverage()) {
+                                case PRODUCT:
+                                    System.out.println("Will the discount affect the whole store? (y/n)");
+                                    String answer = scanner.next();
+                                    if (answer.equalsIgnoreCase("y")) {
+                                        new ProductQuantity(startDate, endDate, numThreshold, deduction, true);
+                                    } else {
+                                        new ProductQuantity(startDate, endDate, numThreshold, deduction,
+                                                askDiscountProducts().toArray(new StoreProduct[0]));
+                                    }
+                                    break;
+                                case PACK:
+                                    new PackQuantity(startDate, endDate, numThreshold, deduction,
+                                            askDiscountPacks().toArray(new Pack[0]));
+                                case CATEGORY:
+                                    new CategoryQuantity(startDate, endDate, numThreshold, deduction,
+                                            askDiscountCategories().toArray(new Category[0]));
+                                default:
+                                    System.out.println("Invalid option");
+                            }
+                        case 4: /* Volume */
+                            System.out.println("Enter the discount's spending threshold:");
+                            spendingThreshold = scanner.nextDouble();
+                            System.out.println("Enter the discount's deduction:");
+                            deduction = scanner.nextDouble();
+
+                            switch (askDiscountCoverage()) {
+                                case PRODUCT:
+                                    System.out.println("Will the discount affect the whole store? (y/n)");
+                                    String answer = scanner.next();
+                                    if (answer.equalsIgnoreCase("y")) {
+                                        new ProductVolume(startDate, endDate, spendingThreshold, deduction, true);
+                                    } else {
+                                        new ProductVolume(startDate, endDate, spendingThreshold, deduction,
+                                                askDiscountProducts().toArray(new StoreProduct[0]));
+                                    }
+                                    break;
+                                case PACK:
+                                    new PackVolume(startDate, endDate, spendingThreshold, deduction,
+                                            askDiscountPacks().toArray(new Pack[0]));
+                                case CATEGORY:
+                                    new CategoryVolume(startDate, endDate, spendingThreshold, deduction,
+                                            askDiscountCategories().toArray(new Category[0]));
+                                default:
+                                    System.out.println("Invalid option");
+                            }
+                        default:
+                            System.out.println("Invalid option");
+                    }
+                    break;
+                case 3: /* Previous page */
+                    previousPage();
+                    break;
+                case 4: /* Next page */
+                    nextPageDiscount();
+                    break;
+                case 5: /* See profile */
+                    seeProfile();
+                    break;
+                case 6: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * It asks and returns the discount coverage that a discount will have
+     * @return the discount coverage that a discount will have
+     */
+    private DiscountCoverage askDiscountCoverage() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which discount coverage do you want to use?");
+        int i = 1;
+        System.out.println("\t[" + i++ + "] Category");
+        System.out.println("\t[" + i++ + "] Pack");
+        System.out.println("\t[" + i + "] Store Product");
+
+        return DiscountCoverage.valueOf(scanner.next());
+    }
+
+    /**
+     * It asks and returns the store products that a discount will be placed over
+     * @return the store products that a discount will be placed over
+     */
+    private List<StoreProduct> askDiscountProducts() {
+        List<StoreProduct> products = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        boolean stop = false;
+        while (!stop) {
+            System.out.println("Enter the desired store product's id (\"stop\" to apply those already selected):");
+            String id = scanner.next();
+            if (id.equalsIgnoreCase("stop")) {
+                stop = true;
+            }
+            StoreProduct product = Store.getInstance().getStoreProductFromId(id);
+            if (product == null) {
+                System.out.println("A store product with that id doesn't exist, reloading...");
+            } else {
+                products.add(product);
+                System.out.println("Product added to the selection");
+            }
+        }
+        return products;
+    }
+
+    /**
+     * It asks and returns the categories that a discount will be placed over
+     * @return the categories that a discount will be placed over
+     */
+    private List<Category> askDiscountCategories() {
+        List<Category> categories = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        boolean stop = false;
+        while (!stop) {
+            System.out.println("Enter the desired category (type \"stop\" to apply the ones entered so far):");
+            String categoryName = scanner.next();
+            if (categoryName.equals("stop")) {
+                stop = true;
+            }
+            Category category = Store.getInstance().getCategoryFromName(categoryName);
+            if (category == null) {
+                System.out.println("A category which such a name doesn't exist, reloading...");
+            } else {
+                categories.add(category);
+            }
+        }
+        return categories;
+    }
+
+    /**
+     * It asks and returns the packs that a discount will be placed over
+     * @return the packs that a discount will be placed over
+     */
+    private List<Pack> askDiscountPacks() {
+        List<Pack> packs = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        boolean stop = false;
+        while (!stop) {
+            System.out.println("Enter the desired pack's id (-1 to apply those already selected):");
+            int id = scanner.nextInt();
+            if (id == -1) {
+                stop = true;
+            }
+
+            boolean found = false;
+            for (Pack pack : Store.getInstance().getPacks()) {
+                if (pack.getId() == id) {
+                    found = true;
+                    packs.add(pack);
+                    System.out.println("Product added to the selection");
+                }
+            }
+            if (!found) {
+                System.out.println("A store product with that id doesn't exist, reloading...");
+            }
+
+        }
+        return packs;
+    }
+
+    /**
+     * It allows a manager to manage a discount
+     */
+    public void manageDiscount() {
         // DUE
     }
 
     /**
      * It allows the manager to manage the store's parameters
+     * @throws IOException the io exception
      */
     private void manageParameters() throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -1280,44 +1684,51 @@ public class ManagerLoop extends Loop {
             System.out.println("\t[" + i++ + "] Offer time: [" + Parameter.getParam().getOfferTime() + "]");
             System.out.println("\t[" + i++ + "] Order time: [" + Parameter.getParam().getOrderTime() + "]");
             System.out.println("\t[" + i++ + "] Valuation cost: [" + Parameter.getParam().getValuationCost() + "]");
+            System.out.println(
+                    "\t[" + i++ + "] Recommendation's k limit: [" + Parameter.getParam().getkRecommend() + "]");
             basicLoopPrinter(i);
             int chosenOption3 = scanner.nextInt();
 
             switch (chosenOption3) {
-                case 1:
+                case 1: /* Items per page */
                     System.out.println("Enter the new Items per page value:");
                     int newItemsPerPage = scanner.nextInt();
                     manager.changeItemsPerPage(newItemsPerPage);
                     break;
-                case 2:
+                case 2: /* Score a parameter */
                     System.out.println("Enter the new Score a parameter value:");
                     int newScoreAParam = scanner.nextInt();
                     manager.changeScoreAParam(newScoreAParam);
                     break;
-                case 3:
+                case 3: /* Score b parameter */
                     System.out.println("Enter the new Score b parameter value:");
                     int newScoreBParam = scanner.nextInt();
                     manager.changeScoreBParam(newScoreBParam);
                     break;
-                case 4:
+                case 4: /* Offer time */
                     System.out.println("Enter the new Offer time:");
                     Period newOfferTime = Period.parse(scanner.next());
                     manager.changeOfferTime(newOfferTime);
                     break;
-                case 5:
+                case 5: /* Order time */
                     System.out.println("Enter the new Order time:");
                     Period newOrderTime = Period.parse(scanner.next());
                     manager.changeOrderTime(newOrderTime);
                     break;
-                case 6:
+                case 6: /* Valuation cost */
                     System.out.println("Enter the new Valuation cost:");
                     double newValuationCost = scanner.nextDouble();
                     manager.changeValuationCost(newValuationCost);
                     break;
-                case 7: /* See profile */
+                case 7: /* K recommendation limit */
+                    System.out.println("Enter the new K recommendation limit:");
+                    int newKRecommend = scanner.nextInt();
+                    manager.changeKRecommend(newKRecommend);
+                    break;
+                case 8: /* See profile */
                     seeProfile();
                     break;
-                case 8: /* Exit */
+                case 9: /* Exit */
                     exit();
                     break;
                 default: /* Go back */
@@ -1329,8 +1740,9 @@ public class ManagerLoop extends Loop {
 
     /**
      * It allows the manager to see its profile and change their password
+     * @throws IOException the io exception
      */
-    private void seeProfile() throws IOException { // DUE: Que esto sea opción en todos los loops de manager:/
+    private void seeProfile() throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {

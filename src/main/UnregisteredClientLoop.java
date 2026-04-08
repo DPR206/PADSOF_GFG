@@ -2,7 +2,6 @@ package main;
 
 import order.Cart;
 import product.*;
-import store.Pager;
 import store.Store;
 import user.RegisteredClient;
 import user.UnregisteredClient;

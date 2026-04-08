@@ -2,7 +2,7 @@ package product;
 
 import discount.*;
 import order.Order;
-import store.Pager;
+import main.Pager;
 import store.Store;
 import user.RegisteredClient;
 

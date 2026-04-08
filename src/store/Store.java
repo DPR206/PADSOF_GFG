@@ -3,6 +3,7 @@ package store;
 import discount.Discount;
 import exchange.Exchange;
 import exchange.Offer;
+import main.Pager;
 import notification.Notification;
 import order.Order;
 import product.*;
@@ -355,6 +356,15 @@ public class Store {
      */
     public int getCategoryMaxPageNum() {
         return Pager.getInstance().getCategoryMaxPageNum(this.getCategoryList());
+    }
+
+    /**
+     * It gets the paged index belonging to a discount with a certain id
+     * @param wantedID the id of the desired discount
+     * @return the paged index belonging to an employee with a certain username
+     */
+    public int getDiscountIndex(String wantedID) {
+        return Pager.getInstance().getDiscountIndex(this.discounts, wantedID);
     }
 
     /**

@@ -1,12 +1,12 @@
-package store;
+package main;
 
 import discount.Discount;
 import product.*;
+import store.Parameter;
 import user.Employee;
 import user.RegisteredClient;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * It implements the store's pager, used for dividing big lists into small sub-lists of a desired size (lines-wise),
@@ -81,6 +81,46 @@ public class Pager {
         int i = 1;
         for (StoreProduct product : productListPage) {
             System.out.println(i++ + ". " + product.smallPrintInfo());
+        }
+    }
+
+    /**
+     * It prints a sub-hashmap of another according to the desired page
+     * @param storeProductHashMap the hashmap of store products
+     * @param pageNum             the desired page's number
+     */
+    public void printStoreProductHashMapPage(HashMap<StoreProduct, String> storeProductHashMap, int pageNum) {
+        if (storeProductHashMap == null || storeProductHashMap.isEmpty()) {
+            System.out.println("There are no store products");
+            return;
+        }
+
+        List<StoreProduct> productList = new ArrayList<>(storeProductHashMap.keySet());
+
+        List<StoreProduct> productListPage = pageStoreProductList(productList, pageNum);
+        int i = 1;
+        for (StoreProduct product : productListPage) {
+            System.out.println(i++ + ". " + product.smallPrintInfo() + "\t" + storeProductHashMap.get(product));
+        }
+    }
+
+    /**
+     * It prints a sub-hashmap of another according to the desired page
+     * @param categoryHashMap the hashmap of categories
+     * @param pageNum         the desired page's number
+     */
+    public void printCategoryHashMapPage(HashMap<Category, Double> categoryHashMap, int pageNum) {
+        if (categoryHashMap == null || categoryHashMap.isEmpty()) {
+            System.out.println("There are no store products");
+            return;
+        }
+
+        List<Category> categoryList = new ArrayList<>(categoryHashMap.keySet());
+
+        List<Category> categoryListPage = pageCategoryList(categoryList, pageNum);
+        int i = 1;
+        for (Category category : categoryListPage) {
+            System.out.println(i++ + ". " + category.getName() + "\t" + categoryHashMap.get(category));
         }
     }
 
@@ -381,6 +421,23 @@ public class Pager {
     }
 
     /**
+     * It gets the paged index belonging to a discount with a certain id in a list
+     * @param discounts the desired list of discounts
+     * @param wantedId  the id of the desired discount
+     * @return the paged index belonging to a discount with a certain id in a list
+     */
+    public int getDiscountIndex(List<Discount> discounts, String wantedId) {
+        for (int j = 0; j < discounts.size(); j++) {
+            String discountId = discounts.get(j).getId();
+
+            if (Objects.equals(wantedId, discountId)) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * It gets the maximum number of pages that can be obtained from the store's discounts list
      * @param discountList the discount list
      * @return the maximum number of pages that can be obtained from the store's discounts list
@@ -445,7 +502,14 @@ public class Pager {
      * @return the index belonging to a pack with a certain id in a list
      */
     public int getPackIndex(List<Pack> packs, int wantedId) {
-        return 0;
+        for (int j = 0; j < packs.size(); j++) {
+            int packId = packs.get(j).getId();
+
+            if (wantedId == packId) {
+                return j;
+            }
+        }
+        return -1;
     }
 
     /**

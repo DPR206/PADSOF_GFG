@@ -1,8 +1,8 @@
 package main;
 
 import order.Cart;
+import product.Category;
 import product.StoreProduct;
-import store.Pager;
 import store.Store;
 import user.*;
 
@@ -135,11 +135,10 @@ public abstract class Loop {
         System.out.print("\n <<<<<<<<<< exit >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("See you soon!");
         appExited = true;
-        System.out.print("appExited=" + appExited + "\n");
 
-	        /*SaverLoader.getInstance()
-	                   .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
-	                           "discounts", "offers", "exchanges", "orders", "users");*/ // DUE
+        /*SaverLoader.getInstance()
+                   .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
+                           "discounts", "offers", "exchanges", "orders", "users");*/ // DUE
 
     }
 
@@ -179,6 +178,15 @@ public abstract class Loop {
     }
 
     /**
+     * It allows for a user to switch to the next page when viewing a list of registered clients
+     * @param clients the desired client list
+     */
+    protected void nextPageRegisteredClient(List<RegisteredClient> clients) {
+        currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getRegisteredClientMaxPageNum(clients) ?
+                               currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
      * It allows for a user to switch to the next page when viewing the store's list of employees
      */
     protected void nextPageEmployee() {
@@ -199,7 +207,7 @@ public abstract class Loop {
     /**
      * It allows for a user to switch to the next page when viewing the store's list of discounts
      */
-    protected void nextPageStoreDiscount() {
+    protected void nextPageDiscount() {
         currentScreenPageNum =
                 (currentScreenPageNum + 1) < Store.getInstance().getDiscountMaxPageNum() ? currentScreenPageNum + 1 :
                 currentScreenPageNum;
@@ -212,6 +220,15 @@ public abstract class Loop {
         currentScreenPageNum =
                 (currentScreenPageNum + 1) < Store.getInstance().getCategoryMaxPageNum() ? currentScreenPageNum + 1 :
                 currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing a list of categories
+     * @param categories the desired categories list
+     */
+    protected void nextPageCategory(List<Category> categories) {
+        currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getCategoryMaxPageNum(categories) ?
+                               currentScreenPageNum + 1 : currentScreenPageNum;
     }
 
     /**

@@ -280,6 +280,14 @@ public class Parameter {
 	}
 
 	/**
+	 * It changes the store's maximum number of products the recommender will return
+	 * @param newKRecommend the new maximum number of products the recommender will return
+	 */
+	public void changeKRecommend(int newKRecommend) {
+		this.setkRecommend(newKRecommend);
+	}
+
+	/**
 	 * It allows the parameter's to be saved
 	 * @return the parameter's info
 	 */

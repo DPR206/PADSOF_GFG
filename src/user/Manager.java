@@ -470,6 +470,14 @@ public class Manager extends User {
     }
 
     /**
+     * It changes the store's maximum number of products the recommender will return
+     * @param newKRecommend the new maximum number of products the recommender will return
+     */
+    public void changeKRecommend(int newKRecommend) {
+        Parameter.getParam().setkRecommend(newKRecommend);
+    }
+
+    /**
      * It changes the score a param (scoreWeight = a*score + b)
      * @param newScoreAParam the new score a param
      */

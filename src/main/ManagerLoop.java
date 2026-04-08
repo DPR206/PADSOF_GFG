@@ -1421,7 +1421,7 @@ public class ManagerLoop extends Loop {
                 case 2: /* Add a discount */
                     System.out.println("Enter the discount's start date: (example: 2007-12-03T10:15:30.)");
                     LocalDateTime startDate = LocalDateTime.parse(scanner.next());
-                    System.out.println("Enter the discount's end date:");
+                    System.out.println("Enter the discount's end date: (example: 2008-12-03T10:15:30.)");
                     LocalDateTime endDate = LocalDateTime.parse(scanner.next());
 
                     System.out.println("What type of discount do you want to create?");
@@ -1660,8 +1660,123 @@ public class ManagerLoop extends Loop {
     /**
      * It allows a manager to manage a discount
      */
-    public void manageDiscount() {
-        // DUE
+    public void manageDiscount() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.println("\n <<<<<<<<<< manageDiscount >>>>>>>>>> \n"); // Es para debug, borrar
+
+            Discount discount = Store.getInstance().selectDiscountFromPage(currentScreenPageNum, itemNum);
+            discount.bigPrintInfo();
+
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Manage start date");
+            System.out.println("\t[" + i++ + "] Manage end date");
+            System.out.println("\t[" + i++ + "] Manage a discount type-specific attribute");
+            System.out.println("\t[" + i++ + "] Manage a discount coverage-specific attribute");
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            double percentage, spendingThreshold, deduction;
+            int numThreshold;
+            StoreProduct gift;
+            switch (chosenOption) {
+                case 1: /* Manage start date */
+                    System.out.println("Enter the new start date:");
+                    LocalDateTime newStartDate = LocalDateTime.parse(scanner.next());
+                    discount.setStartDate(newStartDate);
+                    break;
+                case 2: /* Manage end date */
+                    System.out.println("Enter the new end date:");
+                    LocalDateTime newEndDate = LocalDateTime.parse(scanner.next());
+                    discount.setEndDate(newEndDate);
+                    break;
+                case 3: /* Manage a discount type-specific attribute */
+                    String answer;
+                    switch (discount.getType()) {
+                        case FIXED_PERCENTAGE:
+                            System.out.println("Do you want to change the discount's percentage? (y/n)");
+                            answer = scanner.next();
+                            if (answer.equalsIgnoreCase("y")) {
+                                System.out.println("Enter the discount's percentage:");
+                                percentage = scanner.nextDouble();
+                                ((FixedPercentageDiscount) discount).setPercentage(percentage);
+                            }
+                            break;
+                        case GIFT:
+                            System.out.println("Do you want to change the discount's spending threshold? (y/n)");
+                            answer = scanner.next();
+                            if (answer.equalsIgnoreCase("y")) {
+                                System.out.println("Enter the discount's spending threshold");
+                                spendingThreshold = scanner.nextDouble();
+                                ((GiftDiscount) discount).setSpendingThreshold(spendingThreshold);
+                            }
+                            System.out.println("Do you want to change the discount's gift? (y/n)");
+                            answer = scanner.next();
+                            if (answer.equalsIgnoreCase("y")) {
+                                System.out.println("Enter the gift's Id");
+                                String giftId = scanner.next();
+                                gift = Store.getInstance().getStoreProductFromId(giftId);
+                                ((GiftDiscount) discount).setGift(gift);
+                            }
+                            break;
+                        case QUANTITY:
+                            System.out.println("Do you want to change the discount's number of units threshold? (y/n)");
+                            answer = scanner.next();
+                            if (answer.equalsIgnoreCase("y")) {
+                                System.out.println("Enter the discount's number of units threshold:");
+                                numThreshold = scanner.nextInt();
+                                ((QuantityDiscount) discount).setNumThreshold(numThreshold);
+                            }
+                            System.out.println("Do you want to change the discount's deduction? (y/n)");
+                            answer = scanner.next();
+                            if (answer.equalsIgnoreCase("y")) {
+                                System.out.println("Enter the discount's deduction:");
+                                deduction = scanner.nextDouble();
+                                ((QuantityDiscount) discount).setDeduction(deduction);
+                            }
+                            break;
+                        case VOLUME:
+                            System.out.println("Do you want to change the discount's spending threshold? (y/n)");
+                            answer = scanner.next();
+                            if (answer.equalsIgnoreCase("y")) {
+                                System.out.println("Enter the discount's spending threshold:");
+                                spendingThreshold = scanner.nextDouble();
+                                ((VolumeDiscount) discount).setSpendingThreshold(spendingThreshold);
+                            }
+                            System.out.println("Do you want to change the discount's deduction? (y/n)");
+                            answer = scanner.next();
+                            if (answer.equalsIgnoreCase("y")) {
+                                System.out.println("Enter the discount's deduction:");
+                                deduction = scanner.nextDouble();
+                                ((VolumeDiscount) discount).setDeduction(deduction);
+                            }
+                            break;
+                        default:
+                            System.out.println("Invalid type");
+                    }
+                    break;
+                case 4: /* Manage a discount coverage-specific attribute */
+                    switch (discount.getCoverage()) {
+                        case CATEGORY:
+                        case PACK:
+                        case PRODUCT:
+                        default:
+                            System.out.println("Invalid coverage");
+                    }
+                    break;
+                case 5: /* See profile */
+                    seeProfile();
+                    break;
+                case 6: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
     }
 
     /**

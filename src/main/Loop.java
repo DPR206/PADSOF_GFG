@@ -101,11 +101,11 @@ public abstract class Loop {
      */
     protected void loopSelector() throws IOException, IllegalArgumentException, NullPointerException {
         System.out.print("\n <<<<<<<<<< loopSelector >>>>>>>>>> \n"); // Es para debug, borrar
-        UserType userType = currentUser.getType();
         if (currentUser == null) {
-            currentUser = new UnregisteredClient(true); // Podría ser un default de la tienda tmb aunque habría que
-            // limpiar el carro cada vez que se invoque, no sé qué es asc
+            currentUser = new UnregisteredClient(true);
         }
+
+        UserType userType = currentUser.getType();
 
         switch (userType) {
             case UNREGISTERED_CLIENT:

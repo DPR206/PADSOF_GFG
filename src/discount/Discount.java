@@ -154,9 +154,14 @@ public abstract class Discount {
         }
     }
 
-    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /**
+     * It prints the discount's basic info
+     */
+    public void bigPrintInfo() {
+        System.out.println(this.getPrintInfo());
+    }
 
-    // DUE: abstract createNotification(){}
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * It gets the discount's coverage type

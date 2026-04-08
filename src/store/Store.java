@@ -320,6 +320,16 @@ public class Store {
         return Pager.getInstance().selectEmployeeFromPage(this.getEmployeeList(), pageNum, clientNum);
     }
 
+    /**
+     * It gets the discount listed as n.º discountNum in a certain page
+     * @param pageNum     the desired page's number
+     * @param discountNum the desired discount's n.º
+     * @return the desired discount
+     */
+    public Discount selectDiscountFromPage(int pageNum, int discountNum) {
+        return Pager.getInstance().selectDiscountFromPage(this.discounts, pageNum, discountNum);
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**

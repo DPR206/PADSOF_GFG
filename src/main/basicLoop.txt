@@ -6,8 +6,6 @@ private void nombre(){
         System.out.println("What do you wish to do? (enter the nº)");
         int i = 1;
         System.out.println("\t[" + i++ + "] ");// DUE
-        System.out.println("\t[" + i++ + "] ");// DUE
-        System.out.println("\t[" + i++ + "] Sign up");
         basicLoopPrinter(i); // DUE: Change
         chosenOption = scanner.nextInt();
 
@@ -18,10 +16,7 @@ private void nombre(){
             case 2: /* DUE */
                 // DUE
                 break;
-            case 3: /* DUE */
-                // DUE
-                break;
-            case 4: /* Exit */
+            case 2: /* Exit */
                 exit();
                 break;
             default: /* Go back */

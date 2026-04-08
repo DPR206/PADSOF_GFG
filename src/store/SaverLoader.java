@@ -957,18 +957,26 @@ public class SaverLoader {
                 else if(type.equals(UserType.EMPLOYEE.getSymbol())) {
                 	String permission = words[4];
                 	String bool = words[5];
-                	if(permission.equals(Permission.EXCHANGE.getMeaning())) {
-                		Employee e = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
+                	Employee emp = null;
+					if(permission.equals(Permission.EXCHANGE.getMeaning()))
+                		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
+						this.s.addUser(emp);
+						this.s.getEmployees().put(emp.getId(), emp);
                 	}
-                }
+                	else if(permission.equals(Permission.EXCHANGE.getMeaning()))
+            		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
+					this.s.addUser(emp);
+					this.s.getEmployees().put(emp.getId(), emp);
+            	}
             }
 
             buffer.close();
 
         } catch (IOException e) {
-            throw new IOException(e.getMessage());
+            throw new IOException(e);
         }
-    }
+   }
+    
 
     /**
      * It sets whatever parameters couldn't be set previously

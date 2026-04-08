@@ -71,4 +71,6 @@ Se guardan y leen en este orden:
     
 
 [ ] Users:
-	ID;USERNAME;PWD;TYPE
+	ID;USERNAME;PWD;TYPES; 
+					REGCL:DNI;REGISTERDATE;BOOL
+					EMPLO:PERMISSION; BOOL;

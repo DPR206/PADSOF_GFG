@@ -776,7 +776,17 @@ public class Manager extends User {
     public void setStock(StoreProduct sp, int stock) {
         this.sp.setStock(sp, stock);
     }
-
+    
+    /**
+     * Adds a new employee
+     *
+     * @param e the employee to add
+     */
+    public void addEmployee(Employee e) {
+    	this.s.addUser(e);
+    	this.s.getEmployeeList().add(e);
+    }
+    
     /**
      * Sets the type of a product.
      *

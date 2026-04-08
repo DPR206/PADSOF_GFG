@@ -23,7 +23,7 @@ public class MainApp {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    public static void main() throws IOException, IllegalArgumentException, NullPointerException {
+    public static void main(String[] args) throws IOException, IllegalArgumentException, NullPointerException {
         try {
             ml.main();
         } catch (IOException io) {

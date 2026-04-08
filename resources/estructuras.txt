@@ -68,5 +68,7 @@ Se guardan y leen en este orden:
 [ ] Orders:
     ---- Order ----
     {TOTAL_ID}
+    
 
 [ ] Users:
+	ID;USERNAME;PWD;TYPE

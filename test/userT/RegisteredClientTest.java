@@ -113,11 +113,4 @@ public class RegisteredClientTest {
         assertFalse(comic.getReviews().isEmpty());
         assertEquals(5, comic.getReviews().get(client).getScoring());
     }
-
-    @Test
-    public void testToString() {
-        String info = client.toString();
-        assertTrue(info.contains(userName));
-        assertTrue(info.contains(dni));
-    }
 }

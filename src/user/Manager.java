@@ -47,7 +47,7 @@ public class Manager extends User {
         this.sp = new StorePermission();
 
         this.getSearcher().setTypes(SearchType.S_STORE);
-        Store.getInstance().getUsers().put(userName, INSTANCE);
+        Store.getInstance().getUsers().put(userName, this);
 }
 
 /*----------------------------------------------------- MISC -----------------------------------------------------*/

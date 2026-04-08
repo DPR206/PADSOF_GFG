@@ -25,9 +25,8 @@ public enum SearchType{
     private final String theType;
 
     /**
-	 * Creates the enum and initializes the name of the type of search
-	 *
-	 * @param asc, determines if the searches are ascendant or descendant
+	 * Creates the enum and initializes the name of the type of search, asc, determines if the searches are ascendant
+     * or descendant
      * @param theType, determines the type of search we are doing
 	 */
     SearchType(String theType){

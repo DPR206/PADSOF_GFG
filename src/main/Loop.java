@@ -28,6 +28,12 @@ public abstract class Loop {
     protected int chosenOption = 2;
     /** The chosen item's number when selecting from a list */
     protected int itemNum = 1;
+    
+    /**
+     * Protected constructor
+     */
+    protected Loop() {
+    }
 
     /**
      * It updates the previous and current page numbers when leaving a paged screen, allowing for the user to go back to

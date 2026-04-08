@@ -44,6 +44,7 @@ public class StorePermissionLoop extends Loop {
 
     /**
      * The store permission's main loop
+     * @throws IOException Error while scanning
      */
     public void storePermissionLoop() throws IOException {
         Scanner scanner = new Scanner(System.in);

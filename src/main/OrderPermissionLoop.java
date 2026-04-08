@@ -40,6 +40,7 @@ public class OrderPermissionLoop extends Loop {
 
     /**
      * The order permission's main loop
+     * @throws IOException Error while scanning
      */
     public void orderPermissionLoop() throws IOException {
         Scanner scanner = new Scanner(System.in);

@@ -1,8 +1,8 @@
 package productT;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.time.*;
 import product.*;
@@ -28,10 +28,9 @@ public class ProductTest {
         assertEquals("New Name", c.getName());
     }
 
-    // ARREGLADO: Uso de assertThrows
     @Test
     public void changeNameNull() {
-        assertThrows(IllegalArgumentException.class, () -> c.setName(null));
+    	assertThrows(IllegalArgumentException.class, () -> c.setName(null));
     }
 
     @Test
@@ -58,18 +57,16 @@ public class ProductTest {
 
     @Test
     public void changeType() {
-        // Asegúrate de importar ProductType o usar Product.ProductType si es interna
         c.setType(ProductType.GAME);
         assertEquals(ProductType.GAME, c.getType());
     }
 
     @Test
     public void smallPrintInfoTest() {
-        String expected = "Name: Test Comic, Price: [12.99]€";
+        String expected = "#1 Name: Test Comic, Price: [12.99]€";
         assertEquals(expected, c.smallPrintInfo());
     }
     
-    // Los getters simples no suelen fallar a menos que la lógica de Comic esté mal
     @Test
     public void getId() {
         assertEquals("1", c.getId());

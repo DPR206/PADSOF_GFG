@@ -1,14 +1,10 @@
 package productT;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.time.Year;
+import org.junit.jupiter.api.BeforeEach;
 
 import product.Category;
-import product.Comic;
 import product.Game;
 import product.GameStyle;
 

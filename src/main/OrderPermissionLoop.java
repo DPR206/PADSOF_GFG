@@ -50,7 +50,7 @@ public class OrderPermissionLoop extends Loop {
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage an order");
-            pagedLoopPrinter(i);
+            pagedOrderLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {

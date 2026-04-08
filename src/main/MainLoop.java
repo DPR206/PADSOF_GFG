@@ -77,7 +77,7 @@ public class MainLoop extends Loop {
 
         switch (chosenOption) {
             case 1:
-                currentUser = new UnregisteredClient(true); // DUE: revisar esto
+                currentUser = new UnregisteredClient(true);
                 loopSelector();
                 break;
             case 2:

@@ -245,7 +245,7 @@ public class StorePermissionLoop extends Loop {
             int i = 1;
             System.out.println("\t[" + i++ + "] Add a filter to the search");
             System.out.println("\t[" + i++ + "] Manage a product");
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, filteredStore);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {

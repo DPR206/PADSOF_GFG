@@ -255,7 +255,7 @@ public class ManagerLoop extends Loop {
             int i = 1;
             System.out.println("\t[" + i++ + "] Add a filter to the search");
             System.out.println("\t[" + i++ + "] Manage a product");
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, filteredStore);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -884,7 +884,7 @@ public class ManagerLoop extends Loop {
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage an employee");
             System.out.println("\t[" + i++ + "] Add an employee");
-            pagedLoopPrinter(i);
+            pagedEmployeeLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -1113,7 +1113,7 @@ public class ManagerLoop extends Loop {
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, products);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -1152,7 +1152,7 @@ public class ManagerLoop extends Loop {
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            pagedLoopPrinter(i);
+            pagedRegisteredClientLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -1191,7 +1191,7 @@ public class ManagerLoop extends Loop {
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            pagedLoopPrinter(i);
+            pagedRegisteredClientLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -1262,7 +1262,7 @@ public class ManagerLoop extends Loop {
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            pagedLoopPrinter(i);
+            pagedCategoryLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -1300,7 +1300,7 @@ public class ManagerLoop extends Loop {
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, new ArrayList<>(products.keySet()));
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -1345,7 +1345,7 @@ public class ManagerLoop extends Loop {
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, new ArrayList<>(products.keySet()));
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -1382,7 +1382,7 @@ public class ManagerLoop extends Loop {
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage a discount");
             System.out.println("\t[" + i++ + "] Add a discount");
-            pagedLoopPrinter(i);
+            pagedDiscountLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {

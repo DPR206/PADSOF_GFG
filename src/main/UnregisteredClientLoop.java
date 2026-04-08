@@ -106,7 +106,7 @@ public class UnregisteredClientLoop extends Loop {
             System.out.println("\t[" + i++ + "] See my cart");
             System.out.println("\t[" + i++ + "] Log in");
             System.out.println("\t[" + i++ + "] Sign up");
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, filteredStore);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -365,7 +365,7 @@ public class UnregisteredClientLoop extends Loop {
             int i = 1;
             System.out.println("\t[" + i++ + "] Log in");
             System.out.println("\t[" + i++ + "] Sign up");
-            pagedLoopPrinter(i);
+            pagedReviewLoopPrinter(i, product);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -455,7 +455,7 @@ public class UnregisteredClientLoop extends Loop {
             System.out.println("\t[" + i++ + "] See a product");
             System.out.println("\t[" + i++ + "] Log in");
             System.out.println("\t[" + i++ + "] Sign up");
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, ((UnregisteredClient) currentUser).getCart().getProducts());
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -555,7 +555,7 @@ public class UnregisteredClientLoop extends Loop {
             System.out.println("\t[" + i++ + "] See a pack");
             System.out.println("\t[" + i++ + "] Log in");
             System.out.println("\t[" + i++ + "] Sign up");
-            pagedLoopPrinter(i);
+            pagedPackLoopPrinter(i, ((UnregisteredClient) currentUser).getCart().getPacks());
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {

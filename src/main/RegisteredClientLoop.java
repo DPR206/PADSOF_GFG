@@ -113,7 +113,7 @@ public class RegisteredClientLoop extends Loop {
             System.out.println("\t[" + i++ + "] Add a filter to the search");
             System.out.println("\t[" + i++ + "] See a product");
             System.out.println("\t[" + i++ + "] See my cart");
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, filteredStore);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -337,7 +337,7 @@ public class RegisteredClientLoop extends Loop {
 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            pagedLoopPrinter(i);
+            pagedReviewLoopPrinter(i, product);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -422,7 +422,7 @@ public class RegisteredClientLoop extends Loop {
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] See a product");
-            pagedLoopPrinter(i);
+            pagedStoreProductLoopPrinter(i, ((RegisteredClient) currentUser).getC().getProducts());
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
@@ -516,7 +516,7 @@ public class RegisteredClientLoop extends Loop {
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] See a pack");
-            pagedLoopPrinter(i);
+            pagedPackLoopPrinter(i, ((RegisteredClient) currentUser).getC().getPacks());
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {

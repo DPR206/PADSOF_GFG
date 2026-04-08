@@ -603,10 +603,16 @@ public class RegisteredClientLoop extends Loop {
         browseStore();
     }
 
+    /**
+     * Browses the second-hand products
+     */
     public void browseSecondHand() {
         // DUE
     }
 
+    /**
+     * Browses the second-hand products in the wallet
+     */
     public void browseWallet() {
         // DUE
     }

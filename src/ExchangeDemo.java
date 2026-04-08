@@ -5,19 +5,27 @@ import product.ProductType;
 import product.SecondHandProduct;
 import user.*;
 
-// NOTE: Técnicamente, usaría store como fachada / base de datos
-// NOTE: Es sin buscador ni notificaciones por ahora
-
+/**
+ * Demo for an exchange
+ * @author Duna P.R.
+ */
 public class ExchangeDemo {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-    public static void main() {
+    
+	/**
+     * Private constructor
+     */
+    private ExchangeDemo() {
+        throw new IllegalStateException("Utility class");
+    }
+	
+	/**
+     * Main of the demo
+     */
+	public static void main() {
         SecondHandProduct[] products1 = new SecondHandProduct[]{};
         SecondHandProduct[] products2 = new SecondHandProduct[]{};
 
-        /* s.addManager */
-        //Manager manager = Manager.getInstance();
-
-        /* s.addRegisteredClient */
         RegisteredClient rc1 = new RegisteredClient("client1", "12345678A", "password", true);
         System.out.println(rc1);
         RegisteredClient rc2 = new RegisteredClient("client2", "12345678A", "password", true);

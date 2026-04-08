@@ -38,6 +38,7 @@ public class EmployeeLoop extends Loop {
 
     /**
      * The employee's main loop
+     * @throws IOException the io exception
      */
     protected void employeeLoop() throws IOException {
         System.out.println("\n <<<<<<<<<< employeeLoop >>>>>>>>>> \n"); // Es para debug, borrar

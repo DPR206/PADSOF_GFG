@@ -8,7 +8,7 @@ import java.time.Year;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import exchange.ExchangeHistory;
+import exchange.*;
 import exchange.OfferHistory;
 import notification.NotificationHistory;
 import product.Category;
@@ -16,6 +16,7 @@ import product.Comic;
 import product.Pack;
 import product.StoreProduct;
 import user.RegisteredClient;
+import order.Cart;
 import order.OrderHistory;
 
 class RegisteredClientTest {
@@ -91,7 +92,26 @@ class RegisteredClientTest {
 	
 	@Test
 	public void getCartTest() {
-		NotificationHistory eh = this.rc.getNotificationHistory();
-		assertEquals(eh, this.rc.getNotificationHistory());
+		Cart eh = this.rc.getC();
+		assertEquals(eh, this.rc.getC());
+	}
+	
+	@Test
+	public void getWalletTest() {
+		Wallet eh = this.rc.getWallet();
+		assertEquals(eh, this.rc.getWallet());
+	}
+	
+	@Test
+	public void getNumOrdersTest() {
+		int eh = this.rc.getNumOrders();
+		assertEquals(eh, this.rc.getWallet());
+	}
+	
+	@Test
+	public void setNumOrdersTest() {
+		int eh = 7;
+		this.rc.setNumOrders(eh);
+		assertEquals(eh, this.rc.getNumOrders());
 	}
 }

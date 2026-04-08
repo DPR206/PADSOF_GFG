@@ -354,11 +354,11 @@ public abstract class Loop {
      */
     protected void basicLoopPrinter(int firstOptionNum) {
         if (currentUser.getType() == UserType.REGISTERED_CLIENT || currentUser.getType() == UserType.EMPLOYEE) {
-            System.out.println("\t[" + firstOptionNum++ + "] See notifications");
+            System.out.println("\t[" + firstOptionNum++ + "] See my notifications");
         }
         if (currentUser.getType() != UserType.UNREGISTERED_CLIENT) {
 
-            System.out.println("\t[" + firstOptionNum++ + "] See profile");
+            System.out.println("\t[" + firstOptionNum++ + "] See my profile");
         }
         System.out.println("\t[" + firstOptionNum++ + "] x Exit app");
         System.out.println("\t[" + firstOptionNum + "] <- Go back");

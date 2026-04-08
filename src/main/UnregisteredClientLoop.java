@@ -238,6 +238,7 @@ public class UnregisteredClientLoop extends Loop {
                 break;
             case 4: /* Change search order */
                 currentUser.toggleSearchOrder();
+                break;
             case 5: /* Log in */
                 logger();
                 break;
@@ -517,7 +518,6 @@ public class UnregisteredClientLoop extends Loop {
                     break;
                 case 2: /* Add another one */
                     ((UnregisteredClient) currentUser).addCart(product);
-                    // Trozos de mis sueños rotos: seeCart();
                     break;
                 case 3: /* Log in */
                     logger();

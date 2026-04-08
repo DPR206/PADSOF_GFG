@@ -428,6 +428,23 @@ public class Store {
     }
 
     /**
+     * It gets the paged index belonging to an exchange with a certain id in the store
+     * @param exchangeId the id of the desired exchange
+     * @return the index belonging to an exchange with a certain id in the store
+     */
+    public int getExchangeIndex(int exchangeId) {
+        return Pager.getInstance().getExchangeIndex(this.exchanges, exchangeId);
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's exchange list
+     * @return the maximum number of pages that can be obtained from the store's exchange list
+     */
+    public int getExchangeMaxPageNum() {
+        return Pager.getInstance().getExchangeMaxPageNum(this.exchanges);
+    }
+
+    /**
      * Gets the list of the exchanges of the store
      * @return a list with the exchanges
      */

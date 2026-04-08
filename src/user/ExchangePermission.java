@@ -43,8 +43,8 @@ public class ExchangePermission {
     /**
      * It allows an employee to set a price (valuation) to a second hand product
      * @param secondHandProduct the desired product
-     * @param valuationPrice         the product's price
-     * @param status 			the product's conservation status
+     * @param valuationPrice    the product's price
+     * @param status            the product's conservation status
      * @throws IllegalArgumentException valuation was negative
      * @throws NullPointerException     second hand product was null
      */
@@ -65,14 +65,14 @@ public class ExchangePermission {
     /**
      * It allows an employee to set a price (valuation) to a second hand product
      * @param secondHandProduct the desired product
-     * @param valuationPrice         the product's price
-     * @param status 			the product's conservation status
-     * @param valuationDate 	the product's valuation date
+     * @param valuationPrice    the product's price
+     * @param status            the product's conservation status
+     * @param valuationDate     the product's valuation date
      * @throws IllegalArgumentException valuation was negative
      * @throws NullPointerException     second hand product was null
      */
-    public void valuate(SecondHandProduct secondHandProduct, double valuationPrice, ConservationStatus status, LocalDate valuationDate)
-            throws IllegalArgumentException, NullPointerException {
+    public void valuate(SecondHandProduct secondHandProduct, double valuationPrice, ConservationStatus status,
+                        LocalDate valuationDate) throws IllegalArgumentException, NullPointerException {
         if (secondHandProduct == null) {
             throw new NullPointerException("Second Hand Product is null");
         }

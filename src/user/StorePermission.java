@@ -101,7 +101,8 @@ public class StorePermission {
      * @return true if the products were added false if else
      * @throws IOException error while reading the file
      */
-    public boolean addProductByFile(String fileName) throws IOException {
+    @SuppressWarnings("unused")
+	public boolean addProductByFile(String fileName) throws IOException {
         int stock;
         String name, desc, aux, type;
         double price;

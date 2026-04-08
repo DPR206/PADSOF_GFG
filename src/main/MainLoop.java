@@ -1,7 +1,6 @@
 package main;
 
-import user.StorePermission;
-import user.UnregisteredClient;
+import user.*;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -60,6 +59,7 @@ public class MainLoop extends Loop {
         storePermission.addComic(3.5, "Batman", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
                 "ComicInc");
         storePermission.addFigurine(6.43, "Funko pop", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+        Manager.getInstance().addEmployee("p123456@", "client", Permission.ORDER);
         /* BORRAR */
         System.out.println("\n<<<<<<< Welcome to Gifts for Geeks >>>>>>>\n");
         if (LocalTime.now().isBefore(LocalTime.of(17, 0))) {

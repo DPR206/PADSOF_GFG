@@ -650,12 +650,7 @@ public class UnregisteredClientLoop extends Loop {
             UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
             Cart currrentCart = unregisteredClient.getCart();
 
-            System.out.print("Enter your username: ");
-            String userName = scanner.next();
-            System.out.print("Enter your password: ");
-            String password = scanner.next();
-
-            currentUser = Store.getInstance().getUtility().logIn(userName, password);
+            currentUser = Store.getInstance().logIn();
             if (currentUser == null) {
                 exitLoop = true;
             }

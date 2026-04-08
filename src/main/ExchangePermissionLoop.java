@@ -45,6 +45,7 @@ public class ExchangePermissionLoop extends Loop {
 
     /**
      * The exchange permission's main loop
+     * @throws IOException the io exception
      */
     protected void exchangePermissionLoop() throws IOException {
         Scanner scanner = new Scanner(System.in);

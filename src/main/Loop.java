@@ -70,13 +70,10 @@ public abstract class Loop {
     protected void logger() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< logger >>>>>>>>>> \n"); // Es para debug, borrar
-        System.out.print("Enter your username: ");
-        String userName = scanner.next();
-        System.out.print("Enter your password: ");
-        String password = scanner.next();
 
-        currentUser = Store.getInstance().getUtility().logIn(userName, password);
+        currentUser = Store.getInstance().logIn();
         if (currentUser == null) {
+            System.err.println("Invalid username or password");
             exit();
         }
         loopSelector();
@@ -191,6 +188,7 @@ public abstract class Loop {
      * prompting the user, notification and profile options will only be printed it they can be chosen by the current
      * user
      * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     * @param products       the products
      */
     protected void pagedSecondHandLoopPrinter(int firstOptionNum, List<SecondHandProduct> products) {
         previousPagePrinter(firstOptionNum);
@@ -320,6 +318,7 @@ public abstract class Loop {
      * prompting the user, notification and profile options will only be printed it they can be chosen by the current
      * user
      * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     * @param product        the product
      */
     protected void pagedReviewLoopPrinter(int firstOptionNum, StoreProduct product) {
         previousPagePrinter(firstOptionNum);
@@ -362,6 +361,7 @@ public abstract class Loop {
      * prompting the user, notification and profile options will only be printed it they can be chosen by the current
      * user
      * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     * @param products       the products
      */
     protected void pagedStoreProductLoopPrinter(int firstOptionNum, List<StoreProduct> products) {
         previousPagePrinter(firstOptionNum);
@@ -442,6 +442,7 @@ public abstract class Loop {
      * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
      * store's list of packs
      * @param optionNum the number that will resemble the previous page action in the prompt
+     * @param packList  the pack list
      */
     protected void nextPagePrinterPack(int optionNum, List<Pack> packList) {
         if ((currentScreenPageNum + 1) < Pager.getInstance().getPackMaxPageNum(packList)) {
@@ -456,6 +457,7 @@ public abstract class Loop {
      * prompting the user, notification and profile options will only be printed it they can be chosen by the current
      * user
      * @param firstOptionNum the number that will resemble the "see notifications" action in the prompt
+     * @param packs          the packs
      */
     protected void pagedPackLoopPrinter(int firstOptionNum, List<Pack> packs) {
         previousPagePrinter(firstOptionNum);

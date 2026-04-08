@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"discount"},{"l":"exchange"},{"l":"main"},{"l":"notification"},{"l":"order"},{"l":"product"},{"l":"search"},{"l":"store"},{"l":"user"},{"l":"utilities"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"l":"discount"},{"l":"exchange"},{"l":"main"},{"l":"notification"},{"l":"order"},{"l":"product"},{"l":"search"},{"l":"store"},{"l":"user"},{"l":"utilities"}];updateSearchResults();

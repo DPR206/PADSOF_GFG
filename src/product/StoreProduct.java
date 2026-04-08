@@ -30,7 +30,7 @@ public abstract class StoreProduct extends Product {
     /** The product's categories */
     private HashMap<String, Category> categories = new HashMap<>();
     /** The date when the product was added to the cart */
-    private LocalDate addedDate = null;
+    private LocalDate addedDate;
     private int sales;
     private HashMap<Month, Integer> salesByMonth;
 
@@ -146,8 +146,9 @@ public abstract class StoreProduct extends Product {
      * @throws IllegalArgumentException value was negative
      */
     public void increaseStock(int value) throws IllegalArgumentException {
+    	
         if (value < 0) {
-            throw new IllegalArgumentException("The increasing amount cannot be negative");
+            throw new IllegalArgumentException("The increasing stock amount cannot be negative");
         }
 
         stock = stock + value;
@@ -172,7 +173,6 @@ public abstract class StoreProduct extends Product {
      */
     public void addReview(int scoring, String comment, RegisteredClient author) {
         reviews.put(author, new Review(scoring, comment, author));
-        // NOTE: Probablemente, haya una mejor forma de recalcular esto
         this.averagePunctuation =
                 (((this.reviews.size() - 1) * this.averagePunctuation) + scoring) / this.reviews.size();
     }
@@ -422,6 +422,8 @@ public abstract class StoreProduct extends Product {
 
         this.stock = newStock;
     }
+    
+    
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 

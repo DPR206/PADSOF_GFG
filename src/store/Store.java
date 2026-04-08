@@ -501,7 +501,15 @@ public class Store {
     public int getPackIndex(int packID) {
         return Pager.getInstance().getPackIndex(this.packs, packID);
     }
-
+    
+    /**
+     * Adds a user to the storee
+     * @param s the user to add
+     */
+    public void addUser(User s) {
+    	this.users.put(s.getId(), s);
+    }
+    
     /**
      * It gets the maximum number of pages that can be obtained from the store's pack list
      * @return the maximum number of pages that can be obtained from the store's pack list

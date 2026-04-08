@@ -5,8 +5,13 @@ import discount.DiscountType;
 import exchange.*;
 import order.Order;
 import product.*;
+import user.Employee;
+import user.Manager;
+import user.Permission;
 import user.RegisteredClient;
+import user.UnregisteredClient;
 import user.User;
+import user.UserType;
 
 import java.io.*;
 import java.time.*;
@@ -19,6 +24,7 @@ import java.util.*;
  */
 public class SaverLoader {
     private static final SaverLoader INSTANCE = new SaverLoader();
+    private Store s = Store.getInstance();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -374,7 +380,7 @@ public class SaverLoader {
             throw new IOException(e.getMessage());
         }
     }
-
+    
     /*---------------------------------------------------- LOADS -----------------------------------------------------*/
 
     /**
@@ -927,8 +933,34 @@ public class SaverLoader {
             User.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
 
             while ((line = buffer.readLine()) != null) {
+            	
                 words = line.split(";");
-                // DUE
+                String actualID = words[0];
+                String userName = words[1];
+                String pwd = words[2];
+                String type = words[3];
+                
+                if(type.equals(UserType.REGISTERED_CLIENT.getSymbol())) {
+                	String dni = words[4];
+                	String registeredDate = words[5];
+                	String bool = words[6];
+                	
+                	LocalDate f = LocalDate.parse(registeredDate);
+                	RegisteredClient c = new RegisteredClient(userName, dni, pwd, Boolean.parseBoolean(bool));
+                	this.s.addUser(c);
+                }
+                
+                else if(type.equals(UserType.MANAGER.getSymbol())) {
+                	Manager m = Manager.getInstance();
+                }
+                
+                else if(type.equals(UserType.EMPLOYEE.getSymbol())) {
+                	String permission = words[4];
+                	String bool = words[5];
+                	if(permission.equals(Permission.EXCHANGE.getMeaning())) {
+                		Employee e = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
+                	}
+                }
             }
 
             buffer.close();

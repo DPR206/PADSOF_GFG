@@ -197,7 +197,15 @@ public class StorePermission {
     public List<StoreProduct> searchStoreProducts(){
         return this.searching.searchStoreProducts();
     }
-
+    
+    /**
+     * Changes the price of a pack
+     *
+     *
+     * @param p, the pack to search
+     * @param price, new price of the pack
+     *
+     */
     public void setPackPrice(Pack p, double price) {
     	List<Pack> packs = s.getPacks();
     	for(Pack pack: packs) {
@@ -207,6 +215,14 @@ public class StorePermission {
     	}
     }
     
+    /**
+     * Changes the discount of a pack
+     *
+     *
+     * @param p, the pack to search
+     * @param discount, new discount of the pack
+     *
+     */
     public void setPackDiscount(Pack p, Discount discount) {
     	List<Pack> packs = s.getPacks();
     	for(Pack pack: packs) {
@@ -216,6 +232,14 @@ public class StorePermission {
     	}
     }
     
+    /**
+     * Adds a product to the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the store product to add
+     *
+     */
     public void PackAddProduct(Pack p, StoreProduct sp) {
     	List<Pack> packs = s.getPacks();
     	for(Pack pack: packs) {
@@ -225,6 +249,14 @@ public class StorePermission {
     	}
     }
     
+    /**
+     * Adds a list of products to the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param lsp, the list of store product to add
+     *
+     */
     public void PackAddListProducts(Pack p, ArrayList<StoreProduct> lsp) {
     	List<Pack> packs = s.getPacks();
     	for(Pack pack: packs) {
@@ -243,6 +275,14 @@ public class StorePermission {
     	}
     }
     
+    /**
+     * Deletes a list of store products from the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the list of store products to delete
+     *
+     */
     public void DeleteListOfProductFromPack(Pack p, ArrayList<StoreProduct> sp) {
     	List<Pack> packs = s.getPacks();
     	for(Pack pack: packs) {
@@ -252,6 +292,14 @@ public class StorePermission {
     	}
     }
     
+    /**
+     * Sets the list of products of the pack
+     *
+     *
+     * @param p, the pack to search
+     * @param sp, the list of store products to add
+     *
+     */
     public void setPackProducts(Pack p, ArrayList<StoreProduct> sp) {
     	List<Pack> packs = s.getPacks();
     	for(Pack pack: packs) {

@@ -177,7 +177,7 @@ public class SearchStoreProducts{
      */
     private List<StoreProduct> filterByCategory(Category... c){
         List<StoreProduct> aux = new ArrayList<>();
-        List<StoreProduct> product = (List<StoreProduct>) this.s.getStoreProducts();
+        List<StoreProduct> product = new ArrayList<> (this.s.getStoreProducts().values());
         Category[] caux;
 
         for(Category cat: c) {

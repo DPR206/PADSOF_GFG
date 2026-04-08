@@ -117,7 +117,7 @@ public class ManagerLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Manage a pack */
-                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< managePack >>>>>>>>>> \n"); // Es para debug, borrar
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] ID");

@@ -452,6 +452,23 @@ public class Store {
     }
 
     /**
+     * It gets the paged index belonging to an order with a certain id in the store
+     * @param orderId the id of the desired order
+     * @return the index belonging to an order with a certain id in the store
+     */
+    public int getOrderIndex(int orderId) {
+        return Pager.getInstance().getOrderIndex(this.orders, orderId);
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's order list
+     * @return the maximum number of pages that can be obtained from the store's order list
+     */
+    public int getOrderMaxPageNum() {
+        return Pager.getInstance().getOrderMaxPageNum(this.orders);
+    }
+
+    /**
      * Gets the list of the orders done in the store
      * @return a list with the orders
      */

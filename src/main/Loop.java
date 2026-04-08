@@ -345,6 +345,19 @@ public abstract class Loop {
         }
     }
 
+    /**
+     * It prints the next page selection when the user is prompted to choose their next action whilst viewing the
+     * store's list of orders
+     * @param optionNum the number that will resemble the previous page action in the prompt
+     */
+    protected void nextPagePrinterOrder(int optionNum) {
+        if ((currentScreenPageNum + 1) < Store.getInstance().getOrderMaxPageNum()) {
+            System.out.println("\t[" + optionNum + "] Next page >");
+        } else {
+            System.out.println("\t[" + optionNum + "] Reload page");
+        }
+    }
+
     /* Useful things */
 
     /**
@@ -373,7 +386,7 @@ public abstract class Loop {
     protected void pagedLoopPrinter(int firstOptionNum) {
         previousPagePrinter(firstOptionNum);
         firstOptionNum++;
-        nextPagePrinterRegisteredClient(firstOptionNum);
+        nextPagePrinterRegisteredClient(firstOptionNum); // DUE Cambiar esto para todos
         firstOptionNum++;
         basicLoopPrinter(firstOptionNum);
     }

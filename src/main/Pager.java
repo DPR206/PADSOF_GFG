@@ -1,6 +1,7 @@
 package main;
 
 import discount.Discount;
+import order.Order;
 import product.*;
 import store.Parameter;
 import user.Employee;
@@ -493,6 +494,32 @@ public class Pager {
     public int getItemNumFromIndex(int index) {
         int itemsPerPage = Parameter.getParam().getItemsPerPage();
         return ((index % itemsPerPage) + 1);
+    }
+
+    /**
+     * It gets the paged index belonging to an order with a certain id in a list
+     * @param orders   the desired list of orders
+     * @param wantedId the id of the desired pack
+     * @return the index belonging to an order with a certain id in a list
+     */
+    public int getOrderIndex(List<Order> orders, int wantedId) {
+        for (int j = 0; j < orders.size(); j++) {
+            int orderId = orders.get(j).getId();
+
+            if (wantedId == orderId) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's order list
+     * @param orderList the order list
+     * @return the maximum number of pages that can be obtained from the store's order list
+     */
+    public int getOrderMaxPageNum(List<Order> orderList) {
+        return maxPageNum(orderList.size());
     }
 
     /**

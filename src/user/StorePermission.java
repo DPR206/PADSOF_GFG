@@ -268,6 +268,12 @@ public class StorePermission {
     	}
     }
     
+    /**
+     * Deletes a product from a pack
+     * 
+     * @param p the pack to delete from
+     * @param sp the store product to delete
+     */
     public void DeleteProductFromPack(Pack p, StoreProduct sp) {
     	List<Pack> packs = s.getPacks();
     	for(Pack pack: packs) {

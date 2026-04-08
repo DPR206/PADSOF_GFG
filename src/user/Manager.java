@@ -630,6 +630,12 @@ public class Manager extends User {
     	this.sp.PackAddListProducts(p, lsp);
     }
     
+    /**
+     * Deletes a product from a pack
+     * 
+     * @param p the pack to delete from
+     * @param sp the store product to delete
+     */
     public void DeleteProductFromPack(Pack p, StoreProduct sp) {
     	this.sp.DeleteProductFromPack(p, sp);
     }

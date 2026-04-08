@@ -413,6 +413,12 @@ public class Employee extends User {
     	if(this.sp != null) this.sp.PackAddListProducts(p, lsp);
     }
     
+    /**
+     * Deletes a product from a pack
+     * 
+     * @param p the pack to delete from
+     * @param sp the store product to delete
+     */
     public void DeleteProductFromPack(Pack p, StoreProduct sp) {
     	if(this.sp != null) this.sp.DeleteProductFromPack(p, sp);
     }

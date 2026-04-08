@@ -3,8 +3,10 @@ package user;
 import exchange.Exchange;
 import product.ConservationStatus;
 import product.SecondHandProduct;
+import search.BrowseSecondHandProducts;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * It implements the permission that allows an employee to manage Exchanges
@@ -14,6 +16,8 @@ import java.time.LocalDate;
  * @see SecondHandProduct
  */
 public class ExchangePermission {
+    /** The permission's searcher */
+    private final BrowseSecondHandProducts browser = new BrowseSecondHandProducts();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -21,7 +25,7 @@ public class ExchangePermission {
      * Constructor for an exchange permission
      */
     public ExchangePermission() {
-        // NOTE: Very complex constructor I know
+
     }
 
     /*--------------------------------------------------- MISC ----------------------------------------------------*/
@@ -84,4 +88,11 @@ public class ExchangePermission {
         secondHandProduct.setAvailability(true);
     }
 
+    /**
+     * Retrieves all second-hand products sorted in alphabetical order by name.
+     * @return a {@link List} of {@link SecondHandProduct} sorted alphabetically
+     */
+    public List<SecondHandProduct> searchSecondHandProducts() {
+        return this.browser.searchSecondHandProducts();
+    }
 }

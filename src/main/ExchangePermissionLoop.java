@@ -1,9 +1,13 @@
 package main;
 
 import exchange.Exchange;
+import product.ConservationStatus;
+import product.SecondHandProduct;
 import store.Store;
+import user.Employee;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,6 +18,8 @@ import java.util.Scanner;
 public class ExchangePermissionLoop extends Loop {
     /** This loop's instance */
     private static ExchangePermissionLoop INSTANCE;
+    /** The store's list of second hand products */
+    private List<SecondHandProduct> products = null;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -40,7 +46,7 @@ public class ExchangePermissionLoop extends Loop {
     /**
      * The exchange permission's main loop
      */
-    public void exchangePermissionLoop() throws IOException {
+    protected void exchangePermissionLoop() throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -114,7 +120,7 @@ public class ExchangePermissionLoop extends Loop {
      * It allows an employee with store permission to manage an exchange
      * @throws IOException the io exception
      */
-    public void manageExchange() throws IOException {
+    private void manageExchange() throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -133,7 +139,7 @@ public class ExchangePermissionLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Mark as exchanged */
-                    exchange.setExchanged(true);
+                    ((Employee) currentUser).getEp().manageExchange(exchange, true);
                     break;
                 case 2: /* Browse notifications */
                     EmployeeLoop.getInstance().browseNotifications();
@@ -151,25 +157,70 @@ public class ExchangePermissionLoop extends Loop {
         }
     }
 
-    public void valuateProducts() throws IOException {
+    private void valuateProducts() throws IOException {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
+
+        products = ((Employee) currentUser).getEp().searchSecondHandProducts();
+
         while (!appExited && !exitLoop) {
             System.out.println("\n <<<<<<<<<< DUE >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("Page: " + currentScreenPageNum);
+
+            Pager.getInstance().printSecondHandProductListPage(products, currentScreenPageNum);
+
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
-            System.out.println("\t[" + i++ + "] ");// DUE
-            basicLoopPrinter(i); // DUE: Change
+            System.out.println("\t[" + i++ + "] Valuate a product");
+            pagedLoopPrinter(i);
             chosenOption = scanner.nextInt();
 
             switch (chosenOption) {
-                case 1: /* DUE */
-                    // DUE
+                case 1: /* Valuate a product */
+                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.println("Do you wish to select it via: ID or list number?");
+                    System.out.println("[1] List number");
+                    System.out.println("[2] ID");
+                    int chosenOption2 = scanner.nextInt();
+
+                    switch (chosenOption2) {
+                        case 1:
+                            System.out.println("Enter the number of the desired product:");
+                            this.itemNum = scanner.nextInt();
+                            leavePagedScreen();
+                            valuateProduct();
+                            break;
+                        case 2:
+                            System.out.println("Enter the ID of the desired product:");
+                            String productID = scanner.next();
+                            int index = Pager.getInstance().getSecondHandProductIndex(products, productID);
+                            if (index != -1) {
+                                currentScreenPageNum = Pager.getInstance().getPageNumFromIndex(index);
+                                itemNum = Pager.getInstance().getItemNumFromIndex(index);
+
+                                leavePagedScreen();
+                                valuateProduct();
+                                break;
+                            }
+                            System.out.println("The ID wasn't valid");
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                    }
                     break;
-                case 2: /* DUE */
-                    // DUE
+                case 2: /* Previous page */
+                    previousPage();
                     break;
-                case 2: /* Exit */
+                case 3: /* Next page */
+                    nextPageSecondHandProduct(products);
+                    break;
+                case 4: /* Browse notifications */
+                    EmployeeLoop.getInstance().browseNotifications();
+                    break;
+                case 5: /* See profile */
+                    EmployeeLoop.getInstance().seeProfile();
+                    break;
+                case 6: /* Exit */
                     exit();
                     break;
                 default: /* Go back */
@@ -177,5 +228,23 @@ public class ExchangePermissionLoop extends Loop {
                     break;
             }
         }
+    }
+
+    private void valuateProduct() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n <<<<<<<<<< valuateProduct >>>>>>>>>> \n"); // Es para debug, borrar
+
+        SecondHandProduct product =
+                Pager.getInstance().selectSecondHandProductFromPage(products, currentScreenPageNum, itemNum);
+        product.bigPrintInfo();
+
+        System.out.println("Enter the product's valuation:");
+        double valuation = scanner.nextDouble();
+        System.out.println("Enter the product's conservation status:");
+        ConservationStatus status = ConservationStatus.valueOf(scanner.next());
+
+        ((Employee) currentUser).getEp().valuate(product, valuation, status);
+
+        System.out.println("The product has been valuated successfully");
     }
 }

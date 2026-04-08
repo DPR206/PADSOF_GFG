@@ -1,8 +1,7 @@
 package main;
 
 import order.Cart;
-import product.Category;
-import product.StoreProduct;
+import product.*;
 import store.Store;
 import user.*;
 
@@ -28,7 +27,9 @@ public abstract class Loop {
     protected int chosenOption = 2;
     /** The chosen item's number when selecting from a list */
     protected int itemNum = 1;
-    
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Protected constructor
      */
@@ -173,6 +174,16 @@ public abstract class Loop {
     protected void nextPageStoreProduct(List<StoreProduct> products) {
         currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
                                currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing a list of second hand products
+     * @param products the list of second hand products
+     */
+    protected void nextPageSecondHandProduct(List<SecondHandProduct> products) {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Pager.getInstance().getSecondHandProductMaxPageNum(products) ?
+                currentScreenPageNum + 1 : currentScreenPageNum;
     }
 
     /**

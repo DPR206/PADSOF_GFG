@@ -777,8 +777,5 @@ public class Manager extends User {
      */
     public void setType(StoreProduct sp, ProductType pt) {
         this.sp.setType(sp, pt);
-    }
-
-    
-    
+    }   
 }

@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.util.*;
 
+import discount.Discount;
+
 /**
  * It implements the store permission of the store
  * @author Sofía C.L.
@@ -196,6 +198,69 @@ public class StorePermission {
         return this.searching.searchStoreProducts();
     }
 
+    public void setPackPrice(Pack p, double price) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.setPrice(price);
+    		}
+    	}
+    }
+    
+    public void setPackDiscount(Pack p, Discount discount) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.setDiscount(discount);
+    		}
+    	}
+    }
+    
+    public void PackAddProduct(Pack p, StoreProduct sp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.addProduct(sp);
+    		}
+    	}
+    }
+    
+    public void PackAddListProducts(Pack p, ArrayList<StoreProduct> lsp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.addArrayProducts(lsp);
+    		}
+    	}
+    }
+    
+    public void DeleteProductFromPack(Pack p, StoreProduct sp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.eliminateProduct(sp);
+    		}
+    	}
+    }
+    
+    public void DeleteListOfProductFromPack(Pack p, ArrayList<StoreProduct> sp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.eliminateArrayProducts(sp);
+    		}
+    	}
+    }
+    
+    public void setPackProducts(Pack p, ArrayList<StoreProduct> sp) {
+    	List<Pack> packs = s.getPacks();
+    	for(Pack pack: packs) {
+    		if(pack.equals(p)) {
+    			p.setProducts(sp);
+    		}
+    	}
+    }
+    
     /**
      * Searches for the store products based on the category
      * @param c, the categories we want our searched products to belong to

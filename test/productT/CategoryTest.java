@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import product.Category;
 import product.Comic;
-import product.*;
 
 public class CategoryTest {
 

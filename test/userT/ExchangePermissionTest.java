@@ -5,7 +5,6 @@ import product.*;
 import user.*;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.*;
@@ -46,7 +45,6 @@ class ExchangePermissionTest {
 
     @Test
     void testValuateSuccess() {
-        // Usamos una instancia real (ajusta el constructor según tu clase SecondHandProduct)
         SecondHandProduct product = new SecondHandProduct("name", "description", "photo", ProductType.COMIC,
     			false, true, null, client1);
         double price = 100.0;

@@ -115,7 +115,7 @@ public abstract class Loop {
                 RegisteredClientLoop.getInstance().registeredClientLoop();
                 break;
             case EMPLOYEE:
-                // DUE employeeLoop();
+                EmployeeLoop.getInstance().employeeLoop();
                 break;
             case MANAGER:
                 ManagerLoop.getInstance().managerLoop();
@@ -229,6 +229,15 @@ public abstract class Loop {
     protected void nextPageCategory(List<Category> categories) {
         currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getCategoryMaxPageNum(categories) ?
                                currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing the store's list of orders
+     */
+    protected void nextPageOrder() {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getOrderMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
     }
 
     /**

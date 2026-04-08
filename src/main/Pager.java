@@ -35,8 +35,6 @@ public class Pager {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-    // DUE: Idealmente, no se le pasan listas directamente desde los loops si no que se invocan esto métodos desde la
-    //  clase que posea dicha lista, si sobrevivo al resto lo implemento <- Estoy en ello
 
     /**
      * It gets the pager's instance
@@ -233,13 +231,26 @@ public class Pager {
 
     /**
      * It gets the discount listed as n.º discountNum in a certain page
-     * @param discountListPage the discount list page
-     * @param pageNum          the desired page's number
-     * @param discountNum      the desired discount's n.º
+     * @param discounts   the discounts
+     * @param pageNum     the desired page's number
+     * @param discountNum the desired discount's n.º
      * @return the desired discount
      */
-    public Discount selectDiscountFromPage(List<Discount> discountListPage, int pageNum, int discountNum) {
+    public Discount selectDiscountFromPage(List<Discount> discounts, int pageNum, int discountNum) {
+        List<Discount> discountListPage = pageDiscountList(discounts, pageNum);
         return discountListPage.get(discountNum - 1);
+    }
+
+    /**
+     * It gets the order listed as n.º discountNum in a certain page
+     * @param orders   the orders
+     * @param pageNum  the desired page's number
+     * @param orderNum the desired discount's n.º
+     * @return the desired discount
+     */
+    public Order selectOrderFromPage(List<Order> orders, int pageNum, int orderNum) {
+        List<Order> orderListPage = pageOrderList(orders, pageNum);
+        return orderListPage.get(orderNum - 1);
     }
 
     /**
@@ -328,6 +339,20 @@ public class Pager {
         }
 
         return discountList.subList(getFrom(pageNum), getTo(pageNum, discountList.size()));
+    }
+
+    /**
+     * It gets a sub-list of orders according to the desired page
+     * @param orderList the order list
+     * @param pageNum   the desired page's number
+     * @return the desired page
+     */
+    public List<Order> pageOrderList(List<Order> orderList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
+        return orderList.subList(getFrom(pageNum), getTo(pageNum, orderList.size()));
     }
 
     /**

@@ -1,5 +1,7 @@
 package main;
 
+import order.Order;
+import order.OrderState;
 import store.Store;
 
 import java.io.IOException;
@@ -87,9 +89,9 @@ public class OrderPermissionLoop extends Loop {
                     previousPage();
                     break;
                 case 4: /* Next page */
-                    //DUE nextPageOrder();
+                    nextPageOrder();
                     break;
-                case 5:
+                case 5: /* Browse notifications */
                     EmployeeLoop.getInstance().browseNotifications();
                 case 6: /* See profile */
                     EmployeeLoop.getInstance().seeProfile();
@@ -109,6 +111,42 @@ public class OrderPermissionLoop extends Loop {
      * @throws IOException the io exception
      */
     public void manageOrder() throws IOException {
-        // DUE
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.println("\n <<<<<<<<<< manageOrder >>>>>>>>>> \n"); // Es para debug, borrar
+
+            Order order = Pager.getInstance()
+                               .selectOrderFromPage(Store.getInstance().getOrders(), currentScreenPageNum, itemNum);
+            order.bigPrintInfo();
+
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            System.out.println("\t[" + i++ + "] Change its status");
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Change status */
+                    System.out.println("Enter the new state (" + OrderState.PAID.getString() + "/" +
+                                       OrderState.READY_TO_PICKUP.getString() + "/" +
+                                       OrderState.IN_PREPARATION.getString() + "/" + OrderState.PICKED_UP.getString() +
+                                       "):");
+                    OrderState state = OrderState.valueOf(scanner.next());
+                    order.setState(state);
+                    break;
+                case 2: /* Browse notifications */
+                    EmployeeLoop.getInstance().browseNotifications();
+                case 3: /* See profile */
+                    EmployeeLoop.getInstance().seeProfile();
+                    break;
+                case 4: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
+        }
     }
 }

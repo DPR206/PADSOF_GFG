@@ -39,9 +39,7 @@ public class EmployeeLoop extends Loop {
     /**
      * The employee's main loop
      */
-    private void employeeLoop() throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        boolean exitLoop = false;
+    protected void employeeLoop() throws IOException {
         System.out.println("\n <<<<<<<<<< employeeLoop >>>>>>>>>> \n"); // Es para debug, borrar
         switch (((Employee) currentUser).getPerm()) {
             case STORE -> StorePermissionLoop.getInstance().storePermissionLoop();
@@ -78,7 +76,6 @@ public class EmployeeLoop extends Loop {
                     break;
             }
         }
-
     }
 
     /**

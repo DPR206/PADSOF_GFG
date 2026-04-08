@@ -3,8 +3,10 @@ package user;
 import exchange.Exchange;
 import product.ConservationStatus;
 import product.SecondHandProduct;
+import search.BrowseSecondHandProducts;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * It implements the permission that allows an employee to manage Exchanges
@@ -14,6 +16,8 @@ import java.time.LocalDate;
  * @see SecondHandProduct
  */
 public class ExchangePermission {
+    /** The permission's searcher */
+    private final BrowseSecondHandProducts browser = new BrowseSecondHandProducts();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -21,7 +25,7 @@ public class ExchangePermission {
      * Constructor for an exchange permission
      */
     public ExchangePermission() {
-        // NOTE: Very complex constructor I know
+
     }
 
     /*--------------------------------------------------- MISC ----------------------------------------------------*/
@@ -43,8 +47,8 @@ public class ExchangePermission {
     /**
      * It allows an employee to set a price (valuation) to a second hand product
      * @param secondHandProduct the desired product
-     * @param valuationPrice         the product's price
-     * @param status 			the product's conservation status
+     * @param valuationPrice    the product's price
+     * @param status            the product's conservation status
      * @throws IllegalArgumentException valuation was negative
      * @throws NullPointerException     second hand product was null
      */
@@ -65,14 +69,14 @@ public class ExchangePermission {
     /**
      * It allows an employee to set a price (valuation) to a second hand product
      * @param secondHandProduct the desired product
-     * @param valuationPrice         the product's price
-     * @param status 			the product's conservation status
-     * @param valuationDate 	the product's valuation date
+     * @param valuationPrice    the product's price
+     * @param status            the product's conservation status
+     * @param valuationDate     the product's valuation date
      * @throws IllegalArgumentException valuation was negative
      * @throws NullPointerException     second hand product was null
      */
-    public void valuate(SecondHandProduct secondHandProduct, double valuationPrice, ConservationStatus status, LocalDate valuationDate)
-            throws IllegalArgumentException, NullPointerException {
+    public void valuate(SecondHandProduct secondHandProduct, double valuationPrice, ConservationStatus status,
+                        LocalDate valuationDate) throws IllegalArgumentException, NullPointerException {
         if (secondHandProduct == null) {
             throw new NullPointerException("Second Hand Product is null");
         }
@@ -84,4 +88,11 @@ public class ExchangePermission {
         secondHandProduct.setAvailability(true);
     }
 
+    /**
+     * Retrieves all second-hand products sorted in alphabetical order by name.
+     * @return a {@link List} of {@link SecondHandProduct} sorted alphabetically
+     */
+    public List<SecondHandProduct> searchSecondHandProducts() {
+        return this.browser.searchSecondHandProducts();
+    }
 }

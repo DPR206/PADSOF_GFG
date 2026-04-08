@@ -44,7 +44,7 @@ public class Order {
         this.sp = sp;
         this.p = p;
 		this.owner = owner;
-		
+
 		Store.getInstance().addOrder(this);
     }
 
@@ -61,7 +61,14 @@ public class Order {
         Order.totalId++;
     }
 
-    /**
+	/**
+	 * It prints the order's info when seen individually
+	 */
+	public void bigPrintInfo() {
+		System.out.println("State: " + state);
+	}
+
+	/**
      * Changes the state of the Order
      * @param state, the state to which we have to change it
      */

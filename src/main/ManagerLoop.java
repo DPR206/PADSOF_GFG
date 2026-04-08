@@ -1659,6 +1659,7 @@ public class ManagerLoop extends Loop {
 
     /**
      * It allows a manager to manage a discount
+     * @throws IOException Error while scanning
      */
     public void manageDiscount() throws IOException {
         Scanner scanner = new Scanner(System.in);

@@ -9,6 +9,11 @@ import java.io.IOException;
  */
 public class MainApp {
     private static final MainLoop ml = MainLoop.getInstance();
+    
+    /**
+     * Private constructor
+     */
+    private MainApp() {}
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 

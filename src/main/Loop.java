@@ -1,8 +1,7 @@
 package main;
 
 import order.Cart;
-import product.Category;
-import product.StoreProduct;
+import product.*;
 import store.Store;
 import user.*;
 
@@ -28,6 +27,14 @@ public abstract class Loop {
     protected int chosenOption = 2;
     /** The chosen item's number when selecting from a list */
     protected int itemNum = 1;
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Protected constructor
+     */
+    protected Loop() {
+    }
 
     /**
      * It updates the previous and current page numbers when leaving a paged screen, allowing for the user to go back to
@@ -115,7 +122,7 @@ public abstract class Loop {
                 RegisteredClientLoop.getInstance().registeredClientLoop();
                 break;
             case EMPLOYEE:
-                // DUE employeeLoop();
+                EmployeeLoop.getInstance().employeeLoop();
                 break;
             case MANAGER:
                 ManagerLoop.getInstance().managerLoop();
@@ -167,6 +174,16 @@ public abstract class Loop {
     protected void nextPageStoreProduct(List<StoreProduct> products) {
         currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getStoreProductMaxPageNum(products) ?
                                currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing a list of second hand products
+     * @param products the list of second hand products
+     */
+    protected void nextPageSecondHandProduct(List<SecondHandProduct> products) {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Pager.getInstance().getSecondHandProductMaxPageNum(products) ?
+                currentScreenPageNum + 1 : currentScreenPageNum;
     }
 
     /**
@@ -229,6 +246,24 @@ public abstract class Loop {
     protected void nextPageCategory(List<Category> categories) {
         currentScreenPageNum = (currentScreenPageNum + 1) < Pager.getInstance().getCategoryMaxPageNum(categories) ?
                                currentScreenPageNum + 1 : currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing the store's list of orders
+     */
+    protected void nextPageOrder() {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getOrderMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
+    }
+
+    /**
+     * It allows for a user to switch to the next page when viewing the store's list of exchanges
+     */
+    protected void nextPageExchange() {
+        currentScreenPageNum =
+                (currentScreenPageNum + 1) < Store.getInstance().getExchangeMaxPageNum() ? currentScreenPageNum + 1 :
+                currentScreenPageNum;
     }
 
     /**

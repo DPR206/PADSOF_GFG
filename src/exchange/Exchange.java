@@ -44,9 +44,8 @@ public class Exchange {
      * @param assignedProducts2 the products 2
      */
     public Exchange(int assignedId, LocalDateTime assignedDate, boolean assignedExchanged,
-                    RegisteredClient assignedUser1,
-                    ArrayList<SecondHandProduct> assignedProducts1, RegisteredClient assignedUser2,
-                    ArrayList<SecondHandProduct> assignedProducts2) {
+                    RegisteredClient assignedUser1, ArrayList<SecondHandProduct> assignedProducts1,
+                    RegisteredClient assignedUser2, ArrayList<SecondHandProduct> assignedProducts2) {
 
         this.id = assignedId;
         this.date = assignedDate;
@@ -65,8 +64,8 @@ public class Exchange {
      * @param assignedExchanged the exchanged
      * @param assignedUser1     the user 1
      * @param assignedProducts1 the products 1
-     * @param assignedProducts2     the user 2
-     * @param assignedUser2 the products 2
+     * @param assignedProducts2 the user 2
+     * @param assignedUser2     the products 2
      */
     public Exchange(LocalDateTime assignedDate, boolean assignedExchanged, RegisteredClient assignedUser1,
                     ArrayList<SecondHandProduct> assignedProducts1, RegisteredClient assignedUser2,
@@ -91,13 +90,15 @@ public class Exchange {
      * @param assignedProducts2 the products 2
      */
     public Exchange(LocalDateTime assignedDate, RegisteredClient assignedUser1,
-                    ArrayList<SecondHandProduct> assignedProducts1,
-                    RegisteredClient assignedUser2, ArrayList<SecondHandProduct> assignedProducts2) {
+                    ArrayList<SecondHandProduct> assignedProducts1, RegisteredClient assignedUser2,
+                    ArrayList<SecondHandProduct> assignedProducts2) {
         this(assignedDate, false, assignedUser1, assignedProducts1, assignedUser2, assignedProducts2);
     }
 
 
     /*-------------------------------------------------------------SETTERS AND GETTERS----------------------------------------------------------*/
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
      * Obtains the total id of the exchanges
@@ -124,6 +125,18 @@ public class Exchange {
     }
 
     /**
+     * It prints the order's info when seen individually
+     */
+    public void bigPrintInfo() {
+        System.out.println("ID: " + id);
+        System.out.println("Sender: " + this.origin.getUserName());
+        System.out.println("Sender's products: " + this.getPrintProducts(true));
+        System.out.println("Receiver: " + this.destination.getUserName());
+        System.out.println("Receiver's products: " + this.getPrintProducts(false));
+        System.out.println(this.exchanged ? "[x] Exchanged" : "[ ] Exchanged\n");
+    }
+
+    /**
      * Changes if the exchange was done
      * @param newExchanged the exchanged
      */
@@ -140,6 +153,8 @@ public class Exchange {
     public void changeDate(LocalDateTime newDate) {
         this.setDate(newDate);
     }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
      * The time when the exchange took place
@@ -184,6 +199,30 @@ public class Exchange {
         clientProducts = this.productos_propietario.get(this.destination);
         for (SecondHandProduct product : clientProducts) {
             sb.append(product.getId()).append(",");
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * It returns an offer's user's products in a save-file-friendly manner
+     * @param origin true if the origin's product are desired, false if its the destination's
+     * @return a string containing the offer's user's products' id
+     */
+    public String getPrintProducts(boolean origin) {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<SecondHandProduct> clientProducts;
+
+        if (origin) {
+            clientProducts = this.productos_propietario.get(this.origin);
+            for (SecondHandProduct product : clientProducts) {
+                sb.append(product.getId()).append(",");
+            }
+        } else {
+            clientProducts = this.productos_propietario.get(this.destination);
+            for (SecondHandProduct product : clientProducts) {
+                sb.append(product.getId()).append(",");
+            }
         }
 
         return sb.toString();

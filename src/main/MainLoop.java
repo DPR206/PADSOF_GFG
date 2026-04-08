@@ -90,8 +90,5 @@ public class MainLoop extends Loop {
                 exit();
                 break;
         }
-
-        exit();
-
     }
 }

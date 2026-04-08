@@ -1,6 +1,3 @@
-/**
- *
- */
 package user;
 
 import es.uam.eps.padsof.telecard.*;

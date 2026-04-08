@@ -1,6 +1,7 @@
 package main;
 
 import discount.Discount;
+import exchange.Exchange;
 import order.Order;
 import product.*;
 import store.Parameter;
@@ -35,8 +36,6 @@ public class Pager {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-    // DUE: Idealmente, no se le pasan listas directamente desde los loops si no que se invocan esto métodos desde la
-    //  clase que posea dicha lista, si sobrevivo al resto lo implemento <- Estoy en ello
 
     /**
      * It gets the pager's instance
@@ -81,6 +80,24 @@ public class Pager {
         List<StoreProduct> productListPage = pageStoreProductList(storeProductList, pageNum);
         int i = 1;
         for (StoreProduct product : productListPage) {
+            System.out.println(i++ + ". " + product.smallPrintInfo());
+        }
+    }
+
+    /**
+     * It prints a sub-list of another according to the desired page
+     * @param secondHandProductList the list of second hand products
+     * @param pageNum               the desired page's number
+     */
+    public void printSecondHandProductListPage(List<SecondHandProduct> secondHandProductList, int pageNum) {
+        if (secondHandProductList == null || secondHandProductList.isEmpty()) {
+            System.out.println("There are no store products");
+            return;
+        }
+
+        List<SecondHandProduct> productListPage = pageSecondHandProductList(secondHandProductList, pageNum);
+        int i = 1;
+        for (SecondHandProduct product : productListPage) {
             System.out.println(i++ + ". " + product.smallPrintInfo());
         }
     }
@@ -233,13 +250,38 @@ public class Pager {
 
     /**
      * It gets the discount listed as n.º discountNum in a certain page
-     * @param discountListPage the discount list page
-     * @param pageNum          the desired page's number
-     * @param discountNum      the desired discount's n.º
+     * @param discounts   the discounts
+     * @param pageNum     the desired page's number
+     * @param discountNum the desired discount's n.º
      * @return the desired discount
      */
-    public Discount selectDiscountFromPage(List<Discount> discountListPage, int pageNum, int discountNum) {
+    public Discount selectDiscountFromPage(List<Discount> discounts, int pageNum, int discountNum) {
+        List<Discount> discountListPage = pageDiscountList(discounts, pageNum);
         return discountListPage.get(discountNum - 1);
+    }
+
+    /**
+     * It gets the order listed as n.º discountNum in a certain page
+     * @param orders   the orders
+     * @param pageNum  the desired page's number
+     * @param orderNum the desired discount's n.º
+     * @return the desired discount
+     */
+    public Order selectOrderFromPage(List<Order> orders, int pageNum, int orderNum) {
+        List<Order> orderListPage = pageOrderList(orders, pageNum);
+        return orderListPage.get(orderNum - 1);
+    }
+
+    /**
+     * It gets the exchange listed as n.º exchangeNum in a certain page
+     * @param exchanges   the exchanges
+     * @param pageNum     the desired page's number
+     * @param exchangeNum the desired exchange's n.º
+     * @return the desired exchange
+     */
+    public Exchange selectExchangeFromPage(List<Exchange> exchanges, int pageNum, int exchangeNum) {
+        List<Exchange> exchangeListPage = pageExchangeList(exchanges, pageNum);
+        return exchangeListPage.get(exchangeNum - 1);
     }
 
     /**
@@ -252,6 +294,19 @@ public class Pager {
     public Employee selectEmployeeFromPage(List<Employee> employees, int pageNum, int clientNum) {
         List<Employee> employeeListPage = pageEmployeeList(employees, pageNum);
         return employeeListPage.get(clientNum - 1);
+    }
+
+    /**
+     * It gets the second hand product listed as n.º discountNum in a certain page
+     * @param products   the second hand products
+     * @param pageNum    the desired page's number
+     * @param productNum the desired second hand product's n.º
+     * @return the desired second hand product
+     */
+    public SecondHandProduct selectSecondHandProductFromPage(List<SecondHandProduct> products, int pageNum,
+                                                             int productNum) {
+        List<SecondHandProduct> secondHandProductList = pageSecondHandProductList(products, pageNum);
+        return secondHandProductList.get(productNum - 1);
     }
 
     /**
@@ -331,6 +386,34 @@ public class Pager {
     }
 
     /**
+     * It gets a sub-list of orders according to the desired page
+     * @param orderList the order list
+     * @param pageNum   the desired page's number
+     * @return the desired page
+     */
+    public List<Order> pageOrderList(List<Order> orderList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
+        return orderList.subList(getFrom(pageNum), getTo(pageNum, orderList.size()));
+    }
+
+    /**
+     * It gets a sub-list of exchanges according to the desired page
+     * @param exchangeList the exchange list
+     * @param pageNum      the desired page's number
+     * @return the desired page
+     */
+    public List<Exchange> pageExchangeList(List<Exchange> exchangeList, int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
+        return exchangeList.subList(getFrom(pageNum), getTo(pageNum, exchangeList.size()));
+    }
+
+    /**
      * It gets a sub-list of employees according to the desired page
      * @param employeeList the employee list
      * @param pageNum      the desired page's number
@@ -403,6 +486,26 @@ public class Pager {
         return storeProductList.subList(getFrom(pageNum), getTo(pageNum, storeProductList.size()));
     }
 
+    /**
+     * It gets a sub-list of another according to the desired page
+     * @param secondHandProductList the list of second hand products
+     * @param pageNum               the desired page's number
+     * @return the desired page
+     */
+    public List<SecondHandProduct> pageSecondHandProductList(List<SecondHandProduct> secondHandProductList,
+                                                             int pageNum) {
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
+
+        return secondHandProductList.subList(getFrom(pageNum), getTo(pageNum, secondHandProductList.size()));
+    }
+
+    /**
+     * It gets the maximum number of pages that can be made from a list's certain size
+     * @param size the size
+     * @return the maximum number of pages that can be made from the list's certain size
+     */
     private int maxPageNum(int size) {
         if (size % Parameter.getParam().getItemsPerPage() == 0) {
             return size / Parameter.getParam().getItemsPerPage();
@@ -471,6 +574,32 @@ public class Pager {
      */
     public int getEmployeeMaxPageNum(List<Employee> employeeList) {
         return maxPageNum(employeeList.size());
+    }
+
+    /**
+     * It gets the paged index belonging to an exchange with a certain id in a list
+     * @param exchanges the desired list of exchanges
+     * @param wantedId  the id of the desired pack
+     * @return the index belonging to an order with a certain id in a list
+     */
+    public int getExchangeIndex(List<Exchange> exchanges, int wantedId) {
+        for (int j = 0; j < exchanges.size(); j++) {
+            int exchangeId = exchanges.get(j).getId();
+
+            if (wantedId == exchangeId) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from the store's exchange list
+     * @param exchangeList the exchange list
+     * @return the maximum number of pages that can be obtained from the store's exchange list
+     */
+    public int getExchangeMaxPageNum(List<Exchange> exchangeList) {
+        return maxPageNum(exchangeList.size());
     }
 
     /**
@@ -577,6 +706,32 @@ public class Pager {
     }
 
     /**
+     * It gets the paged index belonging to a second hand product with a certain id in a list
+     * @param products the desired list of second hand products
+     * @param wantedId the id of the desired second hand product
+     * @return the index belonging to a second hand product with a certain id in a list
+     */
+    public int getSecondHandProductIndex(List<SecondHandProduct> products, String wantedId) {
+        for (int j = 0; j < products.size(); j++) {
+            String productId = products.get(j).getId();
+
+            if (wantedId.equals(productId)) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * It gets the maximum number of pages that can be obtained from a list of second hand products
+     * @param secondHandProductList the desired second hand product list
+     * @return the maximum number of pages that can be obtained from a list of second hand products
+     */
+    public int getSecondHandProductMaxPageNum(List<SecondHandProduct> secondHandProductList) {
+        return maxPageNum(secondHandProductList.size());
+    }
+
+    /**
      * It gets the paged index belonging to a store product with a certain id in a list
      * @param products the desired list of store products
      * @param wantedId the id of the desired store product
@@ -594,9 +749,9 @@ public class Pager {
     }
 
     /**
-     * It gets the maximum number of pages that can be obtained from a list of products
+     * It gets the maximum number of pages that can be obtained from a list of store products
      * @param storeProductList the desired product list
-     * @return the maximum number of pages that can be obtained from a list of products
+     * @return the maximum number of pages that can be obtained from a list of store products
      */
     public int getStoreProductMaxPageNum(List<StoreProduct> storeProductList) {
         return maxPageNum(storeProductList.size());

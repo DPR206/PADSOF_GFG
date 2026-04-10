@@ -5,7 +5,13 @@ import discount.DiscountType;
 import exchange.*;
 import order.Order;
 import product.*;
-import user.*;
+import user.Employee;
+import user.Manager;
+import user.Permission;
+import user.RegisteredClient;
+import user.UnregisteredClient;
+import user.User;
+import user.UserType;
 
 import java.io.*;
 import java.time.*;
@@ -360,21 +366,18 @@ public class SaverLoader {
         try {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + userFilename + ".csv")));
-
-            buffer.write(""); // DUE
-            buffer.write(User.totalId); /* Global ID */
-
-            for (String key : keys) {
-                buffer.write(users.get(key).toString() + "\n");
-            }
-
+            
+            //comienzo saveUsers
+            
+            
+            
             buffer.close();
 
         } catch (IOException e) {
             throw new IOException(e.getMessage());
         }
     }
-
+    
     /*---------------------------------------------------- LOADS -----------------------------------------------------*/
 
     /**
@@ -918,6 +921,9 @@ public class SaverLoader {
         BufferedReader buffer;
         String[] words;
         String line;
+        int i = 0;
+        int j;
+        String id;
 
         try {
             buffer = new BufferedReader(
@@ -927,37 +933,75 @@ public class SaverLoader {
             User.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
 
             while ((line = buffer.readLine()) != null) {
-
+            	
                 words = line.split(";");
-                String actualID = words[0];
-                String userName = words[1];
-                String pwd = words[2];
-                String type = words[3];
-
-                if (type.equals(UserType.REGISTERED_CLIENT.getSymbol())) {
-                    String dni = words[4];
-                    String registeredDate = words[5];
-                    String bool = words[6];
-
-                    LocalDate f = LocalDate.parse(registeredDate);
-                    RegisteredClient c = new RegisteredClient(userName, dni, pwd, Boolean.parseBoolean(bool));
-                    this.s.addUser(c);
-                } else if (type.equals(UserType.MANAGER.getSymbol())) {
-                    Manager m = Manager.getInstance();
-                } else if (type.equals(UserType.EMPLOYEE.getSymbol())) {
-                    String permission = words[4];
-                    String bool = words[5];
-                    Employee emp = null;
-                    if (permission.equals(Permission.EXCHANGE.getMeaning())) {
-                        emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
-                        this.s.addUser(emp);
-                        this.s.getEmployees().put(emp.getId(), emp);
-                    } else if (permission.equals(Permission.ORDER.getMeaning())) {
-                        emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
-                    }
-                    this.s.addUser(emp);
-                    this.s.getEmployees().put(emp.getId(), emp);
+                int l = words.length;
+                String actualID = words[i];
+                i++;
+                String userName = words[i];
+                i++;
+                String pwd = words[i];
+                i++;
+                String type = words[i];
+                i++;
+                
+                if(type.equals(UserType.REGISTERED_CLIENT.getSymbol())) {
+                	String dni = words[i];
+                	i++;
+                	String registeredDate = words[i];
+                	i++;
+                	String bool = words[i];
+                	i++;
+                	
+                	LocalDate f = LocalDate.parse(registeredDate);
+                	RegisteredClient c = new RegisteredClient(userName, dni, pwd, Boolean.parseBoolean(bool));
+                	this.s.addUser(c);
+                	
+                	int num = Integer.parseInt(words[i]);
+                	i++;
+                	/*Ahora miramos la lista de ids y los buscamos en la tienda*/
+                	for(j = i; j <= num; j++) {
+                		id = words[j];
+                		StoreProduct sp = this.s.getStoreProductFromId(id);
+                		c.getC().addProduct(sp);
+                	}
+                	
+                	/*Ahora buscamos los productos de segunda mano de wallet*/
+                	i = j;
+                	
+                	for(j = i; j <= num; j++) {
+                		id = words[j];
+                		SecondHandProduct shp = this.s.getSecondHandProductFromId(id);
+                		c.getWallet().addProducts(shp);
+                	}
                 }
+                
+                else if(type.equals(UserType.MANAGER.getSymbol())) {
+                	Manager m = Manager.getInstance();
+                }
+                
+                else if(type.equals(UserType.EMPLOYEE.getSymbol())) {
+                	String permission = words[i];
+                	i++;
+                	String bool = words[i];
+                	i++;
+                	Employee emp = null;
+					if(permission.equals(Permission.EXCHANGE.getMeaning())) {
+                		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
+						this.s.addUser(emp);
+						this.s.getEmployees().put(emp.getId(), emp);
+					}
+					else if(permission.equals(Permission.ORDER.getMeaning())) {
+						emp = new Employee(pwd, userName, Permission.ORDER, Boolean.parseBoolean(bool));
+						this.s.addUser(emp);
+						this.s.getEmployees().put(emp.getId(), emp);
+					}
+					else if(permission.equals(Permission.STORE.getMeaning())) {
+						emp = new Employee(pwd, userName, Permission.STORE, Boolean.parseBoolean(bool));
+						this.s.addUser(emp);
+						this.s.getEmployees().put(emp.getId(), emp);
+					}
+                }	
             }
 
             buffer.close();
@@ -965,7 +1009,8 @@ public class SaverLoader {
         } catch (IOException e) {
             throw new IOException(e);
         }
-    }
+   }
+    
 
     /**
      * It sets whatever parameters couldn't be set previously

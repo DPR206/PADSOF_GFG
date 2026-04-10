@@ -3,16 +3,15 @@
  */
 package product;
 
-import store.*;
-import store.Store;
-import user.RegisteredClient;
+import es.uam.eps.padsof.telecard.*;
 import notification.*;
+import store.*;
+import user.RegisteredClient;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
-
-import es.uam.eps.padsof.telecard.*;
+import java.util.Collections;
+import java.util.Scanner;
 
 /**
  * It implements the second-hand products
@@ -178,7 +177,7 @@ public class SecondHandProduct extends Product{
         notification.FullNotification(this);
         Store.getInstance().sendNotificationClients(notification);
 	}
-	
+
 	/**
 	 * Makes a valuation of a second-hand product
 	 *
@@ -287,38 +286,39 @@ public class SecondHandProduct extends Product{
 	public void setEstimatedPrice(double price) {
         this.setPrice(price);
     }
-	
+
 /*----------------------------------------------------METHODS-----------------------------------------------------*/
 	/**
 	 * Pays the valuation of a second-hand product
-	 * 
+	 *
 	 * @throws InvalidCardNumberException the card number was invalid
 	 * @throws FailedInternetConnectionException the Internet connection failed
 	 * @throws OrderRejectedException the order was rejected
 	 */
-	public void payValuation() throws InvalidCardNumberException, 
+	public void payValuation() throws InvalidCardNumberException,
 	FailedInternetConnectionException, OrderRejectedException {
-		
-		try (Scanner sc = new Scanner(System.in)) {
+
+		Scanner sc = new Scanner(System.in);
+		try {
 			System.out.print("Introduce tu número de tarjeta: ");
 			String cardNumber = sc.next();
 			System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
 			TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
-		}
+		} catch (InvalidCardNumberException _) {} // revisar
 		this.setPaidValuation(true);
-		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now(), 
+		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now(),
 											Collections.emptyList());
-		
+
 		NotificationPayment notification = new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
 		notification.FullNotification("valuation");
 		this.owner.getNotificationHistory().addNotification(notification);
-		
-		NotificationEmployeeValuation notification2 = new NotificationEmployeeValuation (LocalDateTime.now(), false, true, 
+
+		NotificationEmployeeValuation notification2 = new NotificationEmployeeValuation (LocalDateTime.now(), false, true,
 														NotificationType.EMPLOYEE_VALUATION);
 		notification2.FullNotification(this);
 		Store.getInstance().sendNotificationEmployees(notification2);
 	}
-	
+
 
 /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override

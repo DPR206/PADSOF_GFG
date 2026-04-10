@@ -93,21 +93,20 @@ public class Store {
      * @return the associated user
      */
     public User logIn() {
-        try (Scanner sc = new Scanner(System.in)) {
-            String userName, pwd;
+        Scanner sc = new Scanner(System.in);
+        String userName, pwd;
 
-            try {
-                System.out.print("Introduce tu usuario: ");
-                userName = sc.next();
-                System.out.print("Introduce tu contraseña: ");
-                pwd = sc.next();
-            } catch (InputMismatchException e) {
-                System.out.println("Error: El tipo de dato introducido no es válido.");
-                return null;
-            }
-
-            return utility.logIn(userName, pwd);
+        try {
+            System.out.print("Introduce tu usuario: ");
+            userName = sc.next();
+            System.out.print("Introduce tu contraseña: ");
+            pwd = sc.next();
+        } catch (InputMismatchException e) {
+            System.out.println("Error: El tipo de dato introducido no es válido.");
+            return null;
         }
+
+        return utility.logIn(userName, pwd);
     }
 
     /**
@@ -501,7 +500,7 @@ public class Store {
     public int getPackIndex(int packID) {
         return Pager.getInstance().getPackIndex(this.packs, packID);
     }
-    
+
     /**
      * Adds a user to the storee
      * @param s the user to add
@@ -509,7 +508,7 @@ public class Store {
     public void addUser(User s) {
     	this.users.put(s.getId(), s);
     }
-    
+
     /**
      * It gets the maximum number of pages that can be obtained from the store's pack list
      * @return the maximum number of pages that can be obtained from the store's pack list

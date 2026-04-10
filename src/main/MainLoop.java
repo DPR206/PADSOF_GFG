@@ -59,6 +59,25 @@ public class MainLoop extends Loop {
         storePermission.addComic(3.5, "Batman", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
                 "ComicInc");
         storePermission.addFigurine(6.43, "Funko pop", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+        storePermission.addComic(3.5, "Batman2", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
+                "ComicInc");
+        storePermission.addFigurine(6.43, "Funko pop2", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+        storePermission.addComic(3.5, "Batman3", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
+                "ComicInc");
+        storePermission.addFigurine(6.43, "Funko pop3", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+        storePermission.addComic(3.5, "Batman5", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
+                "ComicInc");
+        storePermission.addFigurine(6.43, "Funko pop5", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+        storePermission.addComic(3.5, "Batman4", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
+                "ComicInc");
+        storePermission.addFigurine(6.43, "Funko pop4", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+        storePermission.addComic(3.5, "Batman5", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
+                "ComicInc");
+        storePermission.addFigurine(6.43, "Funko pop6", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+        storePermission.addComic(3.5, "Batman6", "Batman comic vol.3", "yes.png", 2, 207, Year.of(2006), "Stan Lee",
+                "ComicInc");
+        storePermission.addFigurine(6.43, "Funko pop7", "Harry Potter funko", "no.png", 5, "50x15", "Funko", "Vinyl");
+
         Manager.getInstance().addEmployee("p123456@", "client", Permission.ORDER);
         /* BORRAR */
         System.out.println("\n<<<<<<< Welcome to Gifts for Geeks >>>>>>>\n");

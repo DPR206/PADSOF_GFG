@@ -12,7 +12,7 @@ import java.util.*;
  * @version 1.1.
  */
 public class Utility {
-	
+
 	/**
 	 * Creates a new utility
 	 */
@@ -20,7 +20,7 @@ public class Utility {
 
     /**
      * The sign in process
-     * 
+     *
      * @return a new user
      */
     public User signIn() {
@@ -62,14 +62,12 @@ public class Utility {
         } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
             return null;
-        } finally {
-            sc.close();
         }
     }
 
     /**
      * The log in process
-     * 
+     *
      * @param userName the user's name
      * @param pwd the user's password
      * @return the associated user (if there is one)
@@ -85,10 +83,10 @@ public class Utility {
         }
         return null;
     }
-    
+
     /**
      * Checks if a password is secure
-     * 
+     *
      * @param psswd the password to check
      * @return true if the password is safe, false if else
      */
@@ -99,7 +97,7 @@ public class Utility {
     	@SuppressWarnings("unused")
 		int spaces = 0;
     	int specialCharacters = 0;
-    	
+
     	for(char c : psswd.toCharArray()) {
     		if(Character.isUpperCase(c))
     			upper++;
@@ -112,7 +110,7 @@ public class Utility {
     		else
     			specialCharacters++;
     	}
-    	
+
     	if(psswd.length()<8)
     		return false;
     	else if(upper<=0)

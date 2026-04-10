@@ -293,8 +293,6 @@ public class Cart {
             /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
-        } finally {
-            sc.close();
         }
 
         this.packs.clear();

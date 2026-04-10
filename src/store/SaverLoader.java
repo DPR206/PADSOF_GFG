@@ -5,13 +5,7 @@ import discount.DiscountType;
 import exchange.*;
 import order.Order;
 import product.*;
-import user.Employee;
-import user.Manager;
-import user.Permission;
-import user.RegisteredClient;
-import user.UnregisteredClient;
-import user.User;
-import user.UserType;
+import user.*;
 
 import java.io.*;
 import java.time.*;
@@ -380,7 +374,7 @@ public class SaverLoader {
             throw new IOException(e.getMessage());
         }
     }
-    
+
     /*---------------------------------------------------- LOADS -----------------------------------------------------*/
 
     /**
@@ -933,41 +927,37 @@ public class SaverLoader {
             User.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
 
             while ((line = buffer.readLine()) != null) {
-            	
+
                 words = line.split(";");
                 String actualID = words[0];
                 String userName = words[1];
                 String pwd = words[2];
                 String type = words[3];
-                
-                if(type.equals(UserType.REGISTERED_CLIENT.getSymbol())) {
-                	String dni = words[4];
-                	String registeredDate = words[5];
-                	String bool = words[6];
-                	
-                	LocalDate f = LocalDate.parse(registeredDate);
-                	RegisteredClient c = new RegisteredClient(userName, dni, pwd, Boolean.parseBoolean(bool));
-                	this.s.addUser(c);
+
+                if (type.equals(UserType.REGISTERED_CLIENT.getSymbol())) {
+                    String dni = words[4];
+                    String registeredDate = words[5];
+                    String bool = words[6];
+
+                    LocalDate f = LocalDate.parse(registeredDate);
+                    RegisteredClient c = new RegisteredClient(userName, dni, pwd, Boolean.parseBoolean(bool));
+                    this.s.addUser(c);
+                } else if (type.equals(UserType.MANAGER.getSymbol())) {
+                    Manager m = Manager.getInstance();
+                } else if (type.equals(UserType.EMPLOYEE.getSymbol())) {
+                    String permission = words[4];
+                    String bool = words[5];
+                    Employee emp = null;
+                    if (permission.equals(Permission.EXCHANGE.getMeaning())) {
+                        emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
+                        this.s.addUser(emp);
+                        this.s.getEmployees().put(emp.getId(), emp);
+                    } else if (permission.equals(Permission.ORDER.getMeaning())) {
+                        emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
+                    }
+                    this.s.addUser(emp);
+                    this.s.getEmployees().put(emp.getId(), emp);
                 }
-                
-                else if(type.equals(UserType.MANAGER.getSymbol())) {
-                	Manager m = Manager.getInstance();
-                }
-                
-                else if(type.equals(UserType.EMPLOYEE.getSymbol())) {
-                	String permission = words[4];
-                	String bool = words[5];
-                	Employee emp = null;
-					if(permission.equals(Permission.EXCHANGE.getMeaning()))
-                		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
-						this.s.addUser(emp);
-						this.s.getEmployees().put(emp.getId(), emp);
-                	}
-                	else if(permission.equals(Permission.EXCHANGE.getMeaning()))
-            		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
-					this.s.addUser(emp);
-					this.s.getEmployees().put(emp.getId(), emp);
-            	}
             }
 
             buffer.close();
@@ -975,8 +965,7 @@ public class SaverLoader {
         } catch (IOException e) {
             throw new IOException(e);
         }
-   }
-    
+    }
 
     /**
      * It sets whatever parameters couldn't be set previously

@@ -173,8 +173,8 @@ public class Manager extends User {
      *  @param userName, the username of the employee
      *  @param permission, the permission it has
      */
-    public void addEmployee(String password, String userName, Permission permission) {
-        Employee emp = new Employee(password, userName, permission, true);
+    public void addEmployee(String password, String userName, Permission... permission) {
+        Employee emp = new Employee(password, userName, true, permission);
         s.getEmployees().put(emp.getId(), emp);
         s.getUsers().put(emp.getUserName(), emp);
     }
@@ -796,4 +796,22 @@ public class Manager extends User {
     public void setType(StoreProduct sp, ProductType pt) {
         this.sp.setType(sp, pt);
     }   
+    
+    /**
+     * Adds a new permission to an employee
+     * 
+     * @param p, the permission to add
+     * @param emp, the employee to give a new permission to
+     */
+    public void EmployeeAddPerm(Permission p, Employee emp) {
+    	int l = emp.getPerm().length;
+    	int count = 0;
+
+    	for (Permission pp : emp.getPerm()) {
+    	    if (pp != null) {
+    	        count++;
+    	    }
+    	}
+    	emp.getPerm()[count] = p;
+    }
 }

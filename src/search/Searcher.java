@@ -184,4 +184,14 @@ public class Searcher{
     public void toggleProductOrder() {
         this.searchStore.toggleOrder();
     }
+    
+    
+    /**
+     * It returns the boolean that determines wether or not the search is ascendant in values
+     * 
+     * @return boolean
+     */
+    public boolean getBoolean() {
+    	return this.searchStore.getBoolean();
+    }
 }

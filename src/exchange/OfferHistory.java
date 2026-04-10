@@ -110,6 +110,7 @@ public class OfferHistory {
     public RegisteredClient getOwner() {
         return owner;
     }
+    
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 

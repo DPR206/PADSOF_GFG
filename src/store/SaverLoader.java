@@ -1041,15 +1041,31 @@ public class SaverLoader {
                 		StoreProduct sp = this.s.getStoreProductFromId(id);
                 		c.getC().addProduct(sp);
                 	}
-                	
                 	/*Ahora buscamos los productos de segunda mano de wallet*/
                 	i = j;
+                	i++;
+                	num = Integer.parseInt(words[i]);
+                	i++;
                 	
                 	for(j = i; j <= num; j++) {
                 		id = words[j];
                 		SecondHandProduct shp = this.s.getSecondHandProductFromId(id);
                 		c.getWallet().addProducts(shp);
                 	}
+                	
+                	/*Ahora buscamos el historial de intercambios*/
+                	
+                	i = j;
+                	i++;
+                	num = Integer.parseInt(words[i]);
+                	i++;
+                	
+                	for(j = i; j <= num; j++) {
+                		id = words[j];
+                		Exchange e = this.s.getExchange(); //DUE
+                	}
+                	
+                	
                 }
                 
                 else if(type.equals(UserType.MANAGER.getSymbol())) {

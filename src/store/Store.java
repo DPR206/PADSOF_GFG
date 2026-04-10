@@ -636,4 +636,18 @@ public class Store {
     public Utility getUtility() {
         return utility;
     }
+    
+    /**
+     * Obtains the offer associated to the id
+     * @param id the id of the offer we want to search
+     * @return the offer that has the id
+     */
+    public Offer getOfferById(int id) {
+        for (Offer offer : this.offers) {
+            if (offer.getId() == id) {
+                return offer;
+            }
+        }
+        return null;
+    }
 }

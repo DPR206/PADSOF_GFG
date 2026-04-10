@@ -958,16 +958,22 @@ public class SaverLoader {
                 	String permission = words[4];
                 	String bool = words[5];
                 	Employee emp = null;
-					if(permission.equals(Permission.EXCHANGE.getMeaning()))
+					if(permission.equals(Permission.EXCHANGE.getMeaning())) {
                 		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
 						this.s.addUser(emp);
 						this.s.getEmployees().put(emp.getId(), emp);
-                	}
-                	else if(permission.equals(Permission.EXCHANGE.getMeaning()))
-            		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
-					this.s.addUser(emp);
-					this.s.getEmployees().put(emp.getId(), emp);
-            	}
+					}
+					else if(permission.equals(Permission.ORDER.getMeaning())) {
+						emp = new Employee(pwd, userName, Permission.ORDER, Boolean.parseBoolean(bool));
+						this.s.addUser(emp);
+						this.s.getEmployees().put(emp.getId(), emp);
+					}
+					else if(permission.equals(Permission.STORE.getMeaning())) {
+						emp = new Employee(pwd, userName, Permission.STORE, Boolean.parseBoolean(bool));
+						this.s.addUser(emp);
+						this.s.getEmployees().put(emp.getId(), emp);
+					}
+                }	
             }
 
             buffer.close();

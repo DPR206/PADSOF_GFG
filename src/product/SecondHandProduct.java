@@ -299,12 +299,12 @@ public class SecondHandProduct extends Product{
 	FailedInternetConnectionException, OrderRejectedException {
 
 		Scanner sc = new Scanner(System.in);
-		try {
-			System.out.print("Introduce tu número de tarjeta: ");
-			String cardNumber = sc.next();
-			System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
-			TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
-		} catch (InvalidCardNumberException _) {} // revisar
+		
+		System.out.print("Introduce tu número de tarjeta: ");
+		String cardNumber = sc.next();
+		System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
+		TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
+		
 		this.setPaidValuation(true);
 		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now(),
 											Collections.emptyList());

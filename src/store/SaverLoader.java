@@ -369,7 +369,83 @@ public class SaverLoader {
             
             //comienzo saveUsers
             
-            
+            for(User u: this.s.getUsers().values()) {
+            	buffer.write(User.totalId);
+            	buffer.write("\n");
+            	buffer.write(u.getId());
+            	buffer.write(';');
+            	buffer.write(u.getUserName());
+            	buffer.write(';');
+            	buffer.write(u.getPassword());
+            	buffer.write(';');
+            	buffer.write(u.getType().getSymbol());
+            	buffer.write(';');
+            	
+            	/******** CASO USUARIO REGISTRADO ***********/
+            	if(u.getType() == UserType.REGISTERED_CLIENT) {
+            		RegisteredClient c = (RegisteredClient)u;
+            		buffer.write(c.getDni());
+            		buffer.write(';');
+            		buffer.write(c.getRegisterDate().toString());
+            		buffer.write(';');
+            		buffer.write(String.valueOf(c.getSearcher().getBoolean()));
+            		buffer.write(';');
+            		
+            		/*Metemos el tamaño del carrito ahora*/
+            		
+            		buffer.write(c.getC().getProductAmount());
+            		buffer.write(';');
+            		
+            		/*Metemos los ids de los storeProducts que contiene*/
+            		
+            		for(StoreProduct sp: c.getC().getProducts()) {
+            			buffer.write(sp.getId());
+            			buffer.write(';');
+            		}
+            		
+            		/*Ahora metemos los ids de los second hand products del wallet*/
+            		
+            		buffer.write(c.getWallet().getProducts().length);
+            		buffer.write(';');
+            		int i = 0;
+            		
+            		/*Metemos los ids de los second hand products*/
+            		
+            		for(SecondHandProduct shp: c.getWallet().getProducts()) {
+            			buffer.write(shp.getId());
+            			if(i != c.getWallet().getProducts().length - 1) {
+            				buffer.write(';');
+            			}
+            			i++;
+            		}
+            	}
+            	/****** CASO EMPLEADO **********/
+            	else if(u.getType() == UserType.EMPLOYEE) {
+            		Employee emp = (Employee)u;
+            		if(emp.getSp() != null) {
+            			buffer.write(1);
+            		}
+            		else {
+            			buffer.write(0);
+            		}
+            		if(emp.getOp() != null) {
+            			buffer.write(1);
+            		}
+            		else {
+            			buffer.write(0);
+            		}
+            		if(emp.getEp() != null) {
+            			buffer.write(1);
+            		}
+            		else {
+            			buffer.write(0);
+            		}
+            	}
+            	/********* CASO MANAGER ********/
+            	else if(u.getType() == UserType.MANAGER) {
+            		//nada .-.
+            	}
+            }
             
             buffer.close();
 
@@ -981,30 +1057,27 @@ public class SaverLoader {
                 }
                 
                 else if(type.equals(UserType.EMPLOYEE.getSymbol())) {
-                	String permission = words[i];
+                	String stPermission = words[i];
+                	Permission p[] = new Permission[3];
                 	i++;
-                	String bool = words[i];
+                	Employee emp = new Employee(pwd, userName, false, p);
+                	if(Integer.parseInt(stPermission) == 1) {
+                		this.s.getManager().EmployeeAddPerm(Permission.STORE, emp);
+                	}
+                	String orderPerm = words[i];
                 	i++;
-                	Employee emp = null;
-					if(permission.equals(Permission.EXCHANGE.getMeaning())) {
-                		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));
-						this.s.addUser(emp);
-						this.s.getEmployees().put(emp.getId(), emp);
-					}
-					else if(permission.equals(Permission.ORDER.getMeaning())) {
-						emp = new Employee(pwd, userName, Permission.ORDER, Boolean.parseBoolean(bool));
-						this.s.addUser(emp);
-						this.s.getEmployees().put(emp.getId(), emp);
-					}
-					else if(permission.equals(Permission.STORE.getMeaning())) {
-						emp = new Employee(pwd, userName, Permission.STORE, Boolean.parseBoolean(bool));
-						this.s.addUser(emp);
-						this.s.getEmployees().put(emp.getId(), emp);
-					}
-                }	
+                	if(Integer.parseInt(orderPerm) == 1) {
+                		this.s.getManager().EmployeeAddPerm(Permission.ORDER, emp);
+                	}
+                	String exchPerm = words[i];
+                	i++;
+                	if(Integer.parseInt(exchPerm) == 1) {
+                		this.s.getManager().EmployeeAddPerm(Permission.EXCHANGE, emp);
+                	}
             }
 
             buffer.close();
+        }
 
         } catch (IOException e) {
             throw new IOException(e);

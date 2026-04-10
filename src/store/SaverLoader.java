@@ -369,7 +369,21 @@ public class SaverLoader {
             
             //comienzo saveUsers
             
-            
+            for(User u: this.s.getUsers().values()) {
+            	buffer.write(User.totalId);
+            	buffer.write("\n");
+            	buffer.write(u.getId());
+            	buffer.write(';');
+            	buffer.write(u.getUserName());
+            	buffer.write(';');
+            	buffer.write(u.getPassword());
+            	buffer.write(';');
+            	buffer.write(u.getType().getSymbol());
+            	buffer.write(';');
+            	if(u.getType() == UserType.REGISTERED_CLIENT) {
+            		
+            	}
+            }
             
             buffer.close();
 

@@ -366,14 +366,11 @@ public class SaverLoader {
         try {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + userFilename + ".csv")));
-
-            buffer.write(""); // DUE
-            buffer.write(User.totalId); /* Global ID */
-
-            for (String key : keys) {
-                buffer.write(users.get(key).toString() + "\n");
-            }
-
+            
+            //comienzo saveUsers
+            
+            
+            
             buffer.close();
 
         } catch (IOException e) {

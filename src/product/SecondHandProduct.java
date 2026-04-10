@@ -299,19 +299,11 @@ public class SecondHandProduct extends Product{
 	FailedInternetConnectionException, OrderRejectedException {
 
 		Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
-		System.out.print("Introduce tu número de tarjeta: ");
-		String cardNumber = sc.next();
-		System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
-		TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
-=======
-		
 		System.out.print("Introduce tu número de tarjeta: ");
 		String cardNumber = sc.next();
 		System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
 		TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
 		
->>>>>>> branch 'main' of https://github.com/DPR206/PADSOF_GFG.git
 		this.setPaidValuation(true);
 		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now(),
 											Collections.emptyList());

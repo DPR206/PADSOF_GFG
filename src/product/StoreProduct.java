@@ -315,7 +315,10 @@ public abstract class StoreProduct extends Product {
      * @return the product's price with any fixed percentage discounts applied
      */
     public double getDiscountedPrice() {
-        if (this.discount.getType() == DiscountType.FIXED_PERCENTAGE) {
+        if(discount == null) {
+        	return this.getPrice();
+        }
+    	if (this.discount.getType() == DiscountType.FIXED_PERCENTAGE) {
             if (this.discount.getCoverage() == DiscountCoverage.PRODUCT) {
                 return this.getPrice() - this.getPrice() * ((ProductFixedPercentage) this.discount).getPercentage();
             } else {

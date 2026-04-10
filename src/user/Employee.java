@@ -27,7 +27,7 @@ public class Employee extends User {
     private ExchangePermission ep;
     private OrderPermission op;
     private StorePermission sp;
-    private Permission perm;
+    private Permission[] perm;
     private NotificationHistory notificationHistory;
 
     /*------------------------------------------------------CONSTRUCTOR-----------------------------------------------------------------------*/
@@ -39,28 +39,10 @@ public class Employee extends User {
      * @param p the employee's permission
      * @param asc the products' order in the search
      */
-    public Employee(String pwd, String userName, Permission p, boolean asc) {
+    public Employee(String pwd, String userName, boolean asc, Permission... p) {
         super(UserType.EMPLOYEE, pwd, userName, asc);
         this.perm = p;
-
-        if (p.getMeaning().contentEquals("store")) {
-            this.sp = new StorePermission();
-            this.getSearcher().setTypes(SearchType.S_STORE);
-
-        } else if (p.getMeaning().contentEquals("exchange")) {
-            this.ep = new ExchangePermission();
-            if(this.sp != null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE);
-            else this.getSearcher().setTypes(SearchType.S_EXCHANGE);
-        } else {
-            this.op = new OrderPermission(true);
-            if(this.sp != null && this.ep != null) this.getSearcher().setTypes(SearchType.S_STORE, SearchType.S_EXCHANGE, SearchType.S_ORDER);
-            else if(this.sp != null /*&& this.ep == null*/) this.getSearcher().setTypes(SearchType.S_STORE,
-                    SearchType.S_ORDER);
-            else if(/*this.sp == null &&*/ this.ep != null) this.getSearcher().setTypes(SearchType.S_EXCHANGE,
-                    SearchType.S_ORDER);
-            else this.getSearcher().setTypes(SearchType.S_ORDER);
-        }
-
+        
         this.notificationHistory = new NotificationHistory(this);
     }
 
@@ -118,7 +100,7 @@ public class Employee extends User {
    	 * Obtains the employee's permission
    	 * @return the permission
    	 */
-   	public Permission getPerm() {
+   	public Permission[] getPerm() {
    		return perm;
    	}
 
@@ -126,7 +108,7 @@ public class Employee extends User {
    	 * Sets the employee's permission
    	 * @param newPerm the permission to set
    	 */
-   	public void setPerm(Permission newPerm) {
+   	public void setPerm(Permission... newPerm) {
    		this.perm = newPerm;
    	}
 

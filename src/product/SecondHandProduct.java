@@ -304,7 +304,7 @@ public class SecondHandProduct extends Product{
 			String cardNumber = sc.next();
 			System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
 			TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
-		} catch (InvalidCardNumberException _) {} // revisar
+		} catch (InvalidCardNumberException) {} // revisar
 		this.setPaidValuation(true);
 		Statistics.getINSTANCE().addRevenue((Double)Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now(),
 											Collections.emptyList());

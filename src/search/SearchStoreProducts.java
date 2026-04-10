@@ -210,4 +210,13 @@ public class SearchStoreProducts{
     public void toggleOrder(){
         this.ascendant = !this.ascendant;
     }
+    
+    /**
+     * Returns the boolean that determines wether or not the search is ascendant
+     *
+     * @return boolean 
+     */
+    public boolean getBoolean() {
+    	return this.ascendant;
+    }
 }

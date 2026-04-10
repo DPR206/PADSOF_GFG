@@ -924,6 +924,9 @@ public class SaverLoader {
         BufferedReader buffer;
         String[] words;
         String line;
+        int i = 0;
+        int j;
+        String id;
 
         try {
             buffer = new BufferedReader(
@@ -935,19 +938,45 @@ public class SaverLoader {
             while ((line = buffer.readLine()) != null) {
             	
                 words = line.split(";");
-                String actualID = words[0];
-                String userName = words[1];
-                String pwd = words[2];
-                String type = words[3];
+                int l = words.length;
+                String actualID = words[i];
+                i++;
+                String userName = words[i];
+                i++;
+                String pwd = words[i];
+                i++;
+                String type = words[i];
+                i++;
                 
                 if(type.equals(UserType.REGISTERED_CLIENT.getSymbol())) {
-                	String dni = words[4];
-                	String registeredDate = words[5];
-                	String bool = words[6];
+                	String dni = words[i];
+                	i++;
+                	String registeredDate = words[i];
+                	i++;
+                	String bool = words[i];
+                	i++;
                 	
                 	LocalDate f = LocalDate.parse(registeredDate);
                 	RegisteredClient c = new RegisteredClient(userName, dni, pwd, Boolean.parseBoolean(bool));
                 	this.s.addUser(c);
+                	
+                	int num = Integer.parseInt(words[i]);
+                	i++;
+                	/*Ahora miramos la lista de ids y los buscamos en la tienda*/
+                	for(j = i; j <= num; j++) {
+                		id = words[j];
+                		StoreProduct sp = this.s.getStoreProductFromId(id);
+                		c.getC().addProduct(sp);
+                	}
+                	
+                	/*Ahora buscamos los productos de segunda mano de wallet*/
+                	i = j;
+                	
+                	for(j = i; j <= num; j++) {
+                		id = words[j];
+                		SecondHandProduct shp = this.s.getSecondHandProductFromId(id);
+                		c.getWallet().addProducts(shp);
+                	}
                 }
                 
                 else if(type.equals(UserType.MANAGER.getSymbol())) {
@@ -955,8 +984,10 @@ public class SaverLoader {
                 }
                 
                 else if(type.equals(UserType.EMPLOYEE.getSymbol())) {
-                	String permission = words[4];
-                	String bool = words[5];
+                	String permission = words[i];
+                	i++;
+                	String bool = words[i];
+                	i++;
                 	Employee emp = null;
 					if(permission.equals(Permission.EXCHANGE.getMeaning())) {
                 		emp = new Employee(pwd, userName, Permission.EXCHANGE, Boolean.parseBoolean(bool));

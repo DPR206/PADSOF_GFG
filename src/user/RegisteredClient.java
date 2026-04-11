@@ -74,14 +74,6 @@ public class RegisteredClient extends User {
 	}
 
 	/**
-	 * It sets the registered client's order history
-	 * @param newOrderHistory the registered client's new order history
-	 */
-	private void setOrderHistory(OrderHistory newOrderHistory) {
-		this.orderHistory = newOrderHistory; // TEST_FIX
-	}
-
-	/**
      * Creates a new RegisteredClient
      * @param userName     the user's name
      * @param registerDate the registration date

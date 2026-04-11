@@ -299,7 +299,6 @@ public class SecondHandProduct extends Product{
 	FailedInternetConnectionException, OrderRejectedException {
 
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.print("Introduce tu número de tarjeta: ");
 		String cardNumber = sc.next();
 		System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));

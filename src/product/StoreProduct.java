@@ -1,8 +1,8 @@
 package product;
 
 import discount.*;
-import order.Order;
 import main.Pager;
+import order.Order;
 import store.Store;
 import user.RegisteredClient;
 
@@ -146,7 +146,7 @@ public abstract class StoreProduct extends Product {
      * @throws IllegalArgumentException value was negative
      */
     public void increaseStock(int value) throws IllegalArgumentException {
-    	
+
         if (value < 0) {
             throw new IllegalArgumentException("The increasing stock amount cannot be negative");
         }
@@ -315,6 +315,10 @@ public abstract class StoreProduct extends Product {
      * @return the product's price with any fixed percentage discounts applied
      */
     public double getDiscountedPrice() {
+
+        if (discount == null) {
+            return this.getPrice();
+        }
         if (this.discount.getType() == DiscountType.FIXED_PERCENTAGE) {
             if (this.discount.getCoverage() == DiscountCoverage.PRODUCT) {
                 return this.getPrice() - this.getPrice() * ((ProductFixedPercentage) this.discount).getPercentage();
@@ -422,8 +426,8 @@ public abstract class StoreProduct extends Product {
 
         this.stock = newStock;
     }
-    
-    
+
+
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
 

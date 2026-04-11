@@ -70,8 +70,7 @@ Se guardan y leen en este orden:
     {TOTAL_ID}
     
 
-[x] Users:
+[ ] Users:
 	ID;USERNAME;PWD;TYPES; 						(size y sizeWallet se pone com 0 0 si no tiene)
-					REGCL:DNI;REGISTERDATE;BOOL;CartSize;id1;id2;id3;id4..;sizeWallet;id1;id2;id3...;sizeExchHistory;id1;id2...;sizeOrderH;1;2..;sizeOffer;1;2;Notification;...
-					EMPLO:STOREPERM;EXCHANGEPERM;ORDERPERM; BOOL; //cada uno será cero o uno
-					MANAG:
+					REGCL:DNI;REGISTERDATE;BOOL; size;id1;id2;id3;id4..;sizeWallet;id1;id2;id3...
+					EMPLO:PERMISSION; BOOL;

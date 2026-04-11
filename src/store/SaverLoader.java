@@ -404,17 +404,45 @@ public class SaverLoader {
             			buffer.write(';');
             		}
             		
-            		/*Ahora metemos los ids de los second hand products del wallet*/
+            		/*Ahora metemos el número de second hand products del wallet*/
             		
             		buffer.write(c.getWallet().getProducts().length);
             		buffer.write(';');
-            		int i = 0;
             		
             		/*Metemos los ids de los second hand products*/
             		
             		for(SecondHandProduct shp: c.getWallet().getProducts()) {
             			buffer.write(shp.getId());
-            			if(i != c.getWallet().getProducts().length - 1) {
+            			buffer.write(';');
+            		}
+            		
+            		/*Metemos el número de intercambios realizados*/
+            		buffer.write(c.getExchangeHistory().getExchanges().size());
+            		buffer.write(';');
+            		/*Ahora escribimos los ids*/
+            		
+            		for(Exchange e: c.getExchangeHistory().getExchanges()) {
+            			buffer.write(e.getId());
+            			buffer.write(';');
+            		}
+            		
+            		/*Ahora metemos el número de pedidos realizados*/
+            		buffer.write(c.getOrderHistory().getOrders().size());
+            		buffer.write(';');
+            		
+            		for(Order o: c.getOrderHistory().getOrders()) {
+            			buffer.write(o.getId());
+            			buffer.write(';');
+            		}
+            		
+            		/*Lo mismo para las ofertas*/
+            		buffer.write(c.getOfferHistory().getOffers().size());
+            		buffer.write(';');
+            		int i = 0;
+            		int l = c.getOfferHistory().getOffers().size();
+            		for(Offer of: c.getOfferHistory().getOffers()) {
+            			buffer.write(of.getId());
+            			if(i < l-1) {
             				buffer.write(';');
             			}
             			i++;
@@ -441,10 +469,6 @@ public class SaverLoader {
             		else {
             			buffer.write(0);
             		}
-            	}
-            	/********* CASO MANAGER ********/
-            	else if(u.getType() == UserType.MANAGER) {
-            		//nada .-.
             	}
             }
             

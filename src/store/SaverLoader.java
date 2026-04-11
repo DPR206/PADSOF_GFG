@@ -340,11 +340,43 @@ public class SaverLoader {
             buffer = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(".\\resources\\" + ordersFilename + ".csv")));
 
-            buffer.write(""); // DUE
             buffer.write(Order.totalId); /* Global ID */
+            buffer.write(';');
 
             for (Order order : orders) {
-                buffer.write(order.toString() + "\n");
+                buffer.write(order.getId());
+                buffer.write(';');
+                buffer.write(String.valueOf(order.getPrice()));
+                buffer.write(';');
+                buffer.write(order.getState().getString());
+                buffer.write(';');
+                buffer.write(order.getOwner().getId());
+                buffer.write(';');
+                
+                /*Escribimos los pack ids*/
+                
+                int num = order.getP().size();
+                buffer.write(num);
+                buffer.write(';');
+                
+                for(Pack p: order.getP()) {
+                	buffer.write(p.getId());
+                	buffer.write(';');
+                }
+                
+                /*Ahora escribimos los ids de los productos*/
+                num = order.getSp().size();
+                buffer.write(num);
+                buffer.write(';');
+                int i = 0;
+                
+                for(StoreProduct sp: order.getSp()) {
+                	buffer.write(sp.getId());
+                	if(i < num-1) {
+                		buffer.write(';');
+                	}
+                	i++;
+                }
             }
 
             buffer.close();
@@ -470,6 +502,7 @@ public class SaverLoader {
             			buffer.write(0);
             		}
             	}
+            	buffer.write("\n");
             }
             
             buffer.close();

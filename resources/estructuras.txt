@@ -68,9 +68,10 @@ Se guardan y leen en este orden:
 [ ] Orders:
     ---- Order ----
     {TOTAL_ID}
+    ID;PRICE;STATE;OWNERid;sizePackList;id1;id2....;sizeProductList;id1;id2....
     
 
-[ ] Users:
+[x] Users:
 	ID;USERNAME;PWD;TYPES; 						(size y sizeWallet se pone com 0 0 si no tiene)
 					REGCL:DNI;REGISTERDATE;BOOL; size;id1;id2;id3;id4..;sizeWallet;id1;id2;id3...;sizeExchange;..sizeOrders...;offer
 					EMPLO:PERMISSION; BOOL;

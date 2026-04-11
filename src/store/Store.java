@@ -650,4 +650,34 @@ public class Store {
         }
         return null;
     }
+    
+    /**
+     * Obtains the exchange associated to the id
+     * @param id the id of the exchange we want to search
+     * @return the exchange that has the id
+     */
+    public Exchange getExchangeById(int id) {
+    	
+    	for(Exchange e: this.exchanges) {
+    		if(e.getId() == id) {
+    			return e;
+    		}
+    	}
+    	return null;
+    }
+    
+    /**
+     * Obtains the order associated to the id
+     * @param id the id of the order we want to search
+     * @return the order that has the id
+     */
+    public Order getOrderById(int id) {
+    	
+    	for(Order o: this.orders) {
+    		if(o.getId() == id) {
+    			return o;
+    		}
+    	}
+    	return null;
+    }
 }

@@ -3,6 +3,7 @@ package store;
 import discount.Discount;
 import discount.DiscountType;
 import exchange.*;
+import notification.Notification;
 import order.Order;
 import product.*;
 import user.Employee;
@@ -1062,10 +1063,32 @@ public class SaverLoader {
                 	
                 	for(j = i; j <= num; j++) {
                 		id = words[j];
-                		Exchange e = this.s.getExchange(); //DUE
+                		Exchange e = this.s.getExchangeById(Integer.parseInt(id));
+                		c.getExchangeHistory().addExchange(e);
+                	}
+                	/*Ahora buscamos el historial de pedidos*/
+                	i = j;
+                	i++;
+                	num = Integer.parseInt(words[i]);
+                	i++;
+                	
+                	for(j = i; j <= num; j++) {
+                		id = words[j];
+                		Order o = this.s.getOrderById(Integer.parseInt(id));
+                		c.getOrderHistory().addOrder(o);
                 	}
                 	
+                	/* Ahora buscamos el historial de ofertas*/
+                	i = j;
+                	i++;
+                	num = Integer.parseInt(words[i]);
+                	i++;
                 	
+                	for(j = i; j <= num; j++) {
+                		id = words[j];
+                		Offer of = this.s.getOfferById(Integer.parseInt(id));
+                		c.getOfferHistory().addOffer(of);
+                	}
                 }
                 
                 else if(type.equals(UserType.MANAGER.getSymbol())) {

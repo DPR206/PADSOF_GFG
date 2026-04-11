@@ -680,4 +680,13 @@ public class Store {
     	}
     	return null;
     }
+    
+    public Pack getPackById(int id) {
+    	for(Pack p: this.packs) {
+    		if(p.getId() == id) {
+    			return p;
+    		}
+    	}
+    	return null;
+    }
 }

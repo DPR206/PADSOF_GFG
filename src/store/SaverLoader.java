@@ -5,6 +5,7 @@ import discount.DiscountType;
 import exchange.*;
 import notification.Notification;
 import order.Order;
+import order.OrderState;
 import product.*;
 import user.Employee;
 import user.Manager;
@@ -1028,6 +1029,8 @@ public class SaverLoader {
         String[] words;
         String line;
         List<StoreProduct> sps = new ArrayList<>();
+        List<Pack> packs = new ArrayList<>();
+        RegisteredClient owner = null;
 
         try {
             buffer = new BufferedReader(
@@ -1040,34 +1043,52 @@ public class SaverLoader {
                 int id = Integer.parseInt(words[0]);
                 double price = Double.parseDouble(words[1]);
                 String state = words[2];
-                ConservationStatus status = null;
-                if(state.equals(ConservationStatus.DAMAGED)) {
-                	status = ConservationStatus.DAMAGED;
+                OrderState status = null;
+                if(state.equals(OrderState.IN_PREPARATION.getString())) {
+                	status = OrderState.IN_PREPARATION;
                 }
-                else if(state.equals(ConservationStatus.EVIDENTLY_USED)){
-                	status = ConservationStatus.EVIDENTLY_USED;
+                else if(state.equals(OrderState.PAID.getString())){
+                	status = OrderState.PAID;
                 }
-                else if(state.equals(ConservationStatus.PERFECT)){
-                	status = ConservationStatus.PERFECT;
+                else if(state.equals(OrderState.PICKED_UP.getString())){
+                	status = OrderState.PICKED_UP;
                 }
-                else if(state.equals(ConservationStatus.SLIGHTLY_USED)){
-                	status = ConservationStatus.SLIGHTLY_USED;
+                else if(state.equals(OrderState.READY_TO_PICKUP.getString())){
+                	status = OrderState.READY_TO_PICKUP;
                 }
-                else if(state.equals(ConservationStatus.VERY_GOOD)){
-                	status = ConservationStatus.VERY_GOOD;
-                }
-                else if(state.equals(ConservationStatus.VERY_USED)){
-                	status = ConservationStatus.VERY_USED;
-                }
+               
                 String ownerID = words[3];
                 
                 /*Buscamos al cliente con este id*/
                 
                 for(RegisteredClient rc: this.s.getRegisteredClientList()) {
-                	if(rc.getId().equals(ownerID)) break;
+                	if(rc.getId().equals(ownerID)) {
+                		owner = rc;
+                		break;
+                	}
                 }
                 
                 /*Buscamos al paquete y los productos*/
+                int num = Integer.parseInt(words[4]);
+                int i = 5;
+                int j = 0;
+                
+                for(j = 0; j < num; j++) {
+                	StoreProduct sp = this.s.getStoreProductFromId(words[i]);
+                	sps.add(sp);
+                	i++;
+                }
+                /*Ahora lo mismo pero con los packs*/
+                num = Integer.parseInt(words[i]);
+                j = 0;
+                for(j = 0; j < num; j++) {
+                	Pack p = this.s.getPackById(Integer.parseInt(words[i]));
+                	packs.add(p);
+                	i++;
+                }
+                
+                Order o = new Order(id, price, status, sps, packs, owner);
+                this.s.addOrder(o);
             }
 
             buffer.close();

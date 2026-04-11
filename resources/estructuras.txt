@@ -65,7 +65,7 @@ Se guardan y leen en este orden:
     {TOTAL_ID}
     ID;DATE;EXCHANGED;ORIGIN;DESTINATION;ORIGIN_PRODS;DESTINATION_PRODS <- Requiere preexistencia usuarios!!
 
-[ ] Orders:
+[x] Orders:
     ---- Order ----
     {TOTAL_ID}
     ID;PRICE;STATE;OWNERid;sizePackList;id1;id2....;sizeProductList;id1;id2....

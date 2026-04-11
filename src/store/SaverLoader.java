@@ -377,6 +377,7 @@ public class SaverLoader {
                 	}
                 	i++;
                 }
+                buffer.write('\n');
             }
 
             buffer.close();
@@ -1026,17 +1027,47 @@ public class SaverLoader {
         BufferedReader buffer;
         String[] words;
         String line;
+        List<StoreProduct> sps = new ArrayList<>();
 
         try {
             buffer = new BufferedReader(
                     new InputStreamReader(new FileInputStream(".\\resources\\" + ordersFilename + ".csv")));
 
-            buffer.readLine(); /*  */
             Order.totalId = Integer.parseInt(buffer.readLine()); /* Global ID */
 
             while ((line = buffer.readLine()) != null) {
                 words = line.split(";");
-                // DUE
+                int id = Integer.parseInt(words[0]);
+                double price = Double.parseDouble(words[1]);
+                String state = words[2];
+                ConservationStatus status = null;
+                if(state.equals(ConservationStatus.DAMAGED)) {
+                	status = ConservationStatus.DAMAGED;
+                }
+                else if(state.equals(ConservationStatus.EVIDENTLY_USED)){
+                	status = ConservationStatus.EVIDENTLY_USED;
+                }
+                else if(state.equals(ConservationStatus.PERFECT)){
+                	status = ConservationStatus.PERFECT;
+                }
+                else if(state.equals(ConservationStatus.SLIGHTLY_USED)){
+                	status = ConservationStatus.SLIGHTLY_USED;
+                }
+                else if(state.equals(ConservationStatus.VERY_GOOD)){
+                	status = ConservationStatus.VERY_GOOD;
+                }
+                else if(state.equals(ConservationStatus.VERY_USED)){
+                	status = ConservationStatus.VERY_USED;
+                }
+                String ownerID = words[3];
+                
+                /*Buscamos al cliente con este id*/
+                
+                for(RegisteredClient rc: this.s.getRegisteredClientList()) {
+                	if(rc.getId().equals(ownerID)) break;
+                }
+                
+                /*Buscamos al paquete y los productos*/
             }
 
             buffer.close();

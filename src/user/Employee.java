@@ -4,7 +4,6 @@ import exchange.Exchange;
 import order.Order;
 import order.OrderState;
 import product.*;
-import search.*;
 import notification.*;
 
 import java.io.IOException;

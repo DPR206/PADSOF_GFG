@@ -1,21 +1,28 @@
-import user.StorePermission;
+package demos;
+
 import product.Category;
+import user.StorePermission;
 
 /**
  * Small test for store permission
- * 
+ *
  */
 public class TestStorePermission {
-	
-	/**
-	 * Private constructor
-	 */
-	private TestStorePermission() {}
-	
-	/**
-	 * Main of the test
-	 * @param args the arguments needed for it to function
-	 */
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Private constructor
+     */
+    private TestStorePermission() {
+    }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * Main of the test
+     * @param args the arguments needed for it to function
+     */
     public static void main(String[] args) {
         // Initialize store and categories
         StorePermission sp = new StorePermission();

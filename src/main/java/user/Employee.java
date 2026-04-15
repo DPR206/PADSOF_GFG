@@ -29,7 +29,8 @@ public class Employee extends User {
 
     /*------------------------------------------------------CONSTRUCTOR-----------------------------------------------------------------------*/
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Creates a new employee
      * @param pwd      the password of the employee
@@ -39,6 +40,7 @@ public class Employee extends User {
      */
     public Employee(String pwd, String userName, boolean asc, Permission... p) {
         super(UserType.EMPLOYEE, pwd, userName, asc);
+        this.perm = p;
         for (Permission permission : p) {
             switch (permission) {
                 case STORE:
@@ -344,7 +346,8 @@ public class Employee extends User {
         }
     }
 
-/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * Obtains the employee's exchange permission
      * @return the exchange permission

@@ -10,10 +10,12 @@ import java.io.IOException;
 public class MainApp {
     private static final MainLoop ml = MainLoop.getInstance();
 
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     /**
      * Private constructor
      */
-    private MainApp() {}
+    private MainApp() {
+    }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 

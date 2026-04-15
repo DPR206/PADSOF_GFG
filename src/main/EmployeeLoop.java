@@ -41,12 +41,65 @@ public class EmployeeLoop extends Loop {
      * @throws IOException the io exception
      */
     protected void employeeLoop() throws IOException {
-        System.out.println("\n <<<<<<<<<< employeeLoop >>>>>>>>>> \n"); // Es para debug, borrar
-        switch (((Employee) currentUser).getPerm()) {
-            case STORE -> StorePermissionLoop.getInstance().storePermissionLoop();
-            case ORDER -> OrderPermissionLoop.getInstance().orderPermissionLoop();
-            case EXCHANGE -> ExchangePermissionLoop.getInstance().exchangePermissionLoop();
-            default -> System.out.println("Invalid Input");
+        Scanner scanner = new Scanner(System.in);
+        boolean exitLoop = false;
+        while (!appExited && !exitLoop) {
+            System.out.println("\n <<<<<<<<<< employeeLoop >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("What do you wish to do? (enter the nº)");
+            int i = 1;
+            if (((Employee) currentUser).getSp() != null) {
+                System.out.println("\t[" + i++ + "] Manage the store");
+            } else {
+                System.out.println("\t[" + i++ + "] Reload this page");
+            }
+            if (((Employee) currentUser).getOp() != null) {
+                System.out.println("\t[" + i++ + "] Manage orders");
+            } else {
+                System.out.println("\t[" + i++ + "] Reload this page");
+            }
+            if (((Employee) currentUser).getEp() != null) {
+                System.out.println("\t[" + i++ + "] Manage exchanges and valuate products");
+            } else {
+                System.out.println("\t[" + i++ + "] Reload this page");
+            }
+            basicLoopPrinter(i);
+            chosenOption = scanner.nextInt();
+
+            switch (chosenOption) {
+                case 1: /* Manage the store */
+                    if (((Employee) currentUser).getSp() != null) {
+                        StorePermissionLoop.getInstance().storePermissionLoop();
+                    } else {
+                        EmployeeLoop.getInstance().employeeLoop();
+                    }
+                    break;
+                case 2: /* Manage orders */
+                    if (((Employee) currentUser).getOp() != null) {
+                        OrderPermissionLoop.getInstance().orderPermissionLoop();
+                    } else {
+                        EmployeeLoop.getInstance().employeeLoop();
+                    }
+                    break;
+                case 3: /* Manage exchanges and valuate products */
+                    if (((Employee) currentUser).getEp() != null) {
+                        ExchangePermissionLoop.getInstance().exchangePermissionLoop();
+                    } else {
+                        EmployeeLoop.getInstance().employeeLoop();
+                    }
+                    break;
+                case 4: /* Browse notifications */
+                    EmployeeLoop.getInstance().browseNotifications();
+                    break;
+                case 5: /* See profile */
+                    EmployeeLoop.getInstance().employeeLoop();
+                    break;
+                case 6: /* Exit */
+                    exit();
+                    break;
+                default: /* Go back */
+                    exitLoop = true;
+                    break;
+            }
         }
     }
 

@@ -32,7 +32,7 @@ public class ExchangeDemo {
         System.out.println(rc2);
 
         /* s.addEmployee <- con exchangePermission */
-        Employee emp = new Employee("password", "exchangeEmployee", Permission.EXCHANGE, true);
+        Employee emp = new Employee("password", "exchangeEmployee", true, Permission.EXCHANGE);
         System.out.println(emp);
 
         /*----------------------------------------------- Inicio simulación ----------------------------------------------*/

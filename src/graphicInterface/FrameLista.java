@@ -12,7 +12,8 @@ public class FrameLista {
 
 		// obtener contenedor, asignar layout
 		Container contenedor = ventana.getContentPane();
-		contenedor.setLayout(new BorderLayout());
+		contenedor.setLayout(new FlowLayout());
+		//BorderLayout
 
 		// crear componentes
 		JLabel etiqueta = new JLabel("Selecciona uno de la lista");

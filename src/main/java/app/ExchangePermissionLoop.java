@@ -1,6 +1,5 @@
 package app;
 
-import exchange.Exchange;
 import product.ConservationStatus;
 import product.SecondHandProduct;
 import store.Store;
@@ -9,6 +8,8 @@ import user.Employee;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import app.Pager;
 
 /**
  * It implements the exchange permission's loop

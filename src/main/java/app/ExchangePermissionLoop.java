@@ -10,6 +10,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+<<<<<<< Updated upstream
+=======
+import app.Pager;
+import exchange.Exchange;
+
+>>>>>>> Stashed changes
 /**
  * It implements the exchange permission's loop
  * @author Ana O.R.

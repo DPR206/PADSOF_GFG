@@ -1,7 +1,8 @@
-package demos;
+package main.java.demos;
 
-import product.Category;
-import user.StorePermission;
+import main.java.product.Category;
+import main.java.user.StorePermission;
+import main.java.store.*;
 
 /**
  * Small test for store permission

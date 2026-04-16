@@ -1,9 +1,9 @@
-package demos;
+package main.java.demos;
 
-import exchange.Exchange;
-import exchange.Offer;
-import product.*;
-import user.*;
+import main.java.exchange.Exchange;
+import main.java.exchange.Offer;
+import main.java.product.*;
+import main.java.user.*;
 
 /**
  * Demo for an exchange

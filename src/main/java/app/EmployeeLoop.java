@@ -1,6 +1,6 @@
-package app;
+package main.java.app;
 
-import user.Employee;
+import main.java.user.Employee;
 
 import java.io.IOException;
 import java.util.Scanner;

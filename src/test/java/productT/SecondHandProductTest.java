@@ -1,27 +1,29 @@
 package productT;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import model.product.*;
+import model.store.Store;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDate;
 
-import product.*;
-import user.RegisteredClient;
+import model.user.RegisteredClient;
 
 public class SecondHandProductTest {
 
     private SecondHandProduct shp;
-    private RegisteredClient owner; 
+    private RegisteredClient owner;
 
     @BeforeEach
     public void setUp() {
-        store.Store.getInstance();
+        Store.getInstance();
     	this.owner = new RegisteredClient("testuser", LocalDate.now(), "12345678A", "password", true);
         this.owner.setHistories();
         this.shp = new SecondHandProduct("Test Product", "Description", "photo.png", ProductType.COMIC, this.owner);
     }
-    
+
     @Test
     public void getValuationDate() {
         assertNull(this.shp.getValuationDate());

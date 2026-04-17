@@ -1,11 +1,13 @@
 package productT;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import model.product.Comic;
+import model.product.ProductType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.time.*;
-import product.*;
 
 public class ProductTest {
 
@@ -66,7 +68,7 @@ public class ProductTest {
         String expected = "#1 Name: Test Comic, Price: [12.99]€";
         assertEquals(expected, c.smallPrintInfo());
     }
-    
+
     @Test
     public void getId() {
         assertEquals("1", c.getId());

@@ -1,6 +1,7 @@
 package productT;
 
-import product.*;
+import model.product.Category;
+import model.product.Comic;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ public class StoreProductTest {
 		this.category = new Category("Fiction");
 		this.comic = new Comic(12.99, "Test Comic", "Description", "photo.png", 4, 120, Year.of(2020), "Author", "Editorial", category);
 	}
-	
+
 
 	@Test
 	public void addCategoryTest() {
@@ -36,8 +37,8 @@ public class StoreProductTest {
 
 	@Test
 	public void decreaseStockToZeroTest() {
-		comic.decreaseStock(100); 
-		assertEquals(0, comic.getStock()); 
+		comic.decreaseStock(100);
+		assertEquals(0, comic.getStock());
 	}
 
 	@Test

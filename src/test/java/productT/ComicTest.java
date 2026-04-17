@@ -8,18 +8,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.Year;
 
-import product.Category;
-import product.Comic;
+import model.product.Category;
+import model.product.Comic;
 
 public class ComicTest {
 
 	private Comic c;
-	
+
 	@BeforeEach
 	public void setUp() {
 		 c = new Comic("1", 12.99, "Test Comic", "Description", "photo.png", 4.5, LocalDate.now(), 50, 120, Year.of(2020), "Author", "Editorial", new Category("algo"));
 	}
-	
+
 	@Test
 	public void getAuthorTest() {
 		String author = this.c.getAuthor();
@@ -55,7 +55,7 @@ public class ComicTest {
         Year y = this.c.getYear();
         assertEquals(y, this.c.getYear());
     }
-	
+
 	@Test
 	public void setYearTest() {
         this.c.setYear(Year.of(2000));

@@ -1,6 +1,8 @@
 package productT;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import model.product.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -8,8 +10,6 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashSet;
-
-import product.*;
 
 public class ComposedPackTest {
 

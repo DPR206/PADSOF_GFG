@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import user.UnregisteredClient;
-import user.UserType;
+import model.user.UnregisteredClient;
+import model.user.UserType;
 
 class UserTest {
 

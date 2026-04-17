@@ -1,9 +1,9 @@
 package productT;
 
-import discount.*;
+import model.discount.*;
+import model.product.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import product.*;
 
 import java.time.*;
 import java.util.ArrayList;

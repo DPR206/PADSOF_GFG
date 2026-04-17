@@ -18,12 +18,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>es.uam.eps.padsof</groupId>
-            <artifactId>telecard</artifactId>
-            <version>8</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/TeleChargeAndPaySystem8.jar</systemPath>
-        </dependency>
+    		<groupId>es.uam.eps.padsof</groupId>
+    		<artifactId>telecard</artifactId>
+    		<version>8</version>
+		</dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

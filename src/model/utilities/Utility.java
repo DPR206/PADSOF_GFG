@@ -50,13 +50,16 @@ public class Utility {
 
             System.out.print("Introduce tu contraseña: ");
             pwd = sc.next();
-            if(!this.securePassword(pwd))
+            while(!this.securePassword(pwd)) {
         		System.out.println("Make sure your password has: \n "
         				+ "-At least 8 characters\n"
         				+ "-Upper case letters\n"
         				+ "-Lower case letters\n"
         				+ "-Numbers\n"
         				+ "-Special characters\n");
+        		System.out.print("Introduce tu contraseña: ");
+                pwd = sc.next();
+            }
             System.out.print("Introduce tu DNI: ");
             dni = sc.next();
 

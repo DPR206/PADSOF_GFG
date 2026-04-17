@@ -15,4 +15,5 @@ module PADSOF_GFG {
 	exports main.java.exchange;
 	exports main.java.graphicInterface;
 	requires java.desktop;
+    requires TeleChargeAndPaySystem8;
 }

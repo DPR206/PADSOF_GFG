@@ -1,6 +1,6 @@
 package main;
 
-import ejemplosSwing.mvc.vista.Aplicacion;
+import view.App;
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Aplicacion().setVisible(true);
+                    new App().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

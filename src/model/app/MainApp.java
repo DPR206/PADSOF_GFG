@@ -1,7 +1,6 @@
 package model.app;
 
-import model.utilities.exceptions.PasswordNotValid;
-import model.utilities.exceptions.UsernameTaken;
+import model.utilities.exceptions.*;
 
 import java.io.IOException;
 
@@ -38,6 +37,8 @@ public class MainApp {
             throw new IllegalArgumentException(ia.getMessage());
         } catch (NullPointerException np) {
             throw new NullPointerException(np.getMessage());
+        } catch (InvalidDni e) {
+            throw new RuntimeException(e);
         }
     }
 }

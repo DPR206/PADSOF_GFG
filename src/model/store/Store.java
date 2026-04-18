@@ -1,16 +1,15 @@
 package model.store;
 
+import model.app.Pager;
 import model.discount.Discount;
-import model.utilities.exceptions.PasswordNotValid;
-import model.utilities.exceptions.UsernameTaken;
 import model.exchange.Exchange;
 import model.exchange.Offer;
-import model.app.Pager;
 import model.notification.Notification;
 import model.order.Order;
 import model.product.*;
 import model.user.*;
 import model.utilities.Utility;
+import model.utilities.exceptions.*;
 
 import java.util.*;
 
@@ -115,7 +114,8 @@ public class Store {
      * Signs in a user
      * @return a new user
      */
-    public User signIn(String username, String password, String dni) throws PasswordNotValid, UsernameTaken {
+    public User signIn(String username, String password, String dni)
+            throws PasswordNotValid, UsernameTaken, InvalidDni {
         return utility.signIn(username, password, dni);
     }
 
@@ -330,8 +330,15 @@ public class Store {
         return Pager.getInstance().selectDiscountFromPage(this.discounts, pageNum, discountNum);
     }
 
-    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /**
+     * Adds a user to the storee
+     * @param s the user to add
+     */
+    public void addUser(User s) {
+        this.users.put(s.getId(), s);
+    }
 
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     /**
      * Gets the list of the categories of the store
      * @return a hash map of the categories and their names
@@ -428,6 +435,21 @@ public class Store {
     }
 
     /**
+     * Obtains the exchange associated to the id
+     * @param id the id of the exchange we want to search
+     * @return the exchange that has the id
+     */
+    public Exchange getExchangeById(int id) {
+
+        for (Exchange e : this.exchanges) {
+            if (e.getId() == id) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    /**
      * It gets the paged index belonging to an exchange with a certain id in the store
      * @param exchangeId the id of the desired exchange
      * @return the index belonging to an exchange with a certain id in the store
@@ -461,11 +483,40 @@ public class Store {
     }
 
     /**
+     * Obtains the offer associated to the id
+     * @param id the id of the offer we want to search
+     * @return the offer that has the id
+     */
+    public Offer getOfferById(int id) {
+        for (Offer offer : this.offers) {
+            if (offer.getId() == id) {
+                return offer;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Gets the list of the offers of the store
      * @return a list with the offers
      */
     public List<Offer> getOffers() {
         return this.offers;
+    }
+
+    /**
+     * Obtains the order associated to the id
+     * @param id the id of the order we want to search
+     * @return the order that has the id
+     */
+    public Order getOrderById(int id) {
+
+        for (Order o : this.orders) {
+            if (o.getId() == id) {
+                return o;
+            }
+        }
+        return null;
     }
 
     /**
@@ -493,6 +544,15 @@ public class Store {
         return this.orders;
     }
 
+    public Pack getPackById(int id) {
+        for (Pack p : this.packs) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     /**
      * It gets the paged index belonging to a pack with a certain id in the store
      * @param packID the id of the desired pack
@@ -500,14 +560,6 @@ public class Store {
      */
     public int getPackIndex(int packID) {
         return Pager.getInstance().getPackIndex(this.packs, packID);
-    }
-
-    /**
-     * Adds a user to the storee
-     * @param s the user to add
-     */
-    public void addUser(User s) {
-    	this.users.put(s.getId(), s);
     }
 
     /**
@@ -636,58 +688,5 @@ public class Store {
      */
     public Utility getUtility() {
         return utility;
-    }
-
-    /**
-     * Obtains the offer associated to the id
-     * @param id the id of the offer we want to search
-     * @return the offer that has the id
-     */
-    public Offer getOfferById(int id) {
-        for (Offer offer : this.offers) {
-            if (offer.getId() == id) {
-                return offer;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Obtains the exchange associated to the id
-     * @param id the id of the exchange we want to search
-     * @return the exchange that has the id
-     */
-    public Exchange getExchangeById(int id) {
-
-    	for(Exchange e: this.exchanges) {
-    		if(e.getId() == id) {
-    			return e;
-    		}
-    	}
-    	return null;
-    }
-
-    /**
-     * Obtains the order associated to the id
-     * @param id the id of the order we want to search
-     * @return the order that has the id
-     */
-    public Order getOrderById(int id) {
-
-    	for(Order o: this.orders) {
-    		if(o.getId() == id) {
-    			return o;
-    		}
-    	}
-    	return null;
-    }
-
-    public Pack getPackById(int id) {
-    	for(Pack p: this.packs) {
-    		if(p.getId() == id) {
-    			return p;
-    		}
-    	}
-    	return null;
     }
 }

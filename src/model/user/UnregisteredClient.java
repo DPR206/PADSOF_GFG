@@ -3,8 +3,8 @@
  */
 package model.user;
 
-import model.utilities.exceptions.PasswordNotValid;
-import model.utilities.exceptions.UsernameTaken;
+import model.utilities.exceptions.*;
+import model.utilities.exceptions.*;
 import model.order.Cart;
 import model.product.*;
 import model.search.SearchType;
@@ -42,7 +42,7 @@ public class UnregisteredClient extends User {
     /**
      * Makes the buying process of the cart
      */
-    public void buy(String username, String password, String dni) throws UsernameTaken, PasswordNotValid {
+    public void buy(String username, String password, String dni) throws UsernameTaken, PasswordNotValid, InvalidDni {
         this.s.signIn(username, password, dni);
         try {
 			this.c.payOrder();

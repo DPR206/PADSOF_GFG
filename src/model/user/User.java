@@ -1,6 +1,6 @@
 package model.user;
 
-import model.utilities.exceptions.PasswordNotValid;
+import model.utilities.exceptions.*;
 import model.search.SearchStoreProducts;
 import model.search.Searcher;
 import model.utilities.Utility;
@@ -62,7 +62,7 @@ public abstract class User {
      * Changes the password of the user
      * @param newPwd, the password of the user
      */
-    public void changePassword(String newPwd) throws PasswordNotValid {
+    public void changePassword(String newPwd) throws PasswordNotValid, InvalidDni {
     	Utility utility = new Utility();
     	if(utility.securePassword(newPwd))
     		this.pwd = newPwd;

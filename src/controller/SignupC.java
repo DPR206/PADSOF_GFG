@@ -1,9 +1,8 @@
 package controller;
 
-import model.utilities.exceptions.PasswordNotValid;
-import model.utilities.exceptions.UsernameTaken;
 import model.store.Store;
 import model.user.User;
+import model.utilities.exceptions.*;
 import view.App;
 import view.SignupP;
 
@@ -41,6 +40,8 @@ public class SignupC implements ActionListener {
                 JOptionPane.showMessageDialog(null, exception1.toString());
             } catch (PasswordNotValid exception2) {
                 JOptionPane.showMessageDialog(null, exception2.toString());
+            } catch (InvalidDni exception3) {
+                JOptionPane.showMessageDialog(null, exception3.toString());
             }
         }
     }

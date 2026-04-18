@@ -5,13 +5,13 @@ package model.utilities.exceptions;
  * @author Ana O.R.
  * @version 1.0
  */
-public class UnvalidDni extends Exception {
+public class InvalidDni extends Exception {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This exception's constructor
      */
-    public UnvalidDni() {
+    public InvalidDni() {
     }
 
 

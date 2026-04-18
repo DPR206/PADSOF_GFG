@@ -1,11 +1,9 @@
-
 package model.utilities;
 
-import model.utilities.exceptions.PasswordNotValid;
-import model.utilities.exceptions.UsernameTaken;
 import model.store.Store;
 import model.user.RegisteredClient;
 import model.user.User;
+import model.utilities.exceptions.*;
 
 import java.util.*;
 
@@ -16,17 +14,19 @@ import java.util.*;
  */
 public class Utility {
 
-	/**
-	 * Creates a new utility
-	 */
-    public Utility() {}
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Creates a new utility
+     */
+    public Utility() {
+    }
 
     /**
      * The sign in process
-     *
      * @return a new user
      */
-    public User signIn(String userName, String pwd, String dni) throws PasswordNotValid, UsernameTaken {
+    public User signIn(String userName, String pwd, String dni) throws PasswordNotValid, UsernameTaken, InvalidDni {
         Scanner sc = new Scanner(System.in);
         RegisteredClient rc;
         User u;
@@ -39,13 +39,13 @@ public class Utility {
 
             //while (!aux) {
 
-                //System.out.print("Introduce tu usuario: ");
-                //userName = sc.next();
+            //System.out.print("Introduce tu usuario: ");
+            //userName = sc.next();
 
-                if (users.containsKey(userName)) {
-                    //System.out.print("Este nombre de usuario ya está cogido");
-                    throw new UsernameTaken();
-                } /*else {
+            if (users.containsKey(userName)) {
+                //System.out.print("Este nombre de usuario ya está cogido");
+                throw new UsernameTaken();
+            } /*else {
                     aux = true;
                 }*/
             //}
@@ -65,6 +65,21 @@ public class Utility {
             this.securePassword(pwd);
             //System.out.print("Introduce tu DNI: ");
             //dni = sc.next();
+            /* Check if dni is valid */
+            int charsLeft = 8;
+            for (Character ch : dni.toCharArray()) {
+                /* Check 8 numbers */
+                if (charsLeft > 0) {
+                    if (Character.isDigit(ch)) {
+                        charsLeft--;
+                    } else {
+                        throw new InvalidDni();
+                    }
+                } else if (!Character.isUpperCase(ch)) {
+                    /* Check last uppercase letter */
+                    throw new InvalidDni();
+                }
+            }
 
             rc = new RegisteredClient(userName, dni, pwd, true);
 
@@ -81,9 +96,8 @@ public class Utility {
 
     /**
      * The log in process
-     *
      * @param userName the user's name
-     * @param pwd the user's password
+     * @param pwd      the user's password
      * @return the associated user (if there is one)
      */
     public User logIn(String userName, String pwd) {
@@ -100,18 +114,16 @@ public class Utility {
 
     /**
      * Checks if a password is secure
-     *
      * @param psswd the password to check
      * @return true if the password is safe, false if else
      * @throws PasswordNotValid the password isn't secure
      */
-    public boolean securePassword(String psswd) throws PasswordNotValid {
-    	int upper = 0;
-    	int lower = 0;
-    	int numbers = 0;
-    	@SuppressWarnings("unused")
-		int spaces = 0;
-    	int specialCharacters = 0;
+    public boolean securePassword(String psswd) throws PasswordNotValid, InvalidDni {
+        int upper = 0;
+        int lower = 0;
+        int numbers = 0;
+        @SuppressWarnings ("unused") int spaces = 0;
+        int specialCharacters = 0;
         boolean atLeastEightCharacters = true;
         boolean anUppercaseLetter = true;
         boolean aLowerCaseLetter = true;
@@ -119,18 +131,19 @@ public class Utility {
         boolean aSpecialCharacter = true;
         boolean secure;
 
-    	for(char c : psswd.toCharArray()) {
-    		if(Character.isUpperCase(c))
-    			upper++;
-    		else if(Character.isLowerCase(c))
-    			lower++;
-    		else if(Character.isDigit(c))
-    			numbers++;
-    		else if(Character.isWhitespace(c))
-    			spaces++;
-    		else
-    			specialCharacters++;
-    	}
+        for (char c : psswd.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                upper++;
+            } else if (Character.isLowerCase(c)) {
+                lower++;
+            } else if (Character.isDigit(c)) {
+                numbers++;
+            } else if (Character.isWhitespace(c)) {
+                spaces++;
+            } else {
+                specialCharacters++;
+            }
+        }
 
         if (psswd.length() < 8) {
             secure = false;
@@ -151,7 +164,7 @@ public class Utility {
             secure = true;
         }
 
-        if (!secure){
+        if (!secure) {
             throw new PasswordNotValid(atLeastEightCharacters, anUppercaseLetter, aLowerCaseLetter, aNumber,
                     aSpecialCharacter);
         }

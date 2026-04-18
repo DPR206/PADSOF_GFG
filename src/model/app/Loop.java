@@ -1,11 +1,10 @@
 package model.app;
 
-import model.utilities.exceptions.PasswordNotValid;
-import model.utilities.exceptions.UsernameTaken;
 import model.order.Cart;
 import model.product.*;
 import model.store.Store;
 import model.user.*;
+import model.utilities.exceptions.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -69,7 +68,7 @@ public abstract class Loop {
      * It handles the log-in and updates the current user accordingly
      * @throws IOException the io exception
      */
-    protected void logger() throws IOException, UsernameTaken, PasswordNotValid {
+    protected void logger() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< logger >>>>>>>>>> \n"); // Es para debug, borrar
 
@@ -85,7 +84,7 @@ public abstract class Loop {
      * It handles the sign-up and updates the current user accordingly
      * @throws IOException the io exception
      */
-    protected void signer() throws IOException, UsernameTaken, PasswordNotValid {
+    protected void signer() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< signer >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.print("Enter your username: ");
@@ -102,7 +101,7 @@ public abstract class Loop {
      * Shortcut to the main.Main Loop's main() method
      * @throws IOException the io exception
      */
-    protected void main() throws IOException, UsernameTaken, PasswordNotValid {
+    protected void main() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         MainLoop.getInstance().main();
     }
 
@@ -113,7 +112,8 @@ public abstract class Loop {
      * @throws NullPointerException     the null pointer exception
      */
     protected void loopSelector()
-            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid {
+            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
+                   InvalidDni {
         System.out.print("\n <<<<<<<<<< loopSelector >>>>>>>>>> \n"); // Es para debug, borrar
         if (currentUser == null) {
             currentUser = new UnregisteredClient(true);

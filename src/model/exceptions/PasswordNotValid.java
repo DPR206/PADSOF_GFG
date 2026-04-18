@@ -27,8 +27,8 @@ public class PasswordNotValid extends Exception {
      * @param aNumber                whether the password has numbers
      * @param aSpecialCharacter      whether the password has special characters
      */
-    PasswordNotValid(boolean atLeastEightCharacters, boolean anUppercaseLetter, boolean aLowerCaseLetter,
-                     boolean aNumber, boolean aSpecialCharacter) {
+    public PasswordNotValid(boolean atLeastEightCharacters, boolean anUppercaseLetter, boolean aLowerCaseLetter,
+                            boolean aNumber, boolean aSpecialCharacter) {
         this.atLeastEightCharacters = atLeastEightCharacters;
         this.anUppercaseLetter = anUppercaseLetter;
         this.aLowerCaseLetter = aLowerCaseLetter;
@@ -42,6 +42,7 @@ public class PasswordNotValid extends Exception {
      * It returns the exception's information
      * @return the exception's information
      */
+    @Override
     public String toString() {
         String firstRequisite = (atLeastEightCharacters ? "[x]" : "[ ]") + " At least 8 characters";
         String secondRequisite = (anUppercaseLetter ? "[x]" : "[ ]") + " Upper case letters";

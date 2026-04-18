@@ -1,6 +1,8 @@
 
 package model.utilities;
 
+import model.exceptions.PasswordNotValid;
+import model.exceptions.UsernameTaken;
 import model.store.Store;
 import model.user.RegisteredClient;
 import model.user.User;
@@ -24,31 +26,31 @@ public class Utility {
      *
      * @return a new user
      */
-    public User signIn() {
+    public User signIn(String userName, String pwd, String dni) throws PasswordNotValid, UsernameTaken {
         Scanner sc = new Scanner(System.in);
-        String userName = null, pwd, dni;
         RegisteredClient rc;
         User u;
-        boolean aux = false;
+        //boolean aux = false;
 
         Map<String, User> users = Store.getInstance().getUsers();
-        System.out.print("Introduce tu usuario: ");
+        //System.out.print("Introduce tu usuario: ");
 
         try {
 
-            while (!aux) {
+            //while (!aux) {
 
-                System.out.print("Introduce tu usuario: ");
-                userName = sc.next();
+                //System.out.print("Introduce tu usuario: ");
+                //userName = sc.next();
 
                 if (users.containsKey(userName)) {
-                    System.out.print("Este nombre de usuario ya está cogido");
-                } else {
+                    //System.out.print("Este nombre de usuario ya está cogido");
+                    throw new UsernameTaken();
+                } /*else {
                     aux = true;
-                }
-            }
+                }*/
+            //}
 
-            System.out.print("Introduce tu contraseña: ");
+            /*System.out.print("Introduce tu contraseña: ");
             pwd = sc.next();
             while(!this.securePassword(pwd)) {
         		System.out.println("Make sure your password has: \n "
@@ -59,9 +61,10 @@ public class Utility {
         				+ "-Special characters\n");
         		System.out.print("Introduce tu contraseña: ");
                 pwd = sc.next();
-            }
-            System.out.print("Introduce tu DNI: ");
-            dni = sc.next();
+            }*/
+            this.securePassword(pwd);
+            //System.out.print("Introduce tu DNI: ");
+            //dni = sc.next();
 
             rc = new RegisteredClient(userName, dni, pwd, true);
 
@@ -100,14 +103,21 @@ public class Utility {
      *
      * @param psswd the password to check
      * @return true if the password is safe, false if else
+     * @throws PasswordNotValid the password isn't secure
      */
-    public boolean securePassword(String psswd) {
+    public boolean securePassword(String psswd) throws PasswordNotValid {
     	int upper = 0;
     	int lower = 0;
     	int numbers = 0;
     	@SuppressWarnings("unused")
 		int spaces = 0;
     	int specialCharacters = 0;
+        boolean atLeastEightCharacters = true;
+        boolean anUppercaseLetter = true;
+        boolean aLowerCaseLetter = true;
+        boolean aNumber = true;
+        boolean aSpecialCharacter = true;
+        boolean secure;
 
     	for(char c : psswd.toCharArray()) {
     		if(Character.isUpperCase(c))
@@ -122,17 +132,30 @@ public class Utility {
     			specialCharacters++;
     	}
 
-    	if(psswd.length()<8)
-    		return false;
-    	else if(upper<=0)
-    		return false;
-    	else if(lower<=0)
-    		return false;
-    	else if(numbers<=0)
-    		return false;
-    	else if(specialCharacters<=0)
-    		return false;
-    	else
-    		return true;
+        if (psswd.length() < 8) {
+            secure = false;
+            atLeastEightCharacters = false;
+        } else if (upper <= 0) {
+            secure = false;
+            anUppercaseLetter = false;
+        } else if (lower <= 0) {
+            secure = false;
+            aLowerCaseLetter = false;
+        } else if (numbers <= 0) {
+            secure = false;
+            aNumber = false;
+        } else if (specialCharacters <= 0) {
+            secure = false;
+            aSpecialCharacter = false;
+        } else {
+            secure = true;
+        }
+
+        if (!secure){
+            throw new PasswordNotValid(atLeastEightCharacters, anUppercaseLetter, aLowerCaseLetter, aNumber,
+                    aSpecialCharacter);
+        }
+
+        return secure;
     }
 }

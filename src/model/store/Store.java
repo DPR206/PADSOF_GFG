@@ -1,6 +1,8 @@
 package model.store;
 
 import model.discount.Discount;
+import model.exceptions.PasswordNotValid;
+import model.exceptions.UsernameTaken;
 import model.exchange.Exchange;
 import model.exchange.Offer;
 import model.app.Pager;
@@ -113,9 +115,8 @@ public class Store {
      * Signs in a user
      * @return a new user
      */
-    public User signIn() {
-        User user = utility.signIn();
-        return user;
+    public User signIn(String username, String password, String dni) throws PasswordNotValid, UsernameTaken {
+        return utility.signIn(username, password, dni);
     }
 
     /**

@@ -1,9 +1,13 @@
 package controller;
 
+import model.exceptions.PasswordNotValid;
+import model.exceptions.UsernameTaken;
 import model.store.Store;
+import model.user.User;
 import view.App;
 import view.SignupP;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,9 +31,17 @@ public class SignupC implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Sign up")) { /* "Sign up" pressed */
-            /*try {
-                model.signIn(view.getUsername(), view.getPassword(), view.getDni());
-            } catch (PasswordNotValid exception) {}*/
+            try {
+                User user = model.signIn(view.getUsername(), view.getPassword(), view.getDni());
+                if (user != null) {
+                    JOptionPane.showMessageDialog(null,
+                            "Signed up successfully :)\n" + "Welcome abroad " + view.getUsername());
+                }
+            } catch (UsernameTaken exception1) {
+                JOptionPane.showMessageDialog(null, exception1.toString());
+            } catch (PasswordNotValid exception2) {
+                JOptionPane.showMessageDialog(null, exception2.toString());
+            }
         }
     }
 }

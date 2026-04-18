@@ -1,5 +1,8 @@
 package model.app;
 
+import model.exceptions.PasswordNotValid;
+import model.exceptions.UsernameTaken;
+
 import java.io.IOException;
 
 /**
@@ -10,7 +13,8 @@ import java.io.IOException;
 public class MainApp {
     private static final MainLoop ml = MainLoop.getInstance();
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Private constructor
      */
@@ -30,7 +34,7 @@ public class MainApp {
             ml.main();
         } catch (IOException io) {
             throw new IOException(io.getMessage());
-        } catch (IllegalArgumentException ia) {
+        } catch (IllegalArgumentException | UsernameTaken | PasswordNotValid ia) {
             throw new IllegalArgumentException(ia.getMessage());
         } catch (NullPointerException np) {
             throw new NullPointerException(np.getMessage());

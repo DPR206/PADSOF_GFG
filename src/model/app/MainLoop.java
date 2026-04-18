@@ -1,5 +1,7 @@
 package model.app;
 
+import model.exceptions.PasswordNotValid;
+import model.exceptions.UsernameTaken;
 import model.user.*;
 
 import java.io.IOException;
@@ -44,7 +46,8 @@ public class MainLoop extends Loop {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    protected void main() throws IOException, IllegalArgumentException, NullPointerException {
+    protected void main()
+            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< main >>>>>>>>>> \n"); // Es para debug, borrar
 

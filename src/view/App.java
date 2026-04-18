@@ -6,6 +6,11 @@ import model.store.Store;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * It implements the app's view
+ * @author Sofia C.L., Duna P.R. and Ana O.R.
+ * @version 1.0
+ */
 public class App extends JFrame {
 
     // Aquí se declaran todos los paneles de vista como atributos
@@ -58,7 +63,7 @@ public class App extends JFrame {
 
         /* Configure main window's size */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(250, 190);
+        this.setSize(700, 500);
         this.setLocationRelativeTo(null);
     }
 

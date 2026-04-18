@@ -7,6 +7,11 @@ import view.WelcomeP;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * It implements the app's welcome controller
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class WelcomeC implements ActionListener {
     private final WelcomeP view; /* view -> panel */
     private final App frame; /* view -> frame */

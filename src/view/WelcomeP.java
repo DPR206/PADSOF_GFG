@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * It implements the app's welcome panel view
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class WelcomeP extends JPanel {
     private final JButton browseButton;
     private final JButton loginButton;
@@ -12,7 +17,7 @@ public class WelcomeP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public WelcomeP() {
         // asignar layout
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setLayout(new FlowLayout());
 
         // crear componentes
         JLabel label = new JLabel("Welcome to Gifts for Geeks!");

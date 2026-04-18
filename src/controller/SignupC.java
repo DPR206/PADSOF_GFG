@@ -7,6 +7,11 @@ import view.SignupP;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * It implements the sign-up controller
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class SignupC implements ActionListener {
     private final SignupP view; /* view -> panel */
     private final App frame; /* view -> frame */
@@ -21,6 +26,10 @@ public class SignupC implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // DUE
+        if (e.getActionCommand().equals("Sign up")) { /* "Sign up" pressed */
+            /*try {
+                model.signIn(view.getUsername(), view.getPassword(), view.getDni());
+            } catch (PasswordNotValid exception) {}*/
+        }
     }
 }

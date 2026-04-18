@@ -1,6 +1,6 @@
 package model.user;
 
-import model.exceptions.PasswordNotValid;
+import model.utilities.exceptions.PasswordNotValid;
 import model.search.SearchStoreProducts;
 import model.search.Searcher;
 import model.utilities.Utility;

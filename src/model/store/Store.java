@@ -1,8 +1,8 @@
 package model.store;
 
 import model.discount.Discount;
-import model.exceptions.PasswordNotValid;
-import model.exceptions.UsernameTaken;
+import model.utilities.exceptions.PasswordNotValid;
+import model.utilities.exceptions.UsernameTaken;
 import model.exchange.Exchange;
 import model.exchange.Offer;
 import model.app.Pager;

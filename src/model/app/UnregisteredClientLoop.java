@@ -1,7 +1,7 @@
 package model.app;
 
-import model.exceptions.PasswordNotValid;
-import model.exceptions.UsernameTaken;
+import model.utilities.exceptions.PasswordNotValid;
+import model.utilities.exceptions.UsernameTaken;
 import model.order.Cart;
 import model.product.*;
 import model.store.Store;

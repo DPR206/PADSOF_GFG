@@ -1,8 +1,8 @@
 
 package model.utilities;
 
-import model.exceptions.PasswordNotValid;
-import model.exceptions.UsernameTaken;
+import model.utilities.exceptions.PasswordNotValid;
+import model.utilities.exceptions.UsernameTaken;
 import model.store.Store;
 import model.user.RegisteredClient;
 import model.user.User;

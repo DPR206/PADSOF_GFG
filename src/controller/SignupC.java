@@ -1,7 +1,7 @@
 package controller;
 
-import model.exceptions.PasswordNotValid;
-import model.exceptions.UsernameTaken;
+import model.utilities.exceptions.PasswordNotValid;
+import model.utilities.exceptions.UsernameTaken;
 import model.store.Store;
 import model.user.User;
 import view.App;

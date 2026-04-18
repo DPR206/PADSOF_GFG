@@ -1,4 +1,4 @@
-package model.exceptions;
+package model.utilities.exceptions;
 
 /**
  * It defines the exception for when a password isn't secure

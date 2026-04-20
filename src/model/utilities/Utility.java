@@ -67,6 +67,7 @@ public class Utility {
             //dni = sc.next();
             /* Check if dni is valid */
             int charsLeft = 8;
+            boolean letterRead = false;
             for (Character ch : dni.toCharArray()) {
                 /* Check 8 numbers */
                 if (charsLeft > 0) {
@@ -75,10 +76,15 @@ public class Utility {
                     } else {
                         throw new InvalidDni();
                     }
-                } else if (!Character.isUpperCase(ch)) {
+                } else if (Character.isUpperCase(ch)) {
                     /* Check last uppercase letter */
+                    letterRead = true;
+                } else {
                     throw new InvalidDni();
                 }
+            }
+            if (charsLeft > 0 || !letterRead) {
+                throw new InvalidDni();
             }
 
             rc = new RegisteredClient(userName, dni, pwd, true);

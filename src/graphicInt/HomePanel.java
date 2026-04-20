@@ -39,6 +39,7 @@ public class HomePanel extends JPanel{
 		searcher.add(new JButton("BUSCAR"));
 		products.add(searcher, BorderLayout.NORTH);
 		
+		
 		this.add(products, BorderLayout.CENTER);
 		/*Añadimos products a homepanel*/
 		

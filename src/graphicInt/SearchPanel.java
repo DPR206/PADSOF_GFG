@@ -81,7 +81,7 @@ public class SearchPanel extends JPanel{
 		this.ordenacion.add(new JLabel("ORDENAR"));
 		
 		grupo.add(this.ascendente);
-		grupo.add(ascendente);
+		grupo.add(descendente);
 		
 		this.ordenacion.add(this.ascendente);
 		this.ordenacion.add(this.descendente);

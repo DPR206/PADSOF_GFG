@@ -4,6 +4,8 @@ import model.product.*;
 import model.store.Recommender;
 import model.store.Store;
 import model.user.RegisteredClient;
+import model.utilities.exceptions.InvalidDni;
+import model.utilities.exceptions.PasswordNotValid;
 
 import java.io.IOException;
 import java.util.*;
@@ -47,7 +49,8 @@ public class RegisteredClientLoop extends Loop {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    void registeredClientLoop() throws IOException, IllegalArgumentException, NullPointerException {
+    void registeredClientLoop()
+            throws IOException, IllegalArgumentException, NullPointerException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -96,7 +99,8 @@ public class RegisteredClientLoop extends Loop {
      * @throws IllegalArgumentException the illegal argument exception
      * @throws NullPointerException     the null pointer exception
      */
-    private void browseStore() throws IOException, IllegalArgumentException, NullPointerException {
+    private void browseStore()
+            throws IOException, IllegalArgumentException, NullPointerException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -178,7 +182,7 @@ public class RegisteredClientLoop extends Loop {
      * @return the filtered list of store products
      * @throws IOException the io exception
      */
-    public List<StoreProduct> filterSearch() throws IOException {
+    public List<StoreProduct> filterSearch() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose which filter you wish to apply next (those already applied will be reset)");
         int i = 1;
@@ -273,7 +277,7 @@ public class RegisteredClientLoop extends Loop {
      * It allows a registered client to see a certain product's info
      * @throws IOException the io exception
      */
-    private void seeStoreProduct() throws IOException {
+    private void seeStoreProduct() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -324,7 +328,7 @@ public class RegisteredClientLoop extends Loop {
     /**
      * It allows a registered client to see a certain product's reviews
      */
-    private void browseReviews() throws IOException {
+    private void browseReviews() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -367,7 +371,7 @@ public class RegisteredClientLoop extends Loop {
      * It allows a registered client to see their cart's products
      * @throws IOException the io exception
      */
-    private void seeCart() throws IOException {
+    private void seeCart() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -410,7 +414,7 @@ public class RegisteredClientLoop extends Loop {
      * It allows a registered client to browse their cart's products
      * @throws IOException the io exception
      */
-    public void browseCartProducts() throws IOException {
+    public void browseCartProducts() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -460,7 +464,7 @@ public class RegisteredClientLoop extends Loop {
      * It allows a registered client to see a product from their cart
      * @throws IOException the io exception
      */
-    public void seeCartProduct() throws IOException {
+    public void seeCartProduct() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -504,7 +508,7 @@ public class RegisteredClientLoop extends Loop {
      * It allows a registered client to see their cart's packs
      * @throws IOException the io exception
      */
-    public void browseCartPacks() throws IOException {
+    public void browseCartPacks() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -554,7 +558,7 @@ public class RegisteredClientLoop extends Loop {
      * It allows a registered client to see a pack from their cart
      * @throws IOException the io exception
      */
-    public void seeCartPack() throws IOException {
+    public void seeCartPack() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -597,7 +601,7 @@ public class RegisteredClientLoop extends Loop {
      * It allows a registered client to browse the store's recommended products for them based on their interests
      * @throws IOException the io exception
      */
-    public void browseRecommendations() throws IOException {
+    public void browseRecommendations() throws IOException, InvalidDni, PasswordNotValid {
         System.out.print("\n <<<<<<<<<< browseRecommendations >>>>>>>>>> \n"); // Es para debug, borra
         filteredStore = Recommender.getInstance().recommendSimilarProducts((RegisteredClient) currentUser);
         browseStore();
@@ -621,7 +625,7 @@ public class RegisteredClientLoop extends Loop {
      * It allows the registered client to see its profile and change their password
      * @throws IOException the io exception
      */
-    private void seeProfile() throws IOException {
+    private void seeProfile() throws IOException, InvalidDni, PasswordNotValid {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {

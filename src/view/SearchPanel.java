@@ -1,6 +1,7 @@
-package graphicInt;
+package view;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
@@ -87,5 +88,30 @@ public class SearchPanel extends JPanel{
 		this.ordenacion.add(this.descendente);
 		
 		this.add(this.ordenacion);
+	}
+	
+	public void setController(ActionListener c) {
+		this.jmesa.addActionListener(c);
+		this.jrol.addActionListener(c);
+		this.jcarta.addActionListener(c);
+		this.figuras.addActionListener(c);
+		this.comics.addActionListener(c);
+		
+		this.cerouno.addActionListener(c);
+		this.unodos.addActionListener(c);
+		this.dostres.addActionListener(c);
+		this.trescuatro.addActionListener(c);
+		this.cuatrocinco.addActionListener(c);
+		
+		this.cerodiez.addActionListener(c);
+		this.diezquince.addActionListener(c);
+		this.quinceveinte.addActionListener(c);
+		this.veintetreinta.addActionListener(c);
+		this.treintacuarenta.addActionListener(c);
+		this.cuarentacincuenta.addActionListener(c);
+		this.plus50.addActionListener(c);
+		
+		this.ascendente.addActionListener(c);
+		this.descendente.addActionListener(c);
 	}
 }

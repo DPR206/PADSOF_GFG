@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import model.product.Category;
 import model.search.CategoryFilter;
+import model.search.PunctuationFilter;
 
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -48,28 +49,40 @@ public class SearcherC implements ActionListener{
 		}
 		
 		/*Ahora metemos los filtros de puntuación*/
-		int min;
-		int max;
 		
-		if(e.getActionCommand().equals("cerouno") && e.getActionCommand().equals("cerouno")) {
-			categories.add(model.getCategoryFromName("Juegos de mesa"));
+		PunctuationFilter f = null;
+		
+		int min = -1;
+		int max = -1;
+		
+		if(e.getActionCommand().equals("0-1★")) {
+			min = 0;
+			max = 1;
 		}
-		if(e.getActionCommand().equals("Juegos de rol")) {
-			categories.add(model.getCategoryFromName("Juegos de rol"));
+		if(e.getActionCommand().equals("1-2★")) {
+			min = 1;
+			max = 2;
 		}
-		if(e.getActionCommand().equals("Juegos de cartas")) {
-			categories.add(model.getCategoryFromName("Juegos de cartas"));
+		if(e.getActionCommand().equals("2-3★")) {
+			min = 2;
+			max = 3;
 		}
-		if(e.getActionCommand().equals("Figuras")) {
-			categories.add(model.getCategoryFromName("Figuras"));
+		if(e.getActionCommand().equals("3-4★")) {
+			min = 3;
+			max = 4;
 		}
-		if(e.getActionCommand().equals("Cómics")) {
-			categories.add(model.getCategoryFromName("Cómics"));
+		if(e.getActionCommand().equals("4-5★")) {
+			min = 4;
+			max = 5;
 		}
-		if(categories.isEmpty() == false) {
-			CategoryFilter c = new CategoryFilter(categories);
-			frame.getUser().getSearcher().getStoreSearcher().addCategoryFilter(c);
+		if(!(min < 0 || max < 0)) {
+			frame.getUser().addPunctuationFilter(min, max);
 		}
+		
+		/*Ahora metemos el filtro de los precios*/
+		
+		double min2 = -1;
+		double max2 = -1;
 		
 	}
 

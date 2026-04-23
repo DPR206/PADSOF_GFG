@@ -12,12 +12,13 @@ import java.awt.*;
  * @version 1.0
  */
 public class App extends JFrame {
-
+	
     // Aquí se declaran todos los paneles de vista como atributos
     private final LoginP loginPanel;
     private final SignupP signupPanel;
     private final UnregisteredMainP unregisteredMainPanel;
     private final WelcomeP welcomePanel;
+    private final SearchPanel searchPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() {
@@ -28,6 +29,8 @@ public class App extends JFrame {
         signupPanel = new SignupP();
         unregisteredMainPanel = new UnregisteredMainP();
         welcomePanel = new WelcomeP();
+        searchPanel = new SearchPanel();
+        
 
         /* Model */
         Store model = Store.getInstance();
@@ -83,5 +86,9 @@ public class App extends JFrame {
 
     public WelcomeP getWelcomePanel() {
         return welcomePanel;
+    }
+    
+    public SearchPanel getSearchPanel() {
+    	return searchPanel;
     }
 }

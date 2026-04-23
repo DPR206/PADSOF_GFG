@@ -23,6 +23,7 @@ public class SearchStoreProducts{
     private boolean ascendant;
     private PriceFilter priceF;
     private PunctuationFilter punctuationF;
+    private CategoryFilter categoryF;
     private Store s;
 
     /**
@@ -56,7 +57,11 @@ public class SearchStoreProducts{
     public void addPriceFilter(double min, double max){
         this.priceF= new PriceFilter(min, max);
     }
-
+    
+    public void addCategoryFilter(Category...c) {
+    	this.categoryF = new CategoryFilter(c);
+    }
+    
     /**
      * Searches products filtered by price, punctuation, and optionally by categories.
      *
@@ -65,8 +70,8 @@ public class SearchStoreProducts{
      * @param cs the categories to filter by (optional)
      * @return a list of {@link StoreProduct} matching the filters and categories
      */
-    public List<StoreProduct> searchStoreProducts(Category... cs){
-        List<StoreProduct> pCs = this.filterByCategory(cs);
+    public List<StoreProduct> searchStoreProducts(){
+        List<StoreProduct> pCs = this.filterByCategory();
         List<StoreProduct> filtered = this.searchStoreProducts();
 
         if(filtered == this.s.getStoreProducts()){
@@ -108,7 +113,7 @@ public class SearchStoreProducts{
      *
      * @return a list of {@link StoreProduct} matching the active filters
      */
-    public List<StoreProduct> searchStoreProducts(){
+    public List<StoreProduct> searchStoreProductsWithoutCategories(){
         List<StoreProduct> priced;
         List<StoreProduct> punctuation;
 
@@ -175,9 +180,10 @@ public class SearchStoreProducts{
      * @param c the categories to filter by
      * @return a list of {@link StoreProduct} matching the categories
      */
-    private List<StoreProduct> filterByCategory(Category... c){
+    private List<StoreProduct> filterByCategory(){
         List<StoreProduct> aux = new ArrayList<>();
         List<StoreProduct> product = new ArrayList<> (this.s.getStoreProducts().values());
+        List<Category> c = this.categoryF.getCategories();
         Category[] caux;
 
         for(Category cat: c) {

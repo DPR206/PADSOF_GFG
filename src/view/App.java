@@ -2,6 +2,8 @@ package view;
 
 import controller.*;
 import model.store.Store;
+import model.user.UnregisteredClient;
+import model.user.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +21,7 @@ public class App extends JFrame {
     private final UnregisteredMainP unregisteredMainPanel;
     private final WelcomeP welcomePanel;
     private final SearchPanel searchPanel;
+    private User mainUser = null;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() {
@@ -27,7 +30,7 @@ public class App extends JFrame {
         /* Views */
         loginPanel = new LoginP();
         signupPanel = new SignupP();
-        unregisteredMainPanel = new UnregisteredMainP();
+        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient)this.mainUser);
         welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
         
@@ -75,7 +78,11 @@ public class App extends JFrame {
     public LoginP getLoginPanel() {
         return loginPanel;
     }
-
+    
+    public User getUser() {
+    	return this.mainUser;
+    }
+    
     public SignupP getSignupPanel() {
         return signupPanel;
     }
@@ -90,5 +97,13 @@ public class App extends JFrame {
     
     public SearchPanel getSearchPanel() {
     	return searchPanel;
+    }
+    
+    public void setUnregisteredClient(UnregisteredClient u) {
+    	this.mainUser = u;
+    }
+    
+    public App getApp() {
+    	return this;
     }
 }

@@ -13,13 +13,19 @@ public class SearcherC implements ActionListener{
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     
-    public SearcherC() {
-    	
+    public SearcherC(App frame) {
+		this.view = new SearchPanel();
+		this.frame = frame;
+		this.model = Store.getInstance();
+		
     }
     
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+
+		if(e.getActionCommand().equals("Juegos de mesa")) {
+			this.frame.getUser().getSearcher().getStoreSearcher().;
+		}
 		
 	}
 

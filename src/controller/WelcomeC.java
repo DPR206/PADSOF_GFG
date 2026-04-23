@@ -1,6 +1,7 @@
 package controller;
 
 import model.store.Store;
+import model.user.UnregisteredClient;
 import view.App;
 import view.WelcomeP;
 
@@ -27,7 +28,8 @@ public class WelcomeC implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Browse as unregistered client")) { /*"Browse as unregistered client" pressed */
-            this.showBrowseAsUnregistered();
+            this.frame.setUnregisteredClient(new UnregisteredClient(false));
+        	this.showBrowseAsUnregistered();
         } else if (e.getActionCommand().equals("Log in")) { /* "Log in" pressed */
             this.showLogin();
         } else if (e.getActionCommand().equals("Sign up")) { /* "Sign up" pressed */

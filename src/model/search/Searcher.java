@@ -78,6 +78,9 @@ public class Searcher{
      * @return a list of matching {@link StoreProduct}
      */
     public List<StoreProduct> searchStoreProducts(){
+        if(this.searchStore.getCategoryFilter() == null) {
+        	return this.searchStore.searchStoreProductsWithoutCategories();
+        }
         return this.searchStore.searchStoreProducts();
     }
 

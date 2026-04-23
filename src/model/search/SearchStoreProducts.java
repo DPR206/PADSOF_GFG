@@ -225,4 +225,8 @@ public class SearchStoreProducts{
     public boolean getBoolean() {
     	return this.ascendant;
     }
+    
+    public CategoryFilter getCategoryFilter() {
+    	return this.categoryF;
+    }
 }

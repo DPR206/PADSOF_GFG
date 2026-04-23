@@ -8,6 +8,7 @@ import model.notification.Notification;
 import model.order.Order;
 import model.product.*;
 import model.user.*;
+import model.utilities.IdType;
 import model.utilities.Utility;
 import model.utilities.exceptions.*;
 
@@ -114,9 +115,9 @@ public class Store {
      * Signs in a user
      * @return a new user
      */
-    public User signIn(String username, String password, String dni)
+    public User signIn(String username, String password, String dni, IdType idType)
             throws PasswordNotValid, UsernameTaken, InvalidDni {
-        return utility.signIn(username, password, dni);
+        return utility.signIn(username, password, dni, idType);
     }
 
     /**

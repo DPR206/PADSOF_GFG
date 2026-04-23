@@ -29,19 +29,32 @@ public class SignupC implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("DNI")) {
+            view.deselectNie();
+        }
+        if (e.getActionCommand().equals("NIE")) {
+            view.deselectDni();
+        }
         if (e.getActionCommand().equals("Sign up")) { /* "Sign up" pressed */
-            try {
-                User user = model.signIn(view.getUsername(), view.getPassword(), view.getDni());
-                if (user != null) {
-                    JOptionPane.showMessageDialog(null,
-                            "Signed up successfully :)\n" + "Welcome abroad " + view.getUsername());
+            if (view.getIdType() == null) {
+                JOptionPane.showMessageDialog(null, "You must select an idType", "Warning :(",
+                        JOptionPane.ERROR_MESSAGE);
+            } else if (!(view.getPassword().equals(view.getPassword2()))) {
+                JOptionPane.showMessageDialog(null, "Passwords did not match", "Warning :(", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    User user = model.signIn(view.getUsername(), view.getPassword(), view.getDni(), view.getIdType());
+                    if (user != null) {
+                        JOptionPane.showMessageDialog(null,
+                                "Signed up successfully :)\n" + "Welcome abroad " + view.getUsername());
+                    }
+                } catch (UsernameTaken exception1) {
+                    JOptionPane.showMessageDialog(null, exception1.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
+                } catch (PasswordNotValid exception2) {
+                    JOptionPane.showMessageDialog(null, exception2.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
+                } catch (InvalidDni exception3) {
+                    JOptionPane.showMessageDialog(null, exception3.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (UsernameTaken exception1) {
-                JOptionPane.showMessageDialog(null, exception1.toString());
-            } catch (PasswordNotValid exception2) {
-                JOptionPane.showMessageDialog(null, exception2.toString());
-            } catch (InvalidDni exception3) {
-                JOptionPane.showMessageDialog(null, exception3.toString());
             }
         }
     }

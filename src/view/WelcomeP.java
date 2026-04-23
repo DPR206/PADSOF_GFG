@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
@@ -15,9 +14,13 @@ public class WelcomeP extends JPanel {
     private final JButton signupButton;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This page's constructor
+     */
     public WelcomeP() {
         // asignar layout
-        this.setLayout(new FlowLayout());
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // crear componentes
         JLabel label = new JLabel("Welcome to Gifts for Geeks!");

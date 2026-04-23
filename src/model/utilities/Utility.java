@@ -22,11 +22,14 @@ public class Utility {
     public Utility() {
     }
 
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
     /**
      * The sign in process
      * @return a new user
      */
-    public User signIn(String userName, String pwd, String dni) throws PasswordNotValid, UsernameTaken, InvalidDni {
+    public User signIn(String userName, String pwd, String id, IdType idType)
+            throws PasswordNotValid, UsernameTaken, InvalidDni {
         Scanner sc = new Scanner(System.in);
         RegisteredClient rc;
         User u;
@@ -65,29 +68,10 @@ public class Utility {
             this.securePassword(pwd);
             //System.out.print("Introduce tu DNI: ");
             //dni = sc.next();
-            /* Check if dni is valid */
-            int charsLeft = 8;
-            boolean letterRead = false;
-            for (Character ch : dni.toCharArray()) {
-                /* Check 8 numbers */
-                if (charsLeft > 0) {
-                    if (Character.isDigit(ch)) {
-                        charsLeft--;
-                    } else {
-                        throw new InvalidDni();
-                    }
-                } else if (Character.isUpperCase(ch)) {
-                    /* Check last uppercase letter */
-                    letterRead = true;
-                } else {
-                    throw new InvalidDni();
-                }
-            }
-            if (charsLeft > 0 || !letterRead) {
-                throw new InvalidDni();
-            }
+            /* Check if id is valid */
+            validId(id, idType);
 
-            rc = new RegisteredClient(userName, dni, pwd, true);
+            rc = new RegisteredClient(userName, id, pwd, true);
 
             u = rc;
             users.put(u.getUserName(), u);
@@ -176,5 +160,77 @@ public class Utility {
         }
 
         return secure;
+    }
+
+    public void validId(String id, IdType idType) throws InvalidDni {
+        switch (idType) {
+            case DNI -> validDni(id);
+            case NIE -> validNie(id);
+            default -> throw new InvalidDni();
+        }
+    }
+
+    public void validDni(String id) throws InvalidDni {
+        /* (8 números y una letra = 9) */
+        if (id.length() != 9) {
+            throw new InvalidDni();
+        }
+        /* Números */
+        for (int i = 0; i < 8; i++) {
+            if (!Character.isDigit(id.charAt(i))) {
+                throw new InvalidDni();
+            }
+        }
+        /* Letra */
+        if (!Character.isUpperCase(id.charAt(8))) {
+            throw new InvalidDni();
+        }
+        /* Algoritmo de validez: https://interior.gob
+        .es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/dni/calculo-del-digito-de-control-del-nif-nie/*/
+        char letra;
+        int resto = Integer.parseInt(id.substring(0, 8)) % 23;
+        switch (resto) {
+            case 0 -> letra = 'T';
+            case 1 -> letra = 'R';
+            case 2 -> letra = 'W';
+            case 3 -> letra = 'A';
+            case 4 -> letra = 'G';
+            case 5 -> letra = 'M';
+            case 6 -> letra = 'Y';
+            case 7 -> letra = 'F';
+            case 8 -> letra = 'P';
+            case 9 -> letra = 'D';
+            case 10 -> letra = 'X';
+            case 11 -> letra = 'B';
+            case 12 -> letra = 'N';
+            case 13 -> letra = 'J';
+            case 14 -> letra = 'Z';
+            case 15 -> letra = 'S';
+            case 16 -> letra = 'Q';
+            case 17 -> letra = 'V';
+            case 18 -> letra = 'H';
+            case 19 -> letra = 'L';
+            case 20 -> letra = 'C';
+            case 21 -> letra = 'K';
+            case 22 -> letra = 'E';
+            default -> throw new InvalidDni();
+        }
+
+        if (id.charAt(8) != letra) {
+            throw new InvalidDni();
+        }
+    }
+
+    public void validNie(String id) throws InvalidDni {
+        int firstNum;
+        /* Algoritmo de validez: https://interior.gob
+        .es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/dni/calculo-del-digito-de-control-del-nif-nie/*/
+        switch (id.charAt(0)) {
+            case 'X' -> firstNum = 0;
+            case 'Y' -> firstNum = 1;
+            case 'Z' -> firstNum = 2;
+            default -> throw new InvalidDni();
+        }
+        validDni(Character.toString(firstNum) + id.substring(1, 9));
     }
 }

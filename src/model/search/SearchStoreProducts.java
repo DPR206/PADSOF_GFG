@@ -21,9 +21,9 @@ import java.util.*;
  */
 public class SearchStoreProducts{
     private boolean ascendant;
-    private PriceFilter priceF;
-    private PunctuationFilter punctuationF;
-    private CategoryFilter categoryF;
+    private PriceFilter priceF = null;
+    private PunctuationFilter punctuationF = null;
+    private CategoryFilter categoryF = null;
     private Store s;
 
     /**
@@ -58,8 +58,8 @@ public class SearchStoreProducts{
         this.priceF= new PriceFilter(min, max);
     }
     
-    public void addCategoryFilter(Category...c) {
-    	this.categoryF = new CategoryFilter(c);
+    public void addCategoryFilter(CategoryFilter c) {
+    	this.categoryF = c;
     }
     
     /**

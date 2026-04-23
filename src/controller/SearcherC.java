@@ -47,6 +47,30 @@ public class SearcherC implements ActionListener{
 			frame.getUser().getSearcher().getStoreSearcher().addCategoryFilter(c);
 		}
 		
+		/*Ahora metemos los filtros de puntuación*/
+		int min;
+		int max;
+		
+		if(e.getActionCommand().equals("cerouno") && e.getActionCommand().equals("cerouno")) {
+			categories.add(model.getCategoryFromName("Juegos de mesa"));
+		}
+		if(e.getActionCommand().equals("Juegos de rol")) {
+			categories.add(model.getCategoryFromName("Juegos de rol"));
+		}
+		if(e.getActionCommand().equals("Juegos de cartas")) {
+			categories.add(model.getCategoryFromName("Juegos de cartas"));
+		}
+		if(e.getActionCommand().equals("Figuras")) {
+			categories.add(model.getCategoryFromName("Figuras"));
+		}
+		if(e.getActionCommand().equals("Cómics")) {
+			categories.add(model.getCategoryFromName("Cómics"));
+		}
+		if(categories.isEmpty() == false) {
+			CategoryFilter c = new CategoryFilter(categories);
+			frame.getUser().getSearcher().getStoreSearcher().addCategoryFilter(c);
+		}
+		
 	}
 
 }

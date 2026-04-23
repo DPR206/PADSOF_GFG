@@ -22,6 +22,7 @@ public class InvalidDni extends Exception {
      * @return the exception's information
      */
     public String toString() {
-        return "A DNI must have 8 numbers and an uppercase letter (eg. 12345678A)";
+        return "ID wasn't valid\n" + " -A DNI must have 8 numbers and an uppercase letter (eg. 12345678A)\n" +
+               " -A NIE must have a letter, 7 numbers and another letter (eg. X1234567A)";
     }
 }

@@ -33,11 +33,11 @@ public class MainApp {
             ml.main();
         } catch (IOException io) {
             throw new IOException(io.getMessage());
-        } catch (IllegalArgumentException | UsernameTaken | PasswordNotValid ia) {
+        } catch (IllegalArgumentException ia) {
             throw new IllegalArgumentException(ia.getMessage());
         } catch (NullPointerException np) {
             throw new NullPointerException(np.getMessage());
-        } catch (InvalidDni e) {
+        } catch (InvalidDni | UsernameTaken | PasswordNotValid e) {
             throw new RuntimeException(e);
         }
     }

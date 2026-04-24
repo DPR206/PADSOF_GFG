@@ -40,7 +40,7 @@ public class NotificacionP extends JPanel {
 		Container contenedor = nots.getContentPane();
 		contenedor.setLayout(new BorderLayout(10, 10));
 		
-		JLabel etiqueta = new JLabel("Selecciona una notificacion", SwingConstants.CENTER);
+		JLabel etiqueta = new JLabel("Selecciona una notificación", SwingConstants.CENTER);
 		NotificationPayment np = new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
 		np.FullNotification("pedido2");
 		Notification[] notifications = {np,np, np, np, np, np,np, np, np, np, np,np, np, np, np, np,np, np, np, np,
@@ -51,6 +51,7 @@ public class NotificacionP extends JPanel {
 		//lista.setVisibleRowCount(10); 
 		
 	    lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    lista.setFixedCellHeight(50);
 		
 		/*lista.addListSelectionListener(
 				  new ListSelectionListener() {
@@ -76,7 +77,9 @@ public class NotificacionP extends JPanel {
 	            if (value instanceof Notification) {
 	                Notification n = (Notification) value;
 	                // Aquí usamos el método Snippet() para el texto visual de la lista
-	                setText(n.Snippet()); 
+	                String textoHtml = "<html>" + n.Snippet().replace("\n", "<br>") + "</html>";
+	                setText(textoHtml);
+	                //setText(n.Snippet());
 	            }
 	            return this;
 	        }
@@ -91,6 +94,7 @@ public class NotificacionP extends JPanel {
 	                if (valorSeleccionado != null) {
 	                    
 	                    // Muestra el toString() en el diálogo
+	                	//Esto pasará  ser una pantalla nueva
 	                    JOptionPane.showMessageDialog(nots, "Detalles completos:\n" + valorSeleccionado.toString());
 	                    valorSeleccionado.setRead(true);
 	                }

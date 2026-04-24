@@ -227,7 +227,7 @@ public abstract class Notification {
 	}
 	
 	public String Snippet() {
-		return title + "\n" + this.timeLog();
+		return title + "\t" + this.timeLog();
 	}
 
 	@Override

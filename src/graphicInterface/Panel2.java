@@ -8,7 +8,6 @@ public class Panel2 extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    // 1. El método main: Solo arranca la aplicación
     public static void main(String[] args) {
         // Llamamos al constructor para que se ejecute la lógica
         new Panel2();

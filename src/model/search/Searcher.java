@@ -91,7 +91,7 @@ public class Searcher{
      * @return a list of matching {@link StoreProduct}
      */
     public List<StoreProduct> searchByCategory(Category... c){
-        return this.searchStore.searchStoreProducts(c);
+        return this.searchStore.searchStoreProducts();
     }
 
     /**

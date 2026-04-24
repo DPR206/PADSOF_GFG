@@ -94,8 +94,8 @@ public class Store {
      * Logs in a user
      * @return the associated user
      */
-    public User logIn() {
-        Scanner sc = new Scanner(System.in);
+    public User logIn(String userName, String pwd) {
+        /*Scanner sc = new Scanner(System.in);
         String userName, pwd;
 
         try {
@@ -106,7 +106,7 @@ public class Store {
         } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
             return null;
-        }
+        }*/
 
         return utility.logIn(userName, pwd);
     }

@@ -30,7 +30,7 @@ public class Searcher{
     private SearchEmployee employeeSearcher = new SearchEmployee();
     private SearchOrder orderSearcher = new SearchOrder();
     private SearchExchange exchangeSearcher = new SearchExchange();
-
+    private SearchProduct productSearcher = new SearchProduct();
     private BrowseSecondHandProducts secondHandProducts;
 
     /**
@@ -120,6 +120,10 @@ public class Searcher{
         return null;
     }
 
+    public StoreProduct searchProductByID(int id) {
+    	return this.productSearcher.searchByID(id);
+    }
+    
     /**
      * Searches for an order by its ID.
      *

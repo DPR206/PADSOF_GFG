@@ -94,36 +94,21 @@ public class SearchStoreProducts{
        else if(this.ascendant == true && (!this.punctuationF.isEmpty())) {
     	   pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation));
        }
+       
+       else if(this.ascendant == false && (!this.priceF.isEmpty() && !this.punctuationF.isEmpty())) {
+       	pCs.sort(Comparator.comparing(StoreProduct::getPrice).thenComparing(StoreProduct::getAveragePunctuation).reversed());
+       }
+       
+      else if(this.ascendant == false && (!this.priceF.isEmpty())) {
+   	   pCs.sort(Comparator.comparing(StoreProduct::getPrice).reversed());
+      }
+      
+      else if(this.ascendant == false && (!this.punctuationF.isEmpty())) {
+   	   pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation).reversed());
+      }
        return pCs;
     }
-
-    /**
-     * Searches products filtered only by price and/or punctuation.
-     *
-     * @return a list of {@link StoreProduct} matching the active filters
-     */
-    public List<StoreProduct> searchStoreProductsWithoutCategories(){
-        List<StoreProduct> priced;
-        List<StoreProduct> punctuation;
-
-        if(this.punctuationF != null && this.priceF != null){
-            priced = this.filterByPrice();
-            punctuation = this.filterByPrice();
-            if (priced != null && punctuation != null) {
-                priced.retainAll(punctuation);
-                return priced;
-            }
-        }
-        else if(this.punctuationF == null && this.priceF != null){
-            punctuation = this.filterByPrice();
-            return punctuation;
-        }
-        else if(this.punctuationF != null){
-            priced = this.filterByPrice();
-            return priced;
-        }
-        return s.getStoreProductList();
-    }
+  
 
     /**
      * Filters products based on the price filter.

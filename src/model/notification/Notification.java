@@ -148,7 +148,7 @@ public abstract class Notification {
 	 *
 	 * @return the read true if it was read, false if else
 	 */
-	boolean isRead() {
+	public boolean isRead() {
 		return read;
 	}
 
@@ -157,7 +157,7 @@ public abstract class Notification {
 	 *
 	 * @param read the read to set
 	 */
-	void setRead(boolean read) {
+	public void setRead(boolean read) {
 		this.read = read;
 	}
 
@@ -225,4 +225,15 @@ public abstract class Notification {
 	public String signOff() {
 		return "Thank you for using our services\n";
 	}
+	
+	public String Snippet() {
+		return title + "\n" + this.timeLog();
+	}
+
+	@Override
+	public String toString() {
+		return title + "\n" + this.timeLog() + "\n" + text;
+	}
+	
+	
 }

@@ -1,7 +1,6 @@
-package graphicInterface;
+package view;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.time.LocalDateTime;
 
 import javax.swing.*;
@@ -10,7 +9,7 @@ import javax.swing.event.ListSelectionListener;
 
 import model.notification.*;
 
-public class Notificacion extends JPanel {
+public class NotificacionP extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,13 +27,13 @@ public class Notificacion extends JPanel {
 				}
 			}
 		});*/
-		new Notificacion();
+		new NotificacionP();
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Notificacion() {
+	public NotificacionP() {
 		
 		JFrame nots = new JFrame("Notificaciones");
 		

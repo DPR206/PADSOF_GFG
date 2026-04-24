@@ -11,7 +11,7 @@ import java.util.List;
  * @version 1.4
  * @see Store
  */
-public class Category {
+public class Category implements Comparable<Category>{
     /** The category's name */
     public String name;
     /** The category's total revenue */
@@ -144,4 +144,9 @@ public class Category {
     public String toString() {
         return this.name + ";" + this.revenue;
     }
+
+	@Override
+	public int compareTo(Category o) {
+		return this.name.compareTo(o.name);
+	}
 }

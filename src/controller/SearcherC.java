@@ -84,6 +84,8 @@ public class SearcherC implements ActionListener{
 		double min2 = -1;
 		double max2 = -1;
 		
+		
+		
 	}
 
 }

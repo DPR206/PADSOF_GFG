@@ -123,9 +123,9 @@ public class NotificationExchange extends Notification implements NotificationIn
 		String text = "Tu oferta para intercambiar " + o.getOriginProducts() + "por " + o.getDestinationProducts();
 		switch(o.getStatus()) {
 			case ACCEPTED: text += " has been accepted. " + this.timeAndPlace() + ". Don't forget to bring your dni as well.\n"; break;
-			case REJECTED: text += " has been rejected. You can make another offer or look for another exchange"; break;
+			case REJECTED: text += " has been rejected. You can make another offer or look for another exchange.\n"; break;
 			case EXPIRED: text += " has expired after " + Parameter.getParam().getOfferTime()
-												+ " have passed since its publication. You can make the same offer or a new one altogether";
+												+ " have passed since its publication. You can make the same offer or a new one altogether.\n";
 												break;
 			default: text = "Not valid\n";
 		}
@@ -162,4 +162,6 @@ public class NotificationExchange extends Notification implements NotificationIn
 				+ " with date and time: "+this.timeAndDate.format(DateTimeFormatter.ofPattern("dd/MM HH:mm"))
 				+"\n";
 	}
+	
+	
 }

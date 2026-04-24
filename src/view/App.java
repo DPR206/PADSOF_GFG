@@ -2,8 +2,7 @@ package view;
 
 import controller.*;
 import model.store.Store;
-import model.user.UnregisteredClient;
-import model.user.User;
+import model.user.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,14 +13,17 @@ import java.awt.*;
  * @version 1.0
  */
 public class App extends JFrame {
-	
+
     // Aquí se declaran todos los paneles de vista como atributos
     private final LoginP loginPanel;
     private final SignupP signupPanel;
     private final UnregisteredMainP unregisteredMainPanel;
+    private final RegisteredMainP registeredMainPanel;
+    private final EmployeeMainP employeeMainPanel;
+    private final ManagerMainP managerMainPanel;
     private final WelcomeP welcomePanel;
     private final SearchPanel searchPanel;
-    private User mainUser = null;
+    private User mainUser = new UnregisteredClient(true);
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() {
@@ -30,10 +32,13 @@ public class App extends JFrame {
         /* Views */
         loginPanel = new LoginP();
         signupPanel = new SignupP();
-        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient)this.mainUser);
+        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser);
+        registeredMainPanel = new RegisteredMainP();
+        employeeMainPanel = new EmployeeMainP();
+        managerMainPanel = new ManagerMainP();
         welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
-        
+
 
         /* Model */
         Store model = Store.getInstance();
@@ -42,6 +47,9 @@ public class App extends JFrame {
         LoginC loginController = new LoginC(this, model);
         SignupC signupController = new SignupC(this, model);
         UnregisteredMainC unregisteredMainController = new UnregisteredMainC(this, model);
+        RegisteredMainC registeredMainController = new RegisteredMainC(this, model);
+        EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
+        ManagerMainC managerMainController = new ManagerMainC(this, model);
         WelcomeC welcomeController = new WelcomeC(this, model);
 
         /* Configure controllers' views */
@@ -71,18 +79,41 @@ public class App extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(700, 500);
         this.setLocationRelativeTo(null);
+
+        // DUE: BORRAR ESTO PLSSS (es de pruebas)
+        Manager.getInstance().addEmployee("p123456@", "client", Permission.ORDER);
+    }
+
+    public void changeCurrentUser(User user) {
+        this.mainUser = user;
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    public App getApp() {
+        return this;
+    }
     // Aquí van los getters de los atributos
+
+    public EmployeeMainP getEmployeeMainPanel() {
+        return employeeMainPanel;
+    }
+
     public LoginP getLoginPanel() {
         return loginPanel;
     }
-    
-    public User getUser() {
-    	return this.mainUser;
+
+    public ManagerMainP getManagerMainPanel() {
+        return managerMainPanel;
     }
-    
+
+    public RegisteredMainP getRegisteredMainPanel() {
+        return registeredMainPanel;
+    }
+
+    public SearchPanel getSearchPanel() {
+        return searchPanel;
+    }
+
     public SignupP getSignupPanel() {
         return signupPanel;
     }
@@ -91,19 +122,15 @@ public class App extends JFrame {
         return unregisteredMainPanel;
     }
 
+    public User getUser() {
+        return this.mainUser;
+    }
+
     public WelcomeP getWelcomePanel() {
         return welcomePanel;
     }
-    
-    public SearchPanel getSearchPanel() {
-    	return searchPanel;
-    }
-    
+
     public void setUnregisteredClient(UnregisteredClient u) {
-    	this.mainUser = u;
-    }
-    
-    public App getApp() {
-    	return this;
+        this.mainUser = u;
     }
 }

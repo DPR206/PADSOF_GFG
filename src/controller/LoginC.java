@@ -1,9 +1,11 @@
 package controller;
 
 import model.store.Store;
+import model.user.User;
 import view.App;
 import view.LoginP;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,20 +14,26 @@ import java.awt.event.ActionListener;
  * @author Ana O.R.
  * @version 1.0
  */
-public class LoginC implements ActionListener {
+public class LoginC extends MainLoopSelector implements ActionListener {
     private final LoginP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public LoginC(App frame, Store model) {
-        this.frame = frame;
+        super(frame, model);
         this.view = frame.getLoginPanel();
-        this.model = model;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // DUE
+        if (e.getActionCommand().equals("Log in")) {
+            User user = super.getModel().logIn(view.getUsername(), view.getPassword());
+            if (user == null) {
+                JOptionPane.showMessageDialog(super.getFrame(), "Incorrect username or password", "",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                super.getFrame().changeCurrentUser(user);
+                super.loopSelector();
+            }
+        }
     }
 }

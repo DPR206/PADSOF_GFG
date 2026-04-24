@@ -91,6 +91,13 @@ public class SearcherC implements ActionListener{
 		if(e.getActionCommand().equals("50+")) {
 			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
 		}
+		
+		if(e.getActionCommand().equals("Menor a mayor")) {
+			frame.getUser().getSearcher().getStoreSearcher().setAsc(true);
+		}
+		else {
+			frame.getUser().getSearcher().getStoreSearcher().setAsc(false);
+		}
 	}
 
 }

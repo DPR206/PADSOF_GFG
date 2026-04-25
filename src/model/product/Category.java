@@ -13,7 +13,7 @@ import java.util.List;
  * @version 1.4
  * @see Store
  */
-public class Category implements Serializable {
+public class Category implements Comparable<Category.Category>, Serializable {
     @Serial
     private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The category's name */
@@ -148,4 +148,9 @@ public class Category implements Serializable {
     public String toString() {
         return this.name + ";" + this.revenue;
     }
+
+	@Override
+	public int compareTo(Category o) {
+		return this.name.compareTo(o.name);
+	}
 }

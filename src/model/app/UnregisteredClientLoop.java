@@ -1,12 +1,11 @@
 package model.app;
 
-import model.utilities.exceptions.*;
-import model.utilities.exceptions.*;
 import model.order.Cart;
 import model.product.*;
 import model.store.Store;
 import model.user.RegisteredClient;
 import model.user.UnregisteredClient;
+import model.utilities.exceptions.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -51,7 +50,8 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     void unregisteredClientLoop()
-            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid, InvalidDni {
+            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -91,7 +91,8 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     private void browseStore()
-            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid, InvalidDni {
+            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -267,7 +268,8 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     private void placeOrder()
-            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid, InvalidDni {
+            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -648,7 +650,8 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     private void cartLogger()
-            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid, InvalidDni {
+            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -656,7 +659,11 @@ public class UnregisteredClientLoop extends Loop {
             UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
             Cart currrentCart = unregisteredClient.getCart();
 
-            currentUser = Store.getInstance().logIn();
+            System.out.print("Enter your username: ");
+            String username = scanner.next();
+            System.out.print("Enter your password: ");
+            String password = scanner.next();
+            currentUser = Store.getInstance().logIn(username, password);
             if (currentUser == null) {
                 exitLoop = true;
             }
@@ -677,7 +684,8 @@ public class UnregisteredClientLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     private void cartSigner()
-            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid, InvalidDni {
+            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
+                   InvalidDni {
         System.out.print("\n <<<<<<<<<< cartSigner >>>>>>>>>> \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();

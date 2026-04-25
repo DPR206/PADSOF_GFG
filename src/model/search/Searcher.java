@@ -8,6 +8,8 @@ import model.product.SecondHandProduct;
 import model.product.StoreProduct;
 import model.user.Employee;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -22,7 +24,9 @@ import java.util.List;
  * @version 1.4
  * @see SearchStoreProducts
  */
-public class Searcher{
+public class Searcher implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private SearchType[] types;
     private SearchStoreProducts searchStore;
 

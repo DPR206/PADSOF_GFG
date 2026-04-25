@@ -7,6 +7,8 @@ import model.product.SecondHandProduct;
 import model.store.Store;
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +18,9 @@ import java.util.HashMap;
  * @author Duna P.R. and Ana O.R.
  * @version 1.1
  */
-public class Exchange {
+public class Exchange implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     /**
      * The Total id.
@@ -109,22 +113,6 @@ public class Exchange {
     }
 
     /**
-     * Obtains if the exchange was done
-     * @return true if the exchange was done, false if not
-     */
-    public boolean isExchanged() {
-        return exchanged;
-    }
-
-    /**
-     * Sets the state of the exchange
-     * @param newExchanged the exchanged to set
-     */
-    public void setExchanged(boolean newExchanged) {
-        this.exchanged = newExchanged;
-    }
-
-    /**
      * It prints the order's info when seen individually
      */
     public void bigPrintInfo() {
@@ -155,6 +143,22 @@ public class Exchange {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * Obtains if the exchange was done
+     * @return true if the exchange was done, false if not
+     */
+    public boolean isExchanged() {
+        return exchanged;
+    }
+
+    /**
+     * Sets the state of the exchange
+     * @param newExchanged the exchanged to set
+     */
+    public void setExchanged(boolean newExchanged) {
+        this.exchanged = newExchanged;
+    }
 
     /**
      * The time when the exchange took place

@@ -8,6 +8,8 @@ import model.store.*;
 import model.notification.*;
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -20,7 +22,9 @@ import java.util.Scanner;
  * @version 1.5
  * @see Product
  */
-public class SecondHandProduct extends Product{
+public class SecondHandProduct extends Product implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     private LocalDate valuationDate;
     private boolean available;

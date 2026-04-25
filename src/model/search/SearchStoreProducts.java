@@ -4,6 +4,8 @@ import model.product.Category;
 import model.product.StoreProduct;
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -19,7 +21,9 @@ import java.util.*;
  * @version 1.4
  * @see Searcher
  */
-public class SearchStoreProducts{
+public class SearchStoreProducts implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private boolean ascendant;
     private PriceFilter priceF = null;
     private PunctuationFilter punctuationF = null;
@@ -57,11 +61,11 @@ public class SearchStoreProducts{
     public void addPriceFilter(double min, double max){
         this.priceF= new PriceFilter(min, max);
     }
-    
+
     public void addCategoryFilter(CategoryFilter c) {
     	this.categoryF = c;
     }
-    
+
     /**
      * Searches products filtered by price, punctuation, and optionally by categories.
      *
@@ -225,7 +229,7 @@ public class SearchStoreProducts{
     public boolean getBoolean() {
     	return this.ascendant;
     }
-    
+
     public CategoryFilter getCategoryFilter() {
     	return this.categoryF;
     }

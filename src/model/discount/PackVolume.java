@@ -2,6 +2,8 @@ package model.discount;
 
 import model.product.Pack;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +12,9 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @see Pack
  */
-public class PackVolume extends PackDiscount implements VolumeDiscount {
+public class PackVolume extends PackDiscount implements VolumeDiscount, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The spending threshold that allows the discount to take place */
     private double spendingThreshold;
     /** The amount of money the discount deducts from the order's final price */

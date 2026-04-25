@@ -3,9 +3,13 @@
  */
 package model.notification;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import model.exchange.Exchange;
+
+import javax.sql.rowset.serial.SerialException;
 
 /**
  * It implements the exchange notification for employees
@@ -15,7 +19,10 @@ import model.exchange.Exchange;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationEmployeeExchange extends Notification implements NotificationInterface<Exchange>{
+public class NotificationEmployeeExchange extends Notification implements NotificationInterface<Exchange>,
+                                                                          Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	/**
 	 * Creates a new exchange notification for employees with default timeMade (this moment) and no content

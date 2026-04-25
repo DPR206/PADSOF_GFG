@@ -1,6 +1,8 @@
 package model.notification;
 
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import model.discount.Discount;
@@ -15,7 +17,9 @@ import model.discount.ProductDiscount;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationDiscount extends Notification implements NotificationInterface<Discount>{
+public class NotificationDiscount extends Notification implements NotificationInterface<Discount>, Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	/**
 	 * Creates a new discount notification with default timeMade (this moment) and no content

@@ -45,6 +45,8 @@ public class SignupC extends MainLoopSelector implements ActionListener {
                     if (user != null) {
                         JOptionPane.showMessageDialog(null,
                                 "Signed up successfully :)\n" + "Welcome abroad " + view.getUsername());
+                        super.getFrame().changeCurrentUser(user);
+                        super.loopSelector();
                     }
                 } catch (UsernameTaken exception1) {
                     JOptionPane.showMessageDialog(null, exception1.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);

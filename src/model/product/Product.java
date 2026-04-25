@@ -1,11 +1,16 @@
 package model.product;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * It implements the abstract Product class
  * @author Ana O.R.
  * @version 1.9
  */
-public abstract class Product {
+public abstract class Product implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The global variable to determine which id should a new product have */
     static public int totalId = -1; // NOTE: Así el primer ID es 0000 (ver línea 38)
     /** The product's id */

@@ -3,6 +3,8 @@ package model.discount;
 import model.product.Category;
 import model.product.StoreProduct;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,9 @@ import java.util.List;
  * @see Category
  * @see StoreProduct
  */
-public abstract class CategoryDiscount extends Discount {
+public abstract class CategoryDiscount extends Discount implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The list of categories affected by this discount */
     private List<Category> categories = new ArrayList<>();
 

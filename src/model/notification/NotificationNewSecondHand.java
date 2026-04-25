@@ -1,5 +1,7 @@
 package model.notification;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.*;
 
 import model.product.SecondHandProduct;
@@ -11,7 +13,10 @@ import model.product.SecondHandProduct;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationNewSecondHand extends Notification implements NotificationInterface<SecondHandProduct>{
+public class NotificationNewSecondHand extends Notification implements NotificationInterface<SecondHandProduct>,
+                                                                       Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	/**
 	 * Creates a new second-hand notification

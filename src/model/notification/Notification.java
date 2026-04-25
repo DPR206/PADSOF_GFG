@@ -3,6 +3,8 @@
  */
 package model.notification;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.*;
 
 /**
@@ -10,7 +12,9 @@ import java.time.*;
  * @author Duna P.R.
  * @version 1.4
  */
-public abstract class Notification {
+public abstract class Notification implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 	private String title;
 	private String text;
 	private LocalDateTime timeMade;
@@ -225,7 +229,7 @@ public abstract class Notification {
 	public String signOff() {
 		return "Thank you for using our services\n";
 	}
-	
+
 	public String Snippet() {
 		return title + "\t" + this.timeLog();
 	}
@@ -234,6 +238,6 @@ public abstract class Notification {
 	public String toString() {
 		return title + "\n" + this.timeLog() + "\n" + text;
 	}
-	
-	
+
+
 }

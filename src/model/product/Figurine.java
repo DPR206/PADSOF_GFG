@@ -1,5 +1,7 @@
 package model.product;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -8,7 +10,9 @@ import java.time.LocalDate;
  * @version 1.6
  * @see StoreProduct
  */
-public class Figurine extends StoreProduct {
+public class Figurine extends StoreProduct implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The figurine's dimension */
     private String dimension;
     /** The figurine's brand */

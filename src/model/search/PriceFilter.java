@@ -1,5 +1,8 @@
 package model.search;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * This class represents a price range filter used to limit
  * search results based on a minimum and maximum price.
@@ -11,7 +14,9 @@ package model.search;
  * @version 1.4
  * @see SearchStoreProducts
  */
-public class PriceFilter {
+public class PriceFilter implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     /**
      * Minimum price of the filter.

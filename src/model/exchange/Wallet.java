@@ -2,6 +2,8 @@ package model.exchange;
 
 import model.product.SecondHandProduct;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -10,7 +12,9 @@ import java.util.HashMap;
  * @version 1.2
  * @see SecondHandProduct
  */
-public class Wallet {
+public class Wallet implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The list of products that belong to this wallet */
     private HashMap<String, SecondHandProduct> products;
 

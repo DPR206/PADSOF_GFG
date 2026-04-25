@@ -8,7 +8,7 @@ import model.order.Order;
 import model.order.OrderState;
 import model.product.*;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.*;
 import java.util.*;
 
@@ -19,7 +19,9 @@ import java.util.*;
  * @see Employee
  */
 
-public class Employee extends User {
+public class Employee extends User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     private ExchangePermission ep;
     private OrderPermission op;

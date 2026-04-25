@@ -3,6 +3,8 @@ package model.discount;
 import model.product.Pack;
 import model.product.StoreProduct;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -12,7 +14,9 @@ import java.time.LocalDateTime;
  * @see Pack
  * @see StoreProduct
  */
-public class PackGift extends PackDiscount implements GiftDiscount {
+public class PackGift extends PackDiscount implements GiftDiscount, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The product gifted to the client when a certain spending threshold is met */
     StoreProduct gift;
     /** The spending threshold that allows the discount to take place */

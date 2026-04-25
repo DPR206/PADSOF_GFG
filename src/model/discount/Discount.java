@@ -3,6 +3,8 @@ package model.discount;
 import model.product.*;
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +18,9 @@ import java.util.List;
  * @see Pack
  * @see Category
  */
-public abstract class Discount {
+public abstract class Discount implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The global variable to determine which id should a new product have */
     static public int totalId = -1;
     /** The discount's type */
@@ -65,7 +69,7 @@ public abstract class Discount {
     public Discount(DiscountType assignedType, DiscountCoverage assignedCoverage, LocalDateTime assignedStartDate,
                     LocalDateTime assignedEndDate) throws IllegalArgumentException {
 
-        this.id = assignedType.getSymbol() + String.format("%06d", ++totalId);
+        this.id = assignedType.getSymbol() + assignedCoverage.getSymbol() + String.format("%06d", ++totalId);
         this.type = assignedType;
         this.coverage = assignedCoverage;
         this.startDate = assignedStartDate;

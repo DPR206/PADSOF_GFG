@@ -6,6 +6,8 @@ import model.product.StoreProduct;
 import model.store.Store;
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,7 +16,9 @@ import java.util.List;
  * @author Sofía C.L.
  * @version 1.0
  */
-public class Order {
+public class Order implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 	/** ID counter for the orders */
     static public int totalId = 0;
 

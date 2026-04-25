@@ -1,5 +1,8 @@
 package model.search;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * This class represents a punctuation (rating) filter used to limit
  * search results based on a minimum and maximum score.
@@ -11,7 +14,9 @@ package model.search;
  * @version 1.4
  * @see SearchStoreProducts
  */
-public class PunctuationFilter {
+public class PunctuationFilter implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     /**
      * Minimum punctuation (rating) of the filter.

@@ -1,5 +1,7 @@
 package model.product;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
@@ -9,7 +11,9 @@ import java.util.*;
  * @version 1.0
  * @see Pack
  */
-public class SimplePack extends Pack{
+public class SimplePack extends Pack implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 
 	/**

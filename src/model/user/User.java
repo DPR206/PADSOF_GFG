@@ -1,51 +1,63 @@
 package model.user;
 
-import model.utilities.exceptions.*;
 import model.search.SearchStoreProducts;
 import model.search.Searcher;
+import model.store.Store;
 import model.utilities.Utility;
+import model.utilities.exceptions.InvalidDni;
+import model.utilities.exceptions.PasswordNotValid;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * It defines the user of the app
  * @author Sofía C.L.
  * @version 1.0
  */
-public abstract class User {
+public abstract class User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** ID counter for the users */
     static public int totalId = 1;
+    /** The user's user type */
+    private final UserType type;
     /** Password of the user */
     private String pwd;
     /** Username of the user */
     private String userName;
     /** ID of the user */
     private String actualID;
-    /** The user's user type */
-    private final UserType type;
     /** The user's searcher */
     private Searcher searching;
 
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Creates a new user
-     * @param type the user's user type
+     * @param type      the user's user type
      * @param pwd,      the password of the user
      * @param userName, the username of the user
      * @param actualID, the ID of the user
-     * @param asc the results' order in the search
+     * @param asc       the results' order in the search
      */
-    public User(UserType type,String pwd, String userName, String actualID, boolean asc) {
+    public User(UserType type, String pwd, String userName, String actualID, boolean asc) {
         this.type = type;
+        //DEBUG: System.out.println("Password will be: " + pwd);
         this.pwd = pwd;
         this.userName = userName;
         this.actualID = actualID;
         this.searching = new Searcher(new SearchStoreProducts(asc));
+        //DEBUG: System.out.println("Adding user...");
+        Store.getInstance().addUser(this);
     }
 
     /**
      * Creates a new user, but for other classes
-     * @param type the user's user type
+     * @param type      the user's user type
      * @param pwd,      the password of the user
      * @param userName, the username of the user
-     * @param asc the results' order in the search
+     * @param asc       the results' order in the search
      */
     public User(UserType type, String pwd, String userName, boolean asc) {
         this(type, pwd, userName, type.getSymbol() + String.format("%06d", ++totalId), asc);
@@ -63,50 +75,22 @@ public abstract class User {
      * @param newPwd, the password of the user
      */
     public void changePassword(String newPwd) throws PasswordNotValid, InvalidDni {
-    	Utility utility = new Utility();
-    	if(utility.securePassword(newPwd))
-    		this.pwd = newPwd;
-    	else
-    		System.out.println("Make sure your password has: \n "
-    				+ "-At least 8 characters\n"
-    				+ "-Upper case letters\n"
-    				+ "-Lower case letters\n"
-    				+ "-Numbers\n"
-    				+ "-Special characters\n");
-    }
-
-    /**
-     * Obtains the password of the user
-     *
-     * @return the user's password
-     */
-    public String getPassword() {
-        return this.pwd;
-    }
-
-    /**
-     * Obtains the user's searcher
-     * @return the user's searcher
-     */
-    public Searcher getSearcher(){
-        return this.searching;
-    }
-
-    /**
-     * Gets the username of the user
-     * @return the user's name
-     */
-    public String getUserName() {
-        return this.userName;
+        Utility utility = new Utility();
+        if (utility.securePassword(newPwd)) {
+            this.pwd = newPwd;
+        } else {
+            System.out.println(
+                    "Make sure your password has: \n " + "-At least 8 characters\n" + "-Upper case letters\n" +
+                    "-Lower case letters\n" + "-Numbers\n" + "-Special characters\n");
+        }
     }
 
     /**
      * Changes the order of the search (ascendant or descendant)
-     *
      * @param bool, determines the order (ascendant or descendant) on which the products appear
      */
     public void changeSearchOrder(boolean bool) {
-    	this.searching.changeProductOrder(bool);
+        this.searching.changeProductOrder(bool);
     }
 
     /**
@@ -118,39 +102,20 @@ public abstract class User {
 
     /**
      * Adds a new price filter to the user
-     *
-     *@param min, minimum price to search
-     *@param max, maximum price to search
+     * @param min, minimum price to search
+     * @param max, maximum price to search
      */
-    public void addPriceFilter(double min, double max){
+    public void addPriceFilter(double min, double max) {
         this.searching.getStoreSearcher().addPriceFilter(min, max);
     }
 
     /**
      * Adds a new punctuation filter to the user
-     *
-     *@param min, minimum punctuation to search
-     *@param max, maximum punctuation to search
+     * @param min, minimum punctuation to search
+     * @param max, maximum punctuation to search
      */
-    public void addPunctuationFilter(int min, int max){
+    public void addPunctuationFilter(int min, int max) {
         this.searching.getStoreSearcher().addPunctuationFilter(min, max);
-    }
-
-    /**
-     * It gets the user's user type
-     * @return the user's user type
-     */
-    public UserType getType() {
-        return this.type;
-    }
-
-    /**
-     * It gets the user's actual ID (String)
-     *
-     * @return the user's id
-     */
-    public String getId() {
-    	return this.actualID;
     }
 
     /**
@@ -162,5 +127,45 @@ public abstract class User {
 
         System.out.print("Username" + this.userName);
         System.out.println("Password:" + cypheredPassword + "\n");
+    }
+
+    /**
+     * It gets the user's actual ID (String)
+     * @return the user's id
+     */
+    public String getId() {
+        return this.actualID;
+    }
+
+    /**
+     * Obtains the password of the user
+     * @return the user's password
+     */
+    public String getPassword() {
+        return this.pwd;
+    }
+
+    /**
+     * Obtains the user's searcher
+     * @return the user's searcher
+     */
+    public Searcher getSearcher() {
+        return this.searching;
+    }
+
+    /**
+     * It gets the user's user type
+     * @return the user's user type
+     */
+    public UserType getType() {
+        return this.type;
+    }
+
+    /**
+     * Gets the username of the user
+     * @return the user's name
+     */
+    public String getUserName() {
+        return this.userName;
     }
 }

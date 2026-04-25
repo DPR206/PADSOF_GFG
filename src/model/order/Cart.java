@@ -4,11 +4,13 @@ import es.uam.eps.padsof.telecard.*;
 import model.app.Pager;
 import model.discount.*;
 import model.notification.*;
-import model.store.*;
 import model.product.Pack;
 import model.product.StoreProduct;
+import model.store.*;
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
@@ -18,7 +20,9 @@ import java.util.*;
  * @version 1.2
  */
 
-public class Cart {
+public class Cart implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private HashMap<StoreProduct, Integer> sp = new HashMap<>();
     private HashMap<Pack, Integer> packs = new HashMap<>();
     private boolean expired;

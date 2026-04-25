@@ -1,11 +1,17 @@
 package view;
 
 import controller.*;
+import model.store.SaverLoader;
 import model.store.Store;
-import model.user.*;
+import model.user.UnregisteredClient;
+import model.user.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * It implements the app's view
@@ -28,6 +34,16 @@ public class App extends JFrame {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() {
         super("Gifts for Geeks"); /* JFrame's title */
+
+        if ((new File(".\\resources\\data.txt")).isFile()) {
+            try {
+                SaverLoader.getInstance()
+                           .loadStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts",
+                                   "packs", "discounts", "offers", "exchanges", "orders", "users");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
 
         /* Views */
         loginPanel = new LoginP();
@@ -75,13 +91,25 @@ public class App extends JFrame {
         container.add(welcomePanel, gbc);
         welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
 
-        /* Configure main window's size */
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /* Configure main window's size and default actions */
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    SaverLoader.getInstance()
+                               .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts",
+                                       "packs", "discounts", "offers", "exchanges", "orders", "users");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                e.getWindow().dispose();
+            }
+        });
+
         this.setSize(700, 500);
         this.setLocationRelativeTo(null);
 
-        // DUE: BORRAR ESTO PLSSS (es de pruebas)
-        Manager.getInstance().addEmployee("p123456@", "client", Permission.ORDER);
     }
 
     public void changeCurrentUser(User user) {

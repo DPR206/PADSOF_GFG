@@ -5,13 +5,18 @@ import model.order.OrderState;
 import model.search.SearchStoreProducts;
 import model.search.Searcher;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * It implements the permission that allows an employee to manage Orders
  * @author Ana O.R.
  * @version 1.3
  * @see Order
  */
-public class OrderPermission {
+public class OrderPermission implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The user's searcher */
     private Searcher searching;
 

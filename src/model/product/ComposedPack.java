@@ -3,6 +3,8 @@
  */
 package model.product;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 
@@ -12,7 +14,9 @@ import java.util.HashSet;
  * @version 1.0
  * @see Pack
  */
-public class ComposedPack extends Pack {
+public class ComposedPack extends Pack implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     private HashSet<Pack> packs;
 

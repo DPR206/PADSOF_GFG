@@ -2,6 +2,8 @@ package model.discount;
 
 import model.product.Category;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +12,9 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @see Category
  */
-public class CategoryFixedPercentage extends CategoryDiscount implements FixedPercentageDiscount {
+public class CategoryFixedPercentage extends CategoryDiscount implements FixedPercentageDiscount, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The percentage deducted from a product's price */
     double percentage = 0;
 

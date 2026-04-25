@@ -12,6 +12,8 @@ import model.utilities.IdType;
 import model.utilities.Utility;
 import model.utilities.exceptions.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -34,7 +36,9 @@ import java.util.*;
  * @see RegisteredClient
  * @see Employee
  */
-public class Store {
+public class Store implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private static Store INSTANCE = null;
     /** The store's parameters */
     private final Parameter param;
@@ -90,24 +94,15 @@ public class Store {
         return Store.INSTANCE;
     }
 
+    public static void setInstance(Store instance) {
+        Store.INSTANCE = instance;
+    }
+
     /**
      * Logs in a user
      * @return the associated user
      */
     public User logIn(String userName, String pwd) {
-        /*Scanner sc = new Scanner(System.in);
-        String userName, pwd;
-
-        try {
-            System.out.print("Introduce tu usuario: ");
-            userName = sc.next();
-            System.out.print("Introduce tu contraseña: ");
-            pwd = sc.next();
-        } catch (InputMismatchException e) {
-            System.out.println("Error: El tipo de dato introducido no es válido.");
-            return null;
-        }*/
-
         return utility.logIn(userName, pwd);
     }
 
@@ -118,15 +113,6 @@ public class Store {
     public User signIn(String username, String password, String dni, IdType idType)
             throws PasswordNotValid, UsernameTaken, InvalidDni {
         return utility.signIn(username, password, dni, idType);
-    }
-
-    /**
-     * Obtains whether a category exists in the store
-     * @param name, the name of the category
-     * @return true if the category exists, false if else
-     */
-    public boolean isCategoryInStore(String name) {
-        return this.categories.containsKey(name);
     }
 
     /**
@@ -336,10 +322,20 @@ public class Store {
      * @param s the user to add
      */
     public void addUser(User s) {
-        this.users.put(s.getId(), s);
+        this.users.put(s.getUserName(), s);
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * Obtains whether a category exists in the store
+     * @param name, the name of the category
+     * @return true if the category exists, false if else
+     */
+    public boolean isCategoryInStore(String name) {
+        return this.categories.containsKey(name);
+    }
+
     /**
      * Gets the list of the categories of the store
      * @return a hash map of the categories and their names

@@ -1,11 +1,10 @@
 package model.app;
 
 import model.discount.*;
-import model.utilities.exceptions.*;
-import model.utilities.exceptions.*;
 import model.product.*;
 import model.store.*;
 import model.user.*;
+import model.utilities.exceptions.*;
 
 import java.io.IOException;
 import java.time.*;
@@ -51,7 +50,8 @@ public class ManagerLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     void managerLoop()
-            throws IOException, IllegalArgumentException, NullPointerException, PasswordNotValid, UsernameTaken, InvalidDni {
+            throws IOException, IllegalArgumentException, NullPointerException, PasswordNotValid, UsernameTaken,
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1421,7 +1421,7 @@ public class ManagerLoop extends Loop {
                             System.out.println("Invalid option");
                     }
                     break;
-                case 2: /* Add a discount */
+                case 2: /* Add a discount */ // NOTE: You're here
                     System.out.println("Enter the discount's start date: (example: 2007-12-03T10:15:30.)");
                     LocalDateTime startDate = LocalDateTime.parse(scanner.next());
                     System.out.println("Enter the discount's end date: (example: 2008-12-03T10:15:30.)");

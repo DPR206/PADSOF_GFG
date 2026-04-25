@@ -4,6 +4,7 @@ import model.order.Cart;
 import model.product.*;
 import model.store.Store;
 import model.user.*;
+import model.utilities.IdType;
 import model.utilities.exceptions.*;
 
 import java.io.IOException;
@@ -72,7 +73,11 @@ public abstract class Loop {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< logger >>>>>>>>>> \n"); // Es para debug, borrar
 
-        currentUser = Store.getInstance().logIn();
+        System.out.print("Enter your username: ");
+        String username = scanner.next();
+        System.out.print("Enter your password: ");
+        String password = scanner.next();
+        currentUser = Store.getInstance().logIn(username, password);
         if (currentUser == null) {
             System.err.println("Invalid username or password");
             exit();
@@ -93,7 +98,7 @@ public abstract class Loop {
         String password = scanner.next();
         System.out.print("Enter your dni: ");
         String dni = scanner.next();
-        currentUser = Store.getInstance().signIn(username, password, dni);
+        currentUser = Store.getInstance().signIn(username, password, dni, IdType.DNI);
         MainLoop.getInstance().loopSelector();
     }
 

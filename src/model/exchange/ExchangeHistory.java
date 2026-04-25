@@ -3,6 +3,8 @@ package model.exchange;
 
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -11,7 +13,9 @@ import java.util.*;
  * @version 1.0
  * @see Exchange
  */
-public class ExchangeHistory {
+public class ExchangeHistory implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	private Set<Exchange> exchanges;
 	private RegisteredClient owner;

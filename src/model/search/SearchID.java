@@ -11,7 +11,7 @@ package model.search;
  * @version 1.4
  * @see SearchStoreProducts
  */
-public interface SearchID{
+public interface SearchID {
 
     /**
      * Searches for an object by its ID.

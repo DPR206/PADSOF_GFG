@@ -3,6 +3,8 @@
  */
 package model.store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.Period;
 
 /**
@@ -10,7 +12,9 @@ import java.time.Period;
  * @author Duna P.R.
  * @version 1.0
  */
-public class Parameter {
+public class Parameter implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     private static Parameter PARAM = new Parameter();
 
@@ -36,7 +40,8 @@ public class Parameter {
      */
     private int itemsPerPage;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Creates parameter
      *
@@ -53,9 +58,8 @@ public class Parameter {
         this.itemsPerPage = 10;
     }
 
-    /*--------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------------*/
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-/*----------------------------------------------------- MISC -----------------------------------------------------*/
     /**
      * Obtains the parameter
      * @return the param, the parameter of the store
@@ -65,6 +69,10 @@ public class Parameter {
             PARAM = new Parameter();
         }
         return PARAM;
+    }
+
+    public static void setParam(Parameter instance) {
+        Parameter.PARAM = instance;
     }
 
     /**
@@ -139,7 +147,8 @@ public class Parameter {
         this.setkRecommend(newKRecommend);
     }
 
-/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * Obtains the amount of time it will pass before the exchange is done
      * @return the exchangeTime
@@ -168,7 +177,7 @@ public class Parameter {
      * It sets the number of lines that can be printed from a certain list
      * @param newItemsPerPage the new number of lines that can be printed from a certain list
      */
-    private void setItemsPerPage(int newItemsPerPage) {
+    public void setItemsPerPage(int newItemsPerPage) {
         this.itemsPerPage = newItemsPerPage;
     }
 
@@ -184,7 +193,7 @@ public class Parameter {
      * Sets the expiration time of an offer
      * @param offerTime the offerTime to set
      */
-    private void setOfferTime(Period offerTime) {
+    public void setOfferTime(Period offerTime) {
         OfferTime = offerTime;
     }
 
@@ -200,7 +209,7 @@ public class Parameter {
      * Obtains the expiration time of the order
      * @param orderTime the orderTime to set
      */
-    private void setOrderTime(Period orderTime) {
+    public void setOrderTime(Period orderTime) {
         OrderTime = orderTime;
     }
 
@@ -218,7 +227,7 @@ public class Parameter {
      * It sets the score a param (scoreWeight = a*score + b)
      * @param newScoreAParam the new score a param
      */
-    private void setScoreAParam(double newScoreAParam) {
+    public void setScoreAParam(double newScoreAParam) {
         this.scoreAParam = newScoreAParam;
     }
 
@@ -234,7 +243,7 @@ public class Parameter {
      * It gets the score b param (weightedScore = a*score + b)
      * @param newScoreBParam the new score b param
      */
-    private void setScoreBParam(double newScoreBParam) {
+    public void setScoreBParam(double newScoreBParam) {
         this.scoreBParam = newScoreBParam;
     }
 
@@ -250,7 +259,7 @@ public class Parameter {
      * Sets the store's address
      * @param storeAddress the storeAddress to set
      */
-    private void setStoreAddress(String storeAddress) {
+    public void setStoreAddress(String storeAddress) {
         this.storeAddress = storeAddress;
     }
 
@@ -266,7 +275,7 @@ public class Parameter {
      * Sets the cost of a valuation
      * @param valuationCost the valuationCost to set
      */
-    private void setValuationCost(double valuationCost) {
+    public void setValuationCost(double valuationCost) {
         this.valuationCost = valuationCost;
     }
 
@@ -286,16 +295,17 @@ public class Parameter {
         this.kRecommend = newKRecommend;
     }
 
-/*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
     /**
      * It allows the parameter's to be saved
      * @return the parameter's info
      */
     @Override
     public String toString() {
-        return "Parameter [OfferTime=" + OfferTime + ", OrderTime=" + OrderTime + ", valuationCost=" + valuationCost +
-               ", storeAddress=" + storeAddress + ", ExchangeTime=" + ExchangeTime + ", scoreAParam=" + scoreAParam +
-               ", scoreBParam=" + scoreBParam + ", itemsPerPage=" + itemsPerPage + "]";
+        /* OFFER_TIME;ORDER_TIME;VAL_COST;STORE_ADD;EXCHANGE_TIME;K_REC;A_PARAM;B_PARAM;ITEMS_PAGE */
+        return OfferTime + ";" + OrderTime + ";" + valuationCost + ";" + storeAddress + ";" + ExchangeTime + ";" +
+               kRecommend + ";" + scoreAParam + ";" + scoreBParam + ";" + itemsPerPage;
     }
 
 }

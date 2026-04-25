@@ -5,14 +5,18 @@ import model.user.RegisteredClient;
 import model.user.User;
 import model.utilities.exceptions.*;
 
-import java.util.*;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Map;
 
 /**
  * It implements elements such a sign in method and login method which don't belong to either classes
  * @author Sofía C.L. and Duna P.R.
  * @version 1.1.
  */
-public class Utility {
+public class Utility implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -30,58 +34,24 @@ public class Utility {
      */
     public User signIn(String userName, String pwd, String id, IdType idType)
             throws PasswordNotValid, UsernameTaken, InvalidDni {
-        Scanner sc = new Scanner(System.in);
         RegisteredClient rc;
         User u;
-        //boolean aux = false;
 
         Map<String, User> users = Store.getInstance().getUsers();
-        //System.out.print("Introduce tu usuario: ");
 
-        try {
-
-            //while (!aux) {
-
-            //System.out.print("Introduce tu usuario: ");
-            //userName = sc.next();
-
-            if (users.containsKey(userName)) {
-                //System.out.print("Este nombre de usuario ya está cogido");
-                throw new UsernameTaken();
-            } /*else {
-                    aux = true;
-                }*/
-            //}
-
-            /*System.out.print("Introduce tu contraseña: ");
-            pwd = sc.next();
-            while(!this.securePassword(pwd)) {
-        		System.out.println("Make sure your password has: \n "
-        				+ "-At least 8 characters\n"
-        				+ "-Upper case letters\n"
-        				+ "-Lower case letters\n"
-        				+ "-Numbers\n"
-        				+ "-Special characters\n");
-        		System.out.print("Introduce tu contraseña: ");
-                pwd = sc.next();
-            }*/
-            this.securePassword(pwd);
-            //System.out.print("Introduce tu DNI: ");
-            //dni = sc.next();
-            /* Check if id is valid */
-            validId(id, idType);
-
-            rc = new RegisteredClient(userName, id, pwd, true);
-
-            u = rc;
-            users.put(u.getUserName(), u);
-            Store.getInstance().getRegisteredClients().put(userName, rc);
-            return u;
-
-        } catch (InputMismatchException e) {
-            System.out.println("Error: El tipo de dato introducido no es válido.");
-            return null;
+        if (users.containsKey(userName)) {
+            throw new UsernameTaken();
         }
+        this.securePassword(pwd);
+
+        validId(id, idType);
+
+        rc = new RegisteredClient(userName, id, pwd, true);
+
+        u = rc;
+        Store.getInstance().getRegisteredClients().put(userName, rc);
+        return u;
+
     }
 
     /**
@@ -93,9 +63,17 @@ public class Utility {
     public User logIn(String userName, String pwd) {
         User u;
 
+        //DEBUG: if (Store.getInstance().getUsers().size() < 2) {
+        //DEBUG:     System.out.println("NO HAY USUARIOS FUCKKKKK");
+        //DEBUG: }
+        //DEBUG: for (User user : Store.getInstance().getUsers().values()) {
+        //DEBUG:     System.out.println("Username: " + user.getUserName() + " Password: " + user.getPassword() + "\n");
+        //DEBUG: }
+
         if (Store.getInstance().getUsers().containsKey(userName)) {
             u = Store.getInstance().getUsers().get(userName);
-            if (Objects.equals(u.getPassword(), pwd)) {
+            //DEBUG: System.out.println("Password: " + u.getPassword() + " , expected: " + pwd);
+            if (u.getPassword().equals(pwd)) {
                 return u;
             }
         }

@@ -10,11 +10,9 @@ import model.search.SearchType;
 import model.store.Parameter;
 import model.store.Store;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * It implements the manager of the store
@@ -22,7 +20,9 @@ import java.util.List;
  * @version 1.4
  * @see User
  */
-public class Manager extends User {
+public class Manager extends User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private static Manager INSTANCE = null;
     private final Store s = Store.getInstance();
     /** Store permission necessary for the manager to do its functions */
@@ -31,14 +31,15 @@ public class Manager extends User {
     private Parameter parameter;
 
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Creates a manager
-     * @param pwd the password
-     * @param userName the user's name
+     * @param pwd             the password
+     * @param userName        the user's name
      * @param storePermission the store permission
-     * @param p the parameters of the store
-     * @param asc the results' order in the search
+     * @param p               the parameters of the store
+     * @param asc             the results' order in the search
      */
     private Manager(String pwd, String userName, StorePermission storePermission, Parameter p, boolean asc) {
         super(UserType.MANAGER, pwd, userName, asc);
@@ -47,10 +48,10 @@ public class Manager extends User {
         this.sp = new StorePermission();
 
         this.getSearcher().setTypes(SearchType.S_STORE);
-        Store.getInstance().getUsers().put(userName, this);
-}
+    }
 
-/*----------------------------------------------------- MISC -----------------------------------------------------*/
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
     /**
      * Obtains the maneger's instance
      * @return the manager of the store
@@ -75,25 +76,25 @@ public class Manager extends User {
      * @param categories the categories to filter by
      * @return the products the list of products found
      */
-    public List<StoreProduct> searchStoreProductCategory(Category...categories){
-    	return this.getSearcher().searchByCategory(categories);
+    public List<StoreProduct> searchStoreProductCategory(Category... categories) {
+        return this.getSearcher().searchByCategory(categories);
     }
 
     /**
      * Adds and creates new figurine
-     * @param price the price of the figurine
-     * @param name the name of the figurine
-     * @param description  the description of the figurine
-     * @param photo the photo of the figurine
-     * @param stock the figurine's stock
-     * @param dimensions the figurine's dimensions
-     * @param brand the figurine's brand
-     * @param material the figurine's material
-     * @param categories the figurine's categories
-     *
+     * @param price       the price of the figurine
+     * @param name        the name of the figurine
+     * @param description the description of the figurine
+     * @param photo       the photo of the figurine
+     * @param stock       the figurine's stock
+     * @param dimensions  the figurine's dimensions
+     * @param brand       the figurine's brand
+     * @param material    the figurine's material
+     * @param categories  the figurine's categories
      * @return true if the figurine was added, false if else
      */
-    public boolean addFigurine(double price, String name, String description, String photo, int stock, String dimensions, String brand, String material, Category... categories) {
+    public boolean addFigurine(double price, String name, String description, String photo, int stock,
+                               String dimensions, String brand, String material, Category... categories) {
         if (this.sp != null) {
             this.sp.addFigurine(price, name, description, photo, stock, dimensions, brand, material, categories);
             return true;
@@ -104,79 +105,74 @@ public class Manager extends User {
 
     /**
      * Adds and creates new products from a file
-     *
      * @param filename the name of the file
      * @return true if the product's were added successfully, false if else
      */
     public boolean addProductFromFile(String filename) {
-    	try {
-			return this.sp.addProductByFile(filename);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	return false;
+        try {
+            return this.sp.addProductByFile(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
      * Adds and creates new game
-     * @param price the price of the game
-     * @param name the name of the game
+     * @param price       the price of the game
+     * @param name        the name of the game
      * @param description the description of the game
-     * @param photo the photo of the comic
-     * @param stock the game's stock
-     * @param numPlayers the game's number of players
-     * @param ageRange the game's age range
-     * @param gameStyle the style of the game
-     * @param categories the game's categories
-     *
+     * @param photo       the photo of the comic
+     * @param stock       the game's stock
+     * @param numPlayers  the game's number of players
+     * @param ageRange    the game's age range
+     * @param gameStyle   the style of the game
+     * @param categories  the game's categories
      * @return true if the game was added, false if else
      */
     public boolean addGame(double price, String name, String description, String photo, int stock, int numPlayers,
                            String ageRange, GameStyle gameStyle, Category... categories) {
-		if (this.sp != null) {
-			this.sp.addGame(price, name, description, photo, stock, numPlayers, ageRange, gameStyle, categories);
-			return true;
-		}
-		System.err.println("You have no permission to do that...");
-		return false;
-	}
+        if (this.sp != null) {
+            this.sp.addGame(price, name, description, photo, stock, numPlayers, ageRange, gameStyle, categories);
+            return true;
+        }
+        System.err.println("You have no permission to do that...");
+        return false;
+    }
 
     /**
      * Adds and creates new comic
-     * @param price the price of the comic
-     * @param name the name of the comic
+     * @param price       the price of the comic
+     * @param name        the name of the comic
      * @param description the description of the comic
-     * @param photo the photo of the comic
-     * @param stock the comic's stock
-     * @param numPages the comic's number of pages
-     * @param year the year of publication
-     * @param author the comic's author
-     * @param editorial the comic's editorial
-     * @param categories the comic's categories
-     *
+     * @param photo       the photo of the comic
+     * @param stock       the comic's stock
+     * @param numPages    the comic's number of pages
+     * @param year        the year of publication
+     * @param author      the comic's author
+     * @param editorial   the comic's editorial
+     * @param categories  the comic's categories
      * @return true if the comic was added, false if else
      */
     public boolean addComic(double price, String name, String description, String photo, int stock, int numPages,
-        Year year, String author, String editorial, Category... categories) {
-		if (this.sp != null) {
-			this.sp.addComic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
-			return true;
-		}
-		System.err.println("You have no permission to do that...");
-		return false;
+                            Year year, String author, String editorial, Category... categories) {
+        if (this.sp != null) {
+            this.sp.addComic(price, name, description, photo, stock, numPages, year, author, editorial, categories);
+            return true;
+        }
+        System.err.println("You have no permission to do that...");
+        return false;
     }
 
     /**
      * Adds a new employee
-     *
-     *  @param password, the password of the employee
-     *  @param userName, the username of the employee
-     *  @param permission, the permission it has
+     * @param password,   the password of the employee
+     * @param userName,   the username of the employee
+     * @param permission, the permission it has
      */
     public void addEmployee(String password, String userName, Permission... permission) {
         Employee emp = new Employee(password, userName, true, permission);
         s.getEmployees().put(emp.getId(), emp);
-        s.getUsers().put(emp.getUserName(), emp);
     }
 
     /* ---- DISCOUNTS ---- */
@@ -193,7 +189,8 @@ public class Manager extends User {
                                                                  double percentage, Category... categories) {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
         Discount discount = new CategoryFixedPercentage(startDate, endDate, percentage, categories);
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createFixedPercentageDiscount(startDate, endDate, percentage);
@@ -212,7 +209,8 @@ public class Manager extends User {
                                            StoreProduct gift, Category... categories) {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
         Discount discount = new CategoryGift(startDate, endDate, spendingThreshold, gift, categories);
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createGiftDiscount(startDate, endDate, spendingThreshold, gift);
@@ -231,7 +229,8 @@ public class Manager extends User {
                                                    double deduction, Category... categories) {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
         Discount discount = new CategoryQuantity(startDate, endDate, numThreshold, deduction, categories);
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createQuantityDiscount(startDate, endDate, numThreshold, deduction);
@@ -250,7 +249,8 @@ public class Manager extends User {
                                                double deduction, Category... categories) {
         CategoryDiscountFactory factory = new CategoryDiscountFactory(categories);
         Discount discount = new CategoryVolume(startDate, endDate, spendingThreshold, deduction, categories);
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createVolumeDiscount(startDate, endDate, spendingThreshold, deduction);
@@ -268,7 +268,8 @@ public class Manager extends User {
                                                                  double percentage, Pack... packs) {
         PackDiscountFactory factory = new PackDiscountFactory(packs);
         Discount discount = new PackFixedPercentage(startDate, endDate, percentage, packs);
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createFixedPercentageDiscount(startDate, endDate, percentage);
@@ -287,7 +288,8 @@ public class Manager extends User {
                                            StoreProduct gift, Pack... packs) {
         PackDiscountFactory factory = new PackDiscountFactory(packs);
         Discount discount = new PackGift(startDate, endDate, spendingThreshold, gift, packs);
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createGiftDiscount(startDate, endDate, spendingThreshold, gift);
@@ -306,7 +308,8 @@ public class Manager extends User {
                                                    double deduction, Pack... packs) {
         PackDiscountFactory factory = new PackDiscountFactory(packs);
         Discount discount = new PackQuantity(startDate, endDate, numThreshold, deduction, packs);
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createQuantityDiscount(startDate, endDate, numThreshold, deduction);
@@ -325,7 +328,8 @@ public class Manager extends User {
                                                double deduction, Pack... packs) {
         PackDiscountFactory factory = new PackDiscountFactory(packs);
         Discount discount = new PackVolume(startDate, endDate, spendingThreshold, deduction, packs);
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createVolumeDiscount(startDate, endDate, spendingThreshold, deduction);
@@ -354,7 +358,8 @@ public class Manager extends User {
             discount = new ProductFixedPercentage(startDate, endDate, percentage, products);
         }
 
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
 
@@ -384,7 +389,8 @@ public class Manager extends User {
             discount = new ProductGift(startDate, endDate, spendingThreshold, gift, products);
         }
 
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createGiftDiscount(startDate, endDate, spendingThreshold, gift);
@@ -413,7 +419,8 @@ public class Manager extends User {
             discount = new ProductQuantity(startDate, endDate, numThreshold, deduction, products);
         }
 
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createQuantityDiscount(startDate, endDate, numThreshold, deduction);
@@ -442,7 +449,8 @@ public class Manager extends User {
             discount = new ProductVolume(startDate, endDate, spendingThreshold, deduction, products);
         }
 
-        NotificationDiscount notification = new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
+        NotificationDiscount notification =
+                new NotificationDiscount(LocalDateTime.now(), false, true, NotificationType.DISCOUNT);
         notification.FullNotification(discount);
         Store.getInstance().sendNotificationClients(notification);
         return factory.createVolumeDiscount(startDate, endDate, spendingThreshold, deduction);
@@ -506,42 +514,37 @@ public class Manager extends User {
 
     /**
      * Searches for the pack based on the id
-     *
      * @param id, id of the pack
      * @return the pack with said id
      */
-    public Pack searchPackByID(int id){
+    public Pack searchPackByID(int id) {
         return this.getSearcher().searchPackByID(id);
     }
 
-
     /**
      * Searches for the employee based on the id
-     *
      * @param id, id of the employee
      * @return the employee with said id
      */
-    public Employee searchEmployeeByID(int id){
+    public Employee searchEmployeeByID(int id) {
         return this.getSearcher().searchEmployeeByID(id);
     }
 
     /**
      * Searches for the order based on the id
-     *
      * @param id, id of the order
      * @return the order with said id
      */
-    public Order searchOrderByID(int id){
+    public Order searchOrderByID(int id) {
         return this.getSearcher().searchOrderByID(id);
     }
 
     /**
-     * Searches for the exchange based on the id
-     *h
+     * Searches for the exchange based on the id h
      * @param id, id of the exchange
      * @return the exchange with said id
      */
-    public Exchange searchExchangeByID(int id){
+    public Exchange searchExchangeByID(int id) {
         return this.getSearcher().searchExchangeByID(id);
     }
 
@@ -559,7 +562,7 @@ public class Manager extends User {
      * Searches for the store products
      * @return the store product based on the filters
      */
-    public List<StoreProduct> searchStoreProducts(){
+    public List<StoreProduct> searchStoreProducts() {
         return this.sp.searchStoreProducts();
     }
 
@@ -568,11 +571,94 @@ public class Manager extends User {
      * @param c, the categories we want our searched products to belong to
      * @return the store product based on the filters
      */
-    public List<StoreProduct> searchStoreProductByCategory(Category... c){
+    public List<StoreProduct> searchStoreProductByCategory(Category... c) {
         return this.sp.searchStoreProductByCategory(c);
     }
 
-/*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    /**
+     * Adds a product to the pack
+     * @param p,  the pack to search
+     * @param sp, the store product to add
+     *
+     */
+    public void PackAddProduct(Pack p, StoreProduct sp) {
+        this.sp.PackAddProduct(p, sp);
+    }
+
+    /**
+     * Adds a list of products to the pack
+     * @param p,   the pack to search
+     * @param lsp, the list of store product to add
+     *
+     */
+    public void PackAddListProducts(Pack p, ArrayList<StoreProduct> lsp) {
+        this.sp.PackAddListProducts(p, lsp);
+    }
+
+    /**
+     * Deletes a product from a pack
+     * @param p  the pack to delete from
+     * @param sp the store product to delete
+     */
+    public void DeleteProductFromPack(Pack p, StoreProduct sp) {
+        this.sp.DeleteProductFromPack(p, sp);
+    }
+
+    /**
+     * Deletes a list of store products from the pack
+     * @param p,  the pack to search
+     * @param sp, the list of store products to delete
+     *
+     */
+    public void DeleteListOfProductFromPack(Pack p, ArrayList<StoreProduct> sp) {
+        this.sp.DeleteListOfProductFromPack(p, sp);
+    }
+
+    /**
+     * Adds categories to a product.
+     * @param sp         the product to update
+     * @param categories the categories to add
+     */
+    public void addCategories(StoreProduct sp, Category... categories) {
+        this.sp.addCategories(sp, categories);
+    }
+
+    /**
+     * Removes categories from a product.
+     * @param sp         the product to update
+     * @param categories the categories to remove
+     */
+    public void removeCategories(StoreProduct sp, Category... categories) {
+        this.sp.removeCategories(sp, categories);
+    }
+
+    /**
+     * Adds a new employee
+     * @param e the employee to add
+     */
+    public void addEmployee(Employee e) {
+        //this.s.addUser(e);
+        this.s.getEmployeeList().add(e);
+    }
+
+    /**
+     * Adds a new permission to an employee
+     * @param p,   the permission to add
+     * @param emp, the employee to give a new permission to
+     */
+    public void EmployeeAddPerm(Permission p, Employee emp) {
+        int l = emp.getPerm().length;
+        int count = 0;
+
+        for (Permission pp : emp.getPerm()) {
+            if (pp != null) {
+                count++;
+            }
+        }
+        emp.getPerm()[count] = p;
+    }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     /**
      * Obtains the maneger's (and creates one if there wasn't one)
      * @return the manager of the store
@@ -585,122 +671,17 @@ public class Manager extends User {
     }
 
     /**
-     * Changes the price of a pack
-     *
-     *
-     * @param p, the pack to search
-     * @param price, new price of the pack
-     *
-     */
-    public void setPackPrice(Pack p, double price) {
-    	this.sp.setPackPrice(p, price);
-    }
-
-    /**
-     * Changes the discount of a pack
-     *
-     *
-     * @param p, the pack to search
-     * @param discount, new discount of the pack
-     *
-     */
-    public void setPackDiscount(Pack p, Discount discount) {
-    	this.sp.setPackDiscount(p, discount);
-    }
-
-    /**
-     * Adds a product to the pack
-     *
-     *
-     * @param p, the pack to search
-     * @param sp, the store product to add
-     *
-     */
-    public void PackAddProduct(Pack p, StoreProduct sp) {
-    	this.sp.PackAddProduct(p, sp);
-    }
-
-    /**
-     * Adds a list of products to the pack
-     *
-     *
-     * @param p, the pack to search
-     * @param lsp, the list of store product to add
-     *
-     */
-    public void PackAddListProducts(Pack p, ArrayList<StoreProduct> lsp) {
-    	this.sp.PackAddListProducts(p, lsp);
-    }
-
-    /**
-     * Deletes a product from a pack
-     *
-     * @param p the pack to delete from
-     * @param sp the store product to delete
-     */
-    public void DeleteProductFromPack(Pack p, StoreProduct sp) {
-    	this.sp.DeleteProductFromPack(p, sp);
-    }
-
-    /**
-     * Deletes a list of store products from the pack
-     *
-     *
-     * @param p, the pack to search
-     * @param sp, the list of store products to delete
-     *
-     */
-    public void DeleteListOfProductFromPack(Pack p, ArrayList<StoreProduct> sp) {
-    	this.sp.DeleteListOfProductFromPack(p, sp);
-    }
-
-    /**
-     * Sets the list of products of the pack
-     *
-     *
-     * @param p, the pack to search
-     * @param sp, the list of store products to add
-     *
-     */
-    public void setPackProducts(Pack p, ArrayList<StoreProduct> sp) {
-    	this.sp.setPackProducts(p, sp);
-    }
-
-
-    /**
      * Sets the categories of a product.
-     *
-     * @param sp the product to update
+     * @param sp         the product to update
      * @param categories the categories to assign
      */
     public void setCategories(StoreProduct sp, HashMap<String, Category> categories) {
-       this.sp.setCategories(sp, categories);
-    }
-
-    /**
-     * Adds categories to a product.
-     *
-     * @param sp the product to update
-     * @param categories the categories to add
-     */
-    public void addCategories(StoreProduct sp, Category... categories) {
-        this.sp.addCategories(sp, categories);
-    }
-
-    /**
-     * Removes categories from a product.
-     *
-     * @param sp the product to update
-     * @param categories the categories to remove
-     */
-    public void removeCategories(StoreProduct sp, Category... categories) {
-        this.sp.removeCategories(sp, categories);
+        this.sp.setCategories(sp, categories);
     }
 
     /**
      * Sets the description of a product.
-     *
-     * @param sp the product to update
+     * @param sp   the product to update
      * @param desc the new description
      */
     public void setDescription(StoreProduct sp, String desc) {
@@ -709,18 +690,16 @@ public class Manager extends User {
 
     /**
      * Sets the discount of a product.
-     *
-     * @param sp the product to update
+     * @param sp   the product to update
      * @param disc the discount to apply
      */
     public void setDiscount(StoreProduct sp, Discount disc) {
-       this.sp.setDiscount(sp, disc);
+        this.sp.setDiscount(sp, disc);
     }
 
     /**
      * Sets the name of a product.
-     *
-     * @param sp the product to update
+     * @param sp   the product to update
      * @param name the new name
      */
     public void setName(StoreProduct sp, String name) {
@@ -728,19 +707,47 @@ public class Manager extends User {
     }
 
     /**
-     * Sets the photo of a product.
+     * Changes the discount of a pack
+     * @param p,        the pack to search
+     * @param discount, new discount of the pack
      *
-     * @param sp the product to update
+     */
+    public void setPackDiscount(Pack p, Discount discount) {
+        this.sp.setPackDiscount(p, discount);
+    }
+
+    /**
+     * Changes the price of a pack
+     * @param p,     the pack to search
+     * @param price, new price of the pack
+     *
+     */
+    public void setPackPrice(Pack p, double price) {
+        this.sp.setPackPrice(p, price);
+    }
+
+    /**
+     * Sets the list of products of the pack
+     * @param p,  the pack to search
+     * @param sp, the list of store products to add
+     *
+     */
+    public void setPackProducts(Pack p, ArrayList<StoreProduct> sp) {
+        this.sp.setPackProducts(p, sp);
+    }
+
+    /**
+     * Sets the photo of a product.
+     * @param sp    the product to update
      * @param photo the photo reference
      */
     public void setPhoto(StoreProduct sp, String photo) {
-       this.sp.setPhoto(sp, photo);
+        this.sp.setPhoto(sp, photo);
     }
 
     /**
      * Sets the price of a product.
-     *
-     * @param sp the product to update
+     * @param sp    the product to update
      * @param price the new price
      */
     public void setPrice(StoreProduct sp, double price) {
@@ -749,8 +756,7 @@ public class Manager extends User {
 
     /**
      * Sets the total sales of a product.
-     *
-     * @param sp the product to update
+     * @param sp    the product to update
      * @param sales the number of sales
      */
     public void setSales(StoreProduct sp, int sales) {
@@ -759,18 +765,16 @@ public class Manager extends User {
 
     /**
      * Sets the monthly sales of a product.
-     *
-     * @param sp the product to update
+     * @param sp    the product to update
      * @param sales the sales by month
      */
     public void setSalesByMonth(StoreProduct sp, HashMap<Month, Integer> sales) {
-       this.sp.setSalesByMonth(sp, sales);
+        this.sp.setSalesByMonth(sp, sales);
     }
 
     /**
      * Sets the stock of a product.
-     *
-     * @param sp the product to update
+     * @param sp    the product to update
      * @param stock the available stock
      */
     public void setStock(StoreProduct sp, int stock) {
@@ -778,40 +782,11 @@ public class Manager extends User {
     }
 
     /**
-     * Adds a new employee
-     *
-     * @param e the employee to add
-     */
-    public void addEmployee(Employee e) {
-    	this.s.addUser(e);
-    	this.s.getEmployeeList().add(e);
-    }
-
-    /**
      * Sets the type of a product.
-     *
      * @param sp the product to update
      * @param pt the product type
      */
     public void setType(StoreProduct sp, ProductType pt) {
         this.sp.setType(sp, pt);
-    }
-
-    /**
-     * Adds a new permission to an employee
-     *
-     * @param p, the permission to add
-     * @param emp, the employee to give a new permission to
-     */
-    public void EmployeeAddPerm(Permission p, Employee emp) {
-    	int l = emp.getPerm().length;
-    	int count = 0;
-
-    	for (Permission pp : emp.getPerm()) {
-    	    if (pp != null) {
-    	        count++;
-    	    }
-    	}
-    	emp.getPerm()[count] = p;
     }
 }

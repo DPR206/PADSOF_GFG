@@ -3,6 +3,8 @@ package model.discount;
 import model.product.Category;
 import model.product.StoreProduct;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -12,7 +14,9 @@ import java.time.LocalDateTime;
  * @see Category
  * @see StoreProduct
  */
-public class CategoryDiscountFactory implements DiscountFactory {
+public class CategoryDiscountFactory implements DiscountFactory, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The category discount's desired categories */
     private final Category[] targetCategories;
 

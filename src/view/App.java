@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -31,7 +30,7 @@ public class App extends JFrame {
     private User mainUser = new UnregisteredClient(true);
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public App() {
+    public App() throws IOException {
         super("Gifts for Geeks"); /* JFrame's title */
 
         /* Views */
@@ -43,7 +42,6 @@ public class App extends JFrame {
         managerMainPanel = new ManagerMainP();
         welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
-
 
         /* Model */
         Store model = Store.getInstance();
@@ -81,13 +79,8 @@ public class App extends JFrame {
         welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
 
         /* Load store */
-        if ((new File(".\\resources\\" + "data" + ".txt")).isFile()) {
-            try {
-                model.loadStore("data", "statics");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
+        model.loadStore("data", "statics");
+
 
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

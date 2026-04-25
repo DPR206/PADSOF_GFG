@@ -361,24 +361,28 @@ public class Store implements Serializable {
     public void loadStore(String dataFilename, String staticsFilename) throws IOException {
 
         try {
-            FileInputStream fileInputStream = new FileInputStream(".\\resources\\" + dataFilename + ".txt");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            if ((new File(".\\resources\\" + dataFilename + ".txt")).isFile()) {
+                FileInputStream fileInputStream = new FileInputStream(".\\resources\\" + dataFilename + ".txt");
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            Store.setInstance((Store) objectInputStream.readObject());
+                Store.setInstance((Store) objectInputStream.readObject());
 
-            objectInputStream.close();
+                objectInputStream.close();
+            }
 
-            BufferedReader buffer = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(".\\resources\\" + staticsFilename + ".csv")));
+            if ((new File(".\\resources\\" + staticsFilename + ".txt")).isFile()) {
+                BufferedReader buffer = new BufferedReader(
+                        new InputStreamReader(new FileInputStream(".\\resources\\" + staticsFilename + ".csv")));
 
-            Discount.setTotalId(Integer.parseInt(buffer.readLine()));
-            Exchange.setTotalId(Integer.parseInt(buffer.readLine()));
-            Offer.setTotalId(Integer.parseInt(buffer.readLine()));
-            Pack.setTotalId(Integer.parseInt(buffer.readLine()));
-            Product.setTotalId(Integer.parseInt(buffer.readLine()));
-            User.setTotalId(Integer.parseInt(buffer.readLine()));
+                Discount.setTotalId(Integer.parseInt(buffer.readLine()));
+                Exchange.setTotalId(Integer.parseInt(buffer.readLine()));
+                Offer.setTotalId(Integer.parseInt(buffer.readLine()));
+                Pack.setTotalId(Integer.parseInt(buffer.readLine()));
+                Product.setTotalId(Integer.parseInt(buffer.readLine()));
+                User.setTotalId(Integer.parseInt(buffer.readLine()));
 
-            buffer.close();
+                buffer.close();
+            }
 
         } catch (IOException | ClassNotFoundException exception) {
             throw new IOException(exception.getMessage());

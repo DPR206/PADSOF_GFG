@@ -90,6 +90,16 @@ public class Pack implements Serializable {
         this(id, price, new ArrayList<StoreProduct>(), date);
     }
 
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It sets the total id of the packs
+     * @param newTotalId the totalId
+     */
+    public static void setTotalId(int newTotalId) {
+        Pack.totalId = newTotalId;
+    }
+
     /**
      * It prints the pack's info when seen individually
      */

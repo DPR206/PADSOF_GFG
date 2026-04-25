@@ -1,7 +1,6 @@
 package view;
 
 import controller.*;
-import model.store.SaverLoader;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import model.user.User;
@@ -34,16 +33,6 @@ public class App extends JFrame {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() {
         super("Gifts for Geeks"); /* JFrame's title */
-
-        if ((new File(".\\resources\\data.txt")).isFile()) {
-            try {
-                SaverLoader.getInstance()
-                           .loadStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts",
-                                   "packs", "discounts", "offers", "exchanges", "orders", "users");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
 
         /* Views */
         loginPanel = new LoginP();
@@ -91,15 +80,22 @@ public class App extends JFrame {
         container.add(welcomePanel, gbc);
         welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
 
+        /* Load store */
+        if ((new File(".\\resources\\" + "data" + ".txt")).isFile()) {
+            try {
+                model.loadStore("data", "statics");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    SaverLoader.getInstance()
-                               .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts",
-                                       "packs", "discounts", "offers", "exchanges", "orders", "users");
+                    model.saveStore("data", "statics");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

@@ -153,12 +153,10 @@ public abstract class Loop {
     protected void exit() throws IOException {
         System.out.print("\n <<<<<<<<<< exit >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("See you soon!");
+
+        Store.getInstance().saveStore("data", "statics");
+
         appExited = true;
-
-        /*SaverLoader.getInstance()
-                   .saveStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
-                           "discounts", "offers", "exchanges", "orders", "users");*/ // DUE
-
     }
 
     /* Paging stuff */

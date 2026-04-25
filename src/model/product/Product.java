@@ -27,7 +27,6 @@ public abstract class Product implements Serializable {
     private ProductType type;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-
     /**
      * A product's general constructor
      * @param id          the product's id
@@ -72,6 +71,13 @@ public abstract class Product implements Serializable {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+    /**
+     * It sets the total id of the products
+     * @param newTotalId the totalId
+     */
+    public static void setTotalId(int newTotalId) {
+        Product.totalId = newTotalId;
+    }
 
     /**
      * It prints the product's info when seen individually

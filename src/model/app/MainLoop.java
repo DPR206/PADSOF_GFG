@@ -1,8 +1,8 @@
 package model.app;
 
-import model.utilities.exceptions.*;
-import model.utilities.exceptions.*;
+import model.store.Store;
 import model.user.*;
+import model.utilities.exceptions.*;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -47,13 +47,12 @@ public class MainLoop extends Loop {
      * @throws NullPointerException     the null pointer exception
      */
     protected void main()
-            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid, InvalidDni {
+            throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< main >>>>>>>>>> \n"); // Es para debug, borrar
 
-        /*SaverLoader.getInstance()
-                   .loadStore("parameter", "categories", "reviews", "storeProducts", "secondHandProducts", "packs",
-                           "discounts", "offers", "exchanges", "orders", "users"); // DUE*/
+        Store.getInstance().loadStore("data", "statics");
 
         /* BORRAR: */
         System.out.println("Adding products...");

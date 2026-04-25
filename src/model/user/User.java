@@ -1,5 +1,6 @@
 package model.user;
 
+import model.exchange.Exchange;
 import model.search.SearchStoreProducts;
 import model.search.Searcher;
 import model.store.Store;
@@ -68,6 +69,16 @@ public abstract class User implements Serializable {
      */
     public User() {
         this(UserType.UNREGISTERED_CLIENT, null, null, UserType.UNKNOWN.getSymbol() + String.format("%06d", 0), true);
+    }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It sets the total id of the users
+     * @param newTotalId the totalId
+     */
+    public static void setTotalId(int newTotalId) {
+        Exchange.totalId = newTotalId;
     }
 
     /**

@@ -12,8 +12,7 @@ import model.utilities.IdType;
 import model.utilities.Utility;
 import model.utilities.exceptions.*;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -323,6 +322,67 @@ public class Store implements Serializable {
      */
     public void addUser(User s) {
         this.users.put(s.getUserName(), s);
+    }
+
+    /**
+     * It allows for the store to be saved
+     * @param dataFilename    the name of the file where most of the store's data will be saved
+     * @param staticsFilename the name of the file where the static variables will be saved
+     * @throws IOException something went wrong when reading or writing a file
+     */
+    public void saveStore(String dataFilename, String staticsFilename) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(".\\resources\\" + dataFilename + ".txt");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+        objectOutputStream.writeObject(Store.getInstance());
+
+        objectOutputStream.flush();
+        objectOutputStream.close();
+
+        BufferedWriter buffer = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(".\\resources\\" + staticsFilename + ".csv")));
+
+        buffer.write(Discount.totalId + "\n");
+        buffer.write(Exchange.totalId + "\n");
+        buffer.write(Offer.totalId + "\n");
+        buffer.write(Pack.totalId + "\n");
+        buffer.write(Product.totalId + "\n");
+        buffer.write(User.totalId + "\n");
+
+        buffer.close();
+    }
+
+    /**
+     * It allows for the store to be loaded
+     * @param dataFilename    the name of the file where most of the store's data will be saved
+     * @param staticsFilename the name of the file where the static variables will be saved
+     * @throws IOException something went wrong when reading or writing a file
+     */
+    public void loadStore(String dataFilename, String staticsFilename) throws IOException {
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(".\\resources\\" + dataFilename + ".txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            Store.setInstance((Store) objectInputStream.readObject());
+
+            objectInputStream.close();
+
+            BufferedReader buffer = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(".\\resources\\" + staticsFilename + ".csv")));
+
+            Discount.setTotalId(Integer.parseInt(buffer.readLine()));
+            Exchange.setTotalId(Integer.parseInt(buffer.readLine()));
+            Offer.setTotalId(Integer.parseInt(buffer.readLine()));
+            Pack.setTotalId(Integer.parseInt(buffer.readLine()));
+            Product.setTotalId(Integer.parseInt(buffer.readLine()));
+            User.setTotalId(Integer.parseInt(buffer.readLine()));
+
+            buffer.close();
+
+        } catch (IOException | ClassNotFoundException exception) {
+            throw new IOException(exception.getMessage());
+        }
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

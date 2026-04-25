@@ -21,7 +21,6 @@ import java.util.HashMap;
 public class Exchange implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L; /* Para el Save & Load */
-
     /**
      * The Total id.
      */
@@ -34,7 +33,6 @@ public class Exchange implements Serializable {
     private LocalDateTime date;
     private boolean exchanged;
     private HashMap<RegisteredClient, ArrayList<SecondHandProduct>> productos_propietario = new HashMap<>();
-
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
@@ -99,9 +97,6 @@ public class Exchange implements Serializable {
         this(assignedDate, false, assignedUser1, assignedProducts1, assignedUser2, assignedProducts2);
     }
 
-
-    /*-------------------------------------------------------------SETTERS AND GETTERS----------------------------------------------------------*/
-
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
     /**
@@ -110,6 +105,14 @@ public class Exchange implements Serializable {
      */
     public static int getTotalId() {
         return totalId;
+    }
+
+    /**
+     * It sets the total id of the exchanges
+     * @param newTotalId the totalId
+     */
+    public static void setTotalId(int newTotalId) {
+        Exchange.totalId = newTotalId;
     }
 
     /**

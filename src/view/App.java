@@ -32,6 +32,7 @@ public class App extends JFrame {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() throws IOException {
         super("Gifts for Geeks"); /* JFrame's title */
+        this.setIconImage(new ImageIcon(".\\resources\\logo.png").getImage());
 
         /* Views */
         loginPanel = new LoginP();

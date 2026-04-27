@@ -47,6 +47,7 @@ public class SignupP extends JPanel {
         idNieType = new JRadioButton("NIE");
 
         // añadir componentes al panel
+        this.add(ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50));
         this.add(textArea);
         /* Username */
         this.add(usernameLabel);

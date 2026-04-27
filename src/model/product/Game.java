@@ -1,5 +1,7 @@
 package model.product;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -8,7 +10,9 @@ import java.time.LocalDate;
  * @version 1.7
  * @see StoreProduct
  */
-public class Game extends StoreProduct {
+public class Game extends StoreProduct implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The game's number of players */
     private int numPlayers;
     /** The game's age range */

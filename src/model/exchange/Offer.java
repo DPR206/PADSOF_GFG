@@ -6,6 +6,8 @@ import model.store.Parameter;
 import model.store.Store;
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -17,7 +19,9 @@ import java.util.*;
  * @see RegisteredClient
  * @see SecondHandProduct
  */
-public class Offer {
+public class Offer implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The global variable to determine which id should a new offer have */
     static public int totalId = -1;
     /** The offer's id */

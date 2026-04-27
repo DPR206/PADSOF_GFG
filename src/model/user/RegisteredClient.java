@@ -9,7 +9,11 @@ import model.order.OrderHistory;
 import model.search.*;
 import model.store.Recommender;
 import model.store.Store;
+import model.utilities.exceptions.InvalidDni;
+import model.utilities.exceptions.PasswordNotValid;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +25,9 @@ import java.util.List;
  * @version 2.0
  * @see User
  */
-public class RegisteredClient extends User {
+public class RegisteredClient extends User implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     private LocalDate registerDate;
     private String dni;
@@ -163,7 +169,7 @@ public class RegisteredClient extends User {
      * It changes the client's password
      * @param psswd the new password
      */
-    public void changePassword(String psswd) {
+    public void changePassword(String psswd) throws InvalidDni, PasswordNotValid {
     	super.changePassword(psswd);
     }
 

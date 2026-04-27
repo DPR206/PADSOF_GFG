@@ -3,6 +3,8 @@ package model.discount;
 import model.product.Pack;
 import model.product.StoreProduct;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -12,7 +14,9 @@ import java.time.LocalDateTime;
  * @see Pack
  * @see StoreProduct
  */
-public class PackDiscountFactory implements DiscountFactory {
+public class PackDiscountFactory implements DiscountFactory, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The pack discount's desired packs */
     private final Pack[] targetPacks;
 

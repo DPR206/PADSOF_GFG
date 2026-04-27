@@ -1,5 +1,7 @@
 package model.notification;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +12,9 @@ import java.time.LocalDateTime;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationPayment extends Notification implements NotificationInterface<String>{
+public class NotificationPayment extends Notification implements NotificationInterface<String>, Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	/**
 	 * Creates a new payment notification with default timeMade (this moment) and no content

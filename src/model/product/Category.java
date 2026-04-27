@@ -2,6 +2,8 @@ package model.product;
 
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,9 @@ import java.util.List;
  * @version 1.4
  * @see Store
  */
-public class Category {
+public class Category implements Comparable<Category>, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The category's name */
     public String name;
     /** The category's total revenue */
@@ -83,8 +87,12 @@ public class Category {
         this.products.remove(product);
     }
 
-    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    @Override
+    public int compareTo(Category o) {
+        return this.name.compareTo(o.name);
+    }
 
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     /**
      * It returns the category's name
      * @return the category's name
@@ -133,9 +141,7 @@ public class Category {
         this.revenue = newRevenue;
     }
 
-
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
-
     /**
      * It allows a category to be saved
      * @return the category's info

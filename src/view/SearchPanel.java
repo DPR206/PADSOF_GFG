@@ -23,21 +23,21 @@ public class SearchPanel extends JPanel{
 
 	private JPanel puncFilter = new JPanel(new GridLayout(1,1));
 
-	private JRadioButton cerouno = new JRadioButton("0-1★");
-	private JRadioButton unodos = new JRadioButton("1-2★");
-	private JRadioButton dostres = new JRadioButton("2-3★");
-	private JRadioButton trescuatro = new JRadioButton("3-4★");
-	private JRadioButton cuatrocinco = new JRadioButton("4-5★");
+	private JCheckBox cerouno = new JCheckBox("0-1★");
+	private JCheckBox unodos = new JCheckBox("1-2★");
+	private JCheckBox dostres = new JCheckBox("2-3★");
+	private JCheckBox trescuatro = new JCheckBox("3-4★");
+	private JCheckBox cuatrocinco = new JCheckBox("4-5★");
 
 	private JPanel preciosFilt = new JPanel(new GridLayout(1,1));
 
-	private JRadioButton cerodiez = new JRadioButton("0-10");
-	private JRadioButton diezquince = new JRadioButton("10-15");
-	private JRadioButton quinceveinte = new JRadioButton("15-20");
-	private JRadioButton veintetreinta = new JRadioButton("20-30");
-	private JRadioButton treintacuarenta = new JRadioButton("30-40");
-	private JRadioButton cuarentacincuenta = new JRadioButton("40-50");
-	private JRadioButton plus50 = new JRadioButton("50+");
+	private JCheckBox cerodiez = new JCheckBox("0-10");
+	private JCheckBox diezquince = new JCheckBox("10-15");
+	private JCheckBox quinceveinte = new JCheckBox("15-20");
+	private JCheckBox veintetreinta = new JCheckBox("20-30");
+	private JCheckBox treintacuarenta = new JCheckBox("30-40");
+	private JCheckBox cuarentacincuenta = new JCheckBox("40-50");
+	private JCheckBox plus50 = new JCheckBox("50+");
 
 	JPanel ordenacion = new JPanel(new GridLayout(1,1));
 

@@ -19,7 +19,9 @@ import model.discount.Discount;
  * @version 1.3
  * @see Employee
  */
-public class StorePermission {
+public class StorePermission  implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private Store s; //creo que debería tener acceso al store si la va a modificar
     /** The permission's searcher */
     private Searcher searching;

@@ -5,6 +5,8 @@ package model.notification;
 
 import model.user.User;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -15,7 +17,9 @@ import java.util.*;
  * @see Notification
  * @see NotificationSettings
  */
-public class NotificationHistory {
+public class NotificationHistory implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	private Set<Notification> notifications;
 	private User owner;

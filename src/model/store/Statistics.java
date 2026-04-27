@@ -7,6 +7,8 @@ import model.product.Category;
 import model.product.StoreProduct;
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
@@ -17,7 +19,9 @@ import java.util.*;
  * @author Duna P.R.
  * @version 1.4.
  */
-public class Statistics {
+public class Statistics implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 	private static Statistics INSTANCE;
 	private static double total_revenue;
 

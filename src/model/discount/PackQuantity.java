@@ -2,6 +2,8 @@ package model.discount;
 
 import model.product.Pack;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +12,9 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @see Pack
  */
-public class PackQuantity extends PackDiscount implements QuantityDiscount {
+public class PackQuantity extends PackDiscount implements QuantityDiscount, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The amount of products, or packs, in a cart from which the discount can take place */
     private int numThreshold;
     /** The amount of money the discount deducts from the order's final price */
@@ -53,6 +57,7 @@ public class PackQuantity extends PackDiscount implements QuantityDiscount {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * It gets the quantity discount's discount
      * @return the quantity discount's discount

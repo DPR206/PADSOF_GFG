@@ -2,9 +2,9 @@ package model.exchange;
 
 import model.user.RegisteredClient;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * Description: It implements the offer history
@@ -12,7 +12,9 @@ import java.util.Set;
  * @version 1.0
  * @see Offer
  */
-public class OfferHistory {
+public class OfferHistory implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The offer's owner */
     private final RegisteredClient owner;
     /** The offer history's offers */

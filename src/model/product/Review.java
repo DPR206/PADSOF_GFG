@@ -6,13 +6,19 @@ package model.product;
 import model.store.Store;
 import model.user.User;
 import model.user.RegisteredClient;
+
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * It implements the reviews
  * @author Duna P.R. and Ana O.R.
  * @version 1.1
  * @see User
  */
-public class Review {
+public class Review implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 	 /** ID counter for the reviews */
 	public static int totalId = -1;
 	private final int id;

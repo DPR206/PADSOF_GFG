@@ -1,5 +1,7 @@
 package model.product;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Year;
 
@@ -9,7 +11,9 @@ import java.time.Year;
  * @version 1.7
  * @see StoreProduct
  */
-public class Comic extends StoreProduct {
+public class Comic extends StoreProduct implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The comic's number of pages */
     private int numPages;
     /** The year in which the comic was published */

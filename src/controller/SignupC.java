@@ -15,16 +15,13 @@ import java.awt.event.ActionListener;
  * @author Ana O.R.
  * @version 1.0
  */
-public class SignupC implements ActionListener {
+public class SignupC extends MainLoopSelector implements ActionListener {
     private final SignupP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public SignupC(App frame, Store model) {
-        this.frame = frame;
+        super(frame, model);
         this.view = frame.getSignupPanel();
-        this.model = model;
     }
 
     @Override
@@ -43,10 +40,13 @@ public class SignupC implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Passwords did not match", "Warning :(", JOptionPane.ERROR_MESSAGE);
             } else {
                 try {
-                    User user = model.signIn(view.getUsername(), view.getPassword(), view.getDni(), view.getIdType());
+                    User user = super.getModel()
+                                     .signIn(view.getUsername(), view.getPassword(), view.getDni(), view.getIdType());
                     if (user != null) {
                         JOptionPane.showMessageDialog(null,
                                 "Signed up successfully :)\n" + "Welcome abroad " + view.getUsername());
+                        super.getFrame().changeCurrentUser(user);
+                        super.loopSelector();
                     }
                 } catch (UsernameTaken exception1) {
                     JOptionPane.showMessageDialog(null, exception1.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);

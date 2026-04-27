@@ -3,6 +3,8 @@
  */
 package model.notification;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +18,9 @@ import model.store.Parameter;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationExchange extends Notification implements NotificationInterface<Offer> {
+public class NotificationExchange extends Notification implements NotificationInterface<Offer>, Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	private String address;
 	private LocalDateTime timeAndDate;
@@ -162,6 +166,6 @@ public class NotificationExchange extends Notification implements NotificationIn
 				+ " with date and time: "+this.timeAndDate.format(DateTimeFormatter.ofPattern("dd/MM HH:mm"))
 				+"\n";
 	}
-	
-	
+
+
 }

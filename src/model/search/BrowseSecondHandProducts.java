@@ -3,6 +3,8 @@ package model.search;
 import model.product.SecondHandProduct;
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -17,7 +19,9 @@ import java.util.*;
  * @version 1.4
  * @see SearchStoreProducts
  */
-public class BrowseSecondHandProducts {
+public class BrowseSecondHandProducts implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     /**
      * Singleton instance of the store.

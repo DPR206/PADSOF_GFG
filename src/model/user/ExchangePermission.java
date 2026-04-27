@@ -5,6 +5,8 @@ import model.product.ConservationStatus;
 import model.product.SecondHandProduct;
 import model.search.BrowseSecondHandProducts;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,7 +17,9 @@ import java.util.List;
  * @see Exchange
  * @see SecondHandProduct
  */
-public class ExchangePermission {
+public class ExchangePermission implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The permission's searcher */
     private final BrowseSecondHandProducts browser = new BrowseSecondHandProducts();
 

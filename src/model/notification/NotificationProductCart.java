@@ -3,6 +3,8 @@
  */
 package model.notification;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import model.product.StoreProduct;
@@ -15,7 +17,9 @@ import model.store.Parameter;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationProductCart extends Notification implements NotificationInterface<StoreProduct>{
+public class NotificationProductCart extends Notification implements NotificationInterface<StoreProduct>, Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	/**
 	 * Creates a new cart notification for products with default timeMade (this moment) and no content

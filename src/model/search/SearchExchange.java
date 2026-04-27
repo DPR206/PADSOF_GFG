@@ -3,6 +3,8 @@ package model.search;
 import model.exchange.Exchange;
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +17,9 @@ import java.util.List;
  * @version 1.4
  * @see SearchStoreProducts
  */
-public class SearchExchange implements SearchID{
+public class SearchExchange implements SearchID, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private Store s = Store.getInstance();
     private List<Exchange> exchanges;
 

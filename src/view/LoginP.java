@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
@@ -17,7 +16,7 @@ public class LoginP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public LoginP() {
         // asignar layout
-        this.setLayout(new FlowLayout());
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // crear componentes
         JLabel label1 = new JLabel("Enter your Username:");
@@ -29,6 +28,7 @@ public class LoginP extends JPanel {
         login = new JButton("Log in");
 
         // añadir componentes al panel
+        this.add(ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50));
         this.add(label1);
         this.add(username);
         this.add(label2);
@@ -43,6 +43,7 @@ public class LoginP extends JPanel {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     public String getPassword() {
         return new String(password.getPassword());
     }

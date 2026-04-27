@@ -49,41 +49,55 @@ public class SearcherC implements ActionListener{
 		}
 		
 		/*Ahora metemos los filtros de puntuación*/
-		
-		PunctuationFilter f = null;
-		
-		int min = -1;
-		int max = -1;
+	
 		
 		if(e.getActionCommand().equals("0-1★")) {
-			min = 0;
-			max = 1;
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
 		}
 		if(e.getActionCommand().equals("1-2★")) {
-			min = 1;
-			max = 2;
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(1,2);
 		}
 		if(e.getActionCommand().equals("2-3★")) {
-			min = 2;
-			max = 3;
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(2,3);
 		}
 		if(e.getActionCommand().equals("3-4★")) {
-			min = 3;
-			max = 4;
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(3,4);
 		}
 		if(e.getActionCommand().equals("4-5★")) {
-			min = 4;
-			max = 5;
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
 		}
-		if(!(min < 0 || max < 0)) {
-			frame.getUser().addPunctuationFilter(min, max);
-		}
+
 		
 		/*Ahora metemos el filtro de los precios*/
 		
-		double min2 = -1;
-		double max2 = -1;
+		if(e.getActionCommand().equals("0-10")) {
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
+		}
+		if(e.getActionCommand().equals("10-15")) {
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(1,2);
+		}
+		if(e.getActionCommand().equals("15-20")) {
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(2,3);
+		}
+		if(e.getActionCommand().equals("20-30")) {
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(3,4);
+		}
+		if(e.getActionCommand().equals("30-40")) {
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+		}
+		if(e.getActionCommand().equals("40-50")) {
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+		}
+		if(e.getActionCommand().equals("50+")) {
+			frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+		}
 		
+		if(e.getActionCommand().equals("Menor a mayor")) {
+			frame.getUser().getSearcher().getStoreSearcher().setAsc(true);
+		}
+		else {
+			frame.getUser().getSearcher().getStoreSearcher().setAsc(false);
+		}
 	}
 
 }

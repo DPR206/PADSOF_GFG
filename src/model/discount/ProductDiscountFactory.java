@@ -3,6 +3,8 @@ package model.discount;
 import model.product.StoreProduct;
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -12,11 +14,13 @@ import java.time.LocalDateTime;
  * @see Store
  * @see StoreProduct
  */
-public class ProductDiscountFactory implements DiscountFactory {
+public class ProductDiscountFactory implements DiscountFactory, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
+    /** Whether the discount is applied over all the store products or not */
+    private final boolean overWholeStore;
     /** The product discount's desired store products */
     private StoreProduct[] targetProducts;
-    /** Whether the discount is applied over all the store products or not */
-    private boolean overWholeStore;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

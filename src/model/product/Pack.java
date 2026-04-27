@@ -6,6 +6,8 @@ package model.product;
 import model.discount.*;
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,7 +17,9 @@ import java.util.ArrayList;
  * @version 1.2.
  * @see Store
  */
-public class Pack {
+public class Pack implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The number of id's generated for packs */
     static public int totalId = 0;
 
@@ -84,6 +88,16 @@ public class Pack {
      */
     public Pack(int id, double price, LocalDate date) {
         this(id, price, new ArrayList<StoreProduct>(), date);
+    }
+
+    /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * It sets the total id of the packs
+     * @param newTotalId the totalId
+     */
+    public static void setTotalId(int newTotalId) {
+        Pack.totalId = newTotalId;
     }
 
     /**

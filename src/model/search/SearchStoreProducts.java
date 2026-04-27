@@ -4,6 +4,8 @@ import model.product.Category;
 import model.product.StoreProduct;
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -19,10 +21,12 @@ import java.util.*;
  * @version 1.4
  * @see Searcher
  */
-public class SearchStoreProducts{
+public class SearchStoreProducts implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private boolean ascendant;
-    private PriceFilter priceF = null;
-    private PunctuationFilter punctuationF = null;
+    private List<PriceFilter> priceF = new ArrayList<>();;
+    private List<PunctuationFilter> punctuationF = new ArrayList<>();
     private CategoryFilter categoryF = null;
     private Store s;
 
@@ -33,8 +37,6 @@ public class SearchStoreProducts{
      */
     public SearchStoreProducts(boolean asc){
         this.ascendant = asc;
-        this.priceF = null;
-        this.punctuationF = null;
         this.s = Store.getInstance();
     }
 
@@ -45,7 +47,7 @@ public class SearchStoreProducts{
      * @param max maximum punctuation (rating) wanted on the product
      */
     public void addPunctuationFilter(int min, int max){
-        this.punctuationF = new PunctuationFilter(min, max);
+        this.punctuationF.add(new PunctuationFilter(min, max));
     }
 
     /**
@@ -55,13 +57,13 @@ public class SearchStoreProducts{
      * @param max maximum price wanted on the product
      */
     public void addPriceFilter(double min, double max){
-        this.priceF= new PriceFilter(min, max);
+        this.priceF.add(new PriceFilter(min, max));
     }
-    
+
     public void addCategoryFilter(CategoryFilter c) {
     	this.categoryF = c;
     }
-    
+
     /**
      * Searches products filtered by price, punctuation, and optionally by categories.
      *
@@ -71,70 +73,46 @@ public class SearchStoreProducts{
      * @return a list of {@link StoreProduct} matching the filters and categories
      */
     public List<StoreProduct> searchStoreProducts(){
-        List<StoreProduct> pCs = this.filterByCategory();
-        List<StoreProduct> filtered = this.searchStoreProducts();
-
-        if(filtered == this.s.getStoreProducts()){
-            return pCs;
+       List<StoreProduct> pCs;
+       
+       
+       
+       if(!this.filterByCategory().isEmpty()) {
+    	   pCs = this.filterByCategory();
+       }
+       else {
+    	   pCs = new ArrayList<>();
+       }
+       
+       if(!this.priceF.isEmpty()) pCs.retainAll(this.filterByPrice());
+       if(!this.punctuationF.isEmpty()) pCs.retainAll(this.filterByPunctuation());
+        
+       if(this.ascendant == true && (!this.priceF.isEmpty() && !this.punctuationF.isEmpty())) {
+        	pCs.sort(Comparator.comparing(StoreProduct::getPrice).thenComparing(StoreProduct::getAveragePunctuation));
         }
-
-        pCs.retainAll(filtered);
-
-        if(this.ascendant){
-            if(this.priceF != null && this.punctuationF != null){
-                pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation)
-                                   .thenComparing(StoreProduct::getPrice));
-            }
-            else if(this.priceF != null){
-                pCs.sort(Comparator.comparing(StoreProduct::getPrice));
-            }
-            else if(this.punctuationF != null){
-                pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation));
-            }
-        }
-        else{
-             if(this.priceF != null && this.punctuationF != null){
-                pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation)
-                                   .reversed()
-                                   .thenComparing(Comparator.comparingDouble(StoreProduct::getPrice).reversed()));
-            }
-            else if(this.priceF != null){
-                pCs.sort(Comparator.comparingDouble(StoreProduct::getPrice).reversed());
-            }
-            else if(this.punctuationF != null){
-                pCs.sort(Comparator.comparingDouble(StoreProduct::getAveragePunctuation).reversed());
-            }
-        }
-        return pCs;
+        
+       else if(this.ascendant == true && (!this.priceF.isEmpty())) {
+    	   pCs.sort(Comparator.comparing(StoreProduct::getPrice));
+       }
+       
+       else if(this.ascendant == true && (!this.punctuationF.isEmpty())) {
+    	   pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation));
+       }
+       
+       else if(this.ascendant == false && (!this.priceF.isEmpty() && !this.punctuationF.isEmpty())) {
+       	pCs.sort(Comparator.comparing(StoreProduct::getPrice).thenComparing(StoreProduct::getAveragePunctuation).reversed());
+       }
+       
+      else if(this.ascendant == false && (!this.priceF.isEmpty())) {
+   	   pCs.sort(Comparator.comparing(StoreProduct::getPrice).reversed());
+      }
+      
+      else if(this.ascendant == false && (!this.punctuationF.isEmpty())) {
+   	   pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation).reversed());
+      }
+       return pCs;
     }
-
-    /**
-     * Searches products filtered only by price and/or punctuation.
-     *
-     * @return a list of {@link StoreProduct} matching the active filters
-     */
-    public List<StoreProduct> searchStoreProductsWithoutCategories(){
-        List<StoreProduct> priced;
-        List<StoreProduct> punctuation;
-
-        if(this.punctuationF != null && this.priceF != null){
-            priced = this.filterByPrice();
-            punctuation = this.filterByPrice();
-            if (priced != null && punctuation != null) {
-                priced.retainAll(punctuation);
-                return priced;
-            }
-        }
-        else if(this.punctuationF == null && this.priceF != null){
-            punctuation = this.filterByPrice();
-            return punctuation;
-        }
-        else if(this.punctuationF != null){
-            priced = this.filterByPrice();
-            return priced;
-        }
-        return s.getStoreProductList();
-    }
+  
 
     /**
      * Filters products based on the price filter.
@@ -147,7 +125,8 @@ public class SearchStoreProducts{
 
         if(this.priceF != null){
             for(StoreProduct p: fromStore){
-                if(p.getPrice() >= this.priceF.getMin() && p.getPrice() <= this.priceF.getMax()) aux.add(p);
+            	for(PriceFilter priceFf: this.priceF)
+                	if(p.getPrice() >= priceFf.getMin() && p.getPrice() <= priceFf.getMax()) aux.add(p);
             }
             return aux;
         }
@@ -165,9 +144,10 @@ public class SearchStoreProducts{
 
         if(this.punctuationF != null){
             for(StoreProduct p: fromStore){
-                if(p.getAveragePunctuation() >= this.punctuationF.getMin() &&
-                   p.getAveragePunctuation() <= this.punctuationF.getMax()){
-                    aux.add(p);
+            	for(PunctuationFilter f: this.punctuationF)
+                	if(p.getAveragePunctuation() >= f.getMin() &&
+                		p.getAveragePunctuation() <= f.getMax()){
+                		aux.add(p);
                 }
             }
         }
@@ -225,7 +205,7 @@ public class SearchStoreProducts{
     public boolean getBoolean() {
     	return this.ascendant;
     }
-    
+
     public CategoryFilter getCategoryFilter() {
     	return this.categoryF;
     }

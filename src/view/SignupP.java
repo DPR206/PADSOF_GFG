@@ -4,7 +4,6 @@ import model.utilities.IdType;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 /**
  * It implements the sign-up panel view
@@ -48,6 +47,7 @@ public class SignupP extends JPanel {
         idNieType = new JRadioButton("NIE");
 
         // añadir componentes al panel
+        this.add(ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50));
         this.add(textArea);
         /* Username */
         this.add(usernameLabel);
@@ -90,11 +90,11 @@ public class SignupP extends JPanel {
     }
 
     public String getPassword() {
-        return Arrays.toString(password.getPassword());
+        return new String(password.getPassword());
     }
 
     public String getPassword2() {
-        return Arrays.toString(password2.getPassword());
+        return new String(password2.getPassword());
     }
 
     public String getUsername() {

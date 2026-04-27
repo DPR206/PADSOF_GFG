@@ -3,6 +3,8 @@
  */
 package model.notification;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import model.order.Order;
@@ -15,7 +17,9 @@ import model.order.Order;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationEmployeeOrder extends Notification implements NotificationInterface<Order>{
+public class NotificationEmployeeOrder extends Notification implements NotificationInterface<Order>, Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	/**
 	 * Creates a new order notification for employees with default timeMade (this moment) and no content

@@ -9,7 +9,7 @@ package model.notification;
  *
  * @param <T> The object the notification is about
  */
-public interface NotificationInterface<T>{
+public interface NotificationInterface<T> {
 
 	/**
 	 * Creates a full notification

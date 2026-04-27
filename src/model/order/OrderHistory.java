@@ -2,6 +2,8 @@ package model.order;
 
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,9 @@ import java.util.List;
  * @version 1.0
  * @see Order
  */
-public class OrderHistory {
+public class OrderHistory implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private List<Order> orders = new ArrayList<>();
     private RegisteredClient owner;
 

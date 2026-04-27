@@ -5,6 +5,8 @@ import model.product.Category;
 import model.product.StoreProduct;
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,7 +17,9 @@ import static java.lang.Math.sqrt;
  * @author Ana O.R.
  * @version 1.1
  */
-public class Recommender {
+public class Recommender implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private static final Recommender PARAM = new Recommender();
     HashMap<Category, Double> categoriesAndScores = new HashMap<>();
 

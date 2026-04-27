@@ -8,6 +8,8 @@ import model.product.SecondHandProduct;
 import model.product.StoreProduct;
 import model.user.Employee;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -22,7 +24,9 @@ import java.util.List;
  * @version 1.4
  * @see SearchStoreProducts
  */
-public class Searcher{
+public class Searcher implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private SearchType[] types;
     private SearchStoreProducts searchStore;
 
@@ -30,7 +34,7 @@ public class Searcher{
     private SearchEmployee employeeSearcher = new SearchEmployee();
     private SearchOrder orderSearcher = new SearchOrder();
     private SearchExchange exchangeSearcher = new SearchExchange();
-
+    private SearchProduct productSearcher = new SearchProduct();
     private BrowseSecondHandProducts secondHandProducts;
 
     /**
@@ -78,9 +82,6 @@ public class Searcher{
      * @return a list of matching {@link StoreProduct}
      */
     public List<StoreProduct> searchStoreProducts(){
-        if(this.searchStore.getCategoryFilter() == null) {
-        	return this.searchStore.searchStoreProductsWithoutCategories();
-        }
         return this.searchStore.searchStoreProducts();
     }
 
@@ -91,7 +92,7 @@ public class Searcher{
      * @return a list of matching {@link StoreProduct}
      */
     public List<StoreProduct> searchByCategory(Category... c){
-        return this.searchStore.searchStoreProducts(c);
+        return this.searchStore.searchStoreProducts();
     }
 
     /**
@@ -120,6 +121,10 @@ public class Searcher{
         return null;
     }
 
+    public StoreProduct searchProductByID(int id) {
+    	return this.productSearcher.searchByID(id);
+    }
+    
     /**
      * Searches for an order by its ID.
      *

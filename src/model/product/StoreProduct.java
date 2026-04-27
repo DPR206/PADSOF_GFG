@@ -6,6 +6,8 @@ import model.order.Order;
 import model.store.Store;
 import model.user.RegisteredClient;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
@@ -18,7 +20,9 @@ import java.util.*;
  * @see Order
  * @see Review
  */
-public abstract class StoreProduct extends Product {
+public abstract class StoreProduct extends Product implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     /** The product's reviews */
     private HashMap<RegisteredClient, Review> reviews = new HashMap<>(); // NOTE: No es final
     /** The product's average punctuation */

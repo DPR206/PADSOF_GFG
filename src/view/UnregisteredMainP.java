@@ -58,14 +58,8 @@ public class UnregisteredMainP extends JPanel {
     	this.botones.clear();
     	this.products.removeAll();
     	
-    	for (StoreProduct sp : p) {
-    	    if (sp.getId().equals(id)) {
-    	    	JButton boton = new JButton(sp.getName());
-    	        products.add(boton);
-    	        this.botones.add(boton);
-    	        break;
-    	    }
-    	}
+    	mainU.getSearcher().getStoreSearcher();
+    	
     	this.products.revalidate();
         this.products.repaint();
     }

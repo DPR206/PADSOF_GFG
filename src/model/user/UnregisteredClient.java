@@ -3,6 +3,7 @@
  */
 package model.user;
 
+import model.utilities.IdType;
 import model.utilities.exceptions.*;
 import model.utilities.exceptions.*;
 import model.order.Cart;
@@ -10,6 +11,8 @@ import model.product.*;
 import model.search.SearchType;
 import model.store.Store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
@@ -23,7 +26,9 @@ import es.uam.eps.padsof.telecard.OrderRejectedException;
  * @see User
  */
 
-public class UnregisteredClient extends User {
+public class UnregisteredClient extends User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
     private Cart c;
     private Store s;
 
@@ -43,7 +48,7 @@ public class UnregisteredClient extends User {
      * Makes the buying process of the cart
      */
     public void buy(String username, String password, String dni) throws UsernameTaken, PasswordNotValid, InvalidDni {
-        this.s.signIn(username, password, dni);
+        this.s.signIn(username, password, dni, IdType.DNI); //DUE: Contemplar que se use otro
         try {
 			this.c.payOrder();
 		} catch (InvalidCardNumberException e) {

@@ -2,6 +2,8 @@ package model.notification;
 
 import model.order.Order;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -12,7 +14,9 @@ import java.time.LocalDateTime;
  * @see Notification
  * @see NotificationInterface
  */
-public class NotificationOrder extends Notification implements NotificationInterface<Order>{
+public class NotificationOrder extends Notification implements NotificationInterface<Order>, Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
 	static int pickupCode = 0;
 

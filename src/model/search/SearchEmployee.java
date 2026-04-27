@@ -3,6 +3,8 @@ package model.search;
 import model.store.Store;
 import model.user.Employee;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,9 @@ import java.util.List;
  * @version 1.4
  * @see SearchStoreProducts
  */
-public class SearchEmployee implements SearchID {
+public class SearchEmployee implements SearchID, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
     /**
      * Singleton instance of the store.

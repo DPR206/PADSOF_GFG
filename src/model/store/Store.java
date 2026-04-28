@@ -110,7 +110,7 @@ public class Store implements Serializable {
      * @return a new user
      */
     public User signIn(String username, String password, String dni, IdType idType)
-            throws PasswordNotValid, UsernameTaken, InvalidId {
+            throws PasswordNotValid, UsernameTaken, InvalidDni {
         return utility.signIn(username, password, dni, idType);
     }
 

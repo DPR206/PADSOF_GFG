@@ -4,7 +4,7 @@ import model.exchange.Exchange;
 import model.search.SearchStoreProducts;
 import model.search.Searcher;
 import model.utilities.Utility;
-import model.utilities.exceptions.InvalidId;
+import model.utilities.exceptions.InvalidDni;
 import model.utilities.exceptions.PasswordNotValid;
 
 import java.io.Serial;
@@ -84,7 +84,7 @@ public abstract class User implements Serializable {
      * Changes the password of the user
      * @param newPwd, the password of the user
      */
-    public void changePassword(String newPwd) throws PasswordNotValid, InvalidId {
+    public void changePassword(String newPwd) throws PasswordNotValid, InvalidDni {
         Utility utility = new Utility();
         if (utility.securePassword(newPwd)) {
             this.pwd = newPwd;

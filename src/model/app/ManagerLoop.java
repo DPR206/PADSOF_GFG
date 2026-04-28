@@ -51,7 +51,7 @@ public class ManagerLoop extends Loop {
      */
     void managerLoop()
             throws IOException, IllegalArgumentException, NullPointerException, PasswordNotValid, UsernameTaken,
-                   InvalidId {
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -106,7 +106,7 @@ public class ManagerLoop extends Loop {
     /**
      * It allows the manager to manage the store's packs
      */
-    private void managePacks() throws IOException, PasswordNotValid, InvalidId {
+    private void managePacks() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -191,7 +191,7 @@ public class ManagerLoop extends Loop {
     /**
      * It allows the manager to manage a certain pack
      */
-    private void managePack() throws IOException, PasswordNotValid, InvalidId {
+    private void managePack() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -242,7 +242,7 @@ public class ManagerLoop extends Loop {
     /**
      * It allows the manager to manage the store's store products
      */
-    private void manageStoreProducts() throws IOException, PasswordNotValid, InvalidId {
+    private void manageStoreProducts() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
@@ -316,7 +316,7 @@ public class ManagerLoop extends Loop {
      * @return the filtered list of store products
      * @throws IOException the io exception
      */
-    public List<StoreProduct> filterSearch() throws IOException, PasswordNotValid, InvalidId {
+    public List<StoreProduct> filterSearch() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose which filter you wish to apply next (those already applied will be reset)");
         int i = 1;
@@ -390,7 +390,7 @@ public class ManagerLoop extends Loop {
      * @param comic the desired comic
      * @throws IOException the io exception
      */
-    private void manageComic(Comic comic) throws IOException, PasswordNotValid, InvalidId {
+    private void manageComic(Comic comic) throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -479,7 +479,7 @@ public class ManagerLoop extends Loop {
      * @param game the desired game
      * @throws IOException the io exception
      */
-    private void manageGame(Game game) throws IOException, PasswordNotValid, InvalidId {
+    private void manageGame(Game game) throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -565,7 +565,7 @@ public class ManagerLoop extends Loop {
      * @param figurine the desired figurine
      * @throws IOException the io exception
      */
-    private void manageFigurine(Figurine figurine) throws IOException, PasswordNotValid, InvalidId {
+    private void manageFigurine(Figurine figurine) throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -647,7 +647,7 @@ public class ManagerLoop extends Loop {
      * It allows a manager to tweak a store product's categories
      * @param storeProduct the desired store product
      */
-    private void categoryChanger(StoreProduct storeProduct) throws IOException, PasswordNotValid, InvalidId {
+    private void categoryChanger(StoreProduct storeProduct) throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -730,7 +730,7 @@ public class ManagerLoop extends Loop {
     /**
      * It allows the manager to add a store product to the store
      */
-    private void addStoreProduct() throws IOException, PasswordNotValid, InvalidId {
+    private void addStoreProduct() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -878,7 +878,7 @@ public class ManagerLoop extends Loop {
     /**
      * It allows the manager to manage the store's employees
      */
-    private void manageEmployees() throws IOException, PasswordNotValid, UsernameTaken, InvalidId {
+    private void manageEmployees() throws IOException, PasswordNotValid, UsernameTaken, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -955,7 +955,7 @@ public class ManagerLoop extends Loop {
     /**
      * It allows the manager to manage a certain employee
      */
-    private void manageEmployee() throws IOException, PasswordNotValid, UsernameTaken, InvalidId {
+    private void manageEmployee() throws IOException, PasswordNotValid, UsernameTaken, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1017,7 +1017,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to generate several statistics
      * @throws IOException the io exception
      */
-    private void generateStatistics() throws IOException, PasswordNotValid, InvalidId {
+    private void generateStatistics() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1105,7 +1105,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's store products by their sales
      * @throws IOException the io exception
      */
-    public void productBySales() throws IOException, PasswordNotValid, InvalidId {
+    public void productBySales() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1144,7 +1144,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's registered clients by number of orders
      * @throws IOException the io exception
      */
-    public void clientsByOrders() throws IOException, PasswordNotValid, InvalidId {
+    public void clientsByOrders() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1183,7 +1183,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's registered clients by number of exchanges
      * @throws IOException the io exception
      */
-    public void clientsByExchanges() throws IOException, PasswordNotValid, InvalidId {
+    public void clientsByExchanges() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1221,7 +1221,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's revenue by month
      * @throws IOException the io exception
      */
-    public void revenueByMonth() throws IOException, PasswordNotValid, InvalidId {
+    public void revenueByMonth() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1254,7 +1254,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's categories by revenue
      * @throws IOException the io exception
      */
-    public void categoriesByRevenue() throws IOException, PasswordNotValid, InvalidId {
+    public void categoriesByRevenue() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1292,7 +1292,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see the store's store products by sales, with their percentage over the overall sales
      * @throws IOException the io exception
      */
-    public void productBySalesWithPercentage() throws IOException, PasswordNotValid, InvalidId {
+    public void productBySalesWithPercentage() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1332,7 +1332,7 @@ public class ManagerLoop extends Loop {
      * on a certain month
      * @throws IOException the io exception
      */
-    public void productBySalesWithPercentageCertainMonth() throws IOException, PasswordNotValid, InvalidId {
+    public void productBySalesWithPercentageCertainMonth() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1376,7 +1376,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to manage the store's discounts
      * @throws IOException the io exception
      */
-    private void manageDiscounts() throws IOException, PasswordNotValid, InvalidId {
+    private void manageDiscounts() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1664,7 +1664,7 @@ public class ManagerLoop extends Loop {
      * It allows a manager to manage a discount
      * @throws IOException Error while scanning
      */
-    public void manageDiscount() throws IOException, PasswordNotValid, InvalidId {
+    public void manageDiscount() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1787,7 +1787,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to manage the store's parameters
      * @throws IOException the io exception
      */
-    private void manageParameters() throws IOException, PasswordNotValid, InvalidId {
+    private void manageParameters() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -1861,7 +1861,7 @@ public class ManagerLoop extends Loop {
      * It allows the manager to see its profile and change their password
      * @throws IOException the io exception
      */
-    private void seeProfile() throws IOException, PasswordNotValid, InvalidId {
+    private void seeProfile() throws IOException, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {

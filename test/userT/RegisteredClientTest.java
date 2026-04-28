@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import model.product.*;
 import model.user.RegisteredClient;
-import model.utilities.exceptions.InvalidId;
+import model.utilities.exceptions.InvalidDni;
 import model.utilities.exceptions.PasswordNotValid;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -101,7 +101,7 @@ public class RegisteredClientTest {
     }
 
     @Test
-    public void testChangePassword() throws InvalidId, PasswordNotValid {
+    public void testChangePassword() throws InvalidDni, PasswordNotValid {
         String newPass = "newSecurePass12@";
         client.changePassword(newPass);
         assertEquals(newPass, client.getPassword());

@@ -51,7 +51,7 @@ public class UnregisteredClientLoop extends Loop {
      */
     void unregisteredClientLoop()
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
-                   InvalidId {
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -92,7 +92,7 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void browseStore()
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
-                   InvalidId {
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -182,7 +182,7 @@ public class UnregisteredClientLoop extends Loop {
      * @return the filtered list of store products
      * @throws IOException the io exception
      */
-    public List<StoreProduct> filterSearch() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
+    public List<StoreProduct> filterSearch() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose which filter you wish to apply next (those already applied will be reset)");
         int i = 1;
@@ -269,7 +269,7 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void placeOrder()
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
-                   InvalidId {
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -303,7 +303,7 @@ public class UnregisteredClientLoop extends Loop {
      * It allows an unregistered client to see a certain product's info
      * @throws IOException the io exception
      */
-    private void seeStoreProduct() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
+    private void seeStoreProduct() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -357,7 +357,7 @@ public class UnregisteredClientLoop extends Loop {
     /**
      * It allows an unregistered client to see a certain product's reviews
      */
-    private void browseReviews() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
+    private void browseReviews() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -402,7 +402,7 @@ public class UnregisteredClientLoop extends Loop {
      * It allows an unregistered client to see their cart's products
      * @throws IOException the io exception
      */
-    private void seeCart() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
+    private void seeCart() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -448,7 +448,7 @@ public class UnregisteredClientLoop extends Loop {
      * It allows an unregistered client to browse their cart's products
      * @throws IOException the io exception
      */
-    public void browseCartProducts() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
+    public void browseCartProducts() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -501,7 +501,7 @@ public class UnregisteredClientLoop extends Loop {
      * It allows an unregistered client to see a product from their cart
      * @throws IOException the io exception
      */
-    public void seeCartProduct() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
+    public void seeCartProduct() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -548,7 +548,7 @@ public class UnregisteredClientLoop extends Loop {
      * It allows an unregistered client to see their cart's packs
      * @throws IOException the io exception
      */
-    public void browseCartPacks() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
+    public void browseCartPacks() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -600,7 +600,7 @@ public class UnregisteredClientLoop extends Loop {
      * It allows an unregistered client to see a pack from their cart
      * @throws IOException the io exception
      */
-    public void seeCartPack() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
+    public void seeCartPack() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -651,7 +651,7 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void cartLogger()
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
-                   InvalidId {
+                   InvalidDni {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
@@ -685,7 +685,7 @@ public class UnregisteredClientLoop extends Loop {
      */
     private void cartSigner()
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
-                   InvalidId {
+                   InvalidDni {
         System.out.print("\n <<<<<<<<<< cartSigner >>>>>>>>>> \n"); // Es para debug, borrar
         UnregisteredClient unregisteredClient = (UnregisteredClient) currentUser;
         Cart currrentCart = unregisteredClient.getCart();

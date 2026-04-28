@@ -46,7 +46,7 @@ public class SignupC extends MainLoopSelector implements ActionListener {
                     JOptionPane.showMessageDialog(null, exception1.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
                 } catch (PasswordNotValid exception2) {
                     JOptionPane.showMessageDialog(null, exception2.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
-                } catch (InvalidId exception3) {
+                } catch (InvalidDni exception3) {
                     JOptionPane.showMessageDialog(null, exception3.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
                 }
             }

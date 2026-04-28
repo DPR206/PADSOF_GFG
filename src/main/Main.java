@@ -8,7 +8,7 @@ import java.awt.*;
 public class Main {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     public static void main(String[] args) {
-        UIManager.put("Panel.background", new Color(246, 243, 238)); // Beige background as default
+        //UIManager.put("Panel.background", new Color(246, 243, 238)); // Beige background as default
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception e) {

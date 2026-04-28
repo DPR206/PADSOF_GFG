@@ -13,7 +13,7 @@ public class ImageAdder {
     public static JLabel getImageLabel(String imagePath, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(imagePath);
         JLabel image = new JLabel();
-        image.setIcon(getScaledImage(imageIcon, 50, 50));
+        image.setIcon(getScaledImage(imageIcon, width, height));
         return image;
     }
 

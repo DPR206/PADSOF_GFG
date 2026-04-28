@@ -54,7 +54,7 @@ public class SignupP extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(idDniType);
         buttonPanel.add(idNieType);
-        buttonPanel.setBackground(new Color(246, 243, 238)); // Beige
+        //buttonPanel.setBackground(new Color(246, 243, 238)); // Beige
 
         // añadir componentes al panel
         this.add(ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50));

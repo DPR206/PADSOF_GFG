@@ -33,7 +33,7 @@ public class Utility implements Serializable {
      * @return a new user
      */
     public User signIn(String userName, String pwd, String id, IdType idType)
-            throws PasswordNotValid, UsernameTaken, InvalidDni {
+            throws PasswordNotValid, UsernameTaken, InvalidId {
         RegisteredClient rc;
         User u;
 
@@ -86,7 +86,7 @@ public class Utility implements Serializable {
      * @return true if the password is safe, false if else
      * @throws PasswordNotValid the password isn't secure
      */
-    public boolean securePassword(String psswd) throws PasswordNotValid, InvalidDni {
+    public boolean securePassword(String psswd) throws PasswordNotValid, InvalidId {
         int upper = 0;
         int lower = 0;
         int numbers = 0;
@@ -140,28 +140,28 @@ public class Utility implements Serializable {
         return secure;
     }
 
-    public void validId(String id, IdType idType) throws InvalidDni {
+    public void validId(String id, IdType idType) throws InvalidId {
         switch (idType) {
-            case DNI -> validDni(id);
-            case NIE -> validNie(id);
-            default -> throw new InvalidDni();
+            case DNI -> validDni(id, idType);
+            case NIE -> validNie(id, idType);
+            default -> throw new InvalidId(null);
         }
     }
 
-    public void validDni(String id) throws InvalidDni {
+    public void validDni(String id, IdType idType) throws InvalidId {
         /* (8 números y una letra = 9) */
         if (id.length() != 9) {
-            throw new InvalidDni();
+            throw new InvalidId(idType);
         }
         /* Números */
         for (int i = 0; i < 8; i++) {
             if (!Character.isDigit(id.charAt(i))) {
-                throw new InvalidDni();
+                throw new InvalidId(idType);
             }
         }
         /* Letra */
         if (!Character.isUpperCase(id.charAt(8))) {
-            throw new InvalidDni();
+            throw new InvalidId(idType);
         }
         /* Algoritmo de validez: https://interior.gob
         .es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/dni/calculo-del-digito-de-control-del-nif-nie/*/
@@ -191,15 +191,15 @@ public class Utility implements Serializable {
             case 20 -> letra = 'C';
             case 21 -> letra = 'K';
             case 22 -> letra = 'E';
-            default -> throw new InvalidDni();
+            default -> throw new InvalidId(idType);
         }
 
         if (id.charAt(8) != letra) {
-            throw new InvalidDni();
+            throw new InvalidId(idType);
         }
     }
 
-    public void validNie(String id) throws InvalidDni {
+    public void validNie(String id, IdType idType) throws InvalidId {
         int firstNum;
         /* Algoritmo de validez: https://interior.gob
         .es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/dni/calculo-del-digito-de-control-del-nif-nie/*/
@@ -207,8 +207,8 @@ public class Utility implements Serializable {
             case 'X' -> firstNum = 0;
             case 'Y' -> firstNum = 1;
             case 'Z' -> firstNum = 2;
-            default -> throw new InvalidDni();
+            default -> throw new InvalidId(idType);
         }
-        validDni(Character.toString(firstNum) + id.substring(1, 9));
+        validDni(Character.toString(firstNum) + id.substring(1, 9), idType);
     }
 }

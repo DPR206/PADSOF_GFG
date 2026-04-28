@@ -3,7 +3,6 @@ package model.user;
 import model.exchange.Exchange;
 import model.search.SearchStoreProducts;
 import model.search.Searcher;
-import model.store.Store;
 import model.utilities.Utility;
 import model.utilities.exceptions.InvalidDni;
 import model.utilities.exceptions.PasswordNotValid;
@@ -50,7 +49,7 @@ public abstract class User implements Serializable {
         this.actualID = actualID;
         this.searching = new Searcher(new SearchStoreProducts(asc));
         //DEBUG: System.out.println("Adding user...");
-        Store.getInstance().addUser(this);
+        // Store.getInstance().addUser(this); <- Antes iba aquí pero en verdad no guardamos los unregistered
     }
 
     /**

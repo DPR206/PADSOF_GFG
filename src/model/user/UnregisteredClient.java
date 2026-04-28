@@ -37,7 +37,7 @@ public class UnregisteredClient extends User implements Serializable {
     * @param asc the products' order in the search
     */
     public UnregisteredClient(boolean asc) {
-        super(UserType.UNREGISTERED_CLIENT, null, null, asc);
+        super(UserType.UNREGISTERED_CLIENT, null, "Unregistered_Client", asc);
     	c = new Cart();
         s = Store.getInstance();
 
@@ -108,7 +108,7 @@ public class UnregisteredClient extends User implements Serializable {
      * @return the store product based on the filters
      */
     public List<StoreProduct> searchStoreProduct(){
-        return this.getSearcher().searchStoreProducts();
+        return Store.getInstance().getStoreProductList();
     }
 
     /**

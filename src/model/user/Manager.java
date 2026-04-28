@@ -48,6 +48,7 @@ public class Manager extends User implements Serializable {
         this.sp = new StorePermission();
 
         this.getSearcher().setTypes(SearchType.S_STORE);
+        Store.getInstance().addUser(this);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

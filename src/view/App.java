@@ -17,7 +17,6 @@ import java.io.IOException;
  * @version 1.0
  */
 public class App extends JFrame {
-    private static App INSTANCE;
     // Aquí se declaran todos los paneles de vista como atributos
     private final LoginP loginPanel;
     private final SignupP signupPanel;
@@ -39,7 +38,7 @@ public class App extends JFrame {
         signupPanel = new SignupP();
         unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser);
         registeredMainPanel = new RegisteredMainP();
-        employeeMainPanel = new EmployeeMainP();
+        employeeMainPanel = new EmployeeMainP(mainUser);
         managerMainPanel = new ManagerMainP();
         welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
@@ -103,17 +102,6 @@ public class App extends JFrame {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
-    /**
-     * Gets the Instance of the App
-     * @return the app
-     */
-    public static App getInstance() throws IOException {
-        if (App.INSTANCE == null) {
-            App.INSTANCE = new App();
-        }
-        return App.INSTANCE;
-    }
 
     public void changeCurrentUser(User user) {
         this.mainUser = user;

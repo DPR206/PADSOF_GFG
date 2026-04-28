@@ -108,7 +108,7 @@ public class UnregisteredClient extends User implements Serializable {
      * @return the store product based on the filters
      */
     public List<StoreProduct> searchStoreProduct(){
-        return Store.getInstance().getStoreProductList();
+        return this.getSearcher().searchStoreProducts();
     }
 
     /**

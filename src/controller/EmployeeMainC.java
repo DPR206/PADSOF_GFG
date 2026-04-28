@@ -4,7 +4,10 @@ import model.store.Store;
 import view.App;
 import view.EmployeeMainP;
 
-public class EmployeeMainC {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class EmployeeMainC implements ActionListener {
     private final EmployeeMainP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -14,5 +17,10 @@ public class EmployeeMainC {
         this.frame = frame;
         this.view = frame.getEmployeeMainPanel();
         this.model = model;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //DUE
     }
 }

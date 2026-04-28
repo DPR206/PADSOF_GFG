@@ -2,7 +2,8 @@ package view;
 
 import controller.*;
 import model.store.Store;
-import model.user.*;
+import model.user.UnregisteredClient;
+import model.user.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,9 +60,6 @@ public class App extends JFrame {
         loginPanel.setController(loginController);
         signupPanel.setController(signupController);
         unregisteredMainPanel.setController(unregisteredMainController);
-        registeredMainPanel.setController(registeredMainController);
-        employeeMainPanel.setController(employeeMainController);
-        managerMainPanel.setController(managerMainController);
         welcomePanel.setController(welcomeController);
 
         /* Add views to main window */
@@ -102,9 +100,6 @@ public class App extends JFrame {
         this.setSize(700, 500);
         this.setLocationRelativeTo(null);
 
-        Store.getInstance().addUser(
-                new Employee("everythingEmployee", "password", true, Permission.STORE, Permission.ORDER,
-                        Permission.EXCHANGE));
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

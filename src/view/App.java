@@ -1,6 +1,7 @@
 package view;
 
 import controller.*;
+import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import model.user.User;
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * It implements the app's view
@@ -17,7 +19,6 @@ import java.io.IOException;
  * @version 1.0
  */
 public class App extends JFrame {
-    // Aquí se declaran todos los paneles de vista como atributos
     private final LoginP loginPanel;
     private final SignupP signupPanel;
     private final UnregisteredMainP unregisteredMainPanel;
@@ -26,7 +27,10 @@ public class App extends JFrame {
     private final ManagerMainP managerMainPanel;
     private final WelcomeP welcomePanel;
     private final SearchPanel searchPanel;
+    private final BrowseStoreP browseStorePanel;
+    // Aquí se declaran todos los paneles de vista como atributos
     private User mainUser = new UnregisteredClient(true);
+    private List<StoreProduct> products = Store.getInstance().getStoreProductList(); //DUE
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() throws IOException {
@@ -42,6 +46,7 @@ public class App extends JFrame {
         managerMainPanel = new ManagerMainP();
         welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
+        browseStorePanel = new BrowseStoreP();
 
         /* Model */
         Store model = Store.getInstance();
@@ -54,16 +59,23 @@ public class App extends JFrame {
         EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
         ManagerMainC managerMainController = new ManagerMainC(this, model);
         WelcomeC welcomeController = new WelcomeC(this, model);
+        BrowseStoreC browseStoreController = new BrowseStoreC(this, model);
+
 
         /* Configure controllers' views */
         loginPanel.setController(loginController);
         signupPanel.setController(signupController);
         unregisteredMainPanel.setController(unregisteredMainController);
+        registeredMainPanel.setController(registeredMainController);
+        employeeMainPanel.setController(employeeMainController);
+        managerMainPanel.setController(managerMainController);
         welcomePanel.setController(welcomeController);
+        browseStorePanel.setController(browseStoreController);
 
         /* Add views to main window */
         Container container = this.getContentPane();
         container.setLayout(new GridBagLayout());
+        //container.setBackground(new Color(246, 243, 238)); // Beige
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -77,6 +89,8 @@ public class App extends JFrame {
         unregisteredMainPanel.setVisible(false);
         container.add(welcomePanel, gbc);
         welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
+        container.add(browseStorePanel, gbc);
+        browseStorePanel.setVisible(false);
 
         /* Load store */
         model.loadStore("data", "statics");
@@ -88,7 +102,10 @@ public class App extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    model.saveStore("data", "statics");
+                    if (JOptionPane.showConfirmDialog(null, "Save the store?", "One last thing...",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                        model.saveStore("data", "statics");
+                    }
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -99,10 +116,14 @@ public class App extends JFrame {
         this.setSize(700, 500);
         this.setLocationRelativeTo(null);
 
+        //Store.getInstance().addUser(new RegisteredClient("client", "pwd", "12345678A", true));
+        //Store.getInstance()
+        //    .addUser(new Employee("employee3", "pwd", true, Permission.ORDER, Permission.STORE, Permission
+        //    .EXCHANGE));
+        //Store.getInstance().addUser(new Employee("employee2", "pwd", true, Permission.ORDER, Permission.STORE));
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
-
     public void changeCurrentUser(User user) {
         this.mainUser = user;
     }
@@ -110,6 +131,10 @@ public class App extends JFrame {
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     public App getApp() {
         return this;
+    }
+
+    public BrowseStoreP getBrowseStorePanel() {
+        return browseStorePanel;
     }
     // Aquí van los getters de los atributos
 

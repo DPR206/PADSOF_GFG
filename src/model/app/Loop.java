@@ -69,7 +69,7 @@ public abstract class Loop {
      * It handles the log-in and updates the current user accordingly
      * @throws IOException the io exception
      */
-    protected void logger() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
+    protected void logger() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< logger >>>>>>>>>> \n"); // Es para debug, borrar
 
@@ -89,7 +89,7 @@ public abstract class Loop {
      * It handles the sign-up and updates the current user accordingly
      * @throws IOException the io exception
      */
-    protected void signer() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
+    protected void signer() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< signer >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.print("Enter your username: ");
@@ -106,7 +106,7 @@ public abstract class Loop {
      * Shortcut to the main.Main Loop's main() method
      * @throws IOException the io exception
      */
-    protected void main() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
+    protected void main() throws IOException, UsernameTaken, PasswordNotValid, InvalidId {
         MainLoop.getInstance().main();
     }
 
@@ -118,7 +118,7 @@ public abstract class Loop {
      */
     protected void loopSelector()
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
-                   InvalidDni {
+                   InvalidId {
         System.out.print("\n <<<<<<<<<< loopSelector >>>>>>>>>> \n"); // Es para debug, borrar
         if (currentUser == null) {
             currentUser = new UnregisteredClient(true);

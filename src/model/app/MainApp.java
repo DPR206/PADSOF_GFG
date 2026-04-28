@@ -37,7 +37,7 @@ public class MainApp {
             throw new IllegalArgumentException(ia.getMessage());
         } catch (NullPointerException np) {
             throw new NullPointerException(np.getMessage());
-        } catch (InvalidDni | UsernameTaken | PasswordNotValid e) {
+        } catch (InvalidId | UsernameTaken | PasswordNotValid e) {
             throw new RuntimeException(e);
         }
     }

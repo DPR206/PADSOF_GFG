@@ -67,11 +67,26 @@ public class App extends JFrame {
         /* Add views to main window */
         Container container = this.getContentPane();
         container.setLayout(new GridBagLayout());
-        container.setBackground(new Color(246, 243, 238)); // Beige
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
+
+        JLabel label = new JLabel();
+        label.setIcon(new ImageIcon(".\\resources\\confeti.gif"));
+        this.add(label, gbc);
+
+        JLabel label2 = new JLabel();
+        label2.setIcon(new ImageIcon(".\\resources\\confeti2.gif"));
+        this.add(label2, gbc);
+
+        JLabel heart = new JLabel();
+        heart.setIcon(new ImageIcon(".\\resources\\heart.gif"));
+        this.add(heart, gbc);
+
+        JLabel cockroach = new JLabel();
+        cockroach.setIcon(new ImageIcon(".\\resources\\cockroach.gif"));
+        this.add(cockroach, gbc);
 
         container.add(loginPanel, gbc);
         loginPanel.setVisible(false);

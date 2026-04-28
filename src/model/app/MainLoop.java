@@ -48,7 +48,7 @@ public class MainLoop extends Loop {
      */
     protected void main()
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
-                   InvalidDni {
+                   InvalidId {
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n <<<<<<<<<< main >>>>>>>>>> \n"); // Es para debug, borrar
 

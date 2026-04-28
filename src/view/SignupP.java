@@ -31,19 +31,24 @@ public class SignupP extends JPanel {
                 "  -Lower case letters\n" + "  -Numbers\n" + "  -Special characters");
         textArea.setEditable(false);
         textArea.setFocusable(false);
-        JLabel usernameLabel = new JLabel("Enter your Username:");
+        JLabel usernameLabel = new JLabel("Enter your username:");
+        usernameLabel.setForeground(Color.BLUE);
         username = new JTextField();
         username.setColumns(10);
-        JLabel passwordLabel = new JLabel("Enter you password:");
+        JLabel passwordLabel = new JLabel("Enter your password:");
+        passwordLabel.setForeground(Color.GREEN);
         password = new JPasswordField();
-        JLabel password2Label = new JLabel("Repeat you password:");
+        JLabel password2Label = new JLabel("Repeat your password:");
+        password2Label.setForeground(Color.YELLOW);
         password2 = new JPasswordField();
         password.setColumns(10);
         JLabel idNumberLabel = new JLabel("Enter your identification number:");
+        idNumberLabel.setForeground(Color.CYAN);
         idNumber = new JTextField();
         password.setColumns(10);
         signup = new JButton("Sign up");
         JLabel idTypeLabel = new JLabel("Select identification type:");
+        idTypeLabel.setForeground(Color.WHITE);
         idDniType = new JRadioButton("DNI");
         idNieType = new JRadioButton("NIE");
 
@@ -54,10 +59,9 @@ public class SignupP extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(idDniType);
         buttonPanel.add(idNieType);
-        buttonPanel.setBackground(new Color(246, 243, 238)); // Beige
 
         // añadir componentes al panel
-        this.add(ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50));
+        this.add(ImageAdder.getImageLabel(".\\resources\\hamster.png", 150, 150));
         this.add(textArea);
         /* Username */
         this.add(usernameLabel);

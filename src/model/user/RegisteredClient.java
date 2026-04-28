@@ -9,7 +9,7 @@ import model.order.OrderHistory;
 import model.search.*;
 import model.store.Recommender;
 import model.store.Store;
-import model.utilities.exceptions.InvalidDni;
+import model.utilities.exceptions.InvalidId;
 import model.utilities.exceptions.PasswordNotValid;
 
 import java.io.Serial;
@@ -171,7 +171,7 @@ public class RegisteredClient extends User implements Serializable {
      * It changes the client's password
      * @param psswd the new password
      */
-    public void changePassword(String psswd) throws InvalidDni, PasswordNotValid {
+    public void changePassword(String psswd) throws InvalidId, PasswordNotValid {
     	super.changePassword(psswd);
     }
 

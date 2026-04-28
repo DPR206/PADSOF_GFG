@@ -5,7 +5,6 @@ package model.user;
 
 import model.utilities.IdType;
 import model.utilities.exceptions.*;
-import model.utilities.exceptions.*;
 import model.order.Cart;
 import model.product.*;
 import model.search.SearchType;
@@ -47,7 +46,7 @@ public class UnregisteredClient extends User implements Serializable {
     /**
      * Makes the buying process of the cart
      */
-    public void buy(String username, String password, String dni) throws UsernameTaken, PasswordNotValid, InvalidDni {
+    public void buy(String username, String password, String dni) throws UsernameTaken, PasswordNotValid, InvalidId {
         this.s.signIn(username, password, dni, IdType.DNI); //DUE: Contemplar que se use otro
         try {
 			this.c.payOrder();

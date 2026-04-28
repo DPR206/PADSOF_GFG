@@ -77,6 +77,7 @@ public class RegisteredClient extends User implements Serializable {
 		this.searcher = searcher;
 		this.numOrders = numOrders;
 		this.numExchanges = numExchanges;
+		Store.getInstance().addUser(this);
 	}
 
 	/**
@@ -99,6 +100,7 @@ public class RegisteredClient extends User implements Serializable {
         this.setHistories();
 
         this.getSearcher().setTypes(SearchType.S_SECOND_HAND, SearchType.S_STORE);
+        Store.getInstance().addUser(this);
     }
 
 

@@ -7,6 +7,7 @@ import model.notification.NotificationHistory;
 import model.order.Order;
 import model.order.OrderState;
 import model.product.*;
+import model.store.Store;
 
 import java.io.*;
 import java.time.*;
@@ -60,6 +61,7 @@ public class Employee extends User implements Serializable {
         }
 
         this.notificationHistory = new NotificationHistory(this);
+        Store.getInstance().addUser(this);
     }
 
     /*---------------------------------------------------GETTERS AND SETTERS-------------------------------------------------------------*/

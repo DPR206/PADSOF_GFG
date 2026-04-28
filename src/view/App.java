@@ -59,11 +59,15 @@ public class App extends JFrame {
         loginPanel.setController(loginController);
         signupPanel.setController(signupController);
         unregisteredMainPanel.setController(unregisteredMainController);
+        registeredMainPanel.setController(registeredMainController);
+        employeeMainPanel.setController(employeeMainController);
+        managerMainPanel.setController(managerMainController);
         welcomePanel.setController(welcomeController);
 
         /* Add views to main window */
         Container container = this.getContentPane();
         container.setLayout(new GridBagLayout());
+        container.setBackground(new Color(246, 243, 238)); // Beige
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;

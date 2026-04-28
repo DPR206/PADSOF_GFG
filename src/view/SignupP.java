@@ -3,7 +3,7 @@ package view;
 import model.utilities.IdType;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /**
  * It implements the sign-up panel view
@@ -46,6 +46,10 @@ public class SignupP extends JPanel {
         idDniType = new JRadioButton("DNI");
         idNieType = new JRadioButton("NIE");
 
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(idDniType);
+        buttonGroup.add(idNieType);
+
         // añadir componentes al panel
         this.add(ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50));
         this.add(textArea);
@@ -65,14 +69,16 @@ public class SignupP extends JPanel {
         this.add(idNumber);
         /* Button :) */
         this.add(signup);
-    }
 
-    public void deselectDni() {
-        this.idDniType.setSelected(false);
-    }
-
-    public void deselectNie() {
-        this.idNieType.setSelected(false);
+        // Enter para pulsar botón en último campo
+        idNumber.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    signup.doClick();
+                }
+            }
+        });
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

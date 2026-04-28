@@ -99,6 +99,12 @@ public class App extends JFrame {
         this.setSize(700, 500);
         this.setLocationRelativeTo(null);
 
+        //Store.getInstance().addUser(new RegisteredClient("client", "pwd", "12345678A", true));
+        //Store.getInstance()
+        //    .addUser(new Employee("employee3", "pwd", true, Permission.ORDER, Permission.STORE, Permission
+        //    .EXCHANGE));
+        //Store.getInstance().addUser(new Employee("employee2", "pwd", true, Permission.ORDER, Permission.STORE));
+
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

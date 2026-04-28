@@ -26,12 +26,6 @@ public class SignupC extends MainLoopSelector implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("DNI")) {
-            view.deselectNie();
-        }
-        if (e.getActionCommand().equals("NIE")) {
-            view.deselectDni();
-        }
         if (e.getActionCommand().equals("Sign up")) { /* "Sign up" pressed */
             if (view.getIdType() == null) {
                 JOptionPane.showMessageDialog(null, "You must select an idType", "Warning :(",

@@ -88,7 +88,10 @@ public class App extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    model.saveStore("data", "statics");
+                    if (JOptionPane.showConfirmDialog(null, "Save the store?", "One last thing...",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                        model.saveStore("data", "statics");
+                    }
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

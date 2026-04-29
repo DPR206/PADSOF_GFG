@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,6 +39,7 @@ public class SearchPanel extends JPanel{
 	private JCheckBox treintacuarenta = new JCheckBox("30-40");
 	private JCheckBox cuarentacincuenta = new JCheckBox("40-50");
 	private JCheckBox plus50 = new JCheckBox("50+");
+	private JButton aplicar = new JButton("Aplicar filtros");
 
 	JPanel ordenacion = new JPanel(new GridLayout(1,1));
 
@@ -47,7 +49,8 @@ public class SearchPanel extends JPanel{
 	public SearchPanel() {
 		super();
 		this.setLayout(new GridLayout(4, 1));
-
+		
+		this.add(this.aplicar);
 		this.catFilter.add(new JLabel("CATEGORÍAS"));
 		this.catFilter.add(this.jmesa);
 		this.catFilter.add(this.jrol);
@@ -113,5 +116,7 @@ public class SearchPanel extends JPanel{
 		
 		this.ascendente.addActionListener(c);
 		this.descendente.addActionListener(c);
+		
+		this.aplicar.addActionListener(c);
 	}
 }

@@ -6,16 +6,20 @@ import view.App;
 
 import javax.swing.*;
 
-public class MainLoopSelector {
+public class MainLoopSelector { // DUE: Hacer que sea abstract
     private final App frame; /* view -> frame */
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     public MainLoopSelector(App frame, Store model) {
         this.frame = frame;
         this.model = model;
     }
 
+    /**
+     * It selects which main page should be seen by the user via its type
+     */
     public void loopSelector() {
         User user = frame.getUser();
         this.frame.getLoginPanel().setVisible(false);
@@ -32,6 +36,7 @@ public class MainLoopSelector {
             case EMPLOYEE:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Employee!");
                 this.frame.getEmployeeMainPanel().setVisible(true);
+                this.frame.getEmployeeMainPanel().paintEverything();
                 break;
             case MANAGER:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Manager!");

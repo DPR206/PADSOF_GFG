@@ -5,6 +5,8 @@ import model.store.Store;
 import model.user.UnregisteredClient;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,80 +14,75 @@ import java.util.ArrayList;
 
 public class UnregisteredMainP extends JPanel {
     private JPanel banner;
-    private List<JButton> botones = new ArrayList<>();
-    private JTextField toSearch;
+    private JButton filters = new JButton("Filters");
+    private JButton search = new JButton("Search");
     private JScrollPane scrolling;
+    private SearchPanel filterP = new SearchPanel();
+    private BrowseStoreP searching;
     private JPanel products;
     private JPanel productSearch;
     private List<StoreProduct> p;
     private UnregisteredClient mainU;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public UnregisteredMainP(UnregisteredClient mainU) {
+    public UnregisteredMainP(UnregisteredClient mainU, App app) {
         super();
     	this.mainU = mainU;
         this.banner = new JPanel();
         this.productSearch = new JPanel();
         this.productSearch.setLayout(new BorderLayout());
-    	this.toSearch = new JTextField();
-        
+
+        this.filterP.setVisible(false);
+
+        List<StoreProduct> products = Store.getInstance().getStoreProductList();
+        this.p = products;
+        try {
+			this.searching = new BrowseStoreP(app);
+			this.searching.setVisible(false);
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Store s = Store.getInstance();
         this.p = this.mainU.searchStoreProduct();
-        
+
         this.setLayout(new BorderLayout());
-        
-        this.banner.add(new JLabel("GIFTS FOR GEEKS"));
-        
-        this.products = new JPanel(new GridLayout(0,4));
+
+        this.banner.add(new JLabel("GIFTS FOR GEEKS"), BorderLayout.NORTH);
         this.add(banner, BorderLayout.NORTH);
-        
-        for(StoreProduct sp: p) {
-        	JButton boton = new JButton(sp.getName());
-        	products.add(boton);
-        	this.botones.add(boton);
-        }
-        
-        JScrollPane scrolling = new JScrollPane(products);
-        
-        this.productSearch.add(toSearch, BorderLayout.NORTH);
-        this.productSearch.add(scrolling, BorderLayout.CENTER);
-        this.add(productSearch, BorderLayout.CENTER);
-    }
-    
-    public void setFoundProduct() {
-    	String id = this.toSearch.getText();
-    	
-    	this.botones.clear();
-    	this.products.removeAll();
-    	
-    	mainU.getSearcher().getStoreSearcher();
-    	
-    	this.products.revalidate();
-        this.products.repaint();
-    }
-    
-    public void restoreView() {
-    	this.products.removeAll();
 
-        for (StoreProduct sp : p) {
-        	JButton boton = new JButton(sp.getName());
-        	products.add(boton);
-        	this.botones.add(boton);
-        }
+        JPanel others = new JPanel(new BorderLayout());
 
-        this.products.revalidate();
-        this.products.repaint();
+        JPanel botones = new JPanel(new GridLayout(0,2));
+        botones.add(this.search);
+        botones.add(this.filters);
+        others.add(botones, BorderLayout.NORTH);
+
+        this.products = new JPanel(new GridLayout(0,4));
+
+        int index = 1;
+
+        others.add(this.products, BorderLayout.CENTER);
+        this.add(others, BorderLayout.CENTER);
+
+        JPanel bottom = new JPanel(new CardLayout());
+        bottom.add(this.searching, "Search");
+        bottom.add(this.filterP, "Search");
+        others.add(bottom, BorderLayout.SOUTH);
     }
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        this.toSearch.addActionListener(c);
-        for(JButton boton: this.botones) {
-        	boton.addActionListener(c);
-        }
+    public void setController(ActionListener e) {
+    	this.filters.addActionListener(e);
+    	this.search.addActionListener(e);
+
+    }
+
+    public BrowseStoreP getBrowsePanel() {
+    	return this.searching;
+    }
+
+    public SearchPanel getFilterPanel() {
+    	return this.filterP;
     }
 }

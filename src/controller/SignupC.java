@@ -19,6 +19,12 @@ public class SignupC extends MainLoopSelector implements ActionListener {
     private final SignupP view; /* view -> panel */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This controller's constructor
+     * @param frame the controller's frame
+     * @param model the controller's model
+     */
     public SignupC(App frame, Store model) {
         super(frame, model);
         this.view = frame.getSignupPanel();
@@ -34,8 +40,8 @@ public class SignupC extends MainLoopSelector implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Passwords did not match", "Warning :(", JOptionPane.ERROR_MESSAGE);
             } else {
                 try {
-                    User user = super.getModel()
-                                     .signIn(view.getUsername(), view.getPassword(), view.getDni(), view.getIdType());
+                    User user = super.getModel().signIn(view.getUsername(), view.getPassword(), view.getIdNumber(),
+                            view.getIdType());
                     if (user != null) {
                         JOptionPane.showMessageDialog(null,
                                 "Signed up successfully :)\n" + "Welcome abroad " + view.getUsername());

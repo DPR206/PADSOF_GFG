@@ -38,6 +38,8 @@ public class SearchStoreProducts implements Serializable {
     public SearchStoreProducts(boolean asc){
         this.ascendant = asc;
         this.s = Store.getInstance();
+        List<Category> c = new ArrayList<>();
+        this.categoryF = new CategoryFilter(c);
     }
 
     /**
@@ -48,8 +50,6 @@ public class SearchStoreProducts implements Serializable {
      */
     public void addPunctuationFilter(int min, int max){
         this.punctuationF.add(new PunctuationFilter(min, max));
-        List<Category> c = new ArrayList<>();
-        this.categoryF = new CategoryFilter(c);
     }
 
     /**

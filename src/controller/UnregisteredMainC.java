@@ -13,7 +13,7 @@ public class UnregisteredMainC implements ActionListener {
     private final UnregisteredMainP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private final User c = null;
+    private final User c = new UnregisteredClient(false);
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public UnregisteredMainC(App frame, Store model) {
@@ -24,6 +24,6 @@ public class UnregisteredMainC implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // DUE
+        //SE ASUME QUE AQUÍ SE DECIDIÓ NO HACER LOGIN Y SE LE HA PASADO UN UNREGISTEREDCLIENT
     }
 }

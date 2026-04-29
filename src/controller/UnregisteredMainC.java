@@ -24,6 +24,13 @@ public class UnregisteredMainC implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //SE ASUME QUE AQUÍ SE DECIDIÓ NO HACER LOGIN Y SE LE HA PASADO UN UNREGISTEREDCLIENT
+       if(e.getActionCommand().equals("Filters")) {
+    	   view.getBrowsePanel().setVisible(false);
+           view.getFilterPanel().setVisible(true);
+       }
+       else if(e.getActionCommand().equals("Search")) {
+    	   view.getFilterPanel().setVisible(false);
+           view.getBrowsePanel().setVisible(true);
+       }
     }
 }

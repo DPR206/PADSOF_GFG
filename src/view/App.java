@@ -41,7 +41,7 @@ public class App extends JFrame {
         /* Views */
         loginPanel = new LoginP();
         signupPanel = new SignupP();
-        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser);
+        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser, this);
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
         managerMainPanel = new ManagerMainP();
@@ -178,5 +178,9 @@ public class App extends JFrame {
 
     public void setUnregisteredClient(UnregisteredClient u) {
         this.mainUser = u;
+    }
+
+    public void setsProductList(List<StoreProduct> products) {
+        this.products = products;
     }
 }

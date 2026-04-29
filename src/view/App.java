@@ -31,7 +31,7 @@ public class App extends JFrame {
     private final BrowseStoreP browseStorePanel;
     // Aquí se declaran todos los paneles de vista como atributos
     private User mainUser = new UnregisteredClient(true);
-    private List<StoreProduct> products = Store.getInstance().getStoreProductList(); //DUE
+    private List<StoreProduct> products = Store.getInstance().getStoreProductList();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() throws IOException, BadLocationException {
@@ -41,13 +41,13 @@ public class App extends JFrame {
         /* Views */
         loginPanel = new LoginP();
         signupPanel = new SignupP();
-        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser);
+        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser, this);
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
         managerMainPanel = new ManagerMainP();
         welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
-        browseStorePanel = new BrowseStoreP(products);
+        browseStorePanel = new BrowseStoreP(this);
 
         /* Model */
         Store model = Store.getInstance();
@@ -148,6 +148,10 @@ public class App extends JFrame {
         return managerMainPanel;
     }
 
+    public List<StoreProduct> getProducts() {
+        return products;
+    }
+
     public RegisteredMainP getRegisteredMainPanel() {
         return registeredMainPanel;
     }
@@ -175,8 +179,8 @@ public class App extends JFrame {
     public void setUnregisteredClient(UnregisteredClient u) {
         this.mainUser = u;
     }
-    
+
     public void setsProductList(List<StoreProduct> products) {
-    	this.products = products;
+        this.products = products;
     }
 }

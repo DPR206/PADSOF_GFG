@@ -26,11 +26,11 @@ public class BrowseStoreP extends JPanel {
     /**
      * This panel's constructor
      */
-    public BrowseStoreP(List<StoreProduct> storeProducts) throws BadLocationException {
+    public BrowseStoreP(App app) throws BadLocationException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 
         currentPageNum = 1;
-        this.storeProducts = storeProducts;
+        this.storeProducts = app.getProducts();
 
         paintEverything();
     }

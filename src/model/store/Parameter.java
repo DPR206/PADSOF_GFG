@@ -55,7 +55,7 @@ public class Parameter implements Serializable {
         /* scoreWeight = a*<score> + b */
         this.scoreAParam = 0.5;
         this.scoreBParam = 0.5;
-        this.itemsPerPage = 10;
+        this.itemsPerPage = 5;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
@@ -124,14 +124,6 @@ public class Parameter implements Serializable {
     }
 
     /**
-     * It changes the number of lines that can be printed from a certain list
-     * @param newItemsPerPage the new number of lines that can be printed from a certain list
-     */
-    public void changeItemsPerPage(int newItemsPerPage) {
-        this.setItemsPerPage(newItemsPerPage);
-    }
-
-    /**
      * It changes the store's address
      * @param newAddress the new address to set
      */
@@ -171,14 +163,6 @@ public class Parameter implements Serializable {
      */
     public int getItemsPerPage() {
         return itemsPerPage;
-    }
-
-    /**
-     * It sets the number of lines that can be printed from a certain list
-     * @param newItemsPerPage the new number of lines that can be printed from a certain list
-     */
-    public void setItemsPerPage(int newItemsPerPage) {
-        this.itemsPerPage = newItemsPerPage;
     }
 
     /**

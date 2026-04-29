@@ -91,7 +91,7 @@ public class App extends JFrame {
         container.add(welcomePanel, gbc);
         welcomePanel.setVisible(false); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
         container.add(browseStorePanel, gbc);
-        browseStorePanel.setVisible(true);
+        browseStorePanel.setVisible(true); // DUE: poner esto a false y welcomePanel a true
 
         /* Load store */
         model.loadStore("data", "statics");

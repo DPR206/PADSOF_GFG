@@ -1,11 +1,12 @@
 package view;
 
-import model.product.StoreProduct;
+import model.product.*;
 
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,17 +21,19 @@ public class BrowseStoreP extends JPanel {
     public BrowseStoreP() throws BadLocationException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 
-        /*storeProducts.add(new Comic(10.50, "Tintin: Aterrizaje en la Luna", "Comic de Tintin",
+        storeProducts.add(new Comic(10.50, "Tintin: Aterrizaje en la Luna", "Comic de Tintin",
                 ".\\resources\\tintin_aterrizaje_luna" + ".jpg", 5, 135, Year.parse("2000"), "Herge", "No clue"));
         storeProducts.add(
                 new Game(8.75, "Virus", "Juego de cartas muy divertido", ".\\resources\\virus.jpg", 2, 3, "+3",
-                        GameStyle.CARDS));*/
+                        GameStyle.CARDS));
 
         if (storeProducts != null) {
+            int index = 1;
             for (StoreProduct product : storeProducts) {
-                MiniProduct miniProduct = new MiniProduct(product);
+                MiniProduct miniProduct = new MiniProduct(product, index);
                 productPanels.add(miniProduct);
                 this.add(miniProduct);
+                index++;
             }
         }
 
@@ -40,12 +43,12 @@ public class BrowseStoreP extends JPanel {
         private final JButton addToCart = new JButton("Add to Cart");
 
         /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-        public MiniProduct(StoreProduct product) throws BadLocationException {
+        public MiniProduct(StoreProduct product, int index) throws BadLocationException {
             int width = 350;
             int height = 100;
             this.setLayout(new FlowLayout());
 
-            addToCart.setPreferredSize(new Dimension(height + 50, height));
+            addToCart.setPreferredSize(new Dimension(height + height / 4, height));
             addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
 
             JLabel productImage = getImageLabel(product.getPhoto(), height, height); // DUE: Revisar dimensiones
@@ -70,6 +73,17 @@ public class BrowseStoreP extends JPanel {
             productInfo.setPreferredSize(new Dimension(width, height));
             //DUE: Añadir descuento al JLabel
 
+            JTextPane indexNum = new JTextPane();
+            indexNum.setEditable(false);
+            indexNum.setFocusable(false);
+
+            SimpleAttributeSet attributes2 = new SimpleAttributeSet();
+            StyleConstants.setBold(attributes2, true);
+            indexNum.setCharacterAttributes(attributes2, true);
+            indexNum.setText("\n " + index + ". ");
+            indexNum.setPreferredSize(new Dimension(height / 4, height));
+
+            this.add(indexNum);
             this.add(productImage);
             this.add(productInfo);
             this.add(addToCart);

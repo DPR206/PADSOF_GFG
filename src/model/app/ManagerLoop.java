@@ -1810,9 +1810,7 @@ public class ManagerLoop extends Loop {
 
             switch (chosenOption3) {
                 case 1: /* Items per page */
-                    System.out.println("Enter the new Items per page value:");
-                    int newItemsPerPage = scanner.nextInt();
-                    manager.changeItemsPerPage(newItemsPerPage);
+                    System.out.println("This has been deprecated");
                     break;
                 case 2: /* Score a parameter */
                     System.out.println("Enter the new Score a parameter value:");

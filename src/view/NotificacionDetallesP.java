@@ -12,11 +12,6 @@ public class NotificacionDetallesP extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton btnVolver;
 
-	/**
-	 * Create the dialog.
-	 * @param seleccionada 
-	 * @param nots 
-	 */
 	public NotificacionDetallesP(Notification n, ActionListener volverAction) {
 	        setLayout(new BorderLayout(10, 10));
 	        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

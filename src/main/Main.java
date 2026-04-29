@@ -21,6 +21,14 @@ public class Main {
                 try {
                     /* Load store */
                     Store.getInstance().loadStore("data", "statics");
+                    /*new Figurine(5.35, "Hamster de arcilla", "Cutie", ".\\resources\\hamster.jpg", 1, "5cm x 2.5cm",
+                            "Handmade", "Arcilla");
+                    new Figurine(11.8, "Funko Pop Yoda", "Funko", ".\\resources\\yoda.jpg", 15, "10cm x 5cm", "Funko",
+                            "Vinilo");
+                    new Game(13, "Monopoly", "Juego de Monopoly duh", ".\\resources\\monopoly.jpg", 30, 2, "3-99",
+                            GameStyle.DICE);
+                    new Game(5.75, "Polilla Tramposa", "Muy chuli y tal", ".\\resources\\polilla.jpg", 56, 4, "+6",
+                            GameStyle.CARDS);*/
                     new App().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

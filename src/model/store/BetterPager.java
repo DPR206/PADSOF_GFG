@@ -26,7 +26,7 @@ public class BetterPager<G> {
     /**
      * The pager's constructor
      */
-    private BetterPager() {
+    public BetterPager() {
 
     }
 
@@ -43,18 +43,6 @@ public class BetterPager<G> {
         }
 
         return itemList.subList(getFrom(pageNum), getTo(pageNum, itemList.size()));
-    }
-
-    /**
-     * It gets the maximum number of pages that can be made from a list's certain size
-     * @param size the size
-     * @return the maximum number of pages that can be made from the list's certain size
-     */
-    private int maxPageNum(int size) {
-        if (size % Parameter.getParam().getItemsPerPage() == 0) {
-            return size / Parameter.getParam().getItemsPerPage();
-        }
-        return (size / Parameter.getParam().getItemsPerPage()) + 1;
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -80,6 +68,19 @@ public class BetterPager<G> {
     public int getItemNumFromIndex(int index) {
         int itemsPerPage = Parameter.getParam().getItemsPerPage();
         return ((index % itemsPerPage) + 1);
+    }
+
+    /**
+     * It gets the maximum number of pages that can be made from a list's certain size
+     * @param itemList the list of items
+     * @return the maximum number of pages that can be made from the list's certain size
+     */
+    public int getMaxPageNum(List<G> itemList) {
+        int size = itemList.size();
+        if (size % Parameter.getParam().getItemsPerPage() == 0) {
+            return size / Parameter.getParam().getItemsPerPage();
+        }
+        return (size / Parameter.getParam().getItemsPerPage()) + 1;
     }
 
     /**

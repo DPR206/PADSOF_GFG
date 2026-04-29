@@ -18,10 +18,10 @@ public class StoreProductMiniP extends JPanel {
     public StoreProductMiniP(StoreProduct product, int index) throws BadLocationException {
         this.storeProduct = product;
         int width = 350;
-        int height = 100;
+        int height = 60;
         this.setLayout(new FlowLayout());
 
-        addToCart.setPreferredSize(new Dimension(height + height / 4, height));
+        addToCart.setPreferredSize(new Dimension(125, height));
         addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
 
         JLabel productImage = getImageLabel(product.getPhoto(), height, height); // DUE: Revisar dimensiones
@@ -52,8 +52,8 @@ public class StoreProductMiniP extends JPanel {
         SimpleAttributeSet attributes2 = new SimpleAttributeSet();
         StyleConstants.setBold(attributes2, true);
         indexNum.setCharacterAttributes(attributes2, true);
-        indexNum.setText("\n " + index + ". ");
-        indexNum.setPreferredSize(new Dimension(height / 4, height));
+        indexNum.setText("\n" + index + ".");
+        indexNum.setPreferredSize(new Dimension(25, height));
 
         this.add(indexNum);
         this.add(productImage);

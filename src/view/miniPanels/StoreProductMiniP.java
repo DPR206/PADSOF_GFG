@@ -1,4 +1,4 @@
-package view;
+package view.miniPanels;
 
 import model.product.StoreProduct;
 

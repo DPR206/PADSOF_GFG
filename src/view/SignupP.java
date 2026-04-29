@@ -21,6 +21,10 @@ public class SignupP extends JPanel {
     private final JRadioButton idNieType;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This page's constructor
+     */
     public SignupP() {
         // asignar layout
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -87,7 +91,12 @@ public class SignupP extends JPanel {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-    public String getDni() {
+
+    /**
+     * It gets this panel's inputted password
+     * @return this panel's inputted password
+     */
+    public String getIdNumber() {
         return idNumber.getText();
     }
 

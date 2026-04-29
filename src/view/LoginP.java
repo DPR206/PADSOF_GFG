@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 /**
@@ -15,6 +14,10 @@ public class LoginP extends JPanel {
     private final JButton login;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This page's constructor
+     */
     public LoginP() {
         // asignar layout
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -47,19 +50,20 @@ public class LoginP extends JPanel {
         });
     }
 
-    // método que actualiza el valor de los campos
-    public void update() {
-        username.setText("");
-        username.grabFocus();
-    }
-
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
+    /**
+     * It gets this panel's inputted password
+     * @return this panel's inputted password
+     */
     public String getPassword() {
         return new String(password.getPassword());
     }
 
-    // método que devuelve el nombre de una tarea (contenido del campo JTextField)
+    /**
+     * It gets this panel's inputted username
+     * @return this panel's inputted username
+     */
     public String getUsername() {
         return username.getText();
     }

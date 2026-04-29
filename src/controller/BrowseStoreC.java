@@ -3,6 +3,7 @@ package controller;
 import model.store.Store;
 import model.user.RegisteredClient;
 import view.*;
+import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

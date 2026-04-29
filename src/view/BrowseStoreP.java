@@ -2,6 +2,7 @@ package view;
 
 import model.product.StoreProduct;
 import model.store.BetterPager;
+import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -21,6 +22,10 @@ public class BrowseStoreP extends JPanel {
     private int currentPageNum;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This page's constructor
+     */
     public BrowseStoreP(List<StoreProduct> storeProducts) throws BadLocationException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 
@@ -30,6 +35,11 @@ public class BrowseStoreP extends JPanel {
         paintEverything();
     }
 
+    /**
+     * It allows this page's components to be repainted (revalidate() & repaint() didn't work)
+     * @throws BadLocationException bad locations within a document model (that is, attempts to reference a location
+     *                              that doesn't exist)
+     */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
         productPanels.clear();
@@ -62,16 +72,30 @@ public class BrowseStoreP extends JPanel {
         this.repaint();
     }
 
+    /**
+     * It gets this page's current page number
+     * @return this page's current page number
+     */
     public int getCurrentPageNum() {
         return currentPageNum;
     }
 
+    /**
+     * It changes this page's current page number
+     * @param newCurrentPageNum the desired page number
+     * @throws BadLocationException bad locations within a document model (that is, attempts to reference a location
+     *                              that doesn't exist)
+     */
     public void setCurrentPageNum(int newCurrentPageNum) throws BadLocationException {
         System.out.println("setCurrentPageNum: " + newCurrentPageNum);
         this.currentPageNum = newCurrentPageNum;
         paintEverything();
     }
 
+    /**
+     * It gets the available store product list's max page number
+     * @return the available store product list's max page number
+     */
     public int getMaxPageNum() {
         return pager.getMaxPageNum(storeProducts);
     }

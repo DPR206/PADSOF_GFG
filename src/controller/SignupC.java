@@ -35,7 +35,7 @@ public class SignupC extends MainLoopSelector implements ActionListener {
             } else {
                 try {
                     User user = super.getModel()
-                                     .signIn(view.getUsername(), view.getPassword(), view.getDni(), view.getIdType());
+                                     .signIn(view.getUsername(), view.getPassword(), view.getIdNumber(), view.getIdType());
                     if (user != null) {
                         JOptionPane.showMessageDialog(null,
                                 "Signed up successfully :)\n" + "Welcome abroad " + view.getUsername());

@@ -149,7 +149,7 @@ public class App extends JFrame {
     }
 
     public List<StoreProduct> getProducts() {
-        return products;
+        return this.products;
     }
 
     public RegisteredMainP getRegisteredMainPanel() {

@@ -9,6 +9,8 @@ import model.search.PunctuationFilter;
 import java.awt.event.ActionListener;
 import java.util.*;
 
+import javax.swing.text.BadLocationException;
+
 import model.store.Store;
 import model.user.UnregisteredClient;
 import view.App;
@@ -103,7 +105,12 @@ public class SearcherC implements ActionListener{
 				frame.getUser().getSearcher().getStoreSearcher().setAsc(false);
 			}
 			UnregisteredClient u = (UnregisteredClient) frame.getUser();
-			this.frame.setsProductList(u.searchStoreProduct());
+			try {
+				this.frame.getBrowseStorePanel().paintEverything();
+			} catch (BadLocationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }

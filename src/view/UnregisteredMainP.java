@@ -58,11 +58,6 @@ public class UnregisteredMainP extends JPanel {
         botones.add(this.filters);
         others.add(botones, BorderLayout.NORTH);
 
-        this.products = new JPanel(new GridLayout(0,4));
-
-        int index = 1;
-
-        others.add(this.products, BorderLayout.CENTER);
         this.add(others, BorderLayout.CENTER);
 
         JPanel bottom = new JPanel(new CardLayout());

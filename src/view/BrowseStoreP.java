@@ -17,9 +17,10 @@ public class BrowseStoreP extends JPanel {
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
     private final List<StoreProductMiniP> productPanels = new ArrayList<>();
-    private final List<StoreProduct> storeProducts;
+    private List<StoreProduct> storeProducts=new ArrayList<>();
     private final BetterPager<StoreProduct> pager = new BetterPager<>();
     private int currentPageNum;
+    private final App app;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -29,8 +30,8 @@ public class BrowseStoreP extends JPanel {
     public BrowseStoreP(App app) throws BadLocationException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 
+        this.app=app;
         currentPageNum = 1;
-        this.storeProducts = app.getProducts();
 
         paintEverything();
     }
@@ -43,6 +44,8 @@ public class BrowseStoreP extends JPanel {
     public void paintEverything() throws BadLocationException {
         this.removeAll();
         productPanels.clear();
+
+        this.storeProducts = app.getProducts();
 
         List<StoreProduct> currentStoreProducts = pager.pageItemList(storeProducts, currentPageNum);
 

@@ -506,14 +506,6 @@ public class Manager extends User implements Serializable {
     }
 
     /**
-     * It changes the number of lines that can be printed from a certain list parameter
-     * @param newItemsPerPage the new number of lines that can be printed from a certain list
-     */
-    public void changeItemsPerPage(int newItemsPerPage) {
-        Parameter.getParam().changeItemsPerPage(newItemsPerPage);
-    }
-
-    /**
      * Searches for the pack based on the id
      * @param id, id of the pack
      * @return the pack with said id
@@ -660,6 +652,7 @@ public class Manager extends User implements Serializable {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * Obtains the maneger's (and creates one if there wasn't one)
      * @return the manager of the store

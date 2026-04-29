@@ -51,10 +51,6 @@ public class ManagerMainP extends JPanel {
     	
     	stuffPanel.add(cosoDeBotones, BorderLayout.CENTER);
     	this.add(stuffPanel, BorderLayout.CENTER);
-    	
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS)); // Change this
-        
-        
     }
 
     /**

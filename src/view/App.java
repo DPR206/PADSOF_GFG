@@ -47,7 +47,7 @@ public class App extends JFrame {
         managerMainPanel = new ManagerMainP();
         welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
-        browseStorePanel = new BrowseStoreP();
+        browseStorePanel = new BrowseStoreP(products);
 
         /* Model */
         Store model = Store.getInstance();
@@ -61,7 +61,6 @@ public class App extends JFrame {
         ManagerMainC managerMainController = new ManagerMainC(this, model);
         WelcomeC welcomeController = new WelcomeC(this, model);
         BrowseStoreC browseStoreController = new BrowseStoreC(this, model);
-
 
         /* Configure controllers' views */
         loginPanel.setController(loginController);
@@ -92,10 +91,6 @@ public class App extends JFrame {
         welcomePanel.setVisible(false); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
         container.add(browseStorePanel, gbc);
         browseStorePanel.setVisible(true); // DUE: poner esto a false y welcomePanel a true
-
-        /* Load store */
-        model.loadStore("data", "statics");
-
 
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

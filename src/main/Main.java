@@ -1,5 +1,6 @@
 package main;
 
+import model.store.Store;
 import view.App;
 
 import javax.swing.*;
@@ -18,6 +19,8 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    /* Load store */
+                    Store.getInstance().loadStore("data", "statics");
                     new App().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

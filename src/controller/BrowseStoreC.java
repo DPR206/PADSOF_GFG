@@ -1,8 +1,7 @@
 package controller;
 
 import model.store.Store;
-import view.App;
-import view.BrowseStoreP;
+import view.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +22,10 @@ public class BrowseStoreC implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Add to Cart")) {
-            JOptionPane.showMessageDialog(frame, "Product added to cart");
+            // Inspirado en: https://stackoverflow.com/a/16192146
+            StoreProductMiniP miniPanel = ((StoreProductMiniP) ((JButton) e.getSource()).getParent());
+            //((RegisteredClient) frame.getUser()).addCart(miniPanel.getStoreProduct());
+            System.out.println("Selected product was: " + miniPanel.getStoreProduct().getName());
         }
     }
 }

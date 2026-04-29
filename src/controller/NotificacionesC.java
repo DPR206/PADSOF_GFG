@@ -81,7 +81,7 @@ public class NotificacionesC {
 
 	    private void abrirDetalle(Notification n) {
 	        // Creamos la vista de detalle y le pasamos la acción de volver
-	        NotificacionDetallesP vistaDetalle = new NotificacionDetallesP(n, e -> {
+	    	NotificationDetailP vistaDetalle = new NotificationDetailP(n, e -> {
 	            vista.mostrarPantalla("LISTA");
 	            vista.getLista().repaint();
 	        });

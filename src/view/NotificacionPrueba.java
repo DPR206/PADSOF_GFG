@@ -182,7 +182,7 @@ public class NotificacionPrueba extends JPanel {
 	        pantallas.show(contenedorPrincipal, "PANTALLA_LISTA");
 	        lista.repaint();
 	    };
-	    NotificacionDetallesP panelDetalle = new NotificacionDetallesP(n, volverAccion);
+	    NotificationDetailP panelDetalle = new NotificationDetailP(n, volverAccion);
 
 	    // Reemplazamos el panel en el contenedor principal
 	    contenedorPrincipal.add(panelDetalle, "PANTALLA_DETALLE");

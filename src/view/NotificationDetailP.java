@@ -7,12 +7,12 @@ import javax.swing.*;
 
 import model.notification.Notification;
 
-public class NotificacionDetallesP extends JPanel {
+public class NotificationDetailP extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JButton btnVolver;
 
-	public NotificacionDetallesP(Notification n, ActionListener volverAction) {
+	public NotificationDetailP(Notification n, ActionListener volverAction) {
 	        setLayout(new BorderLayout(10, 10));
 	        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 

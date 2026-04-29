@@ -57,7 +57,7 @@ public class BetterPager<G> {
         if (pageNum == 1) {
             return 0;
         }
-        return (itemsPerPage * (pageNum - 1) - 1);
+        return (itemsPerPage * (pageNum - 1));
     }
 
     /**

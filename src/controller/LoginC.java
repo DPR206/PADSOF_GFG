@@ -18,6 +18,12 @@ public class LoginC extends MainLoopSelector implements ActionListener {
     private final LoginP view; /* view -> panel */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This controller's constructor
+     * @param frame the controller's frame
+     * @param model the controller's model
+     */
     public LoginC(App frame, Store model) {
         super(frame, model);
         this.view = frame.getLoginPanel();

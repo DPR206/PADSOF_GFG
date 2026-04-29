@@ -13,6 +13,12 @@ public class EmployeeMainC implements ActionListener {
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This controller's constructor
+     * @param frame the controller's frame
+     * @param model the controller's model
+     */
     public EmployeeMainC(App frame, Store model) {
         this.frame = frame;
         this.view = frame.getEmployeeMainPanel();

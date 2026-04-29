@@ -17,7 +17,7 @@ public class WelcomeP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * This page's constructor
+     * This panel's constructor
      */
     public WelcomeP() {
         // asignar layout

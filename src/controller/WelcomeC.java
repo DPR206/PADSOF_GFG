@@ -19,6 +19,12 @@ public class WelcomeC implements ActionListener {
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This controller's constructor
+     * @param frame the controller's frame
+     * @param model the controller's model
+     */
     public WelcomeC(App frame, Store model) {
         this.frame = frame;
         this.view = frame.getWelcomePanel();
@@ -27,31 +33,36 @@ public class WelcomeC implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Browse as unregistered client")) { /*"Browse as unregistered client" pressed */
-            this.frame.setUnregisteredClient(new UnregisteredClient(false));
-        	this.showBrowseAsUnregistered();
-        } else if (e.getActionCommand().equals("Log in")) { /* "Log in" pressed */
-            this.showLogin();
-        } else if (e.getActionCommand().equals("Sign up")) { /* "Sign up" pressed */
-            this.showSignUp();
+        switch (e.getActionCommand()) {
+            case "Browse as unregistered client" -> {
+                this.frame.setUnregisteredClient(new UnregisteredClient(false));
+                this.showBrowseAsUnregistered();
+            }
+            case "Log in" -> this.showLogin();
+            case "Sign up" -> this.showSignUp();
         }
     }
 
+    /**
+     * It shows the unregistered client's main panel
+     */
     private void showBrowseAsUnregistered() {
-        // No hace falta validar la vista ni modificar el modelo
-        /* Show new view */
         this.view.setVisible(false);
         this.frame.getUnregisteredMainPanel().setVisible(true);
     }
 
+    /**
+     * It shows the login page
+     */
     private void showLogin() {
-        /* Show new view */
         this.view.setVisible(false);
         this.frame.getLoginPanel().setVisible(true);
     }
 
+    /**
+     * It shows the signup page
+     */
     private void showSignUp() {
-        /* Show new view */
         this.view.setVisible(false);
         this.frame.getSignupPanel().setVisible(true);
     }

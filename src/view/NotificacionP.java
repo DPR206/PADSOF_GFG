@@ -12,22 +12,14 @@ import model.notification.*;
 public class NotificacionP extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	
+	private CardLayout pantallas = new CardLayout();
+	private JPanel contenedorPrincipal = new JPanel(pantallas);
+	DefaultListModel<Notification> modeloFiltrado;
+	JList<Notification> lista;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		/*EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Notificacion frame = new Notificacion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});*/
-		new NotificacionP();
+		SwingUtilities.invokeLater(() -> new NotificacionP());
 	}
 
 	/**
@@ -36,51 +28,60 @@ public class NotificacionP extends JPanel {
 	public NotificacionP() {
 		
 		JFrame nots = new JFrame("Notificaciones");
-		DefaultListModel<Notification> modeloFiltrado = new DefaultListModel<>();
-		
-		Container contenedor = nots.getContentPane();
-		contenedor.setLayout(new BorderLayout(10, 10));
-		
-		JLabel etiqueta = new JLabel("Selecciona una notificación", SwingConstants.CENTER);
-		NotificationPayment np = new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
-		np.FullNotification("pedido2");
-		NotificationPayment np2 = new NotificationPayment(LocalDateTime.now(), true, true, NotificationType.PAYMENT);
-		np2.FullNotification("pedido1");
-		Notification[] notifications = {np, np, np2, np, np, np, np, np, np2, np, np, np, np2, 
-				np, np, np2, np, np, np, np, np, np2, np, np, np, np2};
-		
-		//Filtramos para que solo se impriman las notificaciones visibles
-		for (Notification n : notifications) {
-		    if (n.isVisible()) {
-		        modeloFiltrado.addElement(n);
-		    }
-		}
+		nots.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    nots.setSize(300, 450);
+		modeloFiltrado = new DefaultListModel<>();
 
-		// Creamos la lista usando el modelo filtrado
-		JList<Notification> lista = new JList<>(modeloFiltrado);
+		// Creamos 20 notificaciones diferentes
+		for (int i = 1; i <= 20; i++) {
+		    // Alternamos entre leídas y no leídas para probar el diseño
+		    boolean estaLeida = (i % 3 == 0); // Cada 3 notificaciones, una vendrá ya leída
+		    
+		    NotificationPayment temp = new NotificationPayment(
+		        LocalDateTime.now().minusHours(i), // Diferentes horas
+		        estaLeida, 
+		        true, // Visible
+		        NotificationType.PAYMENT
+		    );
+		    
+		    temp.FullNotification("Pedido #" + (1000 + i)); // ID de pedido único
+		    
+		    //Filtramos para que solo se impriman las notificaciones visibles
+			if (temp.isVisible()) {
+			    modeloFiltrado.addElement(temp);
+			}
+			
+		}
 		
-		//JList<Notification> lista = new JList<>(notifications);
+		// 2. CONSTRUIR PANEL DE LISTA
+        JPanel panelLista = crearPanelLista();
+        
+        // 3. CONSTRUIR PANEL DE DETALLE (se llenará dinámicamente)
+        JPanel panelDetalle = crearPanelDetalleVacio();
+
+        // Añadir al contenedor de cartas
+        contenedorPrincipal.add(panelLista, "PANTALLA_LISTA");
+        contenedorPrincipal.add(panelDetalle, "PANTALLA_DETALLE");
+
+        nots.add(contenedorPrincipal);
+        nots.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        nots.setSize(450, 500);
+        nots.setLocationRelativeTo(null);
+        nots.setVisible(true);
+	}
+
+	private JPanel crearPanelLista() {
 		
-		//lista.setVisibleRowCount(10); 
-		
-	    lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    lista.setFixedCellHeight(50);
-		
-		/*lista.addListSelectionListener(
-				  new ListSelectionListener() {
-				    public void valueChanged(ListSelectionEvent ev) {
-				    	JList<String> localJList = (JList<String>) ev.getSource();
-				    	System.out.println( lista.getSelectedValue() );
-				    	if (! ev.getValueIsAdjusting() ) {
-				    	  Notification valorSeleccionado = (Notification) lista.getSelectedValue();
-				          JOptionPane.showMessageDialog(nots, "Seleccionaste: " + valorSeleccionado);
-				    	}
-				    }
-				  }
-				);*/
-		
-		
-	    lista.setCellRenderer(new DefaultListCellRenderer() {
+		JPanel panel = new JPanel(new BorderLayout(10, 10));
+        JLabel etiqueta = new JLabel("Notificaciones", SwingConstants.CENTER);
+        etiqueta.setFont(new Font("SansSerif", Font.BOLD, 16));
+        etiqueta.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
+
+        lista = new JList<>(modeloFiltrado);
+        lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        lista.setFixedCellHeight(50);
+        
+        lista.setCellRenderer(new DefaultListCellRenderer() {
 	        @Override
 	        public Component getListCellRendererComponent(JList<?> list, Object value, int index, 
 	                                                      boolean isSelected, boolean cellHasFocus) {
@@ -106,108 +107,87 @@ public class NotificacionP extends JPanel {
 	        }
 	    });
 
-	   
-	    /*lista.addListSelectionListener(new ListSelectionListener() {
-	        public void valueChanged(ListSelectionEvent ev) {
-	            if (!ev.getValueIsAdjusting()) {
-	                Notification valorSeleccionado = lista.getSelectedValue();
-	                
-	                if (valorSeleccionado != null) {
-	                	
-	                	valorSeleccionado.setRead(true);
-	                    
-	                    // Muestra el toString() en el diálogo
-	                	//Esto pasará  ser una pantalla nueva
-	                    JOptionPane.showMessageDialog(nots, "Detalles completos:\n" + valorSeleccionado.toString());
-	                    
-	                    //lista.repaint(); /*Algo no funciona
-	                }
-	            }
-	        }
-	    }); */
-	    
-	    lista.addMouseListener(new MouseAdapter() {
-	        @Override
-	        public void mouseClicked(MouseEvent e) {
-	            // Detectamos si es doble clic
-	            if (e.getClickCount() == 2) {
-	                // Obtenemos el índice del elemento sobre el que se hizo clic
-	                int index = lista.locationToIndex(e.getPoint());
-	                
-	                if (index != -1) {
-	                    Notification seleccionada = lista.getModel().getElementAt(index);
-	                    
-	                    // 1. Marcar como leída
-	                    seleccionada.setRead(true);
-	                    
-	                    // 2. Abrir la pantalla de detalle
-	                    //DetalleNotificacion ventanaDetalle = new DetalleNotificacion(nots, seleccionada);
-	                    //ventanaDetalle.setVisible(true);
-	                    JOptionPane.showMessageDialog(nots, "Detalles completos:\n" + seleccionada.toString());
-	                    
-	                    // 3. Refrescar la lista para quitar la negrita
-	                    //lista.repaint();
-	                }
-	            }
-	        }
-	    });
-	    
-	    JButton btnBorrar = new JButton("Borrar Seleccionada");
-	    btnBorrar.addActionListener(e -> {
-	        Notification seleccionada = lista.getSelectedValue();
-	        if (seleccionada != null) {
-	            seleccionada.setVisible(false); // Tu atributo
-	            // Actualizamos el modelo filtrado (el que creamos antes)
-	            ((DefaultListModel<Notification>)lista.getModel()).removeElement(seleccionada);
-	        }
-	    });
-	    
-	 // Permitir borrar pulsando la tecla "Suprimir" (Delete)
+        // Evento Doble Clic
+        lista.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = lista.locationToIndex(e.getPoint());
+                    if (index != -1) {
+                        Notification n = modeloFiltrado.getElementAt(index);
+                        n.setRead(true); //Marcar como leído
+                        actualizarYMostrarDetalle(n);
+                    }
+                }
+            }
+        });
+
+        // Panel de Botones VERTICAL
+        JPanel panelBotones = new JPanel(new GridLayout(0, 1, 5, 5));
+        panelBotones.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 10)); //Dejar márgenes en los laterales de los botones
+
+        JButton btnMarcarLeido = new JButton("Marcar como leída");
+        btnMarcarLeido.addActionListener(e -> {
+            Notification sel = lista.getSelectedValue();
+            if (sel != null) {
+                sel.setRead(true);
+                lista.repaint();
+            }
+        });
+
+        JButton btnBorrar = new JButton("Borrar");
+        btnBorrar.addActionListener(e -> {
+            Notification sel = lista.getSelectedValue();
+            if (sel != null) {
+                modeloFiltrado.removeElement(sel);
+            }
+        });
+        
+     // Permitir borrar pulsando la tecla "Suprimir" (Delete)
 	    lista.addKeyListener(new KeyAdapter() {
 	        @Override
 	        public void keyPressed(KeyEvent e) {
 	            if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-	                // Ejecutamos la misma lógica que el botón borrar
 	                btnBorrar.doClick(); 
 	            }
 	        }
 	    });
+	    
+	    JButton btnAjustes = new JButton("Ajustes");
+	    
 
-		
-				// Para que solo se pueda seleccionar una fila
-				lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
-				        
-				// Es aconsejable crear una barra de scroll para la lista,
-				// por si el numero de elementos supera el tamanyo previsto 
-				JScrollPane scroll = new JScrollPane(lista);
-				        
-				// Añadir el scroll con la lista al panel donde se vaya a mostrar
-				/*JPanel ejemploList = new JPanel();
-				ejemploList.add(scroll);*/
 
-				// Añadir componentes al contenedor
-				/*contenedor.add(etiqueta);
-				contenedor.add(ejemploList);
-				ejemploList.setVisible(true);*/
+        panelBotones.add(btnMarcarLeido);
+        panelBotones.add(btnBorrar);
+        panelBotones.add(btnAjustes);
+	    
+	    JPanel contenedorBotones = new JPanel(new BorderLayout());
+	    contenedorBotones.add(panelBotones, BorderLayout.NORTH);
 
-				// mostrar ventana
-				/*nots.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				nots.setSize(200,340);
-				nots.setVisible(true);*/
-				
-				JPanel panelBotones = new JPanel();
-			    panelBotones.add(btnBorrar);
+        panel.add(etiqueta, BorderLayout.NORTH);
+        panel.add(new JScrollPane(lista), BorderLayout.CENTER);
+        panel.add(contenedorBotones, BorderLayout.EAST);
 
-			    // Añadimos todo al frame principal
-			    //contenedor.add(new JLabel("Bandeja de Entrada", SwingConstants.CENTER), BorderLayout.NORTH);
-				contenedor.add(etiqueta, BorderLayout.NORTH); // Título arriba
-			    contenedor.add(scroll, BorderLayout.CENTER);  // La lista ocupa el resto
-			    contenedor.add(panelBotones, BorderLayout.EAST);
+        return panel;
+	}
+	
+	private JPanel crearPanelDetalleVacio() {
+        // Solo creamos el contenedor, el contenido se genera al hacer clic
+        return new JPanel(new BorderLayout());
+    }
+	
+	private void actualizarYMostrarDetalle(Notification n) {
+	    // 1. Creamos la acción que queremos que ocurra cuando se pulse "Volver"
+	    ActionListener volverAccion = e -> {
+	        pantallas.show(contenedorPrincipal, "PANTALLA_LISTA");
+	        lista.repaint();
+	    };
+	    NotificacionDetallesP panelDetalle = new NotificacionDetallesP(n, volverAccion);
 
-			    // 5. Ajustamos el tamaño de la ventana
-			    nots.setSize(300, 450); 
-			    nots.setLocationRelativeTo(null); // Centra la ventana en pantalla
-			    nots.setVisible(true);
-
+	    // Reemplazamos el panel en el contenedor principal
+	    contenedorPrincipal.add(panelDetalle, "PANTALLA_DETALLE");
+	    
+	    // Mostramos la pantalla
+	    pantallas.show(contenedorPrincipal, "PANTALLA_DETALLE");
 	}
 }

@@ -8,7 +8,7 @@ public class RegisteredMainP extends JPanel {
     public RegisteredMainP() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 
-        this.add(new JLabel("Work in progres..."));
+        this.add(new JLabel("Work in progress!!!..."));
     }
 
     /**

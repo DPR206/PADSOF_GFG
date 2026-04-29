@@ -1,60 +1,79 @@
 package view;
 
 import model.product.StoreProduct;
+import model.store.BetterPager;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static view.ImageAdder.getImageLabel;
-
 public class BrowseStoreP extends JPanel {
-    List<MiniProduct> productPanels = new ArrayList<>();
-    List<StoreProduct> storeProducts = new ArrayList<>();
+    private final JButton firstPage = new JButton("<< First Page");
+    private final JButton previousPage = new JButton("< Previous Page");
+    private final JButton nextPage = new JButton("Next Page >");
+    private final JButton lastPage = new JButton("Last Page >>");
+    private final List<StoreProductMiniP> productPanels = new ArrayList<>();
+    private final List<StoreProduct> storeProducts;
+    private final BetterPager<StoreProduct> pager = new BetterPager<>();
+    private int currentPageNum;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public BrowseStoreP() {
+    public BrowseStoreP(List<StoreProduct> storeProducts) throws BadLocationException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 
-        if (storeProducts != null) {
-            for (StoreProduct product : storeProducts) {
-                MiniProduct miniProduct = new MiniProduct(product);
-                productPanels.add(miniProduct);
-                this.add(miniProduct);
-            }
-        }
+        currentPageNum = 1;
+        this.storeProducts = storeProducts;
 
+        paintEverything();
     }
 
-    class MiniProduct extends JPanel {
-        private final JButton addToCart = new JButton("Add to Cart");
+    public void paintEverything() throws BadLocationException {
+        this.removeAll();
+        productPanels.clear();
 
-        /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-        public MiniProduct(StoreProduct product) {
-            this.setLayout(new FlowLayout());
+        List<StoreProduct> currentStoreProducts = pager.pageItemList(storeProducts, currentPageNum);
 
-            JLabel productImage = getImageLabel(product.getPhoto(), 100, 100); // DUE: Revisar dimensiones
-            JTextPane productInfo = new JTextPane();
-            productInfo.setEditable(false);
-            productInfo.setText(
-                    product.getName() + "\nPrecio: " + product.getPrice() + " €\nUnidades: " + product.getStock());
-            productInfo.setPreferredSize(new Dimension(400, 100));
-            //DUE: Añadir descuento al JLabel
-
-            this.add(productImage);
-            this.add(productInfo);
-            this.add(addToCart);
+        int index = 1;
+        for (StoreProduct product : currentStoreProducts) {
+            StoreProductMiniP miniProduct = new StoreProductMiniP(product, index);
+            productPanels.add(miniProduct);
+            this.add(miniProduct);
+            index++;
         }
 
-        /**
-         * It makes it possible to assign a controller to this panel's components
-         * @param c the desired controller
-         */
-        public void setController(ActionListener c) {
-            addToCart.addActionListener(c);
+        System.out.println("CurrentPageNum: " + currentPageNum);
+
+        JPanel pageTurner = new JPanel(new FlowLayout());
+        if (currentPageNum != 1) {
+            pageTurner.add(firstPage);
+            pageTurner.add(previousPage);
         }
+        pageTurner.add(new JLabel("Page " + currentPageNum));
+        if (currentPageNum != pager.getMaxPageNum(storeProducts)) {
+            pageTurner.add(nextPage);
+            pageTurner.add(lastPage);
+        }
+        this.add(pageTurner);
+
+        this.revalidate();
+        this.repaint();
+    }
+
+    public int getCurrentPageNum() {
+        return currentPageNum;
+    }
+
+    public void setCurrentPageNum(int newCurrentPageNum) throws BadLocationException {
+        System.out.println("setCurrentPageNum: " + newCurrentPageNum);
+        this.currentPageNum = newCurrentPageNum;
+        paintEverything();
+    }
+
+    public int getMaxPageNum() {
+        return pager.getMaxPageNum(storeProducts);
     }
 
     /**
@@ -63,14 +82,13 @@ public class BrowseStoreP extends JPanel {
      */
     public void setController(ActionListener c) {
         if (productPanels != null) {
-            for (MiniProduct miniProduct : productPanels) {
+            for (StoreProductMiniP miniProduct : productPanels) {
                 miniProduct.setController(c);
             }
         }
-        //DUE
-    }
-
-    public void setStoreProducts(List<StoreProduct> newStoreProducts) {
-        this.storeProducts = newStoreProducts;
+        firstPage.addActionListener(c);
+        previousPage.addActionListener(c);
+        nextPage.addActionListener(c);
+        lastPage.addActionListener(c);
     }
 }

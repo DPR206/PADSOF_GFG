@@ -36,6 +36,7 @@ public class MainLoopSelector { // DUE: Hacer que sea abstract
             case EMPLOYEE:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Employee!");
                 this.frame.getEmployeeMainPanel().setVisible(true);
+                this.frame.getEmployeeMainPanel().paintEverything();
                 break;
             case MANAGER:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Manager!");

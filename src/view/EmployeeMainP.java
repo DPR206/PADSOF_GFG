@@ -4,7 +4,6 @@ import model.user.*;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class EmployeeMainP extends JPanel {
     private final JButton managePacks;
@@ -13,14 +12,17 @@ public class EmployeeMainP extends JPanel {
     private final JButton manageOrders;
     private final JButton manageExchanges;
     private final JButton valuateProducts;
+    private final App app;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
      */
-    public EmployeeMainP(User user) throws IOException {
+    public EmployeeMainP(App app) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.app = app;
 
         managePacks = new JButton("Manage Packs");
         manageStoreProducts = new JButton("Manage Store Products");
@@ -28,6 +30,14 @@ public class EmployeeMainP extends JPanel {
         manageOrders = new JButton("Manage Orders");
         manageExchanges = new JButton("Manage Exchanges");
         valuateProducts = new JButton("Valuate Products");
+
+        paintEverything();
+    }
+
+    public void paintEverything() {
+        this.removeAll();
+
+        User user = app.getUser();
 
         if (user.getType() == UserType.EMPLOYEE) {
             if (((Employee) user).getSp() != null) {
@@ -44,6 +54,8 @@ public class EmployeeMainP extends JPanel {
             }
         }
 
+        this.revalidate();
+        this.repaint();
     }
 
     /**

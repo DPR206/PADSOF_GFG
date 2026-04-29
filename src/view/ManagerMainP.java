@@ -8,7 +8,7 @@ public class ManagerMainP extends JPanel {
     public ManagerMainP() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 
-        this.add(new JLabel("Work in progres..."));
+        this.add(new JLabel("Work in progress..."));
     }
 
     /**

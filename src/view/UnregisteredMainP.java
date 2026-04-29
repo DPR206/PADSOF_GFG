@@ -62,17 +62,6 @@ public class UnregisteredMainP extends JPanel {
       
         int index = 1;
         
-        for(StoreProduct sp: p) {
-        	try {
-				StoreProductMiniP spm = new StoreProductMiniP(sp, index);
-				this.products.add(spm);
-				
-			} catch (BadLocationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	index++;
-        }
         others.add(this.products, BorderLayout.CENTER);
         this.add(others, BorderLayout.CENTER);
         

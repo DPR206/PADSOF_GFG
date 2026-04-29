@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.awt.event.ActionEvent;
 import model.product.Category;
 import model.search.CategoryFilter;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 import model.store.Store;
+import model.user.UnregisteredClient;
 import view.App;
 import view.SearchPanel;
 import view.SignupP;
@@ -100,6 +102,8 @@ public class SearcherC implements ActionListener{
 			else {
 				frame.getUser().getSearcher().getStoreSearcher().setAsc(false);
 			}
+			UnregisteredClient u = (UnregisteredClient) frame.getUser();
+			this.frame.setsProductList(u.searchStoreProduct());
 		}
 	}
 }

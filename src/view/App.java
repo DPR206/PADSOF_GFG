@@ -175,4 +175,8 @@ public class App extends JFrame {
     public void setUnregisteredClient(UnregisteredClient u) {
         this.mainUser = u;
     }
+    
+    public void setsProductList(List<StoreProduct> products) {
+    	this.products = products;
+    }
 }

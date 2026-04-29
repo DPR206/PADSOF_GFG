@@ -27,6 +27,13 @@ public class EmployeeMainC implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //DUE
+        switch (e.getActionCommand()) {
+            case "Manage Packs" -> System.out.println("Manage Packs"); //DUE
+            case "Manage Store Products" -> System.out.println("Manage Store Products"); //DUE
+            case "Add Store Products" -> System.out.println("Add Store Products"); //DUE
+            case "Manage Orders" -> System.out.println("Manage orders"); //DUE
+            case "Manage Exchanges" -> System.out.println("Manage exchanges"); //DUE
+            case "Valuate Products" -> System.out.println("Valuate Products"); //DUE
+        }
     }
 }

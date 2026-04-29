@@ -88,9 +88,9 @@ public class App extends JFrame {
         container.add(unregisteredMainPanel, gbc);
         unregisteredMainPanel.setVisible(false);
         container.add(welcomePanel, gbc);
-        welcomePanel.setVisible(false); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
+        welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
         container.add(browseStorePanel, gbc);
-        browseStorePanel.setVisible(true);
+        browseStorePanel.setVisible(false);
 
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

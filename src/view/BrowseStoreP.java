@@ -24,7 +24,7 @@ public class BrowseStoreP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * This page's constructor
+     * This panel's constructor
      */
     public BrowseStoreP(List<StoreProduct> storeProducts) throws BadLocationException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
@@ -53,8 +53,6 @@ public class BrowseStoreP extends JPanel {
             this.add(miniProduct);
             index++;
         }
-
-        System.out.println("CurrentPageNum: " + currentPageNum);
 
         JPanel pageTurner = new JPanel(new FlowLayout());
         if (currentPageNum != 1) {
@@ -87,7 +85,6 @@ public class BrowseStoreP extends JPanel {
      *                              that doesn't exist)
      */
     public void setCurrentPageNum(int newCurrentPageNum) throws BadLocationException {
-        System.out.println("setCurrentPageNum: " + newCurrentPageNum);
         this.currentPageNum = newCurrentPageNum;
         paintEverything();
     }

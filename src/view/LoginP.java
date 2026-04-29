@@ -16,7 +16,7 @@ public class LoginP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * This page's constructor
+     * This panel's constructor
      */
     public LoginP() {
         // asignar layout

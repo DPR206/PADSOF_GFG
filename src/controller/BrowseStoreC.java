@@ -2,7 +2,8 @@ package controller;
 
 import model.store.Store;
 import model.user.RegisteredClient;
-import view.*;
+import view.App;
+import view.BrowseStoreP;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
@@ -16,6 +17,12 @@ public class BrowseStoreC implements ActionListener {
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This controller's constructor
+     * @param frame the controller's frame
+     * @param model the controller's model
+     */
     public BrowseStoreC(App frame, Store model) {
         this.frame = frame;
         this.view = frame.getBrowseStorePanel();

@@ -15,6 +15,10 @@ public class EmployeeMainP extends JPanel {
     private final JButton valuateProducts;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This panel's constructor
+     */
     public EmployeeMainP(User user) throws IOException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

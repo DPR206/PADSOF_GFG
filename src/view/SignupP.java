@@ -23,7 +23,7 @@ public class SignupP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * This page's constructor
+     * This panel's constructor
      */
     public SignupP() {
         // asignar layout

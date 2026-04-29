@@ -7,6 +7,7 @@ import model.user.UnregisteredClient;
 import model.user.User;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -33,7 +34,7 @@ public class App extends JFrame {
     private List<StoreProduct> products = Store.getInstance().getStoreProductList(); //DUE
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public App() throws IOException {
+    public App() throws IOException, BadLocationException {
         super("Gifts for Geeks"); /* JFrame's title */
         this.setIconImage(new ImageIcon(".\\resources\\logo.png").getImage());
 
@@ -88,9 +89,9 @@ public class App extends JFrame {
         container.add(unregisteredMainPanel, gbc);
         unregisteredMainPanel.setVisible(false);
         container.add(welcomePanel, gbc);
-        welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
+        welcomePanel.setVisible(false); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
         container.add(browseStorePanel, gbc);
-        browseStorePanel.setVisible(false);
+        browseStorePanel.setVisible(true);
 
         /* Load store */
         model.loadStore("data", "statics");

@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
@@ -7,15 +8,99 @@ import javax.swing.*;
 public class NotificacionsSettingsClientP extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JButton btnVolver;
 
 	/**
 	 * Create the panel.
 	 */
 	public NotificacionsSettingsClientP(ActionListener volverAction) {
 		
-		JFrame nots = new JFrame("Notificaciones");
-		nots.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    nots.setSize(300, 450);
+		setLayout(new BorderLayout(10, 10));
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Título
+        JLabel titulo = new JLabel("Ajustes notificaciones", SwingConstants.CENTER);
+        titulo.setFont(new Font("SansSerif", Font.BOLD, 18));
+        
+        //Ajustes
+        
+        JPanel contenedorCentral = new JPanel();
+        contenedorCentral.setLayout(new BoxLayout(contenedorCentral, BoxLayout.Y_AXIS));
+        contenedorCentral.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        
+        JPanel discounts = new JPanel();
+        discounts.setLayout(new BoxLayout(discounts, BoxLayout.Y_AXIS));
+        discounts.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+        JLabel tituloDisc = new JLabel("DISCOUNTS");
+        tituloDisc.setFont(new Font("SansSerif", Font.BOLD, 14));
+        tituloDisc.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+        JPanel filaChecksDisc = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
+        filaChecksDisc.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JCheckBox disc = new JCheckBox("New discounts");
+        filaChecksDisc.add(disc);
+        
+        discounts.add(tituloDisc);
+        discounts.add(filaChecksDisc);
+        
+        JPanel exchanges = new JPanel();
+        exchanges.setLayout(new BoxLayout(exchanges, BoxLayout.Y_AXIS));
+        exchanges.setAlignmentX(Component.LEFT_ALIGNMENT);
+        exchanges.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        
+        
+        JLabel tituloExc = new JLabel("EXCHANGES");
+        tituloExc.setFont(new Font("SansSerif", Font.BOLD, 14));
+        tituloExc.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+        JPanel filaChecksExc = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
+        filaChecksExc.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JCheckBox offers = new JCheckBox("Offers");
+        JCheckBox newSecondHand = new JCheckBox("New second-hand products");
+        filaChecksExc.add(offers);
+        filaChecksExc.add(newSecondHand);
+        
+	    exchanges.add(tituloExc);
+	    exchanges.add(filaChecksExc);
+	    
+	    JPanel orders = new JPanel();
+	    orders.setLayout(new BoxLayout(orders, BoxLayout.Y_AXIS));
+	    orders.setAlignmentX(Component.LEFT_ALIGNMENT);
+	    orders.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+	    
+	    JLabel tituloOrder = new JLabel("ORDERS");
+	    tituloOrder.setFont(new Font("SansSerif", Font.BOLD, 14));
+        tituloOrder.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+        JPanel filaChecksOrd = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
+        filaChecksOrd.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JCheckBox payment = new JCheckBox("Payments");
+        JCheckBox orderState = new JCheckBox("Order state");
+        JCheckBox packCart = new JCheckBox("Expired packs");
+        JCheckBox productCart = new JCheckBox("Expired products");
+        
+        filaChecksOrd.add(payment);
+        filaChecksOrd.add(orderState);
+        filaChecksOrd.add(packCart);
+        filaChecksOrd.add(productCart);
+        
+        
+        orders.add(tituloOrder);
+        orders.add(filaChecksOrd);
+        
+	    contenedorCentral.add(discounts);
+	    contenedorCentral.add(exchanges);
+	    contenedorCentral.add(orders);
+        
+        //Botón volver
+        btnVolver = new JButton("← Volver");
+        btnVolver.setPreferredSize(new Dimension(0, 50));
+        btnVolver.addActionListener(volverAction);
+        
+        add(titulo, BorderLayout.NORTH);
+        add(new JScrollPane(contenedorCentral), BorderLayout.CENTER);
+        add(btnVolver, BorderLayout.SOUTH);
 	}
 
 }

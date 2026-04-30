@@ -73,6 +73,10 @@ public class App extends JFrame {
         //browseStorePanel.setController(browseStoreController);
 
         /* Add views to main window */
+        ImagePanel bgPanel = new ImagePanel(".\\resources\\background.png");
+        bgPanel.setLayout(new BorderLayout());
+        this.setContentPane(bgPanel);
+
         Container container = this.getContentPane();
         container.setLayout(new GridBagLayout());
         //container.setBackground(new Color(246, 243, 238)); // Beige
@@ -122,19 +126,36 @@ public class App extends JFrame {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
     public void changeCurrentUser(User user) {
         this.mainUser = user;
     }
 
-    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-    public App getApp() {
-        return this;
+    public class ImagePanel extends JPanel {
+        private Image backgroundImage;
+
+        /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+        public ImagePanel(String filePath) {
+            this.backgroundImage = new ImageIcon(filePath).getImage();
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            // Draw the image to fill the entire panel
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
     }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /*public BrowseStoreP getBrowseStorePanel() {
         return browseStorePanel;
     }*/
     // Aquí van los getters de los atributos
+    public App getApp() {
+        return this;
+    }
 
     public EmployeeMainP getEmployeeMainPanel() {
         return employeeMainPanel;

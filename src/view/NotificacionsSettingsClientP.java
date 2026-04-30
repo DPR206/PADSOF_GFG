@@ -9,6 +9,14 @@ public class NotificacionsSettingsClientP extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JButton btnVolver;
+	private JCheckBox disc;
+	private JCheckBox offers;
+	private JCheckBox newSecondHand;
+	private JCheckBox payment;
+	private JCheckBox orderState;
+	private JCheckBox packCart;
+	private JCheckBox productCart;
+	
 
 	/**
 	 * Create the panel.
@@ -38,7 +46,7 @@ public class NotificacionsSettingsClientP extends JPanel {
         
         JPanel filaChecksDisc = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
         filaChecksDisc.setAlignmentX(Component.LEFT_ALIGNMENT);
-        JCheckBox disc = new JCheckBox("New discounts");
+        disc = new JCheckBox("New discounts");
         filaChecksDisc.add(disc);
         
         discounts.add(tituloDisc);
@@ -56,8 +64,8 @@ public class NotificacionsSettingsClientP extends JPanel {
         
         JPanel filaChecksExc = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
         filaChecksExc.setAlignmentX(Component.LEFT_ALIGNMENT);
-        JCheckBox offers = new JCheckBox("Offers");
-        JCheckBox newSecondHand = new JCheckBox("New second-hand products");
+        offers = new JCheckBox("Offers");
+        newSecondHand = new JCheckBox("New second-hand products");
         filaChecksExc.add(offers);
         filaChecksExc.add(newSecondHand);
         
@@ -75,10 +83,10 @@ public class NotificacionsSettingsClientP extends JPanel {
         
         JPanel filaChecksOrd = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
         filaChecksOrd.setAlignmentX(Component.LEFT_ALIGNMENT);
-        JCheckBox payment = new JCheckBox("Payments");
-        JCheckBox orderState = new JCheckBox("Order state");
-        JCheckBox packCart = new JCheckBox("Expired packs");
-        JCheckBox productCart = new JCheckBox("Expired products");
+        payment = new JCheckBox("Payments");
+        orderState = new JCheckBox("Order state");
+        packCart = new JCheckBox("Expired packs");
+        productCart = new JCheckBox("Expired products");
         
         filaChecksOrd.add(payment);
         filaChecksOrd.add(orderState);

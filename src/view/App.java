@@ -117,7 +117,7 @@ public class App extends JFrame {
             }
         });
 
-        this.setSize(700, 500);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
     }
 

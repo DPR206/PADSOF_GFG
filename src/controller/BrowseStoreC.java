@@ -23,9 +23,9 @@ public class BrowseStoreC implements ActionListener {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public BrowseStoreC(App frame, Store model) {
+    public BrowseStoreC(App frame, Store model, BrowseStoreP view) {
         this.frame = frame;
-        this.view = frame.getBrowseStorePanel();
+        this.view = view;
         this.model = model;
     }
 

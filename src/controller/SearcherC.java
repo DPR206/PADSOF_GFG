@@ -21,19 +21,19 @@ public class SearcherC implements ActionListener{
 	private final SearchPanel view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    
-    public SearcherC(App frame) {
-		this.view = new SearchPanel();
+
+    public SearcherC(App frame, SearchPanel view) {
+		this.view = view;
 		this.frame = frame;
 		this.model = Store.getInstance();
     }
-    
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		List<Category> categories = new ArrayList<>();
-		
+
 		if(e.getActionCommand().equals("Aplicar filtros")) {
-		/*METEMOS LAS CATEGORÍAS PRIMERO*/
+			/*METEMOS LAS CATEGORÍAS PRIMERO*/
 			if(e.getActionCommand().equals("Juegos de mesa")) {
 				categories.add(model.getCategoryFromName("Juegos de mesa"));
 			}
@@ -53,10 +53,10 @@ public class SearcherC implements ActionListener{
 				CategoryFilter c = new CategoryFilter(categories);
 				frame.getUser().getSearcher().getStoreSearcher().addCategoryFilter(c);
 			}
-			
+
 			/*Ahora metemos los filtros de puntuación*/
-		
-			
+
+
 			if(e.getActionCommand().equals("0-1★")) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
 			}
@@ -72,11 +72,14 @@ public class SearcherC implements ActionListener{
 			if(e.getActionCommand().equals("4-5★")) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
 			}
-	
-			
+
+
 			/*Ahora metemos el filtro de los precios*/
-			
-			if(e.getActionCommand().equals("0-10")) {
+
+			/*if(e.getActionCommand().equals("0-10")) {
+				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
+			} Transformado en lo de debajo */
+			if(view.getCerodiez().isSelected()) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
 			}
 			if(e.getActionCommand().equals("10-15")) {
@@ -97,7 +100,7 @@ public class SearcherC implements ActionListener{
 			if(e.getActionCommand().equals("50+")) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
 			}
-			
+
 			if(e.getActionCommand().equals("Menor a mayor")) {
 				frame.getUser().getSearcher().getStoreSearcher().setAsc(true);
 			}
@@ -105,12 +108,7 @@ public class SearcherC implements ActionListener{
 				frame.getUser().getSearcher().getStoreSearcher().setAsc(false);
 			}
 			UnregisteredClient u = (UnregisteredClient) frame.getUser();
-			try {
-				this.frame.getBrowseStorePanel().paintEverything();
-			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			frame.setsProductList(u.searchStoreProduct());
 		}
 	}
 }

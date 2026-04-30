@@ -40,6 +40,5 @@ public class UnregisteredMainC implements ActionListener {
 			e1.printStackTrace();
 		}
        }
-       System.out.print(frame.getProducts());
     }
 }

@@ -28,7 +28,7 @@ public class App extends JFrame {
     private final ManagerMainP managerMainPanel;
     private final WelcomeP welcomePanel;
     private final SearchPanel searchPanel;
-    private final BrowseStoreP browseStorePanel;
+    //private final BrowseStoreP browseStorePanel;
     // Aquí se declaran todos los paneles de vista como atributos
     private User mainUser = new UnregisteredClient(true);
     private List<StoreProduct> products = Store.getInstance().getStoreProductList();
@@ -47,7 +47,7 @@ public class App extends JFrame {
         managerMainPanel = new ManagerMainP();
         welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
-        browseStorePanel = new BrowseStoreP(this);
+        //browseStorePanel = new BrowseStoreP(this);
 
         /* Model */
         Store model = Store.getInstance();
@@ -60,7 +60,7 @@ public class App extends JFrame {
         EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
         ManagerMainC managerMainController = new ManagerMainC(this, model);
         WelcomeC welcomeController = new WelcomeC(this, model);
-        BrowseStoreC browseStoreController = new BrowseStoreC(this, model);
+        //BrowseStoreC browseStoreController = new BrowseStoreC(this, model);
 
         /* Configure controllers' views */
         loginPanel.setController(loginController);
@@ -70,7 +70,7 @@ public class App extends JFrame {
         employeeMainPanel.setController(employeeMainController);
         managerMainPanel.setController(managerMainController);
         welcomePanel.setController(welcomeController);
-        browseStorePanel.setController(browseStoreController);
+        //browseStorePanel.setController(browseStoreController);
 
         /* Add views to main window */
         Container container = this.getContentPane();
@@ -97,8 +97,8 @@ public class App extends JFrame {
         welcomePanel.setVisible(false);
         container.add(welcomePanel, gbc);
         welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
-        container.add(browseStorePanel, gbc);
-        browseStorePanel.setVisible(false);
+        //container.add(browseStorePanel, gbc);
+        //browseStorePanel.setVisible(false);
 
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -131,9 +131,9 @@ public class App extends JFrame {
         return this;
     }
 
-    public BrowseStoreP getBrowseStorePanel() {
+    /*public BrowseStoreP getBrowseStorePanel() {
         return browseStorePanel;
-    }
+    }*/
     // Aquí van los getters de los atributos
 
     public EmployeeMainP getEmployeeMainPanel() {

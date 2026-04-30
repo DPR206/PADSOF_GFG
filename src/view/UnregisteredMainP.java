@@ -1,5 +1,7 @@
 package view;
 
+import controller.BrowseStoreC;
+import controller.SearcherC;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
@@ -33,12 +35,15 @@ public class UnregisteredMainP extends JPanel {
         this.productSearch.setLayout(new BorderLayout());
 
         this.filterP.setVisible(false);
+        this.filterP.setController(new SearcherC(app, filterP));
 
         List<StoreProduct> products = Store.getInstance().getStoreProductList();
         this.p = products;
         try {
 			this.searching = new BrowseStoreP(app);
 			this.searching.setVisible(false);
+            this.searching.setController(new BrowseStoreC(app, Store.getInstance(), searching)); // DUE: esto es una
+            // chapuza temporal
 		} catch (BadLocationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

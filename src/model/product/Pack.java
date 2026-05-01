@@ -316,6 +316,10 @@ public class Pack implements Serializable {
 
         return sb.toString();
     }
+    
+    public String getPhoto() {
+    	return this.picture;
+    }
 
     /**
      * Obtains the products inside the pack

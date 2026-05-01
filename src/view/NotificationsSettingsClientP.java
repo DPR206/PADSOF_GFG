@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class NotificacionsSettingsClientP extends JPanel {
+public class NotificationsSettingsClientP extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JButton btnVolver;
@@ -21,7 +21,7 @@ public class NotificacionsSettingsClientP extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public NotificacionsSettingsClientP(ActionListener volverAction) {
+	public NotificationsSettingsClientP(ActionListener volverAction) {
 		
 		setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

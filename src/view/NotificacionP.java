@@ -57,6 +57,7 @@ public class NotificacionP extends JFrame {
         panelBotones.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 10));
         panelBotones.add(btnMarcarLeido);
         panelBotones.add(btnBorrar);
+        panelBotones.add(btnAjustes);
         
         JPanel contenedorBotones = new JPanel(new BorderLayout());
 	    contenedorBotones.add(panelBotones, BorderLayout.NORTH);

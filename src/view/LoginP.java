@@ -1,7 +1,7 @@
 package view;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
 
 /**
  * It implements the log-in panel view
@@ -38,16 +38,6 @@ public class LoginP extends JPanel {
         this.add(label2);
         this.add(password);
         this.add(login);
-
-        // Enter para pulsar botón en último campo
-        password.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    login.doClick();
-                }
-            }
-        });
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -74,5 +64,13 @@ public class LoginP extends JPanel {
      */
     public void setController(ActionListener c) {
         login.addActionListener(c);
+    }
+
+    public JPasswordField getPasswordField() {
+        return password;
+    }
+
+    public JButton getLogin() {
+        return login;
     }
 }

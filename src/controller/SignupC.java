@@ -7,8 +7,7 @@ import view.App;
 import view.SignupP;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /**
  * It implements the sign-up controller
@@ -28,6 +27,16 @@ public class SignupC extends MainLoopSelector implements ActionListener {
     public SignupC(App frame, Store model) {
         super(frame, model);
         this.view = frame.getSignupPanel();
+
+        // Enter para pulsar botón en último campo
+        view.getIdNumberField().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view.getSignup().doClick();
+                }
+            }
+        });
     }
 
     @Override

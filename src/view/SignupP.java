@@ -4,7 +4,7 @@ import model.utilities.IdType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
 
 /**
  * It implements the sign-up panel view
@@ -80,16 +80,6 @@ public class SignupP extends JPanel {
         this.add(idNumber);
         /* Button :) */
         this.add(signup);
-
-        // Enter para pulsar botón en último campo
-        idNumber.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    signup.doClick();
-                }
-            }
-        });
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -100,6 +90,10 @@ public class SignupP extends JPanel {
      */
     public String getIdNumber() {
         return idNumber.getText();
+    }
+
+    public JTextField getIdNumberField() {
+        return idNumber;
     }
 
     public IdType getIdType() {
@@ -117,6 +111,10 @@ public class SignupP extends JPanel {
 
     public String getPassword2() {
         return new String(password2.getPassword());
+    }
+
+    public JButton getSignup() {
+        return signup;
     }
 
     public String getUsername() {

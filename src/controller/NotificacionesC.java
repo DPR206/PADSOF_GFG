@@ -4,6 +4,7 @@ import view.*;
 import model.notification.*;
 import model.user.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class NotificacionesC {
 	
@@ -13,6 +14,13 @@ public class NotificacionesC {
 	    public NotificacionesC (NotificacionP vista, User user) {
 	        this.vista = vista;
 	        this.user = user;
+	        
+	        if (user instanceof Employee) {
+	            vista.getBtnAjustes().setVisible(false);
+	        } else {
+	            vista.getBtnAjustes().setVisible(true);
+	        }
+	        
 	        cargarNotificacionesDelUsuario();
 	        inicializarEventos();
 	    }
@@ -77,6 +85,9 @@ public class NotificacionesC {
 		            }
 		        }
 		    });
+	        
+	        vista.getBtnAjustes().addActionListener(e -> abrirAjustes());
+	        
 	    }
 
 	    private void abrirDetalle(Notification n) {
@@ -87,6 +98,20 @@ public class NotificacionesC {
 	        });
 	        
 	        vista.setDetallePanel(vistaDetalle);
+	    }
+	    
+	    private void abrirAjustes() {
+	        ActionListener volver = e -> vista.mostrarPantalla("LISTA");
+	        JPanel panel = null;
+
+	        if (user instanceof RegisteredClient) {
+	            panel = new NotificationsSettingsClientP(volver);
+	        } else
+	        	return;
+
+	        if (panel != null) {
+	            vista.setDetallePanel(panel);
+	        }
 	    }
 	    
 	}

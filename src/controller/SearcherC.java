@@ -87,19 +87,19 @@ public class SearcherC implements ActionListener{
 				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(10,15);
 			}
 			if(view.getQuinceveinte().isSelected()) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(2,3);
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(15, 20);
 			}
 			if(view.getVeintetreinta().isSelected()) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(3,4);
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(20, 30);
 			}
 			if(view.getTreintacuarenta().isSelected()) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(30, 40);
 			}
 			if(view.getCuarentacincuenta().isSelected()) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(40, 50);
 			}
 			if(view.getPlus50().isSelected()) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(50, Double.MAX_VALUE);
 			}
 
 			if(view.getAscendente().isSelected()) {

@@ -2,6 +2,11 @@ package model.search;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.product.StoreProduct;
+import model.store.Store;
 
 /**
  * This class represents a punctuation (rating) filter used to limit
@@ -55,5 +60,18 @@ public class PunctuationFilter implements Serializable {
      */
     public int getMax(){
         return this.max;
+    }
+    
+    public List<StoreProduct> filterPunctuation(){
+    	List<StoreProduct> products = Store.getInstance().getStoreProductList();
+    	List<StoreProduct> toReturn = new ArrayList<>();
+    	
+    	for(StoreProduct sp: products) {
+    		if(sp.getAveragePunctuation() >= this.min && sp.getAveragePunctuation() < this.max) {
+    			toReturn.add(sp);
+    		}
+    	}
+    	
+    	return toReturn;
     }
 }

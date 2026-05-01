@@ -14,7 +14,7 @@ import model.product.Category;
 public class CategoryFilter implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 1L; /* Para el Save & Load */
-	private List<Category> categories;
+	private List<Category> categories = new ArrayList<>();
 
 	/**
 	 * Constructor of the class

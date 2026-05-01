@@ -166,7 +166,6 @@ public class SearchStoreProducts implements Serializable {
         Store s = Store.getInstance();
         List<StoreProduct> product = new ArrayList<> (this.s.getStoreProducts().values());
         List<Category> c = this.categoryF.getCategories();
-        Category[] caux;
 
         for(Category ca: c){
         	aux.addAll(ca.getProducts());

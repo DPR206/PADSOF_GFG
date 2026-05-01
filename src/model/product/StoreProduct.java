@@ -71,6 +71,7 @@ public abstract class StoreProduct extends Product implements Serializable {
             this.categories.put(category.getName(), category);
             Store.getInstance().getCategoryFromName(category.getName()).addProduct(this);
         }
+        
         this.sales = 0;
         this.salesByMonth = new HashMap<Month, Integer>();
         for (Month month : Month.values()) {

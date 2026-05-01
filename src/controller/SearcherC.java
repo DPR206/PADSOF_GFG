@@ -31,22 +31,23 @@ public class SearcherC implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		List<Category> categories = new ArrayList<>();
+		this.frame.getUser().getSearcher().getStoreSearcher().clearFilters();
 
 		if(e.getActionCommand().equals("Aplicar filtros")) {
 			/*METEMOS LAS CATEGORÍAS PRIMERO*/
-			if(e.getActionCommand().equals("Juegos de mesa")) {
+			if(view.getJmesa().isSelected()) {
 				categories.add(model.getCategoryFromName("Juegos de mesa"));
 			}
-			if(e.getActionCommand().equals("Juegos de rol")) {
+			if(view.getJrol().isSelected()) {
 				categories.add(model.getCategoryFromName("Juegos de rol"));
 			}
-			if(e.getActionCommand().equals("Juegos de cartas")) {
+			if(view.getJcarta().isSelected()) {
 				categories.add(model.getCategoryFromName("Juegos de cartas"));
 			}
-			if(e.getActionCommand().equals("Figuras")) {
+			if(view.getFiguras().isSelected()) {
 				categories.add(model.getCategoryFromName("Figuras"));
 			}
-			if(e.getActionCommand().equals("Cómics")) {
+			if(view.getComics().isSelected()) {
 				categories.add(model.getCategoryFromName("Cómics"));
 			}
 			if(categories.isEmpty() == false) {
@@ -57,19 +58,19 @@ public class SearcherC implements ActionListener{
 			/*Ahora metemos los filtros de puntuación*/
 
 
-			if(e.getActionCommand().equals("0-1★")) {
+			if(view.getCerouno().isSelected()) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
 			}
-			if(e.getActionCommand().equals("1-2★")) {
+			if(view.getUnodos().isSelected()) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(1,2);
 			}
-			if(e.getActionCommand().equals("2-3★")) {
+			if(view.getDostres().isSelected()) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(2,3);
 			}
-			if(e.getActionCommand().equals("3-4★")) {
+			if(view.getTrescuatro().isSelected()) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(3,4);
 			}
-			if(e.getActionCommand().equals("4-5★")) {
+			if(view.getCuatrocinco().isSelected()) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
 			}
 
@@ -80,28 +81,28 @@ public class SearcherC implements ActionListener{
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
 			} Transformado en lo de debajo */
 			if(view.getCerodiez().isSelected()) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(0, 10);
 			}
-			if(e.getActionCommand().equals("10-15")) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(1,2);
+			if(view.getDiezquince().isSelected()) {
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(10,15);
 			}
-			if(e.getActionCommand().equals("15-20")) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(2,3);
+			if(view.getQuinceveinte().isSelected()) {
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(15, 20);
 			}
-			if(e.getActionCommand().equals("20-30")) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(3,4);
+			if(view.getVeintetreinta().isSelected()) {
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(20, 30);
 			}
-			if(e.getActionCommand().equals("30-40")) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+			if(view.getTreintacuarenta().isSelected()) {
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(30, 40);
 			}
-			if(e.getActionCommand().equals("40-50")) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+			if(view.getCuarentacincuenta().isSelected()) {
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(40, 50);
 			}
-			if(e.getActionCommand().equals("50+")) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(4,5);
+			if(view.getPlus50().isSelected()) {
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(50, Double.MAX_VALUE);
 			}
 
-			if(e.getActionCommand().equals("Menor a mayor")) {
+			if(view.getAscendente().isSelected()) {
 				frame.getUser().getSearcher().getStoreSearcher().setAsc(true);
 			}
 			else {

@@ -783,4 +783,10 @@ public class Manager extends User implements Serializable {
     public void setType(StoreProduct sp, ProductType pt) {
         this.sp.setType(sp, pt);
     }
+    
+    public void removePermission(Employee emp, Permission perm) {
+    	if(perm.equals(Permission.STORE)) emp.setSp(null);
+    	else if(perm.equals(Permission.EXCHANGE)) emp.setEp(null);
+    	else if(perm.equals(Permission.ORDER)) emp.setOp(null);
+    }
 }

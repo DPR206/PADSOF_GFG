@@ -31,6 +31,7 @@ public class SearcherC implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		List<Category> categories = new ArrayList<>();
+		this.frame.getUser().getSearcher().getStoreSearcher().clearFilters();
 
 		if(e.getActionCommand().equals("Aplicar filtros")) {
 			/*METEMOS LAS CATEGORÍAS PRIMERO*/
@@ -80,7 +81,7 @@ public class SearcherC implements ActionListener{
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
 			} Transformado en lo de debajo */
 			if(view.getCerodiez().isSelected()) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
+				frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(0, 10);
 			}
 			if(e.getActionCommand().equals("10-15")) {
 				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(1,2);

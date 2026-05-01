@@ -76,16 +76,15 @@ public class SearchStoreProducts implements Serializable {
      */
     public List<StoreProduct> searchStoreProducts(){
        List<StoreProduct> pCs;
-       
-       
-       
-       if(!this.filterByCategory().isEmpty()) {
-    	   pCs = this.filterByCategory();
+
+       List<StoreProduct> catFiltered = this.filterByCategory();
+
+       if (!this.categoryF.getCategories().isEmpty()) {
+           pCs = catFiltered;
+       } else {
+           pCs = new ArrayList<>(this.s.getStoreProducts().values());
        }
-       else {
-    	   pCs = new ArrayList<>();
-       }
-       
+
        if(!this.priceF.isEmpty()) pCs.retainAll(this.filterByPrice());
        if(!this.punctuationF.isEmpty()) pCs.retainAll(this.filterByPunctuation());
         
@@ -123,7 +122,7 @@ public class SearchStoreProducts implements Serializable {
      */
     private List<StoreProduct> filterByPrice(){
         List<StoreProduct> aux = new ArrayList<>();
-        List<StoreProduct> fromStore = (List<StoreProduct>) this.s.getStoreProducts().values();
+        List<StoreProduct> fromStore = new ArrayList<>(this.s.getStoreProducts().values());
 
         if(this.priceF != null){
             for(StoreProduct p: fromStore){
@@ -142,7 +141,7 @@ public class SearchStoreProducts implements Serializable {
      */
     private List<StoreProduct> filterByPunctuation(){
         List<StoreProduct> aux = new ArrayList<>();
-        List<StoreProduct> fromStore = (List<StoreProduct>) this.s.getStoreProducts().values();
+        List<StoreProduct> fromStore = new ArrayList<>(this.s.getStoreProducts().values());
 
         if(this.punctuationF != null){
             for(StoreProduct p: fromStore){
@@ -211,4 +210,11 @@ public class SearchStoreProducts implements Serializable {
     public CategoryFilter getCategoryFilter() {
     	return this.categoryF;
     }
+    
+    public void clearFilters() {
+        this.priceF.clear();
+        this.punctuationF.clear();
+        this.categoryF = new CategoryFilter(new ArrayList<>());
+    }
+
 }

@@ -1,25 +1,30 @@
-package view;
+package view.browserPanels;
 
-import model.product.StoreProduct;
+import model.product.SecondHandProduct;
 import model.store.BetterPager;
-import view.miniPanels.StoreProductMiniP;
+import model.user.RegisteredClient;
+import view.App;
+import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
-public class BrowseStoreP extends JPanel implements BigView {
+import static main.Main.brownColour;
+
+public class BrowseSomeonesWalletP extends JPanel implements BigView {
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
-    private final List<StoreProductMiniP> productPanels = new ArrayList<>();
-    private final BetterPager<StoreProduct> pager = new BetterPager<>();
+    private final List<SecondHandMiniP> productPanels = new ArrayList<>();
+    private final BetterPager<SecondHandProduct> pager = new BetterPager<>();
     private final App app;
-    private List<StoreProduct> storeProducts = new ArrayList<>();
+    private final RegisteredClient owner;
+    private List<SecondHandProduct> secondHandProducts = new ArrayList<>();
     private int currentPageNum;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -27,10 +32,11 @@ public class BrowseStoreP extends JPanel implements BigView {
     /**
      * This panel's constructor
      */
-    public BrowseStoreP(App app) throws BadLocationException {
+    public BrowseSomeonesWalletP(App app, RegisteredClient owner) throws BadLocationException {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 
         this.app = app;
+        this.owner = owner;
         currentPageNum = 1;
 
         paintEverything();
@@ -45,13 +51,17 @@ public class BrowseStoreP extends JPanel implements BigView {
         this.removeAll();
         productPanels.clear();
 
-        this.storeProducts = app.getProducts();
+        JLabel title = new JLabel(owner.getUserName() + "'s wallet'");
+        title.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
+        this.add(title);
 
-        List<StoreProduct> currentStoreProducts = pager.pageItemList(storeProducts, currentPageNum);
+        this.secondHandProducts = Arrays.asList(owner.getWallet().getProducts());
+
+        List<SecondHandProduct> currentSecondHandProducts = pager.pageItemList(secondHandProducts, currentPageNum);
 
         int index = 1;
-        for (StoreProduct product : currentStoreProducts) {
-            StoreProductMiniP miniProduct = new StoreProductMiniP(product, index);
+        for (SecondHandProduct product : currentSecondHandProducts) {
+            SecondHandMiniP miniProduct = new SecondHandMiniP(product, index);
             productPanels.add(miniProduct);
             this.add(miniProduct);
             index++;
@@ -63,7 +73,7 @@ public class BrowseStoreP extends JPanel implements BigView {
             pageTurner.add(previousPage);
         }
         pageTurner.add(new JLabel("Page " + currentPageNum));
-        if (currentPageNum != pager.getMaxPageNum(storeProducts)) {
+        if (currentPageNum != pager.getMaxPageNum(secondHandProducts)) {
             pageTurner.add(nextPage);
             pageTurner.add(lastPage);
         }
@@ -97,10 +107,10 @@ public class BrowseStoreP extends JPanel implements BigView {
      * @return the available store product list's max page number
      */
     public int getMaxPageNum() {
-        return pager.getMaxPageNum(storeProducts);
+        return pager.getMaxPageNum(secondHandProducts);
     }
 
-    public List<StoreProductMiniP> getProductPanels() {
+    public List<SecondHandMiniP> getProductPanels() {
         return productPanels;
     }
 
@@ -110,7 +120,7 @@ public class BrowseStoreP extends JPanel implements BigView {
      */
     public void setController(ActionListener c) {
         if (productPanels != null) {
-            for (StoreProductMiniP miniProduct : productPanels) {
+            for (SecondHandMiniP miniProduct : productPanels) {
                 miniProduct.setController(c);
             }
         }

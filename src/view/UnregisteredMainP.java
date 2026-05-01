@@ -3,6 +3,7 @@ package view;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
+import view.browserPanels.BrowseStoreP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -63,6 +64,7 @@ public class UnregisteredMainP extends JPanel {
         bottom.add(this.filterP, "Search");
         others.add(bottom, BorderLayout.SOUTH);
     }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     public BrowseStoreP getBrowsePanel() {
         return this.searching;

@@ -39,10 +39,9 @@ public class UnregisteredMainC implements ActionListener {
             view.getFilterPanel().setVisible(false);
             view.getBrowsePanel().setVisible(true);
             try {
-                view.getBrowsePanel().paintEverything();
-            } catch (BadLocationException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+                view.getBrowsePanel().setCurrentPageNum(1);
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
             }
         }
         updateControllers();

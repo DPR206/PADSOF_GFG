@@ -163,20 +163,13 @@ public class SearchStoreProducts implements Serializable {
      */
     private List<StoreProduct> filterByCategory(){
         List<StoreProduct> aux = new ArrayList<>();
+        Store s = Store.getInstance();
         List<StoreProduct> product = new ArrayList<> (this.s.getStoreProducts().values());
         List<Category> c = this.categoryF.getCategories();
         Category[] caux;
 
-        for(Category cat: c) {
-            for(StoreProduct sp: product) {
-                caux = sp.getCategories();
-                for(Category cc: caux) {
-                    if(cc == cat) {
-                        aux.add(sp);
-                        break;
-                    }
-                }
-            }
+        for(Category ca: c){
+        	aux.addAll(ca.getProducts());
         }
 
         return new ArrayList<>(new LinkedHashSet<>(aux));

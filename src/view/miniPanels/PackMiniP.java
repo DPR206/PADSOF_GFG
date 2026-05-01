@@ -26,6 +26,7 @@ public class PackMiniP extends JPanel{
 	private final JButton addToCart = new JButton("Add to Cart");
     private final Pack p;
     private final JTextPane packInfo;
+    private final JLabel packImage;
     
     public PackMiniP(Pack p, int index) throws BadLocationException {
     	super();
@@ -38,6 +39,7 @@ public class PackMiniP extends JPanel{
         addToCart.setPreferredSize(new Dimension(125, height));
         addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
     
+        this.packImage = getImageLabel(p.getPhoto(), height, height);
         this.packInfo = new JTextPane();
         this.packInfo.setEditable(false);
         this.packInfo.setFocusable(false);
@@ -66,8 +68,9 @@ public class PackMiniP extends JPanel{
         indexNum.setCharacterAttributes(attributes2, true);
         indexNum.setText("\n" + index + ".");
         indexNum.setPreferredSize(new Dimension(25, height));
-
+        
         this.add(indexNum);
+        this.add(packImage);
         this.add(packInfo);
         this.add(addToCart);
 

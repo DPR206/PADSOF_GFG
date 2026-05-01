@@ -2,6 +2,11 @@ package model.search;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.product.StoreProduct;
+import model.store.Store;
 
 /**
  * This class represents a price range filter used to limit
@@ -55,5 +60,21 @@ public class PriceFilter implements Serializable {
      */
     public double getMax(){
         return this.max;
+    }
+    
+    /**
+     * Searches the product based on one filter
+     */
+    
+    public List<StoreProduct> filterPrice(){
+    	List<StoreProduct> products = Store.getInstance().getStoreProductList();
+    	List<StoreProduct> toReturn = new ArrayList<>();
+    	
+    	for(StoreProduct sp: products) {
+    		if(sp.getPrice() >= this.min && sp.getPrice() < this.max) {
+    			toReturn.add(sp);
+    		}
+    	}
+    	return toReturn;
     }
 }

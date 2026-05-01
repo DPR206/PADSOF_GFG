@@ -122,16 +122,13 @@ public class SearchStoreProducts implements Serializable {
      */
     private List<StoreProduct> filterByPrice(){
         List<StoreProduct> aux = new ArrayList<>();
-        List<StoreProduct> fromStore = new ArrayList<>(this.s.getStoreProducts().values());
 
         if(this.priceF != null){
-            for(StoreProduct p: fromStore){
-            	for(PriceFilter priceFf: this.priceF)
-                	if(p.getPrice() >= priceFf.getMin() && p.getPrice() <= priceFf.getMax()) aux.add(p);
+            for(PriceFilter f: this.priceF) {
+            	aux.addAll(f.filterPrice());
             }
-            return aux;
         }
-        return null;
+         return aux;
     }
 
     /**

@@ -30,8 +30,8 @@ public class ComposedPack extends Pack implements Serializable {
      * @param newPacks the pack's it contains
      * @param date the date it was added to the cart
      */
-    public ComposedPack(int id, double price, HashSet<Pack> newPacks, LocalDate date) {
-        super(id, price, date);
+    public ComposedPack(int id, double price, HashSet<Pack> newPacks, LocalDate date, String picture) {
+        super(id, price, date,picture);
         this.packs = newPacks;
     }
 
@@ -42,8 +42,8 @@ public class ComposedPack extends Pack implements Serializable {
      * @param price the pack's price
      * @param date the date it was added to the cart
      */
-    public ComposedPack(HashSet<Pack> newPacks, double price, LocalDate date) {
-        super(price, date);
+    public ComposedPack(HashSet<Pack> newPacks, double price, LocalDate date, String picture) {
+        super(price, date, picture);
         packs = newPacks;
     }
 
@@ -53,8 +53,8 @@ public class ComposedPack extends Pack implements Serializable {
      * @param price, price of the pack
      * @param newPacks, the packs the pack contains
      */
-    public ComposedPack(double price, HashSet<Pack> newPacks) {
-        this(newPacks, price, null);
+    public ComposedPack(double price, HashSet<Pack> newPacks, String picture) {
+        this(newPacks, price, null, picture);
     }
 
     /*------------------------------------------------GETTERS AND SETTERS-----------------------------------------------------------------------*/

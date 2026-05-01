@@ -29,6 +29,7 @@ public class Pack implements Serializable {
     private LocalDate dateAddCart;
     /** The pack's discount, if it has one */
     private Discount discount;
+    private String picture;
 
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -40,11 +41,12 @@ public class Pack implements Serializable {
      * @param products, the products the pack contains
      * @param date      the date it was added to the cart
      */
-    public Pack(int id, double price, ArrayList<StoreProduct> products, LocalDate date) {
+    public Pack(int id, double price, ArrayList<StoreProduct> products, LocalDate date, String picture) {
         this.id = id;
         this.price = price;
         this.products = products;
         this.dateAddCart = date;
+        this.picture = picture;
 
         Store.getInstance().getPacks().add(this);
     }
@@ -54,8 +56,8 @@ public class Pack implements Serializable {
      * @param price,    price of the pack
      * @param products, the products the pack contains
      */
-    public Pack(double price, ArrayList<StoreProduct> products) {
-        this(totalId, price, products, null);
+    public Pack(double price, ArrayList<StoreProduct> products, String picture) {
+        this(totalId, price, products, null, picture);
         totalId++;
     }
 
@@ -65,8 +67,8 @@ public class Pack implements Serializable {
      * @param products, the products the pack contains
      * @param date      the date it was added to the cart
      */
-    public Pack(double price, ArrayList<StoreProduct> products, LocalDate date) {
-        this(totalId, price, products, date);
+    public Pack(double price, ArrayList<StoreProduct> products, LocalDate date, String picture) {
+        this(totalId, price, products, date, picture);
         totalId++;
     }
 
@@ -75,8 +77,8 @@ public class Pack implements Serializable {
      * @param price, price of the pack
      * @param date,  the date it was added to the cart
      */
-    public Pack(double price, LocalDate date) {
-        this(totalId, price, new ArrayList<StoreProduct>(), date);
+    public Pack(double price, LocalDate date, String picture) {
+        this(totalId, price, new ArrayList<StoreProduct>(), date, picture);
         totalId++;
     }
 
@@ -86,8 +88,8 @@ public class Pack implements Serializable {
      * @param price, price of the pack
      * @param date,  the products the pack contains
      */
-    public Pack(int id, double price, LocalDate date) {
-        this(id, price, new ArrayList<StoreProduct>(), date);
+    public Pack(int id, double price, LocalDate date, String picture) {
+        this(id, price, new ArrayList<StoreProduct>(), date, picture);
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

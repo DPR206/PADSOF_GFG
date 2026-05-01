@@ -9,8 +9,7 @@ import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class StoreProductMiniC implements ActionListener {
     private final StoreProductMiniP view; /* view -> panel */
@@ -33,6 +32,22 @@ public class StoreProductMiniC implements ActionListener {
         this.model = model;
         this.bigController = bigController;
         this.bigView = bigView;
+
+        view.getProductImage().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                }
+            }
+        });
+
+        view.getProductInfo().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                }
+            }
+        });
     }
 
     @Override

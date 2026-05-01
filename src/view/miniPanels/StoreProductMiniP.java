@@ -14,6 +14,8 @@ import static view.ImageAdder.getScaledImage;
 public class StoreProductMiniP extends JPanel {
     private final JButton addToCart = new JButton("Add to Cart");
     private final StoreProduct storeProduct;
+    private final JLabel productImage;
+    private final JTextPane productInfo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public StoreProductMiniP(StoreProduct product, int index) throws BadLocationException {
@@ -25,8 +27,8 @@ public class StoreProductMiniP extends JPanel {
         addToCart.setPreferredSize(new Dimension(125, height));
         addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
 
-        JLabel productImage = getImageLabel(product.getPhoto(), height, height); // DUE: Revisar dimensiones
-        JTextPane productInfo = new JTextPane();
+        productImage = getImageLabel(product.getPhoto(), height, height); // DUE: Revisar dimensiones
+        productInfo = new JTextPane();
         productInfo.setEditable(false);
         productInfo.setFocusable(false);
 
@@ -69,6 +71,14 @@ public class StoreProductMiniP extends JPanel {
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    public JLabel getProductImage() {
+        return productImage;
+    }
+
+    public JTextPane getProductInfo() {
+        return productInfo;
+    }
+
     public StoreProduct getStoreProduct() {
         return storeProduct;
     }
@@ -80,5 +90,4 @@ public class StoreProductMiniP extends JPanel {
     public void setController(ActionListener c) {
         addToCart.addActionListener(c);
     }
-
 }

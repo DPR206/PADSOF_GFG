@@ -103,6 +103,23 @@ public class App extends JFrame {
         welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
         //container.add(browseStorePanel, gbc);
         //browseStorePanel.setVisible(false);
+        /*new RegisteredClient("ama", "51721876M", "pwd", true);
+        RegisteredClient ama = (RegisteredClient) Store.getInstance().getUsers().get("ama");
+        ama.addProductWallet(
+                new SecondHandProduct("Hamster yay", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
+        ama.addProductWallet(
+                new SecondHandProduct("Hamster yippie", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
+        ama.addProductWallet(
+                new SecondHandProduct("Hamster :)", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
+        ama.addProductWallet(
+                new SecondHandProduct("Hamster :3", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
+        ama.addProductWallet(
+                new SecondHandProduct("Hamster ey", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
+        ama.addProductWallet(
+                new SecondHandProduct("Hamster hamster", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
+        BrowseSomeonesWalletP browseWallet = new BrowseSomeonesWalletP(this, ama);
+        container.add(browseWallet, gbc);
+        browseWallet.setController(new BrowseWalletC(this, model, browseWallet));*/
 
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

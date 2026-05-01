@@ -3,6 +3,7 @@ package view;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
+import view.browserPanels.BrowseStoreP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -11,7 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class UnregisteredMainP extends JPanel {
-    private JPanel banner;
+    private static final long serialVersionUID = 1L;
+	private JPanel banner;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
     private JScrollPane scrolling;
@@ -63,6 +65,7 @@ public class UnregisteredMainP extends JPanel {
         bottom.add(this.filterP, "Search");
         others.add(bottom, BorderLayout.SOUTH);
     }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     public BrowseStoreP getBrowsePanel() {
         return this.searching;

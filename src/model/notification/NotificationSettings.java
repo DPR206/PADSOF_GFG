@@ -86,7 +86,8 @@ public class NotificationSettings implements Serializable {
 			for(Permission p : employee.getPerm())
 				switch(p) {
 					case EXCHANGE: this.changeInterest(NotificationType.EMPLOYEE_EXCHANGE, true);
-											  this.changeInterest(NotificationType.EMPLOYEE_VALUATION, true); break;
+								   this.changeInterest(NotificationType.EMPLOYEE_VALUATION, true); 
+								   break;
 
 					case ORDER: this.changeInterest(NotificationType.EMPLOYEE_ORDER, true); break;
 
@@ -120,8 +121,7 @@ public class NotificationSettings implements Serializable {
 	 * @param interest true if the user is interested, false if else
 	 */
 	public void changeInterest(NotificationType type, Boolean interest) {
-		if(type != NotificationType.PAYMENT && NotificationType.ORDER != type && NotificationType.EMPLOYEE_EXCHANGE != type
-		   && NotificationType.EMPLOYEE_ORDER != type && NotificationType.EMPLOYEE_VALUATION != type)
+		if(type != NotificationType.PAYMENT && NotificationType.ORDER != type)
 			this.interests.put(type, interest);
 	}
 

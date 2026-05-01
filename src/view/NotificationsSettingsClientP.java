@@ -111,4 +111,68 @@ public class NotificationsSettingsClientP extends JPanel {
         add(btnVolver, BorderLayout.SOUTH);
 	}
 
+
+	/**
+	 * @return the btnVolver
+	 */
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
+
+
+	/**
+	 * @return the disc
+	 */
+	public JCheckBox getDisc() {
+		return disc;
+	}
+
+
+	/**
+	 * @return the offers
+	 */
+	public JCheckBox getOffers() {
+		return offers;
+	}
+
+
+	/**
+	 * @return the newSecondHand
+	 */
+	public JCheckBox getNewSecondHand() {
+		return newSecondHand;
+	}
+
+
+	/**
+	 * @return the payment
+	 */
+	public JCheckBox getPayment() {
+		return payment;
+	}
+
+
+	/**
+	 * @return the orderState
+	 */
+	public JCheckBox getOrderState() {
+		return orderState;
+	}
+
+
+	/**
+	 * @return the packCart
+	 */
+	public JCheckBox getPackCart() {
+		return packCart;
+	}
+
+
+	/**
+	 * @return the productCart
+	 */
+	public JCheckBox getProductCart() {
+		return productCart;
+	}
+
 }

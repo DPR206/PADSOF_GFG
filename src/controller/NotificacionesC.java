@@ -4,6 +4,7 @@ import view.*;
 import model.notification.*;
 import model.user.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 public class NotificacionesC {
@@ -31,13 +32,13 @@ public class NotificacionesC {
 
 	        // Obtenemos el historial del usuario y lo filtramos por visibilidad
 	        if(user instanceof RegisteredClient client)
-	        	client.getNotificationHistory().getNotificationsSorted().forEach(n -> {
+	        	client.browseNotifications().forEach(n -> {
 	        	if(n.isVisible()) {
 	        		vista.getModelo().addElement(n);
 	        	}
 	        });
 	        else if(user instanceof Employee employee)
-	        	employee.getNotificationHistory().getNotificationsSorted().forEach(n -> {
+	        	employee.browseNotifications().forEach(n -> {
 	        	if(n.isVisible()) {
 	        		vista.getModelo().addElement(n);
 	        	}
@@ -102,16 +103,101 @@ public class NotificacionesC {
 	    
 	    private void abrirAjustes() {
 	        ActionListener volver = e -> vista.mostrarPantalla("LISTA");
-	        JPanel panel = null;
+	        NotificationsSettingsClientP panelAjustes = null;
 
-	        if (user instanceof RegisteredClient) {
-	            panel = new NotificationsSettingsClientP(volver);
+	        if (user instanceof RegisteredClient client) {
+	            panelAjustes = new NotificationsSettingsClientP(volver);
+	            NotificationSettings settings = client.getNotificationHistory().getSettings();
+	            
+	            enlazarCheck(panelAjustes.getDisc(), NotificationType.DISCOUNT, settings);
+	    	    enlazarCheck(panelAjustes.getOffers(), NotificationType.EXCHANGE, settings);
+	    	    enlazarCheck(panelAjustes.getNewSecondHand(), NotificationType.NEW_SECONDHAND_PRODUCT, settings);
+	            enlazarCheck(panelAjustes.getOrderState(), NotificationType.ORDER, settings);
+	            enlazarCheck(panelAjustes.getPackCart(), NotificationType.PACK_CART, settings);
+	            enlazarCheck(panelAjustes.getProductCart(), NotificationType.PRODUCT_CART, settings);
+	            enlazarCheck(panelAjustes.getPayment(), NotificationType.PAYMENT, settings);
+	            
+	            panelAjustes.getDisc().addItemListener(e -> {
+	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
+	                settings.changeInterest(NotificationType.DISCOUNT, estado);
+	            });
+
+	            panelAjustes.getOffers().addItemListener(e -> {
+	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
+	                settings.changeInterest(NotificationType.EXCHANGE, estado);
+	            });
+	            
+	            panelAjustes.getNewSecondHand().addItemListener(e -> {
+	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
+	                settings.changeInterest(NotificationType.NEW_SECONDHAND_PRODUCT, estado);
+	            });
+	            
+	            panelAjustes.getOrderState().addItemListener(e -> {
+	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
+	                settings.changeInterest(NotificationType.ORDER, estado);
+	            });
+	            
+	            panelAjustes.getPackCart().addItemListener(e -> {
+	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
+	                settings.changeInterest(NotificationType.PACK_CART, estado);
+	            });
+	            
+	            panelAjustes.getProductCart().addItemListener(e -> {
+	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
+	                settings.changeInterest(NotificationType.PRODUCT_CART, estado);
+	            });
+	            
+	            panelAjustes.getPayment().addItemListener(e -> {
+	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
+	                settings.changeInterest(NotificationType.PAYMENT, estado);
+	            });
+	            
+	            configurarChecksBloqueados(panelAjustes);
+	            
 	        } else
 	        	return;
 
-	        if (panel != null) {
-	            vista.setDetallePanel(panel);
+	        if (panelAjustes != null) {
+	            vista.setDetallePanel(panelAjustes);
 	        }
+	    }
+	    
+	    private void enlazarCheck(JCheckBox check, NotificationType tipo, NotificationSettings settings) {
+	        // 1. Sincronizar estado inicial
+	        check.setSelected(settings.getInterests().getOrDefault(tipo, false));
+	        
+	        // 2. Crear evento de guardado automático
+	        check.addItemListener(e -> {
+	            settings.changeInterest(tipo, e.getStateChange() == ItemEvent.SELECTED);
+	        });
+	    }
+	    
+	    private void configurarChecksBloqueados(NotificationsSettingsClientP panel) {
+	        
+	        // Listener para Payment
+	        panel.getPayment().addActionListener(e -> {
+	            JCheckBox source = (JCheckBox) e.getSource();
+	            
+	            // Revertimos el estado (si estaba marcado, lo dejamos marcado)
+	            source.setSelected(true); 
+	            
+	            // Lanzamos el aviso
+	            JOptionPane.showMessageDialog(vista, 
+	                "The notifications of your payments must be active to assure your account's security. ", 
+	                "Non-permitted action", 
+	                JOptionPane.WARNING_MESSAGE);
+	        });
+
+	        // Listener para Order State
+	        panel.getOrderState().addActionListener(e -> {
+	            JCheckBox source = (JCheckBox) e.getSource();
+	            source.setSelected(true);
+	            
+	            JOptionPane.showMessageDialog(vista, 
+	                "You can't disable the tracking of your active orders. ", 
+	                "Non-permitted action", 
+	                JOptionPane.WARNING_MESSAGE);
+	        });
 	    }
 	    
 	}

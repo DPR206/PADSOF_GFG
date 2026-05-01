@@ -22,10 +22,10 @@ public class SearcherC implements ActionListener{
     private final App frame; /* view -> frame */
     private final Store model; /* model */
 
-    public SearcherC(App frame, SearchPanel view) {
+    public SearcherC(App frame, Store model, SearchPanel view) {
 		this.view = view;
 		this.frame = frame;
-		this.model = Store.getInstance();
+		this.model = model;
     }
 
 	@Override

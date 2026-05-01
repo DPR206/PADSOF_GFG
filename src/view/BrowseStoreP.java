@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BrowseStoreP extends JPanel {
+public class BrowseStoreP extends JPanel implements BigView {
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
@@ -98,6 +98,10 @@ public class BrowseStoreP extends JPanel {
      */
     public int getMaxPageNum() {
         return pager.getMaxPageNum(storeProducts);
+    }
+
+    public List<StoreProductMiniP> getProductPanels() {
+        return productPanels;
     }
 
     /**

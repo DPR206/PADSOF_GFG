@@ -7,6 +7,7 @@ import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
@@ -40,8 +41,13 @@ public class StoreProductMiniP extends JPanel {
 
         Document doc = productInfo.getStyledDocument();
         doc.insertString(doc.getLength(), // DUE Añadir descuento
-                ("Price: " + String.format("%.2f", product.getPrice()) + " €\nStock: " + product.getStock()),
-                attributes);
+                ("Price: " + String.format("%.2f", product.getPrice()) + " €\n"), attributes);
+
+        if (product.getStock() == 0) {
+            StyleConstants.setForeground(attributes, Color.RED);
+            StyleConstants.setItalic(attributes, true);
+        }
+        doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
 
         productInfo.setPreferredSize(new Dimension(width, height));
 
@@ -59,6 +65,8 @@ public class StoreProductMiniP extends JPanel {
         this.add(productImage);
         this.add(productInfo);
         this.add(addToCart);
+
+        this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
     public StoreProduct getStoreProduct() {

@@ -61,7 +61,9 @@ public class SignupP extends JPanel {
         //buttonPanel.setBackground(new Color(246, 243, 238)); // Beige
 
         // añadir componentes al panel
-        this.add(ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50));
+        JLabel imageLabel = ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50);
+
+        this.add(imageLabel);
         this.add(textArea);
         /* Username */
         this.add(usernameLabel);

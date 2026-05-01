@@ -1,7 +1,6 @@
 package model.product;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 
 /**
  * It implements the abstract Product class
@@ -27,6 +26,7 @@ public abstract class Product implements Serializable {
     private ProductType type;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * A product's general constructor
      * @param id          the product's id
@@ -71,6 +71,7 @@ public abstract class Product implements Serializable {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
     /**
      * It sets the total id of the products
      * @param newTotalId the totalId
@@ -162,7 +163,10 @@ public abstract class Product implements Serializable {
      * @return the product's photo
      */
     public String getPhoto() {
-        return this.photo;
+        if ((new File(this.photo)).isFile()) {
+            return this.photo;
+        }
+        return ".\\resources\\image_not_found.jpg";
     }
 
     /**

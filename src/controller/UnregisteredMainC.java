@@ -6,10 +6,9 @@ import model.user.User;
 import view.App;
 import view.UnregisteredMainP;
 
+import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.text.BadLocationException;
 
 public class UnregisteredMainC implements ActionListener {
     private final UnregisteredMainP view; /* view -> panel */
@@ -22,23 +21,30 @@ public class UnregisteredMainC implements ActionListener {
         this.frame = frame;
         this.view = frame.getUnregisteredMainPanel();
         this.model = model;
+
+        updateControllers();
+    }
+
+    public void updateControllers() {
+        view.getBrowsePanel().setController(new BrowseStoreC(frame, model, view.getBrowsePanel()));
+        view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       if(e.getActionCommand().equals("Filters")) {
-    	   view.getBrowsePanel().setVisible(false);
-           view.getFilterPanel().setVisible(true);
-       }
-       else if(e.getActionCommand().equals("Search")) {
-    	   view.getFilterPanel().setVisible(false);
-           view.getBrowsePanel().setVisible(true);
-           try {
-			view.getBrowsePanel().paintEverything();
-		} catch (BadLocationException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-       }
+        if (e.getActionCommand().equals("Filters")) {
+            view.getBrowsePanel().setVisible(false);
+            view.getFilterPanel().setVisible(true);
+        } else if (e.getActionCommand().equals("Search")) {
+            view.getFilterPanel().setVisible(false);
+            view.getBrowsePanel().setVisible(true);
+            try {
+                view.getBrowsePanel().paintEverything();
+            } catch (BadLocationException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+        updateControllers();
     }
 }

@@ -11,7 +11,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class UnregisteredMainP extends JPanel {
-    private JPanel banner;
+    private static final long serialVersionUID = 1L;
+	private JPanel banner;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
     private JScrollPane scrolling;

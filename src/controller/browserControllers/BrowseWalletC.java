@@ -1,17 +1,17 @@
-package controller;
+package controller.browserControllers;
 
-import controller.miniControllers.StoreProductMiniC;
+import controller.miniControllers.SecondHandMiniC;
 import model.store.Store;
 import view.App;
-import view.BrowseStoreP;
-import view.miniPanels.StoreProductMiniP;
+import view.browserPanels.BrowseSomeonesWalletP;
+import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BrowseStoreC implements ActionListener, BigController {
-    private final BrowseStoreP view; /* view -> panel */
+public class BrowseWalletC implements ActionListener, BigController {
+    private final BrowseSomeonesWalletP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
 
@@ -22,7 +22,7 @@ public class BrowseStoreC implements ActionListener, BigController {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public BrowseStoreC(App frame, Store model, BrowseStoreP view) {
+    public BrowseWalletC(App frame, Store model, BrowseSomeonesWalletP view) {
         this.frame = frame;
         this.view = view;
         this.model = model;
@@ -31,8 +31,8 @@ public class BrowseStoreC implements ActionListener, BigController {
     }
 
     public void updateControllers() {
-        for (StoreProductMiniP miniPanel : view.getProductPanels()) {
-            miniPanel.setController(new StoreProductMiniC(frame, model, miniPanel, this, view));
+        for (SecondHandMiniP miniPanel : view.getProductPanels()) {
+            miniPanel.setController(new SecondHandMiniC(frame, model, miniPanel, this, view));
         }
     }
 

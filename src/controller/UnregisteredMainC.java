@@ -1,5 +1,6 @@
 package controller;
 
+import controller.browserControllers.BrowseStoreC;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import model.user.User;

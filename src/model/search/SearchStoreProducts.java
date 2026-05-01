@@ -76,16 +76,15 @@ public class SearchStoreProducts implements Serializable {
      */
     public List<StoreProduct> searchStoreProducts(){
        List<StoreProduct> pCs;
-       
-       
-       
-       if(!this.filterByCategory().isEmpty()) {
-    	   pCs = this.filterByCategory();
+
+       List<StoreProduct> catFiltered = this.filterByCategory();
+
+       if (!this.categoryF.getCategories().isEmpty()) {
+           pCs = catFiltered;
+       } else {
+           pCs = new ArrayList<>(this.s.getStoreProducts().values());
        }
-       else {
-    	   pCs = new ArrayList<>();
-       }
-       
+
        if(!this.priceF.isEmpty()) pCs.retainAll(this.filterByPrice());
        if(!this.punctuationF.isEmpty()) pCs.retainAll(this.filterByPunctuation());
         
@@ -123,16 +122,13 @@ public class SearchStoreProducts implements Serializable {
      */
     private List<StoreProduct> filterByPrice(){
         List<StoreProduct> aux = new ArrayList<>();
-        List<StoreProduct> fromStore = (List<StoreProduct>) this.s.getStoreProducts().values();
 
         if(this.priceF != null){
-            for(StoreProduct p: fromStore){
-            	for(PriceFilter priceFf: this.priceF)
-                	if(p.getPrice() >= priceFf.getMin() && p.getPrice() <= priceFf.getMax()) aux.add(p);
+            for(PriceFilter f: this.priceF) {
+            	aux.addAll(f.filterPrice());
             }
-            return aux;
         }
-        return null;
+         return aux;
     }
 
     /**
@@ -142,7 +138,7 @@ public class SearchStoreProducts implements Serializable {
      */
     private List<StoreProduct> filterByPunctuation(){
         List<StoreProduct> aux = new ArrayList<>();
-        List<StoreProduct> fromStore = (List<StoreProduct>) this.s.getStoreProducts().values();
+        List<StoreProduct> fromStore = new ArrayList<>(this.s.getStoreProducts().values());
 
         if(this.punctuationF != null){
             for(StoreProduct p: fromStore){
@@ -164,20 +160,12 @@ public class SearchStoreProducts implements Serializable {
      */
     private List<StoreProduct> filterByCategory(){
         List<StoreProduct> aux = new ArrayList<>();
+        Store s = Store.getInstance();
         List<StoreProduct> product = new ArrayList<> (this.s.getStoreProducts().values());
         List<Category> c = this.categoryF.getCategories();
-        Category[] caux;
 
-        for(Category cat: c) {
-            for(StoreProduct sp: product) {
-                caux = sp.getCategories();
-                for(Category cc: caux) {
-                    if(cc == cat) {
-                        aux.add(sp);
-                        break;
-                    }
-                }
-            }
+        for(Category ca: c){
+        	aux.addAll(ca.getProducts());
         }
 
         return new ArrayList<>(new LinkedHashSet<>(aux));
@@ -211,4 +199,11 @@ public class SearchStoreProducts implements Serializable {
     public CategoryFilter getCategoryFilter() {
     	return this.categoryF;
     }
+    
+    public void clearFilters() {
+        this.priceF.clear();
+        this.punctuationF.clear();
+        this.categoryF = new CategoryFilter(new ArrayList<>());
+    }
+
 }

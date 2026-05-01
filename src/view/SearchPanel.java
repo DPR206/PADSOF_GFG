@@ -50,7 +50,6 @@ public class SearchPanel extends JPanel{
 		super();
 		this.setLayout(new GridLayout(4, 1));
 
-		this.add(this.aplicar);
 		this.catFilter.add(new JLabel("CATEGORÍAS"));
 		this.catFilter.add(this.jmesa);
 		this.catFilter.add(this.jrol);
@@ -91,6 +90,7 @@ public class SearchPanel extends JPanel{
 		this.ordenacion.add(this.descendente);
 
 		this.add(this.ordenacion);
+		this.add(this.aplicar);
 	}
 
 	public void setController(ActionListener c) {

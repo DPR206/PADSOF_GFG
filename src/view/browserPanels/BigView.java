@@ -1,4 +1,4 @@
-package view;
+package view.browserPanels;
 
 import javax.swing.text.BadLocationException;
 

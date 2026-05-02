@@ -1,8 +1,10 @@
 package view.browserPanels;
 
+import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.BetterPager;
 import view.App;
+import view.miniPanels.PackMiniP;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
@@ -18,9 +20,11 @@ public class BrowseStoreP extends JPanel implements BigView {
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
     private final List<StoreProductMiniP> productPanels = new ArrayList<>();
+    private final List<PackMiniP> packPanels = new ArrayList<>();
     private final BetterPager<StoreProduct> pager = new BetterPager<>();
     private final App app;
     private List<StoreProduct> storeProducts = new ArrayList<>();
+    private List<Pack> packs = new ArrayList<>()
     private int currentPageNum;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -49,7 +53,7 @@ public class BrowseStoreP extends JPanel implements BigView {
         this.storeProducts = app.getProducts();
 
         List<StoreProduct> currentStoreProducts = pager.pageItemList(storeProducts, currentPageNum);
-
+        
         int index = 1;
         for (StoreProduct product : currentStoreProducts) {
             StoreProductMiniP miniProduct = new StoreProductMiniP(product, index);
@@ -57,8 +61,9 @@ public class BrowseStoreP extends JPanel implements BigView {
             this.add(miniProduct);
             index++;
         }
-
+        
         JPanel pageTurner = new JPanel(new FlowLayout());
+        
         if (currentPageNum != 1) {
             pageTurner.add(firstPage);
             pageTurner.add(previousPage);

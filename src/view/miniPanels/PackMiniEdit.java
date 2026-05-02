@@ -4,10 +4,8 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -21,15 +19,14 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import model.product.Pack;
-import model.product.StoreProduct;
 
-public class PackMiniP extends JPanel{
-	private final JButton addToCart = new JButton("Add to Cart");
+public class PackMiniEdit extends JPanel{
+	private final JButton addToCart = new JButton("Gestionar");
     private final Pack p;
     private final JTextPane packInfo;
     private final JLabel packImage;
     
-    public PackMiniP(Pack p, int index) throws BadLocationException {
+    public PackMiniEdit(Pack p, int index) throws BadLocationException {
     	super();
     	
     	this.p = p;
@@ -77,25 +74,5 @@ public class PackMiniP extends JPanel{
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
-    
-    public JLabel getPackImage() {
-        return packImage;
-    }
-
-    public JTextPane getPackInfo() {
-        return packInfo;
-    }
-
-    public Pack getPack() {
-        return p;
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        addToCart.addActionListener(c);
-    }
 }
-}
+

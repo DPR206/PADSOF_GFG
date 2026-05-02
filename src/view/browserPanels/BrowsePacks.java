@@ -22,7 +22,7 @@ public class BrowsePacks extends JPanel implements BigView{
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
-    private final List<PackMiniP> PackPanels = new ArrayList<>();
+    private final List<PackMiniP> packPanels = new ArrayList<>();
     private final BetterPager<Pack> pager = new BetterPager<>();
     private final App app;
     private List<Pack> packs = new ArrayList<>();
@@ -40,17 +40,15 @@ public class BrowsePacks extends JPanel implements BigView{
 	@Override
 	public void paintEverything() throws BadLocationException {
 		this.removeAll();
-        PackPanels.clear();
+        packPanels.clear();
 
-        this.storeProducts = app.getProducts();
-
-        List<StoreProduct> currentStoreProducts = pager.pageItemList(storeProducts, currentPageNum);
+        List<Pack> currentPacks = pager.pageItemList(this.packs, currentPageNum);
 
         int index = 1;
-        for (StoreProduct product : currentStoreProducts) {
-            StoreProductMiniP miniProduct = new StoreProductMiniP(product, index);
-            productPanels.add(miniProduct);
-            this.add(miniProduct);
+        for (Pack p : currentPacks) {
+            PackMiniP miniPack = new PackMiniP(p, index);
+            packPanels.add(miniPack);
+            this.add(miniPack);
             index++;
         }
 
@@ -60,7 +58,7 @@ public class BrowsePacks extends JPanel implements BigView{
             pageTurner.add(previousPage);
         }
         pageTurner.add(new JLabel("Page " + currentPageNum));
-        if (currentPageNum != pager.getMaxPageNum(storeProducts)) {
+        if (currentPageNum != pager.getMaxPageNum(packs)) {
             pageTurner.add(nextPage);
             pageTurner.add(lastPage);
         }

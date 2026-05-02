@@ -9,19 +9,21 @@ import javax.swing.*;
 
 public class NotificacionesC {
 	
+		//private App frame;
 	    private NotificacionP vista;
 	    private User user;
 
-	    public NotificacionesC (NotificacionP vista, User user) {
+	    public NotificacionesC (NotificacionP vista, App frame) {
 	        this.vista = vista;
-	        this.user = user;
+	        this.user = frame.getUser();
+	        //this.frame = frame;
 	        
-	        if (user instanceof Employee) {
+	        /*if (user instanceof Employee) {
 	            vista.getBtnAjustes().setVisible(false);
 	        } else {
 	            vista.getBtnAjustes().setVisible(true);
-	        }
-	        
+	        }*/
+	        vista.getBtnAjustes().setVisible(true);
 	        cargarNotificacionesDelUsuario();
 	        inicializarEventos();
 	    }
@@ -103,10 +105,9 @@ public class NotificacionesC {
 	    
 	    private void abrirAjustes() {
 	        ActionListener volver = e -> vista.mostrarPantalla("LISTA");
-	        NotificationsSettingsClientP panelAjustes = null;
 
 	        if (user instanceof RegisteredClient client) {
-	            panelAjustes = new NotificationsSettingsClientP(volver);
+	        	NotificationsSettingsClientP panelAjustes = new NotificationsSettingsClientP(volver);
 	            NotificationSettings settings = client.getNotificationHistory().getSettings();
 	            
 	            enlazarCheck(panelAjustes.getDisc(), NotificationType.DISCOUNT, settings);
@@ -153,20 +154,46 @@ public class NotificacionesC {
 	            });
 	            
 	            configurarChecksBloqueados(panelAjustes);
+	            vista.setDetallePanel(panelAjustes);
 	            
+	        } else if (user instanceof Employee) {
+	        	NotificationsSettingsEmployeeP panelAjustes = new NotificationsSettingsEmployeeP(volver);
+	            bloquearAjustesParaEmpleado(panelAjustes);
 	        } else
 	        	return;
 
-	        if (panelAjustes != null) {
-	            vista.setDetallePanel(panelAjustes);
-	        }
 	    }
 	    
-	    private void enlazarCheck(JCheckBox check, NotificationType tipo, NotificationSettings settings) {
-	        // 1. Sincronizar estado inicial
+	    private void bloquearAjustesParaEmpleado(NotificationsSettingsEmployeeP panelAjustes) {
+	    	JCheckBox[] todosLosChecks = {
+	    	        panelAjustes.getValuation(), panelAjustes.getExchanges(), panelAjustes.getOrders()
+	    	    };
+
+	    	    for (JCheckBox check : todosLosChecks) {
+	    	        //Quitamos cualquier listener previo
+	    	        for (ActionListener al : check.getActionListeners()) check.removeActionListener(al);
+	    	        
+	    	        check.addActionListener(e -> {
+	    	            // Revertimos el estado visual inmediatamente
+	    	            check.setSelected(!check.isSelected()); 
+	    	            
+	    	            // Mostramos el mensaje de error
+	    	            JOptionPane.showMessageDialog(vista, 
+	    	                "Acción no autorizada: Los empleados no pueden modificar los ajustes de notificación.", 
+	    	                "Permiso Denegado", 
+	    	                JOptionPane.ERROR_MESSAGE);
+	    	        });
+	    	        
+	    	        check.setEnabled(false); // Si prefieres que ni siquiera puedan clicar, usa esto.
+	    	    }
+			
+		}
+
+		private void enlazarCheck(JCheckBox check, NotificationType tipo, NotificationSettings settings) {
+	        //Sincronizar estado inicial
 	        check.setSelected(settings.getInterests().getOrDefault(tipo, false));
 	        
-	        // 2. Crear evento de guardado automático
+	        //Crear evento de guardado automático
 	        check.addItemListener(e -> {
 	            settings.changeInterest(tipo, e.getStateChange() == ItemEvent.SELECTED);
 	        });

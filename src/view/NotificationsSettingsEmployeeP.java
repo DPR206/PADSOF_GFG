@@ -99,4 +99,38 @@ public class NotificationsSettingsEmployeeP extends JPanel{
         add(btnVolver, BorderLayout.SOUTH);
 	}
 
+
+	/**
+	 * @return the btnVolver
+	 */
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
+
+
+	/**
+	 * @return the exchanges
+	 */
+	public JCheckBox getExchanges() {
+		return exchanges;
+	}
+
+
+	/**
+	 * @return the orders
+	 */
+	public JCheckBox getOrders() {
+		return orders;
+	}
+
+
+	/**
+	 * @return the valuation
+	 */
+	public JCheckBox getValuation() {
+		return valuation;
+	}
+	
+	
+
 }

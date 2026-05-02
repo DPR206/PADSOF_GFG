@@ -4,9 +4,8 @@ import java.awt.Window;
 
 import javax.swing.SwingUtilities;
 
-import model.user.RegisteredClient;
-import model.user.UnregisteredClient;
-import model.user.User;
+import model.store.Store;
+import model.user.*;
 import view.App;
 import view.BannerUnregistered;
 import view.SignupP;
@@ -15,16 +14,16 @@ import view.UnregisteredMainP;
 public class BannerUnregisteredC {
 	
 	private BannerUnregistered vista;
-	private UnregisteredClient user;
-	private App app;
+	//private UnregisteredClient user;
+	private App frame;
 
 	/**
 	 * @param vista
 	 */
-	public BannerUnregisteredC(BannerUnregistered vista, UnregisteredClient user, App app) {
+	public BannerUnregisteredC(BannerUnregistered vista, /*UnregisteredClient user,*/ App frame) {
 		this.vista = vista;
-		this.user = user;
-		this.app = app;
+		//this.user = frame.getUser();
+		this.frame = frame;
         inicializarEventos();
 	}
 	
@@ -47,14 +46,14 @@ public class BannerUnregisteredC {
 		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 	    
 	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana de notificaciones (o donde esté)
+	        ventanaActual.dispose(); // Cerramos la ventana
 	    }
 		
-	    SignupP signUp = new SignupP();
+	    //SignupP signUp = frame.getSignupPanel();
 	    
-	    new SignupC(app, store);
+	    //new SignupC(frame, Store.getInstance());
 	    
-	    signUp.setVisible(true);
+	    frame.getSignupPanel().setVisible(true);
 	}
 
 
@@ -63,14 +62,15 @@ public class BannerUnregisteredC {
 		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 	    
 	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana de notificaciones (o donde esté)
+	        ventanaActual.dispose(); // Cerramos la ventana
 	    }
 	    
-	    UnregisteredMainP pagPrin = new UnregisteredMainP(user, app);
+	    //UnregisteredMainP pagPrin = frame.getUnregisteredMainPanel();
 	    
-	    new UnregisteredClientC(pagPrin, user);
+	    //new UnregisteredMainC(pagPrin, user);
+	    //new UnregisteredMainC(frame, Store.getInstance());
 	    
-	    pagPrin.setVisible(true);
+	    frame.getUnregisteredMainPanel().setVisible(true);
 	}
 
 
@@ -79,14 +79,14 @@ public class BannerUnregisteredC {
 		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 	    
 	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana de notificaciones (o donde esté)
+	        ventanaActual.dispose(); // Cerramos la ventana
 	    }
         
         // 1. Crear la vista del carrito
         CarritoP carritoVista = new CarritoP(); 
         
         // 2. Crear el controlador del carrito pasando el usuario actual
-        new CarritoC(carritoVista, (RegisteredClient) user);
+        new CarritoC(carritoVista, user);
         
         // 3. Mostrar la ventana
         carritoVista.setVisible(true);

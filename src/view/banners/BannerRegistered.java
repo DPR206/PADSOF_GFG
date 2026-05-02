@@ -1,15 +1,14 @@
-package view;
+package view.banners;
 
 import java.awt.*;
 
 import javax.swing.*;
 
-public class BannerEmployee extends JPanel {
+public class BannerRegistered extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JButton home;
-	private JButton tienda;
-	private JButton intercambios;
+	private JButton cartera;
 	private JButton btnCarrito;
 	private JButton btnPerfil;
 	private JButton btnNots;
@@ -17,7 +16,7 @@ public class BannerEmployee extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public BannerEmployee() {
+	public BannerRegistered() {
 		
 		setLayout(new BorderLayout());
         setBackground(new Color(45, 52, 54)); // Un color oscuro elegante
@@ -40,58 +39,25 @@ public class BannerEmployee extends JPanel {
         //Cambiar el cursor para que el usuario sepa que es clickable
         home.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        tienda = new JButton("\uD83C\uDFEA");
-        tienda.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
+        cartera = new JButton("\uD83D\uDCBC");
+        cartera.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
         
-        tienda.setBackground(new Color(45, 52, 54)); 
-        tienda.setForeground(Color.WHITE);
+        cartera.setBackground(new Color(45, 52, 54)); 
+        cartera.setForeground(Color.WHITE);
         
-        tienda.setBorderPainted(false);
+        cartera.setBorderPainted(false);
         
-        tienda.setFocusPainted(false);
-        tienda.setContentAreaFilled(true);
+        cartera.setFocusPainted(false);
+        cartera.setContentAreaFilled(true);
         
-        tienda.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cartera.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        intercambios = new JButton("\uD83D\uDD04");
-        intercambios.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
-        
-        intercambios.setBackground(new Color(45, 52, 54)); 
-        intercambios.setForeground(Color.WHITE);
-        
-        intercambios.setBorderPainted(false);
-        
-        intercambios.setFocusPainted(false);
-        intercambios.setContentAreaFilled(true);
-        
-        intercambios.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
-        JPanel panelCentral = new JPanel();
-        panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
-        panelCentral.setOpaque(false); // Para que mantenga el color oscuro del fondo
-
-        //Título Principal
-        JLabel lblTitulo = new JLabel("GIFTS FOR GEEKS");
+        //Título
+        JLabel lblTitulo = new JLabel("GIFTS FOR GEEKS", SwingConstants.CENTER);
         lblTitulo.setForeground(new Color(223, 230, 233));
         lblTitulo.setFont(new Font("Book Antiqua", Font.BOLD, 25));
-        lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrar horizontalmente
 
-        //Subtítulo
-        JLabel lblSubtitulo = new JLabel("Employee");
-        lblSubtitulo.setForeground(new Color(178, 190, 195)); // Un gris un poco más claro
-        lblSubtitulo.setFont(new Font("Segoe UI", Font.ITALIC, 14));
-        lblSubtitulo.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrar horizontalmente
-
-        // Añadir los labels al panel central
-        panelCentral.add(Box.createVerticalGlue()); // Espacio flexible arriba
-        panelCentral.add(lblTitulo);
-        panelCentral.add(lblSubtitulo);
-        panelCentral.add(Box.createVerticalGlue()); // Espacio flexible abajo
-
-        //Ajuste de altura del Banner
-        this.setPreferredSize(new Dimension(800, 70));
-
-        // Botón usuario
+        //Botón de usuario
         btnPerfil = new JButton("👤");
         btnPerfil.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
 
@@ -138,19 +104,18 @@ public class BannerEmployee extends JPanel {
         panelAccionesD.setOpaque(false); // Para que se vea el fondo del banner
 
         panelAccionesD.add(btnNots);
+        panelAccionesD.add(btnCarrito);
         panelAccionesD.add(btnPerfil);
         
-        JPanel panelAccionesI = new JPanel(new FlowLayout(FlowLayout.LEFT, 1, 10));
+        JPanel panelAccionesI = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
         panelAccionesI.setOpaque(false); // Para que se vea el fondo del banner
 
         panelAccionesI.add(home);
-        panelAccionesI.add(btnCarrito);
-        panelAccionesI.add(tienda);
-        panelAccionesI.add(intercambios);
+        panelAccionesI.add(cartera);
 
         // Añadir componentes al banner
         add(panelAccionesI, BorderLayout.WEST);
-        add(panelCentral, BorderLayout.CENTER);
+        add(lblTitulo, BorderLayout.CENTER);
         add(panelAccionesD, BorderLayout.EAST);
 
 	}
@@ -163,17 +128,10 @@ public class BannerEmployee extends JPanel {
 	}
 
 	/**
-	 * @return the tienda
+	 * @return the cartera
 	 */
-	public JButton getTienda() {
-		return tienda;
-	}
-
-	/**
-	 * @return the intercambios
-	 */
-	public JButton getIntercambios() {
-		return intercambios;
+	public JButton getCartera() {
+		return cartera;
 	}
 
 	/**

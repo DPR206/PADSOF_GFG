@@ -14,6 +14,7 @@ import javax.swing.text.BadLocationException;
 
 import model.product.Pack;
 import model.store.Store;
+import view.banners.BannerManager;
 import view.miniPanels.PackMiniP;
 
 public class ManagerGestionarPacks extends JPanel{

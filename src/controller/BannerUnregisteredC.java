@@ -7,9 +7,9 @@ import javax.swing.SwingUtilities;
 import model.store.Store;
 import model.user.*;
 import view.App;
-import view.BannerUnregistered;
 import view.SignupP;
 import view.UnregisteredMainP;
+import view.banners.BannerUnregistered;
 
 public class BannerUnregisteredC {
 	

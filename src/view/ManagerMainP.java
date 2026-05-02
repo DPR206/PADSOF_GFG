@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 
+import view.banners.BannerManager;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;

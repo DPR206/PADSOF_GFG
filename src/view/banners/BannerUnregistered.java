@@ -1,4 +1,4 @@
-package view;
+package view.banners;
 
 import java.awt.*;
 import javax.swing.*;

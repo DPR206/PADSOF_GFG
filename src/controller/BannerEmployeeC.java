@@ -6,8 +6,8 @@ import javax.swing.SwingUtilities;
 
 import model.user.Employee;
 import view.App;
-import view.BannerEmployee;
 import view.NotificacionP;
+import view.banners.BannerEmployee;
 
 public class BannerEmployeeC {
 

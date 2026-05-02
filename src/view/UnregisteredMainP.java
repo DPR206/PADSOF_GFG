@@ -3,6 +3,7 @@ package view;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
+import view.banners.BannerUnregistered;
 import view.browserPanels.BrowseStoreP;
 
 import javax.swing.*;

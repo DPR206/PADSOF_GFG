@@ -5,7 +5,7 @@ import java.awt.Window;
 import javax.swing.SwingUtilities;
 
 import view.App;
-import view.BannerManager;
+import view.banners.BannerManager;
 
 public class BannerManagerC {
 

@@ -16,13 +16,21 @@ public class NotificacionP extends JFrame {
     private JButton btnMarcarLeido = new JButton("Marcar Leído");
     private JButton btnBorrar = new JButton("Borrar");
     private JButton btnAjustes = new JButton("Ajustes");
+    private JPanel banner;
 
-    public NotificacionP() {
+    public NotificacionP(JPanel banner) {
         super("Notificaciones");
+        this.banner = banner;
         configurarEstructura();
     }
 
     private void configurarEstructura() {
+    	setLayout(new BorderLayout());
+
+        if (banner != null) {
+            add(banner, BorderLayout.NORTH);
+        }
+    	
         // Panel Lista
         JPanel panelLista = new JPanel(new BorderLayout(10, 10));
         lista.setFixedCellHeight(50);
@@ -66,9 +74,9 @@ public class NotificacionP extends JFrame {
         panelLista.add(contenedorBotones, BorderLayout.EAST);
 
         contenedorPrincipal.add(panelLista, "LISTA");
-        add(contenedorPrincipal);
+        add(contenedorPrincipal, BorderLayout.CENTER);
         
-        setSize(450, 500);
+        setSize(600, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
@@ -86,4 +94,6 @@ public class NotificacionP extends JFrame {
     public JButton getBtnMarcarLeido() { return btnMarcarLeido; }
     public JButton getBtnBorrar() { return btnBorrar; }
     public JButton getBtnAjustes() {return btnAjustes; }
+    public JPanel getBanner() { return banner; }
+    
 }

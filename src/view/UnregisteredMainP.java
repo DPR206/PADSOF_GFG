@@ -40,16 +40,15 @@ public class UnregisteredMainP extends JPanel {
             this.searching = new BrowseStoreP(app);
             this.searching.setVisible(false);
         } catch (BadLocationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         Store s = Store.getInstance();
         this.p = this.mainU.searchStoreProduct();
 
         this.setLayout(new BorderLayout());
-
-        this.banner.add(new JLabel("GIFTS FOR GEEKS"), BorderLayout.NORTH);
-        this.add(banner, BorderLayout.NORTH);
+        
+        banner = new BannerUnregistered();
+        add(banner, BorderLayout.NORTH);
 
         JPanel others = new JPanel(new BorderLayout());
 

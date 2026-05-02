@@ -8,32 +8,43 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
+
+import model.product.Pack;
+import model.store.Store;
+import view.miniPanels.PackMiniP;
 
 public class ManagerGestionarPacks extends JPanel{
 	
-	private JButton home = new JButton("Home");
 	private List<JButton> packsButtons = new ArrayList<>();
 	private JTextField text = new JTextField(20);
+	private BannerManager banner = new BannerManager();
 	
 	public ManagerGestionarPacks() {
 		super();
 		
 		this.setLayout(new BorderLayout());
-		
-		JPanel titleScreen = new JPanel();
-		
-		//Banner temporal
-		titleScreen.add(this.home);
-    	titleScreen.add(new JLabel("Gifts for Geeks: Manager"));
-    	titleScreen.add(this.home);
-    	this.add(titleScreen, BorderLayout.NORTH);
+		this.add(banner, BorderLayout.NORTH);
     	
+		JPanel list = new JPanel();
     	JPanel mainThings = new JPanel();
-    	mainThings.setLayout(new BorderLayout());
+    	mainThings.setLayout(new BoxLayout(mainThings, BoxLayout.Y_AXIS));
     	
-    	JPanel packs = new JPanel();
-    	packs.setLayout(new GridLayout(0,1));
+    	List<Pack> packs = Store.getInstance().getPacks();
+    	
+    	JScrollPane scroll = new JScrollPane(mainThings);
+    	
+    	for(Pack p: packs) {
+    		try {
+				mainThings.add(new PackMiniP(p, 0));
+			} catch (BadLocationException e) {
+				e.printStackTrace();
+			}
+    	}
+    	
+    	this.add(scroll, BorderLayout.CENTER);
     	
 	}	
 }

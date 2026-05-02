@@ -46,7 +46,12 @@ public class ManagerMainP extends JPanel {
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        //DUE
+        this.packs.addActionListener(c);
+        this.productoNuevo.addActionListener(c);
+        this.annadirProductos.addActionListener(c);
+        this.empleados.addActionListener(c);
+        this.estadisticas.addActionListener(c);
+        this.parametros.addActionListener(c);
     }
     
     public BannerManager getBanner() {

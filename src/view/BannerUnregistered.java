@@ -17,10 +17,21 @@ public class BannerUnregistered extends JPanel {
         setPreferredSize(new Dimension(800, 60)); // Altura fija de 60px
         setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         
-        JLabel lblLogo = new JLabel("MY APP");
-        lblLogo.setForeground(Color.WHITE);
-        lblLogo.setFont(new Font("SansSerif", Font.BOLD, 20));
+        JButton home = new JButton("\u2302");
+        home.setFont(new Font("Courier New", Font.BOLD, 30));
         
+        home.setBackground(new Color(45, 52, 54)); 
+        home.setForeground(Color.WHITE); // Color del icono/texto
+
+        //Quitar el borde (para que no se vea el relieve)
+        home.setBorderPainted(false);
+
+        //Quitar el foco y el área de contenido por defecto si es necesario
+        home.setFocusPainted(false);
+        home.setContentAreaFilled(true); // Asegura que use su color de fondo
+
+        //Cambiar el cursor para que el usuario sepa que es clickable
+        home.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         // --- Título Dinámico de la pantalla actual ---
         JLabel lblTitulo = new JLabel("GIFTS FOR GEEKS", SwingConstants.CENTER);
@@ -29,7 +40,7 @@ public class BannerUnregistered extends JPanel {
 
         // --- Botón de Usuario / Perfil (Opcional) ---
         JButton btnPerfil = new JButton("👤");
-        btnPerfil.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 20));
+        btnPerfil.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
 
         //Establecer el mismo color que el banner
         btnPerfil.setBackground(new Color(45, 52, 54)); 
@@ -44,11 +55,29 @@ public class BannerUnregistered extends JPanel {
 
         //Cambiar el cursor para que el usuario sepa que es clickable
         btnPerfil.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        JButton btnCarrito = new JButton("\uD83D\uDED2");
+        btnCarrito.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
+        
+        btnCarrito.setBackground(new Color(45, 52, 54));
+        btnCarrito.setForeground(Color.WHITE);
+        
+        btnCarrito.setBorderPainted(false);
+        btnCarrito.setContentAreaFilled(false);
+        btnCarrito.setFocusPainted(false);
+        
+        btnCarrito.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        JPanel panelAcciones = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 10));
+        panelAcciones.setOpaque(false); // Para que se vea el fondo del banner
+
+        panelAcciones.add(btnCarrito);
+        panelAcciones.add(btnPerfil);
 
         // Añadir componentes al banner
-        add(lblLogo, BorderLayout.WEST);
+        add(home, BorderLayout.WEST);
         add(lblTitulo, BorderLayout.CENTER);
-        add(btnPerfil, BorderLayout.EAST);
+        add(panelAcciones, BorderLayout.EAST);
 	}
 
 }

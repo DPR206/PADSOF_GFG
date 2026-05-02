@@ -6,6 +6,9 @@ import javax.swing.*;
 public class BannerUnregistered extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JButton home;
+	private JButton btnCarrito;
+	private JButton btnPerfil;
 
 	/**
 	 * Create the panel.
@@ -17,7 +20,7 @@ public class BannerUnregistered extends JPanel {
         setPreferredSize(new Dimension(800, 60)); // Altura fija de 60px
         setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         
-        JButton home = new JButton("\u2302");
+        home = new JButton("\u2302");
         home.setFont(new Font("Courier New", Font.BOLD, 30));
         
         home.setBackground(new Color(45, 52, 54)); 
@@ -33,13 +36,13 @@ public class BannerUnregistered extends JPanel {
         //Cambiar el cursor para que el usuario sepa que es clickable
         home.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        // --- Título Dinámico de la pantalla actual ---
+        //Título
         JLabel lblTitulo = new JLabel("GIFTS FOR GEEKS", SwingConstants.CENTER);
         lblTitulo.setForeground(new Color(223, 230, 233));
         lblTitulo.setFont(new Font("Book Antiqua", Font.BOLD, 25));
 
-        // --- Botón de Usuario / Perfil (Opcional) ---
-        JButton btnPerfil = new JButton("👤");
+        //Botón de usuario
+        btnPerfil = new JButton("👤");
         btnPerfil.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
 
         //Establecer el mismo color que el banner
@@ -56,7 +59,7 @@ public class BannerUnregistered extends JPanel {
         //Cambiar el cursor para que el usuario sepa que es clickable
         btnPerfil.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        JButton btnCarrito = new JButton("\uD83D\uDED2");
+        btnCarrito = new JButton("\uD83D\uDED2");
         btnCarrito.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
         
         btnCarrito.setBackground(new Color(45, 52, 54));
@@ -80,4 +83,24 @@ public class BannerUnregistered extends JPanel {
         add(panelAcciones, BorderLayout.EAST);
 	}
 
+	/**
+	 * @return the home
+	 */
+	public JButton getHome() {
+		return home;
+	}
+
+	/**
+	 * @return the btnCarrito
+	 */
+	public JButton getBtnCarrito() {
+		return btnCarrito;
+	}
+
+	/**
+	 * @return the btnPerfil
+	 */
+	public JButton getBtnPerfil() {
+		return btnPerfil;
+	}
 }

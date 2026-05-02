@@ -4,20 +4,17 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class BannerRegistered extends JPanel {
+public class BannerManager extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JButton home;
-	private JButton cartera;
-	private JButton btnCarrito;
 	private JButton btnPerfil;
-	private JButton btnNots;
 
 	/**
 	 * Create the panel.
 	 */
-	public BannerRegistered() {
-		
+	public BannerManager() {
+
 		setLayout(new BorderLayout());
         setBackground(new Color(45, 52, 54)); // Un color oscuro elegante
         setPreferredSize(new Dimension(800, 60)); // Altura fija de 60px
@@ -39,23 +36,30 @@ public class BannerRegistered extends JPanel {
         //Cambiar el cursor para que el usuario sepa que es clickable
         home.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        cartera = new JButton("\uD83D\uDCBC");
-        cartera.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
-        
-        cartera.setBackground(new Color(45, 52, 54)); 
-        cartera.setForeground(Color.WHITE);
-        
-        cartera.setBorderPainted(false);
-        
-        cartera.setFocusPainted(false);
-        cartera.setContentAreaFilled(true);
-        
-        cartera.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
-        //Título
-        JLabel lblTitulo = new JLabel("GIFTS FOR GEEKS", SwingConstants.CENTER);
+        JPanel panelCentral = new JPanel();
+        panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
+        panelCentral.setOpaque(false); // Para que mantenga el color oscuro del fondo
+
+        //Título Principal
+        JLabel lblTitulo = new JLabel("GIFTS FOR GEEKS");
         lblTitulo.setForeground(new Color(223, 230, 233));
         lblTitulo.setFont(new Font("Book Antiqua", Font.BOLD, 25));
+        lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrar horizontalmente
+
+        //Subtítulo
+        JLabel lblSubtitulo = new JLabel("Manager");
+        lblSubtitulo.setForeground(new Color(178, 190, 195)); // Un gris un poco más claro
+        lblSubtitulo.setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        lblSubtitulo.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrar horizontalmente
+
+        // Añadir los labels al panel central
+        panelCentral.add(Box.createVerticalGlue()); // Espacio flexible arriba
+        panelCentral.add(lblTitulo);
+        panelCentral.add(lblSubtitulo);
+        panelCentral.add(Box.createVerticalGlue()); // Espacio flexible abajo
+
+        //Ajuste de altura del Banner
+        this.setPreferredSize(new Dimension(800, 70));
 
         //Botón de usuario
         btnPerfil = new JButton("👤");
@@ -75,49 +79,15 @@ public class BannerRegistered extends JPanel {
         //Cambiar el cursor para que el usuario sepa que es clickable
         btnPerfil.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        btnCarrito = new JButton("\uD83D\uDED2");
-        btnCarrito.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
-        
-        btnCarrito.setBackground(new Color(45, 52, 54));
-        btnCarrito.setForeground(Color.WHITE);
-        
-        btnCarrito.setBorderPainted(false);
-        btnCarrito.setContentAreaFilled(false);
-        btnCarrito.setFocusPainted(false);
-        
-        btnCarrito.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
-        btnNots = new JButton("\uD83D\uDD14");
-        
-        btnNots.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
-        
-        btnNots.setBackground(new Color(45, 52, 54)); 
-        btnNots.setForeground(Color.WHITE);
-        
-        btnNots.setBorderPainted(false);
-        
-        btnNots.setFocusPainted(false);
-        btnNots.setContentAreaFilled(true);
-        
-        
         JPanel panelAccionesD = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 14));
         panelAccionesD.setOpaque(false); // Para que se vea el fondo del banner
 
-        panelAccionesD.add(btnNots);
-        panelAccionesD.add(btnCarrito);
         panelAccionesD.add(btnPerfil);
-        
-        JPanel panelAccionesI = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
-        panelAccionesI.setOpaque(false); // Para que se vea el fondo del banner
-
-        panelAccionesI.add(home);
-        panelAccionesI.add(cartera);
 
         // Añadir componentes al banner
-        add(panelAccionesI, BorderLayout.WEST);
-        add(lblTitulo, BorderLayout.CENTER);
+        add(home, BorderLayout.WEST);
+        add(panelCentral, BorderLayout.CENTER);
         add(panelAccionesD, BorderLayout.EAST);
-
 	}
 
 	/**
@@ -128,31 +98,10 @@ public class BannerRegistered extends JPanel {
 	}
 
 	/**
-	 * @return the cartera
-	 */
-	public JButton getCartera() {
-		return cartera;
-	}
-
-	/**
-	 * @return the btnCarrito
-	 */
-	public JButton getBtnCarrito() {
-		return btnCarrito;
-	}
-
-	/**
 	 * @return the btnPerfil
 	 */
 	public JButton getBtnPerfil() {
 		return btnPerfil;
-	}
-
-	/**
-	 * @return the btnNots
-	 */
-	public JButton getBtnNots() {
-		return btnNots;
 	}
 
 }

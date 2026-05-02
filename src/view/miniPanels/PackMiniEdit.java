@@ -4,7 +4,6 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -21,15 +20,14 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import model.product.Pack;
-import model.product.StoreProduct;
 
-public class PackMiniP extends JPanel{
-	private final JButton addToCart = new JButton("Add to Cart");
+public class PackMiniEdit extends JPanel{
+	private final JButton gestionar = new JButton("Gestionar");
     private final Pack p;
     private final JTextPane packInfo;
     private final JLabel packImage;
     
-    public PackMiniP(Pack p, int index) throws BadLocationException {
+    public PackMiniEdit(Pack p, int index) throws BadLocationException {
     	super();
     	
     	this.p = p;
@@ -37,8 +35,8 @@ public class PackMiniP extends JPanel{
         int height = 60;
         this.setLayout(new FlowLayout());
         
-        addToCart.setPreferredSize(new Dimension(125, height));
-        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
+        gestionar.setPreferredSize(new Dimension(125, height));
+        gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
     
         this.packImage = getImageLabel(p.getPhoto(), height, height);
         this.packInfo = new JTextPane();
@@ -73,7 +71,7 @@ public class PackMiniP extends JPanel{
         this.add(indexNum);
         this.add(packImage);
         this.add(packInfo);
-        this.add(addToCart);
+        this.add(gestionar);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
@@ -95,6 +93,7 @@ public class PackMiniP extends JPanel{
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        addToCart.addActionListener(c);
+        gestionar.addActionListener(c);
     }
 }
+

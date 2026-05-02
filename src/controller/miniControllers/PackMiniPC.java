@@ -57,11 +57,11 @@ public class PackMiniPC implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Add to Cart")) {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
-                ((RegisteredClient) frame.getUser()).addCart(view.getStoreProduct());
+                ((RegisteredClient) frame.getUser()).addCart(view.getPack());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-                ((UnregisteredClient) frame.getUser()).addCart(view.getStoreProduct());
+                ((UnregisteredClient) frame.getUser()).addCart(view.getPack());
             }
-            JOptionPane.showMessageDialog(frame, view.getStoreProduct().getName() + " was added to Cart",
+            JOptionPane.showMessageDialog(frame, view.getPack().getId() + " was added to Cart",
                     "Added To Cart", JOptionPane.INFORMATION_MESSAGE);
             try {
                 bigView.paintEverything();

@@ -98,4 +98,3 @@ public class PackMiniP extends JPanel{
         addToCart.addActionListener(c);
     }
 }
-}

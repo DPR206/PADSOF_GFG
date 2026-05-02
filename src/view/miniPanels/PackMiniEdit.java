@@ -6,6 +6,7 @@ import static view.ImageAdder.getScaledImage;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -21,7 +22,7 @@ import javax.swing.text.StyleConstants;
 import model.product.Pack;
 
 public class PackMiniEdit extends JPanel{
-	private final JButton addToCart = new JButton("Gestionar");
+	private final JButton gestionar = new JButton("Gestionar");
     private final Pack p;
     private final JTextPane packInfo;
     private final JLabel packImage;
@@ -34,8 +35,8 @@ public class PackMiniEdit extends JPanel{
         int height = 60;
         this.setLayout(new FlowLayout());
         
-        addToCart.setPreferredSize(new Dimension(125, height));
-        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
+        gestionar.setPreferredSize(new Dimension(125, height));
+        gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
     
         this.packImage = getImageLabel(p.getPhoto(), height, height);
         this.packInfo = new JTextPane();
@@ -70,9 +71,29 @@ public class PackMiniEdit extends JPanel{
         this.add(indexNum);
         this.add(packImage);
         this.add(packInfo);
-        this.add(addToCart);
+        this.add(gestionar);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+    }
+    
+    public JLabel getPackImage() {
+        return packImage;
+    }
+
+    public JTextPane getPackInfo() {
+        return packInfo;
+    }
+
+    public Pack getPack() {
+        return p;
+    }
+
+    /**
+     * It makes it possible to assign a controller to this panel's components
+     * @param c the desired controller
+     */
+    public void setController(ActionListener c) {
+        gestionar.addActionListener(c);
     }
 }
 

@@ -1,16 +1,26 @@
 package view;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
-public class BannerUnregistered extends JPanel {
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+public class BannerRegistered extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create the panel.
 	 */
-	public BannerUnregistered() {
+	public BannerRegistered() {
 		
 		setLayout(new BorderLayout());
         setBackground(new Color(45, 52, 54)); // Un color oscuro elegante
@@ -32,6 +42,19 @@ public class BannerUnregistered extends JPanel {
 
         //Cambiar el cursor para que el usuario sepa que es clickable
         home.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        JButton cartera = new JButton("\uD83D\uDCBC");
+        cartera.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
+        
+        cartera.setBackground(new Color(45, 52, 54)); 
+        cartera.setForeground(Color.WHITE);
+        
+        cartera.setBorderPainted(false);
+        
+        cartera.setFocusPainted(false);
+        cartera.setContentAreaFilled(true);
+        
+        cartera.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         // --- Título Dinámico de la pantalla actual ---
         JLabel lblTitulo = new JLabel("GIFTS FOR GEEKS", SwingConstants.CENTER);
@@ -68,16 +91,37 @@ public class BannerUnregistered extends JPanel {
         
         btnCarrito.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        JPanel panelAcciones = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 14));
-        panelAcciones.setOpaque(false); // Para que se vea el fondo del banner
+        JButton btnNots = new JButton("\uD83D\uDD14");
+        
+        btnNots.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
+        
+        btnNots.setBackground(new Color(45, 52, 54)); 
+        btnNots.setForeground(Color.WHITE);
+        
+        btnNots.setBorderPainted(false);
+        
+        btnNots.setFocusPainted(false);
+        btnNots.setContentAreaFilled(true);
+        
+        
+        JPanel panelAccionesD = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 14));
+        panelAccionesD.setOpaque(false); // Para que se vea el fondo del banner
 
-        panelAcciones.add(btnCarrito);
-        panelAcciones.add(btnPerfil);
+        panelAccionesD.add(btnNots);
+        panelAccionesD.add(btnCarrito);
+        panelAccionesD.add(btnPerfil);
+        
+        JPanel panelAccionesI = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
+        panelAccionesI.setOpaque(false); // Para que se vea el fondo del banner
+
+        panelAccionesI.add(home);
+        panelAccionesI.add(cartera);
 
         // Añadir componentes al banner
-        add(home, BorderLayout.WEST);
+        add(panelAccionesI, BorderLayout.WEST);
         add(lblTitulo, BorderLayout.CENTER);
-        add(panelAcciones, BorderLayout.EAST);
+        add(panelAccionesD, BorderLayout.EAST);
+
 	}
 
 }

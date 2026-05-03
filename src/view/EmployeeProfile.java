@@ -143,8 +143,8 @@ public class EmployeeProfile extends JPanel{
 	/**
 	 * @param pwd the pwd to set
 	 */
-	public void setPwd(JLabel pwd) {
-		this.pwd = pwd;
+	public void setPwd(String pwd) {
+		this.pwd.setText(pwd);;
 	}
 
 	

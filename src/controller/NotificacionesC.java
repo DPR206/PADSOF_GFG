@@ -104,128 +104,21 @@ public class NotificacionesC {
 	    }
 	    
 	    private void abrirAjustes() {
-	        ActionListener volver = e -> vista.mostrarPantalla("LISTA");
+	    	ActionListener volver = e -> vista.mostrarPantalla("LISTA");
+	        JPanel bannerParaAjustes = vista.getBanner();
 
 	        if (user instanceof RegisteredClient client) {
-	        	NotificationsSettingsClientP panelAjustes = new NotificationsSettingsClientP(volver, vista.getBanner());
-	            NotificationSettings settings = client.getNotificationHistory().getSettings();
-	            
-	            enlazarCheck(panelAjustes.getDisc(), NotificationType.DISCOUNT, settings);
-	    	    enlazarCheck(panelAjustes.getOffers(), NotificationType.EXCHANGE, settings);
-	    	    enlazarCheck(panelAjustes.getNewSecondHand(), NotificationType.NEW_SECONDHAND_PRODUCT, settings);
-	            enlazarCheck(panelAjustes.getOrderState(), NotificationType.ORDER, settings);
-	            enlazarCheck(panelAjustes.getPackCart(), NotificationType.PACK_CART, settings);
-	            enlazarCheck(panelAjustes.getProductCart(), NotificationType.PRODUCT_CART, settings);
-	            enlazarCheck(panelAjustes.getPayment(), NotificationType.PAYMENT, settings);
-	            
-	            panelAjustes.getDisc().addItemListener(e -> {
-	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
-	                settings.changeInterest(NotificationType.DISCOUNT, estado);
-	            });
-
-	            panelAjustes.getOffers().addItemListener(e -> {
-	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
-	                settings.changeInterest(NotificationType.EXCHANGE, estado);
-	            });
-	            
-	            panelAjustes.getNewSecondHand().addItemListener(e -> {
-	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
-	                settings.changeInterest(NotificationType.NEW_SECONDHAND_PRODUCT, estado);
-	            });
-	            
-	            panelAjustes.getOrderState().addItemListener(e -> {
-	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
-	                settings.changeInterest(NotificationType.ORDER, estado);
-	            });
-	            
-	            panelAjustes.getPackCart().addItemListener(e -> {
-	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
-	                settings.changeInterest(NotificationType.PACK_CART, estado);
-	            });
-	            
-	            panelAjustes.getProductCart().addItemListener(e -> {
-	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
-	                settings.changeInterest(NotificationType.PRODUCT_CART, estado);
-	            });
-	            
-	            panelAjustes.getPayment().addItemListener(e -> {
-	                boolean estado = (e.getStateChange() == ItemEvent.SELECTED);
-	                settings.changeInterest(NotificationType.PAYMENT, estado);
-	            });
-	            
-	            configurarChecksBloqueados(panelAjustes);
-	            vista.setDetallePanel(panelAjustes);
-	            
-	        } else if (user instanceof Employee) {
-	        	NotificationsSettingsEmployeeP panelAjustes = new NotificationsSettingsEmployeeP(volver);
-	            bloquearAjustesParaEmpleado(panelAjustes);
+	            NotificationsSettingsClientP vistaC = new NotificationsSettingsClientP(volver, bannerParaAjustes);
+	            new NotificationsSettingsClientC(vistaC, client); // Controlador de cliente
+	            vista.setDetallePanel(vistaC);
+	        } 
+	        else if (user instanceof Employee employee) {
+	            NotificationsSettingsEmployeeP vistaE = new NotificationsSettingsEmployeeP(volver, bannerParaAjustes);
+	            new NotificationsSettingsEmployeeC(vistaE, employee); // Controlador de empleado
+	            vista.setDetallePanel(vistaE);
 	        } else
 	        	return;
 
 	    }
 	    
-	    private void bloquearAjustesParaEmpleado(NotificationsSettingsEmployeeP panelAjustes) {
-	    	JCheckBox[] todosLosChecks = {
-	    	        panelAjustes.getValuation(), panelAjustes.getExchanges(), panelAjustes.getOrders()
-	    	    };
-
-	    	    for (JCheckBox check : todosLosChecks) {
-	    	        //Quitamos cualquier listener previo
-	    	        for (ActionListener al : check.getActionListeners()) check.removeActionListener(al);
-	    	        
-	    	        check.addActionListener(e -> {
-	    	            // Revertimos el estado visual inmediatamente
-	    	            check.setSelected(!check.isSelected()); 
-	    	            
-	    	            // Mostramos el mensaje de error
-	    	            JOptionPane.showMessageDialog(vista, 
-	    	                "Acción no autorizada: Los empleados no pueden modificar los ajustes de notificación.", 
-	    	                "Permiso Denegado", 
-	    	                JOptionPane.ERROR_MESSAGE);
-	    	        });
-	    	        
-	    	        check.setEnabled(false); // Si prefieres que ni siquiera puedan clicar, usa esto.
-	    	    }
-			
-		}
-
-		private void enlazarCheck(JCheckBox check, NotificationType tipo, NotificationSettings settings) {
-	        //Sincronizar estado inicial
-	        check.setSelected(settings.getInterests().getOrDefault(tipo, false));
-	        
-	        //Crear evento de guardado automático
-	        check.addItemListener(e -> {
-	            settings.changeInterest(tipo, e.getStateChange() == ItemEvent.SELECTED);
-	        });
-	    }
-	    
-	    private void configurarChecksBloqueados(NotificationsSettingsClientP panel) {
-	        
-	        // Listener para Payment
-	        panel.getPayment().addActionListener(e -> {
-	            JCheckBox source = (JCheckBox) e.getSource();
-	            
-	            // Revertimos el estado (si estaba marcado, lo dejamos marcado)
-	            source.setSelected(true); 
-	            
-	            // Lanzamos el aviso
-	            JOptionPane.showMessageDialog(vista, 
-	                "The notifications of your payments must be active to assure your account's security. ", 
-	                "Non-permitted action", 
-	                JOptionPane.WARNING_MESSAGE);
-	        });
-
-	        // Listener para Order State
-	        panel.getOrderState().addActionListener(e -> {
-	            JCheckBox source = (JCheckBox) e.getSource();
-	            source.setSelected(true);
-	            
-	            JOptionPane.showMessageDialog(vista, 
-	                "You can't disable the tracking of your active orders. ", 
-	                "Non-permitted action", 
-	                JOptionPane.WARNING_MESSAGE);
-	        });
-	    }
-	    
-	}
-
+}

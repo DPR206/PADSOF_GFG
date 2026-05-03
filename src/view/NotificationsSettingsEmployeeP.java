@@ -12,19 +12,33 @@ public class NotificationsSettingsEmployeeP extends JPanel{
 	private JCheckBox exchanges;
 	private JCheckBox orders;
 	private JCheckBox valuation;
+	private JPanel banner;
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public NotificationsSettingsEmployeeP(ActionListener volverAction) {
+	public NotificationsSettingsEmployeeP(ActionListener volverAction, JPanel banner) {
 		
 		setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        JPanel panelCabecera = new JPanel();
+        panelCabecera.setLayout(new BoxLayout(panelCabecera, BoxLayout.Y_AXIS));
+        
+        this.banner = banner;
+        if (banner != null) {
+            panelCabecera.add(this.banner);
+        }
 
         // Título
         JLabel titulo = new JLabel("Ajustes notificaciones empleado", SwingConstants.CENTER);
         titulo.setFont(new Font("SansSerif", Font.BOLD, 18));
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        titulo.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
+        
+        panelCabecera.add(titulo);
+        add(panelCabecera, BorderLayout.NORTH);
         
         //Ajustes
         
@@ -94,7 +108,6 @@ public class NotificationsSettingsEmployeeP extends JPanel{
         btnVolver.setPreferredSize(new Dimension(0, 50));
         btnVolver.addActionListener(volverAction);
         
-        add(titulo, BorderLayout.NORTH);
         add(new JScrollPane(contenedorCentral), BorderLayout.CENTER);
         add(btnVolver, BorderLayout.SOUTH);
 	}

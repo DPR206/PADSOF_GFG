@@ -32,7 +32,7 @@ public class NotificationsSettingsClientP extends JPanel {
         
         this.banner = banner;
         if (banner != null) {
-            panelCabecera.add(banner);
+            panelCabecera.add(this.banner);
         }
 		
 

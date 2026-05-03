@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 
 import model.user.Employee;
 import view.App;
+import view.EmployeeProfile;
 import view.NotificacionP;
 import view.banners.BannerEmployee;
 
@@ -137,7 +138,7 @@ public class BannerEmployeeC {
 	        ventanaActual.dispose(); 
 	    }
 		
-	    EmployeeProfile profile = new EmployeeProfile();
+	    EmployeeProfile profile = new EmployeeProfile(vista);
 	    
 	    new EmployeeProfileC(profile, user);
 	    

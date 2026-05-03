@@ -1,13 +1,8 @@
 package controller;
 
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
+import javax.swing.*;
 
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-
-import model.notification.NotificationSettings;
-import model.notification.NotificationType;
 import model.user.Employee;
 import view.NotificationsSettingsEmployeeP;
 
@@ -19,7 +14,14 @@ public class NotificationsSettingsEmployeeC {
 	public NotificationsSettingsEmployeeC(NotificationsSettingsEmployeeP vista, Employee modelo) {
         this.vista = vista;
         this.modelo = modelo;
+        cargarPermisosActuales();
         bloquearAjustesParaEmpleado(vista);
+    }
+	
+	private void cargarPermisosActuales() {
+        vista.getExchanges().setSelected(modelo.getEp() != null);
+        vista.getValuation().setSelected(modelo.getEp() != null);
+        vista.getOrders().setSelected(modelo.getOp() != null);
     }
 	
 	 private void bloquearAjustesParaEmpleado(NotificationsSettingsEmployeeP panelAjustes) {

@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.*;
+
 import model.user.Employee;
 import view.EmployeeProfile;
 
@@ -26,6 +28,8 @@ public class EmployeeProfileC {
 		vista.getBtnMostrar().addActionListener(e -> {
 			showPassword();
 		});
+		
+		configurarSeccionPermisos();
 	}
 
 	private void showPassword() {
@@ -40,5 +44,29 @@ public class EmployeeProfileC {
 		passwordRevelada = !passwordRevelada;
 	}
 	
+	private void configurarSeccionPermisos() {
+        hacerInmutable(vista.getExchanges(), user.getEp() != null);
+        hacerInmutable(vista.getStore(), user.getSp() != null);
+        hacerInmutable(vista.getOrders(), user.getOp() != null);
+    }
+	
+	private void hacerInmutable(JCheckBox check, boolean valor) {
+	    check.setSelected(valor);
+	    check.setFocusable(false);
+	    check.setModel(new DefaultButtonModel() {
+	        @Override
+	        public void setSelected(boolean b) {
+	            // No hacemos nada, ignoramos el intento de cambio
+	        }
+	        @Override
+	        public void setPressed(boolean b) {
+	            // No permitimos que se vea el efecto de "presionado"
+	        }
+	        @Override
+            public void setArmed(boolean b) {
+                // Evita que el componente se prepare para un evento
+            }
+	    });
+	}
 	
 }

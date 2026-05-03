@@ -49,7 +49,7 @@ public class RegisteredProfile extends JPanel{
 		tituloPwd.setFont(new Font("SansSerif", Font.BOLD, 14));
         tituloPwd.setAlignmentX(Component.LEFT_ALIGNMENT);
        
-        JPanel panelPassword = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        JPanel panelPassword = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
         panelPassword.setOpaque(false);
         panelPassword.setAlignmentX(Component.LEFT_ALIGNMENT);
 

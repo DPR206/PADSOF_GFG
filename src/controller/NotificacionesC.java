@@ -107,7 +107,7 @@ public class NotificacionesC {
 	        ActionListener volver = e -> vista.mostrarPantalla("LISTA");
 
 	        if (user instanceof RegisteredClient client) {
-	        	NotificationsSettingsClientP panelAjustes = new NotificationsSettingsClientP(volver);
+	        	NotificationsSettingsClientP panelAjustes = new NotificationsSettingsClientP(volver, vista.getBanner());
 	            NotificationSettings settings = client.getNotificationHistory().getSettings();
 	            
 	            enlazarCheck(panelAjustes.getDisc(), NotificationType.DISCOUNT, settings);

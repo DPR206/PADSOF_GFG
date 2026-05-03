@@ -11,6 +11,7 @@ import view.NotificacionP;
 import view.SignupP;
 import view.banners.BannerRegistered;
 import view.RegisteredMainP;
+import view.RegisteredProfile;
 
 public class BannerRegisteredC {
 	
@@ -90,7 +91,7 @@ public class BannerRegisteredC {
 	        ventanaActual.dispose(); 
 	    }
 		
-	    RegisteredProfile profile = new RegisteredProfile();
+	    RegisteredProfile profile = new RegisteredProfile(vista);
 	    
 	    new RegisteredProfileC(profile, user);
 	    

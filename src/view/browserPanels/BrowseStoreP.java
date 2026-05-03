@@ -24,7 +24,7 @@ public class BrowseStoreP extends JPanel implements BigView {
     private final BetterPager<StoreProduct> pager = new BetterPager<>();
     private final App app;
     private List<StoreProduct> storeProducts = new ArrayList<>();
-    private List<Pack> packs = new ArrayList<>()
+    private List<Pack> packs = new ArrayList<>();
     private int currentPageNum;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/

@@ -16,19 +16,34 @@ public class NotificationsSettingsClientP extends JPanel {
 	private JCheckBox orderState;
 	private JCheckBox packCart;
 	private JCheckBox productCart;
+	private JPanel banner;
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public NotificationsSettingsClientP(ActionListener volverAction) {
+	public NotificationsSettingsClientP(ActionListener volverAction, JPanel banner) {
 		
 		setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        JPanel panelCabecera = new JPanel();
+        panelCabecera.setLayout(new BoxLayout(panelCabecera, BoxLayout.Y_AXIS));
+        
+        this.banner = banner;
+        if (banner != null) {
+            panelCabecera.add(banner);
+        }
+		
 
         // Título
         JLabel titulo = new JLabel("Ajustes notificaciones", SwingConstants.CENTER);
         titulo.setFont(new Font("SansSerif", Font.BOLD, 18));
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        titulo.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
+        
+        panelCabecera.add(titulo);
+        add(panelCabecera, BorderLayout.NORTH);
         
         //Ajustes
         
@@ -105,8 +120,7 @@ public class NotificationsSettingsClientP extends JPanel {
         btnVolver = new JButton("← Volver");
         btnVolver.setPreferredSize(new Dimension(0, 50));
         btnVolver.addActionListener(volverAction);
-        
-        add(titulo, BorderLayout.NORTH);
+
         add(new JScrollPane(contenedorCentral), BorderLayout.CENTER);
         add(btnVolver, BorderLayout.SOUTH);
 	}

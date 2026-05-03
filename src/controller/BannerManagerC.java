@@ -4,7 +4,9 @@ import java.awt.Window;
 
 import javax.swing.SwingUtilities;
 
+import model.store.Store;
 import view.App;
+import view.ManagerProfile;
 import view.banners.BannerManager;
 
 public class BannerManagerC {
@@ -12,11 +14,12 @@ public class BannerManagerC {
 	private BannerManager vista;
 	//private Manager user;
 	private App frame;
+	private Store store;
 
 	/**
 	 * @param vista
 	 */
-	public BannerManagerC(BannerManager vista, App frame) {
+	public BannerManagerC(BannerManager vista, App frame, Store store) {
 		this.vista = vista;
 		//this.user = frame.getUser();
 		this.frame = frame;
@@ -42,9 +45,9 @@ public class BannerManagerC {
 	        ventanaActual.dispose(); // Cerramos la ventana
 	    }
 		
-	    ManagerPerfil perfil = new ManagerPerfil();
+	    ManagerProfile perfil = new ManagerProfile(vista);
 	    
-	    new ManagerPerfil();
+	    new ManagerProfileC(perfil, store.getManager());
 	    
 	    perfil.setVisible(true);
 	}

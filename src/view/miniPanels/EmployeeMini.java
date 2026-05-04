@@ -19,22 +19,23 @@ import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import model.product.Pack;
 import model.user.Employee;
 
 public class EmployeeMini extends JPanel{
 	private final JButton gestionar = new JButton("Gestionar");
     private final Employee emp;
-    private final JTextPane employeeInfo = new JTextPane();;
+    private final JTextPane employeeInfo = new JTextPane();
+    private final JLabel employeeIcon;
     
     public EmployeeMini(Employee emp, int index) throws BadLocationException {
     	super();
     	
     	this.emp = emp;
-        int width = 350;
+    	int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
         
+        this.employeeIcon = getImageLabel(".\\resources\\default_user.png", height, width);
         gestionar.setPreferredSize(new Dimension(125, height));
         gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
         
@@ -64,8 +65,10 @@ public class EmployeeMini extends JPanel{
         indexNum.setPreferredSize(new Dimension(25, height));
         
         this.add(indexNum);
+        this.add(employeeIcon);
+        this.add(employeeInfo);
         this.add(gestionar);
-
+        
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 

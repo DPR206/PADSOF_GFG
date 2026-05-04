@@ -38,7 +38,7 @@ public class PackMiniEdit extends JPanel{
         gestionar.setPreferredSize(new Dimension(125, height));
         gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
     
-        this.packImage = getImageLabel(p.getPhoto(), height, height);
+        this.packImage = getImageLabel(p.getPhoto(), height, width);
         this.packInfo = new JTextPane();
         this.packInfo.setEditable(false);
         this.packInfo.setFocusable(false);

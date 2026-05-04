@@ -15,6 +15,7 @@ import javax.swing.text.BadLocationException;
 import model.product.Pack;
 import model.store.Store;
 import view.banners.BannerManager;
+import view.browserPanels.BrowsePacks;
 import view.miniPanels.PackMiniP;
 
 public class ManagerGestionarPacks extends JPanel{
@@ -22,10 +23,17 @@ public class ManagerGestionarPacks extends JPanel{
 	private List<JButton> packsButtons = new ArrayList<>();
 	private JTextField text = new JTextField(20);
 	private BannerManager banner = new BannerManager();
+	private BrowsePacks browser;
 	
-	public ManagerGestionarPacks() {
+	public ManagerGestionarPacks(App app) {
 		super();
 		
+		try {
+			this.browser = new BrowsePacks(app);
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.setLayout(new BorderLayout());
 		this.add(banner, BorderLayout.NORTH);
     	

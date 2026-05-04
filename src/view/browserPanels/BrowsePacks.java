@@ -15,6 +15,7 @@ import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.BetterPager;
 import view.App;
+import view.miniPanels.PackMiniEdit;
 import view.miniPanels.PackMiniP;
 import view.miniPanels.StoreProductMiniP;
 
@@ -23,7 +24,7 @@ public class BrowsePacks extends JPanel implements BigView{
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
-    private final List<PackMiniP> packPanels = new ArrayList<>();
+    private final List<PackMiniEdit> packPanels = new ArrayList<>();
     private final BetterPager<Pack> pager = new BetterPager<>();
     private final App app;
     private List<Pack> packs = new ArrayList<>();
@@ -47,7 +48,7 @@ public class BrowsePacks extends JPanel implements BigView{
 
         int index = 1;
         for (Pack p : currentPacks) {
-            PackMiniP miniPack = new PackMiniP(p, index);
+            PackMiniEdit miniPack = new PackMiniEdit(p, index);
             packPanels.add(miniPack);
             this.add(miniPack);
             index++;
@@ -97,7 +98,7 @@ public class BrowsePacks extends JPanel implements BigView{
         return pager.getMaxPageNum(this.packs);
     }
 
-    public List<PackMiniP> getProductPanels() {
+    public List<PackMiniEdit> getProductPanels() {
         return packPanels;
     }
 
@@ -107,7 +108,7 @@ public class BrowsePacks extends JPanel implements BigView{
      */
     public void setController(ActionListener c) {
         if (packPanels != null) {
-            for (PackMiniP miniProduct : this.packPanels) {
+            for (PackMiniEdit miniProduct : this.packPanels) {
                 miniProduct.setController(c);
             }
         }

@@ -2,31 +2,27 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 
 import model.product.Pack;
+import model.product.StoreProduct;
 import model.store.Store;
 import view.banners.BannerManager;
-import view.browserPanels.BrowsePacks;
 import view.miniPanels.PackMiniEdit;
-import view.miniPanels.PackMiniP;
+import view.miniPanels.StoreProductMiniEdit;
 
-public class ManagerGestionarPacks extends JPanel{
-
+public class ManagerGestionarProductos extends JPanel{
 	private BannerManager banner = new BannerManager();
-	private JButton newPack = new JButton("Crear nuevo pack");
+	private JButton newProduct = new JButton("Crear nuevo producto");
 	
-	public ManagerGestionarPacks(App app) {
+	public ManagerGestionarProductos(App app) {
 		super();
 		
 		this.setLayout(new BorderLayout());
@@ -35,25 +31,25 @@ public class ManagerGestionarPacks extends JPanel{
 		JPanel mainThings = new JPanel();
     	mainThings.setLayout(new BoxLayout(mainThings, BoxLayout.Y_AXIS));
     	
-    	List<Pack> packs = Store.getInstance().getPacks();
+    	List<StoreProduct> products = Store.getInstance().getStoreProductList();
     	
     	JScrollPane scroll = new JScrollPane(mainThings);
     	
     	int index = 1;
     	
-    	for(Pack p: packs) {
+    	for(StoreProduct sp: products) {
     		try {
-				mainThings.add(new PackMiniEdit(p, index));
+				mainThings.add(new StoreProductMiniEdit(sp, index));
 				index++;
 			} catch (BadLocationException e) {
 				e.printStackTrace();
 			}
     	}
     	
-    	this.newPack.setPreferredSize(new Dimension(120, 30));
+    	this.newProduct.setPreferredSize(new Dimension(120, 30));
     	
     	JPanel auxiliar = new JPanel();
-    	auxiliar.add(newPack);
+    	auxiliar.add(newProduct);
     	
     	this.add(scroll, BorderLayout.CENTER);
     	this.add(auxiliar, BorderLayout.EAST);
@@ -61,7 +57,7 @@ public class ManagerGestionarPacks extends JPanel{
 	}	
 	
 	public void setController(ActionListener c) {
-		this.newPack.addActionListener(c);
+		this.newProduct.addActionListener(c);
 	}
 	
 	public BannerManager getBanner() {

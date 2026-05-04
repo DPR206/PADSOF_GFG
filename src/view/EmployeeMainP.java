@@ -1,8 +1,11 @@
 package view;
 
 import model.user.*;
+import view.banners.BannerEmployee;
 
 import javax.swing.*;
+
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 
 public class EmployeeMainP extends JPanel {
@@ -13,6 +16,7 @@ public class EmployeeMainP extends JPanel {
     private final JButton manageExchanges;
     private final JButton valuateProducts;
     private final App app;
+    private JPanel banner;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -20,7 +24,8 @@ public class EmployeeMainP extends JPanel {
      * This panel's constructor
      */
     public EmployeeMainP(App app) {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    	this.setLayout(new BorderLayout());
 
         this.app = app;
 
@@ -30,30 +35,34 @@ public class EmployeeMainP extends JPanel {
         manageOrders = new JButton("Manage Orders");
         manageExchanges = new JButton("Manage Exchanges");
         valuateProducts = new JButton("Valuate Products");
+        banner = new BannerEmployee();
 
         paintEverything();
     }
 
     public void paintEverything() {
         this.removeAll();
+        JPanel botones = new JPanel(new BorderLayout());
+        add(banner, BorderLayout.NORTH);
 
         User user = app.getUser();
 
         if (user.getType() == UserType.EMPLOYEE) {
             if (((Employee) user).getSp() != null) {
-                this.add(managePacks);
-                this.add(manageStoreProducts);
-                this.add(addStoreProducts);
+                botones.add(managePacks);
+                botones.add(manageStoreProducts);
+                botones.add(addStoreProducts);
             }
             if (((Employee) user).getOp() != null) {
-                this.add(manageOrders);
+                botones.add(manageOrders);
             }
             if (((Employee) user).getEp() != null) {
-                this.add(manageExchanges);
-                this.add(valuateProducts);
+                botones.add(manageExchanges);
+                botones.add(valuateProducts);
             }
         }
 
+        add(botones, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }

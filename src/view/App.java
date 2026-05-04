@@ -1,6 +1,7 @@
 package view;
 
 import controller.*;
+import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
@@ -32,6 +33,7 @@ public class App extends JFrame {
     // Aquí se declaran todos los paneles de vista como atributos
     private User mainUser = new UnregisteredClient(true);
     private List<StoreProduct> products = Store.getInstance().getStoreProductList();
+    private List<Pack> packs = Store.getInstance().getPacks();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() throws IOException, BadLocationException {
@@ -220,5 +222,13 @@ public class App extends JFrame {
 
     public void setsProductList(List<StoreProduct> products) {
         this.products = products;
+    }
+    
+    public List<Pack> getPackList(){
+    	return this.packs;
+    }
+    
+    public void setPackList(List<Pack> packs) {
+    	this.packs = packs;
     }
 }

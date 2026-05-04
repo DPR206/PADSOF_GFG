@@ -180,8 +180,8 @@ public class StorePermission  implements Serializable {
      * @param date, date when the pack was created
      *
      */
-    public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
-        Pack p = new Pack(price, products, date);
+    public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date, String picture) {
+        Pack p = new Pack(price, products, date, picture);
         s.addPack(p);
     }
 

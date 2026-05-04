@@ -547,8 +547,8 @@ public class Manager extends User implements Serializable {
      * @param products, list of products that the pack contains
      * @param date,     date when the pack was created
      */
-    public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date) {
-        this.sp.addPack(price, products, date);
+    public void addPack(double price, ArrayList<StoreProduct> products, LocalDate date, String picture) {
+        this.sp.addPack(price, products, date, picture);
     }
 
     /**
@@ -649,6 +649,17 @@ public class Manager extends User implements Serializable {
             }
         }
         emp.getPerm()[count] = p;
+        switch(p) {
+        	case Permission.EXCHANGE: 
+        		emp.getNotificationHistory().getSettings().changeInterest(NotificationType.EMPLOYEE_EXCHANGE, true);
+        		emp.getNotificationHistory().getSettings().changeInterest(NotificationType.EMPLOYEE_VALUATION, true);
+        		break;
+        	case Permission.ORDER: 
+        		emp.getNotificationHistory().getSettings().changeInterest(NotificationType.EMPLOYEE_ORDER, true);
+        		break;
+        	default:
+        		break;
+        }
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

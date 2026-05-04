@@ -24,8 +24,8 @@ public class SimplePack extends Pack implements Serializable {
 	 * @param products, the products the pack contains
 	 * @param date, the date the pack was added to the cart
 	 */
-	public SimplePack(int id, double price, ArrayList<StoreProduct> products, LocalDate date) {
-		super(id, price, products, date);
+	public SimplePack(int id, double price, ArrayList<StoreProduct> products, LocalDate date, String picture) {
+		super(id, price, products, date, picture);
 	}
 
 	/**
@@ -34,8 +34,8 @@ public class SimplePack extends Pack implements Serializable {
 	 * @param price, price of the pack
 	 * @param products, the products the pack contains
 	 */
-	public SimplePack(double price, ArrayList<StoreProduct> products) {
-		super(price, products);
+	public SimplePack(double price, ArrayList<StoreProduct> products, String picture) {
+		super(price, products, picture);
 	}
 
 	/**
@@ -45,8 +45,8 @@ public class SimplePack extends Pack implements Serializable {
 	 * @param products, the products the pack contains
 	 * @param date, the date the pack was added to the cart
 	 */
-	public SimplePack(double price, ArrayList<StoreProduct> products, LocalDate date) {
-		super(price, products, date);
+	public SimplePack(double price, ArrayList<StoreProduct> products, LocalDate date, String picture) {
+		super(price, products, date, picture);
 	}
 
 	/**
@@ -55,8 +55,8 @@ public class SimplePack extends Pack implements Serializable {
 	 * @param price the pack's price
 	 * @param products the products the pack contains
 	 */
-	public SimplePack(int id, double price, ArrayList<StoreProduct> products) {
-		this(id, price, products, null);
+	public SimplePack(int id, double price, ArrayList<StoreProduct> products, String picture) {
+		this(id, price, products, null, picture);
 	}
 
 }

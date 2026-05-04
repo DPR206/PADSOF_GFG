@@ -4,20 +4,28 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
+
+import model.user.Manager;
+import view.banners.BannerManager;
+
 import javax.swing.*;
 
 public class GestorChangePwd extends JPanel{
 	private String username;
-	private JPanel title;
+	//private JPanel title;
 	private JPanel main;
+	private BannerManager banner;
 	
-	public GestorChangePwd(String username) {
+	public GestorChangePwd(/*String username,*/ BannerManager banner) {
 		super();
 		
-		this.username = username;
-		this.title = new JPanel();
-		this.title.add(new JLabel("GIFTS FOR GEEKS: GESTOR"), BorderLayout.NORTH);
-		this.add(title, BorderLayout.NORTH);
+		this.banner = banner;
+		add(this.banner, BorderLayout.NORTH);
+		
+		//this.username = username;
+		//this.title = new JPanel();
+		//this.title.add(new JLabel("GIFTS FOR GEEKS: GESTOR"), BorderLayout.NORTH);
+		//this.add(title, BorderLayout.CENTER);
 		
 		this.main = new JPanel();
 		this.main.setLayout(new GridLayout(3,1));
@@ -40,6 +48,9 @@ public class GestorChangePwd extends JPanel{
 		aux3.add(new JButton("CAMBIAR"));
 		
 		this.main.add(aux3);
-		this.add(main, BorderLayout.EAST);
+		//title.add(main);
+		this.add(main, BorderLayout.CENTER);
 	}
+
+
 }

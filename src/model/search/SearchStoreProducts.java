@@ -138,17 +138,13 @@ public class SearchStoreProducts implements Serializable {
      */
     private List<StoreProduct> filterByPunctuation(){
         List<StoreProduct> aux = new ArrayList<>();
-        List<StoreProduct> fromStore = new ArrayList<>(this.s.getStoreProducts().values());
 
         if(this.punctuationF != null){
-            for(StoreProduct p: fromStore){
-            	for(PunctuationFilter f: this.punctuationF)
-                	if(p.getAveragePunctuation() >= f.getMin() &&
-                		p.getAveragePunctuation() <= f.getMax()){
-                		aux.add(p);
-                }
+            for(PunctuationFilter p: this.punctuationF) {
+                aux.addAll(p.filterPunctuation());
             }
         }
+        
         return aux;
     }
 

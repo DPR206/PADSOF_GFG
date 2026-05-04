@@ -4,23 +4,26 @@ import view.*;
 import model.notification.*;
 import model.user.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 public class NotificacionesC {
 	
+		//private App frame;
 	    private NotificacionP vista;
 	    private User user;
 
-	    public NotificacionesC (NotificacionP vista, User user) {
+	    public NotificacionesC (NotificacionP vista, App frame) {
 	        this.vista = vista;
-	        this.user = user;
+	        this.user = frame.getUser();
+	        //this.frame = frame;
 	        
-	        if (user instanceof Employee) {
+	        /*if (user instanceof Employee) {
 	            vista.getBtnAjustes().setVisible(false);
 	        } else {
 	            vista.getBtnAjustes().setVisible(true);
-	        }
-	        
+	        }*/
+	        vista.getBtnAjustes().setVisible(true);
 	        cargarNotificacionesDelUsuario();
 	        inicializarEventos();
 	    }
@@ -31,13 +34,13 @@ public class NotificacionesC {
 
 	        // Obtenemos el historial del usuario y lo filtramos por visibilidad
 	        if(user instanceof RegisteredClient client)
-	        	client.getNotificationHistory().getNotificationsSorted().forEach(n -> {
+	        	client.browseNotifications().forEach(n -> {
 	        	if(n.isVisible()) {
 	        		vista.getModelo().addElement(n);
 	        	}
 	        });
 	        else if(user instanceof Employee employee)
-	        	employee.getNotificationHistory().getNotificationsSorted().forEach(n -> {
+	        	employee.browseNotifications().forEach(n -> {
 	        	if(n.isVisible()) {
 	        		vista.getModelo().addElement(n);
 	        	}
@@ -101,18 +104,21 @@ public class NotificacionesC {
 	    }
 	    
 	    private void abrirAjustes() {
-	        ActionListener volver = e -> vista.mostrarPantalla("LISTA");
-	        JPanel panel = null;
+	    	ActionListener volver = e -> vista.mostrarPantalla("LISTA");
+	        JPanel bannerParaAjustes = vista.getBanner();
 
-	        if (user instanceof RegisteredClient) {
-	            panel = new NotificationsSettingsClientP(volver);
+	        if (user instanceof RegisteredClient client) {
+	            NotificationsSettingsClientP vistaC = new NotificationsSettingsClientP(volver, bannerParaAjustes);
+	            new NotificationsSettingsClientC(vistaC, client); // Controlador de cliente
+	            vista.setDetallePanel(vistaC);
+	        } 
+	        else if (user instanceof Employee employee) {
+	            NotificationsSettingsEmployeeP vistaE = new NotificationsSettingsEmployeeP(volver, bannerParaAjustes);
+	            new NotificationsSettingsEmployeeC(vistaE, employee); // Controlador de empleado
+	            vista.setDetallePanel(vistaE);
 	        } else
 	        	return;
 
-	        if (panel != null) {
-	            vista.setDetallePanel(panel);
-	        }
 	    }
 	    
-	}
-
+}

@@ -2,15 +2,15 @@ package view;
 
 import javax.swing.*;
 
+import view.banners.BannerManager;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 public class ManagerMainP extends JPanel {
 	/*Botones de la parte superior para volver atrás o algo*/
-	private JButton userCheck = new JButton("User settings");
-	private JButton home = new JButton("Home");
-	
+	private BannerManager banner = new BannerManager();
 	/*Botones para administrar cosas*/
 	private JButton packs = new JButton("Packs");
 	private JButton productoNuevo = new JButton("Productos nuevos");
@@ -24,18 +24,9 @@ public class ManagerMainP extends JPanel {
     public ManagerMainP() {
     	super();
     	this.setLayout(new BorderLayout());
-    	JPanel titleScreen = new JPanel();
-    	titleScreen.setLayout(new GridLayout(0,3));
-    	
-    	titleScreen.add(this.home);
-    	titleScreen.add(new JLabel("Gifts for Geeks: Manager"));
-    	titleScreen.add(this.home);
-    	this.add(titleScreen, BorderLayout.NORTH);
+    	this.add(banner, BorderLayout.NORTH);
     	
     	//ahora el cacho principal
-    	JPanel stuffPanel = new JPanel();
-    	stuffPanel.setLayout(new BorderLayout());
-    	stuffPanel.add(new JLabel("GEST. TIENDA"), BorderLayout.NORTH);
     	
     	JPanel cosoDeBotones = new JPanel();
     	
@@ -49,8 +40,7 @@ public class ManagerMainP extends JPanel {
     	cosoDeBotones.add(this.descuentos);
     	cosoDeBotones.add(this.parametros);
     	
-    	stuffPanel.add(cosoDeBotones, BorderLayout.CENTER);
-    	this.add(stuffPanel, BorderLayout.CENTER);
+    	this.add(cosoDeBotones, BorderLayout.CENTER);
     }
 
     /**
@@ -58,6 +48,15 @@ public class ManagerMainP extends JPanel {
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        //DUE
+        this.packs.addActionListener(c);
+        this.productoNuevo.addActionListener(c);
+        this.annadirProductos.addActionListener(c);
+        this.empleados.addActionListener(c);
+        this.estadisticas.addActionListener(c);
+        this.parametros.addActionListener(c);
+    }
+    
+    public BannerManager getBanner() {
+    	return this.banner;
     }
 }

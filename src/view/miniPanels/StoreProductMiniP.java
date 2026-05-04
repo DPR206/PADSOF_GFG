@@ -46,7 +46,7 @@ public class StoreProductMiniP extends JPanel {
         Document doc = productInfo.getStyledDocument();
         doc.insertString(doc.getLength(), ("Price: " + String.format("%.2f", product.getPrice()) + " €"), attributes);
 
-        if (product.getDiscount().getType() == DiscountType.FIXED_PERCENTAGE) {
+        if (product.getDiscount() != null && product.getDiscount().getType() == DiscountType.FIXED_PERCENTAGE) {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
 

@@ -1,6 +1,7 @@
 package view.browserPanels;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,4 +69,51 @@ public class BrowsePacks extends JPanel implements BigView{
         this.repaint();
 		
 	}
+	
+	/**
+	 * It gets this page's current page number
+     * @return this page's current page number
+     */
+    public int getCurrentPageNum() {
+        return currentPageNum;
+    }
+
+    /**
+     * It changes this page's current page number
+     * @param newCurrentPageNum the desired page number
+     * @throws BadLocationException bad locations within a document model (that is, attempts to reference a location
+     *                              that doesn't exist)
+     */
+    public void setCurrentPageNum(int newCurrentPageNum) throws BadLocationException {
+        this.currentPageNum = newCurrentPageNum;
+        paintEverything();
+    }
+
+    /**
+     * It gets the available store product list's max page number
+     * @return the available store product list's max page number
+     */
+    public int getMaxPageNum() {
+        return pager.getMaxPageNum(this.packs);
+    }
+
+    public List<PackMiniP> getProductPanels() {
+        return packPanels;
+    }
+
+    /**
+     * It makes it possible to assign a controller to this panel's components
+     * @param c the desired controller
+     */
+    public void setController(ActionListener c) {
+        if (packPanels != null) {
+            for (PackMiniP miniProduct : this.packPanels) {
+                miniProduct.setController(c);
+            }
+        }
+        firstPage.addActionListener(c);
+        previousPage.addActionListener(c);
+        nextPage.addActionListener(c);
+        lastPage.addActionListener(c);
+    }
 }

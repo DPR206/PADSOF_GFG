@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.*;
 
@@ -16,6 +17,7 @@ import model.product.Pack;
 import model.store.Store;
 import view.banners.BannerManager;
 import view.browserPanels.BrowsePacks;
+import view.miniPanels.PackMiniEdit;
 import view.miniPanels.PackMiniP;
 
 public class ManagerGestionarPacks extends JPanel{
@@ -23,17 +25,11 @@ public class ManagerGestionarPacks extends JPanel{
 	private List<JButton> packsButtons = new ArrayList<>();
 	private JTextField text = new JTextField(20);
 	private BannerManager banner = new BannerManager();
-	private BrowsePacks browser;
+	private JButton newPack = new JButton("Crear nuevo pack");
 	
 	public ManagerGestionarPacks(App app) {
 		super();
 		
-		try {
-			this.browser = new BrowsePacks(app);
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.setLayout(new BorderLayout());
 		this.add(banner, BorderLayout.NORTH);
     	
@@ -47,13 +43,19 @@ public class ManagerGestionarPacks extends JPanel{
     	
     	for(Pack p: packs) {
     		try {
-				mainThings.add(new PackMiniP(p, 0));
+				mainThings.add(new PackMiniEdit(p, 0));
 			} catch (BadLocationException e) {
 				e.printStackTrace();
 			}
     	}
     	
+    	this.newPack.setPreferredSize(new Dimension(120, 30));
+    	
+    	JPanel auxiliar = new JPanel();
+    	auxiliar.add(newPack);
+    	
     	this.add(scroll, BorderLayout.CENTER);
+    	this.add(auxiliar, BorderLayout.EAST);
     	
 	}	
 }

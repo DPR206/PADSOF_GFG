@@ -153,7 +153,7 @@ public class StorePermissionLoop extends Loop {
                     }
                     System.out.println("Enter the desired price:");
                     price = scanner.nextDouble();
-                    ((Manager) currentUser).addPack(price, products, LocalDate.now());
+                    //((Manager) currentUser).addPack(price, products, LocalDate.now());
                     System.out.println("The pack was added to the store");
                     break;
                 case 3: /* Browse notifications */

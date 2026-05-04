@@ -1,8 +1,8 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * It implements the app's welcome panel view
@@ -19,7 +19,7 @@ public class WelcomeP extends JPanel {
     /**
      * This panel's constructor
      */
-    public WelcomeP() {
+    public WelcomeP() throws IOException {
         // asignar layout
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

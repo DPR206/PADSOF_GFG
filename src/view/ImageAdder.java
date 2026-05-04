@@ -1,7 +1,11 @@
 package view;
 
+import model.product.Pack;
+import model.product.StoreProduct;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ImageAdder {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -22,5 +26,17 @@ public class ImageAdder {
         Image image = imageIcon.getImage();
         Image newImg = image.getScaledInstance(w, h, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
+    }
+
+    public static JPanel getPackImagePanel(Pack pack, int width, int height) {
+        JPanel panel = new JPanel(new GridLayout(2, 2));
+        ArrayList<StoreProduct> products = pack.getProducts();
+
+        panel.add(getImageLabel(products.getFirst().getPhoto(), width / 2, height / 2));
+        panel.add(getImageLabel(".\\resources\\arrow_left.png", width / 2, height / 2));
+        panel.add(getImageLabel(".\\resources\\arrow_right.png", width / 2, height / 2));
+        panel.add(getImageLabel(products.get(1).getPhoto(), width / 2, height / 2));
+
+        return panel;
     }
 }

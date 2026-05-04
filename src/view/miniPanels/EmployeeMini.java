@@ -19,44 +19,40 @@ import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import model.product.Pack;
+import model.user.Employee;
 
-public class PackMiniEdit extends JPanel{
+public class EmployeeMini extends JPanel{
 	private final JButton gestionar = new JButton("Gestionar");
-    private final Pack p;
-    private final JTextPane packInfo;
-    private final JLabel packImage;
+    private final Employee emp;
+    private final JTextPane employeeInfo = new JTextPane();
+    private final JLabel employeeIcon;
     
-    public PackMiniEdit(Pack p, int index) throws BadLocationException {
+    public EmployeeMini(Employee emp, int index) throws BadLocationException {
     	super();
     	
-    	this.p = p;
-        int width = 350;
+    	this.emp = emp;
+    	int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
         
+        this.employeeIcon = getImageLabel(".\\resources\\default_user.png", height, width);
         gestionar.setPreferredSize(new Dimension(125, height));
         gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
-    
-        this.packImage = getImageLabel(p.getPhoto(), height, width);
-        this.packInfo = new JTextPane();
-        this.packInfo.setEditable(false);
-        this.packInfo.setFocusable(false);
         
         SimpleAttributeSet attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
         StyleConstants.setBold(attributes, true);
-        packInfo.setCharacterAttributes(attributes, true);
-        packInfo.setText(p.getId() + "\n");
+        employeeInfo.setCharacterAttributes(attributes, true);
+        employeeInfo.setText(emp.getId() + "\n");
         
         attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
 
-        Document doc = packInfo.getStyledDocument();
+        Document doc = employeeInfo.getStyledDocument();
         doc.insertString(doc.getLength(), // DUE Añadir descuento
-                ("Price: " + String.format("%.2f", this.p.getPrice()) + " €\n"), attributes);
+                ("Name: " + this.emp.getUserName()), attributes);
 
-        packInfo.setPreferredSize(new Dimension(width, height));
+        employeeInfo.setPreferredSize(new Dimension(width, height));
 
         JTextPane indexNum = new JTextPane();
         indexNum.setEditable(false);
@@ -69,23 +65,19 @@ public class PackMiniEdit extends JPanel{
         indexNum.setPreferredSize(new Dimension(25, height));
         
         this.add(indexNum);
-        this.add(packImage);
-        this.add(packInfo);
+        this.add(employeeIcon);
+        this.add(employeeInfo);
         this.add(gestionar);
-
+        
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
-    }
-    
-    public JLabel getPackImage() {
-        return packImage;
     }
 
     public JTextPane getPackInfo() {
-        return packInfo;
+        return this.employeeInfo;
     }
 
-    public Pack getPack() {
-        return p;
+    public Employee getEmployee() {
+        return this.emp;
     }
 
     /**
@@ -96,4 +88,3 @@ public class PackMiniEdit extends JPanel{
         gestionar.addActionListener(c);
     }
 }
-

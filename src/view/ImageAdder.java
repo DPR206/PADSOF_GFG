@@ -1,7 +1,7 @@
 package view;
 
-import model.product.Pack;
-import model.product.StoreProduct;
+import model.exchange.Offer;
+import model.product.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,14 +28,30 @@ public class ImageAdder {
         return new ImageIcon(newImg);
     }
 
-    public static JPanel getPackImagePanel(Pack pack, int width, int height) {
+    public static JPanel getOfferImagePanel(Offer offer, int width, int height) {
         JPanel panel = new JPanel(new GridLayout(2, 2));
-        ArrayList<StoreProduct> products = pack.getProducts();
+        ArrayList<SecondHandProduct> originProducts = offer.getOriginProducts();
+        ArrayList<SecondHandProduct> destinationProducts = offer.getDestinationProducts();
 
-        panel.add(getImageLabel(products.getFirst().getPhoto(), width / 2, height / 2));
+        panel.add(getImageLabel(originProducts.getFirst().getPhoto(), width / 2, height / 2));
         panel.add(getImageLabel(".\\resources\\arrow_left.png", width / 2, height / 2));
         panel.add(getImageLabel(".\\resources\\arrow_right.png", width / 2, height / 2));
-        panel.add(getImageLabel(products.get(1).getPhoto(), width / 2, height / 2));
+        panel.add(getImageLabel(destinationProducts.get(1).getPhoto(), width / 2, height / 2));
+
+        return panel;
+    }
+
+    public static JPanel getPackImagePanel(Pack pack, int width, int height) {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        StoreProduct product = pack.getProducts().getFirst();
+        JLabel imageLabel = getImageLabel(product.getPhoto(), width, height);
+        panel.add(imageLabel, BorderLayout.NORTH);
+
+        JLabel number = new JLabel("+" + (pack.getProducts().size() - 1));
+        panel.add(number, BorderLayout.EAST);
+
+        panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         return panel;
     }

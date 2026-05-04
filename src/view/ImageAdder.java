@@ -5,7 +5,6 @@ import model.product.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class ImageAdder {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -30,13 +29,13 @@ public class ImageAdder {
 
     public static JPanel getOfferImagePanel(Offer offer, int width, int height) {
         JPanel panel = new JPanel(new GridLayout(2, 2));
-        ArrayList<SecondHandProduct> originProducts = offer.getOriginProducts();
-        ArrayList<SecondHandProduct> destinationProducts = offer.getDestinationProducts();
+        SecondHandProduct originProduct = offer.getOriginProducts().getFirst();
+        SecondHandProduct destinationProduct = offer.getDestinationProducts().getFirst();
 
-        panel.add(getImageLabel(originProducts.getFirst().getPhoto(), width / 2, height / 2));
+        panel.add(getImageLabel(originProduct.getPhoto(), width / 2, height / 2));
         panel.add(getImageLabel(".\\resources\\arrow_left.png", width / 2, height / 2));
         panel.add(getImageLabel(".\\resources\\arrow_right.png", width / 2, height / 2));
-        panel.add(getImageLabel(destinationProducts.get(1).getPhoto(), width / 2, height / 2));
+        panel.add(getImageLabel(destinationProduct.getPhoto(), width / 2, height / 2));
 
         return panel;
     }

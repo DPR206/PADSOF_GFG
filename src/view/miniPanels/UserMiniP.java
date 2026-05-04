@@ -10,6 +10,12 @@ public class UserMiniP extends JPanel {
     JButton button;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This panel's constructor
+     * @param user       the user to be displayed
+     * @param buttonName the name of the button for this panel (must match the controller's)
+     */
     UserMiniP(User user, String buttonName) {
         this.setLayout(new BoxLayout(null, BoxLayout.Y_AXIS));
 

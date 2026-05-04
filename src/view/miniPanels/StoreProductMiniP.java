@@ -1,5 +1,7 @@
 package view.miniPanels;
 
+import model.discount.DiscountType;
+import model.discount.ProductFixedPercentage;
 import model.product.StoreProduct;
 
 import javax.swing.*;
@@ -27,7 +29,7 @@ public class StoreProductMiniP extends JPanel {
         addToCart.setPreferredSize(new Dimension(125, height));
         addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
 
-        productImage = getImageLabel(product.getPhoto(), height, height); // DUE: Revisar dimensiones
+        productImage = getImageLabel(product.getPhoto(), height, height);
         productInfo = new JTextPane();
         productInfo.setEditable(false);
         productInfo.setFocusable(false);
@@ -42,12 +44,25 @@ public class StoreProductMiniP extends JPanel {
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
 
         Document doc = productInfo.getStyledDocument();
-        doc.insertString(doc.getLength(), // DUE Añadir descuento
-                ("Price: " + String.format("%.2f", product.getPrice()) + " €\n"), attributes);
+        doc.insertString(doc.getLength(), ("Price: " + String.format("%.2f", product.getPrice()) + " €"), attributes);
+
+        if (product.getDiscount().getType() == DiscountType.FIXED_PERCENTAGE) {
+            StyleConstants.setForeground(attributes, Color.RED);
+            StyleConstants.setItalic(attributes, true);
+
+            doc.insertString(doc.getLength(),
+                    "- " + ((ProductFixedPercentage) product.getDiscount()).getPercentage() + "%", attributes);
+
+            StyleConstants.setForeground(attributes, Color.BLACK);
+            StyleConstants.setItalic(attributes, false);
+        } else {
+            doc.insertString(doc.getLength(), "\n", attributes);
+        }
 
         if (product.getStock() == 0) {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
+            addToCart.setEnabled(false);
         }
         doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
 

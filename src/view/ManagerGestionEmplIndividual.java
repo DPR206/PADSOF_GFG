@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import view.banners.BannerManager;
 
@@ -20,12 +22,15 @@ public class ManagerGestionEmplIndividual extends JPanel{
 	private JCheckBox orderPerm = new JCheckBox("Trabajar con pedidos");
 	private JCheckBox exchangePerm = new JCheckBox("Trabajar con intercambios");
 	private BannerManager banner = new BannerManager();
+	private JTextField userName = new JTextField();
+	private JTextField pwd = new JTextField();
+	private JButton confirmar = new JButton("CONFIRMAR");
 	
 	public ManagerGestionEmplIndividual() {
 		
 		super();
 		
-		
+		this.setLayout(new BorderLayout());
 		
 		JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -36,7 +41,7 @@ public class ManagerGestionEmplIndividual extends JPanel{
         lblUsuario.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(lblUsuario);
 
-        panel.add(new JLabel("XXXX"));
+        panel.add(this.userName);
 
         panel.add(Box.createVerticalStrut(15));
 
@@ -45,7 +50,7 @@ public class ManagerGestionEmplIndividual extends JPanel{
         lblPass.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(lblPass);
 
-        panel.add(new JLabel("XXXXXXXX"));
+        panel.add(this.pwd);
 
         panel.add(Box.createVerticalStrut(15));
 
@@ -62,10 +67,12 @@ public class ManagerGestionEmplIndividual extends JPanel{
 
         // Botón a la derecha
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton boton = new JButton("CONFIRMAR");
-        boton.setPreferredSize(new Dimension(140, 40));
-        panelBoton.add(boton);
+        this.confirmar.setPreferredSize(new Dimension(140, 40));
+        panelBoton.add(this.confirmar);
 
         panel.add(panelBoton);
+        
+        this.add(panel, BorderLayout.CENTER);
+        this.add(this.banner, BorderLayout.NORTH);
     }
 }

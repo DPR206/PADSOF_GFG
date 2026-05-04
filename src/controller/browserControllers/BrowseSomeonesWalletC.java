@@ -10,7 +10,7 @@ import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BrowseWalletC implements ActionListener, BigController {
+public class BrowseSomeonesWalletC implements ActionListener, BigController {
     private final BrowseSomeonesWalletP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -22,7 +22,7 @@ public class BrowseWalletC implements ActionListener, BigController {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public BrowseWalletC(App frame, Store model, BrowseSomeonesWalletP view) {
+    public BrowseSomeonesWalletC(App frame, Store model, BrowseSomeonesWalletP view) {
         this.frame = frame;
         this.view = view;
         this.model = model;

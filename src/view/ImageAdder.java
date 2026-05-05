@@ -21,7 +21,6 @@ public class ImageAdder {
     }
 
     public static ImageIcon getScaledImage(ImageIcon imageIcon, int w, int h) {
-        // NOTE: Es código adaptado de StackOverFlow: https://stackoverflow.com/a/18335435
         Image image = imageIcon.getImage();
         Image newImg = image.getScaledInstance(w, h, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);

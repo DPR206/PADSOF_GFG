@@ -428,6 +428,10 @@ public class Store implements Serializable {
         return new ArrayList<>(this.categories.values());
     }
 
+    public List<SecondHandProduct> getSecondHandProductList(){
+        return new ArrayList<>(this.secondHandProducts.values());
+    }
+
     /**
      * It gets the maximum number of pages that can be obtained from the store's categories list
      * @return the maximum number of pages that can be obtained from the store's categories list

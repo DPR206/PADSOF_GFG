@@ -38,7 +38,7 @@ public class App extends JFrame {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() throws IOException, BadLocationException {
         super("Gifts for Geeks"); /* JFrame's title */
-        this.setIconImage(new ImageIcon(".\\resources\\logo.png").getImage());
+        this.setIconImage(new ImageIcon(".\\resources\\app\\logo.png").getImage());
 
         /* Views */
         loginPanel = new LoginP();
@@ -75,7 +75,7 @@ public class App extends JFrame {
         //browseStorePanel.setController(browseStoreController);
 
         /* Add views to main window */
-        ImagePanel bgPanel = new ImagePanel(".\\resources\\background.png");
+        ImagePanel bgPanel = new ImagePanel(".\\resources\\app\\background.png");
         bgPanel.setLayout(new BorderLayout());
         this.setContentPane(bgPanel);
 

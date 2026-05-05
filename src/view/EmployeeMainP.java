@@ -5,7 +5,7 @@ import view.banners.BannerEmployee;
 
 import javax.swing.*;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class EmployeeMainP extends JPanel {
@@ -25,7 +25,7 @@ public class EmployeeMainP extends JPanel {
      */
     public EmployeeMainP(App app) {
         //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    	this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
 
         this.app = app;
 
@@ -42,8 +42,9 @@ public class EmployeeMainP extends JPanel {
 
     public void paintEverything() {
         this.removeAll();
-        JPanel botones = new JPanel(new BorderLayout());
-        add(banner, BorderLayout.NORTH);
+        this.add(banner, BorderLayout.NORTH);
+
+        JPanel botones = new JPanel(new GridLayout(2, 3));
 
         User user = app.getUser();
 
@@ -62,7 +63,8 @@ public class EmployeeMainP extends JPanel {
             }
         }
 
-        add(botones, BorderLayout.CENTER);
+        this.add(botones, BorderLayout.CENTER);
+
         this.revalidate();
         this.repaint();
     }

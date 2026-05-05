@@ -32,8 +32,8 @@ public class ImageAdder {
         SecondHandProduct destinationProduct = offer.getDestinationProducts().getFirst();
 
         panel.add(getImageLabel(originProduct.getPhoto(), width / 2, height / 2));
-        panel.add(getImageLabel(".\\resources\\arrow_left.png", width / 2, height / 2));
-        panel.add(getImageLabel(".\\resources\\arrow_right.png", width / 2, height / 2));
+        panel.add(getImageLabel(".\\resources\\app\\arrow_left.png", width / 2, height / 2));
+        panel.add(getImageLabel(".\\resources\\app\\arrow_right.png", width / 2, height / 2));
         panel.add(getImageLabel(destinationProduct.getPhoto(), width / 2, height / 2));
 
         return panel;

@@ -166,7 +166,7 @@ public abstract class Product implements Serializable {
         if ((new File(this.photo)).isFile()) {
             return this.photo;
         }
-        return ".\\resources\\image_not_found.jpg";
+        return ".\\resources\\app\\image_not_found.jpg";
     }
 
     /**

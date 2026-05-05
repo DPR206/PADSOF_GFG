@@ -27,7 +27,7 @@ public class StoreProductMiniP extends JPanel {
         this.setLayout(new FlowLayout());
 
         addToCart.setPreferredSize(new Dimension(125, height));
-        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
+        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
 
         productImage = getImageLabel(product.getPhoto(), height, height);
         productInfo = new JTextPane();

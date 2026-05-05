@@ -331,7 +331,7 @@ public class Store implements Serializable {
      * @throws IOException something went wrong when reading or writing a file
      */
     public void saveStore(String dataFilename, String staticsFilename) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(".\\resources\\" + dataFilename + ".txt");
+        FileOutputStream fileOutputStream = new FileOutputStream(".\\resources\\data\\" + dataFilename + ".txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
         objectOutputStream.writeObject(Store.getInstance());
@@ -340,7 +340,7 @@ public class Store implements Serializable {
         objectOutputStream.close();
 
         BufferedWriter buffer = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(".\\resources\\" + staticsFilename + ".csv")));
+                new OutputStreamWriter(new FileOutputStream(".\\resources\\data\\" + staticsFilename + ".csv")));
 
         buffer.write(Discount.totalId + "\n");
         buffer.write(Exchange.totalId + "\n");
@@ -361,8 +361,8 @@ public class Store implements Serializable {
     public void loadStore(String dataFilename, String staticsFilename) throws IOException {
         this.addUser(Manager.getInstance());
         try {
-            if ((new File(".\\resources\\" + dataFilename + ".txt")).isFile()) {
-                FileInputStream fileInputStream = new FileInputStream(".\\resources\\" + dataFilename + ".txt");
+            if ((new File(".\\resources\\data\\" + dataFilename + ".txt")).isFile()) {
+                FileInputStream fileInputStream = new FileInputStream(".\\resources\\data\\" + dataFilename + ".txt");
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
                 Store.setInstance((Store) objectInputStream.readObject());
@@ -370,9 +370,9 @@ public class Store implements Serializable {
                 objectInputStream.close();
             }
 
-            if ((new File(".\\resources\\" + staticsFilename + ".txt")).isFile()) {
+            if ((new File(".\\resources\\data\\" + staticsFilename + ".txt")).isFile()) {
                 BufferedReader buffer = new BufferedReader(
-                        new InputStreamReader(new FileInputStream(".\\resources\\" + staticsFilename + ".csv")));
+                        new InputStreamReader(new FileInputStream(".\\resources\\data\\" + staticsFilename + ".csv")));
 
                 Discount.setTotalId(Integer.parseInt(buffer.readLine()));
                 Exchange.setTotalId(Integer.parseInt(buffer.readLine()));

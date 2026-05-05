@@ -21,7 +21,7 @@ public class UserMiniP extends JPanel {
     public UserMiniP(User user, String buttonName) {
         this.setLayout(new BoxLayout(null, BoxLayout.Y_AXIS));
 
-        image = ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50);
+        image = ImageAdder.getImageLabel(".\\resources\\app\\default_user.png", 50, 50);
         this.add(image);
         this.add(new JLabel(user.getUserName()));
         button = new JButton(buttonName);

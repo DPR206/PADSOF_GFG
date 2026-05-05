@@ -104,12 +104,12 @@ public class App extends JFrame {
         container.add(managerMainPanel, gbc);
         welcomePanel.setVisible(false);
         container.add(welcomePanel, gbc);
-        welcomePanel.setVisible(false); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
-        BrowseForOffersP panel = new BrowseForOffersP(this);
+        welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
+        /*BrowseForOffersP panel = new BrowseForOffersP(this);
         panel.setController(new BrowseForOffersC(this, model, panel));
 
         container.add(panel, gbc);
-        panel.setVisible(true);
+        panel.setVisible(true);*/
 
 
         /* Configure main window's size and default actions */

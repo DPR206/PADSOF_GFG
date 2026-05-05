@@ -7,6 +7,7 @@ import view.App;
 import view.WelcomeP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

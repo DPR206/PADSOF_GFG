@@ -1,9 +1,11 @@
 package controller.miniControllers;
 
 import controller.browserControllers.BigController;
+import controller.browserControllers.BrowseSomeonesWalletC;
 import model.store.Store;
 import view.App;
-import view.browserPanels.BigView;
+import view.BrowseForOffersP;
+import view.browserPanels.*;
 import view.miniPanels.UserMiniP;
 
 import javax.swing.*;
@@ -16,6 +18,8 @@ public class WalletOwnerMiniC implements ActionListener {
     private final Store model; /* model */
     private final BigController bigController;
     private final BigView bigView;
+    BrowseSecondHandProductsP deleteThis;
+    BrowseForOffersP deleteThisToo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -24,12 +28,15 @@ public class WalletOwnerMiniC implements ActionListener {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public WalletOwnerMiniC(App frame, Store model, UserMiniP view, BigController bigController, BigView bigView) {
+    public WalletOwnerMiniC(App frame, Store model, UserMiniP view, BigController bigController, BigView bigView,
+                            BrowseSecondHandProductsP deleteThis, BrowseForOffersP deleteThisToo) {
         this.frame = frame;
         this.view = view;
         this.model = model;
         this.bigController = bigController;
         this.bigView = bigView;
+        this.deleteThis = deleteThis;
+        this.deleteThisToo = deleteThisToo;
 
         view.getUserImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -42,13 +49,19 @@ public class WalletOwnerMiniC implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("DUE")) { //DUE
-            // Acción
+        if (e.getActionCommand().equals("Browse Wallet")) {
             try {
-                bigView.paintEverything();
+                view.setVisible(false);
+
+                BrowseSomeonesWalletP newView = new BrowseSomeonesWalletP(frame, view.getWalletOwner());
+                frame.addToContainer(newView);
+                newView.setController(new BrowseSomeonesWalletC(frame, model, newView));
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
+            bigView.setVisible(false);
+            deleteThis.setVisible(false);
+            deleteThisToo.setVisible(false);
             bigController.updateControllers();
         }
 

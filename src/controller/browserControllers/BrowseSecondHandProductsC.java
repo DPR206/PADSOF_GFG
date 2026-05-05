@@ -1,23 +1,19 @@
 package controller.browserControllers;
 
-import controller.miniControllers.WalletOwnerMiniC;
+import controller.miniControllers.SecondHandMiniC;
 import model.store.Store;
 import view.App;
-import view.BrowseForOffersP;
 import view.browserPanels.BrowseSecondHandProductsP;
-import view.browserPanels.BrowseWalletOwnersP;
-import view.miniPanels.UserMiniP;
+import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BrowseWalletOwnersC implements ActionListener, BigController {
-    private final BrowseWalletOwnersP view; /* view -> panel */
+public class BrowseSecondHandProductsC implements ActionListener, BigController {
+    private final BrowseSecondHandProductsP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    BrowseSecondHandProductsP deleteThis;
-    BrowseForOffersP deleteThisToo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -26,21 +22,17 @@ public class BrowseWalletOwnersC implements ActionListener, BigController {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public BrowseWalletOwnersC(App frame, Store model, BrowseWalletOwnersP view, BrowseSecondHandProductsP deleteThis,
-                               BrowseForOffersP deleteThisToo) {
+    public BrowseSecondHandProductsC(App frame, Store model, BrowseSecondHandProductsP view) {
         this.frame = frame;
         this.view = view;
         this.model = model;
-        this.deleteThis = deleteThis;
-        this.deleteThisToo = deleteThisToo;
 
         updateControllers();
     }
 
     public void updateControllers() {
-        for (UserMiniP miniPanel : view.getUserPanels()) {
-            miniPanel.setController(
-                    new WalletOwnerMiniC(frame, model, miniPanel, this, view, deleteThis, deleteThisToo));
+        for (SecondHandMiniP miniPanel : view.getProductPanels()) {
+            miniPanel.setController(new SecondHandMiniC(frame, model, miniPanel, this, view));
         }
     }
 

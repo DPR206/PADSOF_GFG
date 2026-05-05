@@ -1,11 +1,11 @@
 package view;
 
 import controller.*;
-import model.product.Pack;
-import model.product.StoreProduct;
+import controller.browserControllers.BrowseForOffersC;
+import model.product.*;
 import model.store.Store;
-import model.user.UnregisteredClient;
-import model.user.User;
+import model.user.*;
+import view.browserPanels.BrowseSecondHandProductsP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -29,6 +29,8 @@ public class App extends JFrame {
     private final ManagerMainP managerMainPanel;
     private final WelcomeP welcomePanel;
     private final SearchPanel searchPanel;
+    private final Container container;
+    private final GridBagConstraints gbc;
     //private final BrowseStoreP browseStorePanel;
     // Aquí se declaran todos los paneles de vista como atributos
     private User mainUser = new UnregisteredClient(true);
@@ -79,10 +81,10 @@ public class App extends JFrame {
         bgPanel.setLayout(new BorderLayout());
         this.setContentPane(bgPanel);
 
-        Container container = this.getContentPane();
+        container = this.getContentPane();
         container.setLayout(new GridBagLayout());
         //container.setBackground(new Color(246, 243, 238)); // Beige
-        GridBagConstraints gbc = new GridBagConstraints();
+        gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -102,26 +104,13 @@ public class App extends JFrame {
         container.add(managerMainPanel, gbc);
         welcomePanel.setVisible(false);
         container.add(welcomePanel, gbc);
-        welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
-        //container.add(browseStorePanel, gbc);
-        //browseStorePanel.setVisible(false);
-        /*new RegisteredClient("ama", "51721876M", "pwd", true);
-        RegisteredClient ama = (RegisteredClient) Store.getInstance().getUsers().get("ama");
-        ama.addProductWallet(
-                new SecondHandProduct("Hamster yay", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
-        ama.addProductWallet(
-                new SecondHandProduct("Hamster yippie", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
-        ama.addProductWallet(
-                new SecondHandProduct("Hamster :)", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
-        ama.addProductWallet(
-                new SecondHandProduct("Hamster :3", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
-        ama.addProductWallet(
-                new SecondHandProduct("Hamster ey", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
-        ama.addProductWallet(
-                new SecondHandProduct("Hamster hamster", "a", ".\\resources\\hamster.jpg", ProductType.FIGURINE, ama));
-        BrowseSomeonesWalletP browseWallet = new BrowseSomeonesWalletP(this, ama);
-        container.add(browseWallet, gbc);
-        browseWallet.setController(new BrowseWalletC(this, model, browseWallet));*/
+        welcomePanel.setVisible(false); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
+        BrowseForOffersP panel = new BrowseForOffersP(this);
+        panel.setController(new BrowseForOffersC(this, model, panel));
+
+        container.add(panel, gbc);
+        panel.setVisible(true);
+
 
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -148,6 +137,10 @@ public class App extends JFrame {
 
     public void changeCurrentUser(User user) {
         this.mainUser = user;
+    }
+
+    public void addToContainer(JPanel newView) {
+        container.add(newView, gbc);
     }
 
     public class ImagePanel extends JPanel {

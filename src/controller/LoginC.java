@@ -6,6 +6,7 @@ import view.App;
 import view.LoginP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.event.*;
 
 /**

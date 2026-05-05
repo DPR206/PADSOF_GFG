@@ -7,6 +7,7 @@ import view.App;
 import view.SignupP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.event.*;
 
 /**

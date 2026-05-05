@@ -1,8 +1,7 @@
 package view;
 
-import model.user.RegisteredClient;
-import model.user.UnregisteredClient;
-import view.banners.BannerUnregistered;
+import model.store.Store;
+import view.banners.BannerRegistered;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.browserPanels.BrowseWalletOwnersP;
 
@@ -23,26 +22,30 @@ public class BrowseForOffersP extends JPanel {
         super();
         this.app = app;
 
+        this.add(new JLabel("Select a product:"));
+
         browseSecondHandProductsP = new BrowseSecondHandProductsP(app);
-        browseUsersP = new BrowseWalletOwnersP();
+        browseUsersP = new BrowseWalletOwnersP(app, Store.getInstance().getRegisteredClientList(), "Browse Wallet");
 
         this.setLayout(new BorderLayout());
 
-        add(new BannerUnregistered(), BorderLayout.NORTH);
+        this.add(new BannerRegistered(), BorderLayout.NORTH);
 
         JPanel others = new JPanel(new BorderLayout());
 
         JPanel botones = new JPanel(new GridLayout(0, 2));
         botones.add(this.browseAvailableProducts);
         botones.add(this.browseUsers);
+
         others.add(botones, BorderLayout.NORTH);
 
-        this.add(others, BorderLayout.CENTER);
-
         JPanel bottom = new JPanel(new CardLayout());
-        bottom.add(this.browseSecondHandProductsP, "Search");
-        bottom.add(this.browseUsersP, "Search");
+        bottom.add(this.browseSecondHandProductsP, "Browse available products");
+        bottom.add(this.browseUsersP, "Browse users");
+
         others.add(bottom, BorderLayout.SOUTH);
+
+        this.add(others, BorderLayout.CENTER);
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -50,5 +53,13 @@ public class BrowseForOffersP extends JPanel {
     public void setController(ActionListener e) {
         this.browseAvailableProducts.addActionListener(e);
         this.browseUsers.addActionListener(e);
+    }
+
+    public BrowseSecondHandProductsP getBrowseSecondHandProductsP() {
+        return browseSecondHandProductsP;
+    }
+
+    public BrowseWalletOwnersP getBrowseWalletOwnersP() {
+        return browseUsersP;
     }
 }

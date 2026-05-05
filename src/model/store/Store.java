@@ -322,6 +322,9 @@ public class Store implements Serializable {
      */
     public void addUser(User s) {
         this.users.put(s.getUserName(), s);
+        if (s.getType() == UserType.REGISTERED_CLIENT){
+            this.registeredClients.put(s.getUserName(), (RegisteredClient) s);
+        }
     }
 
     /**

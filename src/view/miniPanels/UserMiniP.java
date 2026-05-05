@@ -1,5 +1,6 @@
 package view.miniPanels;
 
+import model.user.RegisteredClient;
 import model.user.User;
 import view.ImageAdder;
 
@@ -7,9 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+import static main.Main.brownColour;
+
 public class UserMiniP extends JPanel {
-    JButton button;
-    JLabel image;
+    private final JButton button;
+    private final JLabel image;
+    private final User user;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -19,17 +23,27 @@ public class UserMiniP extends JPanel {
      * @param buttonName the name of the button for this panel (must match the controller's)
      */
     public UserMiniP(User user, String buttonName) {
-        this.setLayout(new BoxLayout(null, BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        this.user = user;
+
+        JPanel imageAndName = new JPanel();
         image = ImageAdder.getImageLabel(".\\resources\\app\\default_user.png", 50, 50);
-        this.add(image);
-        this.add(new JLabel(user.getUserName()));
+        imageAndName.add(image);
+        imageAndName.add(new JLabel(user.getUserName()));
+        this.add(imageAndName);
         button = new JButton(buttonName);
         this.add(button);
+
+        this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
     }
 
     public Component getUserImage() {
         return image;
+    }
+
+    public RegisteredClient getWalletOwner() {
+        return (RegisteredClient) user;
     }
 
     /**

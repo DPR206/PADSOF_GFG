@@ -6,7 +6,6 @@ import model.store.BetterPager;
 import model.store.Store;
 import view.App;
 import view.miniPanels.SecondHandMiniP;
-import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

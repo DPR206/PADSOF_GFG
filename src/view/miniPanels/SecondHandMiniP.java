@@ -11,7 +11,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 
 public class SecondHandMiniP extends JPanel {
-    private final JButton addToCart = new JButton("Add to Offer");
+    private final JButton addToOffer = new JButton("Add to Offer");
     private final SecondHandProduct secondHandProduct;
     private final JLabel productImage;
     private final JTextPane productInfo;
@@ -23,10 +23,10 @@ public class SecondHandMiniP extends JPanel {
         int height = 60;
         this.setLayout(new FlowLayout());
 
-        addToCart.setPreferredSize(new Dimension(125, height));
-        //addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
+        addToOffer.setPreferredSize(new Dimension(125, height));
+        //addToOffer.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
 
-        productImage = getImageLabel(product.getPhoto(), height, height); // DUE: Revisar dimensiones
+        productImage = getImageLabel(product.getPhoto(), height, height);
         productInfo = new JTextPane();
         productInfo.setEditable(false);
         productInfo.setFocusable(false);
@@ -65,7 +65,7 @@ public class SecondHandMiniP extends JPanel {
         this.add(indexNum);
         this.add(productImage);
         this.add(productInfo);
-        this.add(addToCart);
+        this.add(addToOffer);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
@@ -87,6 +87,6 @@ public class SecondHandMiniP extends JPanel {
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        addToCart.addActionListener(c);
+        addToOffer.addActionListener(c);
     }
 }

@@ -4,10 +4,12 @@ import model.user.User;
 import view.ImageAdder;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class UserMiniP extends JPanel {
     JButton button;
+    JLabel image;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -16,13 +18,18 @@ public class UserMiniP extends JPanel {
      * @param user       the user to be displayed
      * @param buttonName the name of the button for this panel (must match the controller's)
      */
-    UserMiniP(User user, String buttonName) {
+    public UserMiniP(User user, String buttonName) {
         this.setLayout(new BoxLayout(null, BoxLayout.Y_AXIS));
 
-        this.add(ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50));
+        image = ImageAdder.getImageLabel(".\\resources\\default_user.png", 50, 50);
+        this.add(image);
         this.add(new JLabel(user.getUserName()));
         button = new JButton(buttonName);
         this.add(button);
+    }
+
+    public Component getUserImage() {
+        return image;
     }
 
     /**

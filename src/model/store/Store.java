@@ -359,7 +359,7 @@ public class Store implements Serializable {
      * @throws IOException something went wrong when reading or writing a file
      */
     public void loadStore(String dataFilename, String staticsFilename) throws IOException {
-
+        this.addUser(Manager.getInstance());
         try {
             if ((new File(".\\resources\\" + dataFilename + ".txt")).isFile()) {
                 FileInputStream fileInputStream = new FileInputStream(".\\resources\\" + dataFilename + ".txt");
@@ -426,10 +426,6 @@ public class Store implements Serializable {
      */
     public List<Category> getCategoryList() {
         return new ArrayList<>(this.categories.values());
-    }
-
-    public List<SecondHandProduct> getSecondHandProductList(){
-        return new ArrayList<>(this.secondHandProducts.values());
     }
 
     /**
@@ -701,6 +697,10 @@ public class Store implements Serializable {
             return this.secondHandProducts.get(productId);
         }
         return null;
+    }
+
+    public List<SecondHandProduct> getSecondHandProductList() {
+        return new ArrayList<>(this.secondHandProducts.values());
     }
 
     /**

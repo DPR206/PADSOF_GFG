@@ -13,6 +13,7 @@ public class WelcomeP extends JPanel {
     private final JButton browseButton;
     private final JButton loginButton;
     private final JButton signupButton;
+    private final JButton managerAccess;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -28,12 +29,14 @@ public class WelcomeP extends JPanel {
         browseButton = new JButton("Browse as unregistered client");
         loginButton = new JButton("Log in");
         signupButton = new JButton("Sign up");
+        managerAccess = new JButton("Manager Access");
 
         // añadir componentes al panel
         this.add(label);
         this.add(browseButton);
         this.add(loginButton);
         this.add(signupButton);
+        this.add(managerAccess);
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -46,5 +49,6 @@ public class WelcomeP extends JPanel {
         browseButton.addActionListener(c);
         loginButton.addActionListener(c);
         signupButton.addActionListener(c);
+        managerAccess.addActionListener(c);
     }
 }

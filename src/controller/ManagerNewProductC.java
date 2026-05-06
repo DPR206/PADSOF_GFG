@@ -14,9 +14,21 @@ public class ManagerNewProductC implements ActionListener{
 	
 	@Override
     public void actionPerformed(ActionEvent e) {
+		
+		String name;
+		double price;
+		int stock;
+		String description;
+		
         if(e.getActionCommand().equals("Confirmar")) {
-        	/*Ahora se mirarán los textos y checkboxes*/
-        	
+        	if(panel.getNombreField().getText() == null) return;
+        	name = panel.getNombreField().getText();
+        	if(panel.getPrecioField().getText() == null) return;
+        	price = Double.parseDouble(panel.getPrecioField().getText());
+        	if(panel.getStockField().getText() == null) return;
+        	stock = Integer.parseInt(panel.getStockField().getText());
+        	if(panel.getDescArea().getText() == null) return;
+        	description = panel.getDescArea().getText();
         }
 	}  
 }

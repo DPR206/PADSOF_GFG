@@ -147,4 +147,59 @@ public class ManagerNewProduct extends JPanel{
 	        dim2.addActionListener(c);
 	        dim3.addActionListener(c);
 	    }
+	    public JTextField getNombreField() {
+	        return nombreField;
+	    }
+
+	    public JTextField getPrecioField() {
+	        return precioField;
+	    }
+
+	    public JTextField getStockField() {
+	        return stockField;
+	    }
+
+	    public JTextArea getDescArea() {
+	        return descArea;
+	    }
+
+	    public JTextField getMarcaField() {
+	        return marcaField;
+	    }
+
+	    public JTextField getMaterialField() {
+	        return materialField;
+	    }
+
+	    public JTextField getDim1() {
+	        return dim1;
+	    }
+
+	    public JTextField getDim2() {
+	        return dim2;
+	    }
+
+	    public JTextField getDim3() {
+	        return dim3;
+	    }
+	    
+	    public JCheckBox getCbMesa() {
+	        return cbMesa;
+	    }
+
+	    public JCheckBox getCbRol() {
+	        return cbRol;
+	    }
+
+	    public JCheckBox getCbCartas() {
+	        return cbCartas;
+	    }
+
+	    public JCheckBox getCbFiguras() {
+	        return cbFiguras;
+	    }
+
+	    public JCheckBox getCbComics() {
+	        return cbComics;
+	    }
 }

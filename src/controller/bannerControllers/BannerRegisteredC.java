@@ -1,9 +1,12 @@
-package controller;
+package controller.bannerControllers;
 
 import java.awt.Window;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import controller.NotificacionesC;
+import controller.RegisteredProfileC;
 import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
@@ -52,7 +55,30 @@ public class BannerRegisteredC {
         vista.getCartera().addActionListener(e -> {
         	abrirCartera();
         });
+        
+        vista.getBtnExit().addActionListener(e -> {
+        	abrirWelcome();
+        });
     }
+	
+	private void abrirWelcome() {
+		
+		int respuesta = JOptionPane.showConfirmDialog(
+		        this.frame, 
+		        "Are you sure you want to log out?", 
+		        "Confirm log out", 
+		        JOptionPane.YES_NO_OPTION, 
+		        JOptionPane.QUESTION_MESSAGE
+		);
+		
+		if (respuesta == JOptionPane.YES_OPTION) {
+	        this.vista.setVisible(false);
+	        this.frame.getWelcomePanel().setVisible(true);
+	        
+	        this.frame.revalidate();
+	        this.frame.repaint();
+	    }
+	}
 	
 	private void abrirCartera() {
 		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);

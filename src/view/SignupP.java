@@ -12,7 +12,8 @@ import java.awt.event.ActionListener;
  * @version 1.0
  */
 public class SignupP extends JPanel {
-    private final JTextField username;
+    private static final long serialVersionUID = 1L;
+	private final JTextField username;
     private final JPasswordField password;
     private final JPasswordField password2;
     private final JTextField idNumber;

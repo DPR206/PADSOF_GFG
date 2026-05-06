@@ -1,9 +1,10 @@
 package controller;
 
+import controller.bannerControllers.BannerUnregisteredC;
 import controller.browserControllers.BrowseStoreC;
 import model.store.Store;
-import model.user.UnregisteredClient;
-import model.user.User;
+//import model.user.UnregisteredClient;
+//import model.user.User;
 import view.App;
 import view.UnregisteredMainP;
 
@@ -15,7 +16,7 @@ public class UnregisteredMainC implements ActionListener {
     private final UnregisteredMainP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private final User c = new UnregisteredClient(false);
+    //private final User c = new UnregisteredClient(false);
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public UnregisteredMainC(App frame, Store model) {
@@ -23,12 +24,15 @@ public class UnregisteredMainC implements ActionListener {
         this.view = frame.getUnregisteredMainPanel();
         this.model = model;
 
+        new BannerUnregisteredC(this.view.getBanner(), this.frame);
+        
         updateControllers();
     }
 
     public void updateControllers() {
         view.getBrowsePanel().setController(new BrowseStoreC(frame, model, view.getBrowsePanel()));
-        view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
+        view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));   
+        
     }
 
     @Override

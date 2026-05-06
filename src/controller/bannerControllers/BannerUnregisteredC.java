@@ -1,7 +1,8 @@
-package controller;
+package controller.bannerControllers;
 
 import java.awt.Window;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import model.store.Store;
@@ -40,30 +41,50 @@ public class BannerUnregisteredC {
         vista.getBtnPerfil().addActionListener(e -> {
         	abrirSignUp();
         });
+        
+        vista.getBtnExit().addActionListener(e -> {
+        	abrirWelcome();
+        });
     }
 	
-	private void abrirSignUp() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana
-	    }
+	private void abrirWelcome() {
 		
+		int respuesta = JOptionPane.showConfirmDialog(
+		        this.frame, 
+		        "Are you sure you want to log out?", 
+		        "Confirm log out", 
+		        JOptionPane.YES_NO_OPTION, 
+		        JOptionPane.QUESTION_MESSAGE
+		);
+		
+		if (respuesta == JOptionPane.YES_OPTION) {
+	        this.vista.setVisible(false);
+	        this.frame.getWelcomePanel().setVisible(true);
+	        
+	        this.frame.revalidate();
+	        this.frame.repaint();
+	    }
+	}
+
+
+	private void abrirSignUp() {
+	
 	    //SignupP signUp = frame.getSignupPanel();
 	    
 	    //new SignupC(frame, Store.getInstance());
 	    
-	    frame.getSignupPanel().setVisible(true);
+		this.vista.setVisible(false);
+        this.frame.getSignupPanel().setVisible(true);
+	    
+		/*this.frame.getContentPane().remove(this.vista); // Quita el panel actual
+	    this.frame.getContentPane().add(this.frame.getSignupPanel()); // Añade el nuevo
+	    
+	    this.frame.getContentPane().revalidate();
+	    this.frame.getContentPane().repaint();*/
 	}
 
 
 	private void abrirPaginaPrincipal() {
-		
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana
-	    }
 	    
 	    //UnregisteredMainP pagPrin = frame.getUnregisteredMainPanel();
 	    
@@ -75,12 +96,6 @@ public class BannerUnregisteredC {
 
 
 	private void abrirCarritoDelCliente() {
-		
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana
-	    }
         
         // 1. Crear la vista del carrito
         CarritoP carritoVista = new CarritoP(); 

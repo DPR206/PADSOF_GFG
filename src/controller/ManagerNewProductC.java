@@ -29,6 +29,7 @@ public class ManagerNewProductC implements ActionListener{
         	stock = Integer.parseInt(panel.getStockField().getText());
         	if(panel.getDescArea().getText() == null) return;
         	description = panel.getDescArea().getText();
+        	if()
         }
 	}  
 }

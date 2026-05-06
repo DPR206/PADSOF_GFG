@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -31,11 +32,11 @@ public class ManagerNewProduct extends JPanel{
 	    private JButton btnSubir;
 	    private JButton confirmarBtn;
 
-	    private JCheckBox cbMesa;
-	    private JCheckBox cbRol;
-	    private JCheckBox cbCartas;
-	    private JCheckBox cbFiguras;
-	    private JCheckBox cbComics;
+	    private JRadioButton cbMesa;
+	    private JRadioButton cbRol;
+	    private JRadioButton cbCartas;
+	    private JRadioButton cbFiguras;
+	    private JRadioButton cbComics;
 
 	    public ManagerNewProduct() {
 	        super();
@@ -77,11 +78,11 @@ public class ManagerNewProduct extends JPanel{
 	        JPanel rightPanel = new JPanel();
 	        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
-	        cbMesa = new JCheckBox("Juegos de mesa");
-	        cbRol = new JCheckBox("Juegos de rol");
-	        cbCartas = new JCheckBox("Juegos de cartas");
-	        cbFiguras = new JCheckBox("Figuras");
-	        cbComics = new JCheckBox("Cómics");
+	        cbMesa = new JRadioButton("Juegos de mesa");
+	        cbRol = new JRadioButton("Juegos de rol");
+	        cbCartas = new JRadioButton("Juegos de cartas");
+	        cbFiguras = new JRadioButton("Figuras");
+	        cbComics = new JRadioButton("Cómics");
 
 	        JPanel catPanel = new JPanel(new GridLayout(3, 2));
 	        catPanel.add(cbMesa);
@@ -183,23 +184,23 @@ public class ManagerNewProduct extends JPanel{
 	        return dim3;
 	    }
 	    
-	    public JCheckBox getCbMesa() {
+	    public JRadioButton getCbMesa() {
 	        return cbMesa;
 	    }
 
-	    public JCheckBox getCbRol() {
+	    public JRadioButton getCbRol() {
 	        return cbRol;
 	    }
 
-	    public JCheckBox getCbCartas() {
+	    public JRadioButton getCbCartas() {
 	        return cbCartas;
 	    }
 
-	    public JCheckBox getCbFiguras() {
+	    public JRadioButton getCbFiguras() {
 	        return cbFiguras;
 	    }
 
-	    public JCheckBox getCbComics() {
+	    public JRadioButton getCbComics() {
 	        return cbComics;
 	    }
 }

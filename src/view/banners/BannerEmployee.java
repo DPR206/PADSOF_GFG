@@ -13,6 +13,7 @@ public class BannerEmployee extends JPanel {
 	private JButton btnCarrito;
 	private JButton btnPerfil;
 	private JButton btnNots;
+	private JButton btnExit;
 
 	/**
 	 * Create the panel.
@@ -93,7 +94,7 @@ public class BannerEmployee extends JPanel {
 
         // Botón usuario
         btnPerfil = new JButton("👤");
-        btnPerfil.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
+        btnPerfil.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
 
         //Establecer el mismo color que el banner
         btnPerfil.setBackground(new Color(45, 52, 54)); 
@@ -110,7 +111,7 @@ public class BannerEmployee extends JPanel {
         btnPerfil.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         btnCarrito = new JButton("\uD83D\uDED2");
-        btnCarrito.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
+        btnCarrito.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
         
         btnCarrito.setBackground(new Color(45, 52, 54));
         btnCarrito.setForeground(Color.WHITE);
@@ -123,7 +124,7 @@ public class BannerEmployee extends JPanel {
         
         btnNots = new JButton("\uD83D\uDD14");
         
-        btnNots.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
+        btnNots.setFont(new Font("Segoe UI Symbol", Font.BOLD, 20));
         
         btnNots.setBackground(new Color(45, 52, 54)); 
         btnNots.setForeground(Color.WHITE);
@@ -133,12 +134,25 @@ public class BannerEmployee extends JPanel {
         btnNots.setFocusPainted(false);
         btnNots.setContentAreaFilled(true);
         
+        btnExit = new JButton("\u23FB");
+        btnExit.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
+        
+        btnExit.setBackground(new Color(45, 52, 54));
+        btnExit.setForeground(Color.WHITE);
+        
+        btnExit.setBorderPainted(false);
+        btnExit.setContentAreaFilled(false);
+        btnExit.setFocusPainted(false);
+        
+        btnExit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
         
         JPanel panelAccionesD = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 14));
         panelAccionesD.setOpaque(false); // Para que se vea el fondo del banner
 
         panelAccionesD.add(btnNots);
         panelAccionesD.add(btnPerfil);
+        panelAccionesD.add(panelAccionesD);
         
         JPanel panelAccionesI = new JPanel(new FlowLayout(FlowLayout.LEFT, 1, 10));
         panelAccionesI.setOpaque(false); // Para que se vea el fondo del banner
@@ -196,5 +210,14 @@ public class BannerEmployee extends JPanel {
 	public JButton getBtnNots() {
 		return btnNots;
 	}
+
+	/**
+	 * @return the btnExit
+	 */
+	public JButton getBtnExit() {
+		return btnExit;
+	}
+	
+	
 
 }

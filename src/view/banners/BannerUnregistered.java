@@ -9,6 +9,7 @@ public class BannerUnregistered extends JPanel {
 	private JButton home;
 	private JButton btnCarrito;
 	private JButton btnPerfil;
+	private JButton btnExit;
 
 	/**
 	 * Create the panel.
@@ -43,7 +44,7 @@ public class BannerUnregistered extends JPanel {
 
         //Botón de usuario
         btnPerfil = new JButton("👤");
-        btnPerfil.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
+        btnPerfil.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
 
         //Establecer el mismo color que el banner
         btnPerfil.setBackground(new Color(45, 52, 54)); 
@@ -60,7 +61,7 @@ public class BannerUnregistered extends JPanel {
         btnPerfil.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         btnCarrito = new JButton("\uD83D\uDED2");
-        btnCarrito.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
+        btnCarrito.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
         
         btnCarrito.setBackground(new Color(45, 52, 54));
         btnCarrito.setForeground(Color.WHITE);
@@ -71,11 +72,24 @@ public class BannerUnregistered extends JPanel {
         
         btnCarrito.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
+        btnExit = new JButton("\u23FB");
+        btnExit.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
+        
+        btnExit.setBackground(new Color(45, 52, 54));
+        btnExit.setForeground(Color.WHITE);
+        
+        btnExit.setBorderPainted(false);
+        btnExit.setContentAreaFilled(false);
+        btnExit.setFocusPainted(false);
+        
+        btnExit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
         JPanel panelAcciones = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 14));
         panelAcciones.setOpaque(false); // Para que se vea el fondo del banner
 
         panelAcciones.add(btnCarrito);
         panelAcciones.add(btnPerfil);
+        panelAcciones.add(btnExit);
 
         // Añadir componentes al banner
         add(home, BorderLayout.WEST);
@@ -103,4 +117,13 @@ public class BannerUnregistered extends JPanel {
 	public JButton getBtnPerfil() {
 		return btnPerfil;
 	}
+
+	/**
+	 * @return the btnExit
+	 */
+	public JButton getBtnExit() {
+		return btnExit;
+	}
+	
+	
 }

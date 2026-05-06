@@ -1,9 +1,12 @@
-package controller;
+package controller.bannerControllers;
 
 import java.awt.Window;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import controller.EmployeeProfileC;
+import controller.NotificacionesC;
 import model.user.Employee;
 import view.App;
 import view.EmployeeProfile;
@@ -73,7 +76,30 @@ public class BannerEmployeeC {
         vista.getIntercambios().addActionListener(e -> {
         	abrirIntercambios();
         });
+        
+        vista.getBtnExit().addActionListener(e -> {
+        	abrirWelcome();
+        });
     }
+	
+	private void abrirWelcome() {
+		
+		int respuesta = JOptionPane.showConfirmDialog(
+		        this.frame, 
+		        "Are you sure you want to log out?", 
+		        "Confirm log out", 
+		        JOptionPane.YES_NO_OPTION, 
+		        JOptionPane.QUESTION_MESSAGE
+		);
+		
+		if (respuesta == JOptionPane.YES_OPTION) {
+	        this.vista.setVisible(false);
+	        this.frame.getWelcomePanel().setVisible(true);
+	        
+	        this.frame.revalidate();
+	        this.frame.repaint();
+	    }
+	}
 
 	private void abrirIntercambios() {
 		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);

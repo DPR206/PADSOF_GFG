@@ -1,9 +1,7 @@
-package controller;
+package controller.bannerControllers;
 
-import java.awt.Window;
-
-import javax.swing.SwingUtilities;
-
+import javax.swing.JOptionPane;
+import controller.ManagerProfileC;
 import model.store.Store;
 import view.App;
 import view.ManagerProfile;
@@ -36,14 +34,32 @@ public class BannerManagerC {
         vista.getBtnPerfil().addActionListener(e -> {
         	abrirPerfil();
         });
+        
+        vista.getBtnExit().addActionListener(e -> {
+        	abrirWelcome();
+        });
     }
 	
-	private void abrirPerfil() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana
+	private void abrirWelcome() {
+		
+		int respuesta = JOptionPane.showConfirmDialog(
+		        this.frame, 
+		        "Are you sure you want to log out?", 
+		        "Confirm log out", 
+		        JOptionPane.YES_NO_OPTION, 
+		        JOptionPane.QUESTION_MESSAGE
+		);
+		
+		if (respuesta == JOptionPane.YES_OPTION) {
+	        this.vista.setVisible(false);
+	        this.frame.getWelcomePanel().setVisible(true);
+	        
+	        this.frame.revalidate();
+	        this.frame.repaint();
 	    }
+	}
+	
+	private void abrirPerfil() {
 		
 	    ManagerProfile perfil = new ManagerProfile(vista);
 	    
@@ -54,12 +70,6 @@ public class BannerManagerC {
 
 
 	private void abrirPaginaPrincipal() {
-		
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana
-	    }
 	    
 	    frame.getManagerMainPanel().setVisible(true);;
 	}

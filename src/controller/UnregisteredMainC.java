@@ -1,5 +1,6 @@
 package controller;
 
+import controller.bannerControllers.BannerUnregisteredC;
 import controller.browserControllers.BrowseStoreC;
 import model.store.Store;
 //import model.user.UnregisteredClient;

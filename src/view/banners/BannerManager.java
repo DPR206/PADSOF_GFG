@@ -9,6 +9,7 @@ public class BannerManager extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton home;
 	private JButton btnPerfil;
+	private JButton btnExit;
 
 	/**
 	 * Create the panel.
@@ -63,7 +64,7 @@ public class BannerManager extends JPanel {
 
         //Botón de usuario
         btnPerfil = new JButton("👤");
-        btnPerfil.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 22));
+        btnPerfil.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
 
         //Establecer el mismo color que el banner
         btnPerfil.setBackground(new Color(45, 52, 54)); 
@@ -79,10 +80,23 @@ public class BannerManager extends JPanel {
         //Cambiar el cursor para que el usuario sepa que es clickable
         btnPerfil.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
+        btnExit = new JButton("\u23FB");
+        btnExit.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
+        
+        btnExit.setBackground(new Color(45, 52, 54));
+        btnExit.setForeground(Color.WHITE);
+        
+        btnExit.setBorderPainted(false);
+        btnExit.setContentAreaFilled(false);
+        btnExit.setFocusPainted(false);
+        
+        btnExit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
         JPanel panelAccionesD = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 14));
         panelAccionesD.setOpaque(false); // Para que se vea el fondo del banner
 
         panelAccionesD.add(btnPerfil);
+        panelAccionesD.add(btnExit);
 
         // Añadir componentes al banner
         add(home, BorderLayout.WEST);
@@ -104,4 +118,10 @@ public class BannerManager extends JPanel {
 		return btnPerfil;
 	}
 
+	/**
+	 * @return the btnExit
+	 */
+	public JButton getBtnExit() {
+		return btnExit;
+	}
 }

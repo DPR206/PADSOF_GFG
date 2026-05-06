@@ -58,5 +58,4 @@ public class SimplePack extends Pack implements Serializable {
 	public SimplePack(int id, double price, ArrayList<StoreProduct> products, String picture) {
 		this(id, price, products, null, picture);
 	}
-
 }

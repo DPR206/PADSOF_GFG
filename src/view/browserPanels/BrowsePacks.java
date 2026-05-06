@@ -32,7 +32,7 @@ public class BrowsePacks extends JPanel implements BigView{
     
     public BrowsePacks(App app) throws BadLocationException{
     	this.app = app;
-    	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
+    	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         currentPageNum = 1;
 
         paintEverything();

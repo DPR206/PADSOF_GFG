@@ -10,6 +10,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * It implements the packs
@@ -340,7 +341,12 @@ public class Pack implements Serializable {
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
-
+    
+    public HashSet<Pack> getPacks() {
+    	HashSet<Pack> toRet = new HashSet<>();
+    	return toRet;
+    }
+    
     /**
      * Written information of a pack
      * @return String, information of a pack

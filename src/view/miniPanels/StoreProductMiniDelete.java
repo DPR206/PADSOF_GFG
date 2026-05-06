@@ -22,21 +22,21 @@ import javax.swing.text.StyleConstants;
 
 import model.product.StoreProduct;
 
-public class StoreProductMiniEdit extends JPanel{
-	private final JButton delete = new JButton("Modificar");
+public class StoreProductMiniDelete extends JPanel{
+	private final JButton addToCart = new JButton("ELIMINAR DEL PACK");
     private final StoreProduct storeProduct;
     private final JLabel productImage;
     private final JTextPane productInfo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public StoreProductMiniEdit(StoreProduct product, int index) throws BadLocationException {
+    public StoreProductMiniDelete(StoreProduct product, int index) throws BadLocationException {
         this.storeProduct = product;
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
 
-        delete.setPreferredSize(new Dimension(125, height));
-        delete.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
+        addToCart.setPreferredSize(new Dimension(125, height));
+        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
 
         productImage = getImageLabel(product.getPhoto(), height, height); // DUE: Revisar dimensiones
         productInfo = new JTextPane();
@@ -77,7 +77,7 @@ public class StoreProductMiniEdit extends JPanel{
         this.add(indexNum);
         this.add(productImage);
         this.add(productInfo);
-        this.add(delete);
+        this.add(addToCart);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
@@ -99,6 +99,6 @@ public class StoreProductMiniEdit extends JPanel{
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        delete.addActionListener(c);
+        addToCart.addActionListener(c);
     }
 }

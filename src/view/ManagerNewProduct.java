@@ -17,190 +17,34 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import view.banners.BannerManager;
+
 public class ManagerNewProduct extends JPanel{
-	    private JTextField nombreField;
-	    private JTextField precioField;
-	    private JTextField stockField;
-	    private JTextArea descArea;
-
-	    private JTextField marcaField;
-	    private JTextField materialField;
-	    private JTextField dim1;
-	    private JTextField dim2;
-	    private JTextField dim3;
-
-	    private JButton btnSubir;
-	    private JButton confirmarBtn;
-
-	    private JRadioButton cbMesa;
-	    private JRadioButton cbRol;
-	    private JRadioButton cbCartas;
-	    private JRadioButton cbFiguras;
-	    private JRadioButton cbComics;
-
-	    public ManagerNewProduct() {
-	        super();
-	        setSize(900, 450);
-	      
-
-	        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-	        mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
-
-	        JPanel formPanel = new JPanel(new GridLayout(1, 2, 20, 0));
-
-	        JPanel leftPanel = new JPanel();
-	        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-
-	        btnSubir = new JButton("Subir fichero");
-
-	        nombreField = new JTextField();
-	        precioField = new JTextField();
-	        stockField = new JTextField();
-	        descArea = new JTextArea(4, 20);
-
-	        JScrollPane descScroll = new JScrollPane(descArea);
-
-	        leftPanel.add(btnSubir);
-	        leftPanel.add(Box.createVerticalStrut(10));
-	        leftPanel.add(new JLabel("Nombre producto:"));
-	        leftPanel.add(nombreField);
-	        leftPanel.add(Box.createVerticalStrut(10));
-	        leftPanel.add(new JLabel("Precio:"));
-	        leftPanel.add(precioField);
-	        leftPanel.add(Box.createVerticalStrut(10));
-	        leftPanel.add(new JLabel("Unidades en stock:"));
-	        leftPanel.add(stockField);
-	        leftPanel.add(Box.createVerticalStrut(10));
-	        leftPanel.add(new JLabel("Descripción:"));
-	        leftPanel.add(descScroll);
-
-	        // 🔹 DERECHA
-	        JPanel rightPanel = new JPanel();
-	        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-
-	        cbMesa = new JRadioButton("Juegos de mesa");
-	        cbRol = new JRadioButton("Juegos de rol");
-	        cbCartas = new JRadioButton("Juegos de cartas");
-	        cbFiguras = new JRadioButton("Figuras");
-	        cbComics = new JRadioButton("Cómics");
-
-	        JPanel catPanel = new JPanel(new GridLayout(3, 2));
-	        catPanel.add(cbMesa);
-	        catPanel.add(cbRol);
-	        catPanel.add(cbCartas);
-	        catPanel.add(cbFiguras);
-	        catPanel.add(cbComics);
-
-	        marcaField = new JTextField();
-	        materialField = new JTextField();
-
-	        dim1 = new JTextField(5);
-	        dim2 = new JTextField(5);
-	        dim3 = new JTextField(5);
-
-	        JPanel dimPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	        dimPanel.add(dim1);
-	        dimPanel.add(new JLabel("x"));
-	        dimPanel.add(dim2);
-	        dimPanel.add(new JLabel("x"));
-	        dimPanel.add(dim3);
-
-	        confirmarBtn = new JButton("CONFIRMAR");
-	        
-
-	        rightPanel.add(new JLabel("Categoría (mínimo 1):"));
-	        rightPanel.add(catPanel);
-	        rightPanel.add(Box.createVerticalStrut(10));
-	        rightPanel.add(new JLabel("Marca:"));
-	        rightPanel.add(marcaField);
-	        rightPanel.add(Box.createVerticalStrut(10));
-	        rightPanel.add(new JLabel("Material:"));
-	        rightPanel.add(materialField);
-	        rightPanel.add(Box.createVerticalStrut(10));
-	        rightPanel.add(new JLabel("Dimensiones:"));
-	        rightPanel.add(dimPanel);
-	        rightPanel.add(Box.createVerticalStrut(20));
-	        rightPanel.add(confirmarBtn);
-
-	        formPanel.add(leftPanel);
-	        formPanel.add(rightPanel);
-
-	        mainPanel.add(formPanel, BorderLayout.CENTER);
-	        add(mainPanel);
-	    }
-
-	    
-	    public void setController(ActionListener c) {
-	        btnSubir.addActionListener(c);
-	        confirmarBtn.addActionListener(c);
-	        cbMesa.addActionListener(c);
-	        cbRol.addActionListener(c);
-	        cbCartas.addActionListener(c);
-	        cbFiguras.addActionListener(c);
-	        cbComics.addActionListener(c);
-	        
-	        nombreField.addActionListener(c);
-	        precioField.addActionListener(c);
-	        stockField.addActionListener(c);
-	        marcaField.addActionListener(c);
-	        materialField.addActionListener(c);
-	        dim1.addActionListener(c);
-	        dim2.addActionListener(c);
-	        dim3.addActionListener(c);
-	    }
-	    public JTextField getNombreField() {
-	        return nombreField;
-	    }
-
-	    public JTextField getPrecioField() {
-	        return precioField;
-	    }
-
-	    public JTextField getStockField() {
-	        return stockField;
-	    }
-
-	    public JTextArea getDescArea() {
-	        return descArea;
-	    }
-
-	    public JTextField getMarcaField() {
-	        return marcaField;
-	    }
-
-	    public JTextField getMaterialField() {
-	        return materialField;
-	    }
-
-	    public JTextField getDim1() {
-	        return dim1;
-	    }
-
-	    public JTextField getDim2() {
-	        return dim2;
-	    }
-
-	    public JTextField getDim3() {
-	        return dim3;
-	    }
-	    
-	    public JRadioButton getCbMesa() {
-	        return cbMesa;
-	    }
-
-	    public JRadioButton getCbRol() {
-	        return cbRol;
-	    }
-
-	    public JRadioButton getCbCartas() {
-	        return cbCartas;
-	    }
-
-	    public JRadioButton getCbFiguras() {
-	        return cbFiguras;
-	    }
-
-	    public JRadioButton getCbComics() {
-	        return cbComics;
-	    }
+	   private JButton comics = new JButton("AÑADIR UN CÓMIC");
+	   private JButton figuras = new JButton("AÑADIR UNA FIGURA");
+	   private JButton juegos = new JButton("AÑADIR UN JUEGO");
+	   private BannerManager banner = new BannerManager();
+	   
+	   public ManagerNewProduct() {
+		   super();
+		   
+		   this.setLayout(new BorderLayout());
+		   
+		   JPanel cosoDeBotones = new JPanel();
+	    	
+	    	//añadimos los botoncitos
+	    	cosoDeBotones.setLayout(new GridLayout(3, 1));
+	    	cosoDeBotones.add(comics);
+	    	cosoDeBotones.add(figuras);
+	    	cosoDeBotones.add(juegos);
+	    	
+	    	this.add(cosoDeBotones, BorderLayout.CENTER);
+	    	this.add(banner, BorderLayout.NORTH);
+	   }
+	   
+	   public void setController(ActionListener c) {
+		   this.comics.addActionListener(c);
+		   this.figuras.addActionListener(c);
+		   this.juegos.addActionListener(c);
+	   }
 }

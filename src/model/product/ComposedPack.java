@@ -64,6 +64,7 @@ public class ComposedPack extends Pack implements Serializable {
      *
      * @return the packs, the packs it contains
      */
+    @Override
     public HashSet<Pack> getPacks() {
     	return this.packs;
     }

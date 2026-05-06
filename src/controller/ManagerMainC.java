@@ -6,6 +6,7 @@ import view.ManagerGestionarEmpleados;
 import view.ManagerGestionarPacks;
 import view.ManagerGestionarProductos;
 import view.ManagerMainP;
+import view.ManagerNewProduct;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ public class ManagerMainC implements ActionListener {
     private final ManagerGestionarEmpleados mge; 
     private final ManagerGestionarPacks mgp;
     private final ManagerGestionarProductos mgproduct;
+    private final ManagerNewProduct mnproduct;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerMainC(App frame, Store model) {
@@ -24,8 +26,13 @@ public class ManagerMainC implements ActionListener {
         this.view = frame.getManagerMainPanel();
         this.model = model;
         this.mge = new ManagerGestionarEmpleados(this.frame);
+        this.mge.setVisible(false);
         this.mgp = new ManagerGestionarPacks(this.frame);
+        this.mgp.setVisible(false);
         this.mgproduct = new ManagerGestionarProductos(this.frame);
+        this.mgproduct.setVisible(false);
+        this.mnproduct = new ManagerNewProduct();
+        this.mnproduct.setVisible(false);
     }
 
     @Override
@@ -34,22 +41,22 @@ public class ManagerMainC implements ActionListener {
         	
         }
         else if(e.getActionCommand().equals("Productos nuevos")) {
-        	
+        	this.mgproduct.setVisible(true);
         }
         else if(e.getActionCommand().equals("Añadir productos")) {
-        	
+        	this.mnproduct.setVisible(true);
         }
         else if(e.getActionCommand().equals("Empleados")) {
-        	
+        	this.mge.setVisible(true);
         }
         else if(e.getActionCommand().equals("Estadísticas")) {
-        	
+        	//DUE
         }
         else if(e.getActionCommand().equals("Descuentos")) {
-        	
+        	//DUE
         }
         else if(e.getActionCommand().equals("Parámetros")) {
-        	
+        	//DUE
         }
     }
 }

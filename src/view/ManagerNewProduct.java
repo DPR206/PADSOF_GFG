@@ -3,17 +3,13 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -21,8 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class ManagerNewProduct extends JPanel{
-
-	    // 🔹 ATRIBUTOS
 	    private JTextField nombreField;
 	    private JTextField precioField;
 	    private JTextField stockField;
@@ -138,14 +132,12 @@ public class ManagerNewProduct extends JPanel{
 	    public void setController(ActionListener c) {
 	        btnSubir.addActionListener(c);
 	        confirmarBtn.addActionListener(c);
-
-	        // Opcional (si quieres que el controlador escuche más eventos)
 	        cbMesa.addActionListener(c);
 	        cbRol.addActionListener(c);
 	        cbCartas.addActionListener(c);
 	        cbFiguras.addActionListener(c);
 	        cbComics.addActionListener(c);
-
+	        
 	        nombreField.addActionListener(c);
 	        precioField.addActionListener(c);
 	        stockField.addActionListener(c);

@@ -1,11 +1,11 @@
 package view;
 
 import controller.*;
-import controller.browserControllers.BrowseForOffersC;
-import model.product.*;
+import model.product.Pack;
+import model.product.StoreProduct;
 import model.store.Store;
-import model.user.*;
-import view.browserPanels.BrowseSecondHandProductsP;
+import model.user.UnregisteredClient;
+import model.user.User;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -88,6 +88,7 @@ public class App extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.BOTH;
 
         container.add(loginPanel, gbc);
         loginPanel.setVisible(false);
@@ -181,6 +182,14 @@ public class App extends JFrame {
         return managerMainPanel;
     }
 
+    public List<Pack> getPackList() {
+        return this.packs;
+    }
+
+    public void setPackList(List<Pack> packs) {
+        this.packs = packs;
+    }
+
     public List<StoreProduct> getProducts() {
         return this.products;
     }
@@ -215,13 +224,5 @@ public class App extends JFrame {
 
     public void setsProductList(List<StoreProduct> products) {
         this.products = products;
-    }
-    
-    public List<Pack> getPackList(){
-    	return this.packs;
-    }
-    
-    public void setPackList(List<Pack> packs) {
-    	this.packs = packs;
     }
 }

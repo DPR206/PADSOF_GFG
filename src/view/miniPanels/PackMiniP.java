@@ -1,8 +1,7 @@
 package view.miniPanels;
 
 import static main.Main.brownColour;
-import static view.ImageAdder.getImageLabel;
-import static view.ImageAdder.getScaledImage;
+import static view.ImageAdder.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,30 +26,30 @@ public class PackMiniP extends JPanel{
 	private final JButton addToCart = new JButton("Add to Cart");
     private final Pack p;
     private final JTextPane packInfo;
-    private final JLabel packImage;
-    
+    private final JPanel packImage;
+
     public PackMiniP(Pack p, int index) throws BadLocationException {
     	super();
-    	
+
     	this.p = p;
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
-        
+
         addToCart.setPreferredSize(new Dimension(125, height));
-        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
-    
-        this.packImage = getImageLabel(p.getPhoto(), height, height);
+        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
+
+        this.packImage = getPackImagePanel(p, height, height);//getImageLabel(p.getPhoto(), height, height);
         this.packInfo = new JTextPane();
         this.packInfo.setEditable(false);
         this.packInfo.setFocusable(false);
-        
+
         SimpleAttributeSet attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
         StyleConstants.setBold(attributes, true);
         packInfo.setCharacterAttributes(attributes, true);
         packInfo.setText(p.getId() + "\n");
-        
+
         attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
 
@@ -69,7 +68,7 @@ public class PackMiniP extends JPanel{
         indexNum.setCharacterAttributes(attributes2, true);
         indexNum.setText("\n" + index + ".");
         indexNum.setPreferredSize(new Dimension(25, height));
-        
+
         this.add(indexNum);
         this.add(packImage);
         this.add(packInfo);
@@ -77,8 +76,8 @@ public class PackMiniP extends JPanel{
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
-    
-    public JLabel getPackImage() {
+
+    public JPanel getPackImage() {
         return packImage;
     }
 

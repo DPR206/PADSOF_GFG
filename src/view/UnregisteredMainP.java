@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UnregisteredMainP extends JPanel {
     private static final long serialVersionUID = 1L;
-	private JPanel banner;
+	private BannerUnregistered banner;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
     private JScrollPane scrolling;
@@ -29,7 +29,6 @@ public class UnregisteredMainP extends JPanel {
     public UnregisteredMainP(UnregisteredClient mainU, App app) {
         super();
         this.mainU = mainU;
-        this.banner = new JPanel();
         this.productSearch = new JPanel();
         this.productSearch.setLayout(new BorderLayout());
 
@@ -73,6 +72,10 @@ public class UnregisteredMainP extends JPanel {
 
     public SearchPanel getFilterPanel() {
         return this.filterP;
+    }
+    
+    public BannerUnregistered getBanner() {
+    	return this.banner;
     }
 
     public void setController(ActionListener e) {

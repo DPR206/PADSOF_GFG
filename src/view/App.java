@@ -1,17 +1,13 @@
 package view;
 
 import controller.*;
-import controller.browserControllers.BrowseForOffersC;
 import model.product.*;
 import model.store.Store;
 import model.user.*;
-import view.browserPanels.BrowseSecondHandProductsP;
-
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,7 +17,8 @@ import java.util.List;
  * @version 1.0
  */
 public class App extends JFrame {
-    private final LoginP loginPanel;
+    private static final long serialVersionUID = 1L;
+	private final LoginP loginPanel;
     private final SignupP signupPanel;
     private final UnregisteredMainP unregisteredMainPanel;
     private final RegisteredMainP registeredMainPanel;
@@ -87,7 +84,10 @@ public class App extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
+        
+        gbc.weightx = 1.0; 
+        gbc.weighty = 1.0; 
+        gbc.fill = GridBagConstraints.BOTH;
 
         container.add(loginPanel, gbc);
         loginPanel.setVisible(false);
@@ -96,8 +96,10 @@ public class App extends JFrame {
 
         container.add(unregisteredMainPanel, gbc);
         unregisteredMainPanel.setVisible(false);
+        unregisteredMainPanel.setOpaque(false);
         container.add(registeredMainPanel, gbc);
         registeredMainPanel.setVisible(false);
+        registeredMainPanel.setOpaque(false);
         container.add(employeeMainPanel, gbc);
         employeeMainPanel.setVisible(false);
         managerMainPanel.setVisible(false);
@@ -105,6 +107,7 @@ public class App extends JFrame {
         welcomePanel.setVisible(false);
         container.add(welcomePanel, gbc);
         welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
+        welcomePanel.setOpaque(false);
         /*BrowseForOffersP panel = new BrowseForOffersP(this);
         panel.setController(new BrowseForOffersC(this, model, panel));
 
@@ -144,7 +147,8 @@ public class App extends JFrame {
     }
 
     public class ImagePanel extends JPanel {
-        private Image backgroundImage;
+        private static final long serialVersionUID = 1L;
+		private Image backgroundImage;
 
         /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
         public ImagePanel(String filePath) {

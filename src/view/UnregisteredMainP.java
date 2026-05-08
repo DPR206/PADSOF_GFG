@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UnregisteredMainP extends JPanel {
     private static final long serialVersionUID = 1L;
-	private BannerUnregistered banner;
+    private BannerUnregistered banner;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
     private JScrollPane scrolling;
@@ -24,6 +24,7 @@ public class UnregisteredMainP extends JPanel {
     private JPanel productSearch;
     private List<StoreProduct> p;
     private UnregisteredClient mainU;
+    private App app;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public UnregisteredMainP(UnregisteredClient mainU, App app) {
@@ -31,8 +32,15 @@ public class UnregisteredMainP extends JPanel {
         this.mainU = mainU;
         this.productSearch = new JPanel();
         this.productSearch.setLayout(new BorderLayout());
+        this.app = app;
 
         this.filterP.setVisible(false);
+
+        repaintALL();
+    }
+
+    public void repaintALL() {
+        this.removeAll();
 
         List<StoreProduct> products = Store.getInstance().getStoreProductList();
         this.p = products;
@@ -46,7 +54,7 @@ public class UnregisteredMainP extends JPanel {
         this.p = this.mainU.searchStoreProduct();
 
         this.setLayout(new BorderLayout());
-        
+
         banner = new BannerUnregistered();
         add(banner, BorderLayout.NORTH);
 
@@ -63,19 +71,22 @@ public class UnregisteredMainP extends JPanel {
         bottom.add(this.searching, "Search");
         bottom.add(this.filterP, "Search");
         others.add(bottom, BorderLayout.SOUTH);
+
+        revalidate();
+        repaint();
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    public BannerUnregistered getBanner() {
+        return this.banner;
+    }
+
     public BrowseStoreP getBrowsePanel() {
         return this.searching;
     }
 
     public SearchPanel getFilterPanel() {
         return this.filterP;
-    }
-    
-    public BannerUnregistered getBanner() {
-    	return this.banner;
     }
 
     public void setController(ActionListener e) {

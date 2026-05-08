@@ -7,7 +7,6 @@ import view.App;
 import view.WelcomeP;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,16 +39,15 @@ public class WelcomeC extends MainLoopSelector implements ActionListener {
         switch (e.getActionCommand()) {
             case "Browse as unregistered client" -> {
                 this.frame.setUnregisteredClient(new UnregisteredClient(false));
-                this.showBrowseAsUnregistered();
+                frame.changeVisibleCard("UNREGISTERED_MAIN");
             }
-            case "Log in" -> this.showLogin();
-            case "Sign up" -> this.showSignUp();
+            case "Log in" -> frame.changeVisibleCard("LOGIN");
+            case "Sign up" -> frame.changeVisibleCard("SIGNUP");
             case "Manager Access" -> {
                 boolean stop = false;
                 while (!stop) {
                     String password = JOptionPane.showInputDialog("Please enter the password: ");
                     if (password.equals("password")) {
-                        this.view.setVisible(false);
                         this.frame.changeCurrentUser(Manager.getInstance());
                         super.loopSelector();
                     } else {
@@ -61,29 +59,5 @@ public class WelcomeC extends MainLoopSelector implements ActionListener {
                 }
             }
         }
-    }
-
-    /**
-     * It shows the unregistered client's main panel
-     */
-    private void showBrowseAsUnregistered() {
-        this.view.setVisible(false);
-        this.frame.getUnregisteredMainPanel().setVisible(true);
-    }
-
-    /**
-     * It shows the login page
-     */
-    private void showLogin() {
-        this.view.setVisible(false);
-        this.frame.getLoginPanel().setVisible(true);
-    }
-
-    /**
-     * It shows the signup page
-     */
-    private void showSignUp() {
-        this.view.setVisible(false);
-        this.frame.getSignupPanel().setVisible(true);
     }
 }

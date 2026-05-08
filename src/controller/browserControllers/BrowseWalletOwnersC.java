@@ -39,8 +39,7 @@ public class BrowseWalletOwnersC implements ActionListener, BigController {
 
     public void updateControllers() {
         for (UserMiniP miniPanel : view.getUserPanels()) {
-            miniPanel.setController(
-                    new WalletOwnerMiniC(frame, model, miniPanel, this, view, deleteThis, deleteThisToo));
+            miniPanel.setController(new WalletOwnerMiniC(frame, model, miniPanel));
         }
     }
 

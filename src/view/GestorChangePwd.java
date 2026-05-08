@@ -11,6 +11,7 @@ import view.banners.BannerManager;
 import javax.swing.*;
 
 public class GestorChangePwd extends JPanel{
+	private static final long serialVersionUID = 1L;
 	private String username;
 	//private JPanel title;
 	private JPanel main;

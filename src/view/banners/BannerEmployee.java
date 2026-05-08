@@ -152,7 +152,7 @@ public class BannerEmployee extends JPanel {
 
         panelAccionesD.add(btnNots);
         panelAccionesD.add(btnPerfil);
-        panelAccionesD.add(panelAccionesD);
+        panelAccionesD.add(btnExit);
         
         JPanel panelAccionesI = new JPanel(new FlowLayout(FlowLayout.LEFT, 1, 10));
         panelAccionesI.setOpaque(false); // Para que se vea el fondo del banner

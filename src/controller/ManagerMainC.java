@@ -26,7 +26,7 @@ public class ManagerMainC implements ActionListener {
         this.view = frame.getManagerMainPanel();
         this.model = model;
         this.mge = new ManagerGestionarEmpleados(this.frame);
-        this.mge.setVisible(false);
+        this.frame.addCard
         this.mgp = new ManagerGestionarPacks(this.frame);
         this.mgp.setVisible(false);
         this.mgproduct = new ManagerGestionarProductos(this.frame);

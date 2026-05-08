@@ -74,4 +74,46 @@ public class RegisteredChangePwd extends JDialog {
         
         getContentPane().add(information, BorderLayout.CENTER);
 	}
+
+
+	/**
+	 * @return the nom
+	 */
+	public JLabel getNom() {
+		return nom;
+	}
+
+
+	/**
+	 * @param nom the nom to set
+	 */
+	public void setNom(String nom) {
+		this.nom.setText(nom);
+	}
+
+
+	/**
+	 * @return the btnCambiar
+	 */
+	public JButton getBtnCambiar() {
+		return btnCambiar;
+	}
+
+
+	/**
+	 * @return the pwd1
+	 */
+	public String getPwd1() {
+		return new String(pwd1.getPassword());
+	}
+
+
+	/**
+	 * @return the pwd2
+	 */
+	public String getPwd2() {
+		return new String(pwd2.getPassword());
+	}
+	
+	
 }

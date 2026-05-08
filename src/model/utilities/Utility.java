@@ -86,7 +86,7 @@ public class Utility implements Serializable {
      * @return true if the password is safe, false if else
      * @throws PasswordNotValid the password isn't secure
      */
-    public boolean securePassword(String psswd) throws PasswordNotValid, InvalidDni {
+    public boolean securePassword(String psswd) throws PasswordNotValid {
         int upper = 0;
         int lower = 0;
         int numbers = 0;

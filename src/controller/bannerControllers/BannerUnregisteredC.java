@@ -5,11 +5,10 @@ import java.awt.Window;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import controller.CarritoC;
 import model.store.Store;
 import model.user.*;
-import view.App;
-import view.SignupP;
-import view.UnregisteredMainP;
+import view.*;
 import view.banners.BannerUnregistered;
 
 public class BannerUnregisteredC {
@@ -100,7 +99,7 @@ public class BannerUnregisteredC {
         CarritoP carritoVista = new CarritoP();
 
         // 2. Crear el controlador del carrito pasando el usuario actual
-        new CarritoC(carritoVista, user);
+        //new CarritoC(carritoVista, user);
 
         // 3. Mostrar la ventana
         carritoVista.setVisible(true);

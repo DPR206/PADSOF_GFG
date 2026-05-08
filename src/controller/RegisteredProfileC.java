@@ -1,6 +1,6 @@
 package controller;
 
-import java.awt.Window;
+import java.awt.Frame;
 
 import javax.swing.SwingUtilities;
 
@@ -43,13 +43,10 @@ public class RegisteredProfileC {
 
 
 	private void cambiarPwd() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
+		
+		Frame parentFrame = (Frame) SwingUtilities.getWindowAncestor(vista);
 
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose();
-	    }
-
-	    RegisteredChangePwd pagPwd = new RegisteredChangePwd(user, vista.getBanner());
+	    RegisteredChangePwd pagPwd = new RegisteredChangePwd(parentFrame);
 
 	    new RegisteredChangePwdC(pagPwd, user);
 

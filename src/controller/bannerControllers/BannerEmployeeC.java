@@ -8,9 +8,7 @@ import javax.swing.SwingUtilities;
 import controller.EmployeeProfileC;
 import controller.NotificacionesC;
 import model.user.Employee;
-import view.App;
-import view.EmployeeProfile;
-import view.NotificacionP;
+import view.*;
 import view.banners.BannerEmployee;
 
 public class BannerEmployeeC {
@@ -102,11 +100,6 @@ public class BannerEmployeeC {
 	}
 
 	private void abrirIntercambios() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); 
-	    }
 	    
 	    EmloyeeExchange pagExchange = new EmployeeExchange();
 	    new EmployeeExchangeC();
@@ -116,11 +109,6 @@ public class BannerEmployeeC {
 	}
 
 	private void abrirPedidos() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); 
-	    }
 	    
 	    EmloyeeOrder pagOrder = new EmployeeOrder();
 	    new EmployeeOrderC();
@@ -130,11 +118,6 @@ public class BannerEmployeeC {
 	}
 
 	private void abrirTienda() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); 
-	    }
 		
 	    EmloyeeTienda pagTienda = new EmployeeTienda();
 	    new EmployeeTiendaC();
@@ -143,11 +126,6 @@ public class BannerEmployeeC {
 	}
 
 	private void abrirNots() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); 
-	    }
 		
 	    //NotificacionP pagNots = new NotificacionP(new BannerRegistered());
 	    NotificacionP pagNots = new NotificacionP(vista);
@@ -158,11 +136,6 @@ public class BannerEmployeeC {
 	}
 
 	private void abrirPerfil() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); 
-	    }
 		
 	    EmployeeProfile profile = new EmployeeProfile(vista);
 	    
@@ -174,11 +147,6 @@ public class BannerEmployeeC {
 
 	private void abrirPaginaPrincipal() {
 		
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana 
-	    }
 	    
 	    frame.getEmployeeMainPanel().setVisible(true);
 	}

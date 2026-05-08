@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author Ana O.R.
  * @version 1.0
  */
-public class WelcomeP extends JPanel {
+public class WelcomeP extends ControllableJPanel {
     private final JButton browseButton;
     private final JButton loginButton;
     private final JButton signupButton;

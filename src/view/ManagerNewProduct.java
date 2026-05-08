@@ -1,21 +1,12 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import view.banners.BannerManager;
 
@@ -24,6 +15,14 @@ public class ManagerNewProduct extends JPanel{
 	   private JButton figuras = new JButton("AÑADIR UNA FIGURA");
 	   private JButton juegos = new JButton("AÑADIR UN JUEGO");
 	   private BannerManager banner = new BannerManager();
+	   
+	   private CardLayout layout = new CardLayout();
+	   private JPanel cards = new JPanel(layout);
+
+	   public static final String PANEL_MENU = "MENU";
+	   public static final String PANEL_COMIC = "COMIC";
+	   public static final String PANEL_FIGURA = "FIGURA";
+	   public static final String PANEL_JUEGO = "JUEGO";
 	   
 	   public ManagerNewProduct() {
 		   super();
@@ -38,7 +37,9 @@ public class ManagerNewProduct extends JPanel{
 	    	cosoDeBotones.add(figuras);
 	    	cosoDeBotones.add(juegos);
 	    	
-	    	this.add(cosoDeBotones, BorderLayout.CENTER);
+	    	cards.add(cosoDeBotones, PANEL_MENU);
+	    	
+	    	this.add(cards, BorderLayout.CENTER);
 	    	this.add(banner, BorderLayout.NORTH);
 	   }
 	   
@@ -46,5 +47,13 @@ public class ManagerNewProduct extends JPanel{
 		   this.comics.addActionListener(c);
 		   this.figuras.addActionListener(c);
 		   this.juegos.addActionListener(c);
+	   }
+	   
+	   public void showPanel(String name) {
+	       layout.show(cards, name);
+	   }
+	   
+	   public JPanel getCards() {
+	        return cards;
 	   }
 }

@@ -64,9 +64,9 @@ public class BrowseStoreP extends JPanel implements BigView {
             index++;
         }
 
-        if (index < 5) {
+        if (index < 9) {
             JLabel fillVoid = new JLabel();
-            fillVoid.setPreferredSize(new Dimension(350, 70 * (6 - index)));
+            fillVoid.setPreferredSize(new Dimension(350, 70 * (10 - index)));
             this.add(fillVoid);
         }
 

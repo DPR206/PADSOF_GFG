@@ -1,11 +1,9 @@
 package view;
 
 import controller.*;
-import model.product.*;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
-import model.user.*;
 import model.user.UnregisteredClient;
 import model.user.User;
 
@@ -23,7 +21,7 @@ import java.util.List;
  */
 public class App extends JFrame {
     private static final long serialVersionUID = 1L;
-	private final LoginP loginPanel;
+    private final LoginP loginPanel;
     private final SignupP signupPanel;
     private final UnregisteredMainP unregisteredMainPanel;
     private final RegisteredMainP registeredMainPanel;
@@ -33,6 +31,7 @@ public class App extends JFrame {
     private final SearchPanel searchPanel;
     private final Container container;
     private final GridBagConstraints gbc;
+    JPanel cards;
     //private final BrowseStoreP browseStorePanel;
     // Aquí se declaran todos los paneles de vista como atributos
     private User mainUser = new UnregisteredClient(true);
@@ -45,13 +44,13 @@ public class App extends JFrame {
         this.setIconImage(new ImageIcon(".\\resources\\app\\logo.png").getImage());
 
         /* Views */
+        welcomePanel = new WelcomeP();
         loginPanel = new LoginP();
         signupPanel = new SignupP();
         unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser, this);
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
         managerMainPanel = new ManagerMainP();
-        welcomePanel = new WelcomeP();
         searchPanel = new SearchPanel();
         //browseStorePanel = new BrowseStoreP(this);
 
@@ -59,14 +58,13 @@ public class App extends JFrame {
         Store model = Store.getInstance();
 
         /* Controllers */
+        WelcomeC welcomeController = new WelcomeC(this, model);
         LoginC loginController = new LoginC(this, model);
         SignupC signupController = new SignupC(this, model);
         UnregisteredMainC unregisteredMainController = new UnregisteredMainC(this, model);
         RegisteredMainC registeredMainController = new RegisteredMainC(this, model);
         EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
         ManagerMainC managerMainController = new ManagerMainC(this, model);
-        WelcomeC welcomeController = new WelcomeC(this, model);
-        //BrowseStoreC browseStoreController = new BrowseStoreC(this, model);
 
         /* Configure controllers' views */
         loginPanel.setController(loginController);
@@ -75,8 +73,6 @@ public class App extends JFrame {
         registeredMainPanel.setController(registeredMainController);
         employeeMainPanel.setController(employeeMainController);
         managerMainPanel.setController(managerMainController);
-        welcomePanel.setController(welcomeController);
-        //browseStorePanel.setController(browseStoreController);
 
         /* Add views to main window */
         ImagePanel bgPanel = new ImagePanel(".\\resources\\app\\background.png");
@@ -84,7 +80,7 @@ public class App extends JFrame {
         this.setContentPane(bgPanel);
 
         container = this.getContentPane();
-        container.setLayout(new GridBagLayout());
+        container.setLayout(new BorderLayout());
         //container.setBackground(new Color(246, 243, 238)); // Beige
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -94,31 +90,23 @@ public class App extends JFrame {
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
 
-        container.add(loginPanel, gbc);
-        loginPanel.setVisible(false);
-        container.add(signupPanel, gbc);
-        signupPanel.setVisible(false);
+        cards = new JPanel(new CardLayout());
+        cards.setOpaque(false);
+        JPanel banner = new JPanel();
+        banner.setOpaque(false);
+        container.add(cards, BorderLayout.CENTER);
+        container.add(banner, BorderLayout.NORTH);
 
-        container.add(unregisteredMainPanel, gbc);
-        unregisteredMainPanel.setVisible(false);
-        unregisteredMainPanel.setOpaque(false);
-        container.add(registeredMainPanel, gbc);
-        registeredMainPanel.setVisible(false);
-        registeredMainPanel.setOpaque(false);
-        container.add(employeeMainPanel, gbc);
-        employeeMainPanel.setVisible(false);
-        managerMainPanel.setVisible(false);
-        container.add(managerMainPanel, gbc);
-        welcomePanel.setVisible(false);
-        container.add(welcomePanel, gbc);
+        addCard(welcomePanel, "WELCOME", welcomeController);
+        addCard(loginPanel, "LOGIN");
+        addCard(signupPanel, "SIGNUP");
+        addCard(unregisteredMainPanel, "UNREGISTERED_MAIN");
+        addCard(registeredMainPanel, "REGISTERED_MAIN");
+        addCard(employeeMainPanel, "EMPLOYEE_MAIN");
+        addCard(managerMainPanel, "MANAGER_MAIN");
+
+        /* Main panel */
         welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
-        welcomePanel.setOpaque(false);
-        /*BrowseForOffersP panel = new BrowseForOffersP(this);
-        panel.setController(new BrowseForOffersC(this, model, panel));
-
-        container.add(panel, gbc);
-        panel.setVisible(true);*/
-
 
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -143,6 +131,24 @@ public class App extends JFrame {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
+    public void changeVisibleCard(String cardName) {
+        CardLayout cl = (CardLayout) (cards.getLayout());
+        cl.show(cards, cardName);
+    }
+
+    public void addCard(JPanel newView, String constraints) {
+        cards.add(newView, constraints);
+        newView.setVisible(false);
+        newView.setOpaque(false);
+    }
+
+    public void addCard(ControllableJPanel newView, String constraints, ActionListener controller) {
+        newView.setController(controller);
+        cards.add(newView, constraints);
+        newView.setVisible(false);
+        newView.setOpaque(false);
+    }
+
     public void changeCurrentUser(User user) {
         this.mainUser = user;
     }
@@ -153,7 +159,7 @@ public class App extends JFrame {
 
     public class ImagePanel extends JPanel {
         private static final long serialVersionUID = 1L;
-		private Image backgroundImage;
+        private Image backgroundImage;
 
         /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
         public ImagePanel(String filePath) {
@@ -190,6 +196,14 @@ public class App extends JFrame {
         return managerMainPanel;
     }
 
+    public List<Pack> getPackList() {
+        return this.packs;
+    }
+
+    public void setPackList(List<Pack> packs) {
+        this.packs = packs;
+    }
+
     public List<StoreProduct> getProducts() {
         return this.products;
     }
@@ -224,13 +238,5 @@ public class App extends JFrame {
 
     public void setsProductList(List<StoreProduct> products) {
         this.products = products;
-    }
-
-    public List<Pack> getPackList(){
-    	return this.packs;
-    }
-
-    public void setPackList(List<Pack> packs) {
-    	this.packs = packs;
     }
 }

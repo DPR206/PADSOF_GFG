@@ -4,6 +4,7 @@ import model.product.SecondHandProduct;
 import model.store.BetterPager;
 import model.user.RegisteredClient;
 import view.App;
+import view.ControllableJPanel;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static main.Main.brownColour;
 
-public class BrowseSomeonesWalletP extends JPanel implements BigView {
+public class BrowseSomeonesWalletP extends ControllableJPanel implements BigView {
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");

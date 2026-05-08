@@ -25,18 +25,21 @@ public class UnregisteredMainC implements ActionListener {
         this.model = model;
 
         new BannerUnregisteredC(this.view.getBanner(), this.frame);
-        
+
         updateControllers();
     }
 
     public void updateControllers() {
         view.getBrowsePanel().setController(new BrowseStoreC(frame, model, view.getBrowsePanel()));
-        view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));   
-        
+        view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("Browse Wallet")) {
+            view.setVisible(false);
+        }
         if (e.getActionCommand().equals("Filters")) {
             view.getBrowsePanel().setVisible(false);
             view.getFilterPanel().setVisible(true);

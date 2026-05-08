@@ -27,6 +27,8 @@ public class PackMiniP extends JPanel{
     private final Pack p;
     private final JTextPane packInfo;
     private final JPanel packImage;
+    
+    
 
     public PackMiniP(Pack p, int index) throws BadLocationException {
     	super();

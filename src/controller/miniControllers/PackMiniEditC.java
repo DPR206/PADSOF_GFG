@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import controller.browserControllers.BigController;
 import model.store.Store;
 import view.App;
+import view.SPManageIndividualPack;
 import view.browserPanels.BigView;
 import view.miniPanels.PackMiniEdit;
 import view.miniPanels.PackMiniP;
@@ -21,15 +22,16 @@ public class PackMiniEditC implements ActionListener{
 	private PackMiniEdit view;
 	private BigController bigController;
 	private BigView bigView;
+	private SPManageIndividualPack spm;
 	
-	 public PackMiniEditC(App frame, Store model, PackMiniEdit view, BigController bigController,
-	            BigView bigView) 
+	public PackMiniEditC(App frame, Store model, PackMiniEdit view, BigController bigController, BigView bigView) 
 	    {
 	    	this.frame = frame;
 	    	this.view = view;
 	    	this.model = model;
 	    	this.bigController = bigController;
 	    	this.bigView = bigView;
+	    	this.spm = new SPManageIndividualPack(this.view.getPack());
 
 	    	view.getPackImage().addMouseListener(new MouseAdapter() {
 	    		public void mouseClicked(MouseEvent e) {
@@ -42,7 +44,7 @@ public class PackMiniEditC implements ActionListener{
 	    	view.getPackInfo().addMouseListener(new MouseAdapter() {
 	    		public void mouseClicked(MouseEvent e) {
 	    			if (e.getClickCount() == 2) {
-	    				JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+	    				JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del pack");
 	    			}
 	    		}
 	    	});

@@ -20,7 +20,6 @@ public class SignupP extends JPanel {
     private final JButton signup;
     private final JRadioButton idDniType;
     private final JRadioButton idNieType;
-    private JPanel banner;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

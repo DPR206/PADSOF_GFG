@@ -22,7 +22,8 @@ import view.miniPanels.PackMiniEdit;
 import view.miniPanels.PackMiniP;
 
 public class ManagerGestionarPacks extends JPanel{
-
+	
+	
 	private BannerManager banner = new BannerManager();
 	private JButton newPack = new JButton("Crear nuevo pack");
 	

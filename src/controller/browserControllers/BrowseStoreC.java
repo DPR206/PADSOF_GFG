@@ -21,6 +21,9 @@ public class BrowseStoreC extends MixedBrowserController<Pack, StoreProduct> {
      */
     public BrowseStoreC(App frame, Store model, BrowseStoreP view) {
         super(frame, view, model);
+        if (view == null){
+            System.out.println("AAAAAAAAAa");
+        }
     }
 
     @Override

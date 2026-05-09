@@ -1,7 +1,6 @@
 package view.clientPanels;
 
 import model.product.StoreProduct;
-import model.store.Store;
 import model.user.UnregisteredClient;
 import view.App;
 import view.browserPanels.BrowseStoreP;
@@ -18,57 +17,36 @@ public class UnregisteredMainP extends JPanel {
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
     private SearchPanel filterP = new SearchPanel();
-    private BrowseStoreP searching;
+    private BrowseStoreP searchingP;
     private JPanel productSearch;
     private List<StoreProduct> p;
-    private UnregisteredClient mainU;
     private App app;
+    private JPanel others;
+    private CardLayout cardLayout = new CardLayout();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public UnregisteredMainP(UnregisteredClient mainU, App app) {
-        super();
-        this.mainU = mainU;
-        this.productSearch = new JPanel();
-        this.productSearch.setLayout(new BorderLayout());
-        this.app = app;
+    public UnregisteredMainP(UnregisteredClient mainU, App app) throws BadLocationException {
+        searchingP = new BrowseStoreP(app);
 
-        this.filterP.setVisible(false);
-
-        repaintALL();
+        configurarEstructura();
     }
 
-    public void repaintALL() {
-        this.removeAll();
-
-        List<StoreProduct> products = Store.getInstance().getStoreProductList();
-        this.p = products;
-        try {
-            this.searching = new BrowseStoreP(app);
-            this.searching.setVisible(false);
-        } catch (BadLocationException e) {
-            e.printStackTrace();
-        }
-        Store s = Store.getInstance();
-        this.p = this.mainU.searchStoreProduct();
-
+    private void configurarEstructura() {
         this.setLayout(new BorderLayout());
 
-        JPanel others = new JPanel(new BorderLayout());
+        others = new JPanel(new BorderLayout());
 
         JPanel botones = new JPanel(new GridLayout(0, 2));
         botones.add(this.search);
         botones.add(this.filters);
+
         others.add(botones, BorderLayout.NORTH);
 
-        this.add(others, BorderLayout.CENTER);
+        bottom = new JPanel(cardLayout);
 
-        bottom = new JPanel(new CardLayout());
-        bottom.add(this.searching, "Search");
-        bottom.add(this.filterP, "Filters");
         others.add(bottom, BorderLayout.SOUTH);
 
-        revalidate();
-        repaint();
+        this.add(others, BorderLayout.CENTER);
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
@@ -80,8 +58,24 @@ public class UnregisteredMainP extends JPanel {
         this.app = newApp;
     }
 
+    public JPanel getBottom() {
+        return bottom;
+    }
+
+    public void setBottom(JPanel newBottom) {
+        this.bottom = newBottom;
+    }
+
     public BrowseStoreP getBrowsePanel() {
-        return this.searching;
+        return this.searchingP;
+    }
+
+    public CardLayout getCardLayout() {
+        return cardLayout;
+    }
+
+    public void setCardLayout(CardLayout newCardLayout) {
+        this.cardLayout = newCardLayout;
     }
 
     public SearchPanel getFilterP() {
@@ -104,12 +98,12 @@ public class UnregisteredMainP extends JPanel {
         this.filters = newFilters;
     }
 
-    public UnregisteredClient getMainU() {
-        return mainU;
+    public JPanel getOthers() {
+        return others;
     }
 
-    public void setMainU(UnregisteredClient newMainU) {
-        this.mainU = newMainU;
+    public void setOthers(JPanel newOthers) {
+        this.others = newOthers;
     }
 
     public List<StoreProduct> getP() {
@@ -137,11 +131,19 @@ public class UnregisteredMainP extends JPanel {
     }
 
     public BrowseStoreP getSearching() {
-        return searching;
+        return searchingP;
     }
 
     public void setSearching(BrowseStoreP newSearching) {
-        this.searching = newSearching;
+        this.searchingP = newSearching;
+    }
+
+    public BrowseStoreP getSearchingP() {
+        return searchingP;
+    }
+
+    public void setSearchingP(BrowseStoreP newSearchingP) {
+        this.searchingP = newSearchingP;
     }
 
     public void setController(ActionListener e) {
@@ -150,7 +152,11 @@ public class UnregisteredMainP extends JPanel {
 
     }
 
-    public void setPanelInferior(JPanel panel, String constraints) {
-        bottom.add(panel, constraints);
+    public void setPanelInferior(JPanel panel, String nombre) {
+        this.bottom.add(panel, nombre);
+        this.cardLayout.show(bottom, nombre);
+
+        this.revalidate();
+        this.repaint();
     }
 }

@@ -63,7 +63,7 @@ public class App extends JFrame {
         loginPanel = new LoginP();
         signupPanel = new SignupP();
 
-        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) mainUser, this);
+        unregisteredMainPanel = new UnregisteredMainP(this);
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
         managerMainPanel = new ManagerMainP();

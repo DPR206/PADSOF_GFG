@@ -4,10 +4,7 @@ import controller.browserControllers.BrowseStoreC;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import view.App;
-import view.browserPanels.BrowseStoreP;
 import view.clientPanels.UnregisteredMainP;
-
-import javax.swing.text.BadLocationException;
 
 //import model.user.UnregisteredClient;
 //import model.user.User;
@@ -25,8 +22,6 @@ public class UnregisteredMainC {
         this.model = model;
         this.user = user;
 
-        //new BannerUnregisteredC((BannerUnregistered) frame.getViewFromName("BANNER_UNREGISTERED"), this.frame);
-
         inicializar();
         linkControllers();
     }
@@ -34,35 +29,26 @@ public class UnregisteredMainC {
     private void inicializar() {
 
         //List<StoreProduct> productos = Store.getInstance().getStoreProductList();
+        //this.view.setP(productos);
 
         view.getSearch().addActionListener(e -> {
-            try {
-                this.view.setSearchingP(new BrowseStoreP(frame));
-                this.view.getSearchingP().setVisible(false);
-
-            } catch (BadLocationException exc) {
-                exc.printStackTrace();
-            }
 
             this.view.setP(this.user.searchStoreProduct());
             this.view.setPanelInferior(this.view.getBrowsePanel(), "Search");
-            this.view.getBrowsePanel().setVisible(true);
-            try {
+            /*try {
                 view.getBrowsePanel().setCurrentPageNum(1);
             } catch (BadLocationException ex) {
                 ex.printStackTrace();
-            }
+            }*/
 
         });
 
         view.getFilters().addActionListener(e -> {
-            //this.view.setFilterP(new SearchPanel());
             this.view.setPanelInferior(view.getFilterP(), "Filters");
         });
     }
 
     public void linkControllers() {
-        // Vinculamos los controladores hijos para que los paneles internos funcionen
         new BrowseStoreC(frame, model, view.getBrowsePanel());
         new SearcherC(frame, model, view.getFilterPanel());
     }

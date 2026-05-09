@@ -1,7 +1,6 @@
 package view.clientPanels;
 
 import model.product.StoreProduct;
-import model.user.UnregisteredClient;
 import view.App;
 import view.browserPanels.BrowseStoreP;
 
@@ -25,7 +24,7 @@ public class UnregisteredMainP extends JPanel {
     private CardLayout cardLayout = new CardLayout();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public UnregisteredMainP(UnregisteredClient mainU, App app) throws BadLocationException {
+    public UnregisteredMainP(App app) throws BadLocationException {
         searchingP = new BrowseStoreP(app);
 
         configurarEstructura();
@@ -35,16 +34,18 @@ public class UnregisteredMainP extends JPanel {
         this.setLayout(new BorderLayout());
 
         others = new JPanel(new BorderLayout());
+        others.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JPanel botones = new JPanel(new GridLayout(0, 2));
         botones.add(this.search);
         botones.add(this.filters);
-
+        
         others.add(botones, BorderLayout.NORTH);
 
         bottom = new JPanel(cardLayout);
-
-        others.add(bottom, BorderLayout.SOUTH);
+        bottom.setOpaque(false);
+        
+        others.add(bottom, BorderLayout.CENTER);
 
         this.add(others, BorderLayout.CENTER);
     }

@@ -1,6 +1,5 @@
 package view.browserPanels;
 
-import model.product.StoreProduct;
 import model.store.BetterPager;
 import model.store.Parameter;
 import view.App;

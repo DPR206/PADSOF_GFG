@@ -2,15 +2,11 @@ package view;
 
 import javax.swing.*;
 
-import view.banners.BannerManager;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 public class ManagerMainP extends JPanel {
-	/*Botones de la parte superior para volver atrás o algo*/
-	private BannerManager banner = new BannerManager();
 	/*Botones para administrar cosas*/
 	private JButton packs = new JButton("Packs");
 	private JButton productoNuevo = new JButton("Productos nuevos");
@@ -19,17 +15,16 @@ public class ManagerMainP extends JPanel {
 	private JButton estadisticas = new JButton("Estadísticas");
 	private JButton descuentos = new JButton("Descuentos");
 	private JButton parametros = new JButton("Parámetros");
-	
+
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerMainP() {
     	super();
     	this.setLayout(new BorderLayout());
-    	this.add(banner, BorderLayout.NORTH);
-    	
+
     	//ahora el cacho principal
-    	
+
     	JPanel cosoDeBotones = new JPanel();
-    	
+
     	//añadimos los botoncitos
     	cosoDeBotones.setLayout(new GridLayout(2, 6));
     	cosoDeBotones.add(this.packs);
@@ -39,7 +34,7 @@ public class ManagerMainP extends JPanel {
     	cosoDeBotones.add(this.estadisticas);
     	cosoDeBotones.add(this.descuentos);
     	cosoDeBotones.add(this.parametros);
-    	
+
     	this.add(cosoDeBotones, BorderLayout.CENTER);
     }
 
@@ -54,9 +49,5 @@ public class ManagerMainP extends JPanel {
         this.empleados.addActionListener(c);
         this.estadisticas.addActionListener(c);
         this.parametros.addActionListener(c);
-    }
-    
-    public BannerManager getBanner() {
-    	return this.banner;
     }
 }

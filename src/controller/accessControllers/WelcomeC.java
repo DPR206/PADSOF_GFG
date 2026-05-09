@@ -46,15 +46,30 @@ public class WelcomeC extends MainLoopSelector implements ActionListener {
             case "Manager Access" -> {
                 boolean stop = false;
                 while (!stop) {
-                    String password = JOptionPane.showInputDialog("Please enter the password: ");
-                    if (password != null && password.equals("password")) {
-                        this.frame.changeCurrentUser(Manager.getInstance());
-                        super.loopSelector();
-                    } else {
-                        int chosen_option = JOptionPane.showConfirmDialog(null, "Incorrect password, retry?");
-                        switch (chosen_option) {
-                            case JOptionPane.NO_OPTION, JOptionPane.CANCEL_OPTION -> stop = true;
+                    JPanel panel = new JPanel();
+                    JLabel label = new JLabel("Enter a password:");
+                    JPasswordField passwordField = new JPasswordField(10);
+                    panel.add(label);
+                    panel.add(passwordField);
+                    String[] options = new String[]{"OK", "Cancel"};
+                    int option =
+                            JOptionPane.showOptionDialog(null, panel, "Manager Access", JOptionPane.OK_CANCEL_OPTION,
+                                    JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                    if (option == 0) {
+                        String password = new String(passwordField.getPassword());
+
+                        if (password.equals("password")) {
+                            this.frame.changeCurrentUser(Manager.getInstance());
+                            stop = true;
+                            super.loopSelector();
+                        } else {
+                            int chosen_option = JOptionPane.showConfirmDialog(null, "Incorrect password, retry?");
+                            switch (chosen_option) {
+                                case JOptionPane.NO_OPTION, JOptionPane.CANCEL_OPTION -> stop = true;
+                            }
                         }
+                    } else {
+                        stop = true;
                     }
                 }
             }

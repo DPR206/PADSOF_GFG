@@ -4,33 +4,25 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import view.banners.BannerEmployee;
-
 public class EmployeeProfile extends JPanel{
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private BannerEmployee banner;
 	private JLabel nom, pwd;
 	private JButton btnMostrar;
 	private JCheckBox exchanges;
 	private JCheckBox orders;
 	private JCheckBox store;
 
-	public EmployeeProfile(BannerEmployee banner) {
-		this.banner = banner;
+	public EmployeeProfile() {
 		configurarEstructura();
 	}
 
 	private void configurarEstructura() {
 		setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-		if (banner != null) {
-            add(banner, BorderLayout.NORTH);
-        }
 
 		JPanel information = new JPanel();
 		information.setLayout(new BoxLayout(information, BoxLayout.Y_AXIS));
@@ -96,13 +88,6 @@ public class EmployeeProfile extends JPanel{
 		information.add(Box.createVerticalGlue());
 
 		add(information, BorderLayout.CENTER);
-	}
-
-	/**
-	 * @return the banner
-	 */
-	public BannerEmployee getBanner() {
-		return banner;
 	}
 
 	/**

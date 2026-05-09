@@ -2,8 +2,6 @@ package view;
 
 import javax.swing.*;
 
-import view.banners.BannerManager;
-
 import java.awt.*;
 
 public class ManagerCreateFiguritaP extends JPanel {
@@ -25,16 +23,14 @@ public class ManagerCreateFiguritaP extends JPanel {
     private JButton btnSubir;
 
     private JLabel vistaPrevia;
-    private BannerManager banner = new BannerManager(); 
 
     public ManagerCreateFiguritaP() {
     	this.setLayout(new BorderLayout());
-    	this.add(banner, BorderLayout.NORTH);
-    	
+
     	JPanel todo = new JPanel();
-    	
+
         setBackground(new Color(245, 241, 236));
-     
+
         JPanel superior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
         superior.setBackground(getBackground());
 
@@ -122,7 +118,7 @@ public class ManagerCreateFiguritaP extends JPanel {
 
         todo.add(botonPanel, BorderLayout.PAGE_END);
     }
-    
+
     public JTextField getTxtCategoria() {
         return txtCategoria;
     }
@@ -164,4 +160,3 @@ public class ManagerCreateFiguritaP extends JPanel {
     }
 
 }
-

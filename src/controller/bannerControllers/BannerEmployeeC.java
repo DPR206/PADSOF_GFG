@@ -16,9 +16,10 @@ public class BannerEmployeeC {
 	private App frame;
 
 	/**
+	 *
 	 * @param vista
 	 * @param user
-	 * @param app
+	 * @param frame
 	 */
 	public BannerEmployeeC(BannerEmployee vista, Employee user, App frame) {
 		this.vista = vista;
@@ -135,7 +136,7 @@ public class BannerEmployeeC {
 
 	private void abrirPerfil() {
 
-	    EmployeeProfile profile = new EmployeeProfile(vista);
+	    EmployeeProfile profile = new EmployeeProfile();
 
 	    new EmployeeProfileC(profile, user);
 

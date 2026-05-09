@@ -20,33 +20,30 @@ import javax.swing.text.BadLocationException;
 
 import model.product.Pack;
 import model.store.Store;
-import view.banners.BannerManager;
 import view.miniPanels.EmployeeMini;
 import view.miniPanels.PackMiniEdit;
 
 import model.user.Employee;
 
 public class ManagerGestionarEmpleados extends JPanel{
-	private BannerManager banner = new BannerManager();
 	private JButton newEmployee = new JButton("Crear nuevo empleado");
 	private JCheckBox storeP = new JCheckBox("Trabajar con productos");
 	private JCheckBox orderP = new JCheckBox("Trabajar con pedidos");
 	private JCheckBox exchangeP = new JCheckBox("Trabajar con intercambios");
 	public ManagerGestionarEmpleados(App app) {
 		super();
-		
+
 		this.setLayout(new BorderLayout());
-		this.add(banner, BorderLayout.NORTH);
-    	
+
 		JPanel mainThings = new JPanel();
     	mainThings.setLayout(new BoxLayout(mainThings, BoxLayout.Y_AXIS));
-    	
+
     	List<Employee> emps = Store.getInstance().getEmployeeList();
-    	
+
     	JScrollPane scroll = new JScrollPane(mainThings);
-    	
+
     	int index = 1;
-    	
+
     	for(Employee emp: emps) {
     		try {
 				mainThings.add(new EmployeeMini(emp, index));
@@ -55,9 +52,9 @@ public class ManagerGestionarEmpleados extends JPanel{
 				e.printStackTrace();
 			}
     	}
-    	
+
     	this.newEmployee.setPreferredSize(new Dimension(120, 30));
-    	
+
     	JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -97,17 +94,13 @@ public class ManagerGestionarEmpleados extends JPanel{
         // Márgenes
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-    	
+
     	this.add(scroll, BorderLayout.WEST);
     	this.add(panel, BorderLayout.EAST);
-    	
-	}	
-	
+
+	}
+
 	public void setController(ActionListener c) {
 		this.newEmployee.addActionListener(c);
-	}
-	
-	public BannerManager getBanner() {
-		return this.banner;
 	}
 }

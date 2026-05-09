@@ -137,6 +137,9 @@ public class App extends JFrame {
         addCard(managerMainPanel, "MANAGER_MAIN");
 
         addBanner(bannerUnregisteredPanel, "BANNER_UNREGISTERED");
+        addBanner(bannerRegisteredPanel, "BANNER_REGISTERED");
+        addBanner(bannerEmployeePanel, "BANNER_EMPLOYEE");
+        addBanner(bannerManagerPanel, "BANNER_MANAGER");
 
         /* Main panel */
         bannerUnregisteredPanel.setVisible(true);

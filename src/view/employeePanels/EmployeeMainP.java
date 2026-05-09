@@ -2,7 +2,6 @@ package view.employeePanels;
 
 import model.user.*;
 import view.App;
-import view.banners.BannerEmployee;
 
 import javax.swing.*;
 
@@ -17,7 +16,6 @@ public class EmployeeMainP extends JPanel {
     private final JButton manageExchanges;
     private final JButton valuateProducts;
     private final App app;
-    private JPanel banner;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -36,14 +34,12 @@ public class EmployeeMainP extends JPanel {
         manageOrders = new JButton("Manage Orders");
         manageExchanges = new JButton("Manage Exchanges");
         valuateProducts = new JButton("Valuate Products");
-        banner = new BannerEmployee();
 
         paintEverything();
     }
 
     public void paintEverything() {
         this.removeAll();
-        this.add(banner, BorderLayout.NORTH);
 
         JPanel botones = new JPanel(new GridLayout(2, 3));
 

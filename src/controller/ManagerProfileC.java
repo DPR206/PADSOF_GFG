@@ -9,12 +9,12 @@ import view.GestorChangePwd;
 import view.ManagerProfile;
 
 public class ManagerProfileC {
-	
+
 	private ManagerProfile vista;
 	private Manager user;
 	//private App frame;
 	private boolean passwordRevelada = false;
-	
+
 	/**
 	 * @param vista
 	 * @param user
@@ -26,29 +26,29 @@ public class ManagerProfileC {
 	}
 
 	private void inicializarEventos() {
-		
+
 		vista.setName(user.getUserName());
-		
+
 		vista.getBtnMostrar().addActionListener(e -> {
 			showPassword();
 		});
-		
+
 		vista.getBtnCambiar().addActionListener(e -> {
 			cambiarPwd();
 		});
 	}
-	
+
 	private void cambiarPwd() {
 		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-	    
+
 	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); 
+	        ventanaActual.dispose();
 	    }
-		
-	    GestorChangePwd pagPwd = new GestorChangePwd(vista.getBanner());
-	    
+
+	    GestorChangePwd pagPwd = new GestorChangePwd();
+
 	    new GestorChangePwdC(pagPwd, user);
-	    
+
 	    pagPwd.setVisible(true);
 	}
 

@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.*;
-import view.banners.BannerManager;
 import java.awt.*;
 
 public class ManagerCreateGameP extends JPanel {
@@ -26,12 +25,10 @@ public class ManagerCreateGameP extends JPanel {
     private JButton btnSubir;
 
     private JLabel vistaPrevia;
-    private BannerManager banner = new BannerManager();
 
     public ManagerCreateGameP() {
 
         this.setLayout(new BorderLayout());
-        this.add(banner, BorderLayout.NORTH);
 
         JPanel todo = new JPanel(new BorderLayout());
         todo.setBackground(new Color(245, 241, 236));

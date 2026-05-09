@@ -25,19 +25,23 @@ public class MainLoopSelector { // DUE: Hacer que sea abstract
         switch (user.getType()) {
             case UNREGISTERED_CLIENT:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Unregistered Client!");
+                this.frame.changeVisibleBanner("BANNER_UNREGISTERED");
                 this.frame.changeVisibleCard("UNREGISTERED_MAIN");
                 break;
             case REGISTERED_CLIENT:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Registered Client!");
+                this.frame.changeVisibleBanner("BANNER_REGISTERED");
                 this.frame.changeVisibleCard("REGISTERED_MAIN");
                 break;
             case EMPLOYEE:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Employee!");
+                this.frame.changeVisibleBanner("BANNER_EMPLOYEE");
                 this.frame.changeVisibleCard("EMPLOYEE_MAIN");
                 this.frame.getEmployeeMainPanel().paintEverything();
                 break;
             case MANAGER:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Manager!");
+                this.frame.changeVisibleBanner("BANNER_MANAGER");
                 this.frame.changeVisibleCard("MANAGER_MAIN");
                 break;
             default:

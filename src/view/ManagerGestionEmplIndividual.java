@@ -14,24 +14,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import view.banners.BannerManager;
-
 public class ManagerGestionEmplIndividual extends JPanel{
-	
+
 	private JCheckBox storePerm = new JCheckBox("Trabajar con productos");
 	private JCheckBox orderPerm = new JCheckBox("Trabajar con pedidos");
 	private JCheckBox exchangePerm = new JCheckBox("Trabajar con intercambios");
-	private BannerManager banner = new BannerManager();
 	private JTextField userName = new JTextField();
 	private JTextField pwd = new JTextField();
 	private JButton confirmar = new JButton("CONFIRMAR");
-	
+
 	public ManagerGestionEmplIndividual() {
-		
+
 		super();
-		
+
 		this.setLayout(new BorderLayout());
-		
+
 		JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -71,8 +68,7 @@ public class ManagerGestionEmplIndividual extends JPanel{
         panelBoton.add(this.confirmar);
 
         panel.add(panelBoton);
-        
+
         this.add(panel, BorderLayout.CENTER);
-        this.add(this.banner, BorderLayout.NORTH);
     }
 }

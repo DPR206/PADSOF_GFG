@@ -2,7 +2,6 @@
 	package view;
 
 import javax.swing.*;
-import view.banners.BannerManager;
 import java.awt.*;
 
 public class ManagerCreateComicP extends JPanel {
@@ -24,12 +23,10 @@ public class ManagerCreateComicP extends JPanel {
     private JButton btnSubir;
 
     private JLabel vistaPrevia;
-    private BannerManager banner = new BannerManager();
 
     public ManagerCreateComicP() {
 
         this.setLayout(new BorderLayout());
-        this.add(banner, BorderLayout.NORTH);
 
         JPanel todo = new JPanel(new BorderLayout());
         todo.setBackground(new Color(245, 241, 236));
@@ -45,7 +42,7 @@ public class ManagerCreateComicP extends JPanel {
         vistaPrevia = new JLabel();
         vistaPrevia.setPreferredSize(new Dimension(150, 60));
         vistaPrevia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        
+
         JPanel categoriaPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         categoriaPanel.setBackground(todo.getBackground());
         categoriaPanel.add(new JLabel("Categoría (Juego, Cómic, Figura):"));

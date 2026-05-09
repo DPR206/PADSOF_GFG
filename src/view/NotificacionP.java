@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import model.notification.Notification;
 
-public class NotificacionP extends JFrame {
+public class NotificacionP extends JPanel {
     /**
 	 * 
 	 */
@@ -19,13 +19,13 @@ public class NotificacionP extends JFrame {
     private JPanel banner;
 
     public NotificacionP(JPanel banner) {
-        super("Notificaciones");
         this.banner = banner;
         configurarEstructura();
     }
 
     private void configurarEstructura() {
     	setLayout(new BorderLayout());
+    	setPreferredSize(new Dimension(600, 600));
 
         if (banner != null) {
             add(banner, BorderLayout.NORTH);
@@ -75,10 +75,6 @@ public class NotificacionP extends JFrame {
 
         contenedorPrincipal.add(panelLista, "LISTA");
         add(contenedorPrincipal, BorderLayout.CENTER);
-        
-        setSize(600, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
     }
 
     // MÉTODOS PARA EL CONTROLADOR

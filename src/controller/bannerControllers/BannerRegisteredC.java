@@ -7,7 +7,6 @@ import view.*;
 import view.banners.BannerRegistered;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class BannerRegisteredC {
 
@@ -70,11 +69,6 @@ public class BannerRegisteredC {
     }
 
     private void abrirCartera() {
-        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-
-        if (ventanaActual != null) {
-            ventanaActual.dispose();
-        }
 
         RegisteredWalletP pagWallet = new RegisteredWalletP((RegisteredClient) user);
 
@@ -85,13 +79,7 @@ public class BannerRegisteredC {
     }
 
     private void abrirNots() {
-        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 
-        if (ventanaActual != null) {
-            ventanaActual.dispose();
-        }
-
-        //NotificacionP pagNots = new NotificacionP(new BannerRegistered());
         NotificacionP pagNots = new NotificacionP(vista);
 
         new NotificacionesC(pagNots, frame);
@@ -100,11 +88,6 @@ public class BannerRegisteredC {
     }
 
     private void abrirPerfil() {
-        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-
-        if (ventanaActual != null) {
-            ventanaActual.dispose();
-        }
 
         RegisteredProfile profile = new RegisteredProfile(vista);
 
@@ -115,12 +98,6 @@ public class BannerRegisteredC {
 
     private void abrirPaginaPrincipal() {
 
-        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-
-        if (ventanaActual != null) {
-            ventanaActual.dispose(); // Cerramos la ventana
-        }
-
         //RegisteredMainP pagPrin = new RegisteredMainP();
 
         //new RegisteredMainC(frame, Store.getInstance());
@@ -129,12 +106,6 @@ public class BannerRegisteredC {
     }
 
     private void abrirCarritoDelCliente() {
-
-        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-
-        if (ventanaActual != null) {
-            ventanaActual.dispose(); // Cerramos la ventana
-        }
 
         // 1. Crear la vista del carrito
         CarritoP carritoVista = new CarritoP();

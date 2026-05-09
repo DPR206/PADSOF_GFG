@@ -1,39 +1,32 @@
 package view;
 
 import model.product.StoreProduct;
-import model.user.UnregisteredClient;
 import view.browserPanels.BrowseStoreP;
+import view.clientPanels.SearchPanel;
 
 import javax.swing.*;
+
+import controller.UnregisteredMainPruebaC;
+
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class UnregisteredMainPrueba extends JPanel {
     private static final long serialVersionUID = 1L;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
-    private SearchPanel filterP;
+    private SearchPanel filterP = new SearchPanel();
     private BrowseStoreP searchingP;
     private JPanel bottom;
     private JPanel others;
     private CardLayout cardLayout = new CardLayout();
-    private JPanel products;
-    private JPanel productSearch;
     private List<StoreProduct> p;
+    //private UnregisteredMainPruebaC controller;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public UnregisteredMainPrueba() {
-        
-        /*this.mainU = mainU;
-        this.productSearch = new JPanel();
-        this.productSearch.setLayout(new BorderLayout());
-        this.app = app;*/
-
-        //this.filterP.setVisible(false);
 
         configurarEstructura();
-        //repaintALL();
     }
 
     private void configurarEstructura() {
@@ -46,7 +39,7 @@ public class UnregisteredMainPrueba extends JPanel {
         botones.add(this.filters);
         //this.add(botones, BorderLayout.NORTH);
         
-        others.add(botones, BorderLayout.SOUTH);
+        others.add(botones, BorderLayout.NORTH);
         
         bottom = new JPanel(cardLayout);
         
@@ -63,13 +56,11 @@ public class UnregisteredMainPrueba extends JPanel {
         return this.filterP;
     }
 
-    public void setController(ActionListener e) {
-        this.filters.addActionListener(e);
-        this.search.addActionListener(e);
-
-    }
+    /*public void setController(UnregisteredMainPruebaC controller) {
+        this.controller = controller;
+    }*/
     
-    /**
+    /*
 	 * @return the filterP
 	 */
 	public SearchPanel getFilterP() {
@@ -126,7 +117,6 @@ public class UnregisteredMainPrueba extends JPanel {
 	}
 
 	public void setPanelInferior(JPanel panel, String nombre) {
-        // El controlador decide qué panel inyectar aquí
         this.bottom.add(panel, nombre);
         this.cardLayout.show(bottom, nombre);
         

@@ -1,5 +1,6 @@
 package view;
 
+import controller.UnregisteredMainPruebaC;
 import controller.accessControllers.*;
 import controller.bannerControllers.BannerRegisteredC;
 import controller.bannerControllers.BannerUnregisteredC;
@@ -38,7 +39,7 @@ public class App extends JFrame {
     private final WelcomeP welcomePanel;
     private final LoginP loginPanel;
     private final SignupP signupPanel;
-    private final UnregisteredMainP unregisteredMainPanel;
+    private final UnregisteredMainPrueba unregisteredMainPanel;
     private final RegisteredMainP registeredMainPanel;
     private final EmployeeMainP employeeMainPanel;
     private final ManagerMainP managerMainPanel;
@@ -63,7 +64,7 @@ public class App extends JFrame {
         loginPanel = new LoginP();
         signupPanel = new SignupP();
 
-        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser, this);
+        unregisteredMainPanel = new UnregisteredMainPrueba();
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
         managerMainPanel = new ManagerMainP();
@@ -82,7 +83,7 @@ public class App extends JFrame {
         LoginC loginController = new LoginC(this, model);
         SignupC signupController = new SignupC(this, model);
 
-        UnregisteredMainC unregisteredMainController = new UnregisteredMainC(this, model);
+        UnregisteredMainPruebaC unregisteredMainController = new UnregisteredMainPruebaC(this, model, (UnregisteredClient) this.mainUser);
         RegisteredMainC registeredMainController = new RegisteredMainC(this, model);
         EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
         ManagerMainC managerMainController = new ManagerMainC(this, model);
@@ -279,7 +280,7 @@ public class App extends JFrame {
         return signupPanel;
     }
 
-    public UnregisteredMainP getUnregisteredMainPanel() {
+    public UnregisteredMainPrueba getUnregisteredMainPanel() {
         return unregisteredMainPanel;
     }
 

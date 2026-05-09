@@ -57,27 +57,18 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         firstMiniPanels.clear();
         secondMiniPanels.clear();
 
-        int index = 1;
-        int secondCurrentPageNum = currentPageNum - firstPager.getMaxPageNum(firstItemList);
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        int startGlobalIndex = (currentPageNum - 1) * itemsPerPage;
+        int totalItems = firstItemList.size() + secondItemList.size();
+        int maxIndex = Math.min(startGlobalIndex + itemsPerPage, totalItems);
 
-        if (firstPager.getMaxPageNum(firstItemList) >= currentPageNum) {
-            List<G> currentfirstItemList = firstPager.pageItemList(firstItemList, currentPageNum);
-            for (G item : currentfirstItemList) {
-                addFirstMiniPanel(item, index);
-                index++;
-            }
-        }
-
-        if (secondPager.getMaxPageNum(secondItemList) >= secondCurrentPageNum) {
-            if (index < Parameter.getParam().getItemsPerPage()) {
-                List<U> currentSecondItemlist = secondPager.pageItemListCluster(secondItemList, secondCurrentPageNum,
-                        Parameter.getParam().getItemsPerPage() - index);
-
-                index = 1;
-                for (U item : currentSecondItemlist) {
-                    addSecondMiniPanel(item, index);
-                    index++;
-                }
+        for (int i = startGlobalIndex; i < maxIndex; i++) {
+            int panelIndex = (i % itemsPerPage) + 1;
+            if (i < firstItemList.size()) {
+                addFirstMiniPanel(firstItemList.get(i), panelIndex);
+            } else {
+                int secondListIndex = i - firstItemList.size();
+                addSecondMiniPanel(secondItemList.get(secondListIndex), panelIndex);
             }
         }
     }
@@ -154,7 +145,16 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
      * @return the available store product list's max page number
      */
     public int getMaxPageNum() {
-        return firstPager.getMaxPageNum(firstItemList) + secondPager.getMaxPageNum(secondItemList);
+        int totalItems = firstItemList.size() + secondItemList.size();
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        if (totalItems == 0) {
+            return 1;
+        }
+
+        if (totalItems % itemsPerPage == 0) {
+            return totalItems / itemsPerPage;
+        }
+        return (totalItems / itemsPerPage) + 1;
     }
 
     /**

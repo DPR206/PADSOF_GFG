@@ -47,7 +47,7 @@ public class PackMiniP extends MiniPanel {
         doc.insertString(doc.getLength(), // DUE Añadir descuento
                 ("Price: " + String.format("%.2f", this.p.getPrice()) + " €\n"), attributes);
 
-        packInfo.setPreferredSize(new Dimension(width, height));
+        packInfo.setPreferredSize(new Dimension(width + 16, height));
 
         JTextPane indexNum = new JTextPane();
         indexNum.setEditable(false);

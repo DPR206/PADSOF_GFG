@@ -88,6 +88,15 @@ public class BetterPager<G> {
         return (size / itemsPerPage) + 1;
     }
 
+    public int getMaxPageNum(List<G> itemList, int offset) {
+        int itemsPerPage = Parameter.getParam().getItemsPerPage();
+        int size = itemList.size() + offset;
+        if (size % itemsPerPage == 0) {
+            return size / itemsPerPage;
+        }
+        return (size / itemsPerPage) + 1;
+    }
+
     public int getMaxPageNumCluster(List<G> itemList, int itemsPerPage) {
         int size = itemList.size();
         if (size % itemsPerPage == 0) {

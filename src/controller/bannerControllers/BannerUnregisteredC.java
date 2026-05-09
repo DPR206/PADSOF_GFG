@@ -2,6 +2,7 @@ package controller.bannerControllers;
 
 import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
+import model.user.UnregisteredClient;
 import model.user.User;
 import view.App;
 import view.banners.BannerUnregistered;
@@ -84,8 +85,8 @@ public class BannerUnregisteredC {
 
         UnregisteredMainP pagPrin = frame.getUnregisteredMainPanel();
 
-        new UnregisteredMainC(frame, Store.getInstance());
-        new UnregisteredMainC(frame, Store.getInstance());
+        new UnregisteredMainC(frame, Store.getInstance(), (UnregisteredClient) frame.getUser());
+        new UnregisteredMainC(frame, Store.getInstance(), (UnregisteredClient) frame.getUser());
 
         frame.changeVisibleCard("UNREGISTERED_MAIN");
     }

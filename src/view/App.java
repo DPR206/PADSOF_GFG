@@ -63,7 +63,7 @@ public class App extends JFrame {
         loginPanel = new LoginP();
         signupPanel = new SignupP();
 
-        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) this.mainUser, this);
+        unregisteredMainPanel = new UnregisteredMainP((UnregisteredClient) mainUser, this);
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
         managerMainPanel = new ManagerMainP();
@@ -82,7 +82,7 @@ public class App extends JFrame {
         LoginC loginController = new LoginC(this, model);
         SignupC signupController = new SignupC(this, model);
 
-        UnregisteredMainC unregisteredMainController = new UnregisteredMainC(this, model);
+        new UnregisteredMainC(this, model, (UnregisteredClient) this.mainUser);
         RegisteredMainC registeredMainController = new RegisteredMainC(this, model);
         EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
         ManagerMainC managerMainController = new ManagerMainC(this, model);
@@ -96,7 +96,6 @@ public class App extends JFrame {
         loginPanel.setController(loginController);
         signupPanel.setController(signupController);
 
-        unregisteredMainPanel.setController(unregisteredMainController);
         registeredMainPanel.setController(registeredMainController);
         employeeMainPanel.setController(employeeMainController);
         managerMainPanel.setController(managerMainController);
@@ -188,6 +187,7 @@ public class App extends JFrame {
     }
 
     public void changeVisibleCard(String cardName) {
+        System.out.println("Showing: " + cardName);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
         getViewFromName(cardName).requestFocusInWindow();

@@ -21,18 +21,13 @@ import view.miniPanels.StoreProductMiniEdit;
 public class ManagerGestionarProductos extends JPanel{
 	private JButton newProduct = new JButton("Crear nuevo producto");
 
-	public ManagerGestionarProductos(App app) {
+	public ManagerGestionarProductos(App app) throws BadLocationException {
 		super();
 
 		this.setLayout(new BorderLayout());
 
-		BrowseStorePEdit products = null;
-		try {
-			products = new BrowseStorePEdit(app);
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		BrowseStorePEdit products = new BrowseStorePEdit(app);
+
 
     	this.newProduct.setPreferredSize(new Dimension(120, 30));
 

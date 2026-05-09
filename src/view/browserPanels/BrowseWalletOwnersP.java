@@ -36,7 +36,7 @@ public class BrowseWalletOwnersP extends BrowserPanel<RegisteredClient> {
      */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        getMiniPanels().clear();
+        
 
         // Item list was set in constructor
 

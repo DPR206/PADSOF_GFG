@@ -1,6 +1,7 @@
 package controller.miniControllers;
 
-import controller.browserControllers.BigController;
+import controller.browserControllers.BrowserController;
+import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowserPanel;
@@ -14,8 +15,8 @@ public class SecondHandMiniC implements ActionListener {
     private final SecondHandMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private final BigController bigController;
-    private final BrowserPanel browserPanel;
+    private final BrowserController<SecondHandProduct> browserController;
+    private final BrowserPanel<SecondHandProduct> browserPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -24,12 +25,13 @@ public class SecondHandMiniC implements ActionListener {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public SecondHandMiniC(App frame, Store model, SecondHandMiniP view, BigController bigController,
-                           BrowserPanel browserPanel) {
+    public SecondHandMiniC(App frame, Store model, SecondHandMiniP view,
+                           BrowserController<SecondHandProduct> browserController,
+                           BrowserPanel<SecondHandProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;
-        this.bigController = bigController;
+        this.browserController = browserController;
         this.browserPanel = browserPanel;
 
         view.getProductImage().addMouseListener(new MouseAdapter() {
@@ -60,7 +62,7 @@ public class SecondHandMiniC implements ActionListener {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            bigController.updateControllers();
+            browserController.updateControllers();
         }
 
     }

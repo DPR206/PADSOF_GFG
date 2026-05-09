@@ -1,5 +1,7 @@
-package controller.browserControllers;
+package controller.employeeControllers;
 
+import controller.browserControllers.BrowseSecondHandProductsC;
+import controller.browserControllers.BrowseWalletOwnersC;
 import model.store.Store;
 import view.App;
 import view.clientPanels.RegisteredMakeOfferP;
@@ -8,13 +10,13 @@ import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BrowseForOffersC implements ActionListener {
+public class RegisteredMakeOfferC implements ActionListener {
     private final RegisteredMakeOfferP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public BrowseForOffersC(App frame, Store model, RegisteredMakeOfferP view) {
+    public RegisteredMakeOfferC(App frame, Store model, RegisteredMakeOfferP view) {
         this.frame = frame;
         this.view = view;
         this.model = model;
@@ -24,10 +26,9 @@ public class BrowseForOffersC implements ActionListener {
 
     public void updateControllers() {
         view.getBrowseWalletOwnersP()
-            .setController(new BrowseWalletOwnersC(frame, model, view.getBrowseWalletOwnersP(),
-                    view.getBrowseSecondHandProductsP(), view));
+            .setController(new BrowseWalletOwnersC(frame, view.getBrowseWalletOwnersP(), model));
         view.getBrowseSecondHandProductsP()
-            .setController(new BrowseSecondHandProductsC(frame, model, view.getBrowseSecondHandProductsP()));
+            .setController(new BrowseSecondHandProductsC(frame, view.getBrowseSecondHandProductsP(), model));
     }
 
     @Override

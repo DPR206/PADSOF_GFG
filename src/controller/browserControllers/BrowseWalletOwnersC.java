@@ -3,7 +3,7 @@ package controller.browserControllers;
 import controller.miniControllers.WalletOwnerMiniC;
 import model.store.Store;
 import view.App;
-import view.RegisteredMakeOfferP;
+import view.clientPanels.RegisteredMakeOfferP;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.browserPanels.BrowseWalletOwnersP;
 import view.miniPanels.MiniPanel;

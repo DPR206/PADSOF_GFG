@@ -2,7 +2,7 @@ package controller.browserControllers;
 
 import model.store.Store;
 import view.App;
-import view.RegisteredMakeOfferP;
+import view.clientPanels.RegisteredMakeOfferP;
 
 import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;

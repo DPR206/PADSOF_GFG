@@ -1,10 +1,13 @@
 package controller.bannerControllers;
 
-import controller.*;
+import controller.clientControllers.*;
+import controller.notifications.NotificacionesC;
 import model.user.RegisteredClient;
 import model.user.User;
 import view.*;
 import view.banners.BannerRegistered;
+import view.clientPanels.*;
+import view.notifications.NotificacionP;
 
 import javax.swing.*;
 

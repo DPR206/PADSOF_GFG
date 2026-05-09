@@ -3,7 +3,7 @@ package controller.miniControllers;
 import controller.browserControllers.BigController;
 import model.store.Store;
 import view.App;
-import view.SPManageIndividualPack;
+import view.employeePanels.SPManageIndividualPack;
 import view.browserPanels.BrowserPanel;
 import view.miniPanels.PackMiniEdit;
 

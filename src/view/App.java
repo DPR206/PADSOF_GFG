@@ -1,10 +1,12 @@
 package view;
 
-import controller.*;
 import controller.accessControllers.*;
 import controller.bannerControllers.BannerRegisteredC;
 import controller.bannerControllers.BannerUnregisteredC;
+import controller.clientControllers.RegisteredMainC;
+import controller.clientControllers.UnregisteredMainC;
 import controller.employeeControllers.EmployeeMainC;
+import controller.managerControllers.ManagerMainC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
@@ -12,7 +14,9 @@ import model.user.UnregisteredClient;
 import model.user.User;
 import view.accessPanels.*;
 import view.banners.*;
+import view.clientPanels.*;
 import view.employeePanels.EmployeeMainP;
+import view.managerPanels.ManagerMainP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -198,9 +202,7 @@ public class App extends JFrame {
 
     public void addCard(ControllableJPanel newView, String constraints, ActionListener controller) {
         newView.setController(controller);
-        cards.add(newView, constraints);
-        newView.setVisible(false);
-        newView.setOpaque(false);
+        addCard(newView, constraints);
     }
 
     public void changeCurrentUser(User user) {

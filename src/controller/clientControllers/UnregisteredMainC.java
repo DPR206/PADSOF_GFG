@@ -1,13 +1,13 @@
 package controller.clientControllers;
 
-import java.util.List;
-
 import controller.browserControllers.BrowseStoreC;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import view.App;
 import view.clientPanels.UnregisteredMainP;
+
+import java.util.List;
 
 //import model.user.UnregisteredClient;
 //import model.user.User;
@@ -53,7 +53,9 @@ public class UnregisteredMainC {
     }
 
     public void linkControllers() {
-        new BrowseStoreC(frame, model, view.getBrowsePanel());
-        new SearcherC(frame, model, view.getFilterPanel());
+//        new BrowseStoreC(frame, model, view.getBrowsePanel());
+//        new SearcherC(frame, model, view.getFilterPanel());
+        this.view.getBrowsePanel().setController(new BrowseStoreC(frame, model, view.getBrowsePanel()));
+        this.view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
     }
 }

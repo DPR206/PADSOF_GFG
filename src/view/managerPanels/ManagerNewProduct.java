@@ -36,13 +36,7 @@ public class ManagerNewProduct extends JPanel{
 	    	cosoDeBotones.add(juegos);
 
 	    	cards.add(cosoDeBotones, PANEL_MENU);
-	    	
-	    	
-	    	JScrollPane scroll = new JScrollPane(cards);
-	    	scroll.setVerticalScrollBarPolicy(
-	    	        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
-	    	);
-	    	this.add(scroll, BorderLayout.CENTER);
+	    	this.add(cards);
 	   }
 
 	   public void setController(ActionListener c) {

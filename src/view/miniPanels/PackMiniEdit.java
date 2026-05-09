@@ -25,6 +25,7 @@ public class PackMiniEdit extends MiniPanel {
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
+        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, height));
 
         gestionar.setPreferredSize(new Dimension(125, height));
         gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));

@@ -3,8 +3,8 @@ package view.accessPanels;
 import view.ControllableJPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 /**
  * It implements the app's welcome panel view
@@ -22,19 +22,17 @@ public class WelcomeP extends ControllableJPanel {
     /**
      * This panel's constructor
      */
-    public WelcomeP() throws IOException {
+    public WelcomeP() {
         // asignar layout
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new GridLayout(2, 2));
 
         // crear componentes
-        JLabel label = new JLabel("Welcome to Gifts for Geeks!");
-        browseButton = new JButton("Browse as unregistered client");
-        loginButton = new JButton("Log in");
-        signupButton = new JButton("Sign up");
-        managerAccess = new JButton("Manager Access");
+        browseButton = new JButton("🔍 Browse as unregistered client");
+        loginButton = new JButton("🔑 Log in");
+        signupButton = new JButton("👤 Sign up");
+        managerAccess = new JButton("🛠️ Manager Access");
 
         // añadir componentes al panel
-        this.add(label);
         this.add(browseButton);
         this.add(loginButton);
         this.add(signupButton);

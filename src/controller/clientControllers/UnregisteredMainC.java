@@ -1,6 +1,9 @@
 package controller.clientControllers;
 
+import java.util.List;
+
 import controller.browserControllers.BrowseStoreC;
+import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import view.App;
@@ -28,8 +31,9 @@ public class UnregisteredMainC {
 
     private void inicializar() {
 
-        //List<StoreProduct> productos = Store.getInstance().getStoreProductList();
-        //this.view.setP(productos);
+        List<StoreProduct> productos = Store.getInstance().getStoreProductList();
+        this.view.setP(productos);
+        this.view.setPanelInferior(this.view.getBrowsePanel(), "Search");
 
         view.getSearch().addActionListener(e -> {
 

@@ -362,7 +362,6 @@ public class Store implements Serializable {
      * @throws IOException something went wrong when reading or writing a file
      */
     public void loadStore(String dataFilename, String staticsFilename) throws IOException {
-        this.addUser(Manager.getInstance());
         try {
             if ((new File(".\\resources\\data\\" + dataFilename + ".txt")).isFile()) {
                 FileInputStream fileInputStream = new FileInputStream(".\\resources\\data\\" + dataFilename + ".txt");
@@ -387,6 +386,7 @@ public class Store implements Serializable {
                 buffer.close();
             }
 
+            Store.getInstance().addUser(Manager.getInstance());
         } catch (IOException | ClassNotFoundException exception) {
             throw new IOException(exception.getMessage());
         }

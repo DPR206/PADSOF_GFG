@@ -16,7 +16,7 @@ public class GestorChangePwdC implements ActionListener {
     	this.pagPwd = pagPwd;
     }
 
-    @SuppressWarnings("deprecation")
+
 	@Override
     public void actionPerformed(ActionEvent e) {
     	if(e.getActionCommand().equals("CAMBIAR")) {

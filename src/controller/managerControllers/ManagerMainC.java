@@ -7,6 +7,7 @@ import view.managerPanels.ManagerGestionarPacks;
 import view.managerPanels.ManagerGestionarProductos;
 import view.managerPanels.ManagerMainP;
 import view.managerPanels.ManagerNewProduct;
+import controller.managerControllers.ManagerGestionarEmpleadosC;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +27,7 @@ public class ManagerMainC implements ActionListener {
         this.view = frame.getManagerMainPanel();
         this.model = model;
         this.mge = new ManagerGestionarEmpleados(this.frame);
+        this.mge.setController(new ManagerGestionarEmpleadosC(this.mge, this.frame));
         //this.frame.addCard
         this.mgp = new ManagerGestionarPacks(this.frame);
         this.mgp.setVisible(false);

@@ -12,56 +12,84 @@ import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
 public class EmployeeMini extends MiniPanel {
+
     private final JButton gestionar = new JButton("Gestionar");
     private final Employee emp;
     private final JTextPane employeeInfo = new JTextPane();
     private final JLabel employeeIcon;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public EmployeeMini(Employee emp, int index) throws BadLocationException {
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public EmployeeMini(Employee emp, int index) {
+
         super();
 
         this.emp = emp;
+
         int width = 350;
         int height = 60;
-        this.setLayout(new FlowLayout());
-        this.setPreferredSize(new Dimension(350, 60));
-        this.setMaximumSize(new Dimension(350, 60));
-        this.employeeIcon = getImageLabel(".\\resources\\app\\default_user.png", height, width);
-        gestionar.setPreferredSize(new Dimension(125, height));
-        gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
 
-        SimpleAttributeSet attributes = new SimpleAttributeSet();
-        StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
-        StyleConstants.setBold(attributes, true);
-        employeeInfo.setCharacterAttributes(attributes, true);
-        employeeInfo.setText(emp.getId() + "\n");
+        // PANEL
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        this.setPreferredSize(new Dimension(width, height));
+        this.setMaximumSize(new Dimension(width, height));
 
-        attributes = new SimpleAttributeSet();
-        StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
+        // ---------------- ICONO ----------------
+        // IMPORTANTE: cuadrado
+        this.employeeIcon = getImageLabel(
+                ".\\resources\\app\\default_user.png",
+                50,
+                50
+        );
 
-        Document doc = employeeInfo.getStyledDocument();
-        doc.insertString(doc.getLength(), // DUE Añadir descuento
-                ("Name: " + this.emp.getUserName()), attributes);
+        // ---------------- INFO ----------------
+        employeeInfo.setEditable(false);
+        employeeInfo.setFocusable(false);
+        employeeInfo.setOpaque(false);
+        employeeInfo.setContentType("text/html");
 
-        employeeInfo.setPreferredSize(new Dimension(width, height));
+        employeeInfo.setText("<html><b>ID: " + emp.getId() + "</b><br>Name: " + emp.getUserName() + "</html>");
 
+        employeeInfo.setPreferredSize(new Dimension(120, 50));
+
+        // ---------------- ÍNDICE ----------------
         JTextPane indexNum = new JTextPane();
+
         indexNum.setEditable(false);
         indexNum.setFocusable(false);
+        indexNum.setOpaque(false);
+        indexNum.setContentType("text/html");
 
-        SimpleAttributeSet attributes2 = new SimpleAttributeSet();
-        StyleConstants.setBold(attributes2, true);
-        indexNum.setCharacterAttributes(attributes2, true);
-        indexNum.setText("\n" + index + ".");
-        indexNum.setPreferredSize(new Dimension(25, height));
+        indexNum.setText("<html><b>" + index + ".</b></html>");
 
+        indexNum.setPreferredSize(new Dimension(25, 50));
+
+        // ---------------- BOTÓN ----------------
+        gestionar.setPreferredSize(new Dimension(110, 45));
+
+        gestionar.setIcon(
+                getScaledImage(
+                        new ImageIcon(".\\resources\\app\\cart.png"),
+                        20,
+                        20
+                )
+        );
+
+        // ---------------- AÑADIR COMPONENTES ----------------
         this.add(indexNum);
         this.add(employeeIcon);
         this.add(employeeInfo);
         this.add(gestionar);
 
-        this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+        // BORDE
+        this.setBorder(
+                BorderFactory.createMatteBorder(
+                        0,
+                        1,
+                        1,
+                        1,
+                        brownColour
+                )
+        );
     }
 
     public Employee getEmployee() {

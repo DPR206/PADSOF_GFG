@@ -1,6 +1,8 @@
 package main;
 
 import model.store.Store;
+import model.user.Permission;
+import model.user.Manager;
 import view.App;
 
 import javax.swing.*;
@@ -32,6 +34,12 @@ public class Main {
                 try {
                     /* Load store */
                     Store.getInstance().loadStore("data", "statics");
+
+                    if (Store.getInstance().getEmployeeList().isEmpty()) {
+                        Manager.getInstance().addEmployee("emp123", "alice", Permission.STORE, Permission.ORDER);
+                        Manager.getInstance().addEmployee("emp456", "bob", Permission.ORDER);
+                        Manager.getInstance().addEmployee("emp789", "carol", Permission.EXCHANGE);
+                    }
 
                     new App().setVisible(true);
                 } catch (Exception e) {

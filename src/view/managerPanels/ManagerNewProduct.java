@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class ManagerNewProduct extends JPanel{
 	   private JButton comics = new JButton("AÑADIR UN CÓMIC");
@@ -35,8 +36,13 @@ public class ManagerNewProduct extends JPanel{
 	    	cosoDeBotones.add(juegos);
 
 	    	cards.add(cosoDeBotones, PANEL_MENU);
-
-	    	this.add(cards, BorderLayout.CENTER);
+	    	
+	    	
+	    	JScrollPane scroll = new JScrollPane(cards);
+	    	scroll.setVerticalScrollBarPolicy(
+	    	        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+	    	);
+	    	this.add(scroll, BorderLayout.CENTER);
 	   }
 
 	   public void setController(ActionListener c) {

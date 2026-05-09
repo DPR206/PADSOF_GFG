@@ -1,0 +1,71 @@
+package controller.accessControllers;
+
+import model.store.Store;
+import model.user.User;
+import model.utilities.exceptions.*;
+import view.App;
+import view.accessPanels.SignupP;
+
+import javax.swing.*;
+import java.awt.event.*;
+
+/**
+ * It implements the sign-up controller
+ * @author Ana O.R.
+ * @version 1.0
+ */
+public class SignupC extends MainLoopSelector implements ActionListener {
+    private final SignupP view; /* view -> panel */
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * This controller's constructor
+     * @param frame the controller's frame
+     * @param model the controller's model
+     */
+    public SignupC(App frame, Store model) {
+        super(frame, model);
+        this.view = frame.getSignupPanel();
+
+        /* Enter to press key */
+        view.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view.getSignup().doClick();
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("Sign up")) { /* "Sign up" pressed */
+            if (view.getIdType() == null) {
+                JOptionPane.showMessageDialog(null, "You must select an idType", "Warning :(",
+                        JOptionPane.ERROR_MESSAGE);
+            } else if (!(view.getPassword().equals(view.getPassword2()))) {
+                JOptionPane.showMessageDialog(null, "Passwords did not match", "Warning :(", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    User user = super.getModel().signIn(view.getUsername(), view.getPassword(), view.getIdNumber(),
+                            view.getIdType());
+                    if (user != null) {
+                        JOptionPane.showMessageDialog(null,
+                                "Signed up successfully :)\n" + "Welcome abroad " + view.getUsername());
+                        super.getFrame().changeCurrentUser(user);
+                        super.loopSelector();
+                    }
+                } catch (UsernameTaken exception1) {
+                    JOptionPane.showMessageDialog(null, exception1.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
+                } catch (PasswordNotValid exception2) {
+                    JOptionPane.showMessageDialog(null, exception2.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
+                } catch (InvalidDni exception3) {
+                    JOptionPane.showMessageDialog(null, exception3.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+}

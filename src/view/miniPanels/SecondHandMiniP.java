@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 
-public class SecondHandMiniP extends JPanel {
+public class SecondHandMiniP extends MiniPanel {
     private final JButton addToOffer = new JButton("Add to Offer");
     private final SecondHandProduct secondHandProduct;
     private final JLabel productImage;

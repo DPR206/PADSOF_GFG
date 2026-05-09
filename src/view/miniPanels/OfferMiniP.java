@@ -1,5 +1,10 @@
 package view.miniPanels;
-//getPackImagePanel(Store.getInstance().getPacks().getFirst(), height, height);
 
-public class OfferMiniP {
+import java.awt.event.ActionListener;
+
+public class OfferMiniP extends MiniPanel {
+    @Override
+    public void setController(ActionListener c) {
+
+    }
 }

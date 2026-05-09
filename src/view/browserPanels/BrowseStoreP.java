@@ -2,32 +2,17 @@ package view.browserPanels;
 
 import model.product.Pack;
 import model.product.StoreProduct;
-import model.store.BetterPager;
+import model.store.Store;
 import view.App;
 import view.miniPanels.PackMiniP;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import static main.Main.brownColour;
 
-public class BrowseStoreP extends JPanel implements BigView {
-    private final JButton firstPage = new JButton("<< First Page");
-    private final JButton previousPage = new JButton("< Previous Page");
-    private final JButton nextPage = new JButton("Next Page >");
-    private final JButton lastPage = new JButton("Last Page >>");
-    private final List<StoreProductMiniP> productPanels = new ArrayList<>();
-    private final List<PackMiniP> packPanels = new ArrayList<>();
-    private final BetterPager<StoreProduct> pager = new BetterPager<>();
-    private final App app;
-    private List<StoreProduct> storeProducts = new ArrayList<>();
-    private List<Pack> packs = new ArrayList<>();
-    private int currentPageNum;
+public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -35,11 +20,8 @@ public class BrowseStoreP extends JPanel implements BigView {
      * This panel's constructor
      */
     public BrowseStoreP(App app) throws BadLocationException {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
-
-        this.app = app;
-        currentPageNum = 1;
-
+        super(app);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();
     }
 
@@ -50,89 +32,29 @@ public class BrowseStoreP extends JPanel implements BigView {
      */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        productPanels.clear();
 
-        this.storeProducts = app.getProducts();
+        super.setFirstItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
+        super.setSecondItemList(Store.getInstance().getStoreProductList()); // DUE: Esto debe darlo el controlador
 
-        List<StoreProduct> currentStoreProducts = pager.pageItemList(storeProducts, currentPageNum);
-
-        int index = 1;
-        for (StoreProduct product : currentStoreProducts) {
-            StoreProductMiniP miniProduct = new StoreProductMiniP(product, index);
-            productPanels.add(miniProduct);
-            this.add(miniProduct);
-            index++;
-        }
-
-        if (index < 9) {
-            JLabel fillVoid = new JLabel();
-            fillVoid.setPreferredSize(new Dimension(350, 70 * (10 - index)));
-            this.add(fillVoid);
-        }
-
-        JPanel pageTurner = new JPanel(new FlowLayout());
-
-        if (currentPageNum != 1) {
-            pageTurner.add(firstPage);
-            pageTurner.add(previousPage);
-        }
-        pageTurner.add(new JLabel("Page " + currentPageNum));
-        if (currentPageNum != pager.getMaxPageNum(storeProducts)) {
-            pageTurner.add(nextPage);
-            pageTurner.add(lastPage);
-        }
-        this.add(pageTurner);
-
+        super.addAllMiniPanels();
+        this.add(super.getPageTurner());
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
 
         this.revalidate();
         this.repaint();
     }
 
-    /**
-     * It gets this page's current page number
-     * @return this page's current page number
-     */
-    public int getCurrentPageNum() {
-        return currentPageNum;
+    @Override
+    public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
+        PackMiniP miniPack = new PackMiniP(item, index);
+        super.addFirstMiniPanel(miniPack);
+        this.add(miniPack);
     }
 
-    /**
-     * It changes this page's current page number
-     * @param newCurrentPageNum the desired page number
-     * @throws BadLocationException bad locations within a document model (that is, attempts to reference a location
-     *                              that doesn't exist)
-     */
-    public void setCurrentPageNum(int newCurrentPageNum) throws BadLocationException {
-        this.currentPageNum = newCurrentPageNum;
-        paintEverything();
-    }
-
-    /**
-     * It gets the available store product list's max page number
-     * @return the available store product list's max page number
-     */
-    public int getMaxPageNum() {
-        return pager.getMaxPageNum(storeProducts);
-    }
-
-    public List<StoreProductMiniP> getProductPanels() {
-        return productPanels;
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        if (productPanels != null) {
-            for (StoreProductMiniP miniProduct : productPanels) {
-                miniProduct.setController(c);
-            }
-        }
-        firstPage.addActionListener(c);
-        previousPage.addActionListener(c);
-        nextPage.addActionListener(c);
-        lastPage.addActionListener(c);
+    @Override
+    public void addSecondMiniPanel(StoreProduct item, int index) throws BadLocationException {
+        StoreProductMiniP miniPack = new StoreProductMiniP(item, index);
+        super.addSecondMiniPanel(miniPack);
+        this.add(miniPack);
     }
 }

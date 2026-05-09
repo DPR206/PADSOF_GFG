@@ -1,76 +1,75 @@
 package controller.bannerControllers;
 
-import java.awt.Window;
-
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
-import controller.CarritoC;
+import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
-import model.user.*;
-import view.*;
+import model.user.User;
+import view.App;
 import view.banners.BannerUnregistered;
+import view.clientPanels.CarritoP;
+import view.clientPanels.UnregisteredMainP;
+
+import javax.swing.*;
 
 public class BannerUnregisteredC {
 
-	private BannerUnregistered vista;
-	//private UnregisteredClient user;
-	private App frame;
+    private BannerUnregistered vista;
+    private User user;
+    private App frame;
 
-	/**
-	 * @param vista
-	 */
-	public BannerUnregisteredC(BannerUnregistered vista, /*UnregisteredClient user,*/ App frame) {
-		this.vista = vista;
-		//this.user = frame.getUser();
-		this.frame = frame;
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * @param vista
+     */
+    public BannerUnregisteredC(BannerUnregistered vista, /*UnregisteredClient user,*/ App frame) {
+        this.vista = vista;
+        this.user = frame.getUser();
+        this.frame = frame;
         inicializarEventos();
-	}
+    }
 
-
-	private void inicializarEventos() {
+    private void inicializarEventos() {
         vista.getBtnCarrito().addActionListener(e -> {
             abrirCarritoDelCliente();
         });
 
         vista.getHome().addActionListener(e -> {
-        	abrirPaginaPrincipal();
+            abrirPaginaPrincipal();
         });
 
         vista.getBtnPerfil().addActionListener(e -> {
-        	abrirSignUp();
+            abrirSignUp();
         });
 
         vista.getBtnExit().addActionListener(e -> {
-        	abrirWelcome();
+            abrirWelcome();
+        });
+
+        vista.getBtnGoBack().addActionListener(e -> {
+            goBack();
         });
     }
 
-	private void abrirWelcome() {
+    private void goBack() {
+        frame.goBack();
+    }
 
-		int respuesta = JOptionPane.showConfirmDialog(
-		        this.frame,
-		        "Are you sure you want to log out?",
-		        "Confirm log out",
-		        JOptionPane.YES_NO_OPTION,
-		        JOptionPane.QUESTION_MESSAGE
-		);
+    private void abrirWelcome() {
 
-		if (respuesta == JOptionPane.YES_OPTION) {
-	        this.vista.setVisible(false);
-	        this.frame.getWelcomePanel().setVisible(true);
+        int respuesta =
+                JOptionPane.showConfirmDialog(this.frame, "Are you sure you want to log out?", "Confirm log out",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-	        this.frame.revalidate();
-	        this.frame.repaint();
-	    }
-	}
+        if (respuesta == JOptionPane.YES_OPTION) {
+            this.frame.changeVisibleCard("WELCOME");
+        }
+    }
 
+    private void abrirSignUp() {
 
-	private void abrirSignUp() {
+        //SignupP signUp = frame.getSignupPanel();
 
-	    //SignupP signUp = frame.getSignupPanel();
-
-	    //new SignupC(frame, Store.getInstance());
+        //new SignupC(frame, Store.getInstance());
 
         frame.changeVisibleCard("SIGNUP");
 
@@ -79,21 +78,19 @@ public class BannerUnregisteredC {
 
 	    this.frame.getContentPane().revalidate();
 	    this.frame.getContentPane().repaint();*/
-	}
+    }
 
+    private void abrirPaginaPrincipal() {
 
-	private void abrirPaginaPrincipal() {
+        UnregisteredMainP pagPrin = frame.getUnregisteredMainPanel();
 
-	    //UnregisteredMainP pagPrin = frame.getUnregisteredMainPanel();
+        new UnregisteredMainC(frame, Store.getInstance());
+        new UnregisteredMainC(frame, Store.getInstance());
 
-	    //new UnregisteredMainC(pagPrin, user);
-	    //new UnregisteredMainC(frame, Store.getInstance());
+        frame.changeVisibleCard("UNREGISTERED_MAIN");
+    }
 
-	    frame.getUnregisteredMainPanel().setVisible(true);
-	}
-
-
-	private void abrirCarritoDelCliente() {
+    private void abrirCarritoDelCliente() {
 
         // 1. Crear la vista del carrito
         CarritoP carritoVista = new CarritoP();

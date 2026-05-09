@@ -1,37 +1,28 @@
 package view.miniPanels;
 
+import model.user.Employee;
+
+import javax.swing.*;
+import javax.swing.text.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-
-import model.user.Employee;
-
-public class EmployeeMini extends JPanel{
-	private final JButton gestionar = new JButton("Gestionar");
+public class EmployeeMini extends MiniPanel {
+    private final JButton gestionar = new JButton("Gestionar");
     private final Employee emp;
     private final JTextPane employeeInfo = new JTextPane();
     private final JLabel employeeIcon;
 
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public EmployeeMini(Employee emp, int index) throws BadLocationException {
-    	super();
+        super();
 
-    	this.emp = emp;
-    	int width = 350;
+        this.emp = emp;
+        int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
         this.setPreferredSize(new Dimension(350, 60));
@@ -73,12 +64,12 @@ public class EmployeeMini extends JPanel{
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
-    public JTextPane getPackInfo() {
-        return this.employeeInfo;
-    }
-
     public Employee getEmployee() {
         return this.emp;
+    }
+
+    public JTextPane getPackInfo() {
+        return this.employeeInfo;
     }
 
     /**

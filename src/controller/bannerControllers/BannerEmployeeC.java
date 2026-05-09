@@ -1,14 +1,14 @@
 package controller.bannerControllers;
 
-import java.awt.Window;
-
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
-import controller.*;
+import controller.employeeControllers.*;
+import controller.notifications.NotificacionesC;
 import model.user.Employee;
 import view.*;
 import view.banners.BannerEmployee;
+import view.employeePanels.*;
+import view.notifications.NotificacionP;
 
 public class BannerEmployeeC {
 
@@ -17,9 +17,10 @@ public class BannerEmployeeC {
 	private App frame;
 
 	/**
+	 *
 	 * @param vista
 	 * @param user
-	 * @param app
+	 * @param frame
 	 */
 	public BannerEmployeeC(BannerEmployee vista, Employee user, App frame) {
 		this.vista = vista;
@@ -136,7 +137,7 @@ public class BannerEmployeeC {
 
 	private void abrirPerfil() {
 
-	    EmployeeProfile profile = new EmployeeProfile(vista);
+	    EmployeeProfile profile = new EmployeeProfile();
 
 	    new EmployeeProfileC(profile, user);
 

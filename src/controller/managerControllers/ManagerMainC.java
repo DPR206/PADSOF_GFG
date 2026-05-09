@@ -9,6 +9,7 @@ import view.managerPanels.ManagerMainP;
 import view.managerPanels.ManagerNewProduct;
 import controller.managerControllers.ManagerGestionarEmpleadosC;
 
+import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,7 +23,7 @@ public class ManagerMainC implements ActionListener {
     private final ManagerNewProduct mnproduct;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public ManagerMainC(App frame, Store model) {
+    public ManagerMainC(App frame, Store model) throws BadLocationException {
         this.frame = frame;
         this.view = frame.getManagerMainPanel();
         this.model = model;

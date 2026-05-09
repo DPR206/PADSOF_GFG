@@ -3,6 +3,7 @@ package view;
 import model.product.StoreProduct;
 import model.user.UnregisteredClient;
 import view.browserPanels.BrowseStoreP;
+import view.clientPanels.SearchPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +25,7 @@ public class UnregisteredMainPrueba extends JPanel {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public UnregisteredMainPrueba() {
-        
+
         /*this.mainU = mainU;
         this.productSearch = new JPanel();
         this.productSearch.setLayout(new BorderLayout());
@@ -38,18 +39,18 @@ public class UnregisteredMainPrueba extends JPanel {
 
     private void configurarEstructura() {
     	this.setLayout(new BorderLayout());
-    	
+
     	others = new JPanel(new BorderLayout());
-    	
+
     	JPanel botones = new JPanel(new GridLayout(0, 2));
     	botones.add(this.search);
         botones.add(this.filters);
         //this.add(botones, BorderLayout.NORTH);
-        
+
         others.add(botones, BorderLayout.SOUTH);
-        
+
         bottom = new JPanel(cardLayout);
-        
+
         others.add(bottom, BorderLayout.SOUTH);
 	}
 
@@ -58,7 +59,7 @@ public class UnregisteredMainPrueba extends JPanel {
     public BrowseStoreP getBrowsePanel() {
         return this.searchingP;
     }
-    
+
     public SearchPanel getFilterPanel() {
         return this.filterP;
     }
@@ -68,7 +69,7 @@ public class UnregisteredMainPrueba extends JPanel {
         this.search.addActionListener(e);
 
     }
-    
+
     /**
 	 * @return the filterP
 	 */
@@ -129,9 +130,9 @@ public class UnregisteredMainPrueba extends JPanel {
         // El controlador decide qué panel inyectar aquí
         this.bottom.add(panel, nombre);
         this.cardLayout.show(bottom, nombre);
-        
+
         this.revalidate();
         this.repaint();
     }
-  
+
 }

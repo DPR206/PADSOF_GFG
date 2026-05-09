@@ -1,16 +1,18 @@
 package controller;
 
 import controller.browserControllers.BrowseStoreC;
+import controller.clientControllers.SearcherC;
 import model.product.StoreProduct;
 import model.store.Store;
-import model.user.*;
+import model.user.UnregisteredClient;
 import view.App;
-import view.SearchPanel;
-import view.UnregisteredMainP;
 import view.browserPanels.BrowseStoreP;
+import view.clientPanels.SearchPanel;
+import view.clientPanels.UnregisteredMainP;
 
 import javax.swing.text.BadLocationException;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class UnregisteredMainPruebaC implements ActionListener {
@@ -31,28 +33,28 @@ public class UnregisteredMainPruebaC implements ActionListener {
     }
 
     private void inicializar() {
-    	List<StoreProduct> productos = Store.getInstance().getStoreProductList();
-		
-    	view.getSearch().addActionListener(e -> {
-    		try {
-                this.view.setSearchingP(new BrowseStoreP(frame));
-                this.view.getSearchingP().setVisible(false);
+        List<StoreProduct> productos = Store.getInstance().getStoreProductList();
+
+        view.getSearch().addActionListener(e -> {
+            try {
+                this.view.setSearching(new BrowseStoreP(frame));
+                this.view.getSearching().setVisible(false);
             } catch (BadLocationException exc) {
                 exc.printStackTrace();
             }
-    		
-    		this.view.setP(this.user.searchStoreProduct());
-    		this.view.setPanelInferior(this.view.getBrowsePanel(), "Search");
-    		
-    	});
-    	
-    	view.getFilters().addActionListener(e -> {
-    		this.view.setFilterP(new SearchPanel());
-    		this.view.setPanelInferior(view.getFilterP(), "Filters");
-    	});
-	}
 
-	public void updateControllers() {
+            this.view.setP(this.user.searchStoreProduct());
+            this.view.setPanelInferior(this.view.getBrowsePanel(), "Search");
+
+        });
+
+        view.getFilters().addActionListener(e -> {
+            this.view.setFilterP(new SearchPanel());
+            this.view.setPanelInferior(view.getFilterP(), "Filters");
+        });
+    }
+
+    public void updateControllers() {
         view.getBrowsePanel().setController(new BrowseStoreC(frame, model, view.getBrowsePanel()));
         view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
 

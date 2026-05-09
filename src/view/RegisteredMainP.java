@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class RegisteredMainP extends JPanel {
-    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+	
+    private static final long serialVersionUID = 1L;
+
+	/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public RegisteredMainP() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
 

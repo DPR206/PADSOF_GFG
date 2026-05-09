@@ -1,6 +1,6 @@
 package controller.browserControllers;
 
-import controller.miniControllers.SecondHandMiniC;
+import controller.miniControllers.SecondHandAddToOfferMiniC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
@@ -26,7 +26,7 @@ public class BrowseSomeonesWalletC extends BrowserController<SecondHandProduct> 
     public void updateControllers() {
         for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
             miniPanel.setController(
-                    new SecondHandMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
+                    new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
                             super.getView()));
         }
     }

@@ -58,10 +58,18 @@ public abstract class MainLoopSelector {
         }
     }
 
+    /**
+     * It gets the controller's frame
+     * @return the controller's frame
+     */
     public App getFrame() {
         return frame;
     }
 
+    /**
+     * It gets the controller's model
+     * @return the controller's model
+     */
     public Store getModel() {
         return model;
     }

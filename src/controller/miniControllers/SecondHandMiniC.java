@@ -7,11 +7,10 @@ import view.App;
 import view.browserPanels.BrowserPanel;
 import view.miniPanels.SecondHandMiniP;
 
-import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SecondHandMiniC implements ActionListener {
+public abstract class SecondHandMiniC implements ActionListener {
     private final SecondHandMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -34,36 +33,29 @@ public class SecondHandMiniC implements ActionListener {
         this.browserController = browserController;
         this.browserPanel = browserPanel;
 
-        view.getProductImage().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
-                }
-            }
-        });
-
-        view.getProductInfo().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
-                }
-            }
-        });
+        //NOTE: Los mouseListeners y keyListeners los asigna las clases que hereden es esta
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Add to Offer")) {
-            //DUE: Aceptar oferta
-            JOptionPane.showMessageDialog(frame, view.getSecondHandProduct().getName() + " was added to the Offer",
-                    "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
-            try {
-                browserPanel.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            browserController.updateControllers();
-        }
+    public abstract void actionPerformed(ActionEvent e);
 
+    public BrowserController<SecondHandProduct> getBrowserController() {
+        return browserController;
+    }
+
+    public BrowserPanel<SecondHandProduct> getBrowserPanel() {
+        return browserPanel;
+    }
+
+    public App getFrame() {
+        return frame;
+    }
+
+    public Store getModel() {
+        return model;
+    }
+
+    public SecondHandMiniP getView() {
+        return view;
     }
 }

@@ -38,16 +38,20 @@ public class ManagerMainC implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Packs")) {
-
+        	this.frame.addCard(this.mgp, "GEST_PACKS");
+        	this.frame.changeVisibleCard("GEST_PACKS");
         }
         else if(e.getActionCommand().equals("Productos nuevos")) {
-        	this.mgproduct.setVisible(true);
+        	this.frame.addCard(this.mgproduct, "NUEVOS_PRODUCTOS");
+        	this.frame.changeVisibleCard("NUEVOS_PRODUCTOS");
         }
         else if(e.getActionCommand().equals("Añadir productos")) {
-        	this.mnproduct.setVisible(true);
+        	this.frame.addCard(this.mnproduct, "CREAR_PRODUCTO");
+        	this.frame.changeVisibleCard("CREAR_PRODUCTO");
         }
         else if(e.getActionCommand().equals("Empleados")) {
-        	this.mge.setVisible(true);
+        	this.frame.addCard(this.mge, "GESTIONAR_EMPL");
+        	this.frame.changeVisibleCard("GESTIONAR_EMPL");
         }
         else if(e.getActionCommand().equals("Estadísticas")) {
         	//DUE

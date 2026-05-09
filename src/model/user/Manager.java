@@ -800,4 +800,9 @@ public class Manager extends User implements Serializable {
     	else if(perm.equals(Permission.EXCHANGE)) emp.setEp(null);
     	else if(perm.equals(Permission.ORDER)) emp.setOp(null);
     }
+
+	public void setUserName(String newName) {
+		this.setUserName(newName);
+		
+	}
 }

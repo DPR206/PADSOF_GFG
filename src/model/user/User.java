@@ -177,4 +177,11 @@ public abstract class User implements Serializable {
     public String getUserName() {
         return this.userName;
     }
+    
+    /**
+     * Sets the new name of the user
+     */
+    public void setUserName(String newName) {
+    	this.userName = newName;
+    }
 }

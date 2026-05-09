@@ -6,6 +6,7 @@ import view.App;
 import view.RegisteredMakeOfferP;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.browserPanels.BrowseWalletOwnersP;
+import view.miniPanels.MiniPanel;
 import view.miniPanels.UserMiniP;
 
 import javax.swing.text.BadLocationException;
@@ -38,8 +39,8 @@ public class BrowseWalletOwnersC implements ActionListener, BigController {
     }
 
     public void updateControllers() {
-        for (UserMiniP miniPanel : view.getUserPanels()) {
-            miniPanel.setController(new WalletOwnerMiniC(frame, model, miniPanel));
+        for (MiniPanel miniPanel : view.getMiniPanels()) {
+            miniPanel.setController(new WalletOwnerMiniC(frame, model, (UserMiniP) miniPanel));
         }
     }
 

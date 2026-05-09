@@ -42,8 +42,9 @@ public class WalletOwnerMiniC implements ActionListener {
             try {
                 BrowseSomeonesWalletP newView = new BrowseSomeonesWalletP(frame, view.getWalletOwner());
                 BrowseSomeonesWalletC controller = new BrowseSomeonesWalletC(frame, model, newView);
-                frame.addCard(newView, "BROWSE_SOMEONES_WALLET", controller);
-                frame.changeVisibleCard("BROWSE_SOMEONES_WALLET");
+                //frame.addCard(newView, "BROWSE_SOMEONES_WALLET", controller);
+                //frame.changeVisibleCard("BROWSE_SOMEONES_WALLET");
+                // DUE
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

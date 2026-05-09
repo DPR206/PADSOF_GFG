@@ -6,12 +6,20 @@ import view.App;
 
 import javax.swing.*;
 
-public class MainLoopSelector { // DUE: Hacer que sea abstract
+/**
+ * Auxiliary class for shared Login & Signup events
+ */
+public abstract class MainLoopSelector {
     private final App frame; /* view -> frame */
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
+    /**
+     * Constructor for the Main Loop Selector
+     * @param frame the frame to be used
+     * @param model the model to be used
+     */
     public MainLoopSelector(App frame, Store model) {
         this.frame = frame;
         this.model = model;

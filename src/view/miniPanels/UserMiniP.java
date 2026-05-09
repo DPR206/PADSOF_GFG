@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 import static main.Main.brownColour;
 
-public class UserMiniP extends JPanel {
+public class UserMiniP extends MiniPanel {
     private final JButton button;
     private final JLabel image;
     private final User user;

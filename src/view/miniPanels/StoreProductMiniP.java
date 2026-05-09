@@ -13,7 +13,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-public class StoreProductMiniP extends JPanel {
+public class StoreProductMiniP extends MiniPanel {
     private final JButton addToCart = new JButton("Add to Cart");
     private final StoreProduct storeProduct;
     private final JLabel productImage;

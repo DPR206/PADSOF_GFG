@@ -16,7 +16,9 @@ import java.util.List;
 
 import static main.Main.brownColour;
 
-public class BrowseStoreP extends JPanel implements BigView {
+// DUE: REVISAR LISTADO DOBLE EN BROWSER_PANEL
+
+public class BrowseStoreP extends JPanel {
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");

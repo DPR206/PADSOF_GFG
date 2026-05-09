@@ -1,39 +1,27 @@
 package view.miniPanels;
 
-import static main.Main.brownColour;
-import static view.ImageAdder.*;
+import model.product.Pack;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import javax.swing.text.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
+import static main.Main.brownColour;
+import static view.ImageAdder.getPackImagePanel;
+import static view.ImageAdder.getScaledImage;
 
-import model.product.Pack;
-import model.product.StoreProduct;
-
-public class PackMiniP extends JPanel{
-	private final JButton addToCart = new JButton("Add to Cart");
+public class PackMiniP extends MiniPanel {
+    private final JButton addToCart = new JButton("Add to Cart");
     private final Pack p;
     private final JTextPane packInfo;
     private final JPanel packImage;
-    
-    
 
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public PackMiniP(Pack p, int index) throws BadLocationException {
-    	super();
+        super();
 
-    	this.p = p;
+        this.p = p;
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
@@ -79,16 +67,16 @@ public class PackMiniP extends JPanel{
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    public Pack getPack() {
+        return p;
+    }
+
     public JPanel getPackImage() {
         return packImage;
     }
 
     public JTextPane getPackInfo() {
         return packInfo;
-    }
-
-    public Pack getPack() {
-        return p;
     }
 
     /**

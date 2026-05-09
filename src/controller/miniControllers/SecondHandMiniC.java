@@ -3,7 +3,7 @@ package controller.miniControllers;
 import controller.browserControllers.BigController;
 import model.store.Store;
 import view.App;
-import view.browserPanels.BigView;
+import view.browserPanels.BrowserPanel;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
@@ -15,7 +15,7 @@ public class SecondHandMiniC implements ActionListener {
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     private final BigController bigController;
-    private final BigView bigView;
+    private final BrowserPanel browserPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -24,12 +24,13 @@ public class SecondHandMiniC implements ActionListener {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public SecondHandMiniC(App frame, Store model, SecondHandMiniP view, BigController bigController, BigView bigView) {
+    public SecondHandMiniC(App frame, Store model, SecondHandMiniP view, BigController bigController,
+                           BrowserPanel browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;
         this.bigController = bigController;
-        this.bigView = bigView;
+        this.browserPanel = browserPanel;
 
         view.getProductImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -55,7 +56,7 @@ public class SecondHandMiniC implements ActionListener {
             JOptionPane.showMessageDialog(frame, view.getSecondHandProduct().getName() + " was added to the Offer",
                     "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
             try {
-                bigView.paintEverything();
+                browserPanel.paintEverything();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

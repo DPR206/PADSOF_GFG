@@ -1,29 +1,18 @@
 package view.miniPanels;
 
+import model.product.StoreProduct;
+
+import javax.swing.*;
+import javax.swing.text.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-
-import model.product.StoreProduct;
-
-public class StoreProductMiniDelete extends JPanel{
-	private final JButton addToCart = new JButton("ELIMINAR DEL PACK");
+public class StoreProductMiniDelete extends MiniPanel {
+    private final JButton addToCart = new JButton("ELIMINAR DEL PACK");
     private final StoreProduct storeProduct;
     private final JLabel productImage;
     private final JTextPane productInfo;

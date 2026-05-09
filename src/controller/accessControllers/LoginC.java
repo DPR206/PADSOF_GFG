@@ -27,6 +27,7 @@ public class LoginC extends MainLoopSelector implements ActionListener {
         super(frame, model);
         this.view = frame.getLoginPanel();
 
+        /* Enter to press key */
         view.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {

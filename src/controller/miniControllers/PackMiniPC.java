@@ -14,9 +14,8 @@ import model.user.RegisteredClient;
 import model.user.UnregisteredClient;
 import model.user.UserType;
 import view.App;
-import view.browserPanels.BigView;
+import view.browserPanels.BrowserPanel;
 import view.miniPanels.PackMiniP;
-import view.miniPanels.StoreProductMiniP;
 
 public class PackMiniPC implements ActionListener{
 
@@ -24,16 +23,16 @@ public class PackMiniPC implements ActionListener{
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     private final BigController bigController;
-    private final BigView bigView;
+    private final BrowserPanel browserPanel;
 
     public PackMiniPC(App frame, Store model, PackMiniP view, BigController bigController,
-            BigView bigView)
+            BrowserPanel browserPanel)
     {
     	this.frame = frame;
     	this.view = view;
     	this.model = model;
     	this.bigController = bigController;
-    	this.bigView = bigView;
+    	this.browserPanel = browserPanel;
 
     	view.getPackImage().addMouseListener(new MouseAdapter() {
     		public void mouseClicked(MouseEvent e) {
@@ -64,7 +63,7 @@ public class PackMiniPC implements ActionListener{
             JOptionPane.showMessageDialog(frame, view.getPack().getId() + " was added to Cart",
                     "Added To Cart", JOptionPane.INFORMATION_MESSAGE);
             try {
-                bigView.paintEverything();
+                browserPanel.paintEverything();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

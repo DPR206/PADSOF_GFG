@@ -19,6 +19,7 @@ import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.io.Serial;
 import java.util.*;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import java.util.List;
  * @version 1.0
  */
 public class App extends JFrame {
+    @Serial
     private static final long serialVersionUID = 1L;
     private final WelcomeP welcomePanel;
     private final LoginP loginPanel;
@@ -36,20 +38,13 @@ public class App extends JFrame {
     private final RegisteredMainP registeredMainPanel;
     private final EmployeeMainP employeeMainPanel;
     private final ManagerMainP managerMainPanel;
-    private final BannerUnregistered bannerUnregisteredPanel;
-    private final BannerRegistered bannerRegisteredPanel;
-    private final BannerEmployee bannerEmployeePanel;
-    private final BannerManager bannerManagerPanel;
     private final SearchPanel searchPanel;
-    private final Container container;
+    //private final GridBagConstraints gbc;
+    private final JPanel cards;
+    private final JPanel banners;
+    private final Map<String, JPanel> allPanels = new HashMap<>();
     private String lastShownPanel;
     private String currentShownPanel;
-    //private final GridBagConstraints gbc;
-    private JPanel cards;
-    private JPanel banners;
-    private Map<String, JPanel> allPanels = new HashMap<>();
-    //private final BrowseStoreP browseStorePanel;
-    // Aquí se declaran todos los paneles de vista como atributos
     private User mainUser = new UnregisteredClient(true);
     private List<StoreProduct> products = Store.getInstance().getStoreProductList();
     private List<Pack> packs = Store.getInstance().getPacks();
@@ -70,10 +65,10 @@ public class App extends JFrame {
         managerMainPanel = new ManagerMainP();
         searchPanel = new SearchPanel();
 
-        bannerUnregisteredPanel = new BannerUnregistered();
-        bannerRegisteredPanel = new BannerRegistered();
-        bannerEmployeePanel = new BannerEmployee();
-        bannerManagerPanel = new BannerManager();
+        BannerUnregistered bannerUnregisteredPanel = new BannerUnregistered();
+        BannerRegistered bannerRegisteredPanel = new BannerRegistered();
+        BannerEmployee bannerEmployeePanel = new BannerEmployee();
+        BannerManager bannerManagerPanel = new BannerManager();
 
         /* Model */
         Store model = Store.getInstance();
@@ -109,7 +104,7 @@ public class App extends JFrame {
         bgPanel.setLayout(new BorderLayout());
         this.setContentPane(bgPanel);
 
-        container = this.getContentPane();
+        Container container = this.getContentPane();
         container.setLayout(new BorderLayout());
         //container.setBackground(new Color(246, 243, 238)); // Beige
 //        gbc = new GridBagConstraints();
@@ -230,10 +225,6 @@ public class App extends JFrame {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-    /*public BrowseStoreP getBrowseStorePanel() {
-        return browseStorePanel;
-    }*/
-    // Aquí van los getters de los atributos
     public App getApp() {
         return this;
     }

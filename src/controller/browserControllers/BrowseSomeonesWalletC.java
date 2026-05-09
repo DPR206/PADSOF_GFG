@@ -4,6 +4,7 @@ import controller.miniControllers.SecondHandMiniC;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseSomeonesWalletP;
+import view.miniPanels.MiniPanel;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.text.BadLocationException;
@@ -31,8 +32,8 @@ public class BrowseSomeonesWalletC implements ActionListener, BigController {
     }
 
     public void updateControllers() {
-        for (SecondHandMiniP miniPanel : view.getProductPanels()) {
-            miniPanel.setController(new SecondHandMiniC(frame, model, miniPanel, this, view));
+        for (MiniPanel miniPanel : view.getMiniPanels()) {
+            miniPanel.setController(new SecondHandMiniC(frame, model, (SecondHandMiniP) miniPanel, this, view));
         }
     }
 

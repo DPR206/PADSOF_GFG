@@ -42,6 +42,7 @@ public class ManagerGestionarEmpleados extends JPanel{
     	mainThings.setLayout(new BoxLayout(mainThings, BoxLayout.Y_AXIS));
     	
     	List<Employee> emps = Store.getInstance().getEmployeeList();
+    	System.out.print(emps);
     	
     	JScrollPane scroll = new JScrollPane(mainThings);
     	
@@ -98,7 +99,7 @@ public class ManagerGestionarEmpleados extends JPanel{
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
     	
-    	this.add(scroll, BorderLayout.WEST);
+    	this.add(scroll, BorderLayout.CENTER);
     	this.add(panel, BorderLayout.EAST);
     	
 	}	

@@ -26,28 +26,29 @@ public class ManagerMainC implements ActionListener {
         this.view = frame.getManagerMainPanel();
         this.model = model;
         this.mge = new ManagerGestionarEmpleados(this.frame);
-        this.frame.addCard
         this.mgp = new ManagerGestionarPacks(this.frame);
-        this.mgp.setVisible(false);
+        
         this.mgproduct = new ManagerGestionarProductos(this.frame);
-        this.mgproduct.setVisible(false);
         this.mnproduct = new ManagerNewProduct();
-        this.mnproduct.setVisible(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Packs")) {
-        	
+        	this.frame.addCard(mge, "GESTIONAR_PACKS");
+        	this.frame.changeVisibleCard("GESTIONAR_PACKS");
         }
         else if(e.getActionCommand().equals("Productos nuevos")) {
-        	this.mgproduct.setVisible(true);
+        	this.frame.addCard(mgproduct, "GESTIONAR_PRODUCTOS");
+        	this.frame.changeVisibleCard("GESTIONAR_PRODUCTOS");
         }
         else if(e.getActionCommand().equals("Añadir productos")) {
-        	this.mnproduct.setVisible(true);
+        	this.frame.addCard(mnproduct, "CREAR_PRODUCTO");
+        	this.frame.changeVisibleCard("CREAR_PRODUCTO");
         }
         else if(e.getActionCommand().equals("Empleados")) {
-        	this.mge.setVisible(true);
+        	this.frame.addCard(mge, "GESTIONAR_EMPLEADOS");
+        	this.frame.changeVisibleCard("GESTIONAR_EMPLEADOS");
         }
         else if(e.getActionCommand().equals("Estadísticas")) {
         	//DUE

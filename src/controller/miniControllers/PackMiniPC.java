@@ -38,7 +38,7 @@ public class PackMiniPC implements ActionListener{
     	view.getPackImage().addMouseListener(new MouseAdapter() {
     		public void mouseClicked(MouseEvent e) {
     			if (e.getClickCount() == 2) {
-    				frame.changeVisibleCard
+    				//un momento
     			}
     		}
     	});

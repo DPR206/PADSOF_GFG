@@ -22,7 +22,7 @@ public class BrowsePacks extends BrowserPanel<Pack> {
     @Override
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        getMiniPanels().clear();
+        
 
         super.setItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
 

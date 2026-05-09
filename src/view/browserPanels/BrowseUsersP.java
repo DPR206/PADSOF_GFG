@@ -36,7 +36,7 @@ public class BrowseUsersP extends BrowserPanel<User> {
      */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        getMiniPanels().clear();
+        
 
         // Item list was set in constructor
 

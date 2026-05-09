@@ -26,7 +26,6 @@ public class BrowseSecondHandProductsP extends BrowserPanel<SecondHandProduct> {
     @Override
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        getMiniPanels().clear();
 
         super.setItemList(Store.getInstance().getSecondHandProductList()); // DUE: Esto debe darlo el controlador
 

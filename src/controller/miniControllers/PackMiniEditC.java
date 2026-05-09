@@ -1,9 +1,9 @@
 package controller.miniControllers;
 
-import controller.browserControllers.BigController;
+import controller.browserControllers.BrowserController;
 import model.store.Store;
 import view.App;
-import view.SPManageIndividualPack;
+import view.employeePanels.SPManageIndividualPack;
 import view.browserPanels.BrowserPanel;
 import view.miniPanels.PackMiniEdit;
 
@@ -15,17 +15,17 @@ public class PackMiniEditC implements ActionListener {
     private App frame;
     private Store model;
     private PackMiniEdit view;
-    private BigController bigController;
+    private BrowserController browserController;
     private BrowserPanel browserPanel;
     private SPManageIndividualPack spm;
 
 /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniEditC(App frame, Store model, PackMiniEdit view, BigController bigController,
+    public PackMiniEditC(App frame, Store model, PackMiniEdit view, BrowserController browserController,
                          BrowserPanel browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;
-        this.bigController = bigController;
+        this.browserController = browserController;
         this.browserPanel = browserPanel;
         this.spm = new SPManageIndividualPack(this.view.getPack());
 

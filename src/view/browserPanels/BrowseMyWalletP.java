@@ -29,7 +29,7 @@ public class BrowseMyWalletP extends BrowserPanel<SecondHandProduct> {
     @Override
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        getMiniPanels().clear();
+        
 
         JLabel title = new JLabel("My wallet'");
         title.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));

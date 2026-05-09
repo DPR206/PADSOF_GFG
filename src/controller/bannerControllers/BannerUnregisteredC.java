@@ -1,10 +1,12 @@
 package controller.bannerControllers;
 
-import controller.UnregisteredMainC;
+import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
 import model.user.User;
-import view.*;
+import view.App;
 import view.banners.BannerUnregistered;
+import view.clientPanels.CarritoP;
+import view.clientPanels.UnregisteredMainP;
 
 import javax.swing.*;
 
@@ -59,12 +61,7 @@ public class BannerUnregisteredC {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (respuesta == JOptionPane.YES_OPTION) {
-//	        this.vista.setVisible(false);
-//	        this.frame.getWelcomePanel().setVisible(true);
             this.frame.changeVisibleCard("WELCOME");
-//
-//            this.frame.revalidate();
-//            this.frame.repaint();
         }
     }
 

@@ -11,6 +11,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Browser panel.
+ * @param <G> the type parameter
+ */
 public abstract class BrowserPanel<G> extends JPanel {
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
@@ -23,6 +27,11 @@ public abstract class BrowserPanel<G> extends JPanel {
     private List<G> itemList = new ArrayList<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Browser panel.
+     * @param app the app
+     */
     public BrowserPanel(App app) {
         this.app = app;
         currentPageNum = 1;
@@ -35,7 +44,13 @@ public abstract class BrowserPanel<G> extends JPanel {
      */
     public abstract void paintEverything() throws BadLocationException;
 
+    /**
+     * Add all mini panels.
+     * @throws BadLocationException the bad location exception
+     */
     public void addAllMiniPanels() throws BadLocationException {
+        miniPanels.clear();
+
         List<G> currentItemList = pager.pageItemList(itemList, currentPageNum);
 
         int index = 1;
@@ -45,16 +60,34 @@ public abstract class BrowserPanel<G> extends JPanel {
         }
     }
 
+    /**
+     * Add mini panel.
+     * @param item  the item
+     * @param index the index
+     * @throws BadLocationException the bad location exception
+     */
     public abstract void addMiniPanel(G item, int index) throws BadLocationException;
 
+    /**
+     * Add mini panel.
+     * @param newMiniPanel the new mini panel
+     */
     public void addMiniPanel(MiniPanel newMiniPanel) {
         this.miniPanels.add(newMiniPanel);
     }
 
+    /**
+     * Gets app.
+     * @return the app
+     */
     public App getApp() {
         return app;
     }
 
+    /**
+     * Gets current page num.
+     * @return the current page num
+     */
     public int getCurrentPageNum() {
         return currentPageNum;
     }
@@ -70,22 +103,6 @@ public abstract class BrowserPanel<G> extends JPanel {
         paintEverything();
     }
 
-    public JButton getFirstPage() {
-        return firstPage;
-    }
-
-    public List<G> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<G> newItemList) {
-        this.itemList = newItemList;
-    }
-
-    public JButton getLastPage() {
-        return lastPage;
-    }
-
     /**
      * It gets the available store product list's max page number
      * @return the available store product list's max page number
@@ -94,18 +111,26 @@ public abstract class BrowserPanel<G> extends JPanel {
         return pager.getMaxPageNum(itemList);
     }
 
+    /**
+     * Gets mini panels.
+     * @return the mini panels
+     */
     public List<MiniPanel> getMiniPanels() {
         return miniPanels;
     }
 
+    /**
+     * Sets mini panels.
+     * @param newMiniPanels the new mini panels
+     */
     public void setMiniPanels(List<MiniPanel> newMiniPanels) {
         this.miniPanels = newMiniPanels;
     }
 
-    public JButton getNextPage() {
-        return nextPage;
-    }
-
+    /**
+     * Gets page turner.
+     * @return the page turner
+     */
     public JPanel getPageTurner() {
 
         JPanel pageTurner = new JPanel(new FlowLayout());
@@ -114,17 +139,25 @@ public abstract class BrowserPanel<G> extends JPanel {
             pageTurner.add(previousPage);
         }
         pageTurner.add(new JLabel("Page " + currentPageNum));
-        if (currentPageNum != pager.getMaxPageNum(itemList)) {
+        if (currentPageNum != getMaxPageNum()) {
             pageTurner.add(nextPage);
             pageTurner.add(lastPage);
         }
         return pageTurner;
     }
 
+    /**
+     * Gets pager.
+     * @return the pager
+     */
     public BetterPager<G> getPager() {
         return pager;
     }
 
+    /**
+     * Gets previous page.
+     * @return the previous page
+     */
     public JButton getPreviousPage() {
         return previousPage;
     }
@@ -143,5 +176,13 @@ public abstract class BrowserPanel<G> extends JPanel {
         previousPage.addActionListener(c);
         nextPage.addActionListener(c);
         lastPage.addActionListener(c);
+    }
+
+    /**
+     * Sets item list.
+     * @param newItemList the new item list
+     */
+    public void setItemList(List<G> newItemList) {
+        this.itemList = newItemList;
     }
 }

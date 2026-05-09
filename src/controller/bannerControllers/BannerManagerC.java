@@ -1,10 +1,10 @@
 package controller.bannerControllers;
 
 import javax.swing.JOptionPane;
-import controller.ManagerProfileC;
+import controller.managerControllers.ManagerProfileC;
 import model.store.Store;
 import view.App;
-import view.ManagerProfile;
+import view.managerPanels.ManagerProfile;
 import view.banners.BannerManager;
 
 public class BannerManagerC {

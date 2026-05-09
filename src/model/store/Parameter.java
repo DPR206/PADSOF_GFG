@@ -55,7 +55,7 @@ public class Parameter implements Serializable {
         /* scoreWeight = a*<score> + b */
         this.scoreAParam = 0.5;
         this.scoreBParam = 0.5;
-        this.itemsPerPage = 9;
+        this.itemsPerPage = 8;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

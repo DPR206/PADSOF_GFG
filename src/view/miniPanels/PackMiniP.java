@@ -17,7 +17,7 @@ public class PackMiniP extends MiniPanel {
     private final JTextPane packInfo;
     private final JPanel packImage;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public PackMiniP(Pack p, int index) throws BadLocationException {
         super();
 
@@ -38,7 +38,7 @@ public class PackMiniP extends MiniPanel {
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
         StyleConstants.setBold(attributes, true);
         packInfo.setCharacterAttributes(attributes, true);
-        packInfo.setText(p.getId() + "\n");
+        packInfo.setText("PACK " + p.getId() + "\n");
 
         attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
@@ -47,7 +47,7 @@ public class PackMiniP extends MiniPanel {
         doc.insertString(doc.getLength(), // DUE Añadir descuento
                 ("Price: " + String.format("%.2f", this.p.getPrice()) + " €\n"), attributes);
 
-        packInfo.setPreferredSize(new Dimension(width, height));
+        packInfo.setPreferredSize(new Dimension(width + 16, height));
 
         JTextPane indexNum = new JTextPane();
         indexNum.setEditable(false);

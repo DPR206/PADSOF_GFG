@@ -25,7 +25,8 @@ public class EmployeeMini extends MiniPanel {
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
-
+        this.setPreferredSize(new Dimension(350, 60));
+        this.setMaximumSize(new Dimension(350, 60));
         this.employeeIcon = getImageLabel(".\\resources\\app\\default_user.png", height, width);
         gestionar.setPreferredSize(new Dimension(125, height));
         gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));

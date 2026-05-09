@@ -631,7 +631,7 @@ public class Manager extends User implements Serializable {
      */
     public void addEmployee(Employee e) {
         //this.s.addUser(e);
-        this.s.getEmployeeList().add(e);
+        this.s.getEmployees().put(e.getId(), e);
     }
 
     /**

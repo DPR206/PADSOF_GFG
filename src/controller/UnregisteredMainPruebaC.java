@@ -2,13 +2,17 @@ package controller;
 
 import controller.browserControllers.BrowseStoreC;
 import controller.clientControllers.*;
+
 import model.store.Store;
-import model.user.*;
+import model.user.UnregisteredClient;
 import view.App;
-import view.browserPanels.*;
+
 import view.UnregisteredMainPrueba;
 
+import view.browserPanels.BrowseStoreP;
+
 import javax.swing.text.BadLocationException;
+
 
 public class UnregisteredMainPruebaC {
     private final UnregisteredMainPrueba view; /* view -> panel */
@@ -28,12 +32,14 @@ public class UnregisteredMainPruebaC {
     }
 
     private void inicializar() {
+
     	//List<StoreProduct> productos = Store.getInstance().getStoreProductList();
 		
     	view.getSearch().addActionListener(e -> {
     		try {
                 this.view.setSearchingP(new BrowseStoreP(frame));
                 this.view.getSearchingP().setVisible(false);
+
             } catch (BadLocationException exc) {
                 exc.printStackTrace();
             }
@@ -59,4 +65,11 @@ public class UnregisteredMainPruebaC {
         new BrowseStoreC(frame, model, view.getBrowsePanel());
         new SearcherC(frame, model, view.getFilterPanel());
     }
+
+    public void updateControllers() {
+        view.getBrowsePanel().setController(new BrowseStoreC(frame, model, view.getBrowsePanel()));
+        view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
+
+    }
+
 }

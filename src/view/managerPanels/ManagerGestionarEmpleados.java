@@ -21,56 +21,48 @@ import javax.swing.text.BadLocationException;
 import model.store.Store;
 import view.App;
 import view.miniPanels.EmployeeMini;
-
 import model.user.Employee;
 
-public class ManagerGestionarEmpleados extends JPanel{
-	private JButton newEmployee = new JButton("Crear nuevo empleado");
-	private JCheckBox storeP = new JCheckBox("Trabajar con productos");
-	private JCheckBox orderP = new JCheckBox("Trabajar con pedidos");
-	private JCheckBox exchangeP = new JCheckBox("Trabajar con intercambios");
-	public ManagerGestionarEmpleados(App app) {
-		super();
+public class ManagerGestionarEmpleados extends JPanel {
+    private JButton newEmployee;
+    private JCheckBox storeP = new JCheckBox("Trabajar con productos");
+    private JCheckBox orderP = new JCheckBox("Trabajar con pedidos");
+    private JCheckBox exchangeP = new JCheckBox("Trabajar con intercambios");
 
-		this.setLayout(new BorderLayout());
+    private JTextField userName = new JTextField();
+    private JPasswordField pwd = new JPasswordField();
+    private JPanel mainThings = new JPanel();
 
-		JPanel mainThings = new JPanel();
-    	mainThings.setLayout(new BoxLayout(mainThings, BoxLayout.Y_AXIS));
+    public ManagerGestionarEmpleados(App app) {
+        super();
 
-    	List<Employee> emps = Store.getInstance().getEmployeeList();
+        this.setLayout(new BorderLayout());
 
-    	JScrollPane scroll = new JScrollPane(mainThings);
+        mainThings.setLayout(new BoxLayout(mainThings, BoxLayout.Y_AXIS));
+        mainThings.setOpaque(true);
 
-    	int index = 1;
+        JScrollPane scroll = new JScrollPane(mainThings);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setPreferredSize(new Dimension(450, 0));
 
-    	for(Employee emp: emps) {
-    		try {
-				mainThings.add(new EmployeeMini(emp, index));
-				index++;
-			} catch (BadLocationException e) {
-				e.printStackTrace();
-			}
-    	}
+        this.newEmployee = new JButton("AÑADIR");
+        this.newEmployee.setPreferredSize(new Dimension(120, 30));
 
-    	this.newEmployee.setPreferredSize(new Dimension(120, 30));
-
-    	JPanel panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Usuario
         panel.add(new JLabel("Nombre de usuario:"));
-        JTextField usuario = new JTextField();
-        usuario.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        panel.add(usuario);
+        this.userName.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        panel.add(this.userName);
 
         // Espacio
         panel.add(Box.createVerticalStrut(10));
 
         // Contraseña
         panel.add(new JLabel("Contraseña:"));
-        JPasswordField password = new JPasswordField();
-        password.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        panel.add(password);
+        this.pwd.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        panel.add(this.pwd);
 
         panel.add(Box.createVerticalStrut(10));
 
@@ -85,21 +77,61 @@ public class ManagerGestionarEmpleados extends JPanel{
 
         // Botón alineado a la derecha
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton boton = new JButton("AÑADIR");
-        panelBoton.add(boton);
-
+        panelBoton.add(this.newEmployee);
+		
         panel.add(panelBoton);
 
         // Márgenes
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
+        this.add(scroll, BorderLayout.CENTER);
+        this.add(panel, BorderLayout.EAST);
 
-    	this.add(scroll, BorderLayout.WEST);
-    	this.add(panel, BorderLayout.EAST);
+        refresh();
+    }
 
-	}
+    public void setController(ActionListener c) {
+        this.newEmployee.addActionListener(c);
+    }
 
-	public void setController(ActionListener c) {
-		this.newEmployee.addActionListener(c);
-	}
+    public JCheckBox getStoreP() {
+        return storeP;
+    }
+
+    public JCheckBox getOrderP() {
+        return orderP;
+    }
+
+    public JCheckBox getExchangeP() {
+        return exchangeP;
+    }
+
+    public JTextField getUserName() {
+        return userName;
+    }
+
+    public JPasswordField getPwd() {
+        return pwd;
+    }
+
+    public void refresh() {
+        mainThings.removeAll(); // Limpia la lista actual
+
+        List<Employee> emps = Store.getInstance().getEmployeeList();
+        int index = 1;
+
+        for (Employee emp : emps) {
+            mainThings.add(new EmployeeMini(emp, index));
+            index++;
+        }
+
+        if (emps.isEmpty()) {
+            JLabel emptyLabel = new JLabel("No hay empleados para mostrar.");
+            emptyLabel.setAlignmentX(LEFT_ALIGNMENT);
+            mainThings.add(emptyLabel);
+        }
+
+        mainThings.revalidate();
+        mainThings.repaint();
+    }
 }

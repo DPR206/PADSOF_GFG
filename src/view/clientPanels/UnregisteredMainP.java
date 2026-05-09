@@ -14,12 +14,11 @@ import java.util.List;
 
 public class UnregisteredMainP extends JPanel {
     private static final long serialVersionUID = 1L;
+    JPanel bottom;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
-    private JScrollPane scrolling;
     private SearchPanel filterP = new SearchPanel();
     private BrowseStoreP searching;
-    private JPanel products;
     private JPanel productSearch;
     private List<StoreProduct> p;
     private UnregisteredClient mainU;
@@ -63,9 +62,9 @@ public class UnregisteredMainP extends JPanel {
 
         this.add(others, BorderLayout.CENTER);
 
-        JPanel bottom = new JPanel(new CardLayout());
+        bottom = new JPanel(new CardLayout());
         bottom.add(this.searching, "Search");
-        bottom.add(this.filterP, "Search");
+        bottom.add(this.filterP, "Filters");
         others.add(bottom, BorderLayout.SOUTH);
 
         revalidate();
@@ -73,18 +72,85 @@ public class UnregisteredMainP extends JPanel {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App newApp) {
+        this.app = newApp;
+    }
 
     public BrowseStoreP getBrowsePanel() {
         return this.searching;
+    }
+
+    public SearchPanel getFilterP() {
+        return filterP;
+    }
+
+    public void setFilterP(SearchPanel newFilterP) {
+        this.filterP = newFilterP;
     }
 
     public SearchPanel getFilterPanel() {
         return this.filterP;
     }
 
+    public JButton getFilters() {
+        return filters;
+    }
+
+    public void setFilters(JButton newFilters) {
+        this.filters = newFilters;
+    }
+
+    public UnregisteredClient getMainU() {
+        return mainU;
+    }
+
+    public void setMainU(UnregisteredClient newMainU) {
+        this.mainU = newMainU;
+    }
+
+    public List<StoreProduct> getP() {
+        return p;
+    }
+
+    public void setP(List<StoreProduct> newP) {
+        this.p = newP;
+    }
+
+    public JPanel getProductSearch() {
+        return productSearch;
+    }
+
+    public void setProductSearch(JPanel newProductSearch) {
+        this.productSearch = newProductSearch;
+    }
+
+    public JButton getSearch() {
+        return search;
+    }
+
+    public void setSearch(JButton newSearch) {
+        this.search = newSearch;
+    }
+
+    public BrowseStoreP getSearching() {
+        return searching;
+    }
+
+    public void setSearching(BrowseStoreP newSearching) {
+        this.searching = newSearching;
+    }
+
     public void setController(ActionListener e) {
         this.filters.addActionListener(e);
         this.search.addActionListener(e);
 
+    }
+
+    public void setPanelInferior(JPanel panel, String constraints) {
+        bottom.add(panel, constraints);
     }
 }

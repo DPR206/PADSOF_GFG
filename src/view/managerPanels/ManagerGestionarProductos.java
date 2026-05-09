@@ -14,40 +14,27 @@ import javax.swing.text.BadLocationException;
 import model.product.StoreProduct;
 import model.store.Store;
 import view.App;
+import view.browserPanels.BrowseStoreP;
+import view.browserPanels.BrowseStorePEdit;
 import view.miniPanels.StoreProductMiniEdit;
 
 public class ManagerGestionarProductos extends JPanel{
 	private JButton newProduct = new JButton("Crear nuevo producto");
 
-	public ManagerGestionarProductos(App app) {
+	public ManagerGestionarProductos(App app) throws BadLocationException {
 		super();
 
 		this.setLayout(new BorderLayout());
 
-		JPanel mainThings = new JPanel();
-    	mainThings.setLayout(new BoxLayout(mainThings, BoxLayout.Y_AXIS));
+		BrowseStorePEdit products = new BrowseStorePEdit(app);
 
-    	List<StoreProduct> products = Store.getInstance().getStoreProductList();
-
-    	JScrollPane scroll = new JScrollPane(mainThings);
-
-    	int index = 1;
-
-    	for(StoreProduct sp: products) {
-    		try {
-				mainThings.add(new StoreProductMiniEdit(sp, index));
-				index++;
-			} catch (BadLocationException e) {
-				e.printStackTrace();
-			}
-    	}
 
     	this.newProduct.setPreferredSize(new Dimension(120, 30));
 
     	JPanel auxiliar = new JPanel();
     	auxiliar.add(newProduct);
 
-    	this.add(scroll, BorderLayout.CENTER);
+    	this.add(products, BorderLayout.CENTER);
     	this.add(auxiliar, BorderLayout.EAST);
 
 	}

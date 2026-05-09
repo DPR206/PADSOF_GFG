@@ -6,8 +6,6 @@ import view.clientPanels.SearchPanel;
 
 import javax.swing.*;
 
-import controller.UnregisteredMainPruebaC;
-
 import java.awt.*;
 import java.util.List;
 
@@ -26,23 +24,23 @@ public class UnregisteredMainPrueba extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public UnregisteredMainPrueba() {
 
+
         configurarEstructura();
     }
 
     private void configurarEstructura() {
     	this.setLayout(new BorderLayout());
-    	
+
     	others = new JPanel(new BorderLayout());
-    	
+
     	JPanel botones = new JPanel(new GridLayout(0, 2));
     	botones.add(this.search);
         botones.add(this.filters);
-        //this.add(botones, BorderLayout.NORTH);
         
         others.add(botones, BorderLayout.NORTH);
-        
+
         bottom = new JPanel(cardLayout);
-        
+
         others.add(bottom, BorderLayout.SOUTH);
 	}
 
@@ -51,7 +49,7 @@ public class UnregisteredMainPrueba extends JPanel {
     public BrowseStoreP getBrowsePanel() {
         return this.searchingP;
     }
-    
+
     public SearchPanel getFilterPanel() {
         return this.filterP;
     }
@@ -60,7 +58,9 @@ public class UnregisteredMainPrueba extends JPanel {
         this.controller = controller;
     }*/
     
-    /*
+    
+
+    /**
 	 * @return the filterP
 	 */
 	public SearchPanel getFilterP() {
@@ -119,9 +119,9 @@ public class UnregisteredMainPrueba extends JPanel {
 	public void setPanelInferior(JPanel panel, String nombre) {
         this.bottom.add(panel, nombre);
         this.cardLayout.show(bottom, nombre);
-        
+
         this.revalidate();
         this.repaint();
     }
-  
+
 }

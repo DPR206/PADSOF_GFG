@@ -146,6 +146,18 @@ public class App extends JFrame {
         lastShownPanel = "WELCOME";
         currentShownPanel = "WELCOME";
 
+//        RegisteredClient rc = new RegisteredClient("taha", "10282634M", "password", true);
+//        rc.addProductWallet(new SecondHandProduct("Cool hamster huh",
+//                "The greatest hamster you'll ever see, made from clay from the artic forest if that even " +
+//                "exists blablabla don't fuck this description up. Keep testing oh poor lad can't wrap text can't you " +
+//                "believe it", ".\\resources\\hamster.jpg", ProductType.FIGURINE, rc));
+//        RegisteredSecondHandP test =
+//                new RegisteredSecondHandP(this, Store.getInstance().getSecondHandProductList().getFirst(),
+//                        "Add to Offer");
+//        addCard(test, "TEST");
+//        test.setVisible(true);
+
+
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {

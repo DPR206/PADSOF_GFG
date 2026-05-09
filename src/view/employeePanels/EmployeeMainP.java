@@ -9,12 +9,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class EmployeeMainP extends JPanel {
-    private final JButton managePacks;
-    private final JButton manageStoreProducts;
-    private final JButton addStoreProducts;
-    private final JButton manageOrders;
-    private final JButton manageExchanges;
-    private final JButton valuateProducts;
+    private final JButton managePacks = new JButton("Manage Packs");
+    private final JButton manageStoreProducts = new JButton("Manage Store Products");
+    private final JButton addStoreProducts = new JButton("Add Store Products");
+    private final JButton manageOrders = new JButton("Manage Orders");
+    private final JButton manageExchanges = new JButton("Manage Exchanges");
+    private final JButton valuateProducts = new JButton("Valuate Products");
     private final App app;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -27,13 +27,6 @@ public class EmployeeMainP extends JPanel {
         this.setLayout(new BorderLayout());
 
         this.app = app;
-
-        managePacks = new JButton("Manage Packs");
-        manageStoreProducts = new JButton("Manage Store Products");
-        addStoreProducts = new JButton("Add Store Products");
-        manageOrders = new JButton("Manage Orders");
-        manageExchanges = new JButton("Manage Exchanges");
-        valuateProducts = new JButton("Valuate Products");
 
         paintEverything();
     }

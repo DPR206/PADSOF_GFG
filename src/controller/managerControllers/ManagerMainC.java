@@ -20,7 +20,6 @@ public class ManagerMainC implements ActionListener {
     private final ManagerGestionarPacks mgp;
     private final ManagerGestionarProductos mgproduct;
     private final ManagerNewProduct mnproduct;
-
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerMainC(App frame, Store model) {
         this.frame = frame;
@@ -30,10 +29,11 @@ public class ManagerMainC implements ActionListener {
         this.mge.setController(new ManagerGestionarEmpleadosC(this.mge, this.frame));
         //this.frame.addCard
         this.mgp = new ManagerGestionarPacks(this.frame);
-        this.mgp.setVisible(false);
+       
         this.mgproduct = new ManagerGestionarProductos(this.frame);
         this.mgproduct.setVisible(false);
         this.mnproduct = new ManagerNewProduct();
+        this.mnproduct.setController(new ManagerNewProductC(this.frame, this.mnproduct));
         this.mnproduct.setVisible(false);
     }
 

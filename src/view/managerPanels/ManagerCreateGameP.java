@@ -2,6 +2,7 @@ package view.managerPanels;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ManagerCreateGameP extends JPanel {
 
@@ -158,4 +159,8 @@ public class ManagerCreateGameP extends JPanel {
     public JButton getBtnConfirmar() { return btnConfirmar; }
     public JButton getBtnSubir() { return btnSubir; }
     public JLabel getVistaPrevia() { return vistaPrevia; }
+    
+    public void setController(ActionListener e) {
+    	this.btnConfirmar.addActionListener(e);
+    }
 }

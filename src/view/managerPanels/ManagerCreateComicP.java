@@ -3,6 +3,7 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ManagerCreateComicP extends JPanel {
 
@@ -131,4 +132,8 @@ public class ManagerCreateComicP extends JPanel {
     public JButton getBtnConfirmar() { return btnConfirmar; }
     public JButton getBtnSubir() { return btnSubir; }
     public JLabel getVistaPrevia() { return vistaPrevia; }
+    
+    public void setController(ActionListener e) {
+    	this.btnConfirmar.addActionListener(e);
+    }
 }

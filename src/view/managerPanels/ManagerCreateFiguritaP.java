@@ -3,6 +3,7 @@ package view.managerPanels;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ManagerCreateFiguritaP extends JPanel {
 
@@ -117,6 +118,7 @@ public class ManagerCreateFiguritaP extends JPanel {
         botonPanel.add(btnConfirmar);
 
         todo.add(botonPanel, BorderLayout.PAGE_END);
+        this.add(todo);
     }
 
     public JTextField getTxtCategoria() {
@@ -158,5 +160,8 @@ public class ManagerCreateFiguritaP extends JPanel {
     public JTextField getTxtAlto() {
         return txtAlto;
     }
-
+    
+    public void setController(ActionListener e) {
+    	this.btnConfirmar.addActionListener(e);
+    }
 }

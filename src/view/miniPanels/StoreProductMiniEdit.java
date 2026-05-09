@@ -25,6 +25,7 @@ public class StoreProductMiniEdit extends MiniPanel {
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
+        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, height));
 
         addToCart.setPreferredSize(new Dimension(125, height));
         addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));

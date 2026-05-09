@@ -27,7 +27,12 @@ public class ManagerGestionarProductos extends JPanel{
 		this.setLayout(new BorderLayout());
 
 		BrowseStorePEdit products = null;
-
+		try {
+			products = new BrowseStorePEdit(app);
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
     	this.newProduct.setPreferredSize(new Dimension(120, 30));
 

@@ -27,8 +27,7 @@ public class LoginC extends MainLoopSelector implements ActionListener {
         super(frame, model);
         this.view = frame.getLoginPanel();
 
-        // Enter para pulsar botón en último campo
-        view.getPasswordField().addKeyListener(new KeyAdapter() {
+        view.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {

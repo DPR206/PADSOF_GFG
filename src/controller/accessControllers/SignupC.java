@@ -28,8 +28,7 @@ public class SignupC extends MainLoopSelector implements ActionListener {
         super(frame, model);
         this.view = frame.getSignupPanel();
 
-        // Enter para pulsar botón en último campo
-        view.getIdNumberField().addKeyListener(new KeyAdapter() {
+        view.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -37,6 +36,7 @@ public class SignupC extends MainLoopSelector implements ActionListener {
                 }
             }
         });
+
     }
 
     @Override

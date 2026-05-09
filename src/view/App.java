@@ -179,6 +179,7 @@ public class App extends JFrame {
     public void changeVisibleCard(String cardName) {
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
+        getViewFromName(cardName).requestFocusInWindow();
         lastShownPanel = currentShownPanel;
         currentShownPanel = cardName;
     }

@@ -15,7 +15,7 @@ public class ManagerMainC implements ActionListener {
     private final ManagerMainP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private final ManagerGestionarEmpleados mge; 
+    private final ManagerGestionarEmpleados mge;
     private final ManagerGestionarPacks mgp;
     private final ManagerGestionarProductos mgproduct;
     private final ManagerNewProduct mnproduct;
@@ -26,7 +26,7 @@ public class ManagerMainC implements ActionListener {
         this.view = frame.getManagerMainPanel();
         this.model = model;
         this.mge = new ManagerGestionarEmpleados(this.frame);
-        this.frame.addCard
+        //this.frame.addCard
         this.mgp = new ManagerGestionarPacks(this.frame);
         this.mgp.setVisible(false);
         this.mgproduct = new ManagerGestionarProductos(this.frame);
@@ -38,7 +38,7 @@ public class ManagerMainC implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Packs")) {
-        	
+
         }
         else if(e.getActionCommand().equals("Productos nuevos")) {
         	this.mgproduct.setVisible(true);

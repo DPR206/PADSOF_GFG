@@ -7,6 +7,7 @@ import model.store.Store;
 //import model.user.User;
 import view.App;
 import view.UnregisteredMainP;
+import view.banners.BannerUnregistered;
 
 import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
@@ -24,7 +25,7 @@ public class UnregisteredMainC implements ActionListener {
         this.view = frame.getUnregisteredMainPanel();
         this.model = model;
 
-        new BannerUnregisteredC(this.view.getBanner(), this.frame);
+        //new BannerUnregisteredC((BannerUnregistered) frame.getViewFromName("BANNER_UNREGISTERED"), this.frame);
 
         updateControllers();
     }

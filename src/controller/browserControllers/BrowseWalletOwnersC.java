@@ -3,7 +3,7 @@ package controller.browserControllers;
 import controller.miniControllers.WalletOwnerMiniC;
 import model.store.Store;
 import view.App;
-import view.BrowseForOffersP;
+import view.RegisteredMakeOfferP;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.browserPanels.BrowseWalletOwnersP;
 import view.miniPanels.UserMiniP;
@@ -17,7 +17,7 @@ public class BrowseWalletOwnersC implements ActionListener, BigController {
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     BrowseSecondHandProductsP deleteThis;
-    BrowseForOffersP deleteThisToo;
+    RegisteredMakeOfferP deleteThisToo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -27,7 +27,7 @@ public class BrowseWalletOwnersC implements ActionListener, BigController {
      * @param model the controller's model
      */
     public BrowseWalletOwnersC(App frame, Store model, BrowseWalletOwnersP view, BrowseSecondHandProductsP deleteThis,
-                               BrowseForOffersP deleteThisToo) {
+                               RegisteredMakeOfferP deleteThisToo) {
         this.frame = frame;
         this.view = view;
         this.model = model;

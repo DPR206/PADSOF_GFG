@@ -1,6 +1,7 @@
-package view;
+package view.employeePanels;
 
 import model.user.*;
+import view.App;
 import view.banners.BannerEmployee;
 
 import javax.swing.*;

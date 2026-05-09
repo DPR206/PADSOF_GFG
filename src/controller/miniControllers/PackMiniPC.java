@@ -19,15 +19,15 @@ import view.miniPanels.PackMiniP;
 import view.miniPanels.StoreProductMiniP;
 
 public class PackMiniPC implements ActionListener{
-	
+
 	private final PackMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     private final BigController bigController;
     private final BigView bigView;
-    
+
     public PackMiniPC(App frame, Store model, PackMiniP view, BigController bigController,
-            BigView bigView) 
+            BigView bigView)
     {
     	this.frame = frame;
     	this.view = view;
@@ -38,7 +38,7 @@ public class PackMiniPC implements ActionListener{
     	view.getPackImage().addMouseListener(new MouseAdapter() {
     		public void mouseClicked(MouseEvent e) {
     			if (e.getClickCount() == 2) {
-    				frame.changeVisibleCard
+    				//frame.changeVisibleCard
     			}
     		}
     	});
@@ -52,7 +52,7 @@ public class PackMiniPC implements ActionListener{
     	});
 }
 
-    
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Add to Cart")) {

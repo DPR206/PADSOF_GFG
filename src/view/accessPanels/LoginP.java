@@ -1,4 +1,6 @@
-package view;
+package view.accessPanels;
+
+import view.ImageAdder;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

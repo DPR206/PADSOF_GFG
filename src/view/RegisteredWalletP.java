@@ -4,8 +4,8 @@ import model.user.RegisteredClient;
 
 import javax.swing.*;
 
-public class WalletP extends JPanel {
+public class RegisteredWalletP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public WalletP(RegisteredClient user) {
+    public RegisteredWalletP(RegisteredClient user) {
     }
 }

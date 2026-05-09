@@ -1,12 +1,11 @@
-package controller;
+package controller.accessControllers;
 
 import model.store.Store;
 import model.user.User;
 import view.App;
-import view.LoginP;
+import view.accessPanels.LoginP;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.event.*;
 
 /**

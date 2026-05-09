@@ -1,14 +1,13 @@
 package controller.bannerControllers;
 
-import java.awt.Window;
-
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 import controller.*;
+import controller.employeeControllers.*;
 import model.user.Employee;
 import view.*;
 import view.banners.BannerEmployee;
+import view.employeePanels.*;
 
 public class BannerEmployeeC {
 

@@ -1,14 +1,14 @@
 package controller;
 
 import model.user.RegisteredClient;
-import view.WalletP;
+import view.RegisteredWalletP;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WalletC implements ActionListener {
+public class RegisteredWalletC implements ActionListener {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public WalletC(WalletP pagWallet, RegisteredClient user) {
+    public RegisteredWalletC(RegisteredWalletP pagWallet, RegisteredClient user) {
     }
 
     @Override

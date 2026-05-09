@@ -1,4 +1,4 @@
-package view;
+package view.employeePanels;
 
 import javax.swing.*;
 

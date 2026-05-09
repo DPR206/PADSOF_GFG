@@ -1,8 +1,8 @@
-package controller;
+package controller.employeeControllers;
 
 import model.store.Store;
 import view.App;
-import view.EmployeeMainP;
+import view.employeePanels.EmployeeMainP;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

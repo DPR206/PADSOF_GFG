@@ -1,154 +1,146 @@
 package controller.bannerControllers;
 
-import java.awt.Window;
-
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
 import controller.*;
-import model.store.Store;
 import model.user.RegisteredClient;
+import model.user.User;
 import view.*;
 import view.banners.BannerRegistered;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class BannerRegisteredC {
 
-	private BannerRegistered vista;
-	private RegisteredClient user;
-	private App frame;
+    private BannerRegistered vista;
+    private User user;
+    private App frame;
 
-	/**
-	 * @param vista
-	 * @param user
-	 * @param app
-	 */
-	public BannerRegisteredC(BannerRegistered vista, RegisteredClient user, App frame) {
-		this.vista = vista;
-		this.user = user;
-		this.frame = frame;
-		inicializarEventos();
-	}
+    /**
+     *
+     * @param vista
+     * @param frame
+     */
+    public BannerRegisteredC(BannerRegistered vista, App frame) {
+        this.vista = vista;
+        this.user = frame.getUser();
+        this.frame = frame;
+        inicializarEventos();
+    }
 
-	private void inicializarEventos() {
+    private void inicializarEventos() {
 
         vista.getBtnCarrito().addActionListener(e -> {
             abrirCarritoDelCliente();
         });
 
         vista.getHome().addActionListener(e -> {
-        	abrirPaginaPrincipal();
+            abrirPaginaPrincipal();
         });
 
         vista.getBtnPerfil().addActionListener(e -> {
-        	abrirPerfil();
+            abrirPerfil();
         });
 
         vista.getBtnNots().addActionListener(e -> {
-        	abrirNots();
+            abrirNots();
         });
 
         vista.getCartera().addActionListener(e -> {
-        	abrirCartera();
+            abrirCartera();
         });
 
         vista.getBtnExit().addActionListener(e -> {
-        	abrirWelcome();
+            abrirWelcome();
         });
     }
 
-	private void abrirWelcome() {
+    private void abrirWelcome() {
 
-		int respuesta = JOptionPane.showConfirmDialog(
-		        this.frame,
-		        "Are you sure you want to log out?",
-		        "Confirm log out",
-		        JOptionPane.YES_NO_OPTION,
-		        JOptionPane.QUESTION_MESSAGE
-		);
+        int respuesta =
+                JOptionPane.showConfirmDialog(this.frame, "Are you sure you want to log out?", "Confirm log out",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-		if (respuesta == JOptionPane.YES_OPTION) {
-	        this.vista.setVisible(false);
-	        this.frame.getWelcomePanel().setVisible(true);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            this.vista.setVisible(false);
+            this.frame.getWelcomePanel().setVisible(true);
 
-	        this.frame.revalidate();
-	        this.frame.repaint();
-	    }
-	}
+            this.frame.revalidate();
+            this.frame.repaint();
+        }
+    }
 
-	private void abrirCartera() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
+    private void abrirCartera() {
+        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose();
-	    }
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
+        }
 
-	    WalletP pagWallet = new WalletP(user);
+        RegisteredWalletP pagWallet = new RegisteredWalletP((RegisteredClient) user);
 
-	    new WalletC(pagWallet, user);
+        new RegisteredWalletC(pagWallet, (RegisteredClient) user);
 
-	    pagWallet.setVisible(true);
+        pagWallet.setVisible(true);
 
-	}
+    }
 
-	private void abrirNots() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
+    private void abrirNots() {
+        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose();
-	    }
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
+        }
 
-	    //NotificacionP pagNots = new NotificacionP(new BannerRegistered());
-	    NotificacionP pagNots = new NotificacionP(vista);
+        //NotificacionP pagNots = new NotificacionP(new BannerRegistered());
+        NotificacionP pagNots = new NotificacionP(vista);
 
-	    new NotificacionesC(pagNots, frame);
+        new NotificacionesC(pagNots, frame);
 
-	    pagNots.setVisible(true);
-	}
+        pagNots.setVisible(true);
+    }
 
-	private void abrirPerfil() {
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
+    private void abrirPerfil() {
+        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose();
-	    }
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
+        }
 
-	    RegisteredProfile profile = new RegisteredProfile(vista);
+        RegisteredProfile profile = new RegisteredProfile(vista);
 
-	    new RegisteredProfileC(profile, user);
+        new RegisteredProfileC(profile, (RegisteredClient) user);
 
-	    profile.setVisible(true);
-	}
+        profile.setVisible(true);
+    }
 
+    private void abrirPaginaPrincipal() {
 
-	private void abrirPaginaPrincipal() {
+        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
+        if (ventanaActual != null) {
+            ventanaActual.dispose(); // Cerramos la ventana
+        }
 
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana
-	    }
+        //RegisteredMainP pagPrin = new RegisteredMainP();
 
-	    //RegisteredMainP pagPrin = new RegisteredMainP();
+        //new RegisteredMainC(frame, Store.getInstance());
 
-	    //new RegisteredMainC(frame, Store.getInstance());
+        frame.getRegisteredMainPanel().setVisible(true);
+    }
 
-	    frame.getRegisteredMainPanel().setVisible(true);
-	}
+    private void abrirCarritoDelCliente() {
 
+        Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
 
-	private void abrirCarritoDelCliente() {
-
-		Window ventanaActual = SwingUtilities.getWindowAncestor(vista);
-
-	    if (ventanaActual != null) {
-	        ventanaActual.dispose(); // Cerramos la ventana
-	    }
+        if (ventanaActual != null) {
+            ventanaActual.dispose(); // Cerramos la ventana
+        }
 
         // 1. Crear la vista del carrito
         CarritoP carritoVista = new CarritoP();
 
         // 2. Crear el controlador del carrito pasando el usuario actual
-        new CarritoC(carritoVista, user);
+        new CarritoC(carritoVista, (RegisteredClient) user);
 
         // 3. Mostrar la ventana
         carritoVista.setVisible(true);

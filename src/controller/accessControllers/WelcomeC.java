@@ -1,10 +1,10 @@
-package controller;
+package controller.accessControllers;
 
 import model.store.Store;
 import model.user.Manager;
 import model.user.UnregisteredClient;
 import view.App;
-import view.WelcomeP;
+import view.accessPanels.WelcomeP;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -47,7 +47,7 @@ public class WelcomeC extends MainLoopSelector implements ActionListener {
                 boolean stop = false;
                 while (!stop) {
                     String password = JOptionPane.showInputDialog("Please enter the password: ");
-                    if (password.equals("password")) {
+                    if (password != null && password.equals("password")) {
                         this.frame.changeCurrentUser(Manager.getInstance());
                         super.loopSelector();
                     } else {

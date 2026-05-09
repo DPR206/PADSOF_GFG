@@ -1,6 +1,7 @@
-package view;
+package view.accessPanels;
 
 import model.utilities.IdType;
+import view.ImageAdder;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package controller;
+package controller.accessControllers;
 
 import model.store.Store;
 import model.user.User;
@@ -22,25 +22,23 @@ public class MainLoopSelector { // DUE: Hacer que sea abstract
      */
     public void loopSelector() {
         User user = frame.getUser();
-        this.frame.getLoginPanel().setVisible(false);
-        this.frame.getSignupPanel().setVisible(false);
         switch (user.getType()) {
             case UNREGISTERED_CLIENT:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Unregistered Client!");
-                this.frame.getUnregisteredMainPanel().setVisible(true);
+                this.frame.changeVisibleCard("UNREGISTERED_MAIN");
                 break;
             case REGISTERED_CLIENT:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Registered Client!");
-                this.frame.getRegisteredMainPanel().setVisible(true);
+                this.frame.changeVisibleCard("REGISTERED_MAIN");
                 break;
             case EMPLOYEE:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Employee!");
-                this.frame.getEmployeeMainPanel().setVisible(true);
+                this.frame.changeVisibleCard("EMPLOYEE_MAIN");
                 this.frame.getEmployeeMainPanel().paintEverything();
                 break;
             case MANAGER:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Manager!");
-                this.frame.getManagerMainPanel().setVisible(true);
+                this.frame.changeVisibleCard("MANAGER_MAIN");
                 break;
             default:
                 JOptionPane.showMessageDialog(frame, "You shouldn't be able to see this, burn the app");

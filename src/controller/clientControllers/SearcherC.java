@@ -3,10 +3,8 @@ package controller.clientControllers;
 import model.product.Category;
 import model.search.CategoryFilter;
 import model.store.Store;
-import model.user.UnregisteredClient;
 import view.App;
 import view.clientPanels.SearchPanel;
-import view.clientPanels.UnregisteredMainP;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -103,10 +101,6 @@ public class SearcherC implements ActionListener {
             } else {
                 frame.getUser().getSearcher().getStoreSearcher().setAsc(false);
             }
-            ((UnregisteredMainP) frame.getViewFromName("UNREGISTERED_MAIN")).getBrowsePanel().setSecondItemList(
-                    ((UnregisteredClient) this.frame.getUser()).searchStoreProduct());
-            System.out.println(
-                    ((UnregisteredClient) this.frame.getUser()).searchStoreProduct()); // FALLA: user.searchStoreProduct();
         }
     }
 }

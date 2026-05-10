@@ -78,7 +78,7 @@ public class App extends JFrame {
         LoginC loginController = new LoginC(this, model);
         SignupC signupController = new SignupC(this, model);
 
-        new UnregisteredMainC(this, model, (UnregisteredClient) this.mainUser);
+        new UnregisteredMainC(this, model);
         RegisteredMainC registeredMainController = new RegisteredMainC(this, model);
         EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
         ManagerMainC managerMainController = new ManagerMainC(this, model);

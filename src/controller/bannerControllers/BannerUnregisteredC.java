@@ -85,8 +85,8 @@ public class BannerUnregisteredC {
 
         UnregisteredMainP pagPrin = frame.getUnregisteredMainPanel();
 
-        new UnregisteredMainC(frame, Store.getInstance(), (UnregisteredClient) frame.getUser());
-        new UnregisteredMainC(frame, Store.getInstance(), (UnregisteredClient) frame.getUser());
+        new UnregisteredMainC(frame, Store.getInstance());
+        new UnregisteredMainC(frame, Store.getInstance());
 
         frame.changeVisibleCard("UNREGISTERED_MAIN");
     }

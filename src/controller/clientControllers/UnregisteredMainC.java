@@ -2,7 +2,6 @@ package controller.clientControllers;
 
 import controller.browserControllers.BrowseStoreC;
 import model.product.StoreProduct;
-import model.search.PriceFilter;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import view.App;
@@ -18,14 +17,12 @@ public class UnregisteredMainC {
     private final UnregisteredMainP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private UnregisteredClient user;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public UnregisteredMainC(App frame, Store model, UnregisteredClient user) {
+    public UnregisteredMainC(App frame, Store model) {
         this.frame = frame;
         this.view = frame.getUnregisteredMainPanel();
         this.model = model;
-        this.user = (UnregisteredClient) frame.getUser();
 
         inicializar();
         linkControllers();
@@ -43,12 +40,8 @@ public class UnregisteredMainC {
         this.view.getCardLayout().show(this.view.getBottom(), "Search");
 
         view.getSearch().addActionListener(e -> {
-            System.out.println("FILTERS:");
-            for (PriceFilter pf : frame.getUser().getSearcher().getStoreSearcher().getPriceF()) {
-                System.out.println(pf.toString());
-            }
-            System.out.println(this.user.searchStoreProduct()); // FALLA: user.searchStoreProduct();
-            //this.view.getBrowsePanel().setSecondItemList(this.user.searchStoreProduct());
+            this.view.getBrowsePanel()
+                     .setSecondItemList(((UnregisteredClient) this.frame.getUser()).searchStoreProduct());
             try {
                 view.getBrowsePanel().setCurrentPageNum(1);
             } catch (BadLocationException ex) {

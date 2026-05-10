@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.*;
 
@@ -27,6 +28,10 @@ public class CarritoP extends JPanel {
 	}
 
 	private void incializarEstrctura() {
+		
+		btnOrders.setIcon(getScaledImage(new ImageIcon("./resources/app/order.png"), 32, 32));
+		btnOrders.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnOrders.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		JPanel panelNorte = new JPanel(new GridLayout(0, 1, 5, 5));
         panelNorte.setBorder(BorderFactory.createEmptyBorder(10, 5, 0, 10));
@@ -55,6 +60,16 @@ public class CarritoP extends JPanel {
         // this.add(scrollProductos, BorderLayout.CENTER);
 	}
 	
+	private Icon getScaledImage(ImageIcon imageIcon, int width, int height) {
+	    if (imageIcon == null || imageIcon.getImage() == null) {
+	        return null;
+	    }
+	    
+	    Image img = imageIcon.getImage();
+	    Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+	    return new ImageIcon(scaledImg);
+	}
+
 	/**
      * Permite actualizar el texto del total desde el controlador
      */

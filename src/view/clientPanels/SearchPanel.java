@@ -11,13 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 public class SearchPanel extends JPanel{
-	private JPanel catFilter = new JPanel();
+	private JPanel catFilter = new JPanel(new GridLayout(1,1));
 
 	private JRadioButton jmesa = new JRadioButton("Juegos de mesa");
 	private JRadioButton jrol = new JRadioButton("Juegos de rol");
 	private JRadioButton jcarta = new JRadioButton("Juegos de carta");
 	private JRadioButton figuras = new JRadioButton("Figuras");
-	private JRadioButton comics = new JRadioButton("comics");
+	private JRadioButton comics = new JRadioButton("Comics");
 
 	private JPanel puncFilter = new JPanel(new GridLayout(1,1));
 

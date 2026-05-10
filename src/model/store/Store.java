@@ -761,4 +761,14 @@ public class Store implements Serializable {
     public Utility getUtility() {
         return utility;
     }
+
+	/**
+	 * Sets the manager
+	 * @param manager the manager to set
+	 */
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+    
+    
 }

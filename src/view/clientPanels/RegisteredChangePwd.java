@@ -7,7 +7,7 @@ import javax.swing.*;
 public class RegisteredChangePwd extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel nom;
+	private JTextField nom;
 	private JButton btnCambiar;
 	private JPasswordField pwd1, pwd2;
 
@@ -34,6 +34,7 @@ public class RegisteredChangePwd extends JDialog {
 		tituloNom.setFont(new Font("SansSerif", Font.BOLD, 14));
         tituloNom.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        nom = new JTextField(20);
 		nom.setFont(new Font("SansSerif", Font.PLAIN, 14));
         nom.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -79,18 +80,9 @@ public class RegisteredChangePwd extends JDialog {
 	/**
 	 * @return the nom
 	 */
-	public JLabel getNom() {
-		return nom;
+	public String getNom() {
+		return new String(nom.getText());
 	}
-
-
-	/**
-	 * @param nom the nom to set
-	 */
-	public void setNom(String nom) {
-		this.nom.setText(nom);
-	}
-
 
 	/**
 	 * @return the btnCambiar

@@ -59,7 +59,9 @@ public class WelcomeC extends MainLoopSelector implements ActionListener {
                         String password = new String(passwordField.getPassword());
 
                         if (password.equals("password")) {
-                            this.frame.changeCurrentUser(Manager.getInstance());
+                        	Manager managerSesion = Manager.getInstance();
+                            Store.getInstance().setManager(managerSesion); 
+                            this.frame.changeCurrentUser(managerSesion);
                             stop = true;
                             super.loopSelector();
                         } else {

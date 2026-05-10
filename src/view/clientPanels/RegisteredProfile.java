@@ -4,28 +4,20 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import view.banners.BannerRegistered;
-
 public class RegisteredProfile extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private BannerRegistered banner;
 	private JLabel nom, dni, pwd;
 	private JButton btnMostrar;
 	private JButton btnCambiar;
 
-	public RegisteredProfile(BannerRegistered banner) {
-		this.banner = banner;
+	public RegisteredProfile() {
 		configurarEstructura();
 	}
 
 	private void configurarEstructura() {
 		setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-		if (banner != null) {
-            add(banner, BorderLayout.NORTH);
-        }
 
 		JPanel information = new JPanel();
 		information.setLayout(new BoxLayout(information, BoxLayout.Y_AXIS));
@@ -35,6 +27,7 @@ public class RegisteredProfile extends JPanel{
 		tituloNom.setFont(new Font("SansSerif", Font.BOLD, 14));
         tituloNom.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        nom = new JLabel("");
 		nom.setFont(new Font("SansSerif", Font.PLAIN, 14));
         nom.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -42,6 +35,7 @@ public class RegisteredProfile extends JPanel{
 		tituloDni.setFont(new Font("SansSerif", Font.BOLD, 14));
         tituloDni.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        dni = new JLabel("");
 		dni.setFont(new Font("SansSerif", Font.PLAIN, 14));
         dni.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -57,6 +51,7 @@ public class RegisteredProfile extends JPanel{
         pwd.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
         btnMostrar = new JButton("👁️");
+        btnMostrar.setForeground(new Color(64, 0, 0));
         btnMostrar.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 14));
         btnMostrar.setBorderPainted(false);
         btnMostrar.setContentAreaFilled(false);
@@ -86,20 +81,6 @@ public class RegisteredProfile extends JPanel{
 		information.add(panelPassword);
 
 		add(information, BorderLayout.CENTER);
-	}
-
-	/**
-	 * @return the banner
-	 */
-	public BannerRegistered getBanner() {
-		return banner;
-	}
-
-	/**
-	 * @param banner the banner to set
-	 */
-	public void setBanner(BannerRegistered banner) {
-		this.banner = banner;
 	}
 
 	/**

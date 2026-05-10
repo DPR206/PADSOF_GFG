@@ -63,7 +63,7 @@ public class BannerRegisteredC {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (respuesta == JOptionPane.YES_OPTION) {
-        	this.frame.changeVisibleCard("WELCOME");
+        	this.frame.updateView("WELCOME", "BANNER_UNREGISTERED");
 
             this.frame.revalidate();
             this.frame.repaint();
@@ -89,24 +89,21 @@ public class BannerRegisteredC {
 
         this.frame.addCard(pagNots, "NOTIFICATIONS");
         this.frame.changeVisibleCard("NOTIFICATIONS");
-        //this.frame.updateView("NOTIFICATIONS", "BANNER_REGISTERED");
     }
 
     private void abrirPerfil() {
 
-        RegisteredProfile profile = new RegisteredProfile(vista);
+    	User usuario = frame.getUser();
+        RegisteredProfile profile = new RegisteredProfile();
 
-        new RegisteredProfileC(profile, (RegisteredClient) user);
+        new RegisteredProfileC(profile, (RegisteredClient) usuario);
 
         this.frame.addCard(profile, "PROFILE_REGISTERED");
-        //this.frame.changeVisibleCard("PROFILE_REGISTERED");
-        this.frame.updateView("PROFILE_REGISTERED", "BANNER_REGISTERED");
+        this.frame.changeVisibleCard("PROFILE_REGISTERED");
     }
 
     private void abrirPaginaPrincipal() {
-
-    	this.frame.updateView("REGISTERED_MAIN", "BANNER_REGISTERED");
-        //frame.changeVisibleCard("REGISTERED_MAIN");
+        frame.changeVisibleCard("REGISTERED_MAIN");
     }
 
     private void abrirCarritoDelCliente() {

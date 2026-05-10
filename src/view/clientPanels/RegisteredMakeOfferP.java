@@ -1,8 +1,6 @@
 package view.clientPanels;
 
 import model.store.Store;
-import view.App;
-import view.banners.BannerRegistered;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.browserPanels.BrowseWalletOwnersP;
 
@@ -14,23 +12,20 @@ import java.awt.event.ActionListener;
 public class RegisteredMakeOfferP extends JPanel {
     private JButton browseAvailableProducts = new JButton("Browse available products");
     private JButton browseUsers = new JButton("Browse users");
-    private App app;
     private BrowseSecondHandProductsP browseSecondHandProductsP;
     private BrowseWalletOwnersP browseUsersP;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public RegisteredMakeOfferP(App app) throws BadLocationException {
+    public RegisteredMakeOfferP() throws BadLocationException {
         super();
-        this.app = app;
 
         this.add(new JLabel("Select a product:"));
 
-        browseSecondHandProductsP = new BrowseSecondHandProductsP(app);
-        browseUsersP = new BrowseWalletOwnersP(app, Store.getInstance().getRegisteredClientList(), "Browse Wallet");
+        browseSecondHandProductsP = new BrowseSecondHandProductsP();
+        browseUsersP = new BrowseWalletOwnersP(Store.getInstance().getRegisteredClientList(), "Browse Wallet"); //
+        // DUE: Tiene que asignar los productos el controlador
 
         this.setLayout(new BorderLayout());
-
-        this.add(new BannerRegistered(), BorderLayout.NORTH);
 
         JPanel others = new JPanel(new BorderLayout());
 
@@ -50,17 +45,16 @@ public class RegisteredMakeOfferP extends JPanel {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-
-    public void setController(ActionListener e) {
-        this.browseAvailableProducts.addActionListener(e);
-        this.browseUsers.addActionListener(e);
-    }
-
     public BrowseSecondHandProductsP getBrowseSecondHandProductsP() {
         return browseSecondHandProductsP;
     }
 
     public BrowseWalletOwnersP getBrowseWalletOwnersP() {
         return browseUsersP;
+    }
+
+    public void setController(ActionListener e) {
+        this.browseAvailableProducts.addActionListener(e);
+        this.browseUsers.addActionListener(e);
     }
 }

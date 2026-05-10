@@ -1,5 +1,6 @@
 package controller.clientControllers;
 
+import controller.employeeControllers.RegisteredMakeOfferC;
 import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
@@ -18,14 +19,14 @@ public class RegisteredMainC {
         this.frame = frame;
         this.view = frame.getRegisteredMainPanel();
         this.model = model;
-        
+
         inicializar();
         linkControllers();
     }
 
     private void inicializar() {
     	//this.frame.changeVisibleBanner("BANNER_REGISTERED");
-    	
+
         this.view.getBrowsePanel().setFirstItemList(model.getPacks());
         this.view.getBrowsePanel().setSecondItemList(model.getStoreProductList());
         try {
@@ -49,11 +50,16 @@ public class RegisteredMainC {
         view.getFilters().addActionListener(e -> {
             this.view.getCardLayout().show(this.view.getBottom(), "Filters");
         });
+
+        view.getSecondHand().addActionListener(e -> {
+            this.view.getCardLayout().show(this.view.getBottom(), "Second Hand");
+        });
     }
 
     public void linkControllers() {
         new BrowseStoreC(frame, model, view.getBrowsePanel());
         this.view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
+        this.view.getMakeOfferP().setController(new RegisteredMakeOfferC(frame, model, view.getMakeOfferP()));
     }
 
 }

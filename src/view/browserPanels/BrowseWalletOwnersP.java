@@ -1,7 +1,6 @@
 package view.browserPanels;
 
 import model.user.RegisteredClient;
-import view.App;
 import view.miniPanels.UserMiniP;
 
 import javax.swing.*;
@@ -19,8 +18,8 @@ public class BrowseWalletOwnersP extends BrowserPanel<RegisteredClient> {
     /**
      * This panel's constructor
      */
-    public BrowseWalletOwnersP(App app, List<RegisteredClient> users, String buttonName) throws BadLocationException {
-        super(app);
+    public BrowseWalletOwnersP(List<RegisteredClient> users, String buttonName) throws BadLocationException {
+        super();
         this.setLayout(new GridLayout(3, 3));
 
         super.setItemList(users);
@@ -36,7 +35,6 @@ public class BrowseWalletOwnersP extends BrowserPanel<RegisteredClient> {
      */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        
 
         // Item list was set in constructor
 

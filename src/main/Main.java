@@ -1,8 +1,9 @@
 package main;
 
+import model.product.ProductType;
+import model.product.SecondHandProduct;
 import model.store.Store;
-import model.user.Permission;
-import model.user.Manager;
+import model.user.*;
 import view.App;
 
 import javax.swing.*;
@@ -35,11 +36,59 @@ public class Main {
                     /* Load store */
                     Store.getInstance().loadStore("data", "statics");
 
-                    if (Store.getInstance().getEmployeeList().isEmpty()) {
-                        Manager.getInstance().addEmployee("emp123", "alice", Permission.STORE, Permission.ORDER);
-                        Manager.getInstance().addEmployee("emp456", "bob", Permission.ORDER);
-                        Manager.getInstance().addEmployee("emp789", "carol", Permission.EXCHANGE);
-                    }
+//                    if (Store.getInstance().getEmployeeList().isEmpty()) {
+//                        Manager.getInstance().addEmployee("emp123", "alice", Permission.STORE, Permission.ORDER);
+//                        Manager.getInstance().addEmployee("emp456", "bob", Permission.ORDER);
+//                        Manager.getInstance().addEmployee("emp789", "carol", Permission.EXCHANGE);
+//                    } Ya están metidos
+
+                    RegisteredClient rc = new RegisteredClient("taha", "10282634M", "password", true);
+                    rc.addProductWallet(new SecondHandProduct("1", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("2", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("3", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("4", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("5", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("6", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("7", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("8", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("9", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("10", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("11", "2", ".\\resources\\hamster.jpg",
+                            ProductType.FIGURINE, rc));
+
+                    rc = new RegisteredClient("martin", "10282634M", "password", true);
+                    rc.addProductWallet(new SecondHandProduct("1", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("2", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("3", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("4", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("5", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("6", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("7", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("8", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("9", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("10", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
+                    rc.addProductWallet(new SecondHandProduct("11", "2", ".\\resources\\virus.jpg",
+                            ProductType.FIGURINE, rc));
 
                     new App().setVisible(true);
                 } catch (Exception e) {

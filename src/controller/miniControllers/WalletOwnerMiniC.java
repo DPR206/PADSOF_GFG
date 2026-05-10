@@ -4,6 +4,7 @@ import controller.browserControllers.BrowseSomeonesWalletC;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseSomeonesWalletP;
+import view.clientPanels.RegisteredMainP;
 import view.miniPanels.UserMiniP;
 
 import javax.swing.*;
@@ -40,11 +41,14 @@ public class WalletOwnerMiniC implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Browse Wallet")) {
             try {
-                BrowseSomeonesWalletP newView = new BrowseSomeonesWalletP(frame, view.getWalletOwner());
-                BrowseSomeonesWalletC controller = new BrowseSomeonesWalletC(frame, model, newView);
-                //frame.addCard(newView, "BROWSE_SOMEONES_WALLET", controller);
-                //frame.changeVisibleCard("BROWSE_SOMEONES_WALLET");
-                // DUE
+                BrowseSomeonesWalletP newView = new BrowseSomeonesWalletP(view.getWalletOwner());
+                new BrowseSomeonesWalletC(frame, model, newView);
+                ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
+                                                                            .add(newView, "BROWSE_SOMEONES_WALLET");
+                ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()
+                                                                            .show(((RegisteredMainP) frame.getViewFromName(
+                                                                                            "REGISTERED_MAIN")).getBottom(),
+                                                                                    "BROWSE_SOMEONES_WALLET");
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

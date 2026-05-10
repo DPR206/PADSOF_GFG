@@ -17,8 +17,8 @@ public class BrowseSecondHandProductsP extends BrowserPanel<SecondHandProduct> {
     /**
      * This panel's constructor
      */
-    public BrowseSecondHandProductsP(App app) throws BadLocationException {
-        super(app);
+    public BrowseSecondHandProductsP() throws BadLocationException {
+        super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();
     }

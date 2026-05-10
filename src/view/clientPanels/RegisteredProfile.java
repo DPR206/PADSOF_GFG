@@ -4,8 +4,6 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import view.banners.BannerRegistered;
-
 public class RegisteredProfile extends JPanel{
 
 	private static final long serialVersionUID = 1L;

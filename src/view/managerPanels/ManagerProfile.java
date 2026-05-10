@@ -27,6 +27,7 @@ public class ManagerProfile extends JPanel {
 		tituloNom.setFont(new Font("SansSerif", Font.BOLD, 14));
         tituloNom.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        nom = new JLabel("");
 		nom.setFont(new Font("SansSerif", Font.PLAIN, 14));
         nom.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -42,6 +43,7 @@ public class ManagerProfile extends JPanel {
         pwd.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
         btnMostrar = new JButton("👁️");
+        btnMostrar.setForeground(new Color(64, 0, 0));
         btnMostrar.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 14));
         btnMostrar.setBorderPainted(false);
         btnMostrar.setContentAreaFilled(false);

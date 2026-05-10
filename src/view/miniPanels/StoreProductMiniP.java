@@ -14,7 +14,8 @@ import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
 public class StoreProductMiniP extends MiniPanel {
-    private final JButton addToCart = new JButton("Add to Cart");
+    private static final long serialVersionUID = 1L;
+	private final JButton addToCart = new JButton("Add to Cart");
     private final StoreProduct storeProduct;
     private final JLabel productImage;
     private final JTextPane productInfo;

@@ -33,6 +33,11 @@ public class PackMiniPC implements Controller {
         this.browserController = browserController;
         this.browserPanel = browserPanel;
 
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
         view.getPackImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -48,10 +53,7 @@ public class PackMiniPC implements Controller {
                 }
             }
         });
-    }
 
-    @Override
-    public void initializeActions() {
         view.getAddToCart().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
                 ((RegisteredClient) frame.getUser()).addCart(view.getPack());

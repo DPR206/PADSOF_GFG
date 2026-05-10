@@ -2,12 +2,10 @@ package view.browserPanels;
 
 import model.product.SecondHandProduct;
 import model.user.RegisteredClient;
-import view.App;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.util.Arrays;
 
 import static main.Main.brownColour;
 
@@ -30,12 +28,9 @@ public class BrowseMyWalletP extends BrowserPanel<SecondHandProduct> {
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
-
         JLabel title = new JLabel("My wallet'");
         title.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
         this.add(title);
-
-        super.setItemList(Arrays.asList(owner.getWallet().getProducts()));
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());

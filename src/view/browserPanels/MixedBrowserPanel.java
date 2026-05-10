@@ -141,8 +141,9 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         return firstItemList;
     }
 
-    public void setFirstItemList(List<G> newFirstItemList) {
+    public void setFirstItemList(List<G> newFirstItemList) throws BadLocationException {
         this.firstItemList = newFirstItemList;
+        this.paintEverything();
     }
 
     /**
@@ -224,8 +225,9 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         return secondItemList;
     }
 
-    public void setSecondItemList(List<U> newSecondItemList) {
+    public void setSecondItemList(List<U> newSecondItemList) throws BadLocationException {
         this.secondItemList = newSecondItemList;
+        this.paintEverything();
     }
 
     /**

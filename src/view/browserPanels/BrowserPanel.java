@@ -102,8 +102,9 @@ public abstract class BrowserPanel<G> extends JPanel {
      * Sets item list.
      * @param newItemList the new item list
      */
-    public void setItemList(List<G> newItemList) {
+    public void setItemList(List<G> newItemList) throws BadLocationException {
         this.itemList = newItemList;
+        this.paintEverything();
     }
 
     public JButton getLastPage() {

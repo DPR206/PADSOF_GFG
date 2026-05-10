@@ -28,25 +28,29 @@ public class SecondHandAddToOfferMiniC extends SecondHandMiniC {
                                      BrowserPanel<SecondHandProduct> browserPanel) {
         super(frame, model, view, browserController, browserPanel);
 
-        view.getProductImage().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
-                }
-            }
-        });
-
-        view.getProductInfo().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
-                }
-            }
-        });
+        initializeActions();
     }
 
     @Override
     public void initializeActions() {
+        JFrame frame = super.getFrame();
+        super.getView().getProductImage().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+
+                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                }
+            }
+        });
+
+        super.getView().getProductInfo().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                }
+            }
+        });
+
         super.getView().getAddToOffer().addActionListener(e -> {
             //DUE: Aceptar oferta
             JOptionPane.showMessageDialog(super.getFrame(),

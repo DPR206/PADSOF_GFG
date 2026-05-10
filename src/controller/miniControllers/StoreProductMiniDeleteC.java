@@ -13,6 +13,8 @@ public class StoreProductMiniDeleteC implements Controller {
     public StoreProductMiniDeleteC(StoreProductMiniDelete spmd, Pack p) {
         this.smpd = spmd;
         this.pack = p;
+
+        initializeActions();
     }
 
     @Override

@@ -3,7 +3,6 @@ package controller.clientControllers;
 import controller.Controller;
 import controller.browserControllers.BrowseStoreC;
 import model.store.Store;
-import model.user.UnregisteredClient;
 import view.App;
 import view.clientPanels.UnregisteredMainP;
 
@@ -15,7 +14,7 @@ public class UnregisteredMainC implements Controller {
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public UnregisteredMainC(App frame, Store model) {
+    public UnregisteredMainC(App frame, Store model) throws BadLocationException {
         this.frame = frame;
         this.view = frame.getUnregisteredMainPanel();
         this.model = model;
@@ -25,23 +24,9 @@ public class UnregisteredMainC implements Controller {
     }
 
     public void initializeActions() {
-        this.view.getBrowsePanel().setFirstItemList(model.getPacks());
-        this.view.getBrowsePanel().setSecondItemList(model.getStoreProductList());
-        try {
-            view.getBrowsePanel().paintEverything();
-        } catch (BadLocationException ex) {
-            ex.printStackTrace();
-        }
         this.view.getCardLayout().show(this.view.getBottom(), "Search");
 
         view.getSearch().addActionListener(e -> {
-            this.view.getBrowsePanel()
-                     .setSecondItemList(((UnregisteredClient) this.frame.getUser()).searchStoreProduct());
-            try {
-                view.getBrowsePanel().setCurrentPageNum(1);
-            } catch (BadLocationException ex) {
-                ex.printStackTrace();
-            }
             this.view.getCardLayout().show(this.view.getBottom(), "Search");
         });
 
@@ -50,7 +35,7 @@ public class UnregisteredMainC implements Controller {
         });
     }
 
-    public void linkControllers() {
+    public void linkControllers() throws BadLocationException {
         new BrowseStoreC(frame, model, view.getBrowsePanel());
         new SearcherC(frame, model, view.getFilterPanel());
     }

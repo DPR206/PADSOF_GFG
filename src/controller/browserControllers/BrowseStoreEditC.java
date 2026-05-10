@@ -9,6 +9,8 @@ import view.App;
 import view.browserPanels.BrowseStorePEdit;
 import view.miniPanels.*;
 
+import javax.swing.text.BadLocationException;
+
 public class BrowseStoreEditC extends MixedBrowserController<Pack, StoreProduct> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -18,8 +20,11 @@ public class BrowseStoreEditC extends MixedBrowserController<Pack, StoreProduct>
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public BrowseStoreEditC(App frame, Store model, BrowseStorePEdit view) {
+    public BrowseStoreEditC(App frame, Store model, BrowseStorePEdit view) throws BadLocationException {
         super(frame, view, model);
+        view.setFirstItemList(model.getPacks());
+        view.setSecondItemList(model.getStoreProductList());
+        super.initializeActions();
     }
 
     @Override

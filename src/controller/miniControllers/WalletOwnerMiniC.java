@@ -30,6 +30,11 @@ public class WalletOwnerMiniC implements Controller {
         this.view = view;
         this.model = model;
 
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
         view.getUserImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -37,10 +42,7 @@ public class WalletOwnerMiniC implements Controller {
                 }
             }
         });
-    }
 
-    @Override
-    public void initializeActions() {
         view.getButton().addActionListener(e -> {
             try {
                 BrowseSomeonesWalletP newView = new BrowseSomeonesWalletP(view.getWalletOwner());

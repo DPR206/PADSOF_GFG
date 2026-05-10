@@ -1,7 +1,6 @@
 package view.browserPanels;
 
 import model.product.Pack;
-import model.store.Store;
 import view.miniPanels.PackMiniP;
 
 import javax.swing.*;
@@ -21,8 +20,6 @@ public class BrowsePacks extends BrowserPanel<Pack> {
     @Override
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-
-        super.setItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());

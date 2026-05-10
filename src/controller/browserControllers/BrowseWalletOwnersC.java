@@ -31,8 +31,7 @@ public class BrowseWalletOwnersC extends BrowserController<RegisteredClient> {
         List<RegisteredClient> users = new ArrayList<>(model.getRegisteredClientList());
         users.remove(frame.getUser());
         view.setItemList(users);
-
-        view.paintEverything();
+        super.initializeActions();
     }
 
     @Override

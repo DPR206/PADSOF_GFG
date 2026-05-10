@@ -9,6 +9,8 @@ import view.App;
 import view.browserPanels.BrowseStoreP;
 import view.miniPanels.*;
 
+import javax.swing.text.BadLocationException;
+
 public class BrowseStoreC extends MixedBrowserController<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -19,12 +21,16 @@ public class BrowseStoreC extends MixedBrowserController<Pack, StoreProduct> {
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public BrowseStoreC(App frame, Store model, BrowseStoreP view) {
+    public BrowseStoreC(App frame, Store model, BrowseStoreP view) throws BadLocationException {
         super(frame, view, model);
+        view.setFirstItemList(model.getPacks());
+        view.setSecondItemList(model.getStoreProductList());
+        super.initializeActions();
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
+        System.out.println("Initialize actions for MiniPanels");
         for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
             new PackMiniPC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
         }

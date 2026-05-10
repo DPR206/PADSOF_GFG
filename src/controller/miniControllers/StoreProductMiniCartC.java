@@ -38,6 +38,8 @@ public class StoreProductMiniCartC implements Controller {
         this.model = model;
         this.browserController = browserController;
         this.browserPanel = browserPanel;
+
+        initializeActions();
     }
 
     @Override

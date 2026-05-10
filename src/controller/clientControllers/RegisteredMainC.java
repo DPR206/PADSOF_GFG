@@ -27,20 +27,18 @@ public class RegisteredMainC implements Controller {
 
     public void initializeActions() {
         //this.frame.changeVisibleBanner("BANNER_REGISTERED");
-
-        this.view.getBrowsePanel().setFirstItemList(model.getPacks());
-        this.view.getBrowsePanel().setSecondItemList(model.getStoreProductList());
         try {
-            view.getBrowsePanel().paintEverything();
+            this.view.getBrowsePanel().setFirstItemList(model.getPacks());
+            this.view.getBrowsePanel().setSecondItemList(model.getStoreProductList());
         } catch (BadLocationException ex) {
             ex.printStackTrace();
         }
         this.view.getCardLayout().show(this.view.getBottom(), "Search");
 
         view.getSearch().addActionListener(e -> {
-            this.view.getBrowsePanel()
-                     .setSecondItemList(((RegisteredClient) this.frame.getUser()).searchStoreProduct());
             try {
+                this.view.getBrowsePanel()
+                         .setSecondItemList(((RegisteredClient) this.frame.getUser()).searchStoreProduct());
                 view.getBrowsePanel().setCurrentPageNum(1);
             } catch (BadLocationException ex) {
                 ex.printStackTrace();

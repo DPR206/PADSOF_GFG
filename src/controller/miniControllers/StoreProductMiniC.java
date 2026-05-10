@@ -39,6 +39,11 @@ public class StoreProductMiniC implements Controller {
         this.browserController = browserController;
         this.browserPanel = browserPanel;
 
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
         view.addMouseListener(new MouseAdapter() {
@@ -56,11 +61,9 @@ public class StoreProductMiniC implements Controller {
                 }
             }
         });
-    }
 
-    @Override
-    public void initializeActions() {
         view.getAddToCart().addActionListener(e -> {
+            System.out.println("AAAAAAAAAAA");
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
                 ((RegisteredClient) frame.getUser()).addCart(view.getStoreProduct());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {

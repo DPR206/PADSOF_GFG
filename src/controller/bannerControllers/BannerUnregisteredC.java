@@ -10,6 +10,7 @@ import view.banners.BannerUnregistered;
 import view.clientPanels.CarritoP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 public class BannerUnregisteredC implements Controller {
 
@@ -35,7 +36,11 @@ public class BannerUnregisteredC implements Controller {
         });
 
         vista.getHome().addActionListener(e -> {
-            abrirPaginaPrincipal();
+            try {
+                abrirPaginaPrincipal();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         vista.getBtnPerfil().addActionListener(e -> {
@@ -71,7 +76,7 @@ public class BannerUnregisteredC implements Controller {
         frame.changeVisibleCard("SIGNUP");
     }
 
-    private void abrirPaginaPrincipal() {
+    private void abrirPaginaPrincipal() throws BadLocationException {
 
         new UnregisteredMainC(frame, Store.getInstance());
 

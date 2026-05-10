@@ -71,7 +71,7 @@ public class StoreProductMiniC implements ActionListener {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.updateControllers();
+            browserController.setActions();
         }
 
     }

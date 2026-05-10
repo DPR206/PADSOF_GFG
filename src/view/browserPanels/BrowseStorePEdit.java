@@ -1,27 +1,24 @@
 package view.browserPanels;
 
-import static main.Main.brownColour;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.text.BadLocationException;
-
 import model.product.Pack;
 import model.product.StoreProduct;
-import model.store.Parameter;
-import model.store.Store;
 import view.App;
 import view.miniPanels.PackMiniEdit;
-import view.miniPanels.PackMiniP;
 import view.miniPanels.StoreProductMiniEdit;
-import view.miniPanels.StoreProductMiniP;
 
-public class BrowseStorePEdit extends MixedBrowserPanel<Pack, StoreProduct>{
-	/**
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+
+import static main.Main.brownColour;
+
+public class BrowseStorePEdit extends MixedBrowserPanel<Pack, StoreProduct> {
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
      * This panel's constructor
      */
     public BrowseStorePEdit(App app) throws BadLocationException {
-        super(app);
+        super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();
     }
@@ -34,8 +31,8 @@ public class BrowseStorePEdit extends MixedBrowserPanel<Pack, StoreProduct>{
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
-        super.setFirstItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
-        super.setSecondItemList(Store.getInstance().getStoreProductList()); // DUE: Esto debe darlo el controlador
+        //super.setFirstItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
+        //super.setSecondItemList(Store.getInstance().getStoreProductList()); // DUE: Esto debe darlo el controlador
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());
@@ -44,7 +41,6 @@ public class BrowseStorePEdit extends MixedBrowserPanel<Pack, StoreProduct>{
         this.revalidate();
         this.repaint();
     }
-
 
     public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
         PackMiniEdit miniPack = new PackMiniEdit(item, index);

@@ -61,20 +61,25 @@ public class PriceFilter implements Serializable {
     public double getMax(){
         return this.max;
     }
-    
+
     /**
      * Searches the product based on one filter
      */
-    
+
     public List<StoreProduct> filterPrice(){
     	List<StoreProduct> products = Store.getInstance().getStoreProductList();
     	List<StoreProduct> toReturn = new ArrayList<>();
-    	
+
     	for(StoreProduct sp: products) {
     		if(sp.getPrice() >= this.min && sp.getPrice() < this.max) {
     			toReturn.add(sp);
     		}
     	}
     	return toReturn;
+    }
+
+    @Override
+    public String toString() {
+        return "PriceFilter{" + "min=" + min + ", max=" + max + '}';
     }
 }

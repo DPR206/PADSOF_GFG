@@ -5,13 +5,11 @@ import view.App;
 import view.browserPanels.BrowserPanel;
 
 import javax.swing.text.BadLocationException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * It defines a controller for a BrowserPanel
  */
-public abstract class BrowserController<G> implements ActionListener {
+public abstract class BrowserController<G> {
     private final BrowserPanel<G> view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -29,26 +27,7 @@ public abstract class BrowserController<G> implements ActionListener {
         this.view = view;
         this.model = model;
 
-        updateControllers();
-    }
-
-    /**
-     * It updates this controller's view's controllers (usually when changing the view's current page)
-     */
-    public abstract void updateControllers();
-
-    public void actionPerformed(ActionEvent e) {
-        try {
-            switch (e.getActionCommand()) {
-                case "<< First Page" -> view.setCurrentPageNum(1);
-                case "< Previous Page" -> view.setCurrentPageNum(view.getCurrentPageNum() - 1);
-                case "Next Page >" -> view.setCurrentPageNum(view.getCurrentPageNum() + 1);
-                case "Last Page >>" -> view.setCurrentPageNum(view.getMaxPageNum());
-            }
-            updateControllers();
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
+        setActions();
     }
 
     public App getFrame() {
@@ -62,4 +41,46 @@ public abstract class BrowserController<G> implements ActionListener {
     public BrowserPanel<G> getView() {
         return view;
     }
+
+    public void setActions() {
+        setActionsForMiniPanels();
+
+        view.getFirstPage().addActionListener(e -> {
+            try {
+                view.setCurrentPageNum(1);
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            setActionsForMiniPanels();
+        });
+
+        view.getPreviousPage().addActionListener(e -> {
+            try {
+                view.setCurrentPageNum(view.getCurrentPageNum() - 1);
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            setActionsForMiniPanels();
+        });
+
+        view.getNextPage().addActionListener(e -> {
+            try {
+                view.setCurrentPageNum(view.getCurrentPageNum() + 1);
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            setActionsForMiniPanels();
+        });
+
+        view.getLastPage().addActionListener(e -> {
+            try {
+                view.setCurrentPageNum(view.getMaxPageNum());
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            setActionsForMiniPanels();
+        });
+    }
+
+    public abstract void setActionsForMiniPanels();
 }

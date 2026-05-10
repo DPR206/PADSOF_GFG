@@ -7,8 +7,6 @@ import controller.clientControllers.RegisteredMainC;
 import controller.clientControllers.UnregisteredMainC;
 import controller.employeeControllers.EmployeeMainC;
 import controller.managerControllers.ManagerMainC;
-import model.product.Pack;
-import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import model.user.User;
@@ -24,8 +22,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.Serial;
-import java.util.*;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * It implements the app's view
@@ -50,8 +48,6 @@ public class App extends JFrame {
     private String lastShownPanel;
     private String currentShownPanel;
     private User mainUser = new UnregisteredClient(true);
-    private List<StoreProduct> products = Store.getInstance().getStoreProductList();
-    private List<Pack> packs = Store.getInstance().getPacks();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public App() throws IOException, BadLocationException {
@@ -63,7 +59,7 @@ public class App extends JFrame {
         loginPanel = new LoginP();
         signupPanel = new SignupP();
 
-        unregisteredMainPanel = new UnregisteredMainP(this);
+        unregisteredMainPanel = new UnregisteredMainP();
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
         managerMainPanel = new ManagerMainP();
@@ -255,18 +251,6 @@ public class App extends JFrame {
         return managerMainPanel;
     }
 
-    public List<Pack> getPackList() {
-        return this.packs;
-    }
-
-    public void setPackList(List<Pack> packs) {
-        this.packs = packs;
-    }
-
-    public List<StoreProduct> getProducts() {
-        return this.products;
-    }
-
     public RegisteredMainP getRegisteredMainPanel() {
         return registeredMainPanel;
     }
@@ -297,9 +281,5 @@ public class App extends JFrame {
 
     public void setUnregisteredClient(UnregisteredClient u) {
         this.mainUser = u;
-    }
-
-    public void setsProductList(List<StoreProduct> products) {
-        this.products = products;
     }
 }

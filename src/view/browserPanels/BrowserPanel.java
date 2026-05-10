@@ -103,6 +103,26 @@ public abstract class BrowserPanel<G> extends JPanel {
         paintEverything();
     }
 
+    public JButton getFirstPage() {
+        return firstPage;
+    }
+
+    public List<G> getItemList() {
+        return itemList;
+    }
+
+    /**
+     * Sets item list.
+     * @param newItemList the new item list
+     */
+    public void setItemList(List<G> newItemList) {
+        this.itemList = newItemList;
+    }
+
+    public JButton getLastPage() {
+        return lastPage;
+    }
+
     /**
      * It gets the available store product list's max page number
      * @return the available store product list's max page number
@@ -125,6 +145,10 @@ public abstract class BrowserPanel<G> extends JPanel {
      */
     public void setMiniPanels(List<MiniPanel> newMiniPanels) {
         this.miniPanels = newMiniPanels;
+    }
+
+    public JButton getNextPage() {
+        return nextPage;
     }
 
     /**
@@ -176,13 +200,5 @@ public abstract class BrowserPanel<G> extends JPanel {
         previousPage.addActionListener(c);
         nextPage.addActionListener(c);
         lastPage.addActionListener(c);
-    }
-
-    /**
-     * Sets item list.
-     * @param newItemList the new item list
-     */
-    public void setItemList(List<G> newItemList) {
-        this.itemList = newItemList;
     }
 }

@@ -21,14 +21,12 @@ public class RegisteredMakeOfferC implements ActionListener {
         this.view = view;
         this.model = model;
 
-        updateControllers();
+        setActionsForMiniPanels();
     }
 
-    public void updateControllers() {
-        view.getBrowseWalletOwnersP()
-            .setController(new BrowseWalletOwnersC(frame, view.getBrowseWalletOwnersP(), model));
-        view.getBrowseSecondHandProductsP()
-            .setController(new BrowseSecondHandProductsC(frame, view.getBrowseSecondHandProductsP(), model));
+    public void setActionsForMiniPanels() {
+        new BrowseWalletOwnersC(frame, view.getBrowseWalletOwnersP(), model);
+        new BrowseSecondHandProductsC(frame, view.getBrowseSecondHandProductsP(), model);
     }
 
     @Override
@@ -50,6 +48,6 @@ public class RegisteredMakeOfferC implements ActionListener {
                 throw new RuntimeException(ex);
             }
         }
-        updateControllers();
+        setActionsForMiniPanels();
     }
 }

@@ -22,7 +22,7 @@ public class BrowseMyWalletC extends BrowserController<SecondHandProduct> {
     }
 
     @Override
-    public void updateControllers() {
+    public void setActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
             miniPanel.setController(
                     new SecondHandMyWalletMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,

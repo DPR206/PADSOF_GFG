@@ -24,16 +24,13 @@ public class BrowseStoreC extends MixedBrowserController<Pack, StoreProduct> {
     }
 
     @Override
-    public void updateControllers() {
+    public void setActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
-            miniPanel.setController(
-                    new PackMiniPC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView()));
+            new PackMiniPC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
         }
-
         for (MiniPanel miniPanel : super.getView().getSecondMiniPanels()) {
-            miniPanel.setController(
-                    new StoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
-                            super.getView()));
+            new StoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
+                    super.getView());
         }
     }
 }

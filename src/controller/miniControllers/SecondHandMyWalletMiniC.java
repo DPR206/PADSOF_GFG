@@ -55,7 +55,7 @@ public class SecondHandMyWalletMiniC extends SecondHandMiniC {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            super.getBrowserController().updateControllers();
+            super.getBrowserController().setActionsForMiniPanels();
         }
     }
 }

@@ -2,8 +2,6 @@ package view.browserPanels;
 
 import model.product.Pack;
 import model.product.StoreProduct;
-import model.store.Store;
-import view.App;
 import view.miniPanels.PackMiniP;
 import view.miniPanels.StoreProductMiniP;
 
@@ -19,8 +17,8 @@ public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
     /**
      * This panel's constructor
      */
-    public BrowseStoreP(App app) throws BadLocationException {
-        super(app);
+    public BrowseStoreP() throws BadLocationException {
+        super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();
     }
@@ -30,11 +28,9 @@ public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
      * @throws BadLocationException bad locations within a document model (that is, attempts to reference a location
      *                              that doesn't exist)
      */
+    @Override
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-
-        super.setFirstItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
-        super.setSecondItemList(Store.getInstance().getStoreProductList()); // DUE: Esto debe darlo el controlador
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());

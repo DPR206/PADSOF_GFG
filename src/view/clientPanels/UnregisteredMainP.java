@@ -1,14 +1,11 @@
 package view.clientPanels;
 
-import model.product.StoreProduct;
-import view.App;
 import view.browserPanels.BrowseStoreP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class UnregisteredMainP extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -18,14 +15,12 @@ public class UnregisteredMainP extends JPanel {
     private SearchPanel filterP = new SearchPanel();
     private BrowseStoreP searchingP;
     private JPanel productSearch;
-    private List<StoreProduct> p;
-    private App app;
     private JPanel others;
     private CardLayout cardLayout = new CardLayout();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public UnregisteredMainP(App app) throws BadLocationException {
-        searchingP = new BrowseStoreP(app);
+    public UnregisteredMainP() throws BadLocationException {
+        searchingP = new BrowseStoreP();
 
         configurarEstructura();
     }
@@ -39,25 +34,20 @@ public class UnregisteredMainP extends JPanel {
         JPanel botones = new JPanel(new GridLayout(0, 2));
         botones.add(this.search);
         botones.add(this.filters);
-        
+
         others.add(botones, BorderLayout.NORTH);
 
         bottom = new JPanel(cardLayout);
         bottom.setOpaque(false);
-        
+        bottom.add(searchingP, "Search");
+        bottom.add(filterP, "Filters");
+
         others.add(bottom, BorderLayout.CENTER);
 
         this.add(others, BorderLayout.CENTER);
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-    public App getApp() {
-        return app;
-    }
-
-    public void setApp(App newApp) {
-        this.app = newApp;
-    }
 
     public JPanel getBottom() {
         return bottom;
@@ -105,14 +95,6 @@ public class UnregisteredMainP extends JPanel {
 
     public void setOthers(JPanel newOthers) {
         this.others = newOthers;
-    }
-
-    public List<StoreProduct> getP() {
-        return p;
-    }
-
-    public void setP(List<StoreProduct> newP) {
-        this.p = newP;
     }
 
     public JPanel getProductSearch() {

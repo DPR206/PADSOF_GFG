@@ -2,7 +2,6 @@ package view.browserPanels;
 
 import model.store.BetterPager;
 import model.store.Parameter;
-import view.App;
 import view.miniPanels.MiniPanel;
 
 import javax.swing.*;
@@ -22,7 +21,6 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
-    private final App app;
     private final BetterPager<G> firstPager = new BetterPager<>();
     private final BetterPager<U> secondPager = new BetterPager<>();
     private final List<MiniPanel> firstMiniPanels = new ArrayList<>();
@@ -35,10 +33,8 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
 
     /**
      * Instantiates a new Mixed browser panel.
-     * @param app the app
      */
-    public MixedBrowserPanel(App app) {
-        this.app = app;
+    public MixedBrowserPanel() {
         currentPageNum = 1;
     }
 
@@ -106,14 +102,6 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     }
 
     /**
-     * Gets app.
-     * @return the app
-     */
-    public App getApp() {
-        return app;
-    }
-
-    /**
      * Gets current page num.
      * @return the current page num
      */
@@ -132,12 +120,32 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         paintEverything();
     }
 
+    public List<G> getFirstItemList() {
+        return firstItemList;
+    }
+
+    public void setFirstItemList(List<G> newFirstItemList) {
+        this.firstItemList = newFirstItemList;
+    }
+
     /**
      * Gets mini panels.
      * @return the mini panels
      */
     public List<MiniPanel> getFirstMiniPanels() {
         return firstMiniPanels;
+    }
+
+    public JButton getFirstPage() {
+        return firstPage;
+    }
+
+    public BetterPager<G> getFirstPager() {
+        return firstPager;
+    }
+
+    public JButton getLastPage() {
+        return lastPage;
     }
 
     /**
@@ -155,6 +163,10 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
             return totalItems / itemsPerPage;
         }
         return (totalItems / itemsPerPage) + 1;
+    }
+
+    public JButton getNextPage() {
+        return nextPage;
     }
 
     /**
@@ -191,6 +203,14 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         return previousPage;
     }
 
+    public List<U> getSecondItemList() {
+        return secondItemList;
+    }
+
+    public void setSecondItemList(List<U> newSecondItemList) {
+        this.secondItemList = newSecondItemList;
+    }
+
     /**
      * Gets mini panels.
      * @return the mini panels
@@ -199,30 +219,24 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         return secondMiniPanels;
     }
 
+    public BetterPager<U> getSecondPager() {
+        return secondPager;
+    }
+
     /**
      * It makes it possible to assign a controller to this panel's components
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        if (firstItemList != null) {
-            for (MiniPanel miniPanel : firstMiniPanels) {
-                miniPanel.setController(c);
-            }
-            for (MiniPanel miniPanel : secondMiniPanels) {
-                miniPanel.setController(c);
-            }
+        for (MiniPanel miniPanel : firstMiniPanels) {
+            miniPanel.setController(c);
+        }
+        for (MiniPanel miniPanel : secondMiniPanels) {
+            miniPanel.setController(c);
         }
         firstPage.addActionListener(c);
         previousPage.addActionListener(c);
         nextPage.addActionListener(c);
         lastPage.addActionListener(c);
-    }
-
-    public void setFirstItemList(List<G> newFirstItemList) {
-        this.firstItemList = newFirstItemList;
-    }
-
-    public void setSecondItemList(List<U> newSecondItemList) {
-        this.secondItemList = newSecondItemList;
     }
 }

@@ -30,6 +30,10 @@ public class SearchStoreProducts implements Serializable {
     private CategoryFilter categoryF = null;
     private Store s;
 
+    public List<PriceFilter> getPriceF() {
+        return priceF;
+    }
+
     /**
      * Creates the searcher with no initial filters.
      *
@@ -87,33 +91,33 @@ public class SearchStoreProducts implements Serializable {
 
        if(!this.priceF.isEmpty()) pCs.retainAll(this.filterByPrice());
        if(!this.punctuationF.isEmpty()) pCs.retainAll(this.filterByPunctuation());
-        
+
        if(this.ascendant == true && (!this.priceF.isEmpty() && !this.punctuationF.isEmpty())) {
         	pCs.sort(Comparator.comparing(StoreProduct::getPrice).thenComparing(StoreProduct::getAveragePunctuation));
         }
-        
+
        else if(this.ascendant == true && (!this.priceF.isEmpty())) {
     	   pCs.sort(Comparator.comparing(StoreProduct::getPrice));
        }
-       
+
        else if(this.ascendant == true && (!this.punctuationF.isEmpty())) {
     	   pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation));
        }
-       
+
        else if(this.ascendant == false && (!this.priceF.isEmpty() && !this.punctuationF.isEmpty())) {
        	pCs.sort(Comparator.comparing(StoreProduct::getPrice).thenComparing(StoreProduct::getAveragePunctuation).reversed());
        }
-       
+
       else if(this.ascendant == false && (!this.priceF.isEmpty())) {
    	   pCs.sort(Comparator.comparing(StoreProduct::getPrice).reversed());
       }
-      
+
       else if(this.ascendant == false && (!this.punctuationF.isEmpty())) {
    	   pCs.sort(Comparator.comparing(StoreProduct::getAveragePunctuation).reversed());
       }
        return pCs;
     }
-  
+
 
     /**
      * Filters products based on the price filter.
@@ -144,7 +148,7 @@ public class SearchStoreProducts implements Serializable {
                 aux.addAll(p.filterPunctuation());
             }
         }
-        
+
         return aux;
     }
 
@@ -195,7 +199,7 @@ public class SearchStoreProducts implements Serializable {
     public CategoryFilter getCategoryFilter() {
     	return this.categoryF;
     }
-    
+
     public void clearFilters() {
         this.priceF.clear();
         this.punctuationF.clear();

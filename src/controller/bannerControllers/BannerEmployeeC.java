@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 import controller.employeeControllers.*;
 import controller.notifications.NotificacionesC;
-import model.user.Employee;
+import model.user.*;
 import view.*;
 import view.banners.BannerEmployee;
 import view.employeePanels.*;
@@ -24,6 +24,7 @@ public class BannerEmployeeC {
 	 */
 	public BannerEmployeeC(BannerEmployee vista, Employee user, App frame) {
 		this.vista = vista;
+		//this.user = (Employee) frame.getUser();
 		this.user = user;
 		this.frame = frame;
 		filtrarBotones();
@@ -128,7 +129,7 @@ public class BannerEmployeeC {
 	private void abrirNots() {
 
 	    //NotificacionP pagNots = new NotificacionP(new BannerRegistered());
-	    NotificacionP pagNots = new NotificacionP(vista);
+	    NotificacionP pagNots = new NotificacionP();
 
 	    new NotificacionesC(pagNots, frame);
 

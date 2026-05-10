@@ -1,21 +1,146 @@
 package view.clientPanels;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+
+import view.browserPanels.BrowseStoreP;
+
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class RegisteredMainP extends JPanel {
-    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public RegisteredMainP() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Change this
+	private static final long serialVersionUID = 1L;
+    JPanel bottom;
+    private JButton filters = new JButton("Filters");
+    private JButton search = new JButton("Search");
+    private SearchPanel filterP = new SearchPanel();
+    private BrowseStoreP searchingP;
+    private JPanel productSearch;
+    private JPanel others;
+    private CardLayout cardLayout = new CardLayout();
 
-        this.add(new JLabel("Work in progress!!!..."));
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public RegisteredMainP() throws BadLocationException {
+        searchingP = new BrowseStoreP();
+
+        configurarEstructura();
     }
 
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        //DUE
+    private void configurarEstructura() {
+        this.setLayout(new BorderLayout());
+
+        others = new JPanel(new BorderLayout());
+        others.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JPanel botones = new JPanel(new GridLayout(0, 2));
+        botones.add(this.search);
+        botones.add(this.filters);
+
+        others.add(botones, BorderLayout.NORTH);
+
+        bottom = new JPanel(cardLayout);
+        bottom.setOpaque(false);
+        bottom.add(searchingP, "Search");
+        bottom.add(filterP, "Filters");
+
+        others.add(bottom, BorderLayout.CENTER);
+
+        this.add(others, BorderLayout.CENTER);
+    }
+
+    /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    public JPanel getBottom() {
+        return bottom;
+    }
+
+    public void setBottom(JPanel newBottom) {
+        this.bottom = newBottom;
+    }
+
+    public BrowseStoreP getBrowsePanel() {
+        return this.searchingP;
+    }
+
+    public CardLayout getCardLayout() {
+        return cardLayout;
+    }
+
+    public void setCardLayout(CardLayout newCardLayout) {
+        this.cardLayout = newCardLayout;
+    }
+
+    public SearchPanel getFilterP() {
+        return filterP;
+    }
+
+    public void setFilterP(SearchPanel newFilterP) {
+        this.filterP = newFilterP;
+    }
+
+    public SearchPanel getFilterPanel() {
+        return this.filterP;
+    }
+
+    public JButton getFilters() {
+        return filters;
+    }
+
+    public void setFilters(JButton newFilters) {
+        this.filters = newFilters;
+    }
+
+    public JPanel getOthers() {
+        return others;
+    }
+
+    public void setOthers(JPanel newOthers) {
+        this.others = newOthers;
+    }
+
+    public JPanel getProductSearch() {
+        return productSearch;
+    }
+
+    public void setProductSearch(JPanel newProductSearch) {
+        this.productSearch = newProductSearch;
+    }
+
+    public JButton getSearch() {
+        return search;
+    }
+
+    public void setSearch(JButton newSearch) {
+        this.search = newSearch;
+    }
+
+    public BrowseStoreP getSearching() {
+        return searchingP;
+    }
+
+    public void setSearching(BrowseStoreP newSearching) {
+        this.searchingP = newSearching;
+    }
+
+    public BrowseStoreP getSearchingP() {
+        return searchingP;
+    }
+
+    public void setSearchingP(BrowseStoreP newSearchingP) {
+        this.searchingP = newSearchingP;
+    }
+
+    public void setController(ActionListener e) {
+        this.filters.addActionListener(e);
+        this.search.addActionListener(e);
+
+    }
+
+    public void setPanelInferior(JPanel panel, String nombre) {
+        this.bottom.add(panel, nombre);
+        this.cardLayout.show(bottom, nombre);
+
+        this.revalidate();
+        this.repaint();
     }
 }

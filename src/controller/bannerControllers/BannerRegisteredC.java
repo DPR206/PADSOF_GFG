@@ -63,8 +63,7 @@ public class BannerRegisteredC {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (respuesta == JOptionPane.YES_OPTION) {
-            this.vista.setVisible(false);
-            this.frame.getWelcomePanel().setVisible(true);
+        	this.frame.changeVisibleCard("WELCOME");
 
             this.frame.revalidate();
             this.frame.repaint();
@@ -77,17 +76,20 @@ public class BannerRegisteredC {
 
         new RegisteredWalletC(pagWallet, (RegisteredClient) user);
 
-        pagWallet.setVisible(true);
+        frame.addCard(pagWallet, "WALLET");
+        frame.changeVisibleCard("WALLET");
 
     }
 
     private void abrirNots() {
 
-        NotificacionP pagNots = new NotificacionP(vista);
+        NotificacionP pagNots = new NotificacionP();
 
         new NotificacionesC(pagNots, frame);
 
-        pagNots.setVisible(true);
+        this.frame.addCard(pagNots, "NOTIFICATIONS");
+        this.frame.changeVisibleCard("NOTIFICATIONS");
+        //this.frame.updateView("NOTIFICATIONS", "BANNER_REGISTERED");
     }
 
     private void abrirPerfil() {
@@ -96,28 +98,25 @@ public class BannerRegisteredC {
 
         new RegisteredProfileC(profile, (RegisteredClient) user);
 
-        profile.setVisible(true);
+        this.frame.addCard(profile, "PROFILE_REGISTERED");
+        //this.frame.changeVisibleCard("PROFILE_REGISTERED");
+        this.frame.updateView("PROFILE_REGISTERED", "BANNER_REGISTERED");
     }
 
     private void abrirPaginaPrincipal() {
 
-        //RegisteredMainP pagPrin = new RegisteredMainP();
-
-        //new RegisteredMainC(frame, Store.getInstance());
-
-        frame.getRegisteredMainPanel().setVisible(true);
+    	this.frame.updateView("REGISTERED_MAIN", "BANNER_REGISTERED");
+        //frame.changeVisibleCard("REGISTERED_MAIN");
     }
 
     private void abrirCarritoDelCliente() {
 
-        // 1. Crear la vista del carrito
         CarritoP carritoVista = new CarritoP();
 
-        // 2. Crear el controlador del carrito pasando el usuario actual
         new CarritoC(carritoVista, (RegisteredClient) user);
 
-        // 3. Mostrar la ventana
-        carritoVista.setVisible(true);
+        frame.addCard(carritoVista, "CART");
+        frame.changeVisibleCard("CART");
 
     }
 }

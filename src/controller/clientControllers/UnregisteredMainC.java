@@ -1,17 +1,12 @@
 package controller.clientControllers;
 
 import controller.browserControllers.BrowseStoreC;
-import model.product.StoreProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import view.App;
 import view.clientPanels.UnregisteredMainP;
 
 import javax.swing.text.BadLocationException;
-import java.util.List;
-
-//import model.user.UnregisteredClient;
-//import model.user.User;
 
 public class UnregisteredMainC {
     private final UnregisteredMainP view; /* view -> panel */
@@ -29,7 +24,6 @@ public class UnregisteredMainC {
     }
 
     private void inicializar() {
-        List<StoreProduct> productos = Store.getInstance().getStoreProductList();
         this.view.getBrowsePanel().setFirstItemList(model.getPacks());
         this.view.getBrowsePanel().setSecondItemList(model.getStoreProductList());
         try {
@@ -51,14 +45,12 @@ public class UnregisteredMainC {
         });
 
         view.getFilters().addActionListener(e -> {
-            //this.view.setPanelInferior(view.getFilterP(), "Filters");
             this.view.getCardLayout().show(this.view.getBottom(), "Filters");
         });
     }
 
     public void linkControllers() {
         new BrowseStoreC(frame, model, view.getBrowsePanel());
-//        new SearcherC(frame, model, view.getFilterPanel());
         this.view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
     }
 }

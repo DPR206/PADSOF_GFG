@@ -10,16 +10,14 @@ import view.banners.BannerManager;
 public class BannerManagerC {
 
 	private BannerManager vista;
-	//private Manager user;
 	private App frame;
 	private Store store;
 
 	/**
 	 * @param vista
 	 */
-	public BannerManagerC(BannerManager vista, App frame, Store store) {
+	public BannerManagerC(BannerManager vista, App frame) {
 		this.vista = vista;
-		//this.user = frame.getUser();
 		this.frame = frame;
         inicializarEventos();
 	}

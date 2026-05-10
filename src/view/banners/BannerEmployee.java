@@ -134,6 +134,8 @@ public class BannerEmployee extends JPanel {
         btnNots.setFocusPainted(false);
         btnNots.setContentAreaFilled(true);
         
+        btnNots.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
         btnExit = new JButton("\u23FB");
         btnExit.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
         

@@ -3,6 +3,7 @@ package controller.bannerControllers;
 import javax.swing.JOptionPane;
 import controller.managerControllers.ManagerProfileC;
 import model.store.Store;
+import model.user.Manager;
 import view.App;
 import view.managerPanels.ManagerProfile;
 import view.banners.BannerManager;
@@ -11,7 +12,7 @@ public class BannerManagerC {
 
 	private BannerManager vista;
 	private App frame;
-	private Store store;
+	private Store store = Store.getInstance();
 
 	/**
 	 * @param vista
@@ -49,7 +50,7 @@ public class BannerManagerC {
 		);
 
 		if (respuesta == JOptionPane.YES_OPTION) {
-			this.frame.changeVisibleCard("WELCOME");
+			this.frame.updateView("WELCOME", "BANNER_UNREGISTERED");
 
 	        this.frame.revalidate();
 	        this.frame.repaint();
@@ -57,10 +58,19 @@ public class BannerManagerC {
 	}
 
 	private void abrirPerfil() {
+		
+		Manager currentManager = store.getManager();
+
+	    // Debug: Verifica si llega nulo a la consola
+	    if (currentManager == null) {
+	        System.out.println("ERROR: El manager en Store es NULL");
+	        JOptionPane.showMessageDialog(frame, "Error: No user session found.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return; // Detiene la ejecución para evitar el crash
+	    }
 
 	    ManagerProfile perfil = new ManagerProfile();
 
-	    new ManagerProfileC(perfil, store.getManager());
+	    new ManagerProfileC(perfil, Store.getInstance().getManager(), frame);
 
 	    frame.addCard(perfil, "PERFIL_MANAGER");
 	    frame.changeVisibleCard("PERFIL_MANAGER");

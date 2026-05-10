@@ -63,7 +63,7 @@ public class BannerRegisteredC {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (respuesta == JOptionPane.YES_OPTION) {
-        	this.frame.changeVisibleCard("WELCOME");
+        	this.frame.updateView("WELCOME", "BANNER_UNREGISTERED");
 
             this.frame.revalidate();
             this.frame.repaint();

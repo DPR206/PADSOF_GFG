@@ -80,8 +80,8 @@ public class ManagerProfile extends JPanel {
 	/**
 	 * @param nom the nom to set
 	 */
-	public void setNom(JLabel nom) {
-		this.nom = nom;
+	public void setNom(String nom) {
+		this.nom.setText(nom);;
 	}
 
 	/**

@@ -23,8 +23,6 @@ public class RegisteredChangePwdC {
 
     private void inicializarEventos() {
 
-    	vista.setNom(user.getUserName());
-
     	vista.getBtnCambiar().addActionListener(e -> {
     		cambiarPwd();
     	});
@@ -34,6 +32,7 @@ public class RegisteredChangePwdC {
 	private void cambiarPwd() {
 		String pass1 = vista.getPwd1();
 	    String pass2 = vista.getPwd2();
+	    String username = vista.getNom();
 
 	    if (pass1.isEmpty() || pass2.isEmpty()) {
 	        JOptionPane.showMessageDialog(vista, "Please fill in all fields", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -45,6 +44,7 @@ public class RegisteredChangePwdC {
 		} else {
 			try {
 				user.changePassword(pass1);
+				user.setUserName(username);
 				JOptionPane.showMessageDialog(vista, "Password changed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				vista.dispose();
 			} catch (PasswordNotValid e) {

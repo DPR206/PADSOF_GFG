@@ -52,6 +52,7 @@ public class RegisteredProfileC {
 	    new RegisteredChangePwdC(pagPwd, user);
 
 	    pagPwd.setVisible(true);
+	    actualizarVista();
 	}
 
 	private void showPassword() {
@@ -66,4 +67,9 @@ public class RegisteredProfileC {
 	}
 
 
+	private void actualizarVista() {
+	    vista.getNom().setText(user.getUserName());
+	    vista.revalidate();
+	    vista.repaint();
+	}
 }

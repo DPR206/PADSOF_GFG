@@ -40,7 +40,7 @@ public class UnregisteredMainC {
         } catch (BadLocationException ex) {
             ex.printStackTrace();
         }
-        this.view.setPanelInferior(this.view.getBrowsePanel(), "Search");
+        this.view.getCardLayout().show(this.view.getBottom(), "Search");
 
         view.getSearch().addActionListener(e -> {
             System.out.println("FILTERS:");
@@ -48,18 +48,18 @@ public class UnregisteredMainC {
                 System.out.println(pf.toString());
             }
             System.out.println(this.user.searchStoreProduct()); // FALLA: user.searchStoreProduct();
-            this.view.getBrowsePanel().setSecondItemList(this.user.searchStoreProduct());
+            //this.view.getBrowsePanel().setSecondItemList(this.user.searchStoreProduct());
             try {
                 view.getBrowsePanel().setCurrentPageNum(1);
             } catch (BadLocationException ex) {
                 ex.printStackTrace();
             }
-            this.view.setPanelInferior(this.view.getBrowsePanel(), "Search");
-
+            this.view.getCardLayout().show(this.view.getBottom(), "Search");
         });
 
         view.getFilters().addActionListener(e -> {
-            this.view.setPanelInferior(view.getFilterP(), "Filters");
+            //this.view.setPanelInferior(view.getFilterP(), "Filters");
+            this.view.getCardLayout().show(this.view.getBottom(), "Filters");
         });
     }
 

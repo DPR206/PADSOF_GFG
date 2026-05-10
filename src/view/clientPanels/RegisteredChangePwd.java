@@ -34,6 +34,7 @@ public class RegisteredChangePwd extends JDialog {
 		tituloNom.setFont(new Font("SansSerif", Font.BOLD, 14));
         tituloNom.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        nom = new JLabel("");
 		nom.setFont(new Font("SansSerif", Font.PLAIN, 14));
         nom.setAlignmentX(Component.LEFT_ALIGNMENT);
 

@@ -1,6 +1,5 @@
 package view.clientPanels;
 
-import model.store.Store;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.browserPanels.BrowseWalletOwnersP;
 
@@ -22,8 +21,7 @@ public class RegisteredMakeOfferP extends JPanel {
         this.add(new JLabel("Select a product:"));
 
         browseSecondHandProductsP = new BrowseSecondHandProductsP();
-        browseUsersP = new BrowseWalletOwnersP(Store.getInstance().getRegisteredClientList(), "Browse Wallet"); //
-        // DUE: Tiene que asignar los productos el controlador
+        browseUsersP = new BrowseWalletOwnersP("Browse Wallet");
 
         this.setLayout(new BorderLayout());
 

@@ -1,5 +1,6 @@
 package controller.clientControllers;
 
+import controller.browserControllers.BrowseStoreC;
 import controller.employeeControllers.RegisteredMakeOfferC;
 import model.store.Store;
 import model.user.RegisteredClient;
@@ -8,14 +9,13 @@ import view.clientPanels.RegisteredMainP;
 
 import javax.swing.text.BadLocationException;
 
-import controller.browserControllers.BrowseStoreC;
-
 public class RegisteredMainC {
     private final RegisteredMainP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
+
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public RegisteredMainC(App frame, Store model) {
+    public RegisteredMainC(App frame, Store model) throws BadLocationException {
         this.frame = frame;
         this.view = frame.getRegisteredMainPanel();
         this.model = model;
@@ -25,7 +25,7 @@ public class RegisteredMainC {
     }
 
     private void inicializar() {
-    	//this.frame.changeVisibleBanner("BANNER_REGISTERED");
+        //this.frame.changeVisibleBanner("BANNER_REGISTERED");
 
         this.view.getBrowsePanel().setFirstItemList(model.getPacks());
         this.view.getBrowsePanel().setSecondItemList(model.getStoreProductList());
@@ -56,7 +56,7 @@ public class RegisteredMainC {
         });
     }
 
-    public void linkControllers() {
+    public void linkControllers() throws BadLocationException {
         new BrowseStoreC(frame, model, view.getBrowsePanel());
         this.view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
         this.view.getMakeOfferP().setController(new RegisteredMakeOfferC(frame, model, view.getMakeOfferP()));

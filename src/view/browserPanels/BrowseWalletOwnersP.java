@@ -6,7 +6,6 @@ import view.miniPanels.UserMiniP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.util.List;
 
 import static main.Main.brownColour;
 
@@ -18,11 +17,10 @@ public class BrowseWalletOwnersP extends BrowserPanel<RegisteredClient> {
     /**
      * This panel's constructor
      */
-    public BrowseWalletOwnersP(List<RegisteredClient> users, String buttonName) throws BadLocationException {
+    public BrowseWalletOwnersP(String buttonName) throws BadLocationException {
         super();
         this.setLayout(new GridLayout(3, 3));
 
-        super.setItemList(users);
         this.buttonName = buttonName;
 
         paintEverything();

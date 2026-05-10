@@ -8,6 +8,10 @@ import view.browserPanels.BrowseWalletOwnersP;
 import view.miniPanels.MiniPanel;
 import view.miniPanels.UserMiniP;
 
+import javax.swing.text.BadLocationException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The type Browse wallet owners c.
  */
@@ -21,8 +25,14 @@ public class BrowseWalletOwnersC extends BrowserController<RegisteredClient> {
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public BrowseWalletOwnersC(App frame, BrowseWalletOwnersP view, Store model) {
+    public BrowseWalletOwnersC(App frame, BrowseWalletOwnersP view, Store model) throws BadLocationException {
         super(frame, view, model);
+
+        List<RegisteredClient> users = new ArrayList<>(model.getRegisteredClientList());
+        users.remove(frame.getUser());
+        view.setItemList(users);
+
+        view.paintEverything();
     }
 
     @Override

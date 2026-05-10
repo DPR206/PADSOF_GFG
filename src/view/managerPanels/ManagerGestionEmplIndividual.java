@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -71,4 +72,26 @@ public class ManagerGestionEmplIndividual extends JPanel{
 
         this.add(panel, BorderLayout.CENTER);
     }
+	
+	public void setController(ActionListener e) {
+		this.confirmar.addActionListener(e);	
+	}
+	public JTextField getUserName() {
+		return this.userName;
+	}
+	
+	public JTextField getPwd() {
+		return this.pwd;
+	}
+	
+	public JCheckBox getStorePerm() {
+		return this.storePerm;
+	}
+	
+	public JCheckBox getExchangePerm() {
+		return this.exchangePerm;
+	}
+	public JCheckBox getOrderPerm() {
+		return this.orderPerm;
+	}
 }

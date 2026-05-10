@@ -46,6 +46,9 @@ public class UserMiniP extends MiniPanel {
         return (RegisteredClient) user;
     }
 
+    public User getUser() {
+    	return this.user;
+    }
     /**
      * It makes it possible to assign a controller to this panel's components
      * @param c the desired controller

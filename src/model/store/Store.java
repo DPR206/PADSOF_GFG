@@ -741,7 +741,11 @@ public class Store implements Serializable {
     public HashMap<String, StoreProduct> getStoreProducts() {
         return this.storeProducts;
     }
-
+    
+    public void addEmployee(Employee emp) {
+    	this.employees.put(emp.getId(), emp);
+    	this.users.put(emp.getUserName(), emp);
+    }
     /**
      * Gets the list of the users of the store
      * @return a map of the users and their names

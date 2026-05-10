@@ -20,11 +20,11 @@ import javax.swing.text.BadLocationException;
 
 import model.store.Store;
 import view.App;
+import view.browserPanels.BrowseUsersP;
 import view.miniPanels.EmployeeMini;
 import model.user.Employee;
 
 public class ManagerGestionarEmpleados extends JPanel {
-    private JButton newEmployee;
     private JCheckBox storeP = new JCheckBox("Trabajar con productos");
     private JCheckBox orderP = new JCheckBox("Trabajar con pedidos");
     private JCheckBox exchangeP = new JCheckBox("Trabajar con intercambios");
@@ -32,6 +32,7 @@ public class ManagerGestionarEmpleados extends JPanel {
     private JTextField userName = new JTextField();
     private JPasswordField pwd = new JPasswordField();
     private JPanel mainThings = new JPanel();
+    private JButton confirmar = new JButton("CONFIRMAR");
 
     public ManagerGestionarEmpleados(App app) {
         super();
@@ -45,9 +46,6 @@ public class ManagerGestionarEmpleados extends JPanel {
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setPreferredSize(new Dimension(450, 0));
 
-        this.newEmployee = new JButton("AÑADIR");
-        this.newEmployee.setPreferredSize(new Dimension(120, 30));
-
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -55,7 +53,7 @@ public class ManagerGestionarEmpleados extends JPanel {
         panel.add(new JLabel("Nombre de usuario:"));
         this.userName.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         panel.add(this.userName);
-
+        
         // Espacio
         panel.add(Box.createVerticalStrut(10));
 
@@ -72,26 +70,22 @@ public class ManagerGestionarEmpleados extends JPanel {
         panel.add(this.storeP);
         panel.add(this.orderP);
         panel.add(this.exchangeP);
-
-        panel.add(Box.createVerticalStrut(20));
-
-        // Botón alineado a la derecha
-        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelBoton.add(this.newEmployee);
-		
-        panel.add(panelBoton);
-
-        // Márgenes
-        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-
-        this.add(scroll, BorderLayout.CENTER);
+        panel.add(this.confirmar);
+        List<Employee> employees = Store.getInstance().getEmployeeList();
+        BrowseUsersP browse = null;
+        try {
+			browse = new BrowseUsersP(employees, "GESTIONAR");
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         this.add(panel, BorderLayout.EAST);
-
-        refresh();
+        this.add(browse, BorderLayout.CENTER);
     }
 
     public void setController(ActionListener c) {
-        this.newEmployee.addActionListener(c);
+        this.confirmar.addActionListener(c);
     }
 
     public JCheckBox getStoreP() {

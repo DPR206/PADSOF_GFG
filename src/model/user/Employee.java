@@ -46,6 +46,8 @@ public class Employee extends User implements Serializable {
         this.perm = p;
         for (Permission permission : p) {
             switch (permission) {
+            	case null:
+            		break;
                 case STORE:
                     this.sp = new StorePermission();
                     break;

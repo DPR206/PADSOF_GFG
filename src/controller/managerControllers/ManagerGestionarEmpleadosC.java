@@ -2,9 +2,12 @@ package controller.managerControllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.JOptionPane;
 
-
+import model.store.Store;
 import model.user.*;
 import view.App;
 import view.managerPanels.GestorChangePwd;
@@ -19,36 +22,30 @@ public class ManagerGestionarEmpleadosC implements ActionListener{
     	this.gest = gest;
     }
     public void actionPerformed(ActionEvent e) {
-    	if(e.getActionCommand().equals("AÑADIR")) {
+    	System.out.println(Store.getInstance().getEmployeeList());
+    	if(e.getActionCommand().equals("CONFIRMAR")) {
     		String userName = gest.getUserName().getText();
     		char[] pwd = gest.getPwd().getPassword();
     		
     		if(userName.isBlank() || pwd.length == 0) return; //si están vacíos, no hacen nada
     		String password = new String(pwd);
     		
-    		Employee emp = new Employee(password, userName, false, null);
-    		
-    		Permission p[] = new Permission[3];;
-    		int i = 0;
-    		if(gest.getStoreP().isSelected()) {
-    			p[i] = Permission.STORE;
-    			i++;
-    			emp.setSp(new StorePermission());
-    		}
-    		if(gest.getOrderP().isSelected()) {
-    			p[i] = Permission.ORDER;
-    			i++;
-    			emp.setOp(new OrderPermission(true));
-    		}
-    		if(gest.getExchangeP().isSelected()) {
-    			p[i] = Permission.EXCHANGE;
-    			i++;
-    			emp.setEp(new ExchangePermission());
-    		}
-    		
-    		emp.setPerm(p);
-    		Manager.getInstance().addEmployee(emp);
+    		List<Permission> perms = new ArrayList<>();
+
+            if (gest.getStoreP().isSelected()) perms.add(Permission.STORE);
+            if (gest.getOrderP().isSelected()) perms.add(Permission.ORDER);
+            if (gest.getExchangeP().isSelected()) perms.add(Permission.EXCHANGE);
+
+            Permission[] p = perms.toArray(new Permission[0]);
+
+            Employee emp = new Employee(password, userName, false, p);
+    		System.out.println(emp.getId());
+    		JOptionPane.showMessageDialog(frame, gest, "CREADO CORRECTAMENTE", JOptionPane.PLAIN_MESSAGE);
+
+    		Store.getInstance().addEmployee(emp);
     		gest.refresh();
+    		System.out.println(emp);
+    		System.out.println(Store.getInstance().getEmployeeList());
     	}
     }
 }

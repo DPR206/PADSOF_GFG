@@ -49,8 +49,7 @@ public class BannerManagerC {
 		);
 
 		if (respuesta == JOptionPane.YES_OPTION) {
-	        this.vista.setVisible(false);
-	        this.frame.getWelcomePanel().setVisible(true);
+			this.frame.changeVisibleCard("WELCOME");
 
 	        this.frame.revalidate();
 	        this.frame.repaint();
@@ -63,13 +62,14 @@ public class BannerManagerC {
 
 	    new ManagerProfileC(perfil, store.getManager());
 
-	    perfil.setVisible(true);
+	    frame.addCard(perfil, "PERFIL_MANAGER");
+	    frame.changeVisibleCard("PERFIL_MANAGER");
 	}
 
 
 	private void abrirPaginaPrincipal() {
 
-	    frame.getManagerMainPanel().setVisible(true);;
+	    frame.changeVisibleCard("MANAGER_MAIN");
 	}
 
 }

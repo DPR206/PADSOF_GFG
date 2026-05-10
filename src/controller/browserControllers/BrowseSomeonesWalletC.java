@@ -20,6 +20,7 @@ public class BrowseSomeonesWalletC extends BrowserController<SecondHandProduct> 
      */
     public BrowseSomeonesWalletC(App frame, Store model, BrowseSomeonesWalletP view) {
         super(frame, view, model);
+        setActions();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class RegisteredMakeOfferC implements ActionListener {
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public RegisteredMakeOfferC(App frame, Store model, RegisteredMakeOfferP view) {
+    public RegisteredMakeOfferC(App frame, Store model, RegisteredMakeOfferP view) throws BadLocationException {
         this.frame = frame;
         this.view = view;
         this.model = model;
@@ -24,7 +24,7 @@ public class RegisteredMakeOfferC implements ActionListener {
         setActionsForMiniPanels();
     }
 
-    public void setActionsForMiniPanels() {
+    public void setActionsForMiniPanels() throws BadLocationException {
         new BrowseWalletOwnersC(frame, view.getBrowseWalletOwnersP(), model);
         new BrowseSecondHandProductsC(frame, view.getBrowseSecondHandProductsP(), model);
     }
@@ -48,6 +48,10 @@ public class RegisteredMakeOfferC implements ActionListener {
                 throw new RuntimeException(ex);
             }
         }
-        setActionsForMiniPanels();
+        try {
+            setActionsForMiniPanels();
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

@@ -2,7 +2,9 @@ package view.browserPanels;
 
 import model.product.Pack;
 import model.product.StoreProduct;
+import view.miniPanels.PackMiniEdit;
 import view.miniPanels.PackMiniP;
+import view.miniPanels.StoreProductMiniEdit;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;

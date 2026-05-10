@@ -1,7 +1,6 @@
 package view.browserPanels;
 
 import model.user.User;
-import view.App;
 import view.miniPanels.UserMiniP;
 
 import javax.swing.*;
@@ -19,8 +18,8 @@ public class BrowseUsersP extends BrowserPanel<User> {
     /**
      * This panel's constructor
      */
-    public BrowseUsersP(App app, List<User> users, String buttonName) throws BadLocationException {
-        super(app);
+    public BrowseUsersP(List<User> users, String buttonName) throws BadLocationException {
+        super();
         this.setLayout(new GridLayout(3, 3));
 
         super.setItemList(users);
@@ -36,7 +35,6 @@ public class BrowseUsersP extends BrowserPanel<User> {
      */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        
 
         // Item list was set in constructor
 

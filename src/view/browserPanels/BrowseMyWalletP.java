@@ -19,8 +19,8 @@ public class BrowseMyWalletP extends BrowserPanel<SecondHandProduct> {
     /**
      * This panel's constructor
      */
-    public BrowseMyWalletP(App app, RegisteredClient owner) throws BadLocationException {
-        super(app);
+    public BrowseMyWalletP(RegisteredClient owner) throws BadLocationException {
+        super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.owner = owner;
         paintEverything();
@@ -29,7 +29,7 @@ public class BrowseMyWalletP extends BrowserPanel<SecondHandProduct> {
     @Override
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        
+
 
         JLabel title = new JLabel("My wallet'");
         title.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));

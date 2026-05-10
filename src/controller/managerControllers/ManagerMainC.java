@@ -7,6 +7,7 @@ import view.managerPanels.ManagerGestionarPacks;
 import view.managerPanels.ManagerGestionarProductos;
 import view.managerPanels.ManagerMainP;
 import view.managerPanels.ManagerNewProduct;
+import controller.browserControllers.BrowseStoreEditC;
 import controller.managerControllers.ManagerGestionarEmpleadosC;
 
 import javax.swing.text.BadLocationException;
@@ -32,6 +33,7 @@ public class ManagerMainC implements ActionListener {
         this.mgp = new ManagerGestionarPacks(this.frame);
        
         this.mgproduct = new ManagerGestionarProductos(this.frame);
+        new BrowseStoreEditC(this.frame, this.model, this.mgproduct.getProductsPanel());
         this.mgproduct.setVisible(false);
         this.mnproduct = new ManagerNewProduct();
         this.mnproduct.setController(new ManagerNewProductC(this.frame, this.mnproduct));

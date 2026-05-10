@@ -1,7 +1,6 @@
 package view.browserPanels;
 
 import model.store.BetterPager;
-import view.App;
 import view.miniPanels.MiniPanel;
 
 import javax.swing.*;
@@ -20,7 +19,6 @@ public abstract class BrowserPanel<G> extends JPanel {
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
-    private final App app;
     private final BetterPager<G> pager = new BetterPager<>();
     private int currentPageNum;
     private List<MiniPanel> miniPanels = new ArrayList<>();
@@ -30,10 +28,8 @@ public abstract class BrowserPanel<G> extends JPanel {
 
     /**
      * Instantiates a new Browser panel.
-     * @param app the app
      */
-    public BrowserPanel(App app) {
-        this.app = app;
+    public BrowserPanel() {
         currentPageNum = 1;
     }
 
@@ -74,14 +70,6 @@ public abstract class BrowserPanel<G> extends JPanel {
      */
     public void addMiniPanel(MiniPanel newMiniPanel) {
         this.miniPanels.add(newMiniPanel);
-    }
-
-    /**
-     * Gets app.
-     * @return the app
-     */
-    public App getApp() {
-        return app;
     }
 
     /**

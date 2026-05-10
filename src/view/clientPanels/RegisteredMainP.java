@@ -1,20 +1,21 @@
 package view.clientPanels;
 
-import javax.swing.*;
-import javax.swing.text.BadLocationException;
-
 import view.browserPanels.BrowseStoreP;
 
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class RegisteredMainP extends JPanel {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     JPanel bottom;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
+    private JButton secondHand = new JButton("Second Hand");
     private SearchPanel filterP = new SearchPanel();
     private BrowseStoreP searchingP;
+    private RegisteredMakeOfferP makeOfferP = new RegisteredMakeOfferP();
     private JPanel productSearch;
     private JPanel others;
     private CardLayout cardLayout = new CardLayout();
@@ -35,6 +36,7 @@ public class RegisteredMainP extends JPanel {
         JPanel botones = new JPanel(new GridLayout(0, 2));
         botones.add(this.search);
         botones.add(this.filters);
+        botones.add(this.secondHand);
 
         others.add(botones, BorderLayout.NORTH);
 
@@ -42,6 +44,7 @@ public class RegisteredMainP extends JPanel {
         bottom.setOpaque(false);
         bottom.add(searchingP, "Search");
         bottom.add(filterP, "Filters");
+        bottom.add(makeOfferP, "Second Hand");
 
         others.add(bottom, BorderLayout.CENTER);
 
@@ -90,6 +93,14 @@ public class RegisteredMainP extends JPanel {
         this.filters = newFilters;
     }
 
+    public RegisteredMakeOfferP getMakeOfferP() {
+        return makeOfferP;
+    }
+
+    public void setMakeOfferP(RegisteredMakeOfferP newMakeOfferP) {
+        this.makeOfferP = newMakeOfferP;
+    }
+
     public JPanel getOthers() {
         return others;
     }
@@ -128,6 +139,14 @@ public class RegisteredMainP extends JPanel {
 
     public void setSearchingP(BrowseStoreP newSearchingP) {
         this.searchingP = newSearchingP;
+    }
+
+    public JButton getSecondHand() {
+        return secondHand;
+    }
+
+    public void setSecondHand(JButton newSecondHand) {
+        this.secondHand = newSecondHand;
     }
 
     public void setController(ActionListener e) {

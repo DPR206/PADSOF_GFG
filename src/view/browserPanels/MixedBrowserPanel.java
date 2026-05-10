@@ -38,13 +38,13 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
      */
     public MixedBrowserPanel() {
         currentPageNum = 1;
-        
+
         this.setLayout(new BorderLayout());
-        
+
         containerItems = new JPanel();
         containerItems.setLayout(new BoxLayout(containerItems, BoxLayout.Y_AXIS));
         containerItems.setOpaque(false);
-        
+
         this.add(containerItems, BorderLayout.NORTH);
     }
 
@@ -78,7 +78,7 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
                 addSecondMiniPanel(secondItemList.get(secondListIndex), panelIndex);
             }
         }
-       
+
     }
 
     /**
@@ -114,7 +114,7 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         this.secondMiniPanels.add(newMiniPanel);
         this.containerItems.add(newMiniPanel);
     }
-    
+
     protected void clearItemsContainer() {
         this.containerItems.removeAll();
     }

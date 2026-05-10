@@ -375,7 +375,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeCart >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< seeCart >>>>>>>>>> \n"); 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Place order");
@@ -418,7 +418,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< browseCartProducts >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< browseCartProducts >>>>>>>>>> \n"); 
             System.out.println("Page: " + currentScreenPageNum);
 
             ((RegisteredClient) currentUser).getC().printStoreProductListPage(currentScreenPageNum);
@@ -431,7 +431,7 @@ public class RegisteredClientLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* See a product */
-                    System.out.print("\n <<<<<<<<<< seeCartProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< seeCartProduct >>>>>>>>>> \n"); 
                     System.out.println("Enter the number of the desired product:");
                     this.itemNum = scanner.nextInt();
 

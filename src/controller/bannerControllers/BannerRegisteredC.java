@@ -86,7 +86,7 @@ public class BannerRegisteredC implements Controller {
 
         CarritoP carritoVista = new CarritoP();
 
-        new CarritoC(carritoVista, (RegisteredClient) user);
+        new CarritoC(carritoVista, frame);
 
         frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");

@@ -1,6 +1,7 @@
 package controller.bannerControllers;
 
 import controller.Controller;
+import controller.clientControllers.CarritoC;
 import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
 import model.user.User;
@@ -79,14 +80,12 @@ public class BannerUnregisteredC implements Controller {
 
     private void abrirCarritoDelCliente() {
 
-        // 1. Crear la vista del carrito
         CarritoP carritoVista = new CarritoP();
 
-        // 2. Crear el controlador del carrito pasando el usuario actual
-        //new CarritoC(carritoVista, user);
+        new CarritoC(carritoVista, frame);
 
-        // 3. Mostrar la ventana
-        carritoVista.setVisible(true);
+        frame.addCard(carritoVista, "CART");
+        frame.changeVisibleCard("CART");
 
     }
 

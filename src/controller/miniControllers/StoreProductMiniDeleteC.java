@@ -1,27 +1,24 @@
 package controller.miniControllers;
 
+import controller.Controller;
 import model.product.Pack;
 import view.miniPanels.StoreProductMiniDelete;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class StoreProductMiniDeleteC implements ActionListener {
+public class StoreProductMiniDeleteC implements Controller {
 
     private StoreProductMiniDelete smpd;
     private Pack pack;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public StoreProductMiniDeleteC(StoreProductMiniDelete spmd, Pack p) {
         this.smpd = spmd;
         this.pack = p;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("ELIMINAR DEL PACK")) {
+    public void initializeActions() {
+        smpd.getAddToCart().addActionListener(e -> {
             pack.getProducts().remove(this.smpd);
-        }
+        });
     }
-
 }

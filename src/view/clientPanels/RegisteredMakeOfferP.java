@@ -43,8 +43,20 @@ public class RegisteredMakeOfferP extends JPanel {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    public JButton getBrowseAvailableProducts() {
+        return browseAvailableProducts;
+    }
+
     public BrowseSecondHandProductsP getBrowseSecondHandProductsP() {
         return browseSecondHandProductsP;
+    }
+
+    public JButton getBrowseUsers() {
+        return browseUsers;
+    }
+
+    public BrowseWalletOwnersP getBrowseUsersP() {
+        return browseUsersP;
     }
 
     public BrowseWalletOwnersP getBrowseWalletOwnersP() {

@@ -1,17 +1,16 @@
 package controller.clientControllers;
 
+import controller.Controller;
 import model.product.Category;
 import model.search.CategoryFilter;
 import model.store.Store;
 import view.App;
 import view.clientPanels.SearchPanel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearcherC implements ActionListener {
+public class SearcherC implements Controller {
     private final SearchPanel view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -21,14 +20,16 @@ public class SearcherC implements ActionListener {
         this.view = view;
         this.frame = frame;
         this.model = model;
+
+        initializeActions();
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void initializeActions() {
         List<Category> categories = new ArrayList<>();
         this.frame.getUser().getSearcher().getStoreSearcher().clearFilters();
 
-        if (e.getActionCommand().equals("Aplicar filtros")) {
+        view.getAplicar().addActionListener(e -> {
             /*METEMOS LAS CATEGORÍAS PRIMERO*/
             if (view.getJmesa().isSelected()) {
                 categories.add(model.getCategoryFromName("Juegos de mesa"));
@@ -101,6 +102,6 @@ public class SearcherC implements ActionListener {
             } else {
                 frame.getUser().getSearcher().getStoreSearcher().setAsc(false);
             }
-        }
+        });
     }
 }

@@ -87,6 +87,10 @@ public class StoreProductMiniEdit extends MiniPanel {
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    public JButton getAddToCart() {
+        return addToCart;
+    }
+
     public JLabel getProductImage() {
         return productImage;
     }

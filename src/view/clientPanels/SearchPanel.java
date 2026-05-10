@@ -1,215 +1,175 @@
 package view.clientPanels;
 
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+public class SearchPanel extends JPanel {
+    JPanel ordenacion = new JPanel(new GridLayout(1, 1));
+    private JPanel catFilter = new JPanel(new GridLayout(1, 1));
+    private JRadioButton jmesa = new JRadioButton("Juegos de mesa");
+    private JRadioButton jrol = new JRadioButton("Juegos de rol");
+    private JRadioButton jcarta = new JRadioButton("Juegos de carta");
+    private JRadioButton figuras = new JRadioButton("Figuras");
+    private JRadioButton comics = new JRadioButton("Comics");
+    private JPanel puncFilter = new JPanel(new GridLayout(1, 1));
+    private JCheckBox cerouno = new JCheckBox("0-1★");
+    private JCheckBox unodos = new JCheckBox("1-2★");
+    private JCheckBox dostres = new JCheckBox("2-3★");
+    private JCheckBox trescuatro = new JCheckBox("3-4★");
+    private JCheckBox cuatrocinco = new JCheckBox("4-5★");
+    private JPanel preciosFilt = new JPanel(new GridLayout(1, 1));
+    private JCheckBox cerodiez = new JCheckBox("0-10");
+    private JCheckBox diezquince = new JCheckBox("10-15");
+    private JCheckBox quinceveinte = new JCheckBox("15-20");
+    private JCheckBox veintetreinta = new JCheckBox("20-30");
+    private JCheckBox treintacuarenta = new JCheckBox("30-40");
+    private JCheckBox cuarentacincuenta = new JCheckBox("40-50");
+    private JCheckBox plus50 = new JCheckBox("50+");
+    private JButton aplicar = new JButton("Aplicar filtros");
+    private JRadioButton ascendente = new JRadioButton("Menor a mayor");
+    private JRadioButton descendente = new JRadioButton("Mayor a menor");
 
-public class SearchPanel extends JPanel{
-	private JPanel catFilter = new JPanel(new GridLayout(1,1));
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public SearchPanel() {
+        super();
+        this.setLayout(new GridLayout(4, 1));
 
-	private JRadioButton jmesa = new JRadioButton("Juegos de mesa");
-	private JRadioButton jrol = new JRadioButton("Juegos de rol");
-	private JRadioButton jcarta = new JRadioButton("Juegos de carta");
-	private JRadioButton figuras = new JRadioButton("Figuras");
-	private JRadioButton comics = new JRadioButton("Comics");
+        this.catFilter.add(new JLabel("CATEGORÍAS"));
+        this.catFilter.add(this.jmesa);
+        this.catFilter.add(this.jrol);
+        this.catFilter.add(this.jcarta);
+        this.catFilter.add(this.figuras);
+        this.catFilter.add(this.comics);
 
-	private JPanel puncFilter = new JPanel(new GridLayout(1,1));
+        this.add(this.catFilter);
 
-	private JCheckBox cerouno = new JCheckBox("0-1★");
-	private JCheckBox unodos = new JCheckBox("1-2★");
-	private JCheckBox dostres = new JCheckBox("2-3★");
-	private JCheckBox trescuatro = new JCheckBox("3-4★");
-	private JCheckBox cuatrocinco = new JCheckBox("4-5★");
+        this.puncFilter.add(new JLabel("PUNTUACIÓN"));
+        this.puncFilter.add(this.cerouno);
+        this.puncFilter.add(this.unodos);
+        this.puncFilter.add(this.dostres);
+        this.puncFilter.add(this.trescuatro);
+        this.puncFilter.add(this.cuatrocinco);
 
-	private JPanel preciosFilt = new JPanel(new GridLayout(1,1));
+        this.add(this.puncFilter);
 
-	private JCheckBox cerodiez = new JCheckBox("0-10");
-	private JCheckBox diezquince = new JCheckBox("10-15");
-	private JCheckBox quinceveinte = new JCheckBox("15-20");
-	private JCheckBox veintetreinta = new JCheckBox("20-30");
-	private JCheckBox treintacuarenta = new JCheckBox("30-40");
-	private JCheckBox cuarentacincuenta = new JCheckBox("40-50");
-	private JCheckBox plus50 = new JCheckBox("50+");
-	private JButton aplicar = new JButton("Aplicar filtros");
+        this.preciosFilt.add(new JLabel("PRECIOS"));
+        this.preciosFilt.add(cerodiez);
+        this.preciosFilt.add(diezquince);
+        this.preciosFilt.add(quinceveinte);
+        this.preciosFilt.add(veintetreinta);
+        this.preciosFilt.add(treintacuarenta);
+        this.preciosFilt.add(cuarentacincuenta);
+        this.preciosFilt.add(plus50);
 
-	JPanel ordenacion = new JPanel(new GridLayout(1,1));
+        this.add(this.preciosFilt);
 
-	private JRadioButton ascendente = new JRadioButton("Menor a mayor");
-	private JRadioButton descendente = new JRadioButton("Mayor a menor");
+        ButtonGroup grupo = new ButtonGroup();
 
-	public SearchPanel() {
-		super();
-		this.setLayout(new GridLayout(4, 1));
+        this.ordenacion.add(new JLabel("ORDENAR"));
 
-		this.catFilter.add(new JLabel("CATEGORÍAS"));
-		this.catFilter.add(this.jmesa);
-		this.catFilter.add(this.jrol);
-		this.catFilter.add(this.jcarta);
-		this.catFilter.add(this.figuras);
-		this.catFilter.add(this.comics);
+        grupo.add(this.ascendente);
+        grupo.add(descendente);
 
-		this.add(this.catFilter);
+        this.ordenacion.add(this.ascendente);
+        this.ordenacion.add(this.descendente);
 
-		this.puncFilter.add(new JLabel("PUNTUACIÓN"));
-		this.puncFilter.add(this.cerouno);
-		this.puncFilter.add(this.unodos);
-		this.puncFilter.add(this.dostres);
-		this.puncFilter.add(this.trescuatro);
-		this.puncFilter.add(this.cuatrocinco);
+        this.add(this.ordenacion);
+        this.add(this.aplicar);
+    }
 
-		this.add(this.puncFilter);
+    public JButton getAplicar() {
+        return aplicar;
+    }
 
-		this.preciosFilt.add(new JLabel("PRECIOS"));
-		this.preciosFilt.add(cerodiez);
-		this.preciosFilt.add(diezquince);
-		this.preciosFilt.add(quinceveinte);
-		this.preciosFilt.add(veintetreinta);
-		this.preciosFilt.add(treintacuarenta);
-		this.preciosFilt.add(cuarentacincuenta);
-		this.preciosFilt.add(plus50);
+    public JRadioButton getAscendente() {
+        return ascendente;
+    }
 
-		this.add(this.preciosFilt);
+    public JPanel getCatFilter() {
+        return catFilter;
+    }
 
-		ButtonGroup grupo = new ButtonGroup();
+    public JCheckBox getCerodiez() {
+        return cerodiez;
+    }
 
-		this.ordenacion.add(new JLabel("ORDENAR"));
+    public JCheckBox getCerouno() {
+        return cerouno;
+    }
 
-		grupo.add(this.ascendente);
-		grupo.add(descendente);
+    public JRadioButton getComics() {
+        return comics;
+    }
 
-		this.ordenacion.add(this.ascendente);
-		this.ordenacion.add(this.descendente);
+    public JCheckBox getCuarentacincuenta() {
+        return cuarentacincuenta;
+    }
 
-		this.add(this.ordenacion);
-		this.add(this.aplicar);
-	}
+    public JCheckBox getCuatrocinco() {
+        return cuatrocinco;
+    }
 
-	public void setController(ActionListener c) {
-		this.jmesa.addActionListener(c);
-		this.jrol.addActionListener(c);
-		this.jcarta.addActionListener(c);
-		this.figuras.addActionListener(c);
-		this.comics.addActionListener(c);
+    public JRadioButton getDescendente() {
+        return descendente;
+    }
 
-		this.cerouno.addActionListener(c);
-		this.unodos.addActionListener(c);
-		this.dostres.addActionListener(c);
-		this.trescuatro.addActionListener(c);
-		this.cuatrocinco.addActionListener(c);
+    public JCheckBox getDiezquince() {
+        return diezquince;
+    }
 
-		this.cerodiez.addActionListener(c);
-		this.diezquince.addActionListener(c);
-		this.quinceveinte.addActionListener(c);
-		this.veintetreinta.addActionListener(c);
-		this.treintacuarenta.addActionListener(c);
-		this.cuarentacincuenta.addActionListener(c);
-		this.plus50.addActionListener(c);
+    public JCheckBox getDostres() {
+        return dostres;
+    }
 
-		this.ascendente.addActionListener(c);
-		this.descendente.addActionListener(c);
+    public JRadioButton getFiguras() {
+        return figuras;
+    }
 
-		this.aplicar.addActionListener(c);
-	}
+    public JRadioButton getJcarta() {
+        return jcarta;
+    }
 
-	public JPanel getCatFilter() {
-		return catFilter;
-	}
+    public JRadioButton getJmesa() {
+        return jmesa;
+    }
 
-	public JRadioButton getJmesa() {
-		return jmesa;
-	}
+    public JRadioButton getJrol() {
+        return jrol;
+    }
 
-	public JRadioButton getJrol() {
-		return jrol;
-	}
+    public JPanel getOrdenacion() {
+        return ordenacion;
+    }
 
-	public JRadioButton getJcarta() {
-		return jcarta;
-	}
+    public JCheckBox getPlus50() {
+        return plus50;
+    }
 
-	public JRadioButton getFiguras() {
-		return figuras;
-	}
+    public JPanel getPreciosFilt() {
+        return preciosFilt;
+    }
 
-	public JRadioButton getComics() {
-		return comics;
-	}
+    public JPanel getPuncFilter() {
+        return puncFilter;
+    }
 
-	public JPanel getPuncFilter() {
-		return puncFilter;
-	}
+    public JCheckBox getQuinceveinte() {
+        return quinceveinte;
+    }
 
-	public JCheckBox getCerouno() {
-		return cerouno;
-	}
+    public JCheckBox getTreintacuarenta() {
+        return treintacuarenta;
+    }
 
-	public JCheckBox getUnodos() {
-		return unodos;
-	}
+    public JCheckBox getTrescuatro() {
+        return trescuatro;
+    }
 
-	public JCheckBox getDostres() {
-		return dostres;
-	}
+    public JCheckBox getUnodos() {
+        return unodos;
+    }
 
-	public JCheckBox getTrescuatro() {
-		return trescuatro;
-	}
-
-	public JCheckBox getCuatrocinco() {
-		return cuatrocinco;
-	}
-
-	public JPanel getPreciosFilt() {
-		return preciosFilt;
-	}
-
-	public JCheckBox getCerodiez() {
-		return cerodiez;
-	}
-
-	public JCheckBox getDiezquince() {
-		return diezquince;
-	}
-
-	public JCheckBox getQuinceveinte() {
-		return quinceveinte;
-	}
-
-	public JCheckBox getVeintetreinta() {
-		return veintetreinta;
-	}
-
-	public JCheckBox getTreintacuarenta() {
-		return treintacuarenta;
-	}
-
-	public JCheckBox getCuarentacincuenta() {
-		return cuarentacincuenta;
-	}
-
-	public JCheckBox getPlus50() {
-		return plus50;
-	}
-
-	public JButton getAplicar() {
-		return aplicar;
-	}
-
-	public JPanel getOrdenacion() {
-		return ordenacion;
-	}
-
-	public JRadioButton getAscendente() {
-		return ascendente;
-	}
-
-	public JRadioButton getDescendente() {
-		return descendente;
-	}
+    public JCheckBox getVeintetreinta() {
+        return veintetreinta;
+    }
 }

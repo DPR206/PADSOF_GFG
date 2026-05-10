@@ -1,17 +1,16 @@
 package controller.bannerControllers;
 
+import controller.Controller;
 import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
-import model.user.UnregisteredClient;
 import model.user.User;
 import view.App;
 import view.banners.BannerUnregistered;
 import view.clientPanels.CarritoP;
-import view.clientPanels.UnregisteredMainP;
 
 import javax.swing.*;
 
-public class BannerUnregisteredC {
+public class BannerUnregisteredC implements Controller {
 
     private BannerUnregistered vista;
     private User user;
@@ -26,10 +25,10 @@ public class BannerUnregisteredC {
         this.vista = vista;
         this.user = frame.getUser();
         this.frame = frame;
-        inicializarEventos();
+        initializeActions();
     }
 
-    private void inicializarEventos() {
+    public void initializeActions() {
         vista.getBtnCarrito().addActionListener(e -> {
             abrirCarritoDelCliente();
         });

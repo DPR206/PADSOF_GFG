@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
+import controller.Controller;
 import controller.browserControllers.MixedBrowserController;
 import model.product.Pack;
 import model.product.StoreProduct;
@@ -21,7 +22,7 @@ import view.browserPanels.MixedBrowserPanel;
 import view.miniPanels.StoreProductMiniEdit;
 import view.miniPanels.StoreProductMiniP;
 
-public class StoreProductMiniEditC implements ActionListener{
+public class StoreProductMiniEditC implements Controller {
 	private final StoreProductMiniEdit view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -64,16 +65,14 @@ public class StoreProductMiniEditC implements ActionListener{
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Add to Cart")) {
+    public void initializeActions() {
+        view.getAddToCart().addActionListener(e -> {
             try {
                 browserPanel.paintEverything();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.setActions();
-        }
-
+            browserController.initializeActions();
+        });
     }
-
 }

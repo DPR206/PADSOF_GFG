@@ -36,9 +36,9 @@ public class BrowseWalletOwnersC extends BrowserController<RegisteredClient> {
     }
 
     @Override
-    public void setActionsForMiniPanels() {
+    public void initializeActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
-            miniPanel.setController(new WalletOwnerMiniC(super.getFrame(), super.getModel(), (UserMiniP) miniPanel));
+            new WalletOwnerMiniC(super.getFrame(), super.getModel(), (UserMiniP) miniPanel);
         }
     }
 }

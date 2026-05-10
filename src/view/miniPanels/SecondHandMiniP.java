@@ -70,6 +70,10 @@ public class SecondHandMiniP extends MiniPanel {
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    public JButton getAddToOffer() {
+        return addToOffer;
+    }
+
     public JLabel getProductImage() {
         return productImage;
     }

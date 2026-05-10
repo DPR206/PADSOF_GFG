@@ -6,7 +6,6 @@ import view.miniPanels.MiniPanel;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,21 +171,5 @@ public abstract class BrowserPanel<G> extends JPanel {
      */
     public JButton getPreviousPage() {
         return previousPage;
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        if (itemList != null) {
-            for (MiniPanel miniPanel : miniPanels) {
-                miniPanel.setController(c);
-            }
-        }
-        firstPage.addActionListener(c);
-        previousPage.addActionListener(c);
-        nextPage.addActionListener(c);
-        lastPage.addActionListener(c);
     }
 }

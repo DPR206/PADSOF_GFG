@@ -17,7 +17,7 @@ public class PackMiniDelete extends MiniPanel {
     private final JTextPane packInfo;
     private final JLabel packImage;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public PackMiniDelete(Pack p, int index) throws BadLocationException {
         super();
 
@@ -65,6 +65,14 @@ public class PackMiniDelete extends MiniPanel {
         this.add(gestionar);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+    }
+
+    public JButton getGestionar() {
+        return gestionar;
+    }
+
+    public Pack getP() {
+        return p;
     }
 
     public Pack getPack() {

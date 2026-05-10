@@ -6,14 +6,15 @@ import view.App;
 import view.accessPanels.LoginP;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * It implements the log-in controller
  * @author Ana O.R.
  * @version 1.0
  */
-public class LoginC extends MainLoopSelector implements ActionListener {
+public class LoginC extends MainLoopSelector {
     private final LoginP view; /* view -> panel */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -36,11 +37,13 @@ public class LoginC extends MainLoopSelector implements ActionListener {
                 }
             }
         });
+
+        initializeActions();
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Log in")) {
+    public void initializeActions() {
+        view.getLogin().addActionListener(e -> {
             User user = super.getModel().logIn(view.getUsername(), view.getPassword());
             if (user == null) {
                 JOptionPane.showMessageDialog(super.getFrame(), "Incorrect username or password", "",
@@ -49,6 +52,6 @@ public class LoginC extends MainLoopSelector implements ActionListener {
                 super.getFrame().changeCurrentUser(user);
                 super.loopSelector();
             }
-        }
+        });
     }
 }

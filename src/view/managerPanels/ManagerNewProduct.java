@@ -1,55 +1,66 @@
 package view.managerPanels;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+public class ManagerNewProduct extends JPanel {
+    public static final String PANEL_MENU = "MENU";
+    public static final String PANEL_COMIC = "COMIC";
+    public static final String PANEL_FIGURA = "FIGURA";
+    public static final String PANEL_JUEGO = "JUEGO";
+    private JButton comics = new JButton("AÑADIR UN CÓMIC");
+    private JButton figuras = new JButton("AÑADIR UNA FIGURA");
+    private JButton juegos = new JButton("AÑADIR UN JUEGO");
+    private CardLayout layout = new CardLayout();
+    private JPanel cards = new JPanel(layout);
 
-public class ManagerNewProduct extends JPanel{
-	   private JButton comics = new JButton("AÑADIR UN CÓMIC");
-	   private JButton figuras = new JButton("AÑADIR UNA FIGURA");
-	   private JButton juegos = new JButton("AÑADIR UN JUEGO");
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public ManagerNewProduct() {
+        super();
 
-	   private CardLayout layout = new CardLayout();
-	   private JPanel cards = new JPanel(layout);
+        this.setLayout(new BorderLayout());
 
-	   public static final String PANEL_MENU = "MENU";
-	   public static final String PANEL_COMIC = "COMIC";
-	   public static final String PANEL_FIGURA = "FIGURA";
-	   public static final String PANEL_JUEGO = "JUEGO";
+        JPanel cosoDeBotones = new JPanel();
 
-	   public ManagerNewProduct() {
-		   super();
+        //añadimos los botoncitos
+        cosoDeBotones.setLayout(new GridLayout(3, 1));
+        cosoDeBotones.add(comics);
+        cosoDeBotones.add(figuras);
+        cosoDeBotones.add(juegos);
 
-		   this.setLayout(new BorderLayout());
+        cards.add(cosoDeBotones, PANEL_MENU);
+        this.add(cards);
+    }
 
-		   JPanel cosoDeBotones = new JPanel();
+    public void showPanel(String name) {
+        layout.show(cards, name);
+    }
 
-	    	//añadimos los botoncitos
-	    	cosoDeBotones.setLayout(new GridLayout(3, 1));
-	    	cosoDeBotones.add(comics);
-	    	cosoDeBotones.add(figuras);
-	    	cosoDeBotones.add(juegos);
+    public JPanel getCards() {
+        return cards;
+    }
 
-	    	cards.add(cosoDeBotones, PANEL_MENU);
-	    	this.add(cards);
-	   }
+    public JButton getComics() {
+        return comics;
+    }
 
-	   public void setController(ActionListener c) {
-		   this.comics.addActionListener(c);
-		   this.figuras.addActionListener(c);
-		   this.juegos.addActionListener(c);
-	   }
+    public JButton getFiguras() {
+        return figuras;
+    }
 
-	   public void showPanel(String name) {
-	       layout.show(cards, name);
-	   }
+    public JButton getJuegos() {
+        return juegos;
+    }
 
-	   public JPanel getCards() {
-	        return cards;
-	   }
+    @Override
+    public CardLayout getLayout() {
+        return layout;
+    }
+
+    public void setController(ActionListener c) {
+        this.comics.addActionListener(c);
+        this.figuras.addActionListener(c);
+        this.juegos.addActionListener(c);
+    }
 }

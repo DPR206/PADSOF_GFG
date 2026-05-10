@@ -1,5 +1,6 @@
 package controller.accessControllers;
 
+import controller.Controller;
 import model.store.Store;
 import model.user.User;
 import view.App;
@@ -9,7 +10,7 @@ import javax.swing.*;
 /**
  * Auxiliary class for shared Login & Signup events
  */
-public abstract class MainLoopSelector {
+public abstract class MainLoopSelector implements Controller {
     private final App frame; /* view -> frame */
     private final Store model; /* model */
 

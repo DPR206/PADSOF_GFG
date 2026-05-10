@@ -9,7 +9,8 @@ import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SecondHandMyWalletMiniC extends SecondHandMiniC {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -45,8 +46,9 @@ public class SecondHandMyWalletMiniC extends SecondHandMiniC {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Add to Offer")) {
+    public void initializeActions() {
+        super.getView().getAddToOffer().addActionListener(e -> {
+            //DUE: Aceptar oferta
             JOptionPane.showMessageDialog(super.getFrame(),
                     super.getView().getSecondHandProduct().getName() + " was " + "added to " + "the Offer",
                     "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
@@ -55,7 +57,7 @@ public class SecondHandMyWalletMiniC extends SecondHandMiniC {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            super.getBrowserController().setActionsForMiniPanels();
-        }
+            super.getBrowserController().initializeActionsForMiniPanels();
+        });
     }
 }

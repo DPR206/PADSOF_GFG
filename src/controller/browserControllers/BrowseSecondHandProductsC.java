@@ -22,11 +22,10 @@ public class BrowseSecondHandProductsC extends BrowserController<SecondHandProdu
     }
 
     @Override
-    public void setActionsForMiniPanels() {
+    public void initializeActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
-            miniPanel.setController(
-                    new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
-                            super.getView()));
+            new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
+                    super.getView());
         }
     }
 }

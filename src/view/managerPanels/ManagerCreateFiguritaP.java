@@ -8,27 +8,24 @@ import java.awt.event.ActionListener;
 public class ManagerCreateFiguritaP extends JPanel {
 
     private JTextField txtCategoria;
-
     private JTextField txtNombre;
     private JTextField txtPrecio;
     private JTextField txtStock;
     private JTextField txtDescripcion;
-
     private JTextField txtMarca;
     private JTextField txtMaterial;
     private JTextField txtLargo;
     private JTextField txtAncho;
     private JTextField txtAlto;
-
     private JButton btnConfirmar;
     private JButton btnSubir;
-
     private JLabel vistaPrevia;
 
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerCreateFiguritaP() {
-    	this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
 
-    	JPanel todo = new JPanel();
+        JPanel todo = new JPanel();
 
         setBackground(new Color(245, 241, 236));
 
@@ -121,8 +118,40 @@ public class ManagerCreateFiguritaP extends JPanel {
         this.add(todo);
     }
 
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
+
+    public JButton getBtnSubir() {
+        return btnSubir;
+    }
+
+    public JTextField getTxtAlto() {
+        return txtAlto;
+    }
+
+    public JTextField getTxtAncho() {
+        return txtAncho;
+    }
+
     public JTextField getTxtCategoria() {
         return txtCategoria;
+    }
+
+    public JTextField getTxtDescripcion() {
+        return txtDescripcion;
+    }
+
+    public JTextField getTxtLargo() {
+        return txtLargo;
+    }
+
+    public JTextField getTxtMarca() {
+        return txtMarca;
+    }
+
+    public JTextField getTxtMaterial() {
+        return txtMaterial;
     }
 
     public JTextField getTxtNombre() {
@@ -137,31 +166,11 @@ public class ManagerCreateFiguritaP extends JPanel {
         return txtStock;
     }
 
-    public JTextField getTxtDescripcion() {
-        return txtDescripcion;
+    public JLabel getVistaPrevia() {
+        return vistaPrevia;
     }
 
-    public JTextField getTxtMarca() {
-        return txtMarca;
-    }
-
-    public JTextField getTxtMaterial() {
-        return txtMaterial;
-    }
-
-    public JTextField getTxtLargo() {
-        return txtLargo;
-    }
-
-    public JTextField getTxtAncho() {
-        return txtAncho;
-    }
-
-    public JTextField getTxtAlto() {
-        return txtAlto;
-    }
-    
     public void setController(ActionListener e) {
-    	this.btnConfirmar.addActionListener(e);
+        this.btnConfirmar.addActionListener(e);
     }
 }

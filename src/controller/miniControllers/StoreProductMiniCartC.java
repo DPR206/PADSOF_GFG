@@ -1,25 +1,23 @@
 package controller.miniControllers;
 
-import java.awt.Cursor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JOptionPane;
-import javax.swing.text.BadLocationException;
-
+import controller.Controller;
 import controller.browserControllers.MixedBrowserController;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
-import model.user.RegisteredClient;
-import model.user.UnregisteredClient;
-import model.user.UserType;
+import model.user.*;
 import view.App;
 import view.browserPanels.MixedBrowserPanel;
 import view.miniPanels.StoreProductMiniCart;
 
-public class StoreProductMiniCartC {
-	private final StoreProductMiniCart view; /* view -> panel */
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class StoreProductMiniCartC implements Controller {
+    private final StoreProductMiniCart view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     private final MixedBrowserController<Pack, StoreProduct> browserController;
@@ -33,14 +31,17 @@ public class StoreProductMiniCartC {
      * @param model the controller's model
      */
     public StoreProductMiniCartC(App frame, Store model, StoreProductMiniCart view,
-                             MixedBrowserController<Pack, StoreProduct> browserController,
-                             MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
+                                 MixedBrowserController<Pack, StoreProduct> browserController,
+                                 MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;
         this.browserController = browserController;
         this.browserPanel = browserPanel;
+    }
 
+    @Override
+    public void initializeActions() {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
         view.addMouseListener(new MouseAdapter() {
@@ -58,22 +59,21 @@ public class StoreProductMiniCartC {
                 }
             }
         });
-        
+
         view.getDeleteFromCart().addActionListener(e -> {
-        	if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
+            if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
                 ((RegisteredClient) frame.getUser()).deleteCart(view.getStoreProduct());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
                 ((UnregisteredClient) frame.getUser()).deleteCart(view.getStoreProduct());
             }
         });
-        
+
         try {
             browserPanel.paintEverything();
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }
-        browserController.setActions();
-    }
 
-	
+        browserController.initializeActions();
+    }
 }

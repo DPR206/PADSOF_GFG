@@ -1,14 +1,11 @@
 package controller.browserControllers;
 
 import controller.miniControllers.PackMiniEditC;
-import controller.miniControllers.PackMiniPC;
-import controller.miniControllers.StoreProductMiniC;
 import controller.miniControllers.StoreProductMiniEditC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import view.App;
-import view.browserPanels.BrowseStoreP;
 import view.browserPanels.BrowseStorePEdit;
 import view.miniPanels.*;
 
@@ -26,16 +23,13 @@ public class BrowseStoreEditC extends MixedBrowserController<Pack, StoreProduct>
     }
 
     @Override
-    public void setActionsForMiniPanels() {
+    public void initializeActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
-            PackMiniEdit view = (PackMiniEdit) miniPanel;
-            PackMiniEditC controller = new PackMiniEditC(super.getFrame(), super.getModel(), view, this, super.getView());
-            view.setController(controller); // IMPORTANTE: Vincular el listener al botón
+            new PackMiniEditC(super.getFrame(), super.getModel(), (PackMiniEdit) miniPanel, this, super.getView());
         }
         for (MiniPanel miniPanel : super.getView().getSecondMiniPanels()) {
-            StoreProductMiniEdit view = (StoreProductMiniEdit) miniPanel;
-            StoreProductMiniEditC controller = new StoreProductMiniEditC(super.getFrame(), super.getModel(), view, this, super.getView());
-            view.setController(controller); // IMPORTANTE: Vincular el listener al botón
+            new StoreProductMiniEditC(super.getFrame(), super.getModel(), (StoreProductMiniEdit) miniPanel, this,
+                    super.getView());
         }
     }
 }

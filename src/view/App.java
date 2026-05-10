@@ -2,11 +2,13 @@ package view;
 
 import controller.accessControllers.*;
 import controller.bannerControllers.*;
-import controller.clientControllers.*;
+import controller.clientControllers.RegisteredMainC;
+import controller.clientControllers.UnregisteredMainC;
 import controller.employeeControllers.EmployeeMainC;
 import controller.managerControllers.ManagerMainC;
 import model.store.Store;
-import model.user.*;
+import model.user.UnregisteredClient;
+import model.user.User;
 import view.accessPanels.*;
 import view.banners.*;
 import view.clientPanels.*;
@@ -16,7 +18,8 @@ import view.managerPanels.ManagerMainP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.HashMap;
@@ -71,14 +74,14 @@ public class App extends JFrame {
         Store model = Store.getInstance();
 
         /* Controllers */
-        WelcomeC welcomeController = new WelcomeC(this, model);
-        LoginC loginController = new LoginC(this, model);
-        SignupC signupController = new SignupC(this, model);
+        new WelcomeC(this, model);
+        new LoginC(this, model);
+        new SignupC(this, model);
 
         new UnregisteredMainC(this, model);
         new RegisteredMainC(this, model);
-        EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
-        ManagerMainC managerMainController = new ManagerMainC(this, model);
+        new EmployeeMainC(this, model);
+        new ManagerMainC(this, model);
 
         new BannerUnregisteredC(bannerUnregisteredPanel, this);
         new BannerRegisteredC(bannerRegisteredPanel, this);
@@ -87,11 +90,6 @@ public class App extends JFrame {
         new BannerManagerC(bannerManagerPanel, this);
 
         /* Configure controllers' views */
-        loginPanel.setController(loginController);
-        signupPanel.setController(signupController);
-
-        employeeMainPanel.setController(employeeMainController);
-        managerMainPanel.setController(managerMainController);
 
         //bannerUnregisteredPanel.setController(bannerUnregisteredController);
 
@@ -119,7 +117,7 @@ public class App extends JFrame {
         cards.setOpaque(false);
         container.add(cards, BorderLayout.CENTER);
 
-        addCard(welcomePanel, "WELCOME", welcomeController);
+        addCard(welcomePanel, "WELCOME");
         addCard(loginPanel, "LOGIN");
         addCard(signupPanel, "SIGNUP");
         addCard(unregisteredMainPanel, "UNREGISTERED_MAIN");
@@ -133,7 +131,7 @@ public class App extends JFrame {
         addBanner(bannerManagerPanel, "BANNER_MANAGER");
 
         /* Main panel */
-        changeVisibleBanner("BANNER_UNREGISTERED"); 
+        changeVisibleBanner("BANNER_UNREGISTERED");
         changeVisibleCard("WELCOME");
         lastShownPanel = "WELCOME";
         currentShownPanel = "WELCOME";
@@ -193,10 +191,10 @@ public class App extends JFrame {
         cl.show(cards, lastShownPanel);
     }
 
-    public void changeVisibleBanner(String cardName) {	
-    	CardLayout cl = (CardLayout) (banners.getLayout());
+    public void changeVisibleBanner(String cardName) {
+        CardLayout cl = (CardLayout) (banners.getLayout());
         cl.show(banners, cardName);
-        
+
         banners.revalidate();
         banners.repaint();
     }
@@ -208,13 +206,8 @@ public class App extends JFrame {
         allPanels.put(constraints, newView);
     }
 
-    public void addCard(ControllableJPanel newView, String constraints, ActionListener controller) {
-        newView.setController(controller);
-        addCard(newView, constraints);
-    }
-    
     public void updateView(String cardName, String bannerName) {
-    	changeVisibleCard(cardName);
+        changeVisibleCard(cardName);
         changeVisibleBanner(bannerName);
     }
 
@@ -224,7 +217,7 @@ public class App extends JFrame {
 
     public class ImagePanel extends JPanel {
         private static final long serialVersionUID = 1L;
-        private Image backgroundImage;
+        private final Image backgroundImage;
 
         /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
         public ImagePanel(String filePath) {

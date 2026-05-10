@@ -1,39 +1,26 @@
 package view.managerPanels;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.text.BadLocationException;
-
 import model.store.Store;
+import model.user.Employee;
 import view.App;
 import view.browserPanels.BrowseUsersP;
 import view.miniPanels.EmployeeMini;
-import model.user.Employee;
+
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 public class ManagerGestionarEmpleados extends JPanel {
     private JCheckBox storeP = new JCheckBox("Trabajar con productos");
     private JCheckBox orderP = new JCheckBox("Trabajar con pedidos");
     private JCheckBox exchangeP = new JCheckBox("Trabajar con intercambios");
-
     private JTextField userName = new JTextField();
     private JPasswordField pwd = new JPasswordField();
     private JPanel mainThings = new JPanel();
     private JButton confirmar = new JButton("CONFIRMAR");
-
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerGestionarEmpleados(App app) {
         super();
 
@@ -53,7 +40,7 @@ public class ManagerGestionarEmpleados extends JPanel {
         panel.add(new JLabel("Nombre de usuario:"));
         this.userName.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         panel.add(this.userName);
-        
+
         // Espacio
         panel.add(Box.createVerticalStrut(10));
 
@@ -74,38 +61,14 @@ public class ManagerGestionarEmpleados extends JPanel {
         List<Employee> employees = Store.getInstance().getEmployeeList();
         BrowseUsersP browse = null;
         try {
-			browse = new BrowseUsersP(employees, "GESTIONAR");
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+            browse = new BrowseUsersP(employees, "GESTIONAR");
+        } catch (BadLocationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         this.add(panel, BorderLayout.EAST);
         this.add(browse, BorderLayout.CENTER);
-    }
-
-    public void setController(ActionListener c) {
-        this.confirmar.addActionListener(c);
-    }
-
-    public JCheckBox getStoreP() {
-        return storeP;
-    }
-
-    public JCheckBox getOrderP() {
-        return orderP;
-    }
-
-    public JCheckBox getExchangeP() {
-        return exchangeP;
-    }
-
-    public JTextField getUserName() {
-        return userName;
-    }
-
-    public JPasswordField getPwd() {
-        return pwd;
     }
 
     public void refresh() {
@@ -127,5 +90,37 @@ public class ManagerGestionarEmpleados extends JPanel {
 
         mainThings.revalidate();
         mainThings.repaint();
+    }
+
+    public JButton getConfirmar() {
+        return confirmar;
+    }
+
+    public JCheckBox getExchangeP() {
+        return exchangeP;
+    }
+
+    public JPanel getMainThings() {
+        return mainThings;
+    }
+
+    public JCheckBox getOrderP() {
+        return orderP;
+    }
+
+    public JPasswordField getPwd() {
+        return pwd;
+    }
+
+    public JCheckBox getStoreP() {
+        return storeP;
+    }
+
+    public JTextField getUserName() {
+        return userName;
+    }
+
+    public void setController(ActionListener c) {
+        this.confirmar.addActionListener(c);
     }
 }

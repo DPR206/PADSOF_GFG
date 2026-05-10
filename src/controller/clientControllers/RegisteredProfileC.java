@@ -1,75 +1,75 @@
 package controller.clientControllers;
 
-import java.awt.Frame;
-
-import javax.swing.SwingUtilities;
-
+import controller.Controller;
 import model.user.RegisteredClient;
 import view.clientPanels.RegisteredChangePwd;
 import view.clientPanels.RegisteredProfile;
 
-public class RegisteredProfileC {
+import javax.swing.*;
+import java.awt.*;
 
-	private RegisteredProfile vista;
-	private RegisteredClient user;
-	//private App frame;
-	private boolean passwordRevelada = false;
+public class RegisteredProfileC implements Controller {
 
-	/**
-	 *
-	 */
-	public RegisteredProfileC(RegisteredProfile vista, RegisteredClient user/*, App frame*/) {
+    private RegisteredProfile vista;
+    private RegisteredClient user;
+    //private App frame;
+    private boolean passwordRevelada = false;
 
-		this.vista = vista;
-		this.user = user;
-		//this.user = frame.getUser();
-		//this.frame = frame;
-		inicializarEventos();
-	}
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
-	private void inicializarEventos() {
+    /**
+     *
+     */
+    public RegisteredProfileC(RegisteredProfile vista, RegisteredClient user/*, App frame*/) {
 
-		vista.setNom(user.getUserName());
+        this.vista = vista;
+        this.user = user;
+        //this.user = frame.getUser();
+        //this.frame = frame;
+        initializeActions();
+    }
 
-		vista.setDni(user.getDni());
+    public void initializeActions() {
 
-		vista.getBtnMostrar().addActionListener(e -> {
-			showPassword();
-		});
+        vista.setNom(user.getUserName());
 
-		vista.getBtnCambiar().addActionListener(e -> {
-			cambiarPwd();
-		});
-	}
+        vista.setDni(user.getDni());
 
+        vista.getBtnMostrar().addActionListener(e -> {
+            showPassword();
+        });
 
-	private void cambiarPwd() {
+        vista.getBtnCambiar().addActionListener(e -> {
+            cambiarPwd();
+        });
+    }
 
-		Frame parentFrame = (Frame) SwingUtilities.getWindowAncestor(vista);
+    private void cambiarPwd() {
 
-	    RegisteredChangePwd pagPwd = new RegisteredChangePwd(parentFrame);
+        Frame parentFrame = (Frame) SwingUtilities.getWindowAncestor(vista);
 
-	    new RegisteredChangePwdC(pagPwd, user);
+        RegisteredChangePwd pagPwd = new RegisteredChangePwd(parentFrame);
 
-	    pagPwd.setVisible(true);
-	    actualizarVista();
-	}
+        new RegisteredChangePwdC(pagPwd, user);
 
-	private void showPassword() {
-		if (passwordRevelada) {
-		    vista.actualizarPasswordVista("********");
-		    vista.getBtnMostrar().setText("👁️");
-		} else {
-		    vista.actualizarPasswordVista(user.getPassword());
-		    vista.getBtnMostrar().setText("🔒");
-		}
-		passwordRevelada = !passwordRevelada;
-	}
+        pagPwd.setVisible(true);
+        actualizarVista();
+    }
 
+    private void showPassword() {
+        if (passwordRevelada) {
+            vista.actualizarPasswordVista("********");
+            vista.getBtnMostrar().setText("👁️");
+        } else {
+            vista.actualizarPasswordVista(user.getPassword());
+            vista.getBtnMostrar().setText("🔒");
+        }
+        passwordRevelada = !passwordRevelada;
+    }
 
-	private void actualizarVista() {
-	    vista.getNom().setText(user.getUserName());
-	    vista.revalidate();
-	    vista.repaint();
-	}
+    private void actualizarVista() {
+        vista.getNom().setText(user.getUserName());
+        vista.revalidate();
+        vista.repaint();
+    }
 }

@@ -7,7 +7,6 @@ import view.miniPanels.MiniPanel;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
  */
 public abstract class MixedBrowserPanel<G, U> extends JPanel {
     private static final long serialVersionUID = 1L;
-	private final JButton firstPage = new JButton("<< First Page");
+    private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
@@ -26,10 +25,10 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     private final BetterPager<U> secondPager = new BetterPager<>();
     private final List<MiniPanel> firstMiniPanels = new ArrayList<>();
     private final List<MiniPanel> secondMiniPanels = new ArrayList<>();
+    protected JPanel containerItems;
     private int currentPageNum;
     private List<G> firstItemList = new ArrayList<>();
     private List<U> secondItemList = new ArrayList<>();
-    protected JPanel containerItems;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -239,22 +238,5 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
 
     public BetterPager<U> getSecondPager() {
         return secondPager;
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        for (MiniPanel miniPanel : firstMiniPanels) {
-            miniPanel.setController(c);
-        }
-        for (MiniPanel miniPanel : secondMiniPanels) {
-            miniPanel.setController(c);
-        }
-        firstPage.addActionListener(c);
-        previousPage.addActionListener(c);
-        nextPage.addActionListener(c);
-        lastPage.addActionListener(c);
     }
 }

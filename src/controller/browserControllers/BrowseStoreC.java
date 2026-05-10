@@ -24,7 +24,7 @@ public class BrowseStoreC extends MixedBrowserController<Pack, StoreProduct> {
     }
 
     @Override
-    public void setActionsForMiniPanels() {
+    public void initializeActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
             new PackMiniPC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
         }

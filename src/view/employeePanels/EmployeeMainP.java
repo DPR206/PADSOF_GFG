@@ -18,7 +18,6 @@ public class EmployeeMainP extends JPanel {
     private final App app;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-
     /**
      * This panel's constructor
      */
@@ -57,6 +56,34 @@ public class EmployeeMainP extends JPanel {
 
         this.revalidate();
         this.repaint();
+    }
+
+    public JButton getAddStoreProducts() {
+        return addStoreProducts;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public JButton getManageExchanges() {
+        return manageExchanges;
+    }
+
+    public JButton getManageOrders() {
+        return manageOrders;
+    }
+
+    public JButton getManagePacks() {
+        return managePacks;
+    }
+
+    public JButton getManageStoreProducts() {
+        return manageStoreProducts;
+    }
+
+    public JButton getValuateProducts() {
+        return valuateProducts;
     }
 
     /**

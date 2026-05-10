@@ -15,7 +15,7 @@ import static view.ImageAdder.getScaledImage;
 
 public class StoreProductMiniP extends MiniPanel {
     private static final long serialVersionUID = 1L;
-	private final JButton addToCart = new JButton("Add to Cart");
+    private final JButton addToCart = new JButton("Add to Cart");
     private final StoreProduct storeProduct;
     private final JLabel productImage;
     private final JTextPane productInfo;
@@ -85,6 +85,10 @@ public class StoreProductMiniP extends MiniPanel {
         this.add(addToCart);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+    }
+
+    public JButton getAddToCart() {
+        return addToCart;
     }
 
     public JLabel getProductImage() {

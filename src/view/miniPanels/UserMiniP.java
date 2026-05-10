@@ -16,7 +16,6 @@ public class UserMiniP extends MiniPanel {
     private final User user;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-
     /**
      * This panel's constructor
      * @param user       the user to be displayed
@@ -38,6 +37,14 @@ public class UserMiniP extends MiniPanel {
         this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
     }
 
+    public JButton getButton() {
+        return button;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
     public Component getUserImage() {
         return image;
     }
@@ -46,9 +53,6 @@ public class UserMiniP extends MiniPanel {
         return (RegisteredClient) user;
     }
 
-    public User getUser() {
-    	return this.user;
-    }
     /**
      * It makes it possible to assign a controller to this panel's components
      * @param c the desired controller

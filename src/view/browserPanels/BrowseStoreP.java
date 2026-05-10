@@ -12,6 +12,8 @@ import javax.swing.text.BadLocationException;
 
 import static main.Main.brownColour;
 
+import java.awt.BorderLayout;
+
 public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -31,13 +33,27 @@ public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
      *                              that doesn't exist)
      */
     public void paintEverything() throws BadLocationException {
-        this.removeAll();
+    	this.clearItemsContainer();
+    	this.removeAll();
 
         super.setFirstItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
         super.setSecondItemList(Store.getInstance().getStoreProductList()); // DUE: Esto debe darlo el controlador
 
         super.addAllMiniPanels();
-        this.add(super.getPageTurner());
+        
+        this.add(containerItems, BorderLayout.NORTH);
+        
+        JPanel northWrapper = new JPanel(new BorderLayout());
+        northWrapper.setOpaque(false);
+        northWrapper.add(containerItems, BorderLayout.NORTH);
+        
+        this.add(northWrapper, BorderLayout.NORTH);
+        
+        JPanel filler = new JPanel();
+        filler.setOpaque(false);
+        this.add(filler, BorderLayout.CENTER);
+        
+        this.add(super.getPageTurner(), BorderLayout.SOUTH);
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
 
         this.revalidate();

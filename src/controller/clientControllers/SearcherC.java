@@ -106,6 +106,7 @@ public class SearcherC implements ActionListener{
 			}
 			UnregisteredClient u = (UnregisteredClient) frame.getUser();
 			frame.setsProductList(u.searchStoreProduct());
+			
 		}
 	}
 }

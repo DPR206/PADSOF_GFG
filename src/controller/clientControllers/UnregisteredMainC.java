@@ -39,11 +39,6 @@ public class UnregisteredMainC {
 
             this.view.setP(this.user.searchStoreProduct());
             this.view.setPanelInferior(this.view.getBrowsePanel(), "Search");
-            /*try {
-                view.getBrowsePanel().setCurrentPageNum(1);
-            } catch (BadLocationException ex) {
-                ex.printStackTrace();
-            }*/
 
         });
 
@@ -53,8 +48,6 @@ public class UnregisteredMainC {
     }
 
     public void linkControllers() {
-//        new BrowseStoreC(frame, model, view.getBrowsePanel());
-//        new SearcherC(frame, model, view.getFilterPanel());
         this.view.getBrowsePanel().setController(new BrowseStoreC(frame, model, view.getBrowsePanel()));
         this.view.getFilterPanel().setController(new SearcherC(frame, model, view.getFilterPanel()));
     }

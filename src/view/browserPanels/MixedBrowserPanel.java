@@ -18,7 +18,8 @@ import java.util.List;
  * @param <U> the type parameter
  */
 public abstract class MixedBrowserPanel<G, U> extends JPanel {
-    private final JButton firstPage = new JButton("<< First Page");
+    private static final long serialVersionUID = 1L;
+	private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
@@ -30,6 +31,7 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     private int currentPageNum;
     private List<G> firstItemList = new ArrayList<>();
     private List<U> secondItemList = new ArrayList<>();
+    protected JPanel containerItems;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -40,6 +42,14 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     public MixedBrowserPanel(App app) {
         this.app = app;
         currentPageNum = 1;
+        
+        this.setLayout(new BorderLayout());
+        
+        containerItems = new JPanel();
+        containerItems.setLayout(new BoxLayout(containerItems, BoxLayout.Y_AXIS));
+        containerItems.setOpaque(false);
+        
+        this.add(containerItems, BorderLayout.NORTH);
     }
 
     /**
@@ -56,6 +66,7 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     public void addAllMiniPanels() throws BadLocationException {
         firstMiniPanels.clear();
         secondMiniPanels.clear();
+        containerItems.removeAll();
 
         int itemsPerPage = Parameter.getParam().getItemsPerPage();
         int startGlobalIndex = (currentPageNum - 1) * itemsPerPage;
@@ -71,6 +82,7 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
                 addSecondMiniPanel(secondItemList.get(secondListIndex), panelIndex);
             }
         }
+       
     }
 
     /**
@@ -87,6 +99,7 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
      */
     public void addFirstMiniPanel(MiniPanel newMiniPanel) {
         this.firstMiniPanels.add(newMiniPanel);
+        this.containerItems.add(newMiniPanel);
     }
 
     /**
@@ -103,6 +116,11 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
      */
     public void addSecondMiniPanel(MiniPanel newMiniPanel) {
         this.secondMiniPanels.add(newMiniPanel);
+        this.containerItems.add(newMiniPanel);
+    }
+    
+    protected void clearItemsContainer() {
+        this.containerItems.removeAll();
     }
 
     /**

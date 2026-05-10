@@ -1,12 +1,15 @@
 package controller.browserControllers;
 
+import controller.miniControllers.PackMiniEditC;
 import controller.miniControllers.PackMiniPC;
 import controller.miniControllers.StoreProductMiniC;
+import controller.miniControllers.StoreProductMiniEditC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseStoreP;
+import view.browserPanels.BrowseStorePEdit;
 import view.miniPanels.*;
 
 public class BrowseStoreEditC extends MixedBrowserController<Pack, StoreProduct> {
@@ -18,18 +21,21 @@ public class BrowseStoreEditC extends MixedBrowserController<Pack, StoreProduct>
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public BrowseStoreEditC(App frame, Store model, BrowseStoreP view) {
+    public BrowseStoreEditC(App frame, Store model, BrowseStorePEdit view) {
         super(frame, view, model);
     }
 
     @Override
     public void setActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
-            new PackMiniPC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
+            PackMiniEdit view = (PackMiniEdit) miniPanel;
+            PackMiniEditC controller = new PackMiniEditC(super.getFrame(), super.getModel(), view, this, super.getView());
+            view.setController(controller); // IMPORTANTE: Vincular el listener al botón
         }
         for (MiniPanel miniPanel : super.getView().getSecondMiniPanels()) {
-            new StoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
-                    super.getView());
+            StoreProductMiniEdit view = (StoreProductMiniEdit) miniPanel;
+            StoreProductMiniEditC controller = new StoreProductMiniEditC(super.getFrame(), super.getModel(), view, this, super.getView());
+            view.setController(controller); // IMPORTANTE: Vincular el listener al botón
         }
     }
 }

@@ -7,8 +7,8 @@ import javax.swing.text.BadLocationException;
 
 public class BrowseExchangesP extends BrowserPanel<Exchange> { // DUE
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public BrowseExchangesP(App app) {
-        super(app);
+    public BrowseExchangesP() {
+        super();
     }
 
     @Override

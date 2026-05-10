@@ -22,7 +22,7 @@ public class BannerUnregisteredC {
     /**
      * @param vista
      */
-    public BannerUnregisteredC(BannerUnregistered vista, /*UnregisteredClient user,*/ App frame) {
+    public BannerUnregisteredC(BannerUnregistered vista, App frame) {
         this.vista = vista;
         this.user = frame.getUser();
         this.frame = frame;
@@ -68,24 +68,11 @@ public class BannerUnregisteredC {
 
     private void abrirSignUp() {
 
-        //SignupP signUp = frame.getSignupPanel();
-
-        //new SignupC(frame, Store.getInstance());
-
         frame.changeVisibleCard("SIGNUP");
-
-		/*this.frame.getContentPane().remove(this.vista); // Quita el panel actual
-	    this.frame.getContentPane().add(this.frame.getSignupPanel()); // Añade el nuevo
-
-	    this.frame.getContentPane().revalidate();
-	    this.frame.getContentPane().repaint();*/
     }
 
     private void abrirPaginaPrincipal() {
 
-        UnregisteredMainP pagPrin = frame.getUnregisteredMainPanel();
-
-        new UnregisteredMainC(frame, Store.getInstance());
         new UnregisteredMainC(frame, Store.getInstance());
 
         frame.changeVisibleCard("UNREGISTERED_MAIN");

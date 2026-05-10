@@ -1,15 +1,12 @@
 package view;
 
 import controller.accessControllers.*;
-import controller.bannerControllers.BannerRegisteredC;
-import controller.bannerControllers.BannerUnregisteredC;
-import controller.clientControllers.RegisteredMainC;
-import controller.clientControllers.UnregisteredMainC;
+import controller.bannerControllers.*;
+import controller.clientControllers.*;
 import controller.employeeControllers.EmployeeMainC;
 import controller.managerControllers.ManagerMainC;
 import model.store.Store;
-import model.user.UnregisteredClient;
-import model.user.User;
+import model.user.*;
 import view.accessPanels.*;
 import view.banners.*;
 import view.clientPanels.*;
@@ -79,20 +76,20 @@ public class App extends JFrame {
         SignupC signupController = new SignupC(this, model);
 
         new UnregisteredMainC(this, model);
-        RegisteredMainC registeredMainController = new RegisteredMainC(this, model);
+        new RegisteredMainC(this, model);
         EmployeeMainC employeeMainController = new EmployeeMainC(this, model);
         ManagerMainC managerMainController = new ManagerMainC(this, model);
 
         new BannerUnregisteredC(bannerUnregisteredPanel, this);
         new BannerRegisteredC(bannerRegisteredPanel, this);
+        //new BannerEmployeeC(bannerEmployeePanel, this);
         new BannerEmployee();
-        new BannerManager();
+        new BannerManagerC(bannerManagerPanel, this);
 
         /* Configure controllers' views */
         loginPanel.setController(loginController);
         signupPanel.setController(signupController);
 
-        registeredMainPanel.setController(registeredMainController);
         employeeMainPanel.setController(employeeMainController);
         managerMainPanel.setController(managerMainController);
 
@@ -136,8 +133,8 @@ public class App extends JFrame {
         addBanner(bannerManagerPanel, "BANNER_MANAGER");
 
         /* Main panel */
-        bannerUnregisteredPanel.setVisible(true);
-        welcomePanel.setVisible(true); // Es el primer panel que aparece, creo que el resto se inicializan a "false"
+        changeVisibleBanner("BANNER_UNREGISTERED"); 
+        changeVisibleCard("WELCOME");
         lastShownPanel = "WELCOME";
         currentShownPanel = "WELCOME";
 
@@ -177,7 +174,7 @@ public class App extends JFrame {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     private void addBanner(JPanel newView, String constraints) {
         banners.add(newView, constraints);
-        newView.setVisible(false);
+        //newView.setVisible(false);
         newView.setOpaque(true);
         allPanels.put(constraints, newView);
     }
@@ -196,14 +193,17 @@ public class App extends JFrame {
         cl.show(cards, lastShownPanel);
     }
 
-    public void changeVisibleBanner(String cardName) {
-        CardLayout cl = (CardLayout) (banners.getLayout());
+    public void changeVisibleBanner(String cardName) {	
+    	CardLayout cl = (CardLayout) (banners.getLayout());
         cl.show(banners, cardName);
+        
+        banners.revalidate();
+        banners.repaint();
     }
 
     public void addCard(JPanel newView, String constraints) {
         cards.add(newView, constraints);
-        newView.setVisible(false);
+        //newView.setVisible(false);
         newView.setOpaque(false);
         allPanels.put(constraints, newView);
     }
@@ -211,6 +211,11 @@ public class App extends JFrame {
     public void addCard(ControllableJPanel newView, String constraints, ActionListener controller) {
         newView.setController(controller);
         addCard(newView, constraints);
+    }
+    
+    public void updateView(String cardName, String bannerName) {
+    	changeVisibleCard(cardName);
+        changeVisibleBanner(bannerName);
     }
 
     public void changeCurrentUser(User user) {

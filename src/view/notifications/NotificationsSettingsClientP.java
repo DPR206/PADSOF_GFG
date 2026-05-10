@@ -16,24 +16,18 @@ public class NotificationsSettingsClientP extends JPanel {
 	private JCheckBox orderState;
 	private JCheckBox packCart;
 	private JCheckBox productCart;
-	private JPanel banner;
 
 
 	/**
 	 * Create the panel.
 	 */
-	public NotificationsSettingsClientP(ActionListener volverAction, JPanel banner) {
+	public NotificationsSettingsClientP(ActionListener volverAction) {
 
 		setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JPanel panelCabecera = new JPanel();
         panelCabecera.setLayout(new BoxLayout(panelCabecera, BoxLayout.Y_AXIS));
-
-        this.banner = banner;
-        if (banner != null) {
-            panelCabecera.add(this.banner);
-        }
 
 
         // Título

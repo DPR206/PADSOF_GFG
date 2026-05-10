@@ -7,8 +7,6 @@ import view.notifications.*;
 
 import java.awt.event.*;
 
-import javax.swing.*;
-
 public class NotificacionesC {
 
 		//private App frame;
@@ -107,15 +105,14 @@ public class NotificacionesC {
 
 	    private void abrirAjustes() {
 	    	ActionListener volver = e -> vista.mostrarPantalla("LISTA");
-	        JPanel bannerParaAjustes = vista.getBanner();
 
 	        if (user instanceof RegisteredClient client) {
-	            NotificationsSettingsClientP vistaC = new NotificationsSettingsClientP(volver, bannerParaAjustes);
+	            NotificationsSettingsClientP vistaC = new NotificationsSettingsClientP(volver);
 	            new NotificationsSettingsClientC(vistaC, client); // Controlador de cliente
 	            vista.setDetallePanel(vistaC);
 	        }
 	        else if (user instanceof Employee employee) {
-	            NotificationsSettingsEmployeeP vistaE = new NotificationsSettingsEmployeeP(volver, bannerParaAjustes);
+	            NotificationsSettingsEmployeeP vistaE = new NotificationsSettingsEmployeeP(volver);
 	            new NotificationsSettingsEmployeeC(vistaE, employee); // Controlador de empleado
 	            vista.setDetallePanel(vistaE);
 	        } else

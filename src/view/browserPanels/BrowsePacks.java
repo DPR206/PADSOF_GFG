@@ -13,8 +13,8 @@ import static main.Main.brownColour;
 public class BrowsePacks extends BrowserPanel<Pack> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public BrowsePacks(App app) throws BadLocationException {
-        super(app);
+    public BrowsePacks() throws BadLocationException {
+        super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();
     }
@@ -22,7 +22,7 @@ public class BrowsePacks extends BrowserPanel<Pack> {
     @Override
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-        
+
 
         super.setItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
 

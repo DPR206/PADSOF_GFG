@@ -39,7 +39,7 @@ public class RegisteredMainC implements Controller {
             try {
                 this.view.getBrowsePanel()
                          .setSecondItemList(((RegisteredClient) this.frame.getUser()).searchStoreProduct());
-                view.getBrowsePanel().setCurrentPageNum(1);
+                //view.getBrowsePanel().setCurrentPageNum(1);
             } catch (BadLocationException ex) {
                 ex.printStackTrace();
             }

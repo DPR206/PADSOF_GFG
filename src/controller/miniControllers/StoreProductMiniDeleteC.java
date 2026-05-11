@@ -2,15 +2,15 @@ package controller.miniControllers;
 
 import controller.Controller;
 import model.product.Pack;
-import view.miniPanels.StoreProductMiniDelete;
+import view.miniPanels.StoreProductMiniP;
 
 public class StoreProductMiniDeleteC implements Controller {
 
-    private StoreProductMiniDelete smpd;
+    private StoreProductMiniP smpd;
     private Pack pack;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public StoreProductMiniDeleteC(StoreProductMiniDelete spmd, Pack p) {
+    public StoreProductMiniDeleteC(StoreProductMiniP spmd, Pack p) {
         this.smpd = spmd;
         this.pack = p;
 
@@ -19,7 +19,7 @@ public class StoreProductMiniDeleteC implements Controller {
 
     @Override
     public void initializeActions() {
-        smpd.getAddToCart().addActionListener(e -> {
+        smpd.getButton().addActionListener(e -> {
             pack.getProducts().remove(this.smpd);
         });
     }

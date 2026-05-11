@@ -35,7 +35,7 @@ public class RegisteredMakeOfferC implements Controller {
             view.getBrowseWalletOwnersP().setVisible(false);
             view.getBrowseSecondHandProductsP().setVisible(true);
             try {
-                view.getBrowseSecondHandProductsP().setCurrentPageNum(1);
+                //view.getBrowseSecondHandProductsP().setCurrentPageNum(1);
                 initializeActionsForMiniPanels();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
@@ -46,7 +46,7 @@ public class RegisteredMakeOfferC implements Controller {
             view.getBrowseSecondHandProductsP().setVisible(false);
             view.getBrowseWalletOwnersP().setVisible(true);
             try {
-                view.getBrowseWalletOwnersP().setCurrentPageNum(1);
+                //view.getBrowseWalletOwnersP().setCurrentPageNum(1);
                 initializeActionsForMiniPanels();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);

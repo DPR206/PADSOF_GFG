@@ -46,7 +46,7 @@ public class BrowseWalletOwnersP extends BrowserPanel<RegisteredClient> {
 
     @Override
     public void addMiniPanel(RegisteredClient item, int index) {
-        UserMiniP miniUser = new UserMiniP(item, buttonName);
+        UserMiniP miniUser = new UserMiniP(item, buttonName, ".\\resources\\app\\default_user.png");
         super.addMiniPanel(miniUser);
         this.add(miniUser);
     }

@@ -54,7 +54,7 @@ public class PackMiniPC implements Controller {
             }
         });
 
-        view.getAddToCart().addActionListener(e -> {
+        view.getButton().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
                 ((RegisteredClient) frame.getUser()).addCart(view.getPack());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
@@ -67,7 +67,7 @@ public class PackMiniPC implements Controller {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.initializeActions();
+            browserController.initializeActionsForMiniPanels();
         });
     }
 }

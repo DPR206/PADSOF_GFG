@@ -1,6 +1,6 @@
 package controller.browserControllers;
 
-import controller.miniControllers.PackMiniEditC;
+import controller.miniControllers.PackMiniPC;
 import controller.miniControllers.StoreProductMiniEditC;
 import model.product.Pack;
 import model.product.StoreProduct;
@@ -30,10 +30,10 @@ public class BrowseStoreEditC extends MixedBrowserController<Pack, StoreProduct>
     @Override
     public void initializeActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
-            new PackMiniEditC(super.getFrame(), super.getModel(), (PackMiniEdit) miniPanel, this, super.getView());
+            new PackMiniPC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
         }
         for (MiniPanel miniPanel : super.getView().getSecondMiniPanels()) {
-            new StoreProductMiniEditC(super.getFrame(), super.getModel(), (StoreProductMiniEdit) miniPanel, this,
+            new StoreProductMiniEditC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
                     super.getView());
         }
     }

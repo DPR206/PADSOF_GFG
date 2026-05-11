@@ -31,7 +31,6 @@ public class Cart implements Serializable {
     private LocalDate creationDate;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-
     /**
      * Creates a new cart
      * @param assignedProducts,         the store products
@@ -139,7 +138,7 @@ public class Cart implements Serializable {
             /* All other discounts + price */
             aux = aux + p.getDiscountedPrice() * this.packs.get(p);
             /* Quantity discount */
-            if (p.getDiscount().getType() == DiscountType.QUANTITY) {
+            if ((p.getDiscount() != null) && (p.getDiscount().getType() == DiscountType.QUANTITY)) {
                 QuantityDiscount quantityDisc = (QuantityDiscount) p.getDiscount();
                 if (this.packs.get(p) >= quantityDisc.getNumThreshold()) {
                     aux = aux - quantityDisc.getNumThreshold();
@@ -302,7 +301,7 @@ public class Cart implements Serializable {
 
         return true;
     }
-    
+
     /**
      * It pays the cart
      * @return true if the cart was paid, if not a message will be printed
@@ -315,26 +314,25 @@ public class Cart implements Serializable {
 
         double price = this.calculatePrice();
 
-        
-            System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
-            TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
+        System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
+        TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
 
-            Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
+        Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
 
-            Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
-                    new ArrayList<>(this.packs.keySet()), this.owner);
-            this.owner.getOrderHistory().addOrder(order);
+        Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
+                new ArrayList<>(this.packs.keySet()), this.owner);
+        this.owner.getOrderHistory().addOrder(order);
 
-            NotificationOrder notification =
-                    new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
-            notification.FullNotification(order);
-            this.owner.getNotificationHistory().addNotification(notification);
-            this.owner.increaseNumOrders();
+        NotificationOrder notification =
+                new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
+        notification.FullNotification(order);
+        this.owner.getNotificationHistory().addNotification(notification);
+        this.owner.increaseNumOrders();
 
-            NotificationEmployeeOrder notification2 =
-                    new NotificationEmployeeOrder(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_ORDER);
-            notification2.FullNotification(order);
-            Store.getInstance().sendNotificationEmployees(notification2);
+        NotificationEmployeeOrder notification2 =
+                new NotificationEmployeeOrder(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_ORDER);
+        notification2.FullNotification(order);
+        Store.getInstance().sendNotificationEmployees(notification2);
 
         this.packs.clear();
         this.sp.clear();
@@ -444,17 +442,16 @@ public class Cart implements Serializable {
     public void printPackListPage(int pageNum) {
         Pager.getInstance().printPackListPage(this.getPacks(), pageNum);
     }
-    
+
     /**
      * Empty the cart
      */
     public void emptyCart() {
-    	this.sp.clear();
-    	this.packs.clear();
+        this.sp.clear();
+        this.packs.clear();
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-
     /**
      * Obtains the creation date of the cart
      * @return the cart's creation date
@@ -535,6 +532,10 @@ public class Cart implements Serializable {
      */
     public List<StoreProduct> getProducts() {
         return new ArrayList<>(this.sp.keySet());
+    }
+
+    public HashMap<StoreProduct, Integer> getSp() {
+        return sp;
     }
 
 }

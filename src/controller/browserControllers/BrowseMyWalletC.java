@@ -22,6 +22,7 @@ public class BrowseMyWalletC extends BrowserController<SecondHandProduct> {
      */
     public BrowseMyWalletC(App frame, Store model, BrowseMyWalletP view) {
         super(frame, view, model);
+        initializeActionsForMiniPanels();
     }
 
     @Override

@@ -8,7 +8,7 @@ import model.store.Store;
 import model.user.*;
 import view.App;
 import view.browserPanels.MixedBrowserPanel;
-import view.miniPanels.StoreProductMiniP;
+import view.miniPanels.StoreProductMiniCart;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -17,7 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class StoreProductMiniCartC implements Controller {
-    private final StoreProductMiniP view; /* view -> panel */
+    private final StoreProductMiniCart view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     private final MixedBrowserController<Pack, StoreProduct> browserController;
@@ -30,7 +30,7 @@ public class StoreProductMiniCartC implements Controller {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public StoreProductMiniCartC(App frame, Store model, StoreProductMiniP view,
+    public StoreProductMiniCartC(App frame, Store model, StoreProductMiniCart view,
                                  MixedBrowserController<Pack, StoreProduct> browserController,
                                  MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
         this.frame = frame;
@@ -46,6 +46,13 @@ public class StoreProductMiniCartC implements Controller {
     public void initializeActions() {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
+            view.setCart(((RegisteredClient) frame.getUser()).getC());
+        } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+            System.out.println("A");
+            view.setCart(((UnregisteredClient) frame.getUser()).getCart());
+        }
+
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -62,19 +69,18 @@ public class StoreProductMiniCartC implements Controller {
             }
         });
 
-        view.getButton().addActionListener(e -> {
+        view.getDeleteFromCart().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
                 ((RegisteredClient) frame.getUser()).deleteCart(view.getStoreProduct());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
                 ((UnregisteredClient) frame.getUser()).deleteCart(view.getStoreProduct());
             }
+            try {
+                browserPanel.paintEverything();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            browserController.initializeActionsForMiniPanels();
         });
-
-        try {
-            browserPanel.paintEverything();
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
-        browserController.initializeActionsForMiniPanels();
     }
 }

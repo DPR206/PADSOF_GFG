@@ -1,6 +1,7 @@
 package controller.bannerControllers;
 
 import controller.Controller;
+import controller.browserControllers.BrowseCartC;
 import controller.clientControllers.CarritoC;
 import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
@@ -32,7 +33,11 @@ public class BannerUnregisteredC implements Controller {
 
     public void initializeActions() {
         vista.getBtnCarrito().addActionListener(e -> {
-            abrirCarritoDelCliente();
+            try {
+                abrirCarritoDelCliente();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         vista.getHome().addActionListener(e -> {
@@ -83,11 +88,12 @@ public class BannerUnregisteredC implements Controller {
         frame.changeVisibleCard("UNREGISTERED_MAIN");
     }
 
-    private void abrirCarritoDelCliente() {
+    private void abrirCarritoDelCliente() throws BadLocationException {
 
         CarritoP carritoVista = new CarritoP();
 
         new CarritoC(carritoVista, frame);
+        new BrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
 
         frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");

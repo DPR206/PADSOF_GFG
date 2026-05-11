@@ -28,19 +28,19 @@ public class ThreeButtonSecondHandMiniP extends MiniPanel {
         this.setLayout(new FlowLayout());
 
         firstButton = new JButton(firstButtonName);
-        firstButton.setPreferredSize(new Dimension(firstButtonName.length() * 10, height));
+        firstButton.setPreferredSize(new Dimension(firstButtonName.length() * 15, height));
         if (firstIconPath != null) {
             firstButton.setIcon(getScaledImage(new ImageIcon(firstIconPath), height / 4, height / 4));
         }
 
         secondButton = new JButton(secondButtonName);
-        secondButton.setPreferredSize(new Dimension(secondButtonName.length() * 10, height));
+        secondButton.setPreferredSize(new Dimension(secondButtonName.length() * 15, height));
         if (secondIconPath != null) {
             secondButton.setIcon(getScaledImage(new ImageIcon(secondIconPath), height / 4, height / 4));
         }
 
         thirdButton = new JButton(thirdButtonName);
-        thirdButton.setPreferredSize(new Dimension(thirdButtonName.length() * 10, height));
+        thirdButton.setPreferredSize(new Dimension(thirdButtonName.length() * 15, height));
         if (thirdIconPath != null) {
             thirdButton.setIcon(getScaledImage(new ImageIcon(thirdIconPath), height / 4, height / 4));
         }
@@ -90,7 +90,7 @@ public class ThreeButtonSecondHandMiniP extends MiniPanel {
         if (!product.isAvailable()) {
             this.add(secondButton);
         } else {
-            productInfo.setPreferredSize(new Dimension(width + (thirdButtonName.length() * 10), height));
+            productInfo.setPreferredSize(new Dimension(width + (thirdButtonName.length() * 15), height));
         }
         this.add(thirdButton);
 

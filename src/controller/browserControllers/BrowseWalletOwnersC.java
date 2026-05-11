@@ -27,6 +27,7 @@ public class BrowseWalletOwnersC extends BrowserController<RegisteredClient> {
      */
     public BrowseWalletOwnersC(App frame, BrowseWalletOwnersP view, Store model) throws BadLocationException {
         super(frame, view, model);
+        initializeActionsForMiniPanels();
     }
 
     @Override

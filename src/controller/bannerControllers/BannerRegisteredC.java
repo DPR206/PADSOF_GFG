@@ -1,6 +1,7 @@
 package controller.bannerControllers;
 
 import controller.Controller;
+import controller.browserControllers.BrowseCartC;
 import controller.browserControllers.BrowseMyWalletC;
 import controller.clientControllers.CarritoC;
 import controller.clientControllers.RegisteredProfileC;
@@ -88,11 +89,12 @@ public class BannerRegisteredC implements Controller {
         frame.changeVisibleCard("REGISTERED_MAIN");
     }
 
-    private void abrirCarritoDelCliente() {
+    private void abrirCarritoDelCliente() throws BadLocationException {
 
         CarritoP carritoVista = new CarritoP();
-
+        System.out.println("Check........");
         new CarritoC(carritoVista, frame);
+        new BrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
 
         frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");
@@ -102,7 +104,12 @@ public class BannerRegisteredC implements Controller {
     public void initializeActions() {
 
         vista.getBtnCarrito().addActionListener(e -> {
-            abrirCarritoDelCliente();
+            try {
+                System.out.println("AEUGH");
+                abrirCarritoDelCliente();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         vista.getHome().addActionListener(e -> {

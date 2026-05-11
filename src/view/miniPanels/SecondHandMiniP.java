@@ -25,7 +25,7 @@ public class SecondHandMiniP extends MiniPanel {
         this.setLayout(new FlowLayout());
 
         button = new JButton(buttonName);
-        button.setPreferredSize(new Dimension(buttonName.length() * 10, height));
+        button.setPreferredSize(new Dimension(buttonName.length() * 15, height));
         if (iconPath != null) {
             button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
         }
@@ -77,7 +77,6 @@ public class SecondHandMiniP extends MiniPanel {
     }
 
     public JButton getButton() {
-        System.out.println("Returning button...");
         return button;
     }
 

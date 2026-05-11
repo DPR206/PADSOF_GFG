@@ -22,6 +22,7 @@ public class BrowseStoreEditC extends MixedBrowserController<Pack, StoreProduct>
      */
     public BrowseStoreEditC(App frame, Store model, BrowseStorePEdit view) throws BadLocationException {
         super(frame, view, model);
+        initializeActionsForMiniPanels();
     }
 
     @Override

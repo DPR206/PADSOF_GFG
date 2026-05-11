@@ -23,6 +23,7 @@ public class BrowseSecondHandProductsC extends BrowserController<SecondHandProdu
      */
     public BrowseSecondHandProductsC(App frame, BrowseSecondHandProductsP view, Store model) {
         super(frame, view, model);
+        initializeActionsForMiniPanels();
     }
 
     @Override

@@ -3,7 +3,7 @@ package view.browserPanels;
 import model.product.Pack;
 import model.product.StoreProduct;
 import view.miniPanels.PackMiniP;
-import view.miniPanels.StoreProductMiniP;
+import view.miniPanels.StoreProductMiniCart;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -11,14 +11,14 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
-public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
+public class BrowseCartP extends MixedBrowserPanel<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
      */
-    public BrowseStoreP() throws BadLocationException {
+    public BrowseCartP() throws BadLocationException {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();
@@ -67,7 +67,7 @@ public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
 
     @Override
     public void addSecondMiniPanel(StoreProduct item, int index) throws BadLocationException {
-        StoreProductMiniP miniPack = new StoreProductMiniP(item, index, "Add to Cart", ".\\resources\\app\\cart.png");
+        StoreProductMiniCart miniPack = new StoreProductMiniCart(item, index);
         super.addSecondMiniPanel(miniPack);
         this.add(miniPack);
     }

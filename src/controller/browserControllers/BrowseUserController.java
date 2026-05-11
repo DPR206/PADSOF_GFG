@@ -33,4 +33,10 @@ public class BrowseUserController extends BrowserController<Employee>{
 			
 		}
 
+		@Override
+		public void initializeActionsForMiniPanels() {
+			// TODO Auto-generated method stub
+			
+		}
+
 }

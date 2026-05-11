@@ -1,11 +1,14 @@
 package controller.employeeControllers;
 
 import controller.Controller;
+import controller.browserControllers.BrowseSecondHandValuationProductsC;
 import model.store.Store;
 import view.App;
+import view.browserPanels.BrowseSecondHandProductsP;
 import view.employeePanels.EmployeeMainP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 public class EmployeeMainC implements Controller {
     private final EmployeeMainP view; /* view -> panel */
@@ -50,8 +53,15 @@ public class EmployeeMainC implements Controller {
         });
 
         view.getValuateProducts().addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Valuate Products", "Valuate Products",
-                    JOptionPane.INFORMATION_MESSAGE);
+            try {
+                BrowseSecondHandProductsP browseSecondHandProductsP =
+                        new BrowseSecondHandProductsP("Add to Offer", null);
+                new BrowseSecondHandValuationProductsC(frame, browseSecondHandProductsP, model);
+                frame.addCard(browseSecondHandProductsP, "BROWSE_SECOND_HAND PRODUCTS");
+                frame.changeVisibleCard("BROWSE_SECOND_HAND PRODUCTS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
     }

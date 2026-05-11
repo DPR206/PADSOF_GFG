@@ -62,8 +62,7 @@ public class StoreProductMiniC implements Controller {
             }
         });
 
-        view.getAddToCart().addActionListener(e -> {
-            System.out.println("AAAAAAAAAAA");
+        view.getButton().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
                 ((RegisteredClient) frame.getUser()).addCart(view.getStoreProduct());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
@@ -76,7 +75,7 @@ public class StoreProductMiniC implements Controller {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.initializeActions();
+            browserController.initializeActionsForMiniPanels();
         });
     }
 }

@@ -2,17 +2,14 @@ package view.browserPanels;
 
 import model.product.Pack;
 import model.product.StoreProduct;
-import view.miniPanels.PackMiniEdit;
 import view.miniPanels.PackMiniP;
-import view.miniPanels.StoreProductMiniEdit;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+import java.awt.*;
 
 import static main.Main.brownColour;
-
-import java.awt.BorderLayout;
 
 public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
 
@@ -34,23 +31,23 @@ public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
      */
     @Override
     public void paintEverything() throws BadLocationException {
-    	this.clearItemsContainer();
-    	this.removeAll();
+        this.clearItemsContainer();
+        this.removeAll();
 
         super.addAllMiniPanels();
-        
+
         this.add(containerItems, BorderLayout.NORTH);
-        
+
         JPanel northWrapper = new JPanel(new BorderLayout());
         northWrapper.setOpaque(false);
         northWrapper.add(containerItems, BorderLayout.NORTH);
-        
+
         this.add(northWrapper, BorderLayout.NORTH);
-        
+
         JPanel filler = new JPanel();
         filler.setOpaque(false);
         this.add(filler, BorderLayout.CENTER);
-        
+
         this.add(super.getPageTurner(), BorderLayout.SOUTH);
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
 
@@ -60,14 +57,14 @@ public class BrowseStoreP extends MixedBrowserPanel<Pack, StoreProduct> {
 
     @Override
     public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
-        PackMiniP miniPack = new PackMiniP(item, index);
+        PackMiniP miniPack = new PackMiniP(item, index, "Add to Cart", ".\\resources\\app\\cart.png");
         super.addFirstMiniPanel(miniPack);
         this.add(miniPack);
     }
 
     @Override
     public void addSecondMiniPanel(StoreProduct item, int index) throws BadLocationException {
-        StoreProductMiniP miniPack = new StoreProductMiniP(item, index);
+        StoreProductMiniP miniPack = new StoreProductMiniP(item, index, "Add to Cart", ".\\resources\\app\\cart.png");
         super.addSecondMiniPanel(miniPack);
         this.add(miniPack);
     }

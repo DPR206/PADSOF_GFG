@@ -49,7 +49,7 @@ public class BrowseUsersP extends BrowserPanel<User> {
 
     @Override
     public void addMiniPanel(User item, int index) {
-        UserMiniP miniUser = new UserMiniP(item, buttonName);
+        UserMiniP miniUser = new UserMiniP(item, buttonName, ".\\resources\\app\\default_user.png");
         super.addMiniPanel(miniUser);
         this.add(miniUser);
     }

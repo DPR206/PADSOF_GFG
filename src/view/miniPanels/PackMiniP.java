@@ -11,14 +11,25 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getPackImagePanel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Pack mini p.
+ */
 public class PackMiniP extends MiniPanel {
-    private final JButton addToCart = new JButton("Add to Cart");
+    private final JButton button;
     private final Pack p;
     private final JTextPane packInfo;
     private final JPanel packImage;
 
+    /**
+     * Instantiates a new Pack mini p.
+     * @param p          the p
+     * @param index      the index
+     * @param buttonName the button name
+     * @param iconPath   the icon path
+     * @throws BadLocationException the bad location exception
+     */
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniP(Pack p, int index) throws BadLocationException {
+    public PackMiniP(Pack p, int index, String buttonName, String iconPath) throws BadLocationException {
         super();
 
         this.p = p;
@@ -26,8 +37,11 @@ public class PackMiniP extends MiniPanel {
         int height = 60;
         this.setLayout(new FlowLayout());
 
-        addToCart.setPreferredSize(new Dimension(125, height));
-        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
+        button = new JButton(buttonName);
+        button.setPreferredSize(new Dimension(125, height));
+        if (iconPath != null) {
+            button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
+        }
 
         this.packImage = getPackImagePanel(p, height, height);//getImageLabel(p.getPhoto(), height, height);
         this.packInfo = new JTextPane();
@@ -62,23 +76,39 @@ public class PackMiniP extends MiniPanel {
         this.add(indexNum);
         this.add(packImage);
         this.add(packInfo);
-        this.add(addToCart);
+        this.add(button);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
-    public JButton getAddToCart() {
-        return addToCart;
+    /**
+     * Gets button.
+     * @return the button
+     */
+    public JButton getButton() {
+        return button;
     }
 
+    /**
+     * Gets pack.
+     * @return the pack
+     */
     public Pack getPack() {
         return p;
     }
 
+    /**
+     * Gets pack image.
+     * @return the pack image
+     */
     public JPanel getPackImage() {
         return packImage;
     }
 
+    /**
+     * Gets pack info.
+     * @return the pack info
+     */
     public JTextPane getPackInfo() {
         return packInfo;
     }
@@ -88,6 +118,6 @@ public class PackMiniP extends MiniPanel {
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        addToCart.addActionListener(c);
+        button.addActionListener(c);
     }
 }

@@ -35,7 +35,7 @@ public class BrowseSecondHandProductsP extends BrowserPanel<SecondHandProduct> {
 
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
-        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index);
+        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, "Add to Offer", null);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

@@ -16,18 +16,19 @@ public class UserMiniP extends MiniPanel {
     private final User user;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * This panel's constructor
      * @param user       the user to be displayed
      * @param buttonName the name of the button for this panel (must match the controller's)
      */
-    public UserMiniP(User user, String buttonName) {
+    public UserMiniP(User user, String buttonName, String iconPath) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.user = user;
 
         JPanel imageAndName = new JPanel();
-        image = ImageAdder.getImageLabel(".\\resources\\app\\default_user.png", 50, 50);
+        image = ImageAdder.getImageLabel(iconPath, 50, 50);
         imageAndName.add(image);
         imageAndName.add(new JLabel(user.getUserName()));
         this.add(imageAndName);

@@ -2,15 +2,15 @@ package controller.miniControllers;
 
 import controller.Controller;
 import model.product.Pack;
-import view.miniPanels.PackMiniDelete;
+import view.miniPanels.PackMiniP;
 
 public class PackMiniDeleteC implements Controller {
 
-    public PackMiniDelete pmd;
+    public PackMiniP pmd;
     private Pack p;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniDeleteC(PackMiniDelete pmc, Pack p) {
+    public PackMiniDeleteC(PackMiniP pmc, Pack p) {
         this.pmd = pmc;
         this.p = p;
 
@@ -18,7 +18,7 @@ public class PackMiniDeleteC implements Controller {
     }
 
     public void initializeActions() {
-        pmd.getGestionar().addActionListener(e -> {
+        pmd.getButton().addActionListener(e -> {
             this.p.getPacks().remove(this.pmd);
         });
     }

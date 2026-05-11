@@ -241,4 +241,24 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     public BetterPager<U> getSecondPager() {
         return secondPager;
     }
+
+    @Override
+    public void setVisible(boolean aFlag) {
+        if (aFlag != isVisible()) {
+            super.setVisible(aFlag);
+            if (aFlag) {
+                Container parent = getParent();
+                if (parent != null) {
+                    Rectangle r = getBounds();
+                    parent.repaint(r.x, r.y, r.width, r.height);
+                }
+                revalidate();
+                try {
+                    setCurrentPageNum(1);
+                } catch (BadLocationException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 }

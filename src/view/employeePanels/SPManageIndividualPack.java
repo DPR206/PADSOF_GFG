@@ -1,81 +1,75 @@
 package view.employeePanels;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
+import model.product.Pack;
+import model.product.StoreProduct;
+import view.miniPanels.PackMiniP;
+import view.miniPanels.StoreProductMiniP;
+
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.text.BadLocationException;
+public class SPManageIndividualPack extends JPanel {
+    private Pack p;
+    private JTextField nameProduct = new JTextField();
+    private JTextField packPrecio = new JTextField();
+    private JButton btnConfirmarProducto = new JButton("CONFIRMAR PRODUCTO");
+    private JButton btnConfirmarPrecio = new JButton("CONFIRMAR PRECIO");
 
-import model.product.Pack;
-import model.product.StoreProduct;
-import view.miniPanels.PackMiniEdit;
-import view.miniPanels.StoreProductMiniDelete;
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public SPManageIndividualPack(Pack p) {
+        this.p = p;
 
-public class SPManageIndividualPack extends JPanel{
-	private Pack p;
-	private JTextField nameProduct = new JTextField();
-	private JTextField packPrecio = new JTextField();
-	private JButton btnConfirmarProducto = new JButton("CONFIRMAR PRODUCTO");
-	private JButton btnConfirmarPrecio = new JButton("CONFIRMAR PRECIO");
+        this.setLayout(new BorderLayout());
 
-	public SPManageIndividualPack(Pack p) {
-		this.p = p;
+        JPanel scrollPanels = new JPanel();
+        scrollPanels.setLayout(new GridLayout(2, 0));
 
-		this.setLayout(new BorderLayout());
+        JPanel aux1 = new JPanel();
+        JPanel aux2 = new JPanel();
 
-		JPanel scrollPanels = new JPanel();
-		scrollPanels.setLayout(new GridLayout(2,0));
+        //añado los minipacks
 
-		JPanel aux1 = new JPanel();
-		JPanel aux2 = new JPanel();
+        HashSet<Pack> listPacks = this.p.getPacks();
 
-		//añado los minipacks
+        int i = 1;
 
-		HashSet<Pack> listPacks = this.p.getPacks();
+        for (Pack pack : listPacks) {
+            try {
+                aux1.add(new PackMiniP(pack, i, "Manage", null));
+            } catch (BadLocationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            i++;
+        }
+        JScrollPane scroll1 = new JScrollPane(aux1);
 
-		int i = 1;
+        //añado los miniproductos en el otro
 
-		for(Pack pack: listPacks) {
-			try {
-				aux1.add(new PackMiniEdit(pack, i));
-			} catch (BadLocationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			i++;
-		}
-		JScrollPane scroll1 = new JScrollPane(aux1);
+        i = 1;
 
-		//añado los miniproductos en el otro
+        List<StoreProduct> products = this.p.getProducts();
+        for (StoreProduct sp : products) {
+            try {
+                aux2.add(new StoreProductMiniP(sp, i, "Delete from pack", ".\\resources\\app\\cart.png"));
+            } catch (BadLocationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            i++;
+        }
 
-		i = 1;
+        JScrollPane scroll2 = new JScrollPane(aux2);
+        scrollPanels.add(scroll1);
+        scrollPanels.add(scroll2);
 
-		List<StoreProduct> products = this.p.getProducts();
-		for(StoreProduct sp: products) {
-			try {
-				aux2.add(new StoreProductMiniDelete(sp, i));
-			} catch (BadLocationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			i++;
-		}
+        this.add(scrollPanels, BorderLayout.CENTER);
+        JPanel panelCreacion = new JPanel();
 
-		JScrollPane scroll2 = new JScrollPane(aux2);
-		scrollPanels.add(scroll1);
-		scrollPanels.add(scroll2);
-
-		this.add(scrollPanels, BorderLayout.CENTER);
-		JPanel panelCreacion = new JPanel();
-
-		panelCreacion.setBackground(new Color(245, 241, 236)); // fondo beige claro
+        panelCreacion.setBackground(new Color(245, 241, 236)); // fondo beige claro
         panelCreacion.setLayout(new BorderLayout(10, 10));
 
         JPanel camposPanel = new JPanel(new GridLayout(2, 3, 10, 10));
@@ -92,5 +86,5 @@ public class SPManageIndividualPack extends JPanel{
         camposPanel.add(this.btnConfirmarPrecio);
 
         this.add(camposPanel, BorderLayout.SOUTH);
-	}
+    }
 }

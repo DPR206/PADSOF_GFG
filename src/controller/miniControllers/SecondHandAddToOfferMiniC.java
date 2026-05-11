@@ -8,7 +8,7 @@ import model.store.Store;
 import view.App;
 import view.browserPanels.BrowserPanel;
 import view.clientPanels.RegisteredMainP;
-import view.clientPanels.RegisteredSecondHandP;
+import view.MaxiSecondHandP;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
@@ -52,8 +52,8 @@ public class SecondHandAddToOfferMiniC implements Controller {
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 try {
-                    RegisteredSecondHandP newView =
-                            new RegisteredSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
+                    MaxiSecondHandP newView =
+                            new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
                     new RegisteredSecondHandC(frame, model, newView);
                     ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                                 .add(newView, "SECONDHAND_PRODUCT");
@@ -71,8 +71,8 @@ public class SecondHandAddToOfferMiniC implements Controller {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     try {
-                        RegisteredSecondHandP newView =
-                                new RegisteredSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
+                        MaxiSecondHandP newView =
+                                new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
                         new RegisteredSecondHandC(frame, model, newView);
                         ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                                     .add(newView, "SECONDHAND_PRODUCT");
@@ -91,8 +91,8 @@ public class SecondHandAddToOfferMiniC implements Controller {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     try {
-                        RegisteredSecondHandP newView =
-                                new RegisteredSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
+                        MaxiSecondHandP newView =
+                                new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
                         new RegisteredSecondHandC(frame, model, newView);
                         ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                                     .add(newView, "SECONDHAND_PRODUCT");

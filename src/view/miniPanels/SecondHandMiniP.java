@@ -45,8 +45,16 @@ public class SecondHandMiniP extends MiniPanel {
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
 
         Document doc = productInfo.getStyledDocument();
-        doc.insertString(doc.getLength(), ("Valuation: " + String.format("%.2f", product.getPrice()) + " €\n"),
-                attributes);
+        if (product.getPrice() != 0) {
+            doc.insertString(doc.getLength(), ("Valuation: " + String.format("%.2f", product.getPrice()) + " €\n"),
+                    attributes);
+        } else if (product.isPaidValuation()) {
+            StyleConstants.setItalic(attributes, true);
+            doc.insertString(doc.getLength(), ("Valuation pending\n"), attributes);
+        } else {
+            StyleConstants.setItalic(attributes, true);
+            doc.insertString(doc.getLength(), ("No valuation\n"), attributes);
+        }
 
         productInfo.setPreferredSize(new Dimension(width, height));
 
@@ -69,6 +77,7 @@ public class SecondHandMiniP extends MiniPanel {
     }
 
     public JButton getButton() {
+        System.out.println("Returning button...");
         return button;
     }
 

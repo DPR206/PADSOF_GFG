@@ -1,6 +1,6 @@
 package controller.browserControllers;
 
-import controller.miniControllers.SecondHandAddToOfferMiniC;
+import controller.miniControllers.SecondHandValuateMiniC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
@@ -25,10 +25,9 @@ public class BrowseSecondHandValuationProductsC extends BrowserController<Second
 
     @Override
     public void initializeActionsForMiniPanels() {
-        List<SecondHandProduct> shownProducts = Store.getInstance().getAvailableSecondHandProductList();
+        List<SecondHandProduct> shownProducts = Store.getInstance().getSecondHandProductList();
         shownProducts.removeIf(product -> !product.isPaidValuation());
         shownProducts.removeIf(SecondHandProduct::isAvailable);
-        System.out.println("shownProducts: " + shownProducts);
         try {
             super.getView().setItemList(shownProducts);
         } catch (Exception e) {
@@ -36,7 +35,7 @@ public class BrowseSecondHandValuationProductsC extends BrowserController<Second
         }
 
         for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
-            new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
+            new SecondHandValuateMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
                     super.getView());
         }
     }

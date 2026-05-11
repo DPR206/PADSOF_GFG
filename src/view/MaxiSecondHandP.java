@@ -1,7 +1,6 @@
-package view.clientPanels;
+package view;
 
 import model.product.SecondHandProduct;
-import view.App;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -12,14 +11,14 @@ import static view.ImageAdder.getImageLabel;
 /**
  * Zoom view of a second hand product with customizable button
  */
-public class RegisteredSecondHandP extends JPanel {
+public class MaxiSecondHandP extends JPanel {
     private final App app;
     private final JTextPane productInfo;
     private final SecondHandProduct product;
     private final JButton addToOffer;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public RegisteredSecondHandP(App app, SecondHandProduct product, String buttonName) throws BadLocationException {
+    public MaxiSecondHandP(App app, SecondHandProduct product, String buttonName) throws BadLocationException {
         this.setLayout(new BorderLayout());
         this.app = app;
         this.product = product;

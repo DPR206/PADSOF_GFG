@@ -8,7 +8,7 @@ import model.store.Store;
 import view.App;
 import view.browserPanels.BrowserPanel;
 import view.clientPanels.RegisteredMainP;
-import view.clientPanels.RegisteredSecondHandP;
+import view.MaxiSecondHandP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
@@ -53,8 +53,8 @@ public class SecondHandMyWalletMiniC implements Controller {
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 try {
-                    RegisteredSecondHandP newView =
-                            new RegisteredSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
+                    MaxiSecondHandP newView =
+                            new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
                     new RegisteredSecondHandC(frame, model, newView);
                     ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                                 .add(newView, "SECONDHAND_PRODUCT");
@@ -72,8 +72,8 @@ public class SecondHandMyWalletMiniC implements Controller {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     try {
-                        RegisteredSecondHandP newView =
-                                new RegisteredSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
+                        MaxiSecondHandP newView =
+                                new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
                         new RegisteredSecondHandC(frame, model, newView);
                         ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                                     .add(newView, "SECONDHAND_PRODUCT");

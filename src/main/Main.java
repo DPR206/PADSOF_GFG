@@ -1,7 +1,6 @@
 package main;
 
 import model.store.Store;
-import model.user.*;
 import view.App;
 
 import javax.swing.*;
@@ -39,14 +38,6 @@ public class Main {
 //                        Manager.getInstance().addEmployee("emp456", "bob", Permission.ORDER);
 //                        Manager.getInstance().addEmployee("emp789", "carol", Permission.EXCHANGE);
 //                    } Ya están metidos
-
-//                    new Employee("pwd", "employee", true, Permission.ORDER, Permission.STORE, Permission.EXCHANGE);
-//                    ((RegisteredClient) Store.getInstance().getUsers().get("martin")).getWallet().getProducts().get(2)
-//                                                                                     .setPaidValuation(true);
-//                    ((RegisteredClient) Store.getInstance().getUsers().get("martin")).getWallet().getProducts().get(2)
-//                                                                                     .setPrice(0);
-//                    ((RegisteredClient) Store.getInstance().getUsers().get("martin")).getWallet().getProducts().get(2)
-//                                                                                     .setAvailable(false);
 
                     new App().setVisible(true);
                 } catch (Exception e) {

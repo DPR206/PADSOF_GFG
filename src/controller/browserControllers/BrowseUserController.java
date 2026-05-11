@@ -20,23 +20,22 @@ public class BrowseUserController extends BrowserController<Employee>{
 	    public BrowseUserController(App frame, BrowserPanel<Employee> view, Store model) throws BadLocationException {
 	        super(frame, view, model);
 
-	        List<RegisteredClient> users = new ArrayList<>(model.getRegisteredClientList());
+	        List<Employee> users = new ArrayList<>(model.getEmployeeList());
 	        users.remove(frame.getUser());
 	        view.setItemList(users);
 
 	        view.paintEverything();
 	    }
 
-		@Override
 		public void setActionsForMiniPanels() {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void initializeActionsForMiniPanels() {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 }

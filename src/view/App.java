@@ -187,8 +187,7 @@ public class App extends JFrame {
     }
 
     public void goBack() {
-        CardLayout cl = (CardLayout) (cards.getLayout());
-        cl.show(cards, lastShownPanel);
+        changeVisibleCard(lastShownPanel);
     }
 
     public void changeVisibleBanner(String cardName) {

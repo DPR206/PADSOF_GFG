@@ -6,8 +6,7 @@ import controller.clientControllers.CarritoC;
 import controller.clientControllers.RegisteredProfileC;
 import controller.notifications.NotificacionesC;
 import model.store.Store;
-import model.user.RegisteredClient;
-import model.user.User;
+import model.user.*;
 import view.App;
 import view.banners.BannerRegistered;
 import view.browserPanels.BrowseMyWalletP;
@@ -127,7 +126,16 @@ public class BannerRegisteredC implements Controller {
         });
 
         vista.getBtnExit().addActionListener(e -> {
+            this.frame.changeCurrentUser(new UnregisteredClient(true));
             abrirWelcome();
         });
+
+        vista.getBtnGoBack().addActionListener(e -> {
+            goBack();
+        });
+    }
+
+    private void goBack() {
+        frame.goBack();
     }
 }

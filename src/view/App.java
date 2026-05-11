@@ -22,8 +22,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.Serial;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
 
 /**
  * It implements the app's view
@@ -45,7 +45,7 @@ public class App extends JFrame {
     private final JPanel cards;
     private final JPanel banners;
     private final Map<String, JPanel> allPanels = new HashMap<>();
-    private String lastShownPanel;
+    private List<String> lastShownPanels = new ArrayList<>();
     private String currentShownPanel;
     private User mainUser = new UnregisteredClient(true);
 
@@ -65,10 +65,10 @@ public class App extends JFrame {
         managerMainPanel = new ManagerMainP();
         searchPanel = new SearchPanel();
 
-        BannerUnregistered bannerUnregisteredPanel = new BannerUnregistered();
-        BannerRegistered bannerRegisteredPanel = new BannerRegistered();
-        BannerEmployee bannerEmployeePanel = new BannerEmployee();
-        BannerManager bannerManagerPanel = new BannerManager();
+        BannerUnregistered bannerUnregisteredPanel = new BannerUnregistered(this);
+        BannerRegistered bannerRegisteredPanel = new BannerRegistered(this);
+        BannerEmployee bannerEmployeePanel = new BannerEmployee(this);
+        BannerManager bannerManagerPanel = new BannerManager(this);
 
         /* Model */
         Store model = Store.getInstance();
@@ -85,8 +85,7 @@ public class App extends JFrame {
 
         new BannerUnregisteredC(bannerUnregisteredPanel, this);
         new BannerRegisteredC(bannerRegisteredPanel, this);
-        //new BannerEmployeeC(bannerEmployeePanel, this);
-        new BannerEmployee();
+        new BannerEmployeeC(bannerEmployeePanel, this);
         new BannerManagerC(bannerManagerPanel, this);
 
         /* Configure controllers' views */
@@ -133,7 +132,7 @@ public class App extends JFrame {
         /* Main panel */
         changeVisibleBanner("BANNER_UNREGISTERED");
         changeVisibleCard("WELCOME");
-        lastShownPanel = "WELCOME";
+        lastShownPanels.add("WELCOME");
         currentShownPanel = "WELCOME";
 
 //        RegisteredClient rc = new RegisteredClient("taha", "10282634M", "password", true);
@@ -182,12 +181,19 @@ public class App extends JFrame {
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
         getViewFromName(cardName).requestFocusInWindow();
-        lastShownPanel = currentShownPanel;
+        if (currentShownPanel != null) {
+            lastShownPanels.add(currentShownPanel);
+        }
         currentShownPanel = cardName;
     }
 
     public void goBack() {
-        changeVisibleCard(lastShownPanel);
+        if (!lastShownPanels.isEmpty()) {
+            changeVisibleCard(lastShownPanels.getLast());
+            lastShownPanels.remove(lastShownPanels.getLast());
+        } else {
+            System.out.println("Man this code sucks");
+        }
     }
 
     public void changeVisibleBanner(String cardName) {
@@ -211,6 +217,8 @@ public class App extends JFrame {
     }
 
     public void changeCurrentUser(User user) {
+        this.lastShownPanels.clear();
+        this.currentShownPanel = null;
         this.mainUser = user;
     }
 
@@ -238,6 +246,10 @@ public class App extends JFrame {
 
     public EmployeeMainP getEmployeeMainPanel() {
         return employeeMainPanel;
+    }
+
+    public List<String> getLastShownPanels() {
+        return lastShownPanels;
     }
 
     public LoginP getLoginPanel() {

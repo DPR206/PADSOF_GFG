@@ -3,7 +3,7 @@ package controller.bannerControllers;
 import controller.Controller;
 import controller.employeeControllers.*;
 import controller.notifications.NotificacionesC;
-import model.user.Employee;
+import model.user.*;
 import view.App;
 import view.banners.BannerEmployee;
 import view.employeePanels.*;
@@ -14,7 +14,6 @@ import javax.swing.*;
 public class BannerEmployeeC implements Controller {
 
     private BannerEmployee vista;
-    private Employee user;
     private App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -22,38 +21,35 @@ public class BannerEmployeeC implements Controller {
     /**
      *
      * @param vista
-     * @param user
      * @param frame
      */
-    public BannerEmployeeC(BannerEmployee vista, Employee user, App frame) {
+    public BannerEmployeeC(BannerEmployee vista, App frame) {
         this.vista = vista;
-        //this.user = (Employee) frame.getUser();
-        this.user = user;
         this.frame = frame;
         filtrarBotones();
         initializeActions();
     }
 
     private void filtrarBotones() {
+        if (frame.getUser().getType() == UserType.EMPLOYEE) {
+            if (((Employee) frame.getUser()).getSp() != null) {
+                vista.getTienda().setVisible(true);
+            } else {
+                vista.getTienda().setVisible(false);
+            }
 
-        if (user.getSp() != null) {
-            vista.getTienda().setVisible(true);
-        } else {
-            vista.getTienda().setVisible(false);
+            if (((Employee) frame.getUser()).getOp() != null) {
+                vista.getBtnCarrito().setVisible(true);
+            } else {
+                vista.getBtnCarrito().setVisible(false);
+            }
+
+            if (((Employee) frame.getUser()).getEp() != null) {
+                vista.getIntercambios().setVisible(true);
+            } else {
+                vista.getIntercambios().setVisible(false);
+            }
         }
-
-        if (user.getOp() != null) {
-            vista.getBtnCarrito().setVisible(true);
-        } else {
-            vista.getBtnCarrito().setVisible(false);
-        }
-
-        if (user.getEp() != null) {
-            vista.getIntercambios().setVisible(true);
-        } else {
-            vista.getIntercambios().setVisible(false);
-        }
-
     }
 
     private void abrirWelcome() {
@@ -111,7 +107,7 @@ public class BannerEmployeeC implements Controller {
 
         EmployeeProfile profile = new EmployeeProfile();
 
-        new EmployeeProfileC(profile, user);
+        new EmployeeProfileC(profile, ((Employee) frame.getUser()));
 
         profile.setVisible(true);
     }
@@ -148,8 +144,17 @@ public class BannerEmployeeC implements Controller {
         });
 
         vista.getBtnExit().addActionListener(e -> {
+            this.frame.changeCurrentUser(new UnregisteredClient(true));
             abrirWelcome();
         });
+
+        vista.getBtnGoBack().addActionListener(e -> {
+            goBack();
+        });
+    }
+
+    private void goBack() {
+        frame.goBack();
     }
 
 }

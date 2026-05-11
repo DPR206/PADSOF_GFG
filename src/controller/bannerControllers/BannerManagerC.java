@@ -4,6 +4,7 @@ import controller.Controller;
 import controller.managerControllers.ManagerProfileC;
 import model.store.Store;
 import model.user.Manager;
+import model.user.UnregisteredClient;
 import view.App;
 import view.banners.BannerManager;
 import view.managerPanels.ManagerProfile;
@@ -76,8 +77,17 @@ public class BannerManagerC implements Controller {
         });
 
         vista.getBtnExit().addActionListener(e -> {
+            this.frame.changeCurrentUser(new UnregisteredClient(true));
             abrirWelcome();
         });
+
+        vista.getBtnGoBack().addActionListener(e -> {
+            goBack();
+        });
+    }
+
+    private void goBack() {
+        frame.goBack();
     }
 
 }

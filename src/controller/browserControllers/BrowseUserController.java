@@ -11,11 +11,13 @@ import model.store.Store;
 import model.user.Employee;
 import model.user.RegisteredClient;
 import view.App;
+import view.browserPanels.BrowseUsersP;
 import view.browserPanels.BrowseWalletOwnersP;
+import view.browserPanels.BrowserPanel;
 
 public class BrowseUserController extends BrowserController<Employee>{
 
-	    public BrowseUserController(App frame, BrowseWalletOwnersP view, Store model) throws BadLocationException {
+	    public BrowseUserController(App frame, BrowserPanel<Employee> view, Store model) throws BadLocationException {
 	        super(frame, view, model);
 
 	        List<RegisteredClient> users = new ArrayList<>(model.getRegisteredClientList());
@@ -24,5 +26,11 @@ public class BrowseUserController extends BrowserController<Employee>{
 
 	        view.paintEverything();
 	    }
+
+		@Override
+		public void setActionsForMiniPanels() {
+			// TODO Auto-generated method stub
+			
+		}
 
 }

@@ -293,11 +293,48 @@ public class Cart implements Serializable {
                     new NotificationEmployeeOrder(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_ORDER);
             notification2.FullNotification(order);
             Store.getInstance().sendNotificationEmployees(notification2);
-
-            /* Para después del lunes, comprobar si el formato es correcto, y si no, retorno false */
         } catch (InputMismatchException e) {
             System.out.println("Error: El tipo de dato introducido no es válido.");
         }
+
+        this.packs.clear();
+        this.sp.clear();
+
+        return true;
+    }
+    
+    /**
+     * It pays the cart
+     * @return true if the cart was paid, if not a message will be printed
+     * @throws InvalidCardNumberException        the card number wasn't valid
+     * @throws FailedInternetConnectionException the Internet connection failed
+     * @throws OrderRejectedException            the order was rejected
+     */
+    public boolean payOrder(String numeroTarjeta)
+            throws InvalidCardNumberException, FailedInternetConnectionException, OrderRejectedException {
+
+        double price = this.calculatePrice();
+
+        
+            System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
+            TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
+
+            Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
+
+            Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
+                    new ArrayList<>(this.packs.keySet()), this.owner);
+            this.owner.getOrderHistory().addOrder(order);
+
+            NotificationOrder notification =
+                    new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
+            notification.FullNotification(order);
+            this.owner.getNotificationHistory().addNotification(notification);
+            this.owner.increaseNumOrders();
+
+            NotificationEmployeeOrder notification2 =
+                    new NotificationEmployeeOrder(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_ORDER);
+            notification2.FullNotification(order);
+            Store.getInstance().sendNotificationEmployees(notification2);
 
         this.packs.clear();
         this.sp.clear();
@@ -406,6 +443,14 @@ public class Cart implements Serializable {
      */
     public void printPackListPage(int pageNum) {
         Pager.getInstance().printPackListPage(this.getPacks(), pageNum);
+    }
+    
+    /**
+     * Empty the cart
+     */
+    public void emptyCart() {
+    	this.sp.clear();
+    	this.packs.clear();
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

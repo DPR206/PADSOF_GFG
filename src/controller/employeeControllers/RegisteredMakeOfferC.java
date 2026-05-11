@@ -1,5 +1,6 @@
 package controller.employeeControllers;
 
+import controller.Controller;
 import controller.browserControllers.BrowseSecondHandProductsC;
 import controller.browserControllers.BrowseWalletOwnersC;
 import model.store.Store;
@@ -7,10 +8,8 @@ import view.App;
 import view.clientPanels.RegisteredMakeOfferP;
 
 import javax.swing.text.BadLocationException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class RegisteredMakeOfferC implements ActionListener {
+public class RegisteredMakeOfferC implements Controller {
     private final RegisteredMakeOfferP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -21,37 +20,38 @@ public class RegisteredMakeOfferC implements ActionListener {
         this.view = view;
         this.model = model;
 
-        setActionsForMiniPanels();
+        initializeActions();
+        initializeActionsForMiniPanels();
     }
 
-    public void setActionsForMiniPanels() throws BadLocationException {
+    public void initializeActionsForMiniPanels() throws BadLocationException {
         new BrowseWalletOwnersC(frame, view.getBrowseWalletOwnersP(), model);
         new BrowseSecondHandProductsC(frame, view.getBrowseSecondHandProductsP(), model);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Browse available products")) {
+    public void initializeActions() {
+        view.getBrowseAvailableProducts().addActionListener(e -> {
             view.getBrowseWalletOwnersP().setVisible(false);
             view.getBrowseSecondHandProductsP().setVisible(true);
             try {
-                view.getBrowseSecondHandProductsP().setCurrentPageNum(1);
+                //view.getBrowseSecondHandProductsP().setCurrentPageNum(1);
+                initializeActionsForMiniPanels();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-        } else if (e.getActionCommand().equals("Browse users")) {
+        });
+
+        view.getBrowseUsers().addActionListener(e -> {
             view.getBrowseSecondHandProductsP().setVisible(false);
             view.getBrowseWalletOwnersP().setVisible(true);
             try {
-                view.getBrowseWalletOwnersP().setCurrentPageNum(1);
+                //view.getBrowseWalletOwnersP().setCurrentPageNum(1);
+                initializeActionsForMiniPanels();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-        }
-        try {
-            setActionsForMiniPanels();
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
+        });
+
     }
 }

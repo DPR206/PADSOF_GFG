@@ -1,5 +1,6 @@
 package controller.miniControllers;
 
+import controller.Controller;
 import controller.browserControllers.MixedBrowserController;
 import model.product.Pack;
 import model.product.StoreProduct;
@@ -12,9 +13,10 @@ import view.miniPanels.StoreProductMiniP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class StoreProductMiniC implements ActionListener {
+public class StoreProductMiniC implements Controller {
     private final StoreProductMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -37,6 +39,11 @@ public class StoreProductMiniC implements ActionListener {
         this.browserController = browserController;
         this.browserPanel = browserPanel;
 
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
         view.addMouseListener(new MouseAdapter() {
@@ -54,11 +61,8 @@ public class StoreProductMiniC implements ActionListener {
                 }
             }
         });
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Add to Cart")) {
+        view.getButton().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
                 ((RegisteredClient) frame.getUser()).addCart(view.getStoreProduct());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
@@ -71,8 +75,7 @@ public class StoreProductMiniC implements ActionListener {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.setActions();
-        }
-
+            browserController.initializeActionsForMiniPanels();
+        });
     }
 }

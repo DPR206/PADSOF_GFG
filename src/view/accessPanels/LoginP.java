@@ -3,7 +3,6 @@ package view.accessPanels;
 import view.ImageAdder;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 /**
  * It implements the log-in panel view
@@ -43,6 +42,9 @@ public class LoginP extends JPanel {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+    public JButton getLogin() {
+        return login;
+    }
 
     /**
      * It gets this panel's inputted password
@@ -52,27 +54,15 @@ public class LoginP extends JPanel {
         return new String(password.getPassword());
     }
 
+    public JPasswordField getPasswordField() {
+        return password;
+    }
+
     /**
      * It gets this panel's inputted username
      * @return this panel's inputted username
      */
     public String getUsername() {
         return username.getText();
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        login.addActionListener(c);
-    }
-
-    public JPasswordField getPasswordField() {
-        return password;
-    }
-
-    public JButton getLogin() {
-        return login;
     }
 }

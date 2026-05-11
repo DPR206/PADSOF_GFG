@@ -1,41 +1,67 @@
 package view.managerPanels;
 
 import javax.swing.*;
-
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ManagerMainP extends JPanel {
-	/*Botones para administrar cosas*/
-	private JButton packs = new JButton("Packs");
-	private JButton productoNuevo = new JButton("Productos nuevos");
-	private JButton annadirProductos = new JButton("Añadir productos");
-	private JButton empleados = new JButton("Empleados");
-	private JButton estadisticas = new JButton("Estadísticas");
-	private JButton descuentos = new JButton("Descuentos");
-	private JButton parametros = new JButton("Parámetros");
+    /*Botones para administrar cosas*/
+    private JButton packs = new JButton("Packs");
+    private JButton productoNuevo = new JButton("Productos nuevos");
+    private JButton annadirProductos = new JButton("Añadir productos");
+    private JButton empleados = new JButton("Empleados");
+    private JButton estadisticas = new JButton("Estadísticas");
+    private JButton descuentos = new JButton("Descuentos");
+    private JButton parametros = new JButton("Parámetros");
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerMainP() {
-    	super();
-    	this.setLayout(new BorderLayout());
+        super();
+        this.setLayout(new BorderLayout());
 
-    	//ahora el cacho principal
+        //ahora el cacho principal
 
-    	JPanel cosoDeBotones = new JPanel();
+        JPanel cosoDeBotones = new JPanel();
 
-    	//añadimos los botoncitos
-    	cosoDeBotones.setLayout(new GridLayout(2, 6));
-    	cosoDeBotones.add(this.packs);
-    	cosoDeBotones.add(this.productoNuevo);
-    	cosoDeBotones.add(this.annadirProductos);
-    	cosoDeBotones.add(this.empleados);
-    	cosoDeBotones.add(this.estadisticas);
-    	cosoDeBotones.add(this.descuentos);
-    	cosoDeBotones.add(this.parametros);
+        //añadimos los botoncitos
+        cosoDeBotones.setLayout(new GridLayout(2, 6));
+        cosoDeBotones.add(this.packs);
+        cosoDeBotones.add(this.productoNuevo);
+        cosoDeBotones.add(this.annadirProductos);
+        cosoDeBotones.add(this.empleados);
+        cosoDeBotones.add(this.estadisticas);
+        cosoDeBotones.add(this.descuentos);
+        cosoDeBotones.add(this.parametros);
 
-    	this.add(cosoDeBotones, BorderLayout.CENTER);
+        this.add(cosoDeBotones, BorderLayout.CENTER);
+    }
+
+    public JButton getAnnadirProductos() {
+        return annadirProductos;
+    }
+
+    public JButton getDescuentos() {
+        return descuentos;
+    }
+
+    public JButton getEmpleados() {
+        return empleados;
+    }
+
+    public JButton getEstadisticas() {
+        return estadisticas;
+    }
+
+    public JButton getPacks() {
+        return packs;
+    }
+
+    public JButton getParametros() {
+        return parametros;
+    }
+
+    public JButton getProductoNuevo() {
+        return productoNuevo;
     }
 
     /**

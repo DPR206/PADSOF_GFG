@@ -6,7 +6,6 @@ import view.miniPanels.MiniPanel;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,8 +102,9 @@ public abstract class BrowserPanel<G> extends JPanel {
      * Sets item list.
      * @param newItemList the new item list
      */
-    public void setItemList(List<G> newItemList) {
+    public void setItemList(List<G> newItemList) throws BadLocationException {
         this.itemList = newItemList;
+        this.paintEverything();
     }
 
     public JButton getLastPage() {
@@ -174,19 +174,23 @@ public abstract class BrowserPanel<G> extends JPanel {
         return previousPage;
     }
 
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        if (itemList != null) {
-            for (MiniPanel miniPanel : miniPanels) {
-                miniPanel.setController(c);
+    @Override
+    public void setVisible(boolean aFlag) {
+        if (aFlag != isVisible()) {
+            super.setVisible(aFlag);
+            if (aFlag) {
+                Container parent = getParent();
+                if (parent != null) {
+                    Rectangle r = getBounds();
+                    parent.repaint(r.x, r.y, r.width, r.height);
+                }
+                revalidate();
+                try {
+                    setCurrentPageNum(1);
+                } catch (BadLocationException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
-        firstPage.addActionListener(c);
-        previousPage.addActionListener(c);
-        nextPage.addActionListener(c);
-        lastPage.addActionListener(c);
     }
 }

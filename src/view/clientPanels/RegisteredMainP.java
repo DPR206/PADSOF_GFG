@@ -5,7 +5,6 @@ import view.browserPanels.BrowseStoreP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class RegisteredMainP extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -147,12 +146,6 @@ public class RegisteredMainP extends JPanel {
 
     public void setSecondHand(JButton newSecondHand) {
         this.secondHand = newSecondHand;
-    }
-
-    public void setController(ActionListener e) {
-        this.filters.addActionListener(e);
-        this.search.addActionListener(e);
-
     }
 
     public void setPanelInferior(JPanel panel, String nombre) {

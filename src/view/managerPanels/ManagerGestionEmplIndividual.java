@@ -1,36 +1,26 @@
 package view.managerPanels;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+public class ManagerGestionEmplIndividual extends JPanel {
 
-public class ManagerGestionEmplIndividual extends JPanel{
+    private JCheckBox storePerm = new JCheckBox("Trabajar con productos");
+    private JCheckBox orderPerm = new JCheckBox("Trabajar con pedidos");
+    private JCheckBox exchangePerm = new JCheckBox("Trabajar con intercambios");
+    private JTextField userName = new JTextField();
+    private JTextField pwd = new JTextField();
+    private JButton confirmar = new JButton("CONFIRMAR");
 
-	private JCheckBox storePerm = new JCheckBox("Trabajar con productos");
-	private JCheckBox orderPerm = new JCheckBox("Trabajar con pedidos");
-	private JCheckBox exchangePerm = new JCheckBox("Trabajar con intercambios");
-	private JTextField userName = new JTextField();
-	private JTextField pwd = new JTextField();
-	private JButton confirmar = new JButton("CONFIRMAR");
+/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public ManagerGestionEmplIndividual() {
 
-	public ManagerGestionEmplIndividual() {
+        super();
 
-		super();
+        this.setLayout(new BorderLayout());
 
-		this.setLayout(new BorderLayout());
-
-		JPanel panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -72,26 +62,32 @@ public class ManagerGestionEmplIndividual extends JPanel{
 
         this.add(panel, BorderLayout.CENTER);
     }
-	
-	public void setController(ActionListener e) {
-		this.confirmar.addActionListener(e);	
-	}
-	public JTextField getUserName() {
-		return this.userName;
-	}
-	
-	public JTextField getPwd() {
-		return this.pwd;
-	}
-	
-	public JCheckBox getStorePerm() {
-		return this.storePerm;
-	}
-	
-	public JCheckBox getExchangePerm() {
-		return this.exchangePerm;
-	}
-	public JCheckBox getOrderPerm() {
-		return this.orderPerm;
-	}
+
+    public JButton getConfirmar() {
+        return confirmar;
+    }
+
+    public JCheckBox getExchangePerm() {
+        return this.exchangePerm;
+    }
+
+    public JCheckBox getOrderPerm() {
+        return this.orderPerm;
+    }
+
+    public JTextField getPwd() {
+        return this.pwd;
+    }
+
+    public JCheckBox getStorePerm() {
+        return this.storePerm;
+    }
+
+    public JTextField getUserName() {
+        return this.userName;
+    }
+
+    public void setController(ActionListener e) {
+        this.confirmar.addActionListener(e);
+    }
 }

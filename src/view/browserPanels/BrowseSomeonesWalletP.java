@@ -3,17 +3,15 @@ package view.browserPanels;
 import model.product.SecondHandProduct;
 import model.user.RegisteredClient;
 import model.user.User;
-import view.App;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.util.List;
 
 import static main.Main.brownColour;
 
 public class BrowseSomeonesWalletP extends BrowserPanel<SecondHandProduct> {
-    User owner;
+    private final User owner;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -33,13 +31,9 @@ public class BrowseSomeonesWalletP extends BrowserPanel<SecondHandProduct> {
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
-
         JLabel title = new JLabel(owner.getUserName() + "'s wallet'");
         title.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
         this.add(title);
-
-        super.setItemList(
-                List.of(((RegisteredClient) owner).getWallet().getProducts())); // DUE: Esto debe darlo el controlador
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());
@@ -51,8 +45,12 @@ public class BrowseSomeonesWalletP extends BrowserPanel<SecondHandProduct> {
 
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
-        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index);
+        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, "Add to Offer", null);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
+    }
+
+    public User getOwner() {
+        return owner;
     }
 }

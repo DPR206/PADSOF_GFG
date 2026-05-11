@@ -7,7 +7,6 @@ import view.miniPanels.MiniPanel;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
  */
 public abstract class MixedBrowserPanel<G, U> extends JPanel {
     private static final long serialVersionUID = 1L;
-	private final JButton firstPage = new JButton("<< First Page");
+    private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
@@ -26,10 +25,10 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     private final BetterPager<U> secondPager = new BetterPager<>();
     private final List<MiniPanel> firstMiniPanels = new ArrayList<>();
     private final List<MiniPanel> secondMiniPanels = new ArrayList<>();
+    protected JPanel containerItems;
     private int currentPageNum;
     private List<G> firstItemList = new ArrayList<>();
     private List<U> secondItemList = new ArrayList<>();
-    protected JPanel containerItems;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -142,8 +141,9 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         return firstItemList;
     }
 
-    public void setFirstItemList(List<G> newFirstItemList) {
+    public void setFirstItemList(List<G> newFirstItemList) throws BadLocationException {
         this.firstItemList = newFirstItemList;
+        this.paintEverything();
     }
 
     /**
@@ -225,8 +225,9 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         return secondItemList;
     }
 
-    public void setSecondItemList(List<U> newSecondItemList) {
+    public void setSecondItemList(List<U> newSecondItemList) throws BadLocationException {
         this.secondItemList = newSecondItemList;
+        this.paintEverything();
     }
 
     /**
@@ -241,20 +242,23 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
         return secondPager;
     }
 
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        for (MiniPanel miniPanel : firstMiniPanels) {
-            miniPanel.setController(c);
+    @Override
+    public void setVisible(boolean aFlag) {
+        if (aFlag != isVisible()) {
+            super.setVisible(aFlag);
+            if (aFlag) {
+                Container parent = getParent();
+                if (parent != null) {
+                    Rectangle r = getBounds();
+                    parent.repaint(r.x, r.y, r.width, r.height);
+                }
+                revalidate();
+                try {
+                    setCurrentPageNum(1);
+                } catch (BadLocationException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
-        for (MiniPanel miniPanel : secondMiniPanels) {
-            miniPanel.setController(c);
-        }
-        firstPage.addActionListener(c);
-        previousPage.addActionListener(c);
-        nextPage.addActionListener(c);
-        lastPage.addActionListener(c);
     }
 }

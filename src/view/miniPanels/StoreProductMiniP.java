@@ -14,20 +14,25 @@ import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
 public class StoreProductMiniP extends MiniPanel {
-    private final JButton addToCart = new JButton("Add to Cart");
+    private static final long serialVersionUID = 1L;
+    private final JButton button;
     private final StoreProduct storeProduct;
     private final JLabel productImage;
     private final JTextPane productInfo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public StoreProductMiniP(StoreProduct product, int index) throws BadLocationException {
+    public StoreProductMiniP(StoreProduct product, int index, String buttonName, String iconPath)
+            throws BadLocationException {
         this.storeProduct = product;
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
 
-        addToCart.setPreferredSize(new Dimension(125, height));
-        addToCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
+        button = new JButton(buttonName);
+        button.setPreferredSize(new Dimension(125, height));
+        if (iconPath != null) {
+            button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
+        }
 
         productImage = getImageLabel(product.getPhoto(), height, height);
         productInfo = new JTextPane();
@@ -62,7 +67,7 @@ public class StoreProductMiniP extends MiniPanel {
         if (product.getStock() == 0) {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
-            addToCart.setEnabled(false);
+            button.setEnabled(false);
         }
         doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
 
@@ -81,9 +86,13 @@ public class StoreProductMiniP extends MiniPanel {
         this.add(indexNum);
         this.add(productImage);
         this.add(productInfo);
-        this.add(addToCart);
+        this.add(button);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+    }
+
+    public JButton getButton() {
+        return button;
     }
 
     public JLabel getProductImage() {
@@ -103,6 +112,6 @@ public class StoreProductMiniP extends MiniPanel {
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        addToCart.addActionListener(c);
+        button.addActionListener(c);
     }
 }

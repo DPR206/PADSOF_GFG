@@ -1,21 +1,24 @@
 package controller.bannerControllers;
 
+import controller.Controller;
 import controller.clientControllers.*;
 import controller.notifications.NotificacionesC;
 import model.user.RegisteredClient;
 import model.user.User;
-import view.*;
+import view.App;
 import view.banners.BannerRegistered;
 import view.clientPanels.*;
 import view.notifications.NotificacionP;
 
 import javax.swing.*;
 
-public class BannerRegisteredC {
+public class BannerRegisteredC implements Controller {
 
     private BannerRegistered vista;
     private User user;
     private App frame;
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      *
@@ -26,34 +29,7 @@ public class BannerRegisteredC {
         this.vista = vista;
         this.user = frame.getUser();
         this.frame = frame;
-        inicializarEventos();
-    }
-
-    private void inicializarEventos() {
-
-        vista.getBtnCarrito().addActionListener(e -> {
-            abrirCarritoDelCliente();
-        });
-
-        vista.getHome().addActionListener(e -> {
-            abrirPaginaPrincipal();
-        });
-
-        vista.getBtnPerfil().addActionListener(e -> {
-            abrirPerfil();
-        });
-
-        vista.getBtnNots().addActionListener(e -> {
-            abrirNots();
-        });
-
-        vista.getCartera().addActionListener(e -> {
-            abrirCartera();
-        });
-
-        vista.getBtnExit().addActionListener(e -> {
-            abrirWelcome();
-        });
+        initializeActions();
     }
 
     private void abrirWelcome() {
@@ -63,7 +39,7 @@ public class BannerRegisteredC {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (respuesta == JOptionPane.YES_OPTION) {
-        	this.frame.updateView("WELCOME", "BANNER_UNREGISTERED");
+            this.frame.updateView("WELCOME", "BANNER_UNREGISTERED");
 
             this.frame.revalidate();
             this.frame.repaint();
@@ -93,7 +69,7 @@ public class BannerRegisteredC {
 
     private void abrirPerfil() {
 
-    	User usuario = frame.getUser();
+        User usuario = frame.getUser();
         RegisteredProfile profile = new RegisteredProfile();
 
         new RegisteredProfileC(profile, (RegisteredClient) usuario);
@@ -110,10 +86,37 @@ public class BannerRegisteredC {
 
         CarritoP carritoVista = new CarritoP();
 
-        new CarritoC(carritoVista, (RegisteredClient) user);
+        new CarritoC(carritoVista, frame);
 
         frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");
 
+    }
+
+    public void initializeActions() {
+
+        vista.getBtnCarrito().addActionListener(e -> {
+            abrirCarritoDelCliente();
+        });
+
+        vista.getHome().addActionListener(e -> {
+            abrirPaginaPrincipal();
+        });
+
+        vista.getBtnPerfil().addActionListener(e -> {
+            abrirPerfil();
+        });
+
+        vista.getBtnNots().addActionListener(e -> {
+            abrirNots();
+        });
+
+        vista.getCartera().addActionListener(e -> {
+            abrirCartera();
+        });
+
+        vista.getBtnExit().addActionListener(e -> {
+            abrirWelcome();
+        });
     }
 }

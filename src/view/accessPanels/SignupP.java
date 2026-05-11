@@ -5,7 +5,6 @@ import view.ImageAdder;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 /**
  * It implements the sign-up panel view
@@ -14,7 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class SignupP extends JPanel {
     private static final long serialVersionUID = 1L;
-	private final JTextField username;
+    private final JTextField username;
     private final JPasswordField password;
     private final JPasswordField password2;
     private final JTextField idNumber;
@@ -121,15 +120,5 @@ public class SignupP extends JPanel {
 
     public String getUsername() {
         return username.getText();
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        idDniType.addActionListener(c);
-        idNieType.addActionListener(c);
-        signup.addActionListener(c);
     }
 }

@@ -22,13 +22,13 @@ public class UserMiniP extends MiniPanel {
      * @param user       the user to be displayed
      * @param buttonName the name of the button for this panel (must match the controller's)
      */
-    public UserMiniP(User user, String buttonName) {
+    public UserMiniP(User user, String buttonName, String iconPath) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.user = user;
 
         JPanel imageAndName = new JPanel();
-        image = ImageAdder.getImageLabel(".\\resources\\app\\default_user.png", 50, 50);
+        image = ImageAdder.getImageLabel(iconPath, 50, 50);
         imageAndName.add(image);
         imageAndName.add(new JLabel(user.getUserName()));
         this.add(imageAndName);
@@ -36,6 +36,14 @@ public class UserMiniP extends MiniPanel {
         this.add(button);
 
         this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
+    }
+
+    public JButton getButton() {
+        return button;
+    }
+
+    public User getUser() {
+        return this.user;
     }
 
     public Component getUserImage() {
@@ -46,9 +54,6 @@ public class UserMiniP extends MiniPanel {
         return (RegisteredClient) user;
     }
 
-    public User getUser() {
-    	return this.user;
-    }
     /**
      * It makes it possible to assign a controller to this panel's components
      * @param c the desired controller

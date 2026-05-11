@@ -31,14 +31,13 @@ public class BrowseWalletOwnersC extends BrowserController<RegisteredClient> {
         List<RegisteredClient> users = new ArrayList<>(model.getRegisteredClientList());
         users.remove(frame.getUser());
         view.setItemList(users);
-
-        view.paintEverything();
+        super.initializeActions();
     }
 
     @Override
-    public void setActionsForMiniPanels() {
+    public void initializeActionsForMiniPanels() {
         for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
-            miniPanel.setController(new WalletOwnerMiniC(super.getFrame(), super.getModel(), (UserMiniP) miniPanel));
+            new WalletOwnerMiniC(super.getFrame(), super.getModel(), (UserMiniP) miniPanel);
         }
     }
 }

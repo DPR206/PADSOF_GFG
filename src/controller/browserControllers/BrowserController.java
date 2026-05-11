@@ -1,5 +1,6 @@
 package controller.browserControllers;
 
+import controller.Controller;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowserPanel;
@@ -9,7 +10,7 @@ import javax.swing.text.BadLocationException;
 /**
  * It defines a controller for a BrowserPanel
  */
-public abstract class BrowserController<G> {
+public abstract class BrowserController<G> implements Controller {
     private final BrowserPanel<G> view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -26,9 +27,50 @@ public abstract class BrowserController<G> {
         this.frame = frame;
         this.view = view;
         this.model = model;
-
-        setActions();
     }
+
+    @Override
+    public void initializeActions() {
+        initializeActionsForMiniPanels();
+
+        view.getFirstPage().addActionListener(e -> {
+            try {
+                view.setCurrentPageNum(1);
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            initializeActionsForMiniPanels();
+        });
+
+        view.getPreviousPage().addActionListener(e -> {
+            try {
+                view.setCurrentPageNum(view.getCurrentPageNum() - 1);
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            initializeActionsForMiniPanels();
+        });
+
+        view.getNextPage().addActionListener(e -> {
+            try {
+                view.setCurrentPageNum(view.getCurrentPageNum() + 1);
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            initializeActionsForMiniPanels();
+        });
+
+        view.getLastPage().addActionListener(e -> {
+            try {
+                view.setCurrentPageNum(view.getMaxPageNum());
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            initializeActionsForMiniPanels();
+        });
+    }
+
+    public abstract void initializeActionsForMiniPanels();
 
     public App getFrame() {
         return frame;
@@ -41,46 +83,4 @@ public abstract class BrowserController<G> {
     public BrowserPanel<G> getView() {
         return view;
     }
-
-    public void setActions() {
-        setActionsForMiniPanels();
-
-        view.getFirstPage().addActionListener(e -> {
-            try {
-                view.setCurrentPageNum(1);
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            setActionsForMiniPanels();
-        });
-
-        view.getPreviousPage().addActionListener(e -> {
-            try {
-                view.setCurrentPageNum(view.getCurrentPageNum() - 1);
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            setActionsForMiniPanels();
-        });
-
-        view.getNextPage().addActionListener(e -> {
-            try {
-                view.setCurrentPageNum(view.getCurrentPageNum() + 1);
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            setActionsForMiniPanels();
-        });
-
-        view.getLastPage().addActionListener(e -> {
-            try {
-                view.setCurrentPageNum(view.getMaxPageNum());
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            setActionsForMiniPanels();
-        });
-    }
-
-    public abstract void setActionsForMiniPanels();
 }

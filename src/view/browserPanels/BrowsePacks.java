@@ -1,8 +1,6 @@
 package view.browserPanels;
 
 import model.product.Pack;
-import model.store.Store;
-import view.App;
 import view.miniPanels.PackMiniP;
 
 import javax.swing.*;
@@ -11,10 +9,14 @@ import javax.swing.text.BadLocationException;
 import static main.Main.brownColour;
 
 public class BrowsePacks extends BrowserPanel<Pack> {
+    private final String buttonName;
+    private final String iconPath;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public BrowsePacks() throws BadLocationException {
+    public BrowsePacks(String buttonName, String... iconPath) throws BadLocationException {
         super();
+        this.buttonName = buttonName;
+        this.iconPath = iconPath[0];
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();
     }
@@ -22,9 +24,6 @@ public class BrowsePacks extends BrowserPanel<Pack> {
     @Override
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-
-
-        super.setItemList(Store.getInstance().getPacks()); // DUE: Esto debe darlo el controlador
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());
@@ -37,7 +36,7 @@ public class BrowsePacks extends BrowserPanel<Pack> {
 
     @Override
     public void addMiniPanel(Pack item, int index) throws BadLocationException {
-        PackMiniP miniPack = new PackMiniP(item, index);
+        PackMiniP miniPack = new PackMiniP(item, index, buttonName, iconPath);
         super.addMiniPanel(miniPack);
         this.add(miniPack);
     }

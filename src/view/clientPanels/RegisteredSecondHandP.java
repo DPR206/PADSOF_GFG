@@ -2,19 +2,17 @@ package view.clientPanels;
 
 import model.product.SecondHandProduct;
 import view.App;
-import view.ControllableJPanel;
 
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 import static view.ImageAdder.getImageLabel;
 
 /**
  * Zoom view of a second hand product with customizable button
  */
-public class RegisteredSecondHandP extends ControllableJPanel {
+public class RegisteredSecondHandP extends JPanel {
     private final App app;
     private final JTextPane productInfo;
     private final SecondHandProduct product;
@@ -76,10 +74,5 @@ public class RegisteredSecondHandP extends ControllableJPanel {
 
         this.revalidate();
         this.repaint();
-    }
-
-    @Override
-    public void setController(ActionListener c) {
-
     }
 }

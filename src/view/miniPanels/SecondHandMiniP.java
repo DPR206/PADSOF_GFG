@@ -9,22 +9,27 @@ import java.awt.event.ActionListener;
 
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
+import static view.ImageAdder.getScaledImage;
 
 public class SecondHandMiniP extends MiniPanel {
-    private final JButton addToOffer = new JButton("Add to Offer");
+    private final JButton button;
     private final SecondHandProduct secondHandProduct;
     private final JLabel productImage;
     private final JTextPane productInfo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public SecondHandMiniP(SecondHandProduct product, int index) throws BadLocationException {
+    public SecondHandMiniP(SecondHandProduct product, int index, String buttonName, String iconPath)
+            throws BadLocationException {
         this.secondHandProduct = product;
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
 
-        addToOffer.setPreferredSize(new Dimension(125, height));
-        //addToOffer.setIcon(getScaledImage(new ImageIcon(".\\resources\\cart.png"), height / 4, height / 4));
+        button = new JButton(buttonName);
+        button.setPreferredSize(new Dimension(125, height));
+        if (iconPath != null) {
+            button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
+        }
 
         productImage = getImageLabel(product.getPhoto(), height, height);
         productInfo = new JTextPane();
@@ -44,12 +49,6 @@ public class SecondHandMiniP extends MiniPanel {
         doc.insertString(doc.getLength(), ("Valuation: " + String.format("%.2f", product.getPrice()) + " €\n"),
                 attributes);
 
-        /*if (product.getStock() == 0) {
-            StyleConstants.setForeground(attributes, Color.RED);
-            StyleConstants.setItalic(attributes, true);
-        }
-        doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);*/
-
         productInfo.setPreferredSize(new Dimension(width, height));
 
         JTextPane indexNum = new JTextPane();
@@ -65,9 +64,13 @@ public class SecondHandMiniP extends MiniPanel {
         this.add(indexNum);
         this.add(productImage);
         this.add(productInfo);
-        this.add(addToOffer);
+        this.add(button);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+    }
+
+    public JButton getButton() {
+        return button;
     }
 
     public JLabel getProductImage() {
@@ -87,6 +90,6 @@ public class SecondHandMiniP extends MiniPanel {
      * @param c the desired controller
      */
     public void setController(ActionListener c) {
-        addToOffer.addActionListener(c);
+        button.addActionListener(c);
     }
 }

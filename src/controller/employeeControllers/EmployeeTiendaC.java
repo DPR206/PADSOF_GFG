@@ -1,11 +1,10 @@
 package controller.employeeControllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import controller.Controller;
 
-public class EmployeeTiendaC implements ActionListener {
+public class EmployeeTiendaC implements Controller {
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void initializeActions() {
 
     }
 }

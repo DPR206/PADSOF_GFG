@@ -1,48 +1,43 @@
 package controller.managerControllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import controller.Controller;
 import view.App;
-import view.managerPanels.ManagerCreateComicP;
-import view.managerPanels.ManagerCreateFiguritaP;
-import view.managerPanels.ManagerCreateGameP;
-import view.managerPanels.ManagerNewProduct;
+import view.managerPanels.*;
 
-public class ManagerNewProductC implements ActionListener{
-	private final ManagerNewProduct panel;
-	private final App frame;
-	private final ManagerCreateComicP managerComic = new ManagerCreateComicP();
-	private final ManagerCreateFiguritaP managerFigura = new ManagerCreateFiguritaP();
-	private final ManagerCreateGameP managerJuego = new ManagerCreateGameP();
+public class ManagerNewProductC implements Controller {
+    private final ManagerNewProduct panel;
+    private final App frame;
+    private final ManagerCreateComicP managerComic = new ManagerCreateComicP();
+    private final ManagerCreateFiguritaP managerFigura = new ManagerCreateFiguritaP();
+    private final ManagerCreateGameP managerJuego = new ManagerCreateGameP();
 
-	public ManagerNewProductC(App app,  ManagerNewProduct panel) {
-		this.frame = app;
-		this.panel = panel;
-		
-		this.managerComic.setController(new ManagerNewComicC(managerComic, app));
-		this.managerFigura.setController(new ManagerNewFigurineC(managerFigura, app));
-		this.managerJuego.setController(new ManagerNewGameC(managerJuego, app));
-	}
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public ManagerNewProductC(App app, ManagerNewProduct panel) {
+        this.frame = app;
+        this.panel = panel;
 
-	@Override
-    public void actionPerformed(ActionEvent e) {
-		switch(e.getActionCommand()) {
+        new ManagerNewComicC(managerComic, app);
+        new ManagerNewFigurineC(managerFigura, app);
+        new ManagerNewGameC(managerJuego, app);
 
-        case "AÑADIR UN CÓMIC":
-        	this.frame.addCard(managerComic, "COMICS");
-        	this.frame.changeVisibleCard("COMICS");
-            break;
+        initializeActions();
+    }
 
-        case "AÑADIR UNA FIGURA":
-        	this.frame.addCard(managerFigura, "FIGURAS");
+    @Override
+    public void initializeActions() {
+        panel.getComics().addActionListener(e -> {
+            this.frame.addCard(managerComic, "COMICS");
+            this.frame.changeVisibleCard("COMICS");
+        });
+
+        panel.getFiguras().addActionListener(e -> {
+            this.frame.addCard(managerFigura, "FIGURAS");
             this.frame.changeVisibleCard("FIGURAS");
-            break;
+        });
 
-        case "AÑADIR UN JUEGO":
-        	this.frame.addCard(managerJuego, "JUEGO");
+        panel.getJuegos().addActionListener(e -> {
+            this.frame.addCard(managerJuego, "JUEGO");
             this.frame.changeVisibleCard("JUEGO");
-            break;
-		}
-	}
+        });
+    }
 }

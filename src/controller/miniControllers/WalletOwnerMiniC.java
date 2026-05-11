@@ -1,5 +1,6 @@
 package controller.miniControllers;
 
+import controller.Controller;
 import controller.browserControllers.BrowseSomeonesWalletC;
 import model.store.Store;
 import view.App;
@@ -9,9 +10,10 @@ import view.miniPanels.UserMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class WalletOwnerMiniC implements ActionListener {
+public class WalletOwnerMiniC implements Controller {
     private final UserMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -28,6 +30,11 @@ public class WalletOwnerMiniC implements ActionListener {
         this.view = view;
         this.model = model;
 
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
         view.getUserImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -35,11 +42,8 @@ public class WalletOwnerMiniC implements ActionListener {
                 }
             }
         });
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Browse Wallet")) {
+        view.getButton().addActionListener(e -> {
             try {
                 BrowseSomeonesWalletP newView = new BrowseSomeonesWalletP(view.getWalletOwner());
                 new BrowseSomeonesWalletC(frame, model, newView);
@@ -52,6 +56,6 @@ public class WalletOwnerMiniC implements ActionListener {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-        }
+        });
     }
 }

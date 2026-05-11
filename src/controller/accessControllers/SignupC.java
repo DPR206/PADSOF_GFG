@@ -7,14 +7,15 @@ import view.App;
 import view.accessPanels.SignupP;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * It implements the sign-up controller
  * @author Ana O.R.
  * @version 1.0
  */
-public class SignupC extends MainLoopSelector implements ActionListener {
+public class SignupC extends MainLoopSelector {
     private final SignupP view; /* view -> panel */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -41,8 +42,8 @@ public class SignupC extends MainLoopSelector implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Sign up")) { /* "Sign up" pressed */
+    public void initializeActions() {
+        view.getSignup().addActionListener(e -> {
             if (view.getIdType() == null) {
                 JOptionPane.showMessageDialog(null, "You must select an idType", "Warning :(",
                         JOptionPane.ERROR_MESSAGE);
@@ -66,6 +67,6 @@ public class SignupC extends MainLoopSelector implements ActionListener {
                     JOptionPane.showMessageDialog(null, exception3.toString(), "Warning :(", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        }
+        });
     }
 }

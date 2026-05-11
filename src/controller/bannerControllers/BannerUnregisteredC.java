@@ -1,17 +1,18 @@
 package controller.bannerControllers;
 
+import controller.Controller;
+import controller.clientControllers.CarritoC;
 import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
-import model.user.UnregisteredClient;
 import model.user.User;
 import view.App;
 import view.banners.BannerUnregistered;
 import view.clientPanels.CarritoP;
-import view.clientPanels.UnregisteredMainP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
-public class BannerUnregisteredC {
+public class BannerUnregisteredC implements Controller {
 
     private BannerUnregistered vista;
     private User user;
@@ -26,16 +27,20 @@ public class BannerUnregisteredC {
         this.vista = vista;
         this.user = frame.getUser();
         this.frame = frame;
-        inicializarEventos();
+        initializeActions();
     }
 
-    private void inicializarEventos() {
+    public void initializeActions() {
         vista.getBtnCarrito().addActionListener(e -> {
             abrirCarritoDelCliente();
         });
 
         vista.getHome().addActionListener(e -> {
-            abrirPaginaPrincipal();
+            try {
+                abrirPaginaPrincipal();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         vista.getBtnPerfil().addActionListener(e -> {
@@ -71,7 +76,7 @@ public class BannerUnregisteredC {
         frame.changeVisibleCard("SIGNUP");
     }
 
-    private void abrirPaginaPrincipal() {
+    private void abrirPaginaPrincipal() throws BadLocationException {
 
         new UnregisteredMainC(frame, Store.getInstance());
 
@@ -80,14 +85,12 @@ public class BannerUnregisteredC {
 
     private void abrirCarritoDelCliente() {
 
-        // 1. Crear la vista del carrito
         CarritoP carritoVista = new CarritoP();
 
-        // 2. Crear el controlador del carrito pasando el usuario actual
-        //new CarritoC(carritoVista, user);
+        new CarritoC(carritoVista, frame);
 
-        // 3. Mostrar la ventana
-        carritoVista.setVisible(true);
+        frame.addCard(carritoVista, "CART");
+        frame.changeVisibleCard("CART");
 
     }
 

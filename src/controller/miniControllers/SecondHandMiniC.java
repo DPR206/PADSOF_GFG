@@ -1,5 +1,6 @@
 package controller.miniControllers;
 
+import controller.Controller;
 import controller.browserControllers.BrowserController;
 import model.product.SecondHandProduct;
 import model.store.Store;
@@ -7,10 +8,7 @@ import view.App;
 import view.browserPanels.BrowserPanel;
 import view.miniPanels.SecondHandMiniP;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public abstract class SecondHandMiniC implements ActionListener {
+public abstract class SecondHandMiniC implements Controller {
     private final SecondHandMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -35,9 +33,6 @@ public abstract class SecondHandMiniC implements ActionListener {
 
         //NOTE: Los mouseListeners y keyListeners los asigna las clases que hereden es esta
     }
-
-    @Override
-    public abstract void actionPerformed(ActionEvent e);
 
     public BrowserController<SecondHandProduct> getBrowserController() {
         return browserController;

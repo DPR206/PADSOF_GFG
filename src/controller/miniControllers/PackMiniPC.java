@@ -1,5 +1,6 @@
 package controller.miniControllers;
 
+import controller.Controller;
 import controller.browserControllers.MixedBrowserController;
 import model.product.Pack;
 import model.product.StoreProduct;
@@ -11,9 +12,10 @@ import view.miniPanels.PackMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class PackMiniPC implements ActionListener {
+public class PackMiniPC implements Controller {
 
     private final PackMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
@@ -31,6 +33,11 @@ public class PackMiniPC implements ActionListener {
         this.browserController = browserController;
         this.browserPanel = browserPanel;
 
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
         view.getPackImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -46,11 +53,8 @@ public class PackMiniPC implements ActionListener {
                 }
             }
         });
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Add to Cart")) {
+        view.getButton().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
                 ((RegisteredClient) frame.getUser()).addCart(view.getPack());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
@@ -63,7 +67,7 @@ public class PackMiniPC implements ActionListener {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.setActions();
-        }
+            browserController.initializeActionsForMiniPanels();
+        });
     }
 }

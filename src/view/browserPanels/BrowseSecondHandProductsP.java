@@ -1,8 +1,6 @@
 package view.browserPanels;
 
 import model.product.SecondHandProduct;
-import model.store.Store;
-import view.App;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
@@ -27,8 +25,6 @@ public class BrowseSecondHandProductsP extends BrowserPanel<SecondHandProduct> {
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
-        super.setItemList(Store.getInstance().getSecondHandProductList()); // DUE: Esto debe darlo el controlador
-
         super.addAllMiniPanels();
         this.add(super.getPageTurner());
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
@@ -39,7 +35,7 @@ public class BrowseSecondHandProductsP extends BrowserPanel<SecondHandProduct> {
 
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
-        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index);
+        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, "Add to Offer", null);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

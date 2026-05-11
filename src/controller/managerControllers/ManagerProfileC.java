@@ -1,63 +1,63 @@
 package controller.managerControllers;
 
-import java.awt.Window;
-
-import javax.swing.SwingUtilities;
-
+import controller.Controller;
 import model.user.Manager;
 import view.App;
 import view.managerPanels.GestorChangePwd;
 import view.managerPanels.ManagerProfile;
 
-public class ManagerProfileC {
+public class ManagerProfileC implements Controller {
 
-	private ManagerProfile vista;
-	private Manager user;
-	private App frame;
-	private boolean passwordRevelada = false;
+    private ManagerProfile vista;
+    private Manager user;
+    private App frame;
+    private boolean passwordRevelada = false;
 
-	/**
-	 * @param vista
-	 * @param user
-	 */
-	public ManagerProfileC(ManagerProfile vista, Manager user, App frame) {
-		this.vista = vista;
-		this.user = user;
-		this.frame = frame;
-		inicializarEventos();
-	}
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
-	private void inicializarEventos() {
+    /**
+     * @param vista
+     * @param user
+     */
+    public ManagerProfileC(ManagerProfile vista, Manager user, App frame) {
+        this.vista = vista;
+        this.user = user;
+        this.frame = frame;
+        initializeActions();
+    }
 
-		vista.setNom(user.getUserName());
+    @Override
+    public void initializeActions() {
 
-		vista.getBtnMostrar().addActionListener(e -> {
-			showPassword();
-		});
+        vista.setNom(user.getUserName());
 
-		vista.getBtnCambiar().addActionListener(e -> {
-			cambiarPwd();
-		});
-	}
+        vista.getBtnMostrar().addActionListener(e -> {
+            showPassword();
+        });
 
-	private void cambiarPwd() {
+        vista.getBtnCambiar().addActionListener(e -> {
+            cambiarPwd();
+        });
+    }
 
-	    GestorChangePwd pagPwd = new GestorChangePwd();
+    private void cambiarPwd() {
 
-	    new GestorChangePwdC(pagPwd, user);
+        GestorChangePwd pagPwd = new GestorChangePwd();
 
-	    frame.addCard(pagPwd, "PROFILE_MANAGER");
-	    frame.changeVisibleCard("PROFILE_MANAGER");
-	}
+        new GestorChangePwdC(pagPwd, user);
 
-	private void showPassword() {
-		if (passwordRevelada) {
-		    vista.setPwd("********");
-		    vista.getBtnMostrar().setText("👁️");
-		} else {
-		    vista.setPwd(user.getPassword());
-		    vista.getBtnMostrar().setText("🔒");
-		}
-		passwordRevelada = !passwordRevelada;
-	}
+        frame.addCard(pagPwd, "PROFILE_MANAGER");
+        frame.changeVisibleCard("PROFILE_MANAGER");
+    }
+
+    private void showPassword() {
+        if (passwordRevelada) {
+            vista.setPwd("********");
+            vista.getBtnMostrar().setText("👁️");
+        } else {
+            vista.setPwd(user.getPassword());
+            vista.getBtnMostrar().setText("🔒");
+        }
+        passwordRevelada = !passwordRevelada;
+    }
 }

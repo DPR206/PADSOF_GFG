@@ -1,33 +1,32 @@
 package controller.miniControllers;
 
-import controller.browserControllers.BrowserController;
+import controller.Controller;
 import controller.browserControllers.MixedBrowserController;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import view.App;
-import view.employeePanels.SPManageIndividualPack;
-import view.browserPanels.BrowserPanel;
 import view.browserPanels.MixedBrowserPanel;
-import view.miniPanels.PackMiniEdit;
+import view.employeePanels.SPManageIndividualPack;
 import view.miniPanels.PackMiniP;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class PackMiniEditC implements ActionListener {
+public class PackMiniEditC implements Controller {
 
     private App frame;
     private Store model;
-    private PackMiniEdit view;
+    private PackMiniP view;
     private MixedBrowserController<Pack, StoreProduct> browserController;
     private MixedBrowserPanel<Pack, StoreProduct> browserPanel;
     private SPManageIndividualPack spm;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniEditC(App frame, Store model, PackMiniEdit view,
-            MixedBrowserController<Pack, StoreProduct> browserController,
-            MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public PackMiniEditC(App frame, Store model, PackMiniP view,
+                         MixedBrowserController<Pack, StoreProduct> browserController,
+                         MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;
@@ -35,6 +34,11 @@ public class PackMiniEditC implements ActionListener {
         this.browserPanel = browserPanel;
         this.spm = new SPManageIndividualPack(this.view.getPack());
 
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
         view.getPackImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -50,13 +54,9 @@ public class PackMiniEditC implements ActionListener {
                 }
             }
         });
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Gestionar")) {
+        view.getButton().addActionListener(e -> {
             //MOSTRAR EL PACK, DUE
-        }
-
+        });
     }
 }

@@ -28,7 +28,11 @@ public class SignupC extends MainLoopSelector {
     public SignupC(App frame, Store model) {
         super(frame, model);
         this.view = frame.getSignupPanel();
+        initializeActions();
+    }
 
+    @Override
+    public void initializeActions() {
         /* Enter to press key */
         view.addKeyListener(new KeyAdapter() {
             @Override
@@ -39,10 +43,6 @@ public class SignupC extends MainLoopSelector {
             }
         });
 
-    }
-
-    @Override
-    public void initializeActions() {
         view.getSignup().addActionListener(e -> {
             if (view.getIdType() == null) {
                 JOptionPane.showMessageDialog(null, "You must select an idType", "Warning :(",

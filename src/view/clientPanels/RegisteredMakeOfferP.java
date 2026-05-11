@@ -20,7 +20,7 @@ public class RegisteredMakeOfferP extends JPanel {
 
         this.add(new JLabel("Select a product:"));
 
-        browseSecondHandProductsP = new BrowseSecondHandProductsP();
+        browseSecondHandProductsP = new BrowseSecondHandProductsP("Add to offer", null);
         browseUsersP = new BrowseWalletOwnersP("Browse Wallet");
 
         this.setLayout(new BorderLayout());

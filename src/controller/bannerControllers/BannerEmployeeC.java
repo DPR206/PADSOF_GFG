@@ -10,6 +10,7 @@ import view.employeePanels.*;
 import view.notifications.NotificacionP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 public class BannerEmployeeC implements Controller {
 
@@ -67,9 +68,9 @@ public class BannerEmployeeC implements Controller {
         }
     }
 
-    private void abrirIntercambios() {
+    private void abrirIntercambios() throws BadLocationException {
 
-        EmployeeExchange pagExchange = new EmployeeExchange();
+        EmployeeExchangePermP pagExchange = new EmployeeExchangePermP(frame);
         new EmployeeExchangeC();
 
         pagExchange.setVisible(true);
@@ -140,7 +141,11 @@ public class BannerEmployeeC implements Controller {
         });
 
         vista.getIntercambios().addActionListener(e -> {
-            abrirIntercambios();
+            try {
+                abrirIntercambios();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         vista.getBtnExit().addActionListener(e -> {

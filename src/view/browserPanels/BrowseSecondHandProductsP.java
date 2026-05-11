@@ -9,14 +9,18 @@ import javax.swing.text.BadLocationException;
 import static main.Main.brownColour;
 
 public class BrowseSecondHandProductsP extends BrowserPanel<SecondHandProduct> {
+    private final String buttonName;
+    private final String iconPath;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
      */
-    public BrowseSecondHandProductsP() throws BadLocationException {
+    public BrowseSecondHandProductsP(String buttonName, String iconPath) throws BadLocationException {
         super();
+        this.buttonName = buttonName;
+        this.iconPath = iconPath;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();
     }
@@ -35,7 +39,7 @@ public class BrowseSecondHandProductsP extends BrowserPanel<SecondHandProduct> {
 
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
-        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, "Add to Offer", null);
+        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, buttonName, iconPath);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

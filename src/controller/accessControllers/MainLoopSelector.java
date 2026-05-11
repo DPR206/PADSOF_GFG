@@ -38,7 +38,6 @@ public abstract class MainLoopSelector implements Controller {
                 this.frame.changeVisibleCard("UNREGISTERED_MAIN");
                 break;
             case REGISTERED_CLIENT:
-                //JOptionPane.showMessageDialog(this.frame, "Welcome Registered Client!");
                 this.frame.changeVisibleBanner("BANNER_REGISTERED");
                 this.frame.changeVisibleCard("REGISTERED_MAIN");
                 break;
@@ -54,7 +53,6 @@ public abstract class MainLoopSelector implements Controller {
                 this.frame.changeVisibleCard("MANAGER_MAIN");
                 break;
             default:
-                JOptionPane.showMessageDialog(frame, "You shouldn't be able to see this, burn the app");
                 break;
         }
     }

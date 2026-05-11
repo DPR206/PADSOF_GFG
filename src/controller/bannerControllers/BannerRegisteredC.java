@@ -1,21 +1,26 @@
 package controller.bannerControllers;
 
 import controller.Controller;
-import controller.clientControllers.*;
+import controller.browserControllers.BrowseMyWalletC;
+import controller.clientControllers.CarritoC;
+import controller.clientControllers.RegisteredProfileC;
 import controller.notifications.NotificacionesC;
+import model.store.Store;
 import model.user.RegisteredClient;
 import model.user.User;
 import view.App;
 import view.banners.BannerRegistered;
-import view.clientPanels.*;
+import view.browserPanels.BrowseMyWalletP;
+import view.clientPanels.CarritoP;
+import view.clientPanels.RegisteredProfile;
 import view.notifications.NotificacionP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 public class BannerRegisteredC implements Controller {
 
     private BannerRegistered vista;
-    private User user;
     private App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -27,7 +32,6 @@ public class BannerRegisteredC implements Controller {
      */
     public BannerRegisteredC(BannerRegistered vista, App frame) {
         this.vista = vista;
-        this.user = frame.getUser();
         this.frame = frame;
         initializeActions();
     }
@@ -46,11 +50,14 @@ public class BannerRegisteredC implements Controller {
         }
     }
 
-    private void abrirCartera() {
+    private void abrirCartera() throws BadLocationException {
 
-        RegisteredWalletP pagWallet = new RegisteredWalletP((RegisteredClient) user);
+//        RegisteredWalletP pagWallet = new RegisteredWalletP((RegisteredClient) frame.getUser());
+//
+//        new RegisteredWalletC(pagWallet, (RegisteredClient) frame.getUser());
 
-        new RegisteredWalletC(pagWallet, (RegisteredClient) user);
+        BrowseMyWalletP pagWallet = new BrowseMyWalletP((RegisteredClient) frame.getUser());
+        new BrowseMyWalletC(frame, Store.getInstance(), pagWallet);
 
         frame.addCard(pagWallet, "WALLET");
         frame.changeVisibleCard("WALLET");
@@ -112,7 +119,11 @@ public class BannerRegisteredC implements Controller {
         });
 
         vista.getCartera().addActionListener(e -> {
-            abrirCartera();
+            try {
+                abrirCartera();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         vista.getBtnExit().addActionListener(e -> {

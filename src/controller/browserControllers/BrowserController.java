@@ -27,6 +27,8 @@ public abstract class BrowserController<G> implements Controller {
         this.frame = frame;
         this.view = view;
         this.model = model;
+
+        initializeActions();
     }
 
     @Override

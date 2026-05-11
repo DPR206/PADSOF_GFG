@@ -16,7 +16,6 @@ public class BrowseEmployeesC extends BrowserController<User> { //DUE
      */
     BrowseEmployeesC(App frame, BrowseUsersP view, Store model) {
         super(frame, view, model);
-        super.initializeActions();
     }
 
     @Override

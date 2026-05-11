@@ -2,7 +2,7 @@ package view.browserPanels;
 
 import model.product.SecondHandProduct;
 import model.user.RegisteredClient;
-import view.miniPanels.SecondHandMiniP;
+import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -42,7 +42,9 @@ public class BrowseMyWalletP extends BrowserPanel<SecondHandProduct> {
 
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
-        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, "Add to Offer", null);
+        ThreeButtonSecondHandMiniP miniProduct =
+                new ThreeButtonSecondHandMiniP(item, index, "Add to Offer", null, "Request valuation", null,
+                        "Remove from wallet", null);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

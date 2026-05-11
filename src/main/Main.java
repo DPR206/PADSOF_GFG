@@ -39,6 +39,20 @@ public class Main {
 //                        Manager.getInstance().addEmployee("emp789", "carol", Permission.EXCHANGE);
 //                    } Ya están metidos
 
+//                    ((RegisteredClient) Store.getInstance().getUsers().get("taha")).getWallet().getProducts().get(0)
+//                                                                                   .valuate(5,
+//                                                                                           ConservationStatus.SLIGHTLY_USED);
+//                    ((RegisteredClient) Store.getInstance().getUsers().get("taha")).getWallet().getProducts().get(1)
+//                                                                                   .valuate(7.6,
+//                                                                                           ConservationStatus.PERFECT);
+//                    ((RegisteredClient) Store.getInstance().getUsers().get("taha")).getWallet().getProducts().get(2)
+//                                                                                   .valuate(1.23,
+//                                                                                           ConservationStatus.VERY_GOOD);
+//
+//                    ((RegisteredClient) Store.getInstance().getUsers().get("martin")).getWallet().getProducts().get(0)
+//                                                                                     .valuate(2,
+//                                                                                             ConservationStatus.DAMAGED);
+
                     new App().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

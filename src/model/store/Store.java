@@ -322,7 +322,7 @@ public class Store implements Serializable {
      */
     public void addUser(User s) {
         this.users.put(s.getUserName(), s);
-        if (s.getType() == UserType.REGISTERED_CLIENT){
+        if (s.getType() == UserType.REGISTERED_CLIENT) {
             this.registeredClients.put(s.getUserName(), (RegisteredClient) s);
         }
     }
@@ -392,6 +392,11 @@ public class Store implements Serializable {
         }
     }
 
+    public void addEmployee(Employee emp) {
+        this.employees.put(emp.getId(), emp);
+        this.users.put(emp.getUserName(), emp);
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
     /**
@@ -401,6 +406,13 @@ public class Store implements Serializable {
      */
     public boolean isCategoryInStore(String name) {
         return this.categories.containsKey(name);
+    }
+
+    public List<SecondHandProduct> getAvailableSecondHandProductList() {
+        List<SecondHandProduct> allProducts = new ArrayList<>(this.secondHandProducts.values());
+        allProducts.removeIf(SecondHandProduct::isRemoved);
+        allProducts.removeIf(product -> !product.isAvailable());
+        return allProducts;
     }
 
     /**
@@ -544,6 +556,14 @@ public class Store implements Serializable {
      */
     public Manager getManager() {
         return this.manager;
+    }
+
+    /**
+     * Sets the manager
+     * @param manager the manager to set
+     */
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     /**
@@ -741,11 +761,7 @@ public class Store implements Serializable {
     public HashMap<String, StoreProduct> getStoreProducts() {
         return this.storeProducts;
     }
-    
-    public void addEmployee(Employee emp) {
-    	this.employees.put(emp.getId(), emp);
-    	this.users.put(emp.getUserName(), emp);
-    }
+
     /**
      * Gets the list of the users of the store
      * @return a map of the users and their names
@@ -762,13 +778,4 @@ public class Store implements Serializable {
         return utility;
     }
 
-	/**
-	 * Sets the manager
-	 * @param manager the manager to set
-	 */
-	public void setManager(Manager manager) {
-		this.manager = manager;
-	}
-    
-    
 }

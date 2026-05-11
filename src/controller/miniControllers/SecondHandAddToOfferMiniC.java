@@ -1,5 +1,6 @@
 package controller.miniControllers;
 
+import controller.Controller;
 import controller.browserControllers.BrowserController;
 import controller.clientControllers.RegisteredSecondHandC;
 import model.product.SecondHandProduct;
@@ -16,7 +17,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class SecondHandAddToOfferMiniC extends SecondHandMiniC {
+public class SecondHandAddToOfferMiniC implements Controller {
+    private final SecondHandMiniP view; /* view -> panel */
+    private final App frame; /* view -> frame */
+    private final Store model; /* model */
+    private final BrowserController<SecondHandProduct> browserController;
+    private final BrowserPanel<SecondHandProduct> browserPanel;
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
@@ -30,16 +36,17 @@ public class SecondHandAddToOfferMiniC extends SecondHandMiniC {
     public SecondHandAddToOfferMiniC(App frame, Store model, SecondHandMiniP view,
                                      BrowserController<SecondHandProduct> browserController,
                                      BrowserPanel<SecondHandProduct> browserPanel) {
-        super(frame, model, view, browserController, browserPanel);
+        this.frame = frame;
+        this.view = view;
+        this.model = model;
+        this.browserController = browserController;
+        this.browserPanel = browserPanel;
 
         initializeActions();
     }
 
     @Override
     public void initializeActions() {
-        App frame = super.getFrame();
-        Store model = super.getModel();
-        SecondHandMiniP view = super.getView();
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
         view.addMouseListener(new MouseAdapter() {
@@ -100,17 +107,17 @@ public class SecondHandAddToOfferMiniC extends SecondHandMiniC {
             }
         });
 
-        super.getView().getButton().addActionListener(e -> {
+        view.getButton().addActionListener(e -> {
             //DUE: Aceptar oferta
-            JOptionPane.showMessageDialog(super.getFrame(),
-                    super.getView().getSecondHandProduct().getName() + " was " + "added to " + "the Offer",
-                    "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame,
+                    view.getSecondHandProduct().getName() + " was " + "added to " + "the Offer", "Added To Offer",
+                    JOptionPane.INFORMATION_MESSAGE);
             try {
-                super.getBrowserPanel().paintEverything();
+                browserPanel.paintEverything();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            super.getBrowserController().initializeActionsForMiniPanels();
+            browserController.initializeActionsForMiniPanels();
         });
     }
 }

@@ -2,9 +2,7 @@ package controller.clientControllers;
 
 import controller.Controller;
 import controller.browserControllers.BrowseStoreC;
-import controller.employeeControllers.RegisteredMakeOfferC;
 import model.store.Store;
-import model.user.RegisteredClient;
 import view.App;
 import view.clientPanels.RegisteredMainP;
 
@@ -16,34 +14,21 @@ public class RegisteredMainC implements Controller {
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public RegisteredMainC(App frame, Store model) throws BadLocationException {
+    public RegisteredMainC(App frame, Store model) {
         this.frame = frame;
         this.view = frame.getRegisteredMainPanel();
         this.model = model;
 
         initializeActions();
-        linkControllers();
     }
 
     public void initializeActions() {
-        //this.frame.changeVisibleBanner("BANNER_REGISTERED");
-        try {
-            this.view.getBrowsePanel().setFirstItemList(model.getPacks());
-            this.view.getBrowsePanel().setSecondItemList(model.getStoreProductList());
-        } catch (BadLocationException ex) {
-            ex.printStackTrace();
-        }
         this.view.getCardLayout().show(this.view.getBottom(), "Search");
+        linkControllers();
 
         view.getSearch().addActionListener(e -> {
-            try {
-                this.view.getBrowsePanel()
-                         .setSecondItemList(((RegisteredClient) this.frame.getUser()).searchStoreProduct());
-                //view.getBrowsePanel().setCurrentPageNum(1);
-            } catch (BadLocationException ex) {
-                ex.printStackTrace();
-            }
             this.view.getCardLayout().show(this.view.getBottom(), "Search");
+            linkControllers();
         });
 
         view.getFilters().addActionListener(e -> {
@@ -52,11 +37,16 @@ public class RegisteredMainC implements Controller {
 
         view.getSecondHand().addActionListener(e -> {
             this.view.getCardLayout().show(this.view.getBottom(), "Second Hand");
+            linkControllers();
         });
     }
 
-    public void linkControllers() throws BadLocationException {
-        new BrowseStoreC(frame, model, view.getBrowsePanel());
+    public void linkControllers() {
+        try {
+            new BrowseStoreC(frame, model, view.getBrowsePanel());
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
         new SearcherC(frame, model, view.getFilterPanel());
         new RegisteredMakeOfferC(frame, model, view.getMakeOfferP());
     }

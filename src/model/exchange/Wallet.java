@@ -4,7 +4,7 @@ import model.product.SecondHandProduct;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * It implements the wallet
@@ -63,12 +63,23 @@ public class Wallet implements Serializable {
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
+    public List<SecondHandProduct> getAvailableProducts() {
+        List<SecondHandProduct> allProducts =
+                new ArrayList<>(List.of(products.values().toArray(new SecondHandProduct[0])));
+        allProducts.removeIf(SecondHandProduct::isRemoved);
+        allProducts.removeIf(product -> !product.isAvailable());
+        return allProducts;
+    }
+
     /**
      * Gets the wallet's products
      * @return the wallet's products
      */
-    public SecondHandProduct[] getProducts() {
-        return products.values().toArray(new SecondHandProduct[0]);
+    public List<SecondHandProduct> getProducts() {
+        List<SecondHandProduct> allProducts =
+                new ArrayList<>(List.of(products.values().toArray(new SecondHandProduct[0])));
+        allProducts.removeIf(SecondHandProduct::isRemoved);
+        return allProducts;
     }
 
     /**
@@ -77,6 +88,18 @@ public class Wallet implements Serializable {
      */
     public void setProducts(HashMap<String, SecondHandProduct> newProducts) {
         this.products = newProducts;
+    }
+
+    /**
+     * Gets the wallet's visible products
+     * @return the wallet's visible products
+     */
+    public List<SecondHandProduct> getVisibleProducts() {
+        List<SecondHandProduct> allProducts =
+                new ArrayList<>(List.of(products.values().toArray(new SecondHandProduct[0])));
+        allProducts.removeIf(SecondHandProduct::isRemoved);
+        allProducts.removeIf(product -> !product.isAvailable());
+        return allProducts;
     }
 
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/

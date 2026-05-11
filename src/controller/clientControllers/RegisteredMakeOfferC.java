@@ -1,4 +1,4 @@
-package controller.employeeControllers;
+package controller.clientControllers;
 
 import controller.Controller;
 import controller.browserControllers.BrowseSecondHandProductsC;
@@ -15,13 +15,12 @@ public class RegisteredMakeOfferC implements Controller {
     private final Store model; /* model */
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public RegisteredMakeOfferC(App frame, Store model, RegisteredMakeOfferP view) throws BadLocationException {
+    public RegisteredMakeOfferC(App frame, Store model, RegisteredMakeOfferP view) {
         this.frame = frame;
         this.view = view;
         this.model = model;
 
         initializeActions();
-        initializeActionsForMiniPanels();
     }
 
     public void initializeActionsForMiniPanels() throws BadLocationException {
@@ -31,6 +30,12 @@ public class RegisteredMakeOfferC implements Controller {
 
     @Override
     public void initializeActions() {
+        try {
+            initializeActionsForMiniPanels();
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+
         view.getBrowseAvailableProducts().addActionListener(e -> {
             view.getBrowseWalletOwnersP().setVisible(false);
             view.getBrowseSecondHandProductsP().setVisible(true);

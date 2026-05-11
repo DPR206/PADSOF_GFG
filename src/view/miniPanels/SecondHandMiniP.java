@@ -5,7 +5,6 @@ import model.product.SecondHandProduct;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
@@ -26,7 +25,7 @@ public class SecondHandMiniP extends MiniPanel {
         this.setLayout(new FlowLayout());
 
         button = new JButton(buttonName);
-        button.setPreferredSize(new Dimension(125, height));
+        button.setPreferredSize(new Dimension(buttonName.length() * 10, height));
         if (iconPath != null) {
             button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
         }
@@ -83,13 +82,5 @@ public class SecondHandMiniP extends MiniPanel {
 
     public SecondHandProduct getSecondHandProduct() {
         return secondHandProduct;
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        button.addActionListener(c);
     }
 }

@@ -10,7 +10,6 @@ import view.miniPanels.MiniPanel;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.text.BadLocationException;
-import java.util.List;
 
 public class BrowseSomeonesWalletC extends BrowserController<SecondHandProduct> {
 
@@ -24,12 +23,17 @@ public class BrowseSomeonesWalletC extends BrowserController<SecondHandProduct> 
      */
     public BrowseSomeonesWalletC(App frame, Store model, BrowseSomeonesWalletP view) throws BadLocationException {
         super(frame, view, model);
-        view.setItemList(List.of(((RegisteredClient) view.getOwner()).getWallet().getProducts()));
-        super.initializeActions();
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
+        BrowseSomeonesWalletP view = (BrowseSomeonesWalletP) super.getView();
+        try {
+            view.setItemList(((RegisteredClient) view.getOwner()).getWallet().getAvailableProducts());
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+
         for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
             new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
                     super.getView());

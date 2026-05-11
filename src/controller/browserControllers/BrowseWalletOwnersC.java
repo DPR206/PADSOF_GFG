@@ -27,15 +27,19 @@ public class BrowseWalletOwnersC extends BrowserController<RegisteredClient> {
      */
     public BrowseWalletOwnersC(App frame, BrowseWalletOwnersP view, Store model) throws BadLocationException {
         super(frame, view, model);
-
-        List<RegisteredClient> users = new ArrayList<>(model.getRegisteredClientList());
-        users.remove(frame.getUser());
-        view.setItemList(users);
-        super.initializeActions();
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
+        List<RegisteredClient> users = new ArrayList<>(super.getModel().getRegisteredClientList());
+        users.remove(super.getFrame().getUser());
+        users.removeIf(user -> user.getWallet().getVisibleProducts().isEmpty());
+        try {
+            super.getView().setItemList(users);
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+        }
+
         for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
             new WalletOwnerMiniC(super.getFrame(), super.getModel(), (UserMiniP) miniPanel);
         }

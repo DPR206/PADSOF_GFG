@@ -22,13 +22,17 @@ public class BrowseStoreEditC extends MixedBrowserController<Pack, StoreProduct>
      */
     public BrowseStoreEditC(App frame, Store model, BrowseStorePEdit view) throws BadLocationException {
         super(frame, view, model);
-        view.setFirstItemList(model.getPacks());
-        view.setSecondItemList(model.getStoreProductList());
-        super.initializeActions();
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
+        try {
+            super.getView().setFirstItemList(super.getModel().getPacks());
+            super.getView().setSecondItemList(super.getModel().getStoreProductList());
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+        }
+
         for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
             new PackMiniPC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
         }

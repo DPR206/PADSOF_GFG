@@ -5,6 +5,7 @@ import controller.miniControllers.StoreProductMiniC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
+import model.user.*;
 import view.App;
 import view.browserPanels.BrowseStoreP;
 import view.miniPanels.*;
@@ -23,13 +24,24 @@ public class BrowseStoreC extends MixedBrowserController<Pack, StoreProduct> {
      */
     public BrowseStoreC(App frame, Store model, BrowseStoreP view) throws BadLocationException {
         super(frame, view, model);
-        view.setFirstItemList(model.getPacks());
-        view.setSecondItemList(model.getStoreProductList());
-        super.initializeActions();
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
+        try {
+            super.getView().setFirstItemList(super.getModel().getPacks());
+            if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
+                super.getView().setSecondItemList(((RegisteredClient) super.getFrame().getUser()).searchStoreProduct());
+            } else if (super.getFrame().getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+                super.getView()
+                     .setSecondItemList(((UnregisteredClient) super.getFrame().getUser()).searchStoreProduct());
+            } else {
+                super.getView().setSecondItemList(super.getModel().getStoreProductList());
+            }
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+        }
+
         System.out.println("Initialize actions for MiniPanels");
         for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
             new PackMiniPC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());

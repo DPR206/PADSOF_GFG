@@ -20,14 +20,15 @@ public class UnregisteredMainC implements Controller {
         this.model = model;
 
         initializeActions();
-        linkControllers();
     }
 
     public void initializeActions() {
         this.view.getCardLayout().show(this.view.getBottom(), "Search");
+        linkControllers();
 
         view.getSearch().addActionListener(e -> {
             this.view.getCardLayout().show(this.view.getBottom(), "Search");
+            linkControllers();
         });
 
         view.getFilters().addActionListener(e -> {
@@ -35,8 +36,12 @@ public class UnregisteredMainC implements Controller {
         });
     }
 
-    public void linkControllers() throws BadLocationException {
-        new BrowseStoreC(frame, model, view.getBrowsePanel());
+    public void linkControllers() {
+        try {
+            new BrowseStoreC(frame, model, view.getBrowsePanel());
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
         new SearcherC(frame, model, view.getFilterPanel());
     }
 }

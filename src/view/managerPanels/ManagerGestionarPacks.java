@@ -52,4 +52,8 @@ public class ManagerGestionarPacks extends JPanel {
     public void setController(ActionListener c) {
         this.newPack.addActionListener(c);
     }
+    
+    public JButton getConfirmacion() {
+    	return this.newPack;
+    }
 }

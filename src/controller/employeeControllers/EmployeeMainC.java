@@ -55,9 +55,9 @@ public class EmployeeMainC implements Controller {
         view.getValuateProducts().addActionListener(e -> {
             try {
                 BrowseSecondHandProductsP browseSecondHandProductsP = new BrowseSecondHandProductsP("Valuate", null);
+                frame.addCard(browseSecondHandProductsP, "BROWSE_VALUATION_PRODUCTS");
+                frame.changeVisibleCard("BROWSE_VALUATION_PRODUCTS");
                 new BrowseValuationProductsC(frame, browseSecondHandProductsP, model);
-                frame.addCard(browseSecondHandProductsP, "BROWSE_SECOND_HAND_VALUATION_PRODUCTS");
-                frame.changeVisibleCard("BROWSE_SECOND_HAND_VALUATION_PRODUCTS");
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

@@ -1,11 +1,13 @@
 package view.employeePanels;
 
+import model.product.ConservationStatus;
 import model.product.SecondHandProduct;
 import view.App;
 
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
+import java.util.HashMap;
 
 import static view.ImageAdder.getImageLabel;
 
@@ -17,6 +19,7 @@ public class MaxiValuateSecondHandP extends JPanel {
     private final JComboBox<String> conservationStatus;
     private final JTextField valuation = new JTextField();
     private final JPanel valuationStuff;
+    private final HashMap<String, ConservationStatus> conservationStatutes = new HashMap<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public MaxiValuateSecondHandP(App app, SecondHandProduct product) throws BadLocationException {
@@ -29,14 +32,24 @@ public class MaxiValuateSecondHandP extends JPanel {
         productInfo.setFocusable(false);
 
         valuate.setPreferredSize(new Dimension(100, 50));
-        String[] conservationStatutes =
-                {"Perfect", "Very good", "Slightly used", "Evidently used", "Very used", "Damaged"};
-        conservationStatus = new JComboBox<>(conservationStatutes);
+        conservationStatutes.put("Perfect", ConservationStatus.PERFECT);
+        conservationStatutes.put("Very good", ConservationStatus.VERY_GOOD);
+        conservationStatutes.put("Slightly used", ConservationStatus.SLIGHTLY_USED);
+        conservationStatutes.put("Evidently used", ConservationStatus.EVIDENTLY_USED);
+        conservationStatutes.put("Very used", ConservationStatus.VERY_USED);
+        conservationStatutes.put("Damaged", ConservationStatus.DAMAGED);
+
+        conservationStatus = new JComboBox<>(conservationStatutes.keySet().toArray(new String[0]));
         valuation.setColumns(20);
 
         valuationStuff = new JPanel(new FlowLayout());
         valuationStuff.add(conservationStatus);
-        valuationStuff.add(valuation);
+
+        JPanel valuateButtonStuff = new JPanel(new GridLayout(2, 0));
+        valuateButtonStuff.add(new JLabel("Valuation (XX.XX)€:"));
+        valuateButtonStuff.add(valuation);
+
+        valuationStuff.add(valuateButtonStuff);
         valuationStuff.add(valuate);
 
         paintEverything();
@@ -82,5 +95,37 @@ public class MaxiValuateSecondHandP extends JPanel {
 
         this.revalidate();
         this.repaint();
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public JComboBox<String> getConservationStatus() {
+        return conservationStatus;
+    }
+
+    public ConservationStatus getConservationStatusFromName(String conservationStatusName) {
+        return conservationStatutes.get(conservationStatusName);
+    }
+
+    public SecondHandProduct getProduct() {
+        return product;
+    }
+
+    public JTextPane getProductInfo() {
+        return productInfo;
+    }
+
+    public JButton getValuate() {
+        return valuate;
+    }
+
+    public JTextField getValuation() {
+        return valuation;
+    }
+
+    public JPanel getValuationStuff() {
+        return valuationStuff;
     }
 }

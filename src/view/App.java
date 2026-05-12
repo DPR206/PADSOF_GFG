@@ -155,6 +155,7 @@ public class App extends JFrame {
     }
 
     public void changeVisibleCard(String cardName) {
+        System.out.println("Changing visible card: " + cardName);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
         getViewFromName(cardName).requestFocusInWindow();
@@ -177,6 +178,7 @@ public class App extends JFrame {
     public void goBack() {
         if (!lastShownPanels.isEmpty()) {
             String previousPanel = lastShownPanels.removeLast();
+            System.out.println("Going back to card: " + previousPanel);
 
             CardLayout cl = (CardLayout) (cards.getLayout());
             cl.show(cards, previousPanel);

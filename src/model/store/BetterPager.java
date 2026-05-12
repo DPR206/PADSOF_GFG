@@ -82,6 +82,9 @@ public class BetterPager<G> {
     public int getMaxPageNum(List<G> itemList) {
         int itemsPerPage = Parameter.getParam().getItemsPerPage();
         int size = itemList.size();
+        if (size == 0) {
+            return 1;
+        }
         if (size % itemsPerPage == 0) {
             return size / itemsPerPage;
         }
@@ -91,6 +94,9 @@ public class BetterPager<G> {
     public int getMaxPageNum(List<G> itemList, int offset) {
         int itemsPerPage = Parameter.getParam().getItemsPerPage();
         int size = itemList.size() + offset;
+        if (size == 0) {
+            return 1;
+        }
         if (size % itemsPerPage == 0) {
             return size / itemsPerPage;
         }

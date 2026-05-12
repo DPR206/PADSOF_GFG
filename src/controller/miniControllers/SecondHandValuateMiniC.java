@@ -87,7 +87,6 @@ public class SecondHandValuateMiniC implements Controller {
         });
 
         view.getButton().addActionListener(e -> {
-            System.out.println("BUTTON CLICKED");
             seeProduct();
         });
     }

@@ -1,8 +1,8 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.MixedBrowseCartC;
 import controller.browserControllers.AbstractMixedBrowserC;
+import controller.browserControllers.MixedBrowseCartC;
 import controller.clientControllers.CarritoC;
 import model.product.Pack;
 import model.product.StoreProduct;
@@ -45,6 +45,18 @@ public class StoreProductMiniCartC implements Controller {
         initializeActions();
     }
 
+    public void updateInterface() {
+        try {
+            CarritoP carritoVista = new CarritoP();
+            new CarritoC(carritoVista, frame);
+            new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
+            frame.addCard(carritoVista, "CART");
+            frame.changeVisibleCard("CART");
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
     @Override
     public void initializeActions() {
         view.setFocusable(true);
@@ -83,41 +95,42 @@ public class StoreProductMiniCartC implements Controller {
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
                 ((UnregisteredClient) frame.getUser()).deleteCart(view.getStoreProduct());
             }
-            try {
-                browserPanel.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            browserController.initializeActionsForMiniPanels();
+            updateInterface();
+//            try {
+//                CarritoP carritoVista = new CarritoP();
+//                new CarritoC(carritoVista, frame);
+//                new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems());
+//            } catch (BadLocationException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//            try {
+//                browserPanel.paintEverything();
+//            } catch (BadLocationException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//            browserController.initializeActionsForMiniPanels();
         });
 
         view.getApplyChanges().addActionListener(e -> {
-            for (int i = 0; i < (int) view.getUnitSpinner().getValue(); i++) {
-                if (view.getStoreProduct().getStock() != 0) {
-                    if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
-
-                        ((RegisteredClient) frame.getUser()).getC().addProduct(view.getStoreProduct());
-                    } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-                        ((UnregisteredClient) frame.getUser()).getCart().addProduct(view.getStoreProduct());
-                    }
-                }
+            if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
+                ((RegisteredClient) frame.getUser()).getC().changeProductUds(view.getStoreProduct(),
+                        (int) view.getUnitSpinner().getValue());
+            } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+                ((UnregisteredClient) frame.getUser()).getCart().changeProductUds(view.getStoreProduct(),
+                        (int) view.getUnitSpinner().getValue());
             }
-            CarritoP carritoVista;
-            try {
-                carritoVista = new CarritoP();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
+            updateInterface();
+//            try {
+//                CarritoP carritoVista;
+//                carritoVista = new CarritoP();
+//                new CarritoC(carritoVista, frame);
+//                new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
+//                frame.addCard(carritoVista, "CART");
+//                frame.changeVisibleCard("CART");
+//            } catch (BadLocationException ex) {
+//                throw new RuntimeException(ex);
+//            }
 
-            new CarritoC(carritoVista, frame);
-            try {
-                new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            frame.addCard(carritoVista, "CART");
-            frame.changeVisibleCard("CART");
 //            try {
 //                browserPanel.paintEverything();
 //            } catch (BadLocationException ex) {

@@ -1,6 +1,7 @@
 package controller.clientControllers;
 
 import controller.Controller;
+import model.store.Store;
 import model.user.RegisteredClient;
 import model.utilities.exceptions.PasswordNotValid;
 import view.clientPanels.RegisteredChangePwd;
@@ -31,6 +32,7 @@ public class RegisteredChangePwdC implements Controller {
     }
 
     private void cambiarPwd() {
+    	String nombreViejo = user.getUserName();
         String pass1 = vista.getPwd1();
         String pass2 = vista.getPwd2();
         String username = vista.getNom();
@@ -46,6 +48,12 @@ public class RegisteredChangePwdC implements Controller {
             try {
                 user.changePassword(pass1);
                 user.setUserName(username);
+                
+                Store.getInstance().getUsers().remove(nombreViejo);
+                
+                // Luego insertamos el usuario con el nuevo nombre como llave
+                Store.getInstance().getUsers().put(username, user);
+                
                 JOptionPane.showMessageDialog(vista, "Password changed successfully!", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
                 vista.dispose();

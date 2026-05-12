@@ -7,13 +7,13 @@ import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
-import view.browserPanels.BrowseCartP;
+import view.browserPanels.MixedBrowseCartP;
 import view.miniPanels.*;
 
 import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 
-public class BrowseCartC extends MixedBrowserController<Pack, StoreProduct> {
+public class MixedBrowseCartC extends AbstractMixedBrowserC<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -23,7 +23,7 @@ public class BrowseCartC extends MixedBrowserController<Pack, StoreProduct> {
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public BrowseCartC(App frame, Store model, BrowseCartP view) throws BadLocationException {
+    public MixedBrowseCartC(App frame, Store model, MixedBrowseCartP view) throws BadLocationException {
         super(frame, view, model);
         initializeActionsForMiniPanels();
     }
@@ -31,9 +31,9 @@ public class BrowseCartC extends MixedBrowserController<Pack, StoreProduct> {
     @Override
     public void initializeActionsForMiniPanels() {
         if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
-            ((BrowseCartP) super.getView()).setCart(((RegisteredClient) super.getFrame().getUser()).getC());
+            ((MixedBrowseCartP) super.getView()).setCart(((RegisteredClient) super.getFrame().getUser()).getC());
         } else if (super.getFrame().getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-            ((BrowseCartP) super.getView()).setCart(((UnregisteredClient) super.getFrame().getUser()).getCart());
+            ((MixedBrowseCartP) super.getView()).setCart(((UnregisteredClient) super.getFrame().getUser()).getCart());
         }
 
         try {

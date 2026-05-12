@@ -9,7 +9,7 @@ import javax.swing.text.BadLocationException;
 
 import static main.Main.brownColour;
 
-public class BrowseMyWalletP extends BrowserPanel<SecondHandProduct> {
+public class BrowseMyWalletP extends AbstractBrowserP<SecondHandProduct> {
     private final RegisteredClient owner;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/

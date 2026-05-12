@@ -1,7 +1,7 @@
 package controller.employeeControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseSecondHandValuationProductsC;
+import controller.browserControllers.BrowseValuationProductsC;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseSecondHandProductsP;
@@ -55,7 +55,7 @@ public class EmployeeMainC implements Controller {
         view.getValuateProducts().addActionListener(e -> {
             try {
                 BrowseSecondHandProductsP browseSecondHandProductsP = new BrowseSecondHandProductsP("Valuate", null);
-                new BrowseSecondHandValuationProductsC(frame, browseSecondHandProductsP, model);
+                new BrowseValuationProductsC(frame, browseSecondHandProductsP, model);
                 frame.addCard(browseSecondHandProductsP, "BROWSE_SECOND_HAND_VALUATION_PRODUCTS");
                 frame.changeVisibleCard("BROWSE_SECOND_HAND_VALUATION_PRODUCTS");
             } catch (BadLocationException ex) {

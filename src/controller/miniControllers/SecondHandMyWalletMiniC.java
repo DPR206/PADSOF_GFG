@@ -1,12 +1,12 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowserController;
+import controller.browserControllers.AbstractBrowserC;
 import controller.clientControllers.RegisteredSecondHandC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
-import view.browserPanels.BrowserPanel;
+import view.browserPanels.AbstractBrowserP;
 import view.clientPanels.RegisteredMainP;
 import view.MaxiSecondHandP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
@@ -21,8 +21,8 @@ public class SecondHandMyWalletMiniC implements Controller {
     private final ThreeButtonSecondHandMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private final BrowserController<SecondHandProduct> browserController;
-    private final BrowserPanel<SecondHandProduct> browserPanel;
+    private final AbstractBrowserC<SecondHandProduct> abstractBrowserC;
+    private final AbstractBrowserP<SecondHandProduct> abstractBrowserP;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -31,17 +31,17 @@ public class SecondHandMyWalletMiniC implements Controller {
      * @param frame             the controller's frame
      * @param model             the controller's model
      * @param view
-     * @param browserController
-     * @param browserPanel
+     * @param abstractBrowserC
+     * @param abstractBrowserP
      */
     public SecondHandMyWalletMiniC(App frame, Store model, ThreeButtonSecondHandMiniP view,
-                                   BrowserController<SecondHandProduct> browserController,
-                                   BrowserPanel<SecondHandProduct> browserPanel) {
+                                   AbstractBrowserC<SecondHandProduct> abstractBrowserC,
+                                   AbstractBrowserP<SecondHandProduct> abstractBrowserP) {
         this.frame = frame;
         this.model = model;
         this.view = view;
-        this.browserController = browserController;
-        this.browserPanel = browserPanel;
+        this.abstractBrowserC = abstractBrowserC;
+        this.abstractBrowserP = abstractBrowserP;
 
         initializeActions();
     }
@@ -94,11 +94,11 @@ public class SecondHandMyWalletMiniC implements Controller {
             JOptionPane.showMessageDialog(frame, view.getSecondHandProduct().getName() + " was added to the Offer",
                     "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
             try {
-                browserPanel.paintEverything();
+                abstractBrowserP.paintEverything();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.initializeActionsForMiniPanels();
+            abstractBrowserC.initializeActionsForMiniPanels();
         });
 
         /* Request valuation */
@@ -108,11 +108,11 @@ public class SecondHandMyWalletMiniC implements Controller {
             // DUE: Pagar
             view.getSecondHandProduct().setPaidValuation(true);
             try {
-                browserPanel.paintEverything();
+                abstractBrowserP.paintEverything();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.initializeActionsForMiniPanels();
+            abstractBrowserC.initializeActionsForMiniPanels();
         });
 
         /* Remove from wallet */
@@ -121,11 +121,11 @@ public class SecondHandMyWalletMiniC implements Controller {
                     JOptionPane.INFORMATION_MESSAGE);
             view.getSecondHandProduct().setRemoved(true);
             try {
-                browserPanel.paintEverything();
+                abstractBrowserP.paintEverything();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.initializeActionsForMiniPanels();
+            abstractBrowserC.initializeActionsForMiniPanels();
         });
     }
 }

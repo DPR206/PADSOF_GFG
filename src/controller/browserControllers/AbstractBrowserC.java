@@ -3,12 +3,15 @@ package controller.browserControllers;
 import controller.Controller;
 import model.store.Store;
 import view.App;
-import view.browserPanels.MixedBrowserPanel;
+import view.browserPanels.AbstractBrowserP;
 
 import javax.swing.text.BadLocationException;
 
-public abstract class MixedBrowserController<G, U> implements Controller {
-    private final MixedBrowserPanel<G, U> view; /* view -> panel */
+/**
+ * It defines a controller for a BrowserPanel
+ */
+public abstract class AbstractBrowserC<G> implements Controller {
+    private final AbstractBrowserP<G> view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
 
@@ -20,7 +23,7 @@ public abstract class MixedBrowserController<G, U> implements Controller {
      * @param view  the controller's view
      * @param model the controller's model
      */
-    MixedBrowserController(App frame, MixedBrowserPanel<G, U> view, Store model) {
+    AbstractBrowserC(App frame, AbstractBrowserP<G> view, Store model) {
         this.frame = frame;
         this.view = view;
         this.model = model;
@@ -79,7 +82,7 @@ public abstract class MixedBrowserController<G, U> implements Controller {
         return model;
     }
 
-    public MixedBrowserPanel<G, U> getView() {
+    public AbstractBrowserP<G> getView() {
         return view;
     }
 }

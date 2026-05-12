@@ -9,7 +9,7 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
-public class BrowseWalletOwnersP extends BrowserPanel<RegisteredClient> {
+public class BrowseWalletOwnersP extends AbstractBrowserP<RegisteredClient> {
     private final String buttonName;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/

@@ -5,7 +5,7 @@ import model.user.User;
 import view.App;
 import view.browserPanels.BrowseUsersP;
 
-public class BrowseEmployeesC extends BrowserController<User> { //DUE
+public class BrowseEmployeesC extends AbstractBrowserC<User> { //DUE
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**

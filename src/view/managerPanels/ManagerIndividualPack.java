@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.product.Pack;
-import view.browserPanels.BrowseStorePInPack;
+import view.browserPanels.BrowsePackProductsP;
 
 public class ManagerIndividualPack extends JPanel{
 	private Pack p;
@@ -17,19 +17,19 @@ public class ManagerIndividualPack extends JPanel{
     private JTextField packPrecio = new JTextField();
     private JButton btnConfirmarProducto = new JButton("CONFIRMAR PRODUCTO");
     private JButton btnConfirmarPrecio = new JButton("CONFIRMAR PRECIO");
-    
+
     public ManagerIndividualPack(Pack p) {
     	super();
     	this.p = p;
-    	
+
     	this.setLayout(new BorderLayout());
-    	
-    	BrowseStorePInPack browser = new BrowseStorePInPack(p);
+
+    	BrowsePackProductsP browser = new BrowsePackProductsP(p);
     	this.add(browser, BorderLayout.NORTH);
-    	
+
     	JPanel inserciones = new JPanel();
     	inserciones.setLayout(new GridLayout(4,1));
-    	
+
     	inserciones.add(new JLabel("ID DEL PRODUCTO A AÑADIR:"));
     	inserciones.add(idProduct, this.btnConfirmarProducto);
     	inserciones.add(new JLabel("PRECIO NUEVO:"));

@@ -1,11 +1,10 @@
 package view.browserPanels;
 
 import model.exchange.Exchange;
-import view.App;
 
 import javax.swing.text.BadLocationException;
 
-public class BrowseExchangesP extends BrowserPanel<Exchange> { // DUE
+public class BrowseExchangesP extends AbstractBrowserP<Exchange> { // DUE
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public BrowseExchangesP() {
         super();

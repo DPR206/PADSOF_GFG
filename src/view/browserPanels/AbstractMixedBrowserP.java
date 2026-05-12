@@ -15,7 +15,7 @@ import java.util.List;
  * @param <G> the type parameter
  * @param <U> the type parameter
  */
-public abstract class MixedBrowserPanel<G, U> extends JPanel {
+public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
     private static final long serialVersionUID = 1L;
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
@@ -35,7 +35,7 @@ public abstract class MixedBrowserPanel<G, U> extends JPanel {
     /**
      * Instantiates a new Mixed browser panel.
      */
-    public MixedBrowserPanel() {
+    public AbstractMixedBrowserP() {
         currentPageNum = 1;
 
         this.setLayout(new BorderLayout());

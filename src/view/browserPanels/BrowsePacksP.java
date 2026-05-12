@@ -8,12 +8,12 @@ import javax.swing.text.BadLocationException;
 
 import static main.Main.brownColour;
 
-public class BrowsePacks extends BrowserPanel<Pack> {
+public class BrowsePacksP extends AbstractBrowserP<Pack> {
     private final String buttonName;
     private final String iconPath;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public BrowsePacks(String buttonName, String... iconPath) throws BadLocationException {
+    public BrowsePacksP(String buttonName, String... iconPath) throws BadLocationException {
         super();
         this.buttonName = buttonName;
         this.iconPath = iconPath[0];

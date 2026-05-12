@@ -7,16 +7,15 @@ import javax.swing.BoxLayout;
 import javax.swing.text.BadLocationException;
 
 import model.product.Pack;
-import model.product.SecondHandProduct;
 import model.product.StoreProduct;
 import view.miniPanels.*;
 import controller.miniControllers.*;
 
-public class BrowseStorePInPack extends BrowserPanel<StoreProduct>{
+public class BrowsePackProductsP extends AbstractBrowserP<StoreProduct> {
 
 	private Pack p;
-	
-	public BrowseStorePInPack(Pack p) {
+
+	public BrowsePackProductsP(Pack p) {
 		this.p= p;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         try {
@@ -26,7 +25,7 @@ public class BrowseStorePInPack extends BrowserPanel<StoreProduct>{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void paintEverything() throws BadLocationException {
 		this.removeAll();
 
@@ -36,7 +35,7 @@ public class BrowseStorePInPack extends BrowserPanel<StoreProduct>{
 
         this.revalidate();
         this.repaint();
-		
+
 	}
 
 	@Override

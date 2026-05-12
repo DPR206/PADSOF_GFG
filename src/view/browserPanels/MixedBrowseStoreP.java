@@ -2,8 +2,6 @@ package view.browserPanels;
 
 import model.product.Pack;
 import model.product.StoreProduct;
-import model.store.Store;
-import view.App;
 import view.miniPanels.PackMiniP;
 import view.miniPanels.StoreProductMiniP;
 
@@ -13,26 +11,33 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
-public class BrowseStorePEdit extends MixedBrowserPanel<Pack, StoreProduct> {
+public class MixedBrowseStoreP extends AbstractMixedBrowserP<Pack, StoreProduct> {
+
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
      */
-    public BrowseStorePEdit() throws BadLocationException {
+    public MixedBrowseStoreP() throws BadLocationException {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        super.setFirstItemList(Store.getInstance().getPacks());
-        super.setSecondItemList(Store.getInstance().getStoreProductList());
         paintEverything();
     }
 
+    /**
+     * It allows this page's components to be repainted (revalidate() & repaint() didn't work)
+     * @throws BadLocationException bad locations within a document model (that is, attempts to reference a location
+     *                              that doesn't exist)
+     */
     @Override
     public void paintEverything() throws BadLocationException {
         this.clearItemsContainer();
         this.removeAll();
 
         super.addAllMiniPanels();
+        if (super.getFirstMiniPanels().isEmpty() && super.getSecondMiniPanels().isEmpty()) {
+            this.add(new JLabel("No packs or products to be seen"));
+        }
 
         this.add(containerItems, BorderLayout.NORTH);
 
@@ -55,14 +60,14 @@ public class BrowseStorePEdit extends MixedBrowserPanel<Pack, StoreProduct> {
 
     @Override
     public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
-        PackMiniP miniPack = new PackMiniP(item, index, "Manage", null);
+        PackMiniP miniPack = new PackMiniP(item, index, "Add to Cart", ".\\resources\\app\\cart.png");
         super.addFirstMiniPanel(miniPack);
         this.add(miniPack);
     }
 
     @Override
     public void addSecondMiniPanel(StoreProduct item, int index) throws BadLocationException {
-        StoreProductMiniP miniPack = new StoreProductMiniP(item, index, "Manage", ".\\resources\\app\\cart.png");
+        StoreProductMiniP miniPack = new StoreProductMiniP(item, index, "Add to Cart", ".\\resources\\app\\cart.png");
         super.addSecondMiniPanel(miniPack);
         this.add(miniPack);
     }

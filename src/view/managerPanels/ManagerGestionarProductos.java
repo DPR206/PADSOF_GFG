@@ -1,7 +1,7 @@
 package view.managerPanels;
 
 import view.App;
-import view.browserPanels.BrowseStorePEdit;
+import view.browserPanels.MixedBrowseStoreEditP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ManagerGestionarProductos extends JPanel {
-    private final BrowseStorePEdit products;
+    private final MixedBrowseStoreEditP products;
     private JButton newProduct = new JButton("Crear nuevo producto");
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -18,7 +18,7 @@ public class ManagerGestionarProductos extends JPanel {
 
         this.setLayout(new BorderLayout());
 
-        this.products = new BrowseStorePEdit();
+        this.products = new MixedBrowseStoreEditP();
 
         this.newProduct.setPreferredSize(new Dimension(120, 30));
 
@@ -30,7 +30,7 @@ public class ManagerGestionarProductos extends JPanel {
 
     }
 
-    public BrowseStorePEdit getProductsPanel() {
+    public MixedBrowseStoreEditP getProductsPanel() {
         return products;
     }
 

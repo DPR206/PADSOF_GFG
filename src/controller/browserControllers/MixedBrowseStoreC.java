@@ -7,12 +7,12 @@ import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
-import view.browserPanels.BrowseStoreP;
+import view.browserPanels.MixedBrowseStoreP;
 import view.miniPanels.*;
 
 import javax.swing.text.BadLocationException;
 
-public class BrowseStoreC extends MixedBrowserController<Pack, StoreProduct> {
+public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -22,7 +22,7 @@ public class BrowseStoreC extends MixedBrowserController<Pack, StoreProduct> {
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public BrowseStoreC(App frame, Store model, BrowseStoreP view) throws BadLocationException {
+    public MixedBrowseStoreC(App frame, Store model, MixedBrowseStoreP view) throws BadLocationException {
         super(frame, view, model);
     }
 

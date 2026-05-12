@@ -1,7 +1,7 @@
 package controller.managerControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseStoreEditC;
+import controller.browserControllers.MixedBrowseStoreEditC;
 import model.store.Store;
 import view.App;
 import view.managerPanels.*;
@@ -28,7 +28,7 @@ public class ManagerMainC implements Controller {
         this.mgp = new ManagerGestionarPacks(this.frame);
 
         this.mgproduct = new ManagerGestionarProductos(this.frame);
-        new BrowseStoreEditC(this.frame, this.model, this.mgproduct.getProductsPanel());
+        new MixedBrowseStoreEditC(this.frame, this.model, this.mgproduct.getProductsPanel());
         this.mgproduct.setVisible(false);
         this.mnproduct = new ManagerNewProduct();
         new ManagerNewProductC(this.frame, this.mnproduct);

@@ -1,8 +1,8 @@
 package controller.bannerControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseCartC;
-import controller.browserControllers.BrowseMyWalletC;
+import controller.browserControllers.MixedBrowseCartC;
+import controller.browserControllers.MixedBrowseMyWalletC;
 import controller.clientControllers.CarritoC;
 import controller.clientControllers.RegisteredProfileC;
 import controller.notifications.NotificacionesC;
@@ -58,7 +58,7 @@ public class BannerRegisteredC implements Controller {
 //        new RegisteredWalletC(pagWallet, (RegisteredClient) frame.getUser());
 
         BrowseMyWalletP pagWallet = new BrowseMyWalletP((RegisteredClient) frame.getUser());
-        new BrowseMyWalletC(frame, Store.getInstance(), pagWallet);
+        new MixedBrowseMyWalletC(frame, Store.getInstance(), pagWallet);
 
         frame.addCard(pagWallet, "WALLET");
         frame.changeVisibleCard("WALLET");
@@ -95,7 +95,7 @@ public class BannerRegisteredC implements Controller {
         CarritoP carritoVista = new CarritoP();
         System.out.println("Check........");
         new CarritoC(carritoVista, frame);
-        new BrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
+        new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
 
         frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");

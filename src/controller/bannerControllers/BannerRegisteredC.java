@@ -53,10 +53,6 @@ public class BannerRegisteredC implements Controller {
 
     private void abrirCartera() throws BadLocationException {
 
-//        RegisteredWalletP pagWallet = new RegisteredWalletP((RegisteredClient) frame.getUser());
-//
-//        new RegisteredWalletC(pagWallet, (RegisteredClient) frame.getUser());
-
         BrowseMyWalletP pagWallet = new BrowseMyWalletP((RegisteredClient) frame.getUser());
         new MixedBrowseMyWalletC(frame, Store.getInstance(), pagWallet);
 

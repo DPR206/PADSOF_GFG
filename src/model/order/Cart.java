@@ -31,6 +31,7 @@ public class Cart implements Serializable {
     private LocalDate creationDate;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Creates a new cart
      * @param assignedProducts,         the store products
@@ -452,6 +453,7 @@ public class Cart implements Serializable {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * Obtains the creation date of the cart
      * @return the cart's creation date
@@ -506,6 +508,10 @@ public class Cart implements Serializable {
      */
     public List<Pack> getPacks() {
         return new ArrayList<>(this.packs.keySet());
+    }
+
+    public HashMap<Pack, Integer> getPacksHashMap() {
+        return this.packs;
     }
 
     /**

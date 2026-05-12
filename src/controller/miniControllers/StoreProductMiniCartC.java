@@ -51,6 +51,12 @@ public class StoreProductMiniCartC implements Controller {
         } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
             view.setCart(((UnregisteredClient) frame.getUser()).getCart());
         }
+//        try {
+//            browserPanel.paintEverything();
+//        } catch (BadLocationException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        browserController.initializeActionsForMiniPanels();
 
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {

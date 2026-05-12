@@ -15,7 +15,7 @@ import javax.swing.text.BadLocationException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PackMiniPC implements Controller {
+public class PackMiniC implements Controller {
 
     private final PackMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
@@ -24,9 +24,9 @@ public class PackMiniPC implements Controller {
     private final MixedBrowserPanel<Pack, StoreProduct> browserPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniPC(App frame, Store model, PackMiniP view,
-                      MixedBrowserController<Pack, StoreProduct> browserController,
-                      MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
+    public PackMiniC(App frame, Store model, PackMiniP view,
+                     MixedBrowserController<Pack, StoreProduct> browserController,
+                     MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;
@@ -41,7 +41,7 @@ public class PackMiniPC implements Controller {
         view.getPackImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    //frame.changeVisibleCard
+                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
                 }
             }
         });

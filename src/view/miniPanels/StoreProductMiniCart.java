@@ -28,7 +28,7 @@ public class StoreProductMiniCart extends MiniPanel {
     public StoreProductMiniCart(StoreProduct product, int index) throws BadLocationException {
         this.storeProduct = product;
         int width = 350;
-        int height = 60;
+        int height = 80;
         this.setLayout(new FlowLayout());
 
         deleteFromCart.setPreferredSize(new Dimension(125, height));
@@ -63,13 +63,6 @@ public class StoreProductMiniCart extends MiniPanel {
         } else {
             doc.insertString(doc.getLength(), "\n", attributes);
         }
-
-        if (product.getStock() == 0) {
-            StyleConstants.setForeground(attributes, Color.RED);
-            StyleConstants.setItalic(attributes, true);
-            doc.insertString(doc.getLength(), ("Last ones!"), attributes);
-        }
-
 //        if (product.getStock() == 0) {
 //            StyleConstants.setForeground(attributes, Color.RED);
 //            StyleConstants.setItalic(attributes, true);
@@ -78,6 +71,7 @@ public class StoreProductMiniCart extends MiniPanel {
 
         int initialValue;
         if (cart != null) {
+            doc.insertString(doc.getLength(), ("Uds: " + cart.getSp().get(product) + "\n"), attributes);
             initialValue = cart.getSp().get(product);
         } else {
             initialValue = 1;
@@ -88,6 +82,14 @@ public class StoreProductMiniCart extends MiniPanel {
         unitSpinner.setPreferredSize(new Dimension(50, 30));
 
         productInfo.setPreferredSize(new Dimension(width, height));
+
+        if (product.getStock() == 0) {
+            StyleConstants.setForeground(attributes, Color.RED);
+            StyleConstants.setItalic(attributes, true);
+            doc.insertString(doc.getLength(), ("Last one!"), attributes);
+            unitSpinner.setEnabled(false);
+            applyChanges.setEnabled(false);
+        }
 
         JTextPane indexNum = new JTextPane();
         indexNum.setEditable(false);
@@ -105,10 +107,6 @@ public class StoreProductMiniCart extends MiniPanel {
         this.add(new JLabel("Units:"));
         this.add(unitSpinner);
         this.add(applyChanges);
-        if (product.getStock() == 0) {
-            unitSpinner.setEnabled(false);
-            applyChanges.setEnabled(false);
-        }
         this.add(deleteFromCart);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));

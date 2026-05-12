@@ -30,7 +30,7 @@ public class StoreProductMiniCart extends MiniPanel {
         int height = 80;
         this.setLayout(new FlowLayout());
 
-        deleteFromCart.setPreferredSize(new Dimension(125, height));
+        deleteFromCart.setPreferredSize(new Dimension(130, height));
         deleteFromCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
 
         productImage = getImageLabel(product.getPhoto(), height, height);

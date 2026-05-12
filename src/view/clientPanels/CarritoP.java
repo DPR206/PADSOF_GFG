@@ -60,8 +60,6 @@ public class CarritoP extends JPanel {
 
         this.add(panelLateral, BorderLayout.EAST);
 
-        // Aquí iría el centro del carrito (donde se listan los productos)
-        // this.add(scrollProductos, BorderLayout.CENTER);
 		cartItems = new MixedBrowseCartP();
 		this.add(cartItems,  BorderLayout.CENTER);
 

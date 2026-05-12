@@ -2,6 +2,7 @@ package view.miniPanels;
 
 import model.discount.DiscountType;
 import model.discount.ProductFixedPercentage;
+import model.product.Pack;
 import model.product.StoreProduct;
 
 import javax.swing.*;
@@ -10,20 +11,28 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 import static main.Main.brownColour;
-import static view.ImageAdder.getImageLabel;
+import static view.ImageAdder.getPackImagePanel;
 import static view.ImageAdder.getScaledImage;
 
-public class StoreProductMiniP extends MiniPanel {
-    private static final long serialVersionUID = 1L;
+public class PackToBuyMiniP extends MiniPanel {
     private final JButton button;
-    private final StoreProduct storeProduct;
-    private final JLabel productImage;
-    private final JTextPane productInfo;
+    private final Pack p;
+    private final JTextPane packInfo;
+    private final JPanel packImage;
 
+    /**
+     * Instantiates a new Pack mini p.
+     * @param p          the p
+     * @param index      the index
+     * @param buttonName the button name
+     * @param iconPath   the icon path
+     * @throws BadLocationException the bad location exception
+     */
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public StoreProductMiniP(StoreProduct product, int index, String buttonName, String iconPath)
-            throws BadLocationException {
-        this.storeProduct = product;
+    public PackToBuyMiniP(Pack p, int index, String buttonName, String iconPath) throws BadLocationException {
+        super();
+
+        this.p = p;
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
@@ -34,29 +43,29 @@ public class StoreProductMiniP extends MiniPanel {
             button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
         }
 
-        productImage = getImageLabel(product.getPhoto(), height, height);
-        productInfo = new JTextPane();
-        productInfo.setEditable(false);
-        productInfo.setFocusable(false);
+        this.packImage = getPackImagePanel(p, height, height);//getImageLabel(p.getPhoto(), height, height);
+        this.packInfo = new JTextPane();
+        this.packInfo.setEditable(false);
+        this.packInfo.setFocusable(false);
 
         SimpleAttributeSet attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
         StyleConstants.setBold(attributes, true);
-        productInfo.setCharacterAttributes(attributes, true);
-        productInfo.setText(product.getName() + "\n");
+        packInfo.setCharacterAttributes(attributes, true);
+        packInfo.setText("PACK " + p.getId() + "\n");
 
         attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
 
-        Document doc = productInfo.getStyledDocument();
-        doc.insertString(doc.getLength(), ("Price: " + String.format("%.2f", product.getPrice()) + " €"), attributes);
+        Document doc = packInfo.getStyledDocument();
+        doc.insertString(doc.getLength(), ("Price: " + String.format("%.2f", this.p.getPrice()) + " €"), attributes);
 
-        if (product.getDiscount() != null && product.getDiscount().getType() == DiscountType.FIXED_PERCENTAGE) {
+        if (p.getDiscount() != null && p.getDiscount().getType() == DiscountType.FIXED_PERCENTAGE) {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
 
-            doc.insertString(doc.getLength(),
-                    "- " + ((ProductFixedPercentage) product.getDiscount()).getPercentage() + "%", attributes);
+            doc.insertString(doc.getLength(), "- " + ((ProductFixedPercentage) p.getDiscount()).getPercentage() + "%",
+                    attributes);
 
             StyleConstants.setForeground(attributes, Color.BLACK);
             StyleConstants.setItalic(attributes, false);
@@ -64,16 +73,19 @@ public class StoreProductMiniP extends MiniPanel {
             doc.insertString(doc.getLength(), "\n", attributes);
         }
 
-        if (product.getStock() == 0) {
+        for (StoreProduct product : p.getProducts()) {
+            if (product.getStock() == 0) {
+                button.setEnabled(false);
+            }
+        }
+        if (!button.isEnabled()) {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
             button.setEnabled(false);
             doc.insertString(doc.getLength(), "Out of stock", attributes);
-        } else {
-            doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
         }
 
-        productInfo.setPreferredSize(new Dimension(width, height));
+        packInfo.setPreferredSize(new Dimension(width + 16, height));
 
         JTextPane indexNum = new JTextPane();
         indexNum.setEditable(false);
@@ -86,27 +98,43 @@ public class StoreProductMiniP extends MiniPanel {
         indexNum.setPreferredSize(new Dimension(25, height));
 
         this.add(indexNum);
-        this.add(productImage);
-        this.add(productInfo);
+        this.add(packImage);
+        this.add(packInfo);
         this.add(button);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    /**
+     * Gets button.
+     * @return the button
+     */
     public JButton getButton() {
         return button;
     }
 
-    public JLabel getProductImage() {
-        return productImage;
+    /**
+     * Gets pack.
+     * @return the pack
+     */
+    public Pack getPack() {
+        return p;
     }
 
-    public JTextPane getProductInfo() {
-        return productInfo;
+    /**
+     * Gets pack image.
+     * @return the pack image
+     */
+    public JPanel getPackImage() {
+        return packImage;
     }
 
-    public StoreProduct getStoreProduct() {
-        return storeProduct;
+    /**
+     * Gets pack info.
+     * @return the pack info
+     */
+    public JTextPane getPackInfo() {
+        return packInfo;
     }
 
     /**

@@ -61,8 +61,7 @@ public class BannerEmployeeC implements Controller {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (respuesta == JOptionPane.YES_OPTION) {
-            this.vista.setVisible(false);
-            this.frame.getWelcomePanel().setVisible(true);
+        	this.frame.updateView("WELCOME", "BANNER_UNREGISTERED");;
 
             this.frame.revalidate();
             this.frame.repaint();
@@ -74,7 +73,8 @@ public class BannerEmployeeC implements Controller {
         EmployeeExchangePermP pagExchange = new EmployeeExchangePermP(frame);
         new EmployeeExchangeC();
 
-        pagExchange.setVisible(true);
+        frame.addCard(pagExchange, "EMPLOYEE_EXCHANGE");
+        frame.changeVisibleCard("EMPLOYEE_EXCHANGE");
 
     }
 
@@ -83,7 +83,8 @@ public class BannerEmployeeC implements Controller {
         EmployeeOrder pagOrder = new EmployeeOrder();
         new EmployeeOrderC();
 
-        pagOrder.setVisible(true);
+        frame.addCard(pagOrder, "EMPLOYEE_ORDERS");
+        frame.changeVisibleCard("EMPLOYEE_ORDERS");
 
     }
 
@@ -92,17 +93,18 @@ public class BannerEmployeeC implements Controller {
         EmployeeTienda pagTienda = new EmployeeTienda();
         new EmployeeTiendaC();
 
-        pagTienda.setVisible(true);
+        frame.addCard(pagTienda, "EMPLOYEE_STORE");
+        frame.changeVisibleCard("EMPLOYEE_STORE");
     }
 
     private void abrirNots() {
 
-        //NotificacionP pagNots = new NotificacionP(new BannerRegistered());
         NotificacionP pagNots = new NotificacionP();
 
         new NotificacionesC(pagNots, frame);
 
-        pagNots.setVisible(true);
+        frame.addCard(pagNots, "EMPLOYEE_NOTIFICATIONS");
+        frame.changeVisibleCard("EMPLOYEE_NOTIFICATIONS");
     }
 
     private void abrirPerfil() {
@@ -111,12 +113,13 @@ public class BannerEmployeeC implements Controller {
 
         new EmployeeProfileC(profile, ((Employee) frame.getUser()));
 
-        profile.setVisible(true);
+        frame.addCard(profile, "EMPLOYEE_PROFILE");
+        frame.changeVisibleCard("EMPLOYEE_PROFILE");
     }
 
     private void abrirPaginaPrincipal() {
 
-        frame.getEmployeeMainPanel().setVisible(true);
+    	frame.changeVisibleCard("EMPLOYEE_MAIN");
     }
 
     public void initializeActions() {

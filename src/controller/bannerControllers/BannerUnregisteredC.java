@@ -37,6 +37,9 @@ public class BannerUnregisteredC implements Controller {
         vista.revalidate();
         vista.repaint();
 
+        for (ActionListener listener : vista.getBtnCarrito().getActionListeners()) {
+            vista.getBtnCarrito().removeActionListener(listener);
+        }
         vista.getBtnCarrito().addActionListener(e -> {
             try {
                 abrirCarritoDelCliente();
@@ -45,6 +48,9 @@ public class BannerUnregisteredC implements Controller {
             }
         });
 
+        for (ActionListener listener : vista.getHome().getActionListeners()) {
+            vista.getHome().removeActionListener(listener);
+        }
         vista.getHome().addActionListener(e -> {
             try {
                 abrirPaginaPrincipal();
@@ -53,10 +59,16 @@ public class BannerUnregisteredC implements Controller {
             }
         });
 
+        for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
+            vista.getBtnPerfil().removeActionListener(listener);
+        }
         vista.getBtnPerfil().addActionListener(e -> {
             abrirSignUp();
         });
 
+        for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
+            vista.getBtnExit().removeActionListener(listener);
+        }
         vista.getBtnExit().addActionListener(e -> {
             abrirWelcome();
         });

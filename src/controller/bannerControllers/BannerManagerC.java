@@ -72,14 +72,23 @@ public class BannerManagerC implements Controller {
         vista.revalidate();
         vista.repaint();
 
+        for (ActionListener listener : vista.getHome().getActionListeners()) {
+            vista.getHome().removeActionListener(listener);
+        }
         vista.getHome().addActionListener(e -> {
             abrirPaginaPrincipal();
         });
 
+        for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
+            vista.getBtnPerfil().removeActionListener(listener);
+        }
         vista.getBtnPerfil().addActionListener(e -> {
             abrirPerfil();
         });
 
+        for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
+            vista.getBtnExit().removeActionListener(listener);
+        }
         vista.getBtnExit().addActionListener(e -> {
             this.frame.changeCurrentUser(new UnregisteredClient(true));
             abrirWelcome();

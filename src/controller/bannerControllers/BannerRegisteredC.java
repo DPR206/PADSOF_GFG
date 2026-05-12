@@ -107,27 +107,41 @@ public class BannerRegisteredC implements Controller {
         vista.revalidate();
         vista.repaint();
 
+        for (ActionListener listener : vista.getBtnCarrito().getActionListeners()) {
+            vista.getBtnCarrito().removeActionListener(listener);
+        }
         vista.getBtnCarrito().addActionListener(e -> {
             try {
-                System.out.println("AEUGH");
                 abrirCarritoDelCliente();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
         });
 
+        for (ActionListener listener : vista.getHome().getActionListeners()) {
+            vista.getHome().removeActionListener(listener);
+        }
         vista.getHome().addActionListener(e -> {
             abrirPaginaPrincipal();
         });
 
+        for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
+            vista.getBtnPerfil().removeActionListener(listener);
+        }
         vista.getBtnPerfil().addActionListener(e -> {
             abrirPerfil();
         });
 
+        for (ActionListener listener : vista.getBtnNots().getActionListeners()) {
+            vista.getBtnNots().removeActionListener(listener);
+        }
         vista.getBtnNots().addActionListener(e -> {
             abrirNots();
         });
 
+        for (ActionListener listener : vista.getCartera().getActionListeners()) {
+            vista.getCartera().removeActionListener(listener);
+        }
         vista.getCartera().addActionListener(e -> {
             try {
                 abrirCartera();
@@ -136,6 +150,9 @@ public class BannerRegisteredC implements Controller {
             }
         });
 
+        for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
+            vista.getBtnExit().removeActionListener(listener);
+        }
         vista.getBtnExit().addActionListener(e -> {
             this.frame.changeCurrentUser(new UnregisteredClient(true));
             abrirWelcome();

@@ -124,26 +124,44 @@ public class BannerEmployeeC implements Controller {
         vista.revalidate();
         vista.repaint();
 
+        for (ActionListener listener : vista.getBtnCarrito().getActionListeners()) {
+            vista.getBtnCarrito().removeActionListener(listener);
+        }
         vista.getBtnCarrito().addActionListener(e -> {
             abrirPedidos();
         });
 
+        for (ActionListener listener : vista.getHome().getActionListeners()) {
+            vista.getHome().removeActionListener(listener);
+        }
         vista.getHome().addActionListener(e -> {
             abrirPaginaPrincipal();
         });
 
+        for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
+            vista.getBtnPerfil().removeActionListener(listener);
+        }
         vista.getBtnPerfil().addActionListener(e -> {
             abrirPerfil();
         });
 
+        for (ActionListener listener : vista.getBtnNots().getActionListeners()) {
+            vista.getBtnNots().removeActionListener(listener);
+        }
         vista.getBtnNots().addActionListener(e -> {
             abrirNots();
         });
 
+        for (ActionListener listener : vista.getTienda().getActionListeners()) {
+            vista.getTienda().removeActionListener(listener);
+        }
         vista.getTienda().addActionListener(e -> {
             abrirTienda();
         });
 
+        for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
+            vista.getBtnExit().removeActionListener(listener);
+        }
         vista.getIntercambios().addActionListener(e -> {
             try {
                 abrirIntercambios();
@@ -152,6 +170,9 @@ public class BannerEmployeeC implements Controller {
             }
         });
 
+        for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
+            vista.getBtnExit().removeActionListener(listener);
+        }
         vista.getBtnExit().addActionListener(e -> {
             this.frame.changeCurrentUser(new UnregisteredClient(true));
             abrirWelcome();

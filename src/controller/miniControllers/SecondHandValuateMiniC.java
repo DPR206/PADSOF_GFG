@@ -1,7 +1,7 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.MaxiValuateSecondHandC;
+import controller.maxiPanels.MaxiValuateSecondHandC;
 import controller.browserControllers.AbstractBrowserC;
 import model.product.SecondHandProduct;
 import model.store.Store;

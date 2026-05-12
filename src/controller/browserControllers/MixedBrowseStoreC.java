@@ -1,13 +1,13 @@
 package controller.browserControllers;
 
-import controller.miniControllers.PackMiniC;
+import controller.miniControllers.PackAddToCartMiniC;
 import controller.miniControllers.StoreProductMiniC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
-import view.browserPanels.MixedBrowseStoreP;
+import view.browserPanels.MixedBrowseStoreAddToCartP;
 import view.miniPanels.*;
 
 import javax.swing.text.BadLocationException;
@@ -22,7 +22,7 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public MixedBrowseStoreC(App frame, Store model, MixedBrowseStoreP view) throws BadLocationException {
+    public MixedBrowseStoreC(App frame, Store model, MixedBrowseStoreAddToCartP view) throws BadLocationException {
         super(frame, view, model);
     }
 
@@ -42,10 +42,10 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
             ex.printStackTrace();
         }
 
-        for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
-            new PackMiniC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
+        for (AbstractMiniP miniPanel : super.getView().getFirstMiniPanels()) {
+            new PackAddToCartMiniC(super.getFrame(), super.getModel(), (PackToBuyMiniP) miniPanel, this, super.getView());
         }
-        for (MiniPanel miniPanel : super.getView().getSecondMiniPanels()) {
+        for (AbstractMiniP miniPanel : super.getView().getSecondMiniPanels()) {
             new StoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
                     super.getView());
         }

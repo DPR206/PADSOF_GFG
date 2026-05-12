@@ -3,7 +3,7 @@ package view.browserPanels;
 import model.order.Cart;
 import model.product.Pack;
 import model.product.StoreProduct;
-import view.miniPanels.PackMiniCartP;
+import view.miniPanels.PackCartMiniP;
 import view.miniPanels.StoreProductMiniCart;
 
 import javax.swing.*;
@@ -61,7 +61,7 @@ public class MixedBrowseCartP extends AbstractMixedBrowserP<Pack, StoreProduct> 
 
     @Override
     public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
-        PackMiniCartP miniPack = new PackMiniCartP(item, index, "Add to Cart", ".\\resources\\app\\cart.png", cart);
+        PackCartMiniP miniPack = new PackCartMiniP(item, index, "Add to Cart", ".\\resources\\app\\cart.png", cart);
         super.addFirstMiniPanel(miniPack);
         this.add(miniPack);
     }

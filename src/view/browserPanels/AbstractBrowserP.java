@@ -1,7 +1,7 @@
 package view.browserPanels;
 
 import model.store.BetterPager;
-import view.miniPanels.MiniPanel;
+import view.miniPanels.AbstractMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -20,7 +20,7 @@ public abstract class AbstractBrowserP<G> extends JPanel {
     private final JButton lastPage = new JButton("Last Page >>");
     private final BetterPager<G> pager = new BetterPager<>();
     private int currentPageNum;
-    private List<MiniPanel> miniPanels = new ArrayList<>();
+    private List<AbstractMiniP> miniPanels = new ArrayList<>();
     private List<G> itemList = new ArrayList<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -67,7 +67,7 @@ public abstract class AbstractBrowserP<G> extends JPanel {
      * Add mini panel.
      * @param newMiniPanel the new mini panel
      */
-    public void addMiniPanel(MiniPanel newMiniPanel) {
+    public void addMiniPanel(AbstractMiniP newMiniPanel) {
         this.miniPanels.add(newMiniPanel);
     }
 
@@ -123,7 +123,7 @@ public abstract class AbstractBrowserP<G> extends JPanel {
      * Gets mini panels.
      * @return the mini panels
      */
-    public List<MiniPanel> getMiniPanels() {
+    public List<AbstractMiniP> getMiniPanels() {
         return miniPanels;
     }
 
@@ -131,7 +131,7 @@ public abstract class AbstractBrowserP<G> extends JPanel {
      * Sets mini panels.
      * @param newMiniPanels the new mini panels
      */
-    public void setMiniPanels(List<MiniPanel> newMiniPanels) {
+    public void setMiniPanels(List<AbstractMiniP> newMiniPanels) {
         this.miniPanels = newMiniPanels;
     }
 

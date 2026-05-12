@@ -5,7 +5,7 @@ import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseSecondHandProductsP;
-import view.miniPanels.MiniPanel;
+import view.miniPanels.AbstractMiniP;
 import view.miniPanels.SecondHandMiniP;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class BrowseValuationProductsC extends AbstractBrowserC<SecondHandProduct
             throw new RuntimeException();
         }
 
-        for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
+        for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new SecondHandValuateMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
                     super.getView());
         }

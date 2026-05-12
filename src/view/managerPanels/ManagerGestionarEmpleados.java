@@ -4,7 +4,7 @@ import model.store.Store;
 import model.user.Employee;
 import view.App;
 import view.browserPanels.BrowseUsersP;
-import view.miniPanels.EmployeeMini;
+import view.miniPanels.EmployeeMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -78,7 +78,7 @@ public class ManagerGestionarEmpleados extends JPanel {
         int index = 1;
 
         for (Employee emp : emps) {
-            mainThings.add(new EmployeeMini(emp, index));
+            mainThings.add(new EmployeeMiniP(emp, index));
             index++;
         }
 

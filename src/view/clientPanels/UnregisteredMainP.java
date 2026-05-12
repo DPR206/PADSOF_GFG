@@ -1,6 +1,6 @@
 package view.clientPanels;
 
-import view.browserPanels.MixedBrowseStoreP;
+import view.browserPanels.MixedBrowseStoreAddToCartP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -13,14 +13,14 @@ public class UnregisteredMainP extends JPanel {
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
     private SearchPanel filterP = new SearchPanel();
-    private MixedBrowseStoreP searchingP;
+    private MixedBrowseStoreAddToCartP searchingP;
     private JPanel productSearch;
     private JPanel others;
     private CardLayout cardLayout = new CardLayout();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public UnregisteredMainP() throws BadLocationException {
-        searchingP = new MixedBrowseStoreP();
+        searchingP = new MixedBrowseStoreAddToCartP();
 
         configurarEstructura();
     }
@@ -57,7 +57,7 @@ public class UnregisteredMainP extends JPanel {
         this.bottom = newBottom;
     }
 
-    public MixedBrowseStoreP getBrowsePanel() {
+    public MixedBrowseStoreAddToCartP getBrowsePanel() {
         return this.searchingP;
     }
 
@@ -113,19 +113,19 @@ public class UnregisteredMainP extends JPanel {
         this.search = newSearch;
     }
 
-    public MixedBrowseStoreP getSearching() {
+    public MixedBrowseStoreAddToCartP getSearching() {
         return searchingP;
     }
 
-    public void setSearching(MixedBrowseStoreP newSearching) {
+    public void setSearching(MixedBrowseStoreAddToCartP newSearching) {
         this.searchingP = newSearching;
     }
 
-    public MixedBrowseStoreP getSearchingP() {
+    public MixedBrowseStoreAddToCartP getSearchingP() {
         return searchingP;
     }
 
-    public void setSearchingP(MixedBrowseStoreP newSearchingP) {
+    public void setSearchingP(MixedBrowseStoreAddToCartP newSearchingP) {
         this.searchingP = newSearchingP;
     }
 

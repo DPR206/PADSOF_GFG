@@ -10,7 +10,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-public class ThreeButtonSecondHandMiniP extends MiniPanel {
+public class ThreeButtonSecondHandMiniP extends AbstractMiniP {
     private final JButton firstButton;
     private final JButton secondButton;
     private final JButton thirdButton;

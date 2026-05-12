@@ -1,5 +1,6 @@
-package controller;
+package controller.maxiPanels;
 
+import controller.Controller;
 import controller.browserControllers.BrowseValuationProductsC;
 import model.product.ConservationStatus;
 import model.store.Store;

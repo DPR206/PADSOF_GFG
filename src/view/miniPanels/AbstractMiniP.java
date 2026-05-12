@@ -3,9 +3,9 @@ package view.miniPanels;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class MiniPanel extends JPanel {
+public abstract class AbstractMiniP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public MiniPanel() {
+    public AbstractMiniP() {
     }
 
     @Override

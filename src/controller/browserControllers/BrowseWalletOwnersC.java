@@ -5,7 +5,7 @@ import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
 import view.browserPanels.BrowseWalletOwnersP;
-import view.miniPanels.MiniPanel;
+import view.miniPanels.AbstractMiniP;
 import view.miniPanels.UserMiniP;
 
 import javax.swing.text.BadLocationException;
@@ -41,7 +41,7 @@ public class BrowseWalletOwnersC extends AbstractBrowserC<RegisteredClient> {
             ex.printStackTrace();
         }
 
-        for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
+        for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new WalletOwnerMiniC(super.getFrame(), super.getModel(), (UserMiniP) miniPanel);
         }
     }

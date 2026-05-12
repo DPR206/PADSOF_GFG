@@ -10,7 +10,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-public class SecondHandMiniP extends MiniPanel {
+public class SecondHandMiniP extends AbstractMiniP {
     private final JButton button;
     private final SecondHandProduct secondHandProduct;
     private final JLabel productImage;

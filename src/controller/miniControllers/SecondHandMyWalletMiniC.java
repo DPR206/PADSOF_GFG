@@ -3,15 +3,15 @@ package controller.miniControllers;
 import controller.Controller;
 import controller.browserControllers.AbstractBrowserC;
 import controller.clientControllers.CartPaymentC;
-import controller.clientControllers.RegisteredSecondHandC;
+import controller.maxiPanels.MaxiSecondHandAddToOfferC;
 import model.product.SecondHandProduct;
 import model.store.Parameter;
 import model.store.Store;
 import view.App;
-import view.MaxiSecondHandP;
 import view.browserPanels.AbstractBrowserP;
 import view.clientPanels.PaymentP;
 import view.clientPanels.RegisteredMainP;
+import view.maxiPanels.MaxiSecondHandP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
@@ -57,7 +57,7 @@ public class SecondHandMyWalletMiniC implements Controller {
             public void mouseClicked(MouseEvent e) {
                 try {
                     MaxiSecondHandP newView = new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
-                    new RegisteredSecondHandC(frame, model, newView);
+                    new MaxiSecondHandAddToOfferC(frame, model, newView);
                     ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                                 .add(newView, "SECONDHAND_PRODUCT");
                     ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()
@@ -76,7 +76,7 @@ public class SecondHandMyWalletMiniC implements Controller {
                     try {
                         MaxiSecondHandP newView =
                                 new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
-                        new RegisteredSecondHandC(frame, model, newView);
+                        new MaxiSecondHandAddToOfferC(frame, model, newView);
                         ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                                     .add(newView, "SECONDHAND_PRODUCT");
                         ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()

@@ -2,27 +2,23 @@ package view.miniPanels;
 
 import model.discount.DiscountType;
 import model.discount.ProductFixedPercentage;
-import model.order.Cart;
 import model.product.Pack;
 import model.product.StoreProduct;
 
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 import static main.Main.brownColour;
 import static view.ImageAdder.getPackImagePanel;
 import static view.ImageAdder.getScaledImage;
 
-public class PackMiniCartP extends MiniPanel {
-    private final JButton deleteFromCart = new JButton("Delete from Cart");
-    private final JButton applyChanges = new JButton("Apply Changes");
+public class PackToBuyMiniP extends AbstractMiniP {
+    private final JButton button;
     private final Pack p;
     private final JTextPane packInfo;
     private final JPanel packImage;
-    private final JSpinner unitSpinner;
-
-    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new Pack mini p.
@@ -32,20 +28,22 @@ public class PackMiniCartP extends MiniPanel {
      * @param iconPath   the icon path
      * @throws BadLocationException the bad location exception
      */
-    public PackMiniCartP(Pack p, int index, String buttonName, String iconPath, Cart cart) throws BadLocationException {
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    public PackToBuyMiniP(Pack p, int index, String buttonName, String iconPath) throws BadLocationException {
         super();
 
         this.p = p;
         int width = 350;
-        int height = 80;
+        int height = 60;
         this.setLayout(new FlowLayout());
 
-        deleteFromCart.setPreferredSize(new Dimension(buttonName.length() * 15, height));
+        button = new JButton(buttonName);
+        button.setPreferredSize(new Dimension(buttonName.length() * 15, height));
         if (iconPath != null) {
-            deleteFromCart.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
+            button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
         }
 
-        this.packImage = getPackImagePanel(p, height, height);
+        this.packImage = getPackImagePanel(p, height, height);//getImageLabel(p.getPhoto(), height, height);
         this.packInfo = new JTextPane();
         this.packInfo.setEditable(false);
         this.packInfo.setFocusable(false);
@@ -75,31 +73,19 @@ public class PackMiniCartP extends MiniPanel {
             doc.insertString(doc.getLength(), "\n", attributes);
         }
 
-        packInfo.setPreferredSize(new Dimension(width + 16, height));
-
-        int initialValue;
-        if (cart != null) {
-            doc.insertString(doc.getLength(), ("Uds: " + cart.getPacksHashMap().get(p) + "\n"), attributes);
-            initialValue = cart.getPacksHashMap().get(p);
-        } else {
-            initialValue = 1;
-        }
-        SpinnerModel model = new SpinnerNumberModel(initialValue, 1, 99, 1);
-        unitSpinner = new JSpinner(model);
-
-        unitSpinner.setPreferredSize(new Dimension(50, 30));
-
-        packInfo.setPreferredSize(new Dimension(width + 16, height));
-
         for (StoreProduct product : p.getProducts()) {
             if (product.getStock() == 0) {
-                StyleConstants.setForeground(attributes, Color.RED);
-                StyleConstants.setItalic(attributes, true);
-                doc.insertString(doc.getLength(), ("Last one!"), attributes);
-                unitSpinner.setEnabled(false);
-                applyChanges.setEnabled(false);
+                button.setEnabled(false);
             }
         }
+        if (!button.isEnabled()) {
+            StyleConstants.setForeground(attributes, Color.RED);
+            StyleConstants.setItalic(attributes, true);
+            button.setEnabled(false);
+            doc.insertString(doc.getLength(), "Out of stock", attributes);
+        }
+
+        packInfo.setPreferredSize(new Dimension(width + 16, height));
 
         JTextPane indexNum = new JTextPane();
         indexNum.setEditable(false);
@@ -114,23 +100,17 @@ public class PackMiniCartP extends MiniPanel {
         this.add(indexNum);
         this.add(packImage);
         this.add(packInfo);
-        this.add(new JLabel("Units:"));
-        this.add(unitSpinner);
-        this.add(applyChanges);
-        this.add(deleteFromCart);
+        this.add(button);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
-    public JButton getApplyChanges() {
-        return applyChanges;
-    }
-
     /**
-     * @return the deleteFromCart
+     * Gets button.
+     * @return the button
      */
-    public JButton getDeleteFromCart() {
-        return deleteFromCart;
+    public JButton getButton() {
+        return button;
     }
 
     /**
@@ -157,7 +137,11 @@ public class PackMiniCartP extends MiniPanel {
         return packInfo;
     }
 
-    public JSpinner getUnitSpinner() {
-        return unitSpinner;
+    /**
+     * It makes it possible to assign a controller to this panel's components
+     * @param c the desired controller
+     */
+    public void setController(ActionListener c) {
+        button.addActionListener(c);
     }
 }

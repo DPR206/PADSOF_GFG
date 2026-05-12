@@ -13,7 +13,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-public class StoreProductMiniP extends MiniPanel {
+public class StoreProductMiniP extends AbstractMiniP {
     private static final long serialVersionUID = 1L;
     private final JButton button;
     private final StoreProduct storeProduct;
@@ -29,7 +29,7 @@ public class StoreProductMiniP extends MiniPanel {
         this.setLayout(new FlowLayout());
 
         button = new JButton(buttonName);
-        button.setPreferredSize(new Dimension(buttonName.length()*15, height));
+        button.setPreferredSize(new Dimension(buttonName.length() * 15, height));
         if (iconPath != null) {
             button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
         }
@@ -68,8 +68,10 @@ public class StoreProductMiniP extends MiniPanel {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
             button.setEnabled(false);
+            doc.insertString(doc.getLength(), "Out of stock", attributes);
+        } else {
+            doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
         }
-        doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
 
         productInfo.setPreferredSize(new Dimension(width, height));
 

@@ -1,6 +1,7 @@
-package view;
+package view.maxiPanels;
 
 import model.product.SecondHandProduct;
+import view.App;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -15,7 +16,7 @@ public class MaxiSecondHandP extends JPanel {
     private final App app;
     private final JTextPane productInfo;
     private final SecondHandProduct product;
-    private final JButton addToOffer;
+    private final JButton button;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public MaxiSecondHandP(App app, SecondHandProduct product, String buttonName) throws BadLocationException {
@@ -27,8 +28,8 @@ public class MaxiSecondHandP extends JPanel {
         productInfo.setEditable(false);
         productInfo.setFocusable(false);
 
-        addToOffer = new JButton(buttonName);
-        addToOffer.setPreferredSize(new Dimension(100, 50));
+        button = new JButton(buttonName);
+        button.setPreferredSize(new Dimension(100, 50));
 
         paintEverything();
     }
@@ -65,7 +66,7 @@ public class MaxiSecondHandP extends JPanel {
 
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(productInfo, BorderLayout.CENTER);
-        rightPanel.add(addToOffer, BorderLayout.SOUTH);
+        rightPanel.add(button, BorderLayout.SOUTH);
 
         this.add(rightPanel, BorderLayout.EAST);
 
@@ -73,5 +74,13 @@ public class MaxiSecondHandP extends JPanel {
 
         this.revalidate();
         this.repaint();
+    }
+
+    public JButton getButton() {
+        return button;
+    }
+
+    public SecondHandProduct getProduct() {
+        return product;
     }
 }

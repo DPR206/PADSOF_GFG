@@ -1,28 +1,27 @@
 package controller.clientControllers;
 
-import javax.swing.JOptionPane;
-
 import controller.Controller;
-import model.user.RegisteredClient;
-import model.user.UnregisteredClient;
-import model.user.User;
+import controller.browserControllers.MixedBrowseCartC;
+import model.store.Store;
+import model.user.*;
 import view.App;
-import view.clientPanels.CarritoP;
-import view.clientPanels.OrdersP;
-import view.clientPanels.PaymentP;
+import view.clientPanels.*;
 
-public class CarritoC implements Controller{
-	private App frame;
-	private CarritoP view;
-	private User user;
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+public class CarritoC implements Controller {
+    private App frame;
+    private CarritoP view;
+    private User user;
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public CarritoC(CarritoP carritoVista, App frame) {
-    	this.frame = frame;
-    	this.view = carritoVista;
-    	this.user = frame.getUser();
+        this.frame = frame;
+        this.view = carritoVista;
+        this.user = frame.getUser();
 
-    	configurarVisibilidad();
+        configurarVisibilidad();
         initializeActions();
     }
 
@@ -33,47 +32,60 @@ public class CarritoC implements Controller{
 
     public void initializeActions() {
 
-    	if(user instanceof RegisteredClient c) {
-    		view.setTotal(c.getC().calculatePrice());
-		} else if(user instanceof UnregisteredClient c) {
-			view.setTotal(c.getCart().calculatePrice());
-		}
+        if (user instanceof RegisteredClient c) {
+            view.setTotal(c.getC().calculatePrice());
+        } else if (user instanceof UnregisteredClient c) {
+            view.setTotal(c.getCart().calculatePrice());
+        }
 
-    	view.getBtnOrders().addActionListener(e -> {
-    		abrirOrders();
-    	});
+        view.getBtnOrders().addActionListener(e -> {
+            abrirOrders();
+        });
 
-    	view.getBtnPay().addActionListener(e -> {
-    		makePayment();
-    	});
+        view.getBtnPay().addActionListener(e -> {
+            makePayment();
+        });
 
-    	view.getBtnDeleteAll().addActionListener(e -> {
-    		deleteAll();
-    	});
+        view.getBtnDeleteAll().addActionListener(e -> {
+            deleteAll();
+        });
     }
 
-	private void deleteAll() {
+    private void deleteAll() {
 
-		int respuesta = JOptionPane.showConfirmDialog(view,
-	            "Are you sure you want to empty the cart?", "Confirm", JOptionPane.YES_NO_OPTION);
+        int respuesta = JOptionPane.showConfirmDialog(view, "Are you sure you want to empty the cart?", "Confirm",
+                JOptionPane.YES_NO_OPTION);
 
-		if(user instanceof RegisteredClient c) {
-			if (respuesta == JOptionPane.YES_OPTION) {
-		    	c.getC().emptyCart();
-		        //actualizarInterfazCarrito();
-		    }
-		} else if(user instanceof UnregisteredClient c) {
-			if (respuesta == JOptionPane.YES_OPTION) {
-		    	c.getCart().emptyCart();
-		        //actualizarInterfazCarrito();
-		    }
-		}
-	}
+        if (user instanceof RegisteredClient c) {
+            if (respuesta == JOptionPane.YES_OPTION) {
+                c.getC().emptyCart();
+                updateInterface();
+            }
+        } else if (user instanceof UnregisteredClient c) {
+            if (respuesta == JOptionPane.YES_OPTION) {
+                c.getCart().emptyCart();
+                updateInterface();
+            }
+        }
+    }
 
-	private void makePayment() {
+    private void updateInterface() {
+        try {
+            CarritoP carritoVista = new CarritoP();
+            new CarritoC(carritoVista, frame);
+            new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems());
+            frame.addCard(carritoVista, "CART");
+            frame.changeVisibleCard("CART");
+            frame.getLastShownPanels().removeLast();
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 
-        if(user instanceof RegisteredClient c) {
-        	double totalActual = c.getC().calculatePrice();
+    private void makePayment() {
+
+        if (user instanceof RegisteredClient c) {
+            double totalActual = c.getC().calculatePrice();
 
             if (totalActual <= 0) {
                 JOptionPane.showMessageDialog(view, "Your cart is empty");
@@ -81,28 +93,25 @@ public class CarritoC implements Controller{
             }
 
             PaymentP ventana = new PaymentP(frame, totalActual);
-
-            ventana.getBtnConfirmar().addActionListener(ev -> {
-                //actualizarInterfazCarrito();
-            });
+            new CartPaymentC(frame, ventana);
 
             ventana.setVisible(true);
-        } else if(user instanceof UnregisteredClient) {
-        	JOptionPane.showMessageDialog(view, "You must be logged in to make a payment.");
-        	frame.changeVisibleCard("SIGNUP");
+        } else if (user instanceof UnregisteredClient) {
+            JOptionPane.showMessageDialog(view, "You must be logged in to make a payment.");
+            frame.changeVisibleCard("SIGNUP");
         }
-	}
+    }
 
-	private void abrirOrders() {
+    private void abrirOrders() {
 
-		if (user instanceof RegisteredClient regClient) {
+        if (user instanceof RegisteredClient regClient) {
             OrdersP pagOrders = new OrdersP();
             new OrdersC(pagOrders, regClient, frame);
 
             frame.addCard(pagOrders, "ORDERS_REGISTERED");
             frame.changeVisibleCard("ORDERS_REGISTERED");
         }
-	}
+    }
 
 	/*public void actualizarInterfazCarrito() {
 	    view.getPanelCentral().removeAll();

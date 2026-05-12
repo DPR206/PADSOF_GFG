@@ -91,7 +91,7 @@ public class RegisteredClient extends User implements Serializable {
         super(UserType.REGISTERED_CLIENT, password, userName, asc);
         this.registerDate = registerDate;
         this.dni = dni;
-        this.c = new Cart();
+        this.c = new Cart(this);
         this.wallet = new Wallet();
         this.searcher = new Searcher(new SearchStoreProducts(true));
         this.numExchanges = 0;

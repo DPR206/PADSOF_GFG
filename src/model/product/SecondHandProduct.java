@@ -36,7 +36,8 @@ public class SecondHandProduct extends Product implements Serializable {
 
     /*----------------------------------------------------------CONSTRUCTORS------------------------------------------------------------------*/
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * A second-hand product's general constructor
      * @param id              the exchange's id
@@ -212,7 +213,37 @@ public class SecondHandProduct extends Product implements Serializable {
         Store.getInstance().sendNotificationEmployees(notification2);
     }
 
+    /**
+     * Pays the valuation of a second-hand product
+     * @throws InvalidCardNumberException        the card number was invalid
+     * @throws FailedInternetConnectionException the Internet connection failed
+     * @throws OrderRejectedException            the order was rejected
+     */
+    public void payValuation(String cardNumber)
+            throws InvalidCardNumberException, FailedInternetConnectionException, OrderRejectedException {
+
+        System.out.println(TeleChargeAndPaySystem.isValidCardNumber(cardNumber));
+        TeleChargeAndPaySystem.charge(cardNumber, "Valuation", Parameter.getParam().getValuationCost(), true);
+
+        this.setPaidValuation(true);
+        Statistics.getINSTANCE()
+                  .addRevenue(Parameter.getParam().getValuationCost(), RevenueType.VALUATION, LocalDate.now(),
+                          Collections.emptyList());
+
+        NotificationPayment notification =
+                new NotificationPayment(LocalDateTime.now(), false, true, NotificationType.PAYMENT);
+        notification.FullNotification("valuation");
+        this.owner.getNotificationHistory().addNotification(notification);
+
+        NotificationEmployeeValuation notification2 =
+                new NotificationEmployeeValuation(LocalDateTime.now(), false, true,
+                        NotificationType.EMPLOYEE_VALUATION);
+        notification2.FullNotification(this);
+        Store.getInstance().sendNotificationEmployees(notification2);
+    }
+
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * Obtains if the product is available
      * @return true if the product is available, false if else

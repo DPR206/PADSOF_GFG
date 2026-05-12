@@ -17,6 +17,7 @@ import static view.ImageAdder.getScaledImage;
 public class StoreProductMiniCart extends MiniPanel {
     private static final long serialVersionUID = 1L;
     private final JButton deleteFromCart = new JButton("Delete from Cart");
+    private final JButton applyChanges = new JButton("Apply Changes");
     private final StoreProduct storeProduct;
     private final JLabel productImage;
     private final JTextPane productInfo;
@@ -63,6 +64,12 @@ public class StoreProductMiniCart extends MiniPanel {
             doc.insertString(doc.getLength(), "\n", attributes);
         }
 
+        if (product.getStock() == 0) {
+            StyleConstants.setForeground(attributes, Color.RED);
+            StyleConstants.setItalic(attributes, true);
+            doc.insertString(doc.getLength(), ("Last ones!"), attributes);
+        }
+
 //        if (product.getStock() == 0) {
 //            StyleConstants.setForeground(attributes, Color.RED);
 //            StyleConstants.setItalic(attributes, true);
@@ -97,9 +104,18 @@ public class StoreProductMiniCart extends MiniPanel {
         this.add(productInfo);
         this.add(new JLabel("Units:"));
         this.add(unitSpinner);
+        this.add(applyChanges);
+        if (product.getStock() == 0) {
+            unitSpinner.setEnabled(false);
+            applyChanges.setEnabled(false);
+        }
         this.add(deleteFromCart);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+    }
+
+    public JButton getApplyChanges() {
+        return applyChanges;
     }
 
     /**

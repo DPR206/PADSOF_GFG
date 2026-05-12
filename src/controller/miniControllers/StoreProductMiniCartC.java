@@ -49,7 +49,6 @@ public class StoreProductMiniCartC implements Controller {
         if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
             view.setCart(((RegisteredClient) frame.getUser()).getC());
         } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-            System.out.println("A");
             view.setCart(((UnregisteredClient) frame.getUser()).getCart());
         }
 
@@ -74,6 +73,20 @@ public class StoreProductMiniCartC implements Controller {
                 ((RegisteredClient) frame.getUser()).deleteCart(view.getStoreProduct());
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
                 ((UnregisteredClient) frame.getUser()).deleteCart(view.getStoreProduct());
+            }
+            try {
+                browserPanel.paintEverything();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+            browserController.initializeActionsForMiniPanels();
+        });
+
+        view.getApplyChanges().addActionListener(e -> {
+            if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
+                ((RegisteredClient) frame.getUser()).getC().addProduct(view.getStoreProduct());
+            } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+                ((UnregisteredClient) frame.getUser()).getCart().addProduct(view.getStoreProduct());
             }
             try {
                 browserPanel.paintEverything();

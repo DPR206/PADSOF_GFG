@@ -57,7 +57,6 @@ public class CartPaymentC {
                 new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems());
                 frame.addCard(carritoVista, "CART");
                 frame.changeVisibleCard("CART");
-                frame.getLastShownPanels().removeLast();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

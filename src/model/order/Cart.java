@@ -468,8 +468,37 @@ public class Cart implements Serializable {
      * Empty the cart
      */
     public void emptyCart() {
+        for (StoreProduct product : this.sp.keySet()) {
+            product.increaseStock(this.sp.get(product));
+        }
+        for (Pack pack : this.packs.keySet()) {
+            for (StoreProduct product : pack.getProducts()) {
+                product.increaseStock(this.packs.get(pack));
+            }
+        }
         this.sp.clear();
         this.packs.clear();
+    }
+
+    public void changeProductUds(StoreProduct product, int uds) {
+        int realUds = Math.min(product.getStock(), uds);
+        int stockAdjust = realUds - sp.get(product); // Las uds que hay que quitar (si se reduce será negativo)
+        product.setStock(product.getStock() - stockAdjust);
+        sp.remove(product);
+        sp.put(product, realUds);
+    }
+
+    public void changePackUds(Pack pack, int uds) {
+        int realUds = uds;
+        for (StoreProduct product : pack.getProducts()) {
+            realUds = Math.min(product.getStock(), realUds);
+        }
+        for (StoreProduct product : pack.getProducts()) {
+            int stockAdjust = realUds - sp.get(product); // Las uds que hay que quitar (si se reduce será negativo)
+            product.setStock(product.getStock() - stockAdjust);
+        }
+        packs.remove(pack);
+        packs.put(pack, realUds);
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

@@ -40,6 +40,18 @@ public class PackMiniCartC implements Controller {
         initializeActions();
     }
 
+    public void updateInterface() {
+        try {
+            CarritoP carritoVista = new CarritoP();
+            new CarritoC(carritoVista, frame);
+            new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
+            frame.addCard(carritoVista, "CART");
+            frame.changeVisibleCard("CART");
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
     @Override
     public void initializeActions() {
         view.setFocusable(true);
@@ -78,42 +90,41 @@ public class PackMiniCartC implements Controller {
             } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
                 ((UnregisteredClient) frame.getUser()).deleteCart(view.getPack());
             }
-            try {
-                browserPanel.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            browserController.initializeActionsForMiniPanels();
+            updateInterface();
+//            try {
+//                CarritoP carritoVista = new CarritoP();
+//                new CarritoC(carritoVista, frame);
+//                new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems());
+//            } catch (BadLocationException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//            try {
+//                browserPanel.paintEverything();
+//            } catch (BadLocationException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//            browserController.initializeActionsForMiniPanels();
         });
 
         view.getApplyChanges().addActionListener(e -> {
-            for (int i = 0; i < (int) view.getUnitSpinner().getValue(); i++) {
-                boolean dont = false;
-                for (StoreProduct product : view.getPack().getProducts()) {
-                    if (product.getStock() == 0) {
-                        dont = true;
-                        break;
-                    }
-                }
-                if (!dont) {
-                    if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
-                        ((RegisteredClient) frame.getUser()).getC().addPack(view.getPack());
-                    } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-                        ((UnregisteredClient) frame.getUser()).getCart().addPack(view.getPack());
-                    }
-                }
+            if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
+                ((RegisteredClient) frame.getUser()).getC().changePackUds(view.getPack(),
+                        (int) view.getUnitSpinner().getValue());
+            } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+                ((UnregisteredClient) frame.getUser()).getCart().changePackUds(view.getPack(),
+                        (int) view.getUnitSpinner().getValue());
             }
-
-            try {
-                CarritoP carritoVista = new CarritoP();
-                new CarritoC(carritoVista, frame);
-                new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
-                frame.addCard(carritoVista, "CART");
-                frame.changeVisibleCard("CART");
-                frame.getLastShownPanels().removeLast();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
+            updateInterface();
+//            try {
+//                CarritoP carritoVista = new CarritoP();
+//                new CarritoC(carritoVista, frame);
+//                new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
+//                frame.addCard(carritoVista, "CART");
+//                frame.changeVisibleCard("CART");
+//                frame.getLastShownPanels().removeLast();
+//            } catch (BadLocationException ex) {
+//                throw new RuntimeException(ex);
+//            }
 //            try {
 //                browserPanel.paintEverything();
 //            } catch (BadLocationException ex) {

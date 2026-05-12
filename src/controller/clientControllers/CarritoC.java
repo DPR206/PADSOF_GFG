@@ -71,12 +71,12 @@ public class CarritoC implements Controller {
 
     private void updateInterface() {
         try {
+            System.out.println("Updating cart..");
             CarritoP carritoVista = new CarritoP();
             new CarritoC(carritoVista, frame);
             new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems());
             frame.addCard(carritoVista, "CART");
             frame.changeVisibleCard("CART");
-            frame.getLastShownPanels().removeLast();
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }

@@ -20,8 +20,9 @@ public class PackMiniCartP extends MiniPanel {
     private final Pack p;
     private final JTextPane packInfo;
     private final JPanel packImage;
-    private JSpinner unitSpinner;
-    private Cart cart = null;
+    private final JSpinner unitSpinner;
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new Pack mini p.
@@ -31,8 +32,7 @@ public class PackMiniCartP extends MiniPanel {
      * @param iconPath   the icon path
      * @throws BadLocationException the bad location exception
      */
-    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniCartP(Pack p, int index, String buttonName, String iconPath) throws BadLocationException {
+    public PackMiniCartP(Pack p, int index, String buttonName, String iconPath, Cart cart) throws BadLocationException {
         super();
 
         this.p = p;
@@ -157,7 +157,7 @@ public class PackMiniCartP extends MiniPanel {
         return packInfo;
     }
 
-    public void setCart(Cart c) {
-        this.cart = c;
+    public JSpinner getUnitSpinner() {
+        return unitSpinner;
     }
 }

@@ -30,6 +30,12 @@ public class BrowseCartC extends MixedBrowserController<Pack, StoreProduct> {
 
     @Override
     public void initializeActionsForMiniPanels() {
+        if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
+            ((BrowseCartP) super.getView()).setCart(((RegisteredClient) super.getFrame().getUser()).getC());
+        } else if (super.getFrame().getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+            ((BrowseCartP) super.getView()).setCart(((UnregisteredClient) super.getFrame().getUser()).getCart());
+        }
+
         try {
             if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
                 super.getView().setFirstItemList(((RegisteredClient) super.getFrame().getUser()).getC().getPacks());

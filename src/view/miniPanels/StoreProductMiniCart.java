@@ -22,10 +22,9 @@ public class StoreProductMiniCart extends MiniPanel {
     private final JLabel productImage;
     private final JTextPane productInfo;
     private JSpinner unitSpinner;
-    private Cart cart = null;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public StoreProductMiniCart(StoreProduct product, int index) throws BadLocationException {
+    public StoreProductMiniCart(StoreProduct product, int index, Cart cart) throws BadLocationException {
         this.storeProduct = product;
         int width = 350;
         int height = 80;
@@ -137,10 +136,6 @@ public class StoreProductMiniCart extends MiniPanel {
 
     public JSpinner getUnitSpinner() {
         return unitSpinner;
-    }
-
-    public void setCart(Cart newCart) {
-        this.cart = newCart;
     }
 
     /**

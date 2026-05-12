@@ -1,13 +1,16 @@
 package controller.miniControllers;
 
 import controller.Controller;
+import controller.browserControllers.BrowseCartC;
 import controller.browserControllers.MixedBrowserController;
+import controller.clientControllers.CarritoC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
 import view.browserPanels.MixedBrowserPanel;
+import view.clientPanels.CarritoP;
 import view.miniPanels.StoreProductMiniCart;
 
 import javax.swing.*;
@@ -46,11 +49,11 @@ public class StoreProductMiniCartC implements Controller {
     public void initializeActions() {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
-            view.setCart(((RegisteredClient) frame.getUser()).getC());
-        } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-            view.setCart(((UnregisteredClient) frame.getUser()).getCart());
-        }
+//        if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
+//            view.setCart(((RegisteredClient) frame.getUser()).getC());
+//        } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+//            view.setCart(((UnregisteredClient) frame.getUser()).getCart());
+//        }
 //        try {
 //            browserPanel.paintEverything();
 //        } catch (BadLocationException ex) {
@@ -89,17 +92,38 @@ public class StoreProductMiniCartC implements Controller {
         });
 
         view.getApplyChanges().addActionListener(e -> {
-            if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
-                ((RegisteredClient) frame.getUser()).getC().addProduct(view.getStoreProduct());
-            } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-                ((UnregisteredClient) frame.getUser()).getCart().addProduct(view.getStoreProduct());
+            for (int i = 0; i < (int) view.getUnitSpinner().getValue(); i++) {
+                if (view.getStoreProduct().getStock() != 0) {
+                    if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
+
+                        ((RegisteredClient) frame.getUser()).getC().addProduct(view.getStoreProduct());
+                    } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+                        ((UnregisteredClient) frame.getUser()).getCart().addProduct(view.getStoreProduct());
+                    }
+                }
             }
+            CarritoP carritoVista;
             try {
-                browserPanel.paintEverything();
+                carritoVista = new CarritoP();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-            browserController.initializeActionsForMiniPanels();
+
+            new CarritoC(carritoVista, frame);
+            try {
+                new BrowseCartC(frame, model, carritoVista.getCartItems());
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            frame.addCard(carritoVista, "CART");
+            frame.changeVisibleCard("CART");
+//            try {
+//                browserPanel.paintEverything();
+//            } catch (BadLocationException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//            browserController.initializeActionsForMiniPanels();
         });
     }
 }

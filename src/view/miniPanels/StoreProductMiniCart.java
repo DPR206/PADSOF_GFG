@@ -14,7 +14,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-public class StoreProductMiniCart extends MiniPanel {
+public class StoreProductMiniCart extends AbstractMiniP {
     private static final long serialVersionUID = 1L;
     private final JButton deleteFromCart = new JButton("Delete from Cart");
     private final JButton applyChanges = new JButton("Apply Changes");

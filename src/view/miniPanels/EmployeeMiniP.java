@@ -3,7 +3,6 @@ package view.miniPanels;
 import model.user.Employee;
 
 import javax.swing.*;
-import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -11,7 +10,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-public class EmployeeMini extends MiniPanel {
+public class EmployeeMiniP extends AbstractMiniP {
 
     private final JButton gestionar = new JButton("Gestionar");
     private final Employee emp;
@@ -19,7 +18,7 @@ public class EmployeeMini extends MiniPanel {
     private final JLabel employeeIcon;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public EmployeeMini(Employee emp, int index) {
+    public EmployeeMiniP(Employee emp, int index) {
 
         super();
 

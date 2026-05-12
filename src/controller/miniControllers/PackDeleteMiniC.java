@@ -4,13 +4,13 @@ import controller.Controller;
 import model.product.Pack;
 import view.miniPanels.PackMiniP;
 
-public class PackMiniDeleteC implements Controller {
+public class PackDeleteMiniC implements Controller {
 
     public PackMiniP pmd;
     private Pack p;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniDeleteC(PackMiniP pmc, Pack p) {
+    public PackDeleteMiniC(PackMiniP pmc, Pack p) {
         this.pmd = pmc;
         this.p = p;
 

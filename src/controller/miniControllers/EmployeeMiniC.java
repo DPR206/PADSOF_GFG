@@ -7,14 +7,14 @@ import view.App;
 import view.managerPanels.ManagerGestionEmplIndividual;
 import view.miniPanels.UserMiniP;
 
-public class EmployeeMiniController implements Controller {
+public class EmployeeMiniC implements Controller {
 
     private UserMiniP employee;
     private ManagerGestionEmplIndividual mge;
     private App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public EmployeeMiniController(App frame, UserMiniP employee, ManagerGestionEmplIndividual mge) {
+    public EmployeeMiniC(App frame, UserMiniP employee, ManagerGestionEmplIndividual mge) {
         this.employee = employee;
         this.mge = mge;
         this.frame = frame;

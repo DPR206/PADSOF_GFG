@@ -2,7 +2,7 @@ package view.browserPanels;
 
 import model.store.BetterPager;
 import model.store.Parameter;
-import view.miniPanels.MiniPanel;
+import view.miniPanels.AbstractMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -23,8 +23,8 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
     private final JButton lastPage = new JButton("Last Page >>");
     private final BetterPager<G> firstPager = new BetterPager<>();
     private final BetterPager<U> secondPager = new BetterPager<>();
-    private final List<MiniPanel> firstMiniPanels = new ArrayList<>();
-    private final List<MiniPanel> secondMiniPanels = new ArrayList<>();
+    private final List<AbstractMiniP> firstMiniPanels = new ArrayList<>();
+    private final List<AbstractMiniP> secondMiniPanels = new ArrayList<>();
     protected JPanel containerItems;
     private int currentPageNum;
     private List<G> firstItemList = new ArrayList<>();
@@ -92,7 +92,7 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
      * Add mini panel.
      * @param newMiniPanel the new mini panel
      */
-    public void addFirstMiniPanel(MiniPanel newMiniPanel) {
+    public void addFirstMiniPanel(AbstractMiniP newMiniPanel) {
         this.firstMiniPanels.add(newMiniPanel);
         this.containerItems.add(newMiniPanel);
     }
@@ -109,7 +109,7 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
      * Add mini panel.
      * @param newMiniPanel the new mini panel
      */
-    public void addSecondMiniPanel(MiniPanel newMiniPanel) {
+    public void addSecondMiniPanel(AbstractMiniP newMiniPanel) {
         this.secondMiniPanels.add(newMiniPanel);
         this.containerItems.add(newMiniPanel);
     }
@@ -150,7 +150,7 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
      * Gets mini panels.
      * @return the mini panels
      */
-    public List<MiniPanel> getFirstMiniPanels() {
+    public List<AbstractMiniP> getFirstMiniPanels() {
         return firstMiniPanels;
     }
 
@@ -234,7 +234,7 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
      * Gets mini panels.
      * @return the mini panels
      */
-    public List<MiniPanel> getSecondMiniPanels() {
+    public List<AbstractMiniP> getSecondMiniPanels() {
         return secondMiniPanels;
     }
 

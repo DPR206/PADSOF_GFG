@@ -13,7 +13,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
-public class StoreProductMiniP extends MiniPanel {
+public class StoreProductMiniP extends AbstractMiniP {
     private static final long serialVersionUID = 1L;
     private final JButton button;
     private final StoreProduct storeProduct;

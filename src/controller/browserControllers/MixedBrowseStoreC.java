@@ -42,10 +42,10 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
             ex.printStackTrace();
         }
 
-        for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
+        for (AbstractMiniP miniPanel : super.getView().getFirstMiniPanels()) {
             new PackAddToCartMiniC(super.getFrame(), super.getModel(), (PackToBuyMiniP) miniPanel, this, super.getView());
         }
-        for (MiniPanel miniPanel : super.getView().getSecondMiniPanels()) {
+        for (AbstractMiniP miniPanel : super.getView().getSecondMiniPanels()) {
             new StoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
                     super.getView());
         }

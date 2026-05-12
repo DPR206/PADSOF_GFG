@@ -16,7 +16,7 @@ import static view.ImageAdder.getScaledImage;
 /**
  * The type Pack mini p.
  */
-public class PackMiniP extends MiniPanel {
+public class PackMiniP extends AbstractMiniP {
     private final JButton button;
     private final Pack p;
     private final JTextPane packInfo;

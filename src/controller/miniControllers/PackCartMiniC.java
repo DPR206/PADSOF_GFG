@@ -11,7 +11,7 @@ import model.user.*;
 import view.App;
 import view.browserPanels.AbstractMixedBrowserP;
 import view.clientPanels.CarritoP;
-import view.miniPanels.PackMiniCartP;
+import view.miniPanels.PackCartMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -19,16 +19,16 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PackMiniCartC implements Controller {
+public class PackCartMiniC implements Controller {
 
-    private final PackMiniCartP view; /* view -> panel */
+    private final PackCartMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     private final AbstractMixedBrowserC<Pack, StoreProduct> browserController;
     private final AbstractMixedBrowserP<Pack, StoreProduct> browserPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniCartC(App frame, Store model, PackMiniCartP view,
+    public PackCartMiniC(App frame, Store model, PackCartMiniP view,
                          AbstractMixedBrowserC<Pack, StoreProduct> browserController,
                          AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
         this.frame = frame;

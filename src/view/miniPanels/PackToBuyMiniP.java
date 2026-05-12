@@ -14,7 +14,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getPackImagePanel;
 import static view.ImageAdder.getScaledImage;
 
-public class PackToBuyMiniP extends MiniPanel {
+public class PackToBuyMiniP extends AbstractMiniP {
     private final JButton button;
     private final Pack p;
     private final JTextPane packInfo;

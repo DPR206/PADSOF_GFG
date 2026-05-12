@@ -6,7 +6,7 @@ import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
 import view.browserPanels.BrowseSomeonesWalletP;
-import view.miniPanels.MiniPanel;
+import view.miniPanels.AbstractMiniP;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.text.BadLocationException;
@@ -35,7 +35,7 @@ public class MixedBrowseSomeonesWalletC extends AbstractBrowserC<SecondHandProdu
             throw new RuntimeException();
         }
 
-        for (MiniPanel miniPanel : super.getView().getMiniPanels()) {
+        for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
                     super.getView());
         }

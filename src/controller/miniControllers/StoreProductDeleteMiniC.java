@@ -3,17 +3,16 @@ package controller.miniControllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controller.Controller;
 import model.product.Pack;
 import view.miniPanels.StoreProductMiniP;
 
-public class StoreProductMiniDeleteC implements ActionListener {
+public class StoreProductDeleteMiniC implements ActionListener {
 
     private StoreProductMiniP smpd;
     private Pack pack;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public StoreProductMiniDeleteC(StoreProductMiniP spmd, Pack p) {
+    public StoreProductDeleteMiniC(StoreProductMiniP spmd, Pack p) {
         this.smpd = spmd;
         this.pack = p;
     }
@@ -23,6 +22,6 @@ public class StoreProductMiniDeleteC implements ActionListener {
 		if(e.getActionCommand().equals("DELETE")) {
 			pack.eliminateProduct(smpd.getStoreProduct());
 		}
-		
+
 	}
 }

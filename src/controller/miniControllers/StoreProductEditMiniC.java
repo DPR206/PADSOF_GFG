@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class StoreProductMiniEditC implements Controller {
+public class StoreProductEditMiniC implements Controller {
     private final StoreProductMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
@@ -29,7 +29,7 @@ public class StoreProductMiniEditC implements Controller {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public StoreProductMiniEditC(App frame, Store model, StoreProductMiniP view,
+    public StoreProductEditMiniC(App frame, Store model, StoreProductMiniP view,
                                  AbstractMixedBrowserC<Pack, StoreProduct> browserController,
                                  AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
         this.frame = frame;

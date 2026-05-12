@@ -14,7 +14,7 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getPackImagePanel;
 import static view.ImageAdder.getScaledImage;
 
-public class PackMiniCartP extends MiniPanel {
+public class PackCartMiniP extends AbstractMiniP {
     private final JButton deleteFromCart = new JButton("Delete from Cart");
     private final JButton applyChanges = new JButton("Apply Changes");
     private final Pack p;
@@ -32,7 +32,7 @@ public class PackMiniCartP extends MiniPanel {
      * @param iconPath   the icon path
      * @throws BadLocationException the bad location exception
      */
-    public PackMiniCartP(Pack p, int index, String buttonName, String iconPath, Cart cart) throws BadLocationException {
+    public PackCartMiniP(Pack p, int index, String buttonName, String iconPath, Cart cart) throws BadLocationException {
         super();
 
         this.p = p;

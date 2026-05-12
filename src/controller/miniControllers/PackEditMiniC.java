@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PackMiniEditC implements Controller {
+public class PackEditMiniC implements Controller {
 
     private App frame;
     private Store model;
@@ -24,7 +24,7 @@ public class PackMiniEditC implements Controller {
     private SPManageIndividualPack spm;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackMiniEditC(App frame, Store model, PackMiniP view,
+    public PackEditMiniC(App frame, Store model, PackMiniP view,
                          AbstractMixedBrowserC<Pack, StoreProduct> browserController,
                          AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
         this.frame = frame;

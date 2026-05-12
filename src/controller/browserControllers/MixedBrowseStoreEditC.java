@@ -1,6 +1,6 @@
 package controller.browserControllers;
 
-import controller.miniControllers.StoreProductMiniEditC;
+import controller.miniControllers.StoreProductEditMiniC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
@@ -33,11 +33,11 @@ public class MixedBrowseStoreEditC extends AbstractMixedBrowserC<Pack, StoreProd
             ex.printStackTrace();
         }
 
-        for (MiniPanel miniPanel : super.getView().getFirstMiniPanels()) {
+        for (AbstractMiniP miniPanel : super.getView().getFirstMiniPanels()) {
             //new PackMiniC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
         }
-        for (MiniPanel miniPanel : super.getView().getSecondMiniPanels()) {
-            new StoreProductMiniEditC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
+        for (AbstractMiniP miniPanel : super.getView().getSecondMiniPanels()) {
+            new StoreProductEditMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
                     super.getView());
         }
     }

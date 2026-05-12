@@ -67,6 +67,10 @@ public class BannerManagerC implements Controller {
     }
 
     public void initializeActions() {
+        System.out.println("buton enabled: " + !frame.getLastShownPanels().isEmpty());
+        vista.getBtnGoBack().setEnabled(!frame.getLastShownPanels().isEmpty());
+        vista.revalidate();
+        vista.repaint();
 
         vista.getHome().addActionListener(e -> {
             abrirPaginaPrincipal();

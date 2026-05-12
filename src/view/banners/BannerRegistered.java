@@ -1,7 +1,5 @@
 package view.banners;
 
-import view.App;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,7 +19,7 @@ public class BannerRegistered extends JPanel {
     /**
      * Create the panel.
      */
-    public BannerRegistered(App frame) {
+    public BannerRegistered() {
 
         setLayout(new BorderLayout());
         setBackground(new Color(45, 52, 54)); // Un color oscuro elegante
@@ -50,9 +48,6 @@ public class BannerRegistered extends JPanel {
         btnGoBack.setOpaque(false);
         btnGoBack.setBorderPainted(false);
         btnGoBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        if (frame.getLastShownPanels().isEmpty()) {
-            btnGoBack.setEnabled(false);
-        }
 
         cartera = new JButton("\uD83D\uDCBC");
         cartera.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));

@@ -1,9 +1,11 @@
 package controller.accessControllers;
 
 import controller.Controller;
+import controller.bannerControllers.*;
 import model.store.Store;
 import model.user.User;
 import view.App;
+import view.banners.*;
 
 import javax.swing.*;
 
@@ -36,21 +38,25 @@ public abstract class MainLoopSelector implements Controller {
                 JOptionPane.showMessageDialog(this.frame, "Welcome Unregistered Client!");
                 this.frame.changeVisibleBanner("BANNER_UNREGISTERED");
                 this.frame.changeVisibleCard("UNREGISTERED_MAIN");
+                new BannerUnregisteredC((BannerUnregistered) this.frame.getViewFromName("BANNER_UNREGISTERED"), frame);
                 break;
             case REGISTERED_CLIENT:
                 this.frame.changeVisibleBanner("BANNER_REGISTERED");
                 this.frame.changeVisibleCard("REGISTERED_MAIN");
+                new BannerRegisteredC((BannerRegistered) this.frame.getViewFromName("BANNER_REGISTERED"), frame);
                 break;
             case EMPLOYEE:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Employee!");
                 this.frame.changeVisibleBanner("BANNER_EMPLOYEE");
                 this.frame.changeVisibleCard("EMPLOYEE_MAIN");
+                new BannerEmployeeC((BannerEmployee) this.frame.getViewFromName("BANNER_EMPLOYEE"), frame);
                 this.frame.getEmployeeMainPanel().paintEverything();
                 break;
             case MANAGER:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Manager!");
                 this.frame.changeVisibleBanner("BANNER_MANAGER");
                 this.frame.changeVisibleCard("MANAGER_MAIN");
+                new BannerManagerC((BannerManager) this.frame.getViewFromName("BANNER_MANAGER"), frame);
                 break;
             default:
                 break;

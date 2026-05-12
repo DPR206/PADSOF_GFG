@@ -65,10 +65,10 @@ public class App extends JFrame {
         managerMainPanel = new ManagerMainP();
         searchPanel = new SearchPanel();
 
-        BannerUnregistered bannerUnregisteredPanel = new BannerUnregistered(this);
-        BannerRegistered bannerRegisteredPanel = new BannerRegistered(this);
-        BannerEmployee bannerEmployeePanel = new BannerEmployee(this);
-        BannerManager bannerManagerPanel = new BannerManager(this);
+        BannerUnregistered bannerUnregisteredPanel = new BannerUnregistered();
+        BannerRegistered bannerRegisteredPanel = new BannerRegistered();
+        BannerEmployee bannerEmployeePanel = new BannerEmployee();
+        BannerManager bannerManagerPanel = new BannerManager();
 
         /* Model */
         Store model = Store.getInstance();
@@ -130,10 +130,10 @@ public class App extends JFrame {
         addBanner(bannerManagerPanel, "BANNER_MANAGER");
 
         /* Main panel */
+//        lastShownPanels.add("WELCOME");
         changeVisibleBanner("BANNER_UNREGISTERED");
-        changeVisibleCard("WELCOME");
-        lastShownPanels.add("WELCOME");
         currentShownPanel = "WELCOME";
+        changeVisibleCard("WELCOME");
 
 //        RegisteredClient rc = new RegisteredClient("taha", "10282634M", "password", true);
 //        rc.addProductWallet(new SecondHandProduct("Cool hamster huh",
@@ -177,13 +177,14 @@ public class App extends JFrame {
     }
 
     public void changeVisibleCard(String cardName) {
-        System.out.println("Showing: " + cardName);
+        System.out.println("Showing: " + cardName + "\n Last shown panels: " + lastShownPanels);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
         getViewFromName(cardName).requestFocusInWindow();
-        if (currentShownPanel != null) {
-            lastShownPanels.add(currentShownPanel);
-        }
+//        if (!currentShownPanel.equals(cardName)) {
+        System.out.println("--> Adding " + currentShownPanel);
+        lastShownPanels.add(currentShownPanel);
+//        }
         currentShownPanel = cardName;
     }
 
@@ -191,8 +192,6 @@ public class App extends JFrame {
         if (!lastShownPanels.isEmpty()) {
             changeVisibleCard(lastShownPanels.getLast());
             lastShownPanels.remove(lastShownPanels.getLast());
-        } else {
-            System.out.println("Man this code sucks");
         }
     }
 
@@ -218,7 +217,13 @@ public class App extends JFrame {
 
     public void changeCurrentUser(User user) {
         this.lastShownPanels.clear();
-        this.currentShownPanel = null;
+        switch (user.getType()) {
+            case UNREGISTERED_CLIENT -> currentShownPanel = "UNREGISTERED_MAIN";
+            case REGISTERED_CLIENT -> currentShownPanel = "REGISTERED_MAIN";
+            case EMPLOYEE -> currentShownPanel = "EMPLOYEE_MAIN";
+            case MANAGER -> currentShownPanel = "MANAGER_MAIN";
+            default -> currentShownPanel = "WELCOME";
+        }
         this.mainUser = user;
     }
 

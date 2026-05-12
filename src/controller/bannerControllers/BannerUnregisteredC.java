@@ -32,6 +32,10 @@ public class BannerUnregisteredC implements Controller {
     }
 
     public void initializeActions() {
+        vista.getBtnGoBack().setEnabled(!frame.getLastShownPanels().isEmpty());
+        vista.revalidate();
+        vista.repaint();
+
         vista.getBtnCarrito().addActionListener(e -> {
             try {
                 abrirCarritoDelCliente();

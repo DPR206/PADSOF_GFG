@@ -18,7 +18,7 @@ public class BannerManager extends JPanel {
     /**
      * Create the panel.
      */
-    public BannerManager(App frame) {
+    public BannerManager() {
 
         setLayout(new BorderLayout());
         setBackground(new Color(45, 52, 54)); // Un color oscuro elegante
@@ -47,9 +47,6 @@ public class BannerManager extends JPanel {
         btnGoBack.setOpaque(false);
         btnGoBack.setBorderPainted(false);
         btnGoBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        if (frame.getLastShownPanels().isEmpty()) {
-            btnGoBack.setEnabled(false);
-        }
 
         JPanel panelBasicActions = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 14));
         panelBasicActions.setOpaque(false); // Para que se vea el fondo del banner

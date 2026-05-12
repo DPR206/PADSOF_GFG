@@ -10,6 +10,7 @@ import view.banners.BannerManager;
 import view.managerPanels.ManagerProfile;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 public class BannerManagerC implements Controller {
 
@@ -67,7 +68,6 @@ public class BannerManagerC implements Controller {
     }
 
     public void initializeActions() {
-        System.out.println("buton enabled: " + !frame.getLastShownPanels().isEmpty());
         vista.getBtnGoBack().setEnabled(!frame.getLastShownPanels().isEmpty());
         vista.revalidate();
         vista.repaint();
@@ -85,6 +85,9 @@ public class BannerManagerC implements Controller {
             abrirWelcome();
         });
 
+        for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
+            vista.getBtnGoBack().removeActionListener(listener);
+        }
         vista.getBtnGoBack().addActionListener(e -> {
             goBack();
         });

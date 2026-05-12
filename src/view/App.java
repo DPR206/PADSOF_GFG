@@ -41,11 +41,14 @@ public class App extends JFrame {
     private final EmployeeMainP employeeMainPanel;
     private final ManagerMainP managerMainPanel;
     private final SearchPanel searchPanel;
-    //private final GridBagConstraints gbc;
     private final JPanel cards;
     private final JPanel banners;
     private final Map<String, JPanel> allPanels = new HashMap<>();
-    private List<String> lastShownPanels = new ArrayList<>();
+    private final BannerUnregistered bannerUnregisteredPanel;
+    private final BannerRegistered bannerRegisteredPanel;
+    private final BannerEmployee bannerEmployeePanel;
+    private final BannerManager bannerManagerPanel;
+    private final List<String> lastShownPanels = new ArrayList<>();
     private String currentShownPanel;
     private User mainUser = new UnregisteredClient(true);
 
@@ -65,10 +68,10 @@ public class App extends JFrame {
         managerMainPanel = new ManagerMainP();
         searchPanel = new SearchPanel();
 
-        BannerUnregistered bannerUnregisteredPanel = new BannerUnregistered();
-        BannerRegistered bannerRegisteredPanel = new BannerRegistered();
-        BannerEmployee bannerEmployeePanel = new BannerEmployee();
-        BannerManager bannerManagerPanel = new BannerManager();
+        bannerUnregisteredPanel = new BannerUnregistered();
+        bannerRegisteredPanel = new BannerRegistered();
+        bannerEmployeePanel = new BannerEmployee();
+        bannerManagerPanel = new BannerManager();
 
         /* Model */
         Store model = Store.getInstance();
@@ -88,10 +91,6 @@ public class App extends JFrame {
         new BannerEmployeeC(bannerEmployeePanel, this);
         new BannerManagerC(bannerManagerPanel, this);
 
-        /* Configure controllers' views */
-
-        //bannerUnregisteredPanel.setController(bannerUnregisteredController);
-
         /* Add views to main window */
         ImagePanel bgPanel = new ImagePanel(".\\resources\\app\\background.png");
         bgPanel.setLayout(new BorderLayout());
@@ -99,14 +98,6 @@ public class App extends JFrame {
 
         Container container = this.getContentPane();
         container.setLayout(new BorderLayout());
-        //container.setBackground(new Color(246, 243, 238)); // Beige
-//        gbc = new GridBagConstraints();
-//        gbc.gridx = 0;
-//        gbc.gridy = 0;
-//
-//        gbc.weightx = 1.0;
-//        gbc.weighty = 1.0;
-//        gbc.fill = GridBagConstraints.BOTH;
 
         banners = new JPanel(new CardLayout());
         banners.setOpaque(false);
@@ -130,22 +121,9 @@ public class App extends JFrame {
         addBanner(bannerManagerPanel, "BANNER_MANAGER");
 
         /* Main panel */
-//        lastShownPanels.add("WELCOME");
         changeVisibleBanner("BANNER_UNREGISTERED");
         currentShownPanel = "WELCOME";
         changeVisibleCard("WELCOME");
-
-//        RegisteredClient rc = new RegisteredClient("taha", "10282634M", "password", true);
-//        rc.addProductWallet(new SecondHandProduct("Cool hamster huh",
-//                "The greatest hamster you'll ever see, made from clay from the artic forest if that even " +
-//                "exists blablabla don't fuck this description up. Keep testing oh poor lad can't wrap text can't you " +
-//                "believe it", ".\\resources\\hamster.jpg", ProductType.FIGURINE, rc));
-//        RegisteredSecondHandP test =
-//                new RegisteredSecondHandP(this, Store.getInstance().getSecondHandProductList().getFirst(),
-//                        "Add to Offer");
-//        addCard(test, "TEST");
-//        test.setVisible(true);
-
 
         /* Configure main window's size and default actions */
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -171,27 +149,41 @@ public class App extends JFrame {
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     private void addBanner(JPanel newView, String constraints) {
         banners.add(newView, constraints);
-        //newView.setVisible(false);
         newView.setOpaque(true);
         allPanels.put(constraints, newView);
     }
 
     public void changeVisibleCard(String cardName) {
-        System.out.println("Showing: " + cardName + "\n Last shown panels: " + lastShownPanels);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
         getViewFromName(cardName).requestFocusInWindow();
-//        if (!currentShownPanel.equals(cardName)) {
-        System.out.println("--> Adding " + currentShownPanel);
-        lastShownPanels.add(currentShownPanel);
-//        }
+
+        if (currentShownPanel != null && !currentShownPanel.equals(cardName)) {
+            lastShownPanels.add(currentShownPanel);
+        }
         currentShownPanel = cardName;
+
+        updateBanners();
+    }
+
+    public void updateBanners() {
+        new BannerUnregisteredC(bannerUnregisteredPanel, this);
+        new BannerRegisteredC(bannerRegisteredPanel, this);
+        new BannerEmployeeC(bannerEmployeePanel, this);
+        new BannerManagerC(bannerManagerPanel, this);
     }
 
     public void goBack() {
         if (!lastShownPanels.isEmpty()) {
-            changeVisibleCard(lastShownPanels.getLast());
-            lastShownPanels.remove(lastShownPanels.getLast());
+            String previousPanel = lastShownPanels.removeLast();
+
+            CardLayout cl = (CardLayout) (cards.getLayout());
+            cl.show(cards, previousPanel);
+            getViewFromName(previousPanel).requestFocusInWindow();
+
+            currentShownPanel = previousPanel;
+
+            updateBanners();
         }
     }
 

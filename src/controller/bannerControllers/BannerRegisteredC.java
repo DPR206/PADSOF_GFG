@@ -17,6 +17,7 @@ import view.notifications.NotificacionP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+import java.awt.event.ActionListener;
 
 public class BannerRegisteredC implements Controller {
 
@@ -140,6 +141,9 @@ public class BannerRegisteredC implements Controller {
             abrirWelcome();
         });
 
+        for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
+            vista.getBtnGoBack().removeActionListener(listener);
+        }
         vista.getBtnGoBack().addActionListener(e -> {
             goBack();
         });

@@ -12,6 +12,7 @@ import view.clientPanels.CarritoP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+import java.awt.event.ActionListener;
 
 public class BannerUnregisteredC implements Controller {
 
@@ -60,6 +61,9 @@ public class BannerUnregisteredC implements Controller {
             abrirWelcome();
         });
 
+        for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
+            vista.getBtnGoBack().removeActionListener(listener);
+        }
         vista.getBtnGoBack().addActionListener(e -> {
             goBack();
         });

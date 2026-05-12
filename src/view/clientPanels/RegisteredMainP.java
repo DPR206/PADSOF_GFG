@@ -32,7 +32,7 @@ public class RegisteredMainP extends JPanel {
         others = new JPanel(new BorderLayout());
         others.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JPanel botones = new JPanel(new GridLayout(0, 2));
+        JPanel botones = new JPanel(new GridLayout(0, 3));
         botones.add(this.search);
         botones.add(this.filters);
         botones.add(this.secondHand);

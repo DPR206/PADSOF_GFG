@@ -45,7 +45,7 @@ public class LoginC extends MainLoopSelector {
         view.getLogin().addActionListener(e -> {
             User user = super.getModel().logIn(view.getUsername(), view.getPassword());
             if (user == null) {
-                JOptionPane.showMessageDialog(super.getFrame(), "Incorrect username or password", "",
+                JOptionPane.showMessageDialog(super.getFrame(), "Incorrect username or password", "Error log in",
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 super.getFrame().changeCurrentUser(user);

@@ -2,13 +2,16 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.browserControllers.AbstractBrowserC;
+import controller.clientControllers.CartPaymentC;
 import controller.clientControllers.RegisteredSecondHandC;
 import model.product.SecondHandProduct;
+import model.store.Parameter;
 import model.store.Store;
 import view.App;
-import view.browserPanels.AbstractBrowserP;
-import view.clientPanels.RegisteredMainP;
 import view.MaxiSecondHandP;
+import view.browserPanels.AbstractBrowserP;
+import view.clientPanels.PaymentP;
+import view.clientPanels.RegisteredMainP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
@@ -28,8 +31,8 @@ public class SecondHandMyWalletMiniC implements Controller {
 
     /**
      * This controller's constructor
-     * @param frame             the controller's frame
-     * @param model             the controller's model
+     * @param frame            the controller's frame
+     * @param model            the controller's model
      * @param view
      * @param abstractBrowserC
      * @param abstractBrowserP
@@ -53,8 +56,7 @@ public class SecondHandMyWalletMiniC implements Controller {
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 try {
-                    MaxiSecondHandP newView =
-                            new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
+                    MaxiSecondHandP newView = new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
                     new RegisteredSecondHandC(frame, model, newView);
                     ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                                 .add(newView, "SECONDHAND_PRODUCT");
@@ -93,26 +95,29 @@ public class SecondHandMyWalletMiniC implements Controller {
             // DUE: Add to Offer
             JOptionPane.showMessageDialog(frame, view.getSecondHandProduct().getName() + " was added to the Offer",
                     "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
-            try {
-                abstractBrowserP.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            abstractBrowserC.initializeActionsForMiniPanels();
+            updateInterface();
         });
 
         /* Request valuation */
         view.getSecondButton().addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame, "Valuation requested", "Request valuation",
-                    JOptionPane.INFORMATION_MESSAGE);
-            // DUE: Pagar
-            view.getSecondHandProduct().setPaidValuation(true);
-            try {
-                abstractBrowserP.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
+            double totalActual = Parameter.getParam().getValuationCost();
+
+            if (totalActual <= 0) {
+                JOptionPane.showMessageDialog(view, "Your cart is empty");
+                return;
             }
-            abstractBrowserC.initializeActionsForMiniPanels();
+
+            PaymentP ventana = new PaymentP(frame, totalActual);
+            new CartPaymentC(frame, ventana);
+
+//            ventana.getPayChecker().addActionListener(ev -> {
+//                JOptionPane.showMessageDialog(frame, "Valuation requested", "Request valuation",
+//                        JOptionPane.INFORMATION_MESSAGE);
+//                view.getSecondHandProduct().setPaidValuation(true);
+//                updateInterface();
+//            });
+
+            ventana.setVisible(true);
         });
 
         /* Remove from wallet */
@@ -120,12 +125,16 @@ public class SecondHandMyWalletMiniC implements Controller {
             JOptionPane.showMessageDialog(frame, "Product removed", "Remove from wallet",
                     JOptionPane.INFORMATION_MESSAGE);
             view.getSecondHandProduct().setRemoved(true);
-            try {
-                abstractBrowserP.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-            abstractBrowserC.initializeActionsForMiniPanels();
+            updateInterface();
         });
+    }
+
+    private void updateInterface() {
+        try {
+            abstractBrowserP.paintEverything();
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+        abstractBrowserC.initializeActionsForMiniPanels();
     }
 }

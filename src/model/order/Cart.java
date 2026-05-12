@@ -7,7 +7,7 @@ import model.notification.*;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.*;
-import model.user.RegisteredClient;
+import model.user.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -27,7 +27,7 @@ public class Cart implements Serializable {
     private HashMap<Pack, Integer> packs = new HashMap<>();
     private boolean expired;
     private LocalDate modificationDate;
-    private RegisteredClient owner;
+    private User owner;
     private LocalDate creationDate;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -40,7 +40,7 @@ public class Cart implements Serializable {
      * @param assignedModificationDate, the last modification date
      */
     public Cart(List<StoreProduct> assignedProducts, List<Pack> assignedPacks, boolean assignedExpired,
-                LocalDate assignedModificationDate) {
+                LocalDate assignedModificationDate, User owner) {
         for (StoreProduct product : assignedProducts) {
             addProduct(product);
         }
@@ -50,6 +50,7 @@ public class Cart implements Serializable {
         this.expired = assignedExpired;
         this.modificationDate = assignedModificationDate;
         this.creationDate = LocalDate.now();
+        this.owner = owner;
     }
 
     /**
@@ -57,15 +58,15 @@ public class Cart implements Serializable {
      * @param assignedExpired,          whether it's expired
      * @param assignedModificationDate, the last modification date
      */
-    public Cart(boolean assignedExpired, LocalDate assignedModificationDate) {
-        this(Collections.emptyList(), Collections.emptyList(), assignedExpired, assignedModificationDate);
+    public Cart(boolean assignedExpired, LocalDate assignedModificationDate, User owner) {
+        this(Collections.emptyList(), Collections.emptyList(), assignedExpired, assignedModificationDate, owner);
     }
 
     /**
      * Creates a cart with default modification date (today)
      */
-    public Cart() {
-        this(false, LocalDate.now());
+    public Cart(User owner) {
+        this(false, LocalDate.now(), owner);
     }
 
     /**
@@ -96,10 +97,12 @@ public class Cart implements Serializable {
                             aux = aux - ((ProductQuantity) discount).getDeduction();
                         }
                     case VOLUME:
+                        assert discount instanceof ProductVolume;
                         if (calculateSpentAmount(products) >= ((ProductVolume) discount).getSpendingThreshold()) {
                             aux = aux - ((ProductVolume) discount).getDeduction();
                         }
                     case GIFT:
+                        assert discount instanceof ProductGift;
                         if (calculateSpentAmount(products) >= ((ProductGift) discount).getSpendingThreshold()) {
                             aux = aux - ((ProductGift) discount).getGift().getDiscountedPrice();
                             if (!this.sp.containsKey(((ProductGift) discount).getGift())) {
@@ -118,10 +121,12 @@ public class Cart implements Serializable {
                             aux = aux - ((CategoryQuantity) discount).getDeduction();
                         }
                     case VOLUME:
+                        assert discount instanceof CategoryVolume;
                         if (calculateSpentAmount(products) >= ((CategoryVolume) discount).getSpendingThreshold()) {
                             aux = aux - ((CategoryVolume) discount).getDeduction();
                         }
                     case GIFT:
+                        assert discount instanceof CategoryGift;
                         if (calculateSpentAmount(products) >= ((CategoryGift) discount).getSpendingThreshold()) {
                             aux = aux - ((CategoryGift) discount).getGift().getDiscountedPrice();
                             if (!this.sp.containsKey(((CategoryGift) discount).getGift())) {
@@ -266,41 +271,46 @@ public class Cart implements Serializable {
     public boolean payOrder()
             throws InvalidCardNumberException, FailedInternetConnectionException, OrderRejectedException {
 
-        double price = this.calculatePrice();
+        if (this.owner.getType() == UserType.REGISTERED_CLIENT) {
+            double price = this.calculatePrice();
 
-        Scanner sc = new Scanner(System.in);
-        String numeroTarjeta;
+            Scanner sc = new Scanner(System.in);
+            String numeroTarjeta;
 
-        try {
-            System.out.print("Introduce tu número de tarjeta: ");
-            numeroTarjeta = sc.next();
-            System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
-            TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
+            try {
+                System.out.print("Introduce tu número de tarjeta: ");
+                numeroTarjeta = sc.next();
+                System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
+                TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
 
-            Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
+                Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
 
-            Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
-                    new ArrayList<>(this.packs.keySet()), this.owner);
-            this.owner.getOrderHistory().addOrder(order);
+                Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
+                        new ArrayList<>(this.packs.keySet()), (RegisteredClient) this.owner);
+                ((RegisteredClient) this.owner).getOrderHistory().addOrder(order);
 
-            NotificationOrder notification =
-                    new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
-            notification.FullNotification(order);
-            this.owner.getNotificationHistory().addNotification(notification);
-            this.owner.increaseNumOrders();
+                NotificationOrder notification =
+                        new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
+                notification.FullNotification(order);
+                ((RegisteredClient) this.owner).getNotificationHistory().addNotification(notification);
+                ((RegisteredClient) this.owner).increaseNumOrders();
 
-            NotificationEmployeeOrder notification2 =
-                    new NotificationEmployeeOrder(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_ORDER);
-            notification2.FullNotification(order);
-            Store.getInstance().sendNotificationEmployees(notification2);
-        } catch (InputMismatchException e) {
-            System.out.println("Error: El tipo de dato introducido no es válido.");
+                NotificationEmployeeOrder notification2 =
+                        new NotificationEmployeeOrder(LocalDateTime.now(), false, true,
+                                NotificationType.EMPLOYEE_ORDER);
+                notification2.FullNotification(order);
+                Store.getInstance().sendNotificationEmployees(notification2);
+            } catch (InputMismatchException e) {
+                System.out.println("Error: El tipo de dato introducido no es válido.");
+            }
+
+            this.packs.clear();
+            this.sp.clear();
+
+            return true;
         }
 
-        this.packs.clear();
-        this.sp.clear();
-
-        return true;
+        return false;
     }
 
     /**
@@ -313,38 +323,43 @@ public class Cart implements Serializable {
     public boolean payOrder(String numeroTarjeta)
             throws InvalidCardNumberException, FailedInternetConnectionException, OrderRejectedException {
 
-        double price = this.calculatePrice();
+        if (this.owner.getType() == UserType.REGISTERED_CLIENT) {
 
-        System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
-        TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
+            double price = this.calculatePrice();
 
-        Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
+            System.out.println(TeleChargeAndPaySystem.isValidCardNumber(numeroTarjeta));
+            TeleChargeAndPaySystem.charge(numeroTarjeta, "Order", price, true);
 
-        Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
-                new ArrayList<>(this.packs.keySet()), this.owner);
-        this.owner.getOrderHistory().addOrder(order);
+            Statistics.getINSTANCE().addRevenue(price, RevenueType.PRODUCTS, LocalDate.now(), this.getProducts());
 
-        NotificationOrder notification =
-                new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
-        notification.FullNotification(order);
-        this.owner.getNotificationHistory().addNotification(notification);
-        this.owner.increaseNumOrders();
+            Order order = new Order(price, OrderState.PAID, new ArrayList<>(this.sp.keySet()),
+                    new ArrayList<>(this.packs.keySet()), (RegisteredClient) this.owner);
+            ((RegisteredClient) this.owner).getOrderHistory().addOrder(order);
 
-        NotificationEmployeeOrder notification2 =
-                new NotificationEmployeeOrder(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_ORDER);
-        notification2.FullNotification(order);
-        Store.getInstance().sendNotificationEmployees(notification2);
+            NotificationOrder notification =
+                    new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
+            notification.FullNotification(order);
+            ((RegisteredClient) this.owner).getNotificationHistory().addNotification(notification);
+            ((RegisteredClient) this.owner).increaseNumOrders();
 
-        this.packs.clear();
-        this.sp.clear();
+            NotificationEmployeeOrder notification2 =
+                    new NotificationEmployeeOrder(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_ORDER);
+            notification2.FullNotification(order);
+            Store.getInstance().sendNotificationEmployees(notification2);
 
-        return true;
+            this.packs.clear();
+            this.sp.clear();
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
      * It prints a cart's product's basic info
      */
-    public void printProducts() { // DUE: Page / wrap this
+    public void printProducts() {
         int i = 0;
         for (StoreProduct product : this.sp.keySet()) {
             System.out.print(i++ + ". " + product.getName() + " x" + this.sp.get(product));
@@ -354,7 +369,7 @@ public class Cart implements Serializable {
     /**
      * It prints a cart's pack's basic info
      */
-    public void printPacks() { // DUE: Page / wrap this
+    public void printPacks() {
         int i = 0;
         for (Pack pack : this.packs.keySet()) {
             System.out.print(i++ + ". [" + pack.getPrintProducts() + "] x" + this.packs.get(pack));
@@ -372,20 +387,25 @@ public class Cart implements Serializable {
             LocalDate expiration = this.calculateExpiredDate(spi);
             if (expiration.isBefore(LocalDate.now())) {
                 this.cancelProduct(spi);
-                NotificationProductCart notificationP =
-                        new NotificationProductCart(LocalDateTime.now(), false, true, NotificationType.PRODUCT_CART);
-                notificationP.FullNotification(spi);
-                this.owner.getNotificationHistory().addNotification(notificationP);
+                if (this.owner.getType() == UserType.REGISTERED_CLIENT) {
+                    NotificationProductCart notificationP =
+                            new NotificationProductCart(LocalDateTime.now(), false, true,
+                                    NotificationType.PRODUCT_CART);
+                    notificationP.FullNotification(spi);
+                    ((RegisteredClient) this.owner).getNotificationHistory().addNotification(notificationP);
+                }
             }
         }
         for (Pack p : packs) {
             LocalDate expiration = this.calculateExpiredDatePacks(p);
             if (expiration.isBefore(LocalDate.now())) {
                 this.cancelPack(p);
-                NotificationPackCart notificationK =
-                        new NotificationPackCart(LocalDateTime.now(), false, true, NotificationType.PACK_CART);
-                notificationK.FullNotification(p);
-                this.owner.getNotificationHistory().addNotification(notificationK);
+                if (this.owner.getType() == UserType.REGISTERED_CLIENT) {
+                    NotificationPackCart notificationK =
+                            new NotificationPackCart(LocalDateTime.now(), false, true, NotificationType.PACK_CART);
+                    notificationK.FullNotification(p);
+                    ((RegisteredClient) this.owner).getNotificationHistory().addNotification(notificationK);
+                }
             }
         }
     }

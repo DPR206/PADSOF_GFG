@@ -38,7 +38,7 @@ public class UnregisteredClient extends User implements Serializable {
     */
     public UnregisteredClient(boolean asc) {
         super(UserType.UNREGISTERED_CLIENT, null, "Unregistered_Client", asc);
-    	c = new Cart();
+    	c = new Cart(this);
         s = Store.getInstance();
 
         this.getSearcher().setTypes(SearchType.S_STORE);

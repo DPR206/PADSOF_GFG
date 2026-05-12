@@ -1,8 +1,8 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.MixedBrowseCartC;
 import controller.browserControllers.AbstractMixedBrowserC;
+import controller.browserControllers.MixedBrowseCartC;
 import controller.clientControllers.CarritoC;
 import model.product.Pack;
 import model.product.StoreProduct;
@@ -103,22 +103,17 @@ public class PackMiniCartC implements Controller {
                     }
                 }
             }
-            CarritoP carritoVista;
-            try {
-                carritoVista = new CarritoP();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
 
-            new CarritoC(carritoVista, frame);
             try {
+                CarritoP carritoVista = new CarritoP();
+                new CarritoC(carritoVista, frame);
                 new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
+                frame.addCard(carritoVista, "CART");
+                frame.changeVisibleCard("CART");
+                frame.getLastShownPanels().removeLast();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-
-            frame.addCard(carritoVista, "CART");
-            frame.changeVisibleCard("CART");
 //            try {
 //                browserPanel.paintEverything();
 //            } catch (BadLocationException ex) {

@@ -11,7 +11,7 @@ import java.util.List;
 
 import static main.Main.brownColour;
 
-public class BrowseUsersP extends BrowserPanel<User> {
+public class BrowseUsersP extends AbstractBrowserP<User> {
     private final String buttonName;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/

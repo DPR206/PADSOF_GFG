@@ -1,7 +1,6 @@
 package view.clientPanels;
 
-import view.browserPanels.BrowseCartP;
-import view.browserPanels.BrowseStoreP;
+import view.browserPanels.MixedBrowseCartP;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,7 +20,7 @@ public class CarritoP extends JPanel {
 	private JLabel total = new JLabel("Total: 0.00 €");
 	private JButton btnPay = new JButton("Pay");
 	private JButton btnDeleteAll = new JButton("Delete all");
-	private BrowseCartP cartItems;
+	private MixedBrowseCartP cartItems;
 
 	/**
 	 *
@@ -63,7 +62,7 @@ public class CarritoP extends JPanel {
 
         // Aquí iría el centro del carrito (donde se listan los productos)
         // this.add(scrollProductos, BorderLayout.CENTER);
-		cartItems = new BrowseCartP();
+		cartItems = new MixedBrowseCartP();
 		this.add(cartItems,  BorderLayout.CENTER);
 
 	}
@@ -78,7 +77,7 @@ public class CarritoP extends JPanel {
 	    return new ImageIcon(scaledImg);
 	}
 
-	public BrowseCartP getCartItems() {
+	public MixedBrowseCartP getCartItems() {
 		return cartItems;
 	}
 

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * The type Browse wallet owners c.
  */
-public class BrowseWalletOwnersC extends BrowserController<RegisteredClient> {
+public class BrowseWalletOwnersC extends AbstractBrowserC<RegisteredClient> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

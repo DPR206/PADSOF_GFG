@@ -1,15 +1,15 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseCartC;
-import controller.browserControllers.MixedBrowserController;
+import controller.browserControllers.MixedBrowseCartC;
+import controller.browserControllers.AbstractMixedBrowserC;
 import controller.clientControllers.CarritoC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
-import view.browserPanels.MixedBrowserPanel;
+import view.browserPanels.AbstractMixedBrowserP;
 import view.clientPanels.CarritoP;
 import view.miniPanels.StoreProductMiniCart;
 
@@ -23,8 +23,8 @@ public class StoreProductMiniCartC implements Controller {
     private final StoreProductMiniCart view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private final MixedBrowserController<Pack, StoreProduct> browserController;
-    private final MixedBrowserPanel<Pack, StoreProduct> browserPanel;
+    private final AbstractMixedBrowserC<Pack, StoreProduct> browserController;
+    private final AbstractMixedBrowserP<Pack, StoreProduct> browserPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -34,8 +34,8 @@ public class StoreProductMiniCartC implements Controller {
      * @param model the controller's model
      */
     public StoreProductMiniCartC(App frame, Store model, StoreProductMiniCart view,
-                                 MixedBrowserController<Pack, StoreProduct> browserController,
-                                 MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
+                                 AbstractMixedBrowserC<Pack, StoreProduct> browserController,
+                                 AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;
@@ -111,7 +111,7 @@ public class StoreProductMiniCartC implements Controller {
 
             new CarritoC(carritoVista, frame);
             try {
-                new BrowseCartC(frame, model, carritoVista.getCartItems());
+                new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

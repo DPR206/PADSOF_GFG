@@ -1,7 +1,7 @@
 package controller.clientControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseSecondHandProductsC;
+import controller.browserControllers.BrowseSecondHandProductsForOfferC;
 import controller.browserControllers.BrowseWalletOwnersC;
 import model.store.Store;
 import view.App;
@@ -25,7 +25,7 @@ public class RegisteredMakeOfferC implements Controller {
 
     public void initializeActionsForMiniPanels() throws BadLocationException {
         new BrowseWalletOwnersC(frame, view.getBrowseWalletOwnersP(), model);
-        new BrowseSecondHandProductsC(frame, view.getBrowseSecondHandProductsP(), model);
+        new BrowseSecondHandProductsForOfferC(frame, view.getBrowseSecondHandProductsP(), model);
     }
 
     @Override

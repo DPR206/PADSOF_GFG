@@ -1,10 +1,10 @@
 package view.browserPanels;
 
-import model.order.Cart;
 import model.product.Pack;
 import model.product.StoreProduct;
-import view.miniPanels.PackMiniCartP;
-import view.miniPanels.StoreProductMiniCart;
+import model.store.Store;
+import view.miniPanels.PackMiniP;
+import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -12,33 +12,26 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
-public class BrowseCartP extends MixedBrowserPanel<Pack, StoreProduct> {
-    private Cart cart;
-
+public class MixedBrowseStoreEditP extends AbstractMixedBrowserP<Pack, StoreProduct> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * This panel's constructor
      */
-    public BrowseCartP() throws BadLocationException {
+    public MixedBrowseStoreEditP() throws BadLocationException {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        super.setFirstItemList(Store.getInstance().getPacks());
+        super.setSecondItemList(Store.getInstance().getStoreProductList());
         paintEverything();
     }
 
-    /**
-     * It allows this page's components to be repainted (revalidate() & repaint() didn't work)
-     * @throws BadLocationException bad locations within a document model (that is, attempts to reference a location
-     *                              that doesn't exist)
-     */
     @Override
     public void paintEverything() throws BadLocationException {
         this.clearItemsContainer();
         this.removeAll();
 
         super.addAllMiniPanels();
-        if (super.getFirstMiniPanels().isEmpty() && super.getSecondMiniPanels().isEmpty()) {
-            this.add(new JLabel("No packs or products to be seen"));
-        }
 
         this.add(containerItems, BorderLayout.NORTH);
 
@@ -61,19 +54,15 @@ public class BrowseCartP extends MixedBrowserPanel<Pack, StoreProduct> {
 
     @Override
     public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
-        PackMiniCartP miniPack = new PackMiniCartP(item, index, "Add to Cart", ".\\resources\\app\\cart.png", cart);
+        PackMiniP miniPack = new PackMiniP(item, index, "Manage", null);
         super.addFirstMiniPanel(miniPack);
         this.add(miniPack);
     }
 
     @Override
     public void addSecondMiniPanel(StoreProduct item, int index) throws BadLocationException {
-        StoreProductMiniCart miniPack = new StoreProductMiniCart(item, index, cart);
+        StoreProductMiniP miniPack = new StoreProductMiniP(item, index, "Manage", ".\\resources\\app\\cart.png");
         super.addSecondMiniPanel(miniPack);
         this.add(miniPack);
-    }
-
-    public void setCart(Cart newCart) {
-        this.cart = newCart;
     }
 }

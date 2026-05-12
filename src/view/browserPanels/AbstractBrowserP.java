@@ -13,7 +13,7 @@ import java.util.List;
  * The type Browser panel.
  * @param <G> the type parameter
  */
-public abstract class BrowserPanel<G> extends JPanel {
+public abstract class AbstractBrowserP<G> extends JPanel {
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
@@ -28,7 +28,7 @@ public abstract class BrowserPanel<G> extends JPanel {
     /**
      * Instantiates a new Browser panel.
      */
-    public BrowserPanel() {
+    public AbstractBrowserP() {
         currentPageNum = 1;
     }
 

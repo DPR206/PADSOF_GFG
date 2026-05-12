@@ -1,6 +1,6 @@
 package view.clientPanels;
 
-import view.browserPanels.BrowseStoreP;
+import view.browserPanels.MixedBrowseStoreP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -13,7 +13,7 @@ public class RegisteredMainP extends JPanel {
     private JButton search = new JButton("Search");
     private JButton secondHand = new JButton("Second Hand");
     private SearchPanel filterP = new SearchPanel();
-    private BrowseStoreP searchingP;
+    private MixedBrowseStoreP searchingP;
     private RegisteredMakeOfferP makeOfferP = new RegisteredMakeOfferP();
     private JPanel productSearch;
     private JPanel others;
@@ -21,7 +21,7 @@ public class RegisteredMainP extends JPanel {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public RegisteredMainP() throws BadLocationException {
-        searchingP = new BrowseStoreP();
+        searchingP = new MixedBrowseStoreP();
 
         configurarEstructura();
     }
@@ -60,7 +60,7 @@ public class RegisteredMainP extends JPanel {
         this.bottom = newBottom;
     }
 
-    public BrowseStoreP getBrowsePanel() {
+    public MixedBrowseStoreP getBrowsePanel() {
         return this.searchingP;
     }
 
@@ -124,19 +124,19 @@ public class RegisteredMainP extends JPanel {
         this.search = newSearch;
     }
 
-    public BrowseStoreP getSearching() {
+    public MixedBrowseStoreP getSearching() {
         return searchingP;
     }
 
-    public void setSearching(BrowseStoreP newSearching) {
+    public void setSearching(MixedBrowseStoreP newSearching) {
         this.searchingP = newSearching;
     }
 
-    public BrowseStoreP getSearchingP() {
+    public MixedBrowseStoreP getSearchingP() {
         return searchingP;
     }
 
-    public void setSearchingP(BrowseStoreP newSearchingP) {
+    public void setSearchingP(MixedBrowseStoreP newSearchingP) {
         this.searchingP = newSearchingP;
     }
 

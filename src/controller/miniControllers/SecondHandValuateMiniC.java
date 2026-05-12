@@ -2,11 +2,11 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.MaxiValuateSecondHandC;
-import controller.browserControllers.BrowserController;
+import controller.browserControllers.AbstractBrowserC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
-import view.browserPanels.BrowserPanel;
+import view.browserPanels.AbstractBrowserP;
 import view.employeePanels.MaxiValuateSecondHandP;
 import view.miniPanels.SecondHandMiniP;
 
@@ -19,8 +19,8 @@ public class SecondHandValuateMiniC implements Controller {
     private final SecondHandMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private final BrowserController<SecondHandProduct> browserController;
-    private final BrowserPanel<SecondHandProduct> browserPanel;
+    private final AbstractBrowserC<SecondHandProduct> abstractBrowserC;
+    private final AbstractBrowserP<SecondHandProduct> abstractBrowserP;
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
@@ -28,17 +28,17 @@ public class SecondHandValuateMiniC implements Controller {
      * @param frame             the controller's frame
      * @param model             the controller's model
      * @param view
-     * @param browserController
-     * @param browserPanel
+     * @param abstractBrowserC
+     * @param abstractBrowserP
      */
     public SecondHandValuateMiniC(App frame, Store model, SecondHandMiniP view,
-                                  BrowserController<SecondHandProduct> browserController,
-                                  BrowserPanel<SecondHandProduct> browserPanel) {
+                                  AbstractBrowserC<SecondHandProduct> abstractBrowserC,
+                                  AbstractBrowserP<SecondHandProduct> abstractBrowserP) {
         this.frame = frame;
         this.view = view;
         this.model = model;
-        this.browserController = browserController;
-        this.browserPanel = browserPanel;
+        this.abstractBrowserC = abstractBrowserC;
+        this.abstractBrowserP = abstractBrowserP;
 
         initializeActions();
     }

@@ -1,12 +1,12 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.MixedBrowserController;
+import controller.browserControllers.AbstractMixedBrowserC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import view.App;
-import view.browserPanels.MixedBrowserPanel;
+import view.browserPanels.AbstractMixedBrowserP;
 import view.employeePanels.SPManageIndividualPack;
 import view.miniPanels.PackMiniP;
 
@@ -19,14 +19,14 @@ public class PackMiniEditC implements Controller {
     private App frame;
     private Store model;
     private PackMiniP view;
-    private MixedBrowserController<Pack, StoreProduct> browserController;
-    private MixedBrowserPanel<Pack, StoreProduct> browserPanel;
+    private AbstractMixedBrowserC<Pack, StoreProduct> browserController;
+    private AbstractMixedBrowserP<Pack, StoreProduct> browserPanel;
     private SPManageIndividualPack spm;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public PackMiniEditC(App frame, Store model, PackMiniP view,
-                         MixedBrowserController<Pack, StoreProduct> browserController,
-                         MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
+                         AbstractMixedBrowserC<Pack, StoreProduct> browserController,
+                         AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;

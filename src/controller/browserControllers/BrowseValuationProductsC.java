@@ -10,7 +10,7 @@ import view.miniPanels.SecondHandMiniP;
 
 import java.util.List;
 
-public class BrowseSecondHandValuationProductsC extends BrowserController<SecondHandProduct> {
+public class BrowseValuationProductsC extends AbstractBrowserC<SecondHandProduct> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
@@ -19,7 +19,7 @@ public class BrowseSecondHandValuationProductsC extends BrowserController<Second
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public BrowseSecondHandValuationProductsC(App frame, BrowseSecondHandProductsP view, Store model) {
+    public BrowseValuationProductsC(App frame, BrowseSecondHandProductsP view, Store model) {
         super(frame, view, model);
         initializeActionsForMiniPanels();
     }

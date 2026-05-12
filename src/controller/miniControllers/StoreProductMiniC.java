@@ -1,13 +1,13 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.MixedBrowserController;
+import controller.browserControllers.AbstractMixedBrowserC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
-import view.browserPanels.MixedBrowserPanel;
+import view.browserPanels.AbstractMixedBrowserP;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
@@ -20,8 +20,8 @@ public class StoreProductMiniC implements Controller {
     private final StoreProductMiniP view; /* view -> panel */
     private final App frame; /* view -> frame */
     private final Store model; /* model */
-    private final MixedBrowserController<Pack, StoreProduct> browserController;
-    private final MixedBrowserPanel<Pack, StoreProduct> browserPanel;
+    private final AbstractMixedBrowserC<Pack, StoreProduct> browserController;
+    private final AbstractMixedBrowserP<Pack, StoreProduct> browserPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -31,8 +31,8 @@ public class StoreProductMiniC implements Controller {
      * @param model the controller's model
      */
     public StoreProductMiniC(App frame, Store model, StoreProductMiniP view,
-                             MixedBrowserController<Pack, StoreProduct> browserController,
-                             MixedBrowserPanel<Pack, StoreProduct> browserPanel) {
+                             AbstractMixedBrowserC<Pack, StoreProduct> browserController,
+                             AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
         this.model = model;

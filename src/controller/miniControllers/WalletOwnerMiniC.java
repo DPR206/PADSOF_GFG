@@ -1,7 +1,7 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseSomeonesWalletC;
+import controller.browserControllers.MixedBrowseSomeonesWalletC;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseSomeonesWalletP;
@@ -46,7 +46,7 @@ public class WalletOwnerMiniC implements Controller {
         view.getButton().addActionListener(e -> {
             try {
                 BrowseSomeonesWalletP newView = new BrowseSomeonesWalletP(view.getWalletOwner());
-                new BrowseSomeonesWalletC(frame, model, newView);
+                new MixedBrowseSomeonesWalletC(frame, model, newView);
                 ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
                                                                             .add(newView, "BROWSE_SOMEONES_WALLET");
                 ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()

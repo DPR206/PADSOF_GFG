@@ -1,7 +1,7 @@
 package controller.bannerControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseCartC;
+import controller.browserControllers.MixedBrowseCartC;
 import controller.clientControllers.CarritoC;
 import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
@@ -113,7 +113,7 @@ public class BannerUnregisteredC implements Controller {
         CarritoP carritoVista = new CarritoP();
 
         new CarritoC(carritoVista, frame);
-        new BrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
+        new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
 
         frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");

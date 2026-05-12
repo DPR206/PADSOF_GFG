@@ -22,7 +22,6 @@ public class WelcomeP extends JPanel {
      */
     public WelcomeP() {
         // asignar layout
-        //this.setLayout(new GridLayout(2, 2));
     	this.setLayout(new GridLayout(2, 3));
 
         // crear componentes

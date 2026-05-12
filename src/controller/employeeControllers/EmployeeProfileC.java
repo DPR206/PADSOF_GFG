@@ -2,6 +2,7 @@ package controller.employeeControllers;
 
 import controller.Controller;
 import model.user.Employee;
+import view.App;
 import view.employeePanels.EmployeeProfile;
 
 import javax.swing.*;
@@ -18,9 +19,9 @@ public class EmployeeProfileC implements Controller {
      * @param vista
      * @param user
      */
-    public EmployeeProfileC(EmployeeProfile vista, Employee user) {
+    public EmployeeProfileC(EmployeeProfile vista, App frame) {
         this.vista = vista;
-        this.user = user;
+        this.user = (Employee) frame.getUser();
         initializeActions();
     }
 
@@ -48,30 +49,32 @@ public class EmployeeProfileC implements Controller {
     }
 
     private void configurarSeccionPermisos() {
+    	
         hacerInmutable(vista.getExchanges(), user.getEp() != null);
         hacerInmutable(vista.getStore(), user.getSp() != null);
         hacerInmutable(vista.getOrders(), user.getOp() != null);
     }
 
     private void hacerInmutable(JCheckBox check, boolean valor) {
-        check.setSelected(valor);
-        check.setFocusable(false);
-        check.setModel(new DefaultButtonModel() {
-            @Override
-            public void setArmed(boolean b) {
-                // Evita que el componente se prepare para un evento
-            }
-
-            @Override
-            public void setPressed(boolean b) {
-                // No permitimos que se vea el efecto de "presionado"
-            }
+    	check.setModel(new DefaultButtonModel() {
+            private boolean inicializado = false;
 
             @Override
             public void setSelected(boolean b) {
-                // No hacemos nada, ignoramos el intento de cambio
+                if (!inicializado) {
+                    super.setSelected(b);
+                    inicializado = true;
+                }
             }
+            
+            @Override
+            public void setPressed(boolean b) { /* Ignorar clic visual */ }
+            @Override
+            public void setArmed(boolean b) { /* Ignorar preparación */ }
         });
+
+        check.setSelected(valor);
+        check.setFocusable(false);
     }
 
 }

@@ -111,7 +111,7 @@ public class BannerEmployeeC implements Controller {
 
         EmployeeProfile profile = new EmployeeProfile();
 
-        new EmployeeProfileC(profile, ((Employee) frame.getUser()));
+        new EmployeeProfileC(profile, frame);
 
         frame.addCard(profile, "EMPLOYEE_PROFILE");
         frame.changeVisibleCard("EMPLOYEE_PROFILE");

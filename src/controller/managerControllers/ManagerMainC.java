@@ -60,7 +60,10 @@ public class ManagerMainC implements Controller {
         });
 
         view.getEstadisticas().addActionListener(e -> {
-            //DUE
+            ManagerStatisticsP managerStatisticsP = new ManagerStatisticsP();
+            new ManagerStatisticsC(frame, model, managerStatisticsP);
+            this.frame.addCard(managerStatisticsP, "STATISTICS");
+            this.frame.changeVisibleCard("STATISTICS");
         });
 
         view.getDescuentos().addActionListener(e -> {

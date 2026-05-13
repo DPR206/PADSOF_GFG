@@ -67,11 +67,17 @@ public class ManagerMainC implements Controller {
         });
 
         view.getDescuentos().addActionListener(e -> {
-            //DUE
+            ManagerDiscountsP managerDiscountsP = new ManagerDiscountsP();
+            new ManagerDiscountsC(frame, model, managerDiscountsP);
+            this.frame.addCard(managerDiscountsP, "MANAGER_DISCOUNTS");
+            this.frame.changeVisibleCard("MANAGER_DISCOUNTS");
         });
 
         view.getParametros().addActionListener(e -> {
-            //DUE
+            ManagerParametersP managerParametersP = new ManagerParametersP();
+            new ManagerParametersC(frame, model, managerParametersP);
+            this.frame.addCard(managerParametersP, "MANAGER_PARAMETERS");
+            this.frame.changeVisibleCard("MANAGER_PARAMETERS");
         });
     }
 }

@@ -153,7 +153,7 @@ public class Parameter implements Serializable {
      * Sets the time it will pass since the offer is accepted and the exchange is done
      * @param exchangeTime the exchangeTime to set
      */
-    private void setExchangeTime(Period exchangeTime) {
+    public void setExchangeTime(Period exchangeTime) {
         ExchangeTime = exchangeTime;
     }
 

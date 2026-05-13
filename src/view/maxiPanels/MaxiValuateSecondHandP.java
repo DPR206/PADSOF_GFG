@@ -1,4 +1,4 @@
-package view.employeePanels;
+package view.maxiPanels;
 
 import model.product.ConservationStatus;
 import model.product.SecondHandProduct;

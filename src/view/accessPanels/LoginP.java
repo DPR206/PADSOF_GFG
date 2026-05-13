@@ -3,6 +3,7 @@ package view.accessPanels;
 import view.ImageAdder;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * It implements the log-in panel view
@@ -23,22 +24,53 @@ public class LoginP extends JPanel {
         // asignar layout
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        JLabel title = new JLabel("LOGIN");
+        title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 20));
+
+        JLabel image = ImageAdder.getImageLabel(".\\resources\\app\\default_user.png", 100, 100);
+
         // crear componentes
         JLabel label1 = new JLabel("Enter your Username:");
         username = new JTextField();
-        username.setColumns(10);
+        username.setColumns(50);
+        username.setMaximumSize(username.getPreferredSize());
         JLabel label2 = new JLabel("Enter you password:");
         password = new JPasswordField();
-        password.setColumns(10);
+        password.setColumns(50);
+        password.setMaximumSize(password.getPreferredSize());
         login = new JButton("Log in");
 
         // añadir componentes al panel
-        this.add(ImageAdder.getImageLabel(".\\resources\\app\\default_user.png", 50, 50));
+        this.add(Box.createVerticalGlue());
+
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(title);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        image.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(image);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        label1.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(label1);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        username.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(username);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        label2.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(label2);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        password.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(password);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        login.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(login);
+
+        this.add(Box.createVerticalGlue());
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/

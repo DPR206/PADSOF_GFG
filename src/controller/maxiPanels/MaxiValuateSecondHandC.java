@@ -6,7 +6,7 @@ import model.product.ConservationStatus;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseSecondHandProductsP;
-import view.employeePanels.MaxiValuateSecondHandP;
+import view.maxiPanels.MaxiValuateSecondHandP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

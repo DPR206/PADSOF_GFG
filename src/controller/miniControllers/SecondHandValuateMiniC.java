@@ -7,7 +7,7 @@ import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
 import view.browserPanels.AbstractBrowserP;
-import view.employeePanels.MaxiValuateSecondHandP;
+import view.maxiPanels.MaxiValuateSecondHandP;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.text.BadLocationException;

@@ -15,7 +15,7 @@ import view.miniPanels.OrderMini;
 
 public class BrowseOrdersC extends AbstractBrowserC<Order>{
 
-	BrowseOrdersC(App frame, BrowseOrdersP view, Store model) {
+	public BrowseOrdersC(App frame, BrowseOrdersP view, Store model) {
 		super(frame, view, model);
 		initializeActionsForMiniPanels();
 	}

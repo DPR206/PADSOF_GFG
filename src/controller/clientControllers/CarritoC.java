@@ -104,46 +104,18 @@ public class CarritoC implements Controller {
 
     private void abrirOrders() {
 
-        if (user instanceof RegisteredClient regClient) {
-            OrdersP pagOrders = new OrdersP();
-            new OrdersC(pagOrders, regClient, frame);
+        if (user instanceof RegisteredClient) {
+            OrdersP pagOrders;
+			try {
+				pagOrders = new OrdersP();
+			} catch (BadLocationException ex) {
+				throw new RuntimeException(ex);
+			}
+            new OrdersC(pagOrders, frame);
 
             frame.addCard(pagOrders, "ORDERS_REGISTERED");
             frame.changeVisibleCard("ORDERS_REGISTERED");
         }
     }
-
-	/*public void actualizarInterfazCarrito() {
-	    view.getPanelCentral().removeAll();
-
-	    double totalAcumulado = 0;
-	    List<StoreProduct> productos = Store.getInstance().getCarrito();
-
-	    // 2. Volver a pintar cada producto
-	    for (int i = 0; i < productos.size(); i++) {
-	        StoreProduct p = productos.get(i);
-	        totalAcumulado += p.getPrice() * p.getStock(); // Suponiendo que stock es la cantidad elegida
-
-	        try {
-	            // Creamos la tarjetita que diseñamos antes
-	            StoreProductMiniCart miniView = new StoreProductMiniCart(p, i + 1);
-
-	            // Añadimos evento al botón borrar de esa tarjetita
-	            miniView.getDeleteBtn().addActionListener(e -> {
-	                Store.getInstance().getCarrito().remove(p);
-	                actualizarInterfazCarrito(); // Recarga todo
-	            });
-
-	            vista.getPanelCentral().add(miniView);
-	        } catch (Exception ex) {
-	            ex.printStackTrace();
-	        }
-	    }
-
-	    view.setTotal(totalAcumulado);
-
-	    view.revalidate();
-	    view.repaint();
-	}*/
 
 }

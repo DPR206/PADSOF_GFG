@@ -49,6 +49,7 @@ public class EmployeeProfile extends JPanel{
         pwd.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
         btnMostrar = new JButton("👁️");
+        btnMostrar.setForeground(new Color(64, 0, 0));
         btnMostrar.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 14));
         btnMostrar.setBorderPainted(false);
         btnMostrar.setContentAreaFilled(false);
@@ -122,8 +123,8 @@ public class EmployeeProfile extends JPanel{
 	/**
 	 * @param nom the nom to set
 	 */
-	public void setNom(JLabel nom) {
-		this.nom = nom;
+	public void setNom(String nom) {
+		this.nom.setText(nom);
 	}
 
 	/**

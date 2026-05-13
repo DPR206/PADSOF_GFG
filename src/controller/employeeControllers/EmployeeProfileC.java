@@ -27,7 +27,7 @@ public class EmployeeProfileC implements Controller {
 
     public void initializeActions() {
 
-        vista.setName(user.getUserName());
+        vista.setNom(user.getUserName());
 
         vista.getBtnMostrar().addActionListener(e -> {
             showPassword();

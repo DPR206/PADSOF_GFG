@@ -39,7 +39,7 @@ public class OrderMiniC implements Controller {
 		if(order.getState() != OrderState.PICKED_UP) {
 			view.getAddReview().setVisible(false);
 		} else
-			view.setVisible(true);
+			view.getAddReview().setVisible(true);
 		
 		initializeActions();
 	}
@@ -61,19 +61,23 @@ public class OrderMiniC implements Controller {
 	     List<StoreProduct> productos = order.getSp();
 	     List<Pack> packs = order.getP();
 	        
-	     for (int i = 0; i < productos.size(); i++) {
-	       sb.append(productos.get(i).getName());
-	       if (i < productos.size() - 1) {
-	         sb.append(", ");
-	       }
+	     if (productos != null && !productos.isEmpty()) {
+	         for (int i = 0; i < productos.size(); i++) {
+	             sb.append(productos.get(i).getName());
+	             if (i < productos.size() - 1) sb.append(", ");
+	         }
 	     }
-	     
-	     for (int i = 0; i < packs.size(); i++) {
-		   sb.append("Pack " + i);
-		   if (i < packs.size() - 1) {
-		     sb.append(", ");
-		   }
-		 }
+
+	     if (sb.length() > 0 && packs != null && !packs.isEmpty()) {
+	         sb.append(", "); 
+	     }
+
+	     if (packs != null && !packs.isEmpty()) {
+	         for (int i = 0; i < packs.size(); i++) {
+	             sb.append("Pack " + (i + 1));
+	             if (i < packs.size() - 1) sb.append(", ");
+	         }
+	     }
 		
 	     view.setOrderDetails(sb.toString(), order.getPrice());
 	}

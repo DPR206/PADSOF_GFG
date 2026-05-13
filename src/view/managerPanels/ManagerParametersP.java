@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.Period;
 
+import static view.ImageAdder.getImageLabel;
+
 public class ManagerParametersP extends JPanel {
     public JButton applyChanges = new JButton("Apply Changes");
     public JTextField offerTimeField;
@@ -26,28 +28,29 @@ public class ManagerParametersP extends JPanel {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerParametersP() {
         this.setLayout(new GridLayout(3, 3)); // There are 8 configurable parameters
-        this.setOpaque(false);
         paintEverything();
     }
 
     public void paintEverything() {
         this.removeAll();
+        this.setOpaque(false);
 
-        offerTimeField = new JTextField(offerTime == null ? "" : String.valueOf(offerTime));
-        orderTimeField = new JTextField(orderTime == null ? "" : String.valueOf(orderTime));
-        valuationCostField = new JTextField(String.valueOf(valuationCost));
-        storeAddressField = new JTextField(storeAddress == null ? "" : storeAddress);
-        exchangeTimeField = new JTextField(exchangeTime == null ? "" : (exchangeTime.toString()));
-        kRecommendField = new JTextField(kRecommend);
+        offerTimeField = new JTextField(offerTime == null ? "" : String.valueOf(offerTime.getDays()));
+        orderTimeField = new JTextField(orderTime == null ? "" : String.valueOf(orderTime.getDays()));
+        exchangeTimeField = new JTextField(exchangeTime == null ? "" : String.valueOf(exchangeTime.getDays()));
+        kRecommendField = new JTextField(String.valueOf(kRecommend));
         scoreAParamField = new JTextField(String.valueOf(scoreAParam));
         scoreBParamField = new JTextField(String.valueOf(scoreBParam));
+        valuationCostField = new JTextField(String.valueOf(valuationCost));
+        storeAddressField = new JTextField(storeAddress == null ? "" : storeAddress);
 
         this.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Padding :)
 
         /* Offer time */
         JPanel param1 = new JPanel();
         param1.setLayout(new BoxLayout(param1, BoxLayout.Y_AXIS));
-        JLabel label1 = new JLabel("⌛ Offer time: " + offerTime);
+        JLabel label1 =
+                new JLabel("⌛ Offer time (days): " + (offerTime == null ? "" : String.valueOf(offerTime.getDays())));
         label1.setAlignmentX(Component.LEFT_ALIGNMENT);
         offerTimeField.setAlignmentX(Component.LEFT_ALIGNMENT);
         offerTimeField.setColumns(30);
@@ -60,11 +63,12 @@ public class ManagerParametersP extends JPanel {
         /* Order time */
         JPanel param2 = new JPanel();
         param2.setLayout(new BoxLayout(param2, BoxLayout.Y_AXIS));
-        JLabel label2 = new JLabel("⌛ Order time: " + orderTime);
+        JLabel label2 =
+                new JLabel("⌛ Order time (days): " + (orderTime == null ? "" : String.valueOf(orderTime.getDays())));
         label2.setAlignmentX(Component.LEFT_ALIGNMENT);
         orderTimeField.setAlignmentX(Component.LEFT_ALIGNMENT);
         orderTimeField.setColumns(30);
-        orderTimeField.setMaximumSize(offerTimeField.getPreferredSize());
+        orderTimeField.setMaximumSize(orderTimeField.getPreferredSize());
         param2.add(label2);
         param2.add(Box.createRigidArea(new Dimension(0, 10)));
         param2.add(orderTimeField);
@@ -73,7 +77,8 @@ public class ManagerParametersP extends JPanel {
         /* Exchange time */
         JPanel param5 = new JPanel();
         param5.setLayout(new BoxLayout(param5, BoxLayout.Y_AXIS));
-        JLabel label5 = new JLabel("⌛ Exchange time: " + exchangeTime);
+        JLabel label5 = new JLabel(
+                "⌛ Exchange time (days): " + (exchangeTime == null ? "" : String.valueOf(exchangeTime.getDays())));
         label5.setAlignmentX(Component.LEFT_ALIGNMENT);
         exchangeTimeField.setAlignmentX(Component.LEFT_ALIGNMENT);
         exchangeTimeField.setColumns(30);
@@ -119,7 +124,7 @@ public class ManagerParametersP extends JPanel {
         scoreBParamField.setMaximumSize(scoreBParamField.getPreferredSize());
         param8.add(label8);
         param8.add(Box.createRigidArea(new Dimension(0, 10)));
-        param8.add(offerTimeField);
+        param8.add(scoreBParamField);
         this.add(param8);
 
         /* Valuation cost */
@@ -148,8 +153,13 @@ public class ManagerParametersP extends JPanel {
         param4.add(storeAddressField);
         this.add(param4);
 
-        applyChanges.setMaximumSize(applyChanges.getPreferredSize());
-        this.add(applyChanges);
+        JPanel botonPanel = new JPanel();
+        applyChanges.setIcon(getImageLabel(".\\resources\\app\\save.png", 35, 35).getIcon());
+        applyChanges.setPreferredSize(new Dimension(("Apply Changes").length() * 16, 50));
+        applyChanges.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        applyChanges.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        botonPanel.add(applyChanges);
+        this.add(botonPanel);
 
         this.revalidate();
         this.repaint();

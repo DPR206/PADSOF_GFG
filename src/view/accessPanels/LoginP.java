@@ -32,11 +32,11 @@ public class LoginP extends JPanel {
         // crear componentes
         JLabel label1 = new JLabel("Enter your Username:");
         username = new JTextField();
-        username.setColumns(50);
+        username.setColumns(20);
         username.setMaximumSize(username.getPreferredSize());
         JLabel label2 = new JLabel("Enter you password:");
         password = new JPasswordField();
-        password.setColumns(50);
+        password.setColumns(20);
         password.setMaximumSize(password.getPreferredSize());
         login = new JButton("Log in");
 

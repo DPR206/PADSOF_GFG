@@ -18,6 +18,7 @@ public class EmployeeMiniC implements Controller {
         this.employee = employee;
         this.mge = new ManagerGestionEmplIndividual();
         this.frame = frame;
+        initializeActions();
     }
 
     public void initializeActions() {

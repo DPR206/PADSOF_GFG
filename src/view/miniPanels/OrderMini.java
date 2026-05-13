@@ -14,7 +14,7 @@ import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-public class OrderMini extends MiniPanel {
+public class OrderMini extends AbstractMiniP {
 
 	private static final long serialVersionUID = 1L;
     private JLabel orderState = new JLabel("");

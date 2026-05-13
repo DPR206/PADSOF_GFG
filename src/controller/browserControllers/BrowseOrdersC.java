@@ -10,7 +10,7 @@ import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
 import view.browserPanels.BrowseOrdersP;
-import view.miniPanels.MiniPanel;
+import view.miniPanels.AbstractMiniP;
 import view.miniPanels.OrderMini;
 
 public class BrowseOrdersC extends AbstractBrowserC<Order>{
@@ -29,13 +29,13 @@ public class BrowseOrdersC extends AbstractBrowserC<Order>{
 	        throw new RuntimeException(ex);
 	    }
 
-		List<MiniPanel> miniPanels = super.getView().getMiniPanels();
+		List<AbstractMiniP> miniPanels = super.getView().getMiniPanels();
 	    List<Order> itemList = super.getView().getItemList();
 
 	    for (int i = 0; i < miniPanels.size(); i++) {
 	        if (i < itemList.size()) {
 	            Order currentOrder = (Order) itemList.get(i);
-	            MiniPanel currentPanel = miniPanels.get(i);
+	            AbstractMiniP currentPanel = miniPanels.get(i);
 
 	            new OrderMiniC(
 	                (OrderMini) currentPanel, 

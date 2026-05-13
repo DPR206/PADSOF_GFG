@@ -3,7 +3,7 @@ package view.managerPanels;
 import model.store.Store;
 import model.user.Employee;
 import view.App;
-import view.browserPanels.BrowseUsersP;
+import view.browserPanels.BrowseEmployeesP;
 import view.miniPanels.EmployeeMiniP;
 
 import javax.swing.*;
@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ManagerGestionarEmpleados extends JPanel {
+    BrowseEmployeesP browse = null;
     private JCheckBox storeP = new JCheckBox("Trabajar con productos");
     private JCheckBox orderP = new JCheckBox("Trabajar con pedidos");
     private JCheckBox exchangeP = new JCheckBox("Trabajar con intercambios");
@@ -20,7 +21,8 @@ public class ManagerGestionarEmpleados extends JPanel {
     private JPasswordField pwd = new JPasswordField();
     private JPanel mainThings = new JPanel();
     private JButton confirmar = new JButton("CONFIRMAR");
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerGestionarEmpleados(App app) {
         super();
 
@@ -59,9 +61,8 @@ public class ManagerGestionarEmpleados extends JPanel {
         panel.add(this.exchangeP);
         panel.add(this.confirmar);
         List<Employee> employees = Store.getInstance().getEmployeeList();
-        BrowseUsersP browse = null;
         try {
-            browse = new BrowseUsersP(employees, "GESTIONAR");
+            browse = new BrowseEmployeesP("GESTIONAR");
         } catch (BadLocationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -90,6 +91,10 @@ public class ManagerGestionarEmpleados extends JPanel {
 
         mainThings.revalidate();
         mainThings.repaint();
+    }
+
+    public BrowseEmployeesP getBrowse() {
+        return browse;
     }
 
     public JButton getConfirmar() {

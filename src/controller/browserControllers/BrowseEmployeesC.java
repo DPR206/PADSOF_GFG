@@ -1,11 +1,11 @@
 package controller.browserControllers;
 
 import model.store.Store;
-import model.user.User;
+import model.user.Employee;
 import view.App;
-import view.browserPanels.BrowseUsersP;
+import view.browserPanels.BrowseEmployeesP;
 
-public class BrowseEmployeesC extends AbstractBrowserC<User> { //DUE
+public class BrowseEmployeesC extends AbstractBrowserC<Employee> { //DUE
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
@@ -14,7 +14,7 @@ public class BrowseEmployeesC extends AbstractBrowserC<User> { //DUE
      * @param view  the controller's view
      * @param model the controller's model
      */
-    BrowseEmployeesC(App frame, BrowseUsersP view, Store model) {
+    BrowseEmployeesC(App frame, BrowseEmployeesP view, Store model) {
         super(frame, view, model);
         initializeActionsForMiniPanels();
     }

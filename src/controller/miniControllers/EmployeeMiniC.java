@@ -22,6 +22,7 @@ public class EmployeeMiniC implements Controller {
 
     public void initializeActions() {
        this.employee.getButton().addActionListener(e->{
+    	   System.out.println("AY");
        		this.frame.addCard(mge, "EMPLEADO INDIVIDUAL");
        		this.frame.changeVisibleCard("EMPLEADO INDIVIDUAL");
        		}

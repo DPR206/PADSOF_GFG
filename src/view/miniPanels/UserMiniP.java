@@ -32,14 +32,14 @@ public class UserMiniP extends AbstractMiniP {
         imageAndName.add(image);
         imageAndName.add(new JLabel(user.getUserName()));
         this.add(imageAndName);
-        button = new JButton(buttonName);
+        this.button = new JButton(buttonName);
         this.add(button);
 
         this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
     }
 
     public JButton getButton() {
-        return button;
+        return this.button;
     }
 
     public User getUser() {

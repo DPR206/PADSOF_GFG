@@ -3,7 +3,7 @@ package view.managerPanels;
 import model.store.Store;
 import model.user.Employee;
 import view.App;
-import view.browserPanels.BrowseUsersP;
+import view.browserPanels.BrowseEmployeesP;
 import view.miniPanels.EmployeeMiniP;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class ManagerGestionarEmpleados extends JPanel {
     private JPasswordField pwd = new JPasswordField();
     private JPanel mainThings = new JPanel();
     private JButton confirmar = new JButton("CONFIRMAR");
-    private BrowseUsersP browse = null;
+    private BrowseEmployeesP browse = null;
 /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerGestionarEmpleados(App app) {
         super();
@@ -58,7 +58,7 @@ public class ManagerGestionarEmpleados extends JPanel {
         List<Employee> employees = Store.getInstance().getEmployeeList();
 
         try {
-            browse = new BrowseUsersP(employees, "GESTIONAR");
+            browse = new BrowseEmployeesP("GESTIONAR");
         } catch (BadLocationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -121,7 +121,7 @@ public class ManagerGestionarEmpleados extends JPanel {
         this.confirmar.addActionListener(c);
     }
     
-    public BrowseUsersP getView() {
+    public BrowseEmployeesP getBrowse() {
     	return this.browse;
     }
 }

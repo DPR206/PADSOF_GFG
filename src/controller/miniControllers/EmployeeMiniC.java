@@ -1,7 +1,7 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.managerControllers.ManagerGestionarEmpInd;
+import controller.managerControllers.ManagerCrearEmpInd;
 import model.user.Employee;
 import view.App;
 import view.managerPanels.ManagerGestionEmplIndividual;
@@ -14,17 +14,18 @@ public class EmployeeMiniC implements Controller {
     private App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public EmployeeMiniC(App frame, UserMiniP employee, ManagerGestionEmplIndividual mge) {
+    public EmployeeMiniC(App frame, UserMiniP employee) {
         this.employee = employee;
-        this.mge = mge;
+        this.mge = new ManagerGestionEmplIndividual();
         this.frame = frame;
-
-        new ManagerGestionarEmpInd((Employee) employee.getUser(), mge);
-        initializeActions();
     }
 
     public void initializeActions() {
-        // TODO Auto-generated method stub
+       this.employee.getButton().addActionListener(e->{
+       		this.frame.addCard(mge, "EMPLEADO INDIVIDUAL");
+       		this.frame.changeVisibleCard("EMPLEADO INDIVIDUAL");
+       		}
+        );  
     }
 
 }

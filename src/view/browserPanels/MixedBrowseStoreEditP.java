@@ -54,7 +54,7 @@ public class MixedBrowseStoreEditP extends AbstractMixedBrowserP<Pack, StoreProd
 
     @Override
     public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
-        PackMiniP miniPack = new PackMiniP(item, index, "Manage", null);
+        PackMiniP miniPack = new PackMiniP(item, index, "Manage", null);;
         super.addFirstMiniPanel(miniPack);
         this.add(miniPack);
     }

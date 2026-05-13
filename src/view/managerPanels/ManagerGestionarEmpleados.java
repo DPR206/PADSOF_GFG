@@ -20,6 +20,7 @@ public class ManagerGestionarEmpleados extends JPanel {
     private JPasswordField pwd = new JPasswordField();
     private JPanel mainThings = new JPanel();
     private JButton confirmar = new JButton("CONFIRMAR");
+    private BrowseUsersP browse = null;
 /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public ManagerGestionarEmpleados(App app) {
         super();
@@ -28,10 +29,6 @@ public class ManagerGestionarEmpleados extends JPanel {
 
         mainThings.setLayout(new BoxLayout(mainThings, BoxLayout.Y_AXIS));
         mainThings.setOpaque(true);
-
-        JScrollPane scroll = new JScrollPane(mainThings);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setPreferredSize(new Dimension(450, 0));
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -59,7 +56,7 @@ public class ManagerGestionarEmpleados extends JPanel {
         panel.add(this.exchangeP);
         panel.add(this.confirmar);
         List<Employee> employees = Store.getInstance().getEmployeeList();
-        BrowseUsersP browse = null;
+
         try {
             browse = new BrowseUsersP(employees, "GESTIONAR");
         } catch (BadLocationException e) {
@@ -122,5 +119,9 @@ public class ManagerGestionarEmpleados extends JPanel {
 
     public void setController(ActionListener c) {
         this.confirmar.addActionListener(c);
+    }
+    
+    public BrowseUsersP getView() {
+    	return this.browse;
     }
 }

@@ -5,12 +5,12 @@ import model.user.*;
 import model.utilities.exceptions.PasswordNotValid;
 import view.managerPanels.ManagerGestionEmplIndividual;
 
-public class ManagerGestionarEmpInd implements Controller {
+public class ManagerCrearEmpInd implements Controller {
     private Employee emp;
     private ManagerGestionEmplIndividual mgei;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public ManagerGestionarEmpInd(Employee emp, ManagerGestionEmplIndividual mgei) {
+    public ManagerCrearEmpInd(Employee emp, ManagerGestionEmplIndividual mgei) {
         this.mgei = mgei;
         this.emp = emp;
 

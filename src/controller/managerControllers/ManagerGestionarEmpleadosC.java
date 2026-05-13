@@ -8,6 +8,8 @@ import view.App;
 import view.managerPanels.ManagerGestionarEmpleados;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class ManagerGestionarEmpleadosC implements Controller {
         gest.getConfirmar().addActionListener(e -> {
             String userName = gest.getUserName().getText();
             char[] pwd = gest.getPwd().getPassword();
-
+            int count = 0;
             if (userName.isBlank() || pwd.length == 0) {
                 return; //si están vacíos, no hacen nada
             }
@@ -39,24 +41,39 @@ public class ManagerGestionarEmpleadosC implements Controller {
 
             if (gest.getStoreP().isSelected()) {
                 perms.add(Permission.STORE);
+                count++;
             }
             if (gest.getOrderP().isSelected()) {
                 perms.add(Permission.ORDER);
+                count++;
             }
             if (gest.getExchangeP().isSelected()) {
                 perms.add(Permission.EXCHANGE);
+                count++;
             }
-
+            
+            if(count == 0) {
+            	return;
+            }
+            
             Permission[] p = perms.toArray(new Permission[0]);
 
             Employee emp = new Employee(password, userName, false, p);
             System.out.println(emp.getId());
-            JOptionPane.showMessageDialog(frame, gest, "CREADO CORRECTAMENTE", JOptionPane.PLAIN_MESSAGE);
 
             Store.getInstance().addEmployee(emp);
             gest.refresh();
             System.out.println(emp);
             System.out.println(Store.getInstance().getEmployeeList());
+            
+            try {
+				this.gest.getView().paintEverything();
+			} catch (BadLocationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            int numEmpl = Store.getInstance().getEmployeeList().size();
+            this.gest.getView().addMiniPanel(emp, numEmpl++);
         });
     }
 }

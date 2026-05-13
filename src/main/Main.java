@@ -26,6 +26,7 @@ public class Main {
         UIManager.put("TextPane.background", backgroundColour);
         UIManager.put("Button.background", brownColour);
         UIManager.put("Button.foreground", new Color(255, 255, 255));
+        //UIManager.put("ButtonUI", "org.jdesktop.swingx.plaf.ButtonCursorAddon$MetalButtonCursorUI");
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {

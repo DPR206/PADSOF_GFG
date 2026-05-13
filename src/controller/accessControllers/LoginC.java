@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
  * @version 1.0
  */
 public class LoginC extends MainLoopSelector {
-    private final LoginP view; /* view -> panel */
+    private final LoginP view;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -32,7 +32,7 @@ public class LoginC extends MainLoopSelector {
 
     @Override
     public void initializeActions() {
-        /* Enter to press key */
+        /* Type Enter to press key */
         view.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -42,6 +42,7 @@ public class LoginC extends MainLoopSelector {
             }
         });
 
+        /* Log in button */
         view.getLogin().addActionListener(e -> {
             User user = super.getModel().logIn(view.getUsername(), view.getPassword());
             if (user == null) {

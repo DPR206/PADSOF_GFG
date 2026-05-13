@@ -63,16 +63,8 @@ public class Utility implements Serializable {
     public User logIn(String userName, String pwd) {
         User u;
 
-        //DEBUG: if (Store.getInstance().getUsers().size() < 2) {
-        //DEBUG:     System.out.println("NO HAY USUARIOS FUCKKKKK");
-        //DEBUG: }
-        //DEBUG: for (User user : Store.getInstance().getUsers().values()) {
-        //DEBUG:     System.out.println("Username: " + user.getUserName() + " Password: " + user.getPassword() + "\n");
-        //DEBUG: }
-
         if (Store.getInstance().getUsers().containsKey(userName)) {
             u = Store.getInstance().getUsers().get(userName);
-            //DEBUG: System.out.println("Password: " + u.getPassword() + " , expected: " + pwd);
             if (u.getPassword().equals(pwd)) {
                 return u;
             }

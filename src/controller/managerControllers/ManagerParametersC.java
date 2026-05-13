@@ -26,15 +26,7 @@ public class ManagerParametersC implements Controller {
 
     @Override
     public void initializeActions() {
-        view.setOfferTime(Parameter.getParam().getOfferTime());
-        view.setOrderTime(Parameter.getParam().getOrderTime());
-        view.setExchangeTime(Parameter.getParam().getExchangeTime());
-        view.setkRecommend(Parameter.getParam().getkRecommend());
-        view.setScoreAParam(Parameter.getParam().getScoreAParam());
-        view.setScoreBParam(Parameter.getParam().getScoreBParam());
-        view.setValuationCost(Parameter.getParam().getValuationCost());
-        view.setStoreAddress(Parameter.getParam().getStoreAddress());
-        view.paintEverything();
+        assignValuesToView();
 
         view.getApplyChanges().addActionListener(e -> {
             boolean applyChanges = true;
@@ -46,9 +38,9 @@ public class ManagerParametersC implements Controller {
             double scoreBParam = 0;
             double valuationCost = 0;
             try {
-                offerTime = Period.parse(view.getOfferTimeField().getText());
-                orderTime = Period.parse(view.getOrderTimeField().getText());
-                exchangeTime = Period.parse(view.getExchangeTimeField().getText());
+                offerTime = Period.ofDays(Integer.parseInt(view.getOfferTimeField().getText()));
+                orderTime = Period.ofDays(Integer.parseInt(view.getOrderTimeField().getText()));
+                exchangeTime = Period.ofDays(Integer.parseInt(view.getExchangeTimeField().getText()));
             } catch (DateTimeParseException e1) {
                 JOptionPane.showMessageDialog(frame, "Times must be Periods", "Invalid time period",
                         JOptionPane.ERROR_MESSAGE);
@@ -78,10 +70,21 @@ public class ManagerParametersC implements Controller {
                     Parameter.getParam().setScoreBParam(scoreBParam);
                     Parameter.getParam().setValuationCost(valuationCost);
                     Parameter.getParam().setStoreAddress(storeAddress);
-                    view.paintEverything();
+                    assignValuesToView();
                 }
             }
         });
+    }
 
+    public void assignValuesToView() {
+        view.setOfferTime(Parameter.getParam().getOfferTime());
+        view.setOrderTime(Parameter.getParam().getOrderTime());
+        view.setExchangeTime(Parameter.getParam().getExchangeTime());
+        view.setkRecommend(Parameter.getParam().getkRecommend());
+        view.setScoreAParam(Parameter.getParam().getScoreAParam());
+        view.setScoreBParam(Parameter.getParam().getScoreBParam());
+        view.setValuationCost(Parameter.getParam().getValuationCost());
+        view.setStoreAddress(Parameter.getParam().getStoreAddress());
+        view.paintEverything();
     }
 }

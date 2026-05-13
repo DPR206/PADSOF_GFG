@@ -33,11 +33,11 @@ public class ManagerParametersP extends JPanel {
     public void paintEverything() {
         this.removeAll();
 
-        offerTimeField = new JTextField(String.valueOf(offerTime));
-        orderTimeField = new JTextField(String.valueOf(orderTime));
+        offerTimeField = new JTextField(offerTime == null ? "" : String.valueOf(offerTime));
+        orderTimeField = new JTextField(orderTime == null ? "" : String.valueOf(orderTime));
         valuationCostField = new JTextField(String.valueOf(valuationCost));
-        storeAddressField = new JTextField(storeAddress);
-        exchangeTimeField = new JTextField((exchangeTime.toString()));
+        storeAddressField = new JTextField(storeAddress == null ? "" : storeAddress);
+        exchangeTimeField = new JTextField(exchangeTime == null ? "" : (exchangeTime.toString()));
         kRecommendField = new JTextField(kRecommend);
         scoreAParamField = new JTextField(String.valueOf(scoreAParam));
         scoreBParamField = new JTextField(String.valueOf(scoreBParam));

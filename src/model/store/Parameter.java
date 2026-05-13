@@ -56,6 +56,7 @@ public class Parameter implements Serializable {
         this.scoreAParam = 0.5;
         this.scoreBParam = 0.5;
         this.itemsPerPage = 7;
+        this.kRecommend = 5;
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/

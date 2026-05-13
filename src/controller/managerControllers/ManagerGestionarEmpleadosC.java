@@ -1,6 +1,7 @@
 package controller.managerControllers;
 
 import controller.Controller;
+import controller.browserControllers.BrowseEmployeesC;
 import model.store.Store;
 import model.user.Employee;
 import model.user.Permission;
@@ -27,6 +28,15 @@ public class ManagerGestionarEmpleadosC implements Controller {
 
     @Override
     public void initializeActions() {
+    	
+    	try {
+    		gest.getBrowse().setItemList(Store.getInstance().getEmployeeList());
+    		gest.getBrowse().paintEverything();
+    		new BrowseEmployeesC(frame, gest.getBrowse(), Store.getInstance());
+    	} catch(Exception e) {
+    		System.out.println(e.getMessage());
+    	}
+    	
         System.out.println(Store.getInstance().getEmployeeList());
         gest.getConfirmar().addActionListener(e -> {
             String userName = gest.getUserName().getText();
@@ -62,18 +72,16 @@ public class ManagerGestionarEmpleadosC implements Controller {
             System.out.println(emp.getId());
 
             Store.getInstance().addEmployee(emp);
-            gest.refresh();
-            System.out.println(emp);
-            System.out.println(Store.getInstance().getEmployeeList());
+           
+        
             
             try {
-				this.gest.getView().paintEverything();
+            	this.gest.getBrowse().setItemList(Store.getInstance().getEmployeeList());
+				this.gest.getBrowse().paintEverything();
 			} catch (BadLocationException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-            int numEmpl = Store.getInstance().getEmployeeList().size();
-            this.gest.getView().addMiniPanel(emp, numEmpl++);
         });
     }
 }

@@ -1,6 +1,5 @@
 package view.managerPanels;
 
-import controller.browserControllers.BrowseEmployeesC;
 import model.store.Store;
 import model.user.Employee;
 import view.App;
@@ -59,7 +58,7 @@ public class ManagerGestionarEmpleados extends JPanel {
         List<Employee> employees = Store.getInstance().getEmployeeList();
 
         try {
-            browse = new BrowseEmployeesP( "GESTIONAR");
+            browse = new BrowseEmployeesP("GESTIONAR");
         } catch (BadLocationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -121,8 +120,8 @@ public class ManagerGestionarEmpleados extends JPanel {
     public void setController(ActionListener c) {
         this.confirmar.addActionListener(c);
     }
-
-    public BrowseEmployeesP getView() {
+    
+    public BrowseEmployeesP getBrowse() {
     	return this.browse;
     }
 }

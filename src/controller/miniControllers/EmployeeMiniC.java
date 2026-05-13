@@ -18,10 +18,12 @@ public class EmployeeMiniC implements Controller {
         this.employee = employee;
         this.mge = new ManagerGestionEmplIndividual();
         this.frame = frame;
+        initializeActions();
     }
 
     public void initializeActions() {
        this.employee.getButton().addActionListener(e->{
+    	   System.out.println("AY");
        		this.frame.addCard(mge, "EMPLEADO INDIVIDUAL");
        		this.frame.changeVisibleCard("EMPLEADO INDIVIDUAL");
        		}

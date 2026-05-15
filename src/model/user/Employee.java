@@ -408,6 +408,20 @@ public class Employee extends User implements Serializable {
      */
     public void setPerm(Permission... newPerm) {
         this.perm = newPerm;
+        
+        List<Permission> toSet = new ArrayList<>(Arrays.asList(newPerm));
+        this.sp = null;
+        this.op = null;
+        this.ep = null;
+        /*Reseteamos los permisos y ahora según nos llegue lo volvemos a hacer*/
+        
+        int size = toSet.size();
+        Permission[] p = new Permission[size];
+        int i = 0;
+        
+        for(i = 0; i < size; i++) {
+        	p[i] = toSet.get(i);
+        }
     }
 
     /**

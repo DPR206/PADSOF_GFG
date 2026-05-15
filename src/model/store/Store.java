@@ -393,7 +393,7 @@ public class Store implements Serializable {
     }
 
     public void addEmployee(Employee emp) {
-        this.employees.put(emp.getId(), emp);
+        this.employees.put(emp.getUserName(), emp);
         this.users.put(emp.getUserName(), emp);
     }
 

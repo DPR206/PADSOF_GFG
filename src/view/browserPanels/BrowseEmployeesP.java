@@ -5,11 +5,13 @@ import view.miniPanels.UserMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+import java.awt.*;
 
 import static main.Main.brownColour;
 
-public class BrowseEmployeesP extends AbstractBrowserP<Employee> {
+public class BrowseEmployeesP extends AbstractClusterBrowserP<Employee> {
     private final String buttonName;
+    private JPanel usersPanel = new JPanel(new GridLayout(3, 3));
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -17,7 +19,9 @@ public class BrowseEmployeesP extends AbstractBrowserP<Employee> {
      * This panel's constructor
      */
     public BrowseEmployeesP(String buttonName) throws BadLocationException {
-        super();
+        super(9);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         this.buttonName = buttonName;
 
         paintEverything();
@@ -30,12 +34,15 @@ public class BrowseEmployeesP extends AbstractBrowserP<Employee> {
      */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-
-        // Item list was set in constructor
+        usersPanel.removeAll();
 
         super.addAllMiniPanels();
-        this.add(super.getPageTurner());
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+        for (int i = 0; i < (9 - super.getMiniPanels().size()); i++) {
+            usersPanel.add(new JLabel(""));
+        }
+        this.add(usersPanel);
+        this.add(super.getPageTurner());
 
         this.revalidate();
         this.repaint();
@@ -45,6 +52,6 @@ public class BrowseEmployeesP extends AbstractBrowserP<Employee> {
     public void addMiniPanel(Employee item, int index) {
         UserMiniP miniUser = new UserMiniP(item, buttonName, ".\\resources\\app\\default_user.png");
         super.addMiniPanel(miniUser);
-        this.add(miniUser);
+        usersPanel.add(miniUser);
     }
 }

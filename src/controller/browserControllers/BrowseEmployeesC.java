@@ -1,21 +1,18 @@
 package controller.browserControllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.BadLocationException;
-
 import controller.miniControllers.EmployeeMiniC;
-import controller.miniControllers.WalletOwnerMiniC;
 import model.store.Store;
 import model.user.Employee;
-import model.user.RegisteredClient;
 import view.App;
 import view.browserPanels.BrowseEmployeesP;
 import view.miniPanels.AbstractMiniP;
 import view.miniPanels.UserMiniP;
 
-public class BrowseEmployeesC extends AbstractBrowserC<Employee> { //DUE
+import javax.swing.text.BadLocationException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BrowseEmployeesC extends AbstractClusterBrowserC<Employee> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
@@ -31,8 +28,8 @@ public class BrowseEmployeesC extends AbstractBrowserC<Employee> { //DUE
 
     @Override
     public void initializeActionsForMiniPanels() {
-    	List<Employee> users = new ArrayList<>(Store.getInstance().getEmployeeList());
-        
+        List<Employee> users = new ArrayList<>(Store.getInstance().getEmployeeList());
+
         try {
             super.getView().setItemList(users);
         } catch (BadLocationException ex) {
@@ -40,8 +37,8 @@ public class BrowseEmployeesC extends AbstractBrowserC<Employee> { //DUE
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new EmployeeMiniC(this.getFrame(), (UserMiniP)miniPanel);
+            new EmployeeMiniC(this.getFrame(), (UserMiniP) miniPanel);
         }
     }
-    
+
 }

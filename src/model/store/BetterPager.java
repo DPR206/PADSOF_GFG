@@ -20,10 +20,10 @@ public class BetterPager<G> {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
 
-    public G selectItemFromPage(List<G> itemList, int pageNum, int itemNum) {
-        List<G> itemListPage = pageItemList(itemList, pageNum);
-        return itemListPage.get(itemNum - 1);
-    }
+//    public G selectItemFromPage(List<G> itemList, int pageNum, int itemNum) {
+//        List<G> itemListPage = pageItemList(itemList, pageNum);
+//        return itemListPage.get(itemNum - 1);
+//    }
 
     public List<G> pageItemList(List<G> itemList, int pageNum) {
         if (pageNum < 1) {
@@ -105,6 +105,9 @@ public class BetterPager<G> {
 
     public int getMaxPageNumCluster(List<G> itemList, int itemsPerPage) {
         int size = itemList.size();
+        if (size == 0) {
+            return 1;
+        }
         if (size % itemsPerPage == 0) {
             return size / itemsPerPage;
         }
@@ -133,6 +136,6 @@ public class BetterPager<G> {
     }
 
     public int getToCluster(int pageNum, int size, int itemsPerPage) {
-        return Math.min(size, getFrom(pageNum) + itemsPerPage);
+        return Math.min(size, getFromCluster(pageNum, itemsPerPage) + itemsPerPage);
     }
 }

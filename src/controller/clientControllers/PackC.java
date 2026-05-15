@@ -38,7 +38,11 @@ public class PackC implements Controller{
 		this.view.setName(pack.getId());
 	    this.view.setPrice(pack.getPrice());
 	    this.view.setImage(pack.getPhoto());
-	    //this.view.setMaxStock(pack.getStock());
+	    
+	    int stockReal = calcularStockDisponiblePack(pack);
+	    this.view.setStock(stockReal);
+	    this.view.setMaxStock(stockReal);
+	    
 	    ArrayList<StoreProduct> products = pack.getProducts();
 	    if(products != null && !products.isEmpty())
 	    	this.view.setProductsInPack(products);
@@ -69,5 +73,28 @@ public class PackC implements Controller{
 		frame.addCard(packVista, "PACK");
 		frame.changeVisibleCard("PACK");
     }
+	
+	private int calcularStockDisponiblePack(Pack p) {
+	    int stockMinimo = Integer.MAX_VALUE;
+
+	    if (p.getProducts() != null) {
+	        for (StoreProduct prod : p.getProducts()) {
+	            if (prod.getStock() < stockMinimo) {
+	                stockMinimo = prod.getStock();
+	            }
+	        }
+	    }
+
+	    if (p.getPacks() != null) {
+	        for (Pack subPack : p.getPacks()) {
+	            int stockSubPack = calcularStockDisponiblePack(subPack);
+	            if (stockSubPack < stockMinimo) {
+	                stockMinimo = stockSubPack;
+	            }
+	        }
+	    }
+
+	    return (stockMinimo == Integer.MAX_VALUE) ? 0 : stockMinimo;
+	}
 }
 

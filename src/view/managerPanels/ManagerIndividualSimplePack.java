@@ -14,7 +14,7 @@ import view.browserPanels.BrowsePackProductsP;
 
 public class ManagerIndividualSimplePack extends JPanel{
 	private Pack p;
-    private JTextField idProduct = new JTextField();
+    private JTextField NameProduct = new JTextField();
     private JTextField packPrecio = new JTextField();
     private JButton btnConfirmarProducto = new JButton("CONFIRMAR PRODUCTO");
     private JButton btnConfirmarPrecio = new JButton("CONFIRMAR PRECIO");
@@ -32,8 +32,8 @@ public class ManagerIndividualSimplePack extends JPanel{
     	JPanel inserciones = new JPanel();
     	inserciones.setLayout(new GridLayout(6,1));
 
-    	inserciones.add(new JLabel("ID DEL PRODUCTO A AÑADIR:"));
-    	inserciones.add(idProduct);
+    	inserciones.add(new JLabel("NOMBRE DEL PRODUCTO A AÑADIR:"));
+    	inserciones.add(NameProduct);
     	inserciones.add(this.btnConfirmarProducto);
     	inserciones.add(new JLabel("PRECIO NUEVO:"));
     	inserciones.add(packPrecio);
@@ -52,8 +52,8 @@ public class ManagerIndividualSimplePack extends JPanel{
     public JButton getConfirmarPrecio() {
     	return this.btnConfirmarPrecio;
     }
-    public JTextField getIdProductText() {
-    	return this.idProduct;
+    public JTextField getNameProductText() {
+    	return this.NameProduct;
     }
     public JTextField getPackPriceText() {
     	return this.packPrecio;

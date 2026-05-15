@@ -13,7 +13,6 @@ import javax.swing.text.BadLocationException;
 import model.product.Pack;
 import view.browserPanels.BrowsePackProductsP;
 import view.browserPanels.BrowsePacksComposed;
-import view.browserPanels.BrowsePacksPackP;
 
 public class ManagerIndividualComposedPack extends JPanel{
 	private Pack p;

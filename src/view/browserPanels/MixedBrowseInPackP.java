@@ -12,6 +12,7 @@ import javax.swing.text.BadLocationException;
 
 import model.product.Pack;
 import model.product.StoreProduct;
+import view.miniPanels.PackMiniP;
 import view.miniPanels.PackToBuyMiniP;
 import view.miniPanels.StoreProductMiniP;
 
@@ -64,14 +65,14 @@ public class MixedBrowseInPackP extends AbstractMixedBrowserP<Pack, StoreProduct
 
     @Override
     public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
-        PackToBuyMiniP miniPack = new PackToBuyMiniP(item, index, "Add to Cart", ".\\resources\\app\\cart.png");
+        PackMiniP miniPack = new PackMiniP(item, index, "MANAGE", ".\\resources\\app\\cart.png");
         super.addFirstMiniPanel(miniPack);
         this.add(miniPack);
     }
 
     @Override
     public void addSecondMiniPanel(StoreProduct item, int index) throws BadLocationException {
-        StoreProductMiniP miniPack = new StoreProductMiniP(item, index, "Add to Cart", ".\\resources\\app\\cart.png");
+        StoreProductMiniP miniPack = new StoreProductMiniP(item, index, "MANAGE", ".\\resources\\app\\cart.png");
         super.addSecondMiniPanel(miniPack);
         this.add(miniPack);
     }

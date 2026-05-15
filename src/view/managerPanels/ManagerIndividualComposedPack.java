@@ -31,12 +31,14 @@ public class ManagerIndividualComposedPack extends JPanel{
     	this.add(browser, BorderLayout.NORTH);
 
     	JPanel inserciones = new JPanel();
-    	inserciones.setLayout(new GridLayout(4,1));
+    	inserciones.setLayout(new GridLayout(6,1));
 
     	inserciones.add(new JLabel("ID DEL PRODUCTO A AÑADIR:"));
-    	inserciones.add(idProduct, this.btnConfirmarProducto);
+    	inserciones.add(idProduct);
+    	inserciones.add(btnConfirmarProducto);
     	inserciones.add(new JLabel("PRECIO NUEVO:"));
-    	inserciones.add(packPrecio, this.btnConfirmarPrecio);
+    	inserciones.add(packPrecio);
+    	inserciones.add(btnConfirmarPrecio);
     	this.add(inserciones, BorderLayout.EAST);
     	
     	this.add(this.browser);

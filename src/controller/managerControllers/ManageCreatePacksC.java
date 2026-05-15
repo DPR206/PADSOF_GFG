@@ -35,6 +35,7 @@ public class ManageCreatePacksC implements Controller{
 	@Override
 	public void initializeActions() {
 		this.gestionar.getConfirmacion().addActionListener(e->{
+			new ManageCreatePackC(packP, frame);
 			frame.addCard(packP, "CREAR NUEVO PACK");
 			this.frame.changeVisibleCard("CREAR NUEVO PACK");
 		});	

@@ -39,7 +39,6 @@ public class ValuationPaymentC {
 
     private void inicializarEventos() {
 
-        // 2. Asignar eventos
         view.getBtnCancelar().addActionListener(e -> view.dispose());
 
         view.getBtnConfirmar().addActionListener(e -> {

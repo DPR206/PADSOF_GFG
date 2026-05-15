@@ -2,12 +2,16 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.browserControllers.AbstractBrowserC;
+import controller.clientControllers.SecondHandOthersC;
+import controller.clientControllers.SecondHandOwnerC;
 import controller.maxiPanels.MaxiSecondHandAddToOfferC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
 import view.browserPanels.AbstractBrowserP;
 import view.clientPanels.RegisteredMainP;
+import view.clientPanels.SecondHandOthersP;
+import view.clientPanels.SecondHandOwnerP;
 import view.maxiPanels.MaxiSecondHandP;
 import view.miniPanels.SecondHandMiniP;
 
@@ -51,17 +55,11 @@ public class SecondHandAddToOfferMiniC implements Controller {
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                try {
-                    MaxiSecondHandP newView = new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
-                    new MaxiSecondHandAddToOfferC(frame, model, newView);
-                    ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
-                                                                                .add(newView, "SECONDHAND_PRODUCT");
-                    ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()
-                                                                                .show(((RegisteredMainP) frame.getViewFromName(
-                                                                                                "REGISTERED_MAIN")).getBottom(),
-                                                                                        "SECONDHAND_PRODUCT");
-                } catch (BadLocationException ex) {
-                    throw new RuntimeException(ex);
+            	if (e.getClickCount() == 2) {
+                	SecondHandOthersP shView = new SecondHandOthersP();
+                    new SecondHandOthersC(frame, shView, view.getSecondHandProduct());
+                    frame.addCard(shView, "SECONDHAND_OTHER");
+            		frame.changeVisibleCard("SECONDHAND_OTHER");
                 }
             }
         });
@@ -69,19 +67,10 @@ public class SecondHandAddToOfferMiniC implements Controller {
         view.getProductImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    try {
-                        MaxiSecondHandP newView =
-                                new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
-                        new MaxiSecondHandAddToOfferC(frame, model, newView);
-                        ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
-                                                                                    .add(newView, "SECONDHAND_PRODUCT");
-                        ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()
-                                                                                    .show(((RegisteredMainP) frame.getViewFromName(
-                                                                                                    "REGISTERED_MAIN")).getBottom(),
-                                                                                            "SECONDHAND_PRODUCT");
-                    } catch (BadLocationException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                	SecondHandOthersP shView = new SecondHandOthersP();
+                    new SecondHandOthersC(frame, shView, view.getSecondHandProduct());
+                    frame.addCard(shView, "SECONDHAND_OTHER");
+            		frame.changeVisibleCard("SECONDHAND_OTHER");
                 }
             }
         });
@@ -89,19 +78,10 @@ public class SecondHandAddToOfferMiniC implements Controller {
         view.getProductInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    try {
-                        MaxiSecondHandP newView =
-                                new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
-                        new MaxiSecondHandAddToOfferC(frame, model, newView);
-                        ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
-                                                                                    .add(newView, "SECONDHAND_PRODUCT");
-                        ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()
-                                                                                    .show(((RegisteredMainP) frame.getViewFromName(
-                                                                                                    "REGISTERED_MAIN")).getBottom(),
-                                                                                            "SECONDHAND_PRODUCT");
-                    } catch (BadLocationException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                	SecondHandOthersP shView = new SecondHandOthersP();
+                    new SecondHandOthersC(frame, shView, view.getSecondHandProduct());
+                    frame.addCard(shView, "SECONDHAND_OTHER");
+            		frame.changeVisibleCard("SECONDHAND_OTHER");
                 }
             }
         });

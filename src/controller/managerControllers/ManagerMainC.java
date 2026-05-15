@@ -13,7 +13,6 @@ public class ManagerMainC implements Controller {
     private final App frame; /* view -> frame */
     private final Store model; /* model */
     private final ManagerGestionarEmpleados mge;
-    private final ManagerGestionarPacks mgp;
     private final ManagerGestionarProductos mgproduct;
     private final ManagerNewProduct mnproduct;
 
@@ -25,7 +24,6 @@ public class ManagerMainC implements Controller {
         this.mge = new ManagerGestionarEmpleados(this.frame);
         new ManagerGestionarEmpleadosC(this.mge, this.frame);
         //this.frame.addCard
-        this.mgp = new ManagerGestionarPacks(this.frame);
 
         this.mgproduct = new ManagerGestionarProductos(this.frame);
         new MixedBrowseStoreEditC(this.frame, this.model, this.mgproduct.getProductsPanel());
@@ -40,8 +38,10 @@ public class ManagerMainC implements Controller {
     @Override
     public void initializeActions() {
         view.getPacks().addActionListener(e -> {
-            this.frame.addCard(this.mgp, "GEST_PACKS");
-            this.frame.changeVisibleCard("GEST_PACKS");
+        	ManagerGestionarPacks m = new ManagerGestionarPacks(frame);
+        	new ManagePacksC(m, this.frame);
+            this.frame.addCard(m, "GEST_PACKS");
+            this.frame.changeVisibleCard("GEST_PACKS");      
         });
 
         view.getProductoNuevo().addActionListener(e -> {

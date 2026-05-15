@@ -1,0 +1,67 @@
+package view.managerPanels;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import model.product.Pack;
+import view.browserPanels.BrowsePackProductsP;
+
+public class ManagerIndividualSimplePack extends JPanel{
+	private Pack p;
+    private JTextField NameProduct = new JTextField();
+    private JTextField packPrecio = new JTextField();
+    private JButton btnConfirmarProducto = new JButton("CONFIRMAR PRODUCTO");
+    private JButton btnConfirmarPrecio = new JButton("CONFIRMAR PRECIO");
+    private BrowsePackProductsP browser;
+
+    public ManagerIndividualSimplePack(Pack p) {
+    	super();
+    	this.p = p;
+    	this.browser = new BrowsePackProductsP(p);
+
+    	this.setLayout(new BorderLayout());
+
+    	this.add(browser, BorderLayout.NORTH);
+
+    	JPanel inserciones = new JPanel();
+    	inserciones.setLayout(new GridLayout(6,1));
+
+    	inserciones.add(new JLabel("NOMBRE DEL PRODUCTO A AÑADIR:"));
+    	inserciones.add(NameProduct);
+    	inserciones.add(this.btnConfirmarProducto);
+    	inserciones.add(new JLabel("PRECIO NUEVO:"));
+    	inserciones.add(packPrecio);
+    	inserciones.add(this.btnConfirmarPrecio);
+    	this.add(inserciones, BorderLayout.EAST);
+    	
+    	this.add(this.browser);
+    }
+    
+    public BrowsePackProductsP getBrowser() {
+    	return this.browser;
+    }
+    public JButton getConfirmarProduct() {
+    	return this.btnConfirmarProducto;
+    }
+    public JButton getConfirmarPrecio() {
+    	return this.btnConfirmarPrecio;
+    }
+    public JTextField getNameProductText() {
+    	return this.NameProduct;
+    }
+    public JTextField getPackPriceText() {
+    	return this.packPrecio;
+    }
+    public void setControllerConfirmarProduct(ActionListener e) {
+    	this.btnConfirmarProducto.addActionListener(e);
+    }
+    public void setControllerConfirmarPrecio(ActionListener e) {
+    	this.btnConfirmarPrecio.addActionListener(e);
+    }
+}

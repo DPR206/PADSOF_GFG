@@ -3,7 +3,12 @@ package controller.miniControllers;
 import controller.Controller;
 import controller.browserControllers.AbstractBrowserC;
 import controller.clientControllers.CartPaymentC;
+import controller.clientControllers.SecondHandOthersC;
+import controller.clientControllers.SecondHandOwnerC;
 import controller.maxiPanels.MaxiSecondHandAddToOfferC;
+import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
+import es.uam.eps.padsof.telecard.InvalidCardNumberException;
+import es.uam.eps.padsof.telecard.OrderRejectedException;
 import model.product.SecondHandProduct;
 import model.store.Parameter;
 import model.store.Store;
@@ -11,6 +16,8 @@ import view.App;
 import view.browserPanels.AbstractBrowserP;
 import view.clientPanels.PaymentP;
 import view.clientPanels.RegisteredMainP;
+import view.clientPanels.SecondHandOthersP;
+import view.clientPanels.SecondHandOwnerP;
 import view.maxiPanels.MaxiSecondHandP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
@@ -55,17 +62,11 @@ public class SecondHandMyWalletMiniC implements Controller {
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                try {
-                    MaxiSecondHandP newView = new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
-                    new MaxiSecondHandAddToOfferC(frame, model, newView);
-                    ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
-                                                                                .add(newView, "SECONDHAND_PRODUCT");
-                    ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()
-                                                                                .show(((RegisteredMainP) frame.getViewFromName(
-                                                                                                "REGISTERED_MAIN")).getBottom(),
-                                                                                        "SECONDHAND_PRODUCT");
-                } catch (BadLocationException ex) {
-                    throw new RuntimeException(ex);
+            	if (e.getClickCount() == 2) {
+            		SecondHandOwnerP shView = new SecondHandOwnerP();
+                    new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
+                    frame.addCard(shView, "SECONDHAND_OWNER");
+            		frame.changeVisibleCard("SECONDHAND_OWNER");
                 }
             }
         });
@@ -73,22 +74,25 @@ public class SecondHandMyWalletMiniC implements Controller {
         view.getProductImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    try {
-                        MaxiSecondHandP newView =
-                                new MaxiSecondHandP(frame, view.getSecondHandProduct(), "Add to Offer");
-                        new MaxiSecondHandAddToOfferC(frame, model, newView);
-                        ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getBottom()
-                                                                                    .add(newView, "SECONDHAND_PRODUCT");
-                        ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()
-                                                                                    .show(((RegisteredMainP) frame.getViewFromName(
-                                                                                                    "REGISTERED_MAIN")).getBottom(),
-                                                                                            "SECONDHAND_PRODUCT");
-                    } catch (BadLocationException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                	 SecondHandOwnerP shView = new SecondHandOwnerP();
+                     new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
+                     frame.addCard(shView, "SECONDHAND_OWNER");
+             		 frame.changeVisibleCard("SECONDHAND_OWNER");
                 }
             }
         });
+        
+        view.getProductInfo().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                	SecondHandOwnerP shView = new SecondHandOwnerP();
+                    new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
+                    frame.addCard(shView, "SECONDHAND_OWNER");
+            		frame.changeVisibleCard("SECONDHAND_OWNER");
+                }
+            }
+        });
+
 
         /* Add to Offer */
         view.getFirstButton().addActionListener(e -> {
@@ -100,24 +104,23 @@ public class SecondHandMyWalletMiniC implements Controller {
 
         /* Request valuation */
         view.getSecondButton().addActionListener(e -> {
-            double totalActual = Parameter.getParam().getValuationCost();
+        	PaymentP payment = new PaymentP(frame, Store.getInstance().getParameters().getValuationCost());
+	    	
+	    	String tarjeta = payment.getNumeroTarjeta();
+	    	if (tarjeta == null) return;
 
-            if (totalActual <= 0) {
-                JOptionPane.showMessageDialog(view, "Your cart is empty");
-                return;
+            try {
+                view.getSecondHandProduct().payValuation(tarjeta);
+                JOptionPane.showMessageDialog(view, "Payment successful!");
+                payment.dispose();
+                updateInterface();
+            } catch (InvalidCardNumberException e1) {
+                JOptionPane.showMessageDialog(view, "Invalid card number", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (FailedInternetConnectionException e1) {
+                JOptionPane.showMessageDialog(view, "Failed Internet connection", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (OrderRejectedException e1) {
+                JOptionPane.showMessageDialog(view, "Order rejected", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-            PaymentP ventana = new PaymentP(frame, totalActual);
-            new CartPaymentC(frame, ventana);
-
-//            ventana.getPayChecker().addActionListener(ev -> {
-//                JOptionPane.showMessageDialog(frame, "Valuation requested", "Request valuation",
-//                        JOptionPane.INFORMATION_MESSAGE);
-//                view.getSecondHandProduct().setPaidValuation(true);
-//                updateInterface();
-//            });
-
-            ventana.setVisible(true);
         });
 
         /* Remove from wallet */

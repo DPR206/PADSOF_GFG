@@ -2,7 +2,9 @@ package view.miniPanels;
 
 import model.discount.DiscountType;
 import model.discount.ProductFixedPercentage;
+import model.product.ComposedPack;
 import model.product.Pack;
+import model.product.SimplePack;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -108,7 +110,10 @@ public class PackMiniP extends AbstractMiniP {
      * @return the pack
      */
     public Pack getPack() {
-        return p;
+    	SimplePack pack;
+    	ComposedPack packc;
+    	if(p instanceof ComposedPack) return (ComposedPack)p;
+		return p;
     }
 
     /**

@@ -2,16 +2,15 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.browserControllers.AbstractMixedBrowserC;
-import controller.clientControllers.ComicC;
-import model.product.Comic;
-import model.product.Pack;
-import model.product.ProductType;
-import model.product.StoreProduct;
+import controller.clientControllers.*;
+import model.product.*;
 import model.store.Store;
 import model.user.*;
 import view.App;
 import view.browserPanels.AbstractMixedBrowserP;
 import view.clientPanels.ComicP;
+import view.clientPanels.FigurineP;
+import view.clientPanels.GameP;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
@@ -59,6 +58,19 @@ public class StoreProductMiniC implements Controller {
                     	new ComicC(frame, comicV, (Comic) view.getStoreProduct());
                     	frame.addCard(comicV, "COMIC_VIEW");
                     	frame.changeVisibleCard("COMIC_VIEW");
+                    	break;
+                    case ProductType.GAME:
+                    	GameP gameV = new GameP();
+                    	new GameC(frame, gameV, (Game) view.getStoreProduct());
+                    	frame.addCard(gameV, "GAME_VIEW");
+                    	frame.changeVisibleCard("GAME_VIEW");
+                    	break;
+                    case ProductType.FIGURINE:
+                    	FigurineP figurineV = new FigurineP();
+                    	new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
+                    	frame.addCard(figurineV, "FIGURINE_VIEW");
+                    	frame.changeVisibleCard("FIGURINE_VIEW");
+                    	break;
 					default:
 						break;
                     }
@@ -76,6 +88,19 @@ public class StoreProductMiniC implements Controller {
                     	new ComicC(frame, comicV, (Comic) view.getStoreProduct());
                     	frame.addCard(comicV, "COMIC_VIEW");
                     	frame.changeVisibleCard("COMIC_VIEW");
+                    	break;
+                    case ProductType.GAME:
+                    	GameP gameV = new GameP();
+                    	new GameC(frame, gameV, (Game) view.getStoreProduct());
+                    	frame.addCard(gameV, "GAME_VIEW");
+                    	frame.changeVisibleCard("GAME_VIEW");
+                    	break;
+                    case ProductType.FIGURINE:
+                    	FigurineP figurineV = new FigurineP();
+                    	new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
+                    	frame.addCard(figurineV, "FIGURINE_VIEW");
+                    	frame.changeVisibleCard("FIGURINE_VIEW");
+                    	break;
 					default:
 						break;
                     }

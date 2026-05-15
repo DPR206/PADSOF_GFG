@@ -1,16 +1,13 @@
 package controller.clientControllers;
 
 import javax.swing.JOptionPane;
-import javax.swing.text.BadLocationException;
 
 import controller.Controller;
-import controller.browserControllers.MixedBrowseCartC;
 import model.product.Comic;
 import model.user.RegisteredClient;
 import model.user.*;
 import model.user.UserType;
 import view.App;
-import view.clientPanels.CarritoP;
 import view.clientPanels.ComicP;
 
 public class ComicC implements Controller{

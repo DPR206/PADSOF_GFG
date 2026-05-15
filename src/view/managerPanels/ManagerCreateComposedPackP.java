@@ -16,7 +16,7 @@ public class ManagerCreateComposedPackP extends JPanel {
     private JTextField productIdAdd = new JTextField();
     private JTextField packIdAdd = new JTextField();
     private JTextField pictureDirectory = new JTextField();
-    private JButton id = new JButton("BUSCAR PRODUCTO");
+    private JButton nombre = new JButton("BUSCAR PRODUCTO");
     private JButton addPackButton = new JButton("BUSCAR PACK");
     private JButton confirmar = new JButton("Confirmar");
     public ManagerCreateComposedPackP() {
@@ -30,9 +30,6 @@ public class ManagerCreateComposedPackP extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.WEST;
 
-        // =========================
-        // Nombre del pack
-        // =========================
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0;
@@ -44,9 +41,6 @@ public class ManagerCreateComposedPackP extends JPanel {
 
         this.add(name, gbc);
 
-        // =========================
-        // Precio
-        // =========================
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0;
@@ -74,7 +68,7 @@ public class ManagerCreateComposedPackP extends JPanel {
         gbc.weightx = 0;
         gbc.anchor = GridBagConstraints.WEST;
 
-        this.add(id, gbc);
+        this.add(nombre, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -133,8 +127,8 @@ public class ManagerCreateComposedPackP extends JPanel {
         return pictureDirectory;
     }
 
-    public JButton getId() {
-        return id;
+    public JButton getNombre() {
+        return this.nombre;
     }
 
     public JButton getAddPackButton() {

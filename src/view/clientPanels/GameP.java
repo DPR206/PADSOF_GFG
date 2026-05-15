@@ -7,13 +7,12 @@ import javax.swing.*;
 
 import model.product.Review;
 
-public class ComicP extends JPanel{
+public class GameP extends JPanel{
 	
 	private JLabel name;
-	private JLabel author;
-	private JLabel editorial;
-	private JLabel year;
-	private JLabel pages;
+	private JLabel gameType;
+	private JLabel numPlayers;
+	private JLabel age;
 	private JLabel categories;
 	private JLabel price;
 	private JLabel rating;
@@ -27,7 +26,7 @@ public class ComicP extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public ComicP() {
+	public GameP() {
 		configurarEstructura();
 	}
 
@@ -47,10 +46,9 @@ public class ComicP extends JPanel{
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 
         name = new JLabel("");
-        author = new JLabel("");
-        editorial = new JLabel("");
-        year = new JLabel("");
-        pages = new JLabel("");
+        gameType = new JLabel("");
+        numPlayers = new JLabel("");
+        age = new JLabel("");
         price = new JLabel("");
         price.setForeground(new Color(0, 128, 128));
         price.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -66,13 +64,11 @@ public class ComicP extends JPanel{
 
         infoPanel.add(name);
         infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(author);
+        infoPanel.add(gameType);
         infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(editorial);
+        infoPanel.add(numPlayers);
         infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(year);
-        infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(pages);
+        infoPanel.add(age);
         infoPanel.add(Box.createVerticalStrut(10));
         infoPanel.add(categories);
         infoPanel.add(Box.createVerticalStrut(10));
@@ -168,13 +164,6 @@ public class ComicP extends JPanel{
 	}
 
 	/**
-	 * @return the lblImagen
-	 */
-	public JLabel getLblImagen() {
-		return lblImagen;
-	}
-
-	/**
 	 * @return the unitSpinner
 	 */
 	public JSpinner getUnitSpinner() {
@@ -191,31 +180,23 @@ public class ComicP extends JPanel{
 	/**
 	 * @param author the author to set
 	 */
-	public void setAuthor(String author) {
-		this.author.setText(author);
+	public void setGameType(String type) {
+		this.gameType.setText(type);
 	}
 
 	/**
 	 * @param editorial the editorial to set
 	 */
-	public void setEditorial(String editorial) {
-		this.editorial.setText(editorial);
+	public void setPlayers(int i) {
+		this.numPlayers.setText(i + " player(s)");
 	}
 
 	/**
 	 * @param year the year to set
 	 */
-	public void setYear(String year) {
-		this.year.setText(year);
+	public void setAge(String age) {
+		this.age.setText(age);
 	}
-
-	/**
-	 * @param i the pages to set
-	 */
-	public void setPages(int i) {
-		this.pages.setText(i + " pages");
-	}
-
 	/**
 	 * @param price the price to set
 	 */

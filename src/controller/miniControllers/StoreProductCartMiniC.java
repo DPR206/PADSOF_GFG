@@ -4,13 +4,23 @@ import controller.Controller;
 import controller.browserControllers.AbstractMixedBrowserC;
 import controller.browserControllers.MixedBrowseCartC;
 import controller.clientControllers.CarritoC;
+import controller.clientControllers.ComicC;
+import controller.clientControllers.FigurineC;
+import controller.clientControllers.GameC;
+import model.product.Comic;
+import model.product.Figurine;
+import model.product.Game;
 import model.product.Pack;
+import model.product.ProductType;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
 import view.browserPanels.AbstractMixedBrowserP;
 import view.clientPanels.CarritoP;
+import view.clientPanels.ComicP;
+import view.clientPanels.FigurineP;
+import view.clientPanels.GameP;
 import view.miniPanels.StoreProductMiniCart;
 
 import javax.swing.*;
@@ -76,7 +86,28 @@ public class StoreProductCartMiniC implements Controller {
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                	switch(view.getStoreProduct().getType()) {
+                    case ProductType.COMIC: 
+                    	ComicP comicV = new ComicP();
+                    	new ComicC(frame, comicV, (Comic) view.getStoreProduct());
+                    	frame.addCard(comicV, "COMIC_VIEW");
+                    	frame.changeVisibleCard("COMIC_VIEW");
+                    	break;
+                    case ProductType.GAME:
+                    	GameP gameV = new GameP();
+                    	new GameC(frame, gameV, (Game) view.getStoreProduct());
+                    	frame.addCard(gameV, "GAME_VIEW");
+                    	frame.changeVisibleCard("GAME_VIEW");
+                    	break;
+                    case ProductType.FIGURINE:
+                    	FigurineP figurineV = new FigurineP();
+                    	new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
+                    	frame.addCard(figurineV, "FIGURINE_VIEW");
+                    	frame.changeVisibleCard("FIGURINE_VIEW");
+                    	break;
+					default:
+						break;
+                    }
                 }
             }
         });
@@ -84,7 +115,28 @@ public class StoreProductCartMiniC implements Controller {
         view.getProductInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                	switch(view.getStoreProduct().getType()) {
+                    case ProductType.COMIC: 
+                    	ComicP comicV = new ComicP();
+                    	new ComicC(frame, comicV, (Comic) view.getStoreProduct());
+                    	frame.addCard(comicV, "COMIC_VIEW");
+                    	frame.changeVisibleCard("COMIC_VIEW");
+                    	break;
+                    case ProductType.GAME:
+                    	GameP gameV = new GameP();
+                    	new GameC(frame, gameV, (Game) view.getStoreProduct());
+                    	frame.addCard(gameV, "GAME_VIEW");
+                    	frame.changeVisibleCard("GAME_VIEW");
+                    	break;
+                    case ProductType.FIGURINE:
+                    	FigurineP figurineV = new FigurineP();
+                    	new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
+                    	frame.addCard(figurineV, "FIGURINE_VIEW");
+                    	frame.changeVisibleCard("FIGURINE_VIEW");
+                    	break;
+					default:
+						break;
+                    }
                 }
             }
         });

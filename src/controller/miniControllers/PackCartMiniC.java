@@ -4,6 +4,7 @@ import controller.Controller;
 import controller.browserControllers.AbstractMixedBrowserC;
 import controller.browserControllers.MixedBrowseCartC;
 import controller.clientControllers.CarritoC;
+import controller.clientControllers.PackC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
@@ -11,6 +12,7 @@ import model.user.*;
 import view.App;
 import view.browserPanels.AbstractMixedBrowserP;
 import view.clientPanels.CarritoP;
+import view.clientPanels.PackP;
 import view.miniPanels.PackCartMiniP;
 
 import javax.swing.*;
@@ -56,22 +58,14 @@ public class PackCartMiniC implements Controller {
     public void initializeActions() {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
-//        if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
-//            view.setCart(((RegisteredClient) frame.getUser()).getC());
-//        } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-//            view.setCart(((UnregisteredClient) frame.getUser()).getCart());
-//        }
-//        try {
-//            browserPanel.paintEverything();
-//        } catch (BadLocationException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//        browserController.initializeActionsForMiniPanels();
 
         view.getPackImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                   PackP packV = new PackP();
+                   new PackC(frame, packV, view.getPack());
+                   frame.addCard(packV, "PACK_V");
+                   frame.changeVisibleCard("PACK_V");
                 }
             }
         });
@@ -79,7 +73,10 @@ public class PackCartMiniC implements Controller {
         view.getPackInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                	PackP packV = new PackP();
+                    new PackC(frame, packV, view.getPack());
+                    frame.addCard(packV, "PACK_V");
+                    frame.changeVisibleCard("PACK_V");
                 }
             }
         });
@@ -91,19 +88,6 @@ public class PackCartMiniC implements Controller {
                 ((UnregisteredClient) frame.getUser()).deleteCart(view.getPack());
             }
             updateInterface();
-//            try {
-//                CarritoP carritoVista = new CarritoP();
-//                new CarritoC(carritoVista, frame);
-//                new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems());
-//            } catch (BadLocationException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            try {
-//                browserPanel.paintEverything();
-//            } catch (BadLocationException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            browserController.initializeActionsForMiniPanels();
         });
 
         view.getApplyChanges().addActionListener(e -> {
@@ -115,22 +99,6 @@ public class PackCartMiniC implements Controller {
                         (int) view.getUnitSpinner().getValue());
             }
             updateInterface();
-//            try {
-//                CarritoP carritoVista = new CarritoP();
-//                new CarritoC(carritoVista, frame);
-//                new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
-//                frame.addCard(carritoVista, "CART");
-//                frame.changeVisibleCard("CART");
-//                frame.getLastShownPanels().removeLast();
-//            } catch (BadLocationException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            try {
-//                browserPanel.paintEverything();
-//            } catch (BadLocationException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            browserController.initializeActionsForMiniPanels();
         });
     }
 }

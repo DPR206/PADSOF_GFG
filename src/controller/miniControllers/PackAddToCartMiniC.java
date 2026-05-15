@@ -2,12 +2,14 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.browserControllers.AbstractMixedBrowserC;
+import controller.clientControllers.PackC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
 import view.browserPanels.AbstractMixedBrowserP;
+import view.clientPanels.PackP;
 import view.miniPanels.PackToBuyMiniP;
 
 import javax.swing.*;
@@ -41,7 +43,10 @@ public class PackAddToCartMiniC implements Controller {
         view.getPackImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                	PackP packV = new PackP();
+                    new PackC(frame, packV, view.getPack());
+                    frame.addCard(packV, "PACK_V");
+                    frame.changeVisibleCard("PACK_V");
                 }
             }
         });
@@ -49,7 +54,10 @@ public class PackAddToCartMiniC implements Controller {
         view.getPackInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                	PackP packV = new PackP();
+                    new PackC(frame, packV, view.getPack());
+                    frame.addCard(packV, "PACK_V");
+                    frame.changeVisibleCard("PACK_V");
                 }
             }
         });

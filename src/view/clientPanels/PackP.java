@@ -1,33 +1,28 @@
 package view.clientPanels;
 
 import java.awt.*;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.swing.*;
 
-import model.product.Review;
+import model.product.Pack;
+import model.product.StoreProduct;
 
-public class ComicP extends JPanel{
-	
+public class PackP extends JPanel{
+
 	private JLabel name;
-	private JLabel author;
-	private JLabel editorial;
-	private JLabel year;
-	private JLabel pages;
-	private JLabel categories;
 	private JLabel price;
-	private JLabel rating;
-	private JLabel description;
 	private JLabel stock;
 	private JButton btnaddCart = new JButton("Add to cart");
 	private JButton btnReturn = new JButton("Return");
 	private JLabel lblImagen;
 	private JSpinner unitSpinner;
-	private JList<String> listReviews;
+	private JList<String> listProducts;
 	
 	private static final long serialVersionUID = 1L;
 
-	public ComicP() {
+	public PackP() {
 		configurarEstructura();
 	}
 
@@ -47,40 +42,22 @@ public class ComicP extends JPanel{
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 
         name = new JLabel("");
-        author = new JLabel("");
-        editorial = new JLabel("");
-        year = new JLabel("");
-        pages = new JLabel("");
+        name.setFont(new Font("Tahoma", Font.PLAIN, 15));
         price = new JLabel("");
         price.setForeground(new Color(0, 128, 128));
         price.setFont(new Font("SansSerif", Font.BOLD, 16));
-        description = new JLabel("");
-        rating = new JLabel("");
-        categories = new JLabel("");
         
-        description.setVerticalAlignment(SwingConstants.TOP);
-        
-        rating = new JLabel("Valoración: ⭐⭐⭐⭐⭐");
-        rating.setFont(new Font("SansSerif", Font.PLAIN, 16));
-        rating.setForeground(new Color(218, 165, 32));
+        listProducts = new JList<>();
+        JScrollPane scrollProducts = new JScrollPane(listProducts);
+        scrollProducts.setMaximumSize(new Dimension(1800, 400));
+        scrollProducts.setBorder(BorderFactory.createTitledBorder("Pack's content"));
+        scrollProducts.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         infoPanel.add(name);
         infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(author);
-        infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(editorial);
-        infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(year);
-        infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(pages);
-        infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(categories);
-        infoPanel.add(Box.createVerticalStrut(10));
         infoPanel.add(price);
-        infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(rating);
-        infoPanel.add(Box.createVerticalStrut(10));
-        infoPanel.add(description);
+        infoPanel.add(Box.createVerticalStrut(15)); 
+        infoPanel.add(scrollProducts);
         
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -111,46 +88,23 @@ public class ComicP extends JPanel{
         purchasePanel.setLayout(new BoxLayout(purchasePanel, BoxLayout.Y_AXIS));
         
         stock = new JLabel("Stock: ");
-        stock.setFont(new Font("SansSerif", Font.BOLD, 15));
+        stock.setFont(new Font("SansSerif", Font.BOLD, 20));
         stock.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         SpinnerModel model = new SpinnerNumberModel(1, 1, 100, 1);
         unitSpinner = new JSpinner(model);
         unitSpinner.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        unitSpinner.setMaximumSize(new Dimension(120, 50));
+        unitSpinner.setMaximumSize(new Dimension(120, 100));
         unitSpinner.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         purchasePanel.add(stock);
         purchasePanel.add(Box.createVerticalStrut(10)); 
         purchasePanel.add(unitSpinner);
         
-        listReviews = new JList<>(); 
-        JScrollPane scrollReviews = new JScrollPane(listReviews);
-        scrollReviews.setPreferredSize(new Dimension(300, 150));
-        scrollReviews.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(Color.GRAY), "User reviews", 0, 0, 
-                new Font("SansSerif", Font.BOLD, 15)));
-        
         containerSouth.add(purchasePanel, BorderLayout.WEST);
-        containerSouth.add(scrollReviews, BorderLayout.CENTER);
 
         add(containerSouth, BorderLayout.SOUTH);
 		
-	}
-	
-	public void setValoraciones(List<Review> list) {
-	    if (list == null || list.isEmpty()) {
-	        String[] emptyMessage = {"Aún no hay valoraciones para este cómic."};
-	        listReviews.setListData(emptyMessage);
-	        listReviews.setEnabled(false);
-	    } else {
-	        String[] mensajes = list.stream()
-	                                .map(review -> review.getAuthor() + ": " + review.getComment())
-	                                .toArray(String[]::new);
-	        
-	        listReviews.setListData(mensajes);
-	        listReviews.setEnabled(true);
-	    }
 	}
 
 	/**
@@ -168,13 +122,6 @@ public class ComicP extends JPanel{
 	}
 
 	/**
-	 * @return the lblImagen
-	 */
-	public JLabel getLblImagen() {
-		return lblImagen;
-	}
-
-	/**
 	 * @return the unitSpinner
 	 */
 	public JSpinner getUnitSpinner() {
@@ -182,38 +129,10 @@ public class ComicP extends JPanel{
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param i the name to set
 	 */
-	public void setName(String name) {
-		this.name.setText(name);
-	}
-
-	/**
-	 * @param author the author to set
-	 */
-	public void setAuthor(String author) {
-		this.author.setText(author);
-	}
-
-	/**
-	 * @param editorial the editorial to set
-	 */
-	public void setEditorial(String editorial) {
-		this.editorial.setText(editorial);
-	}
-
-	/**
-	 * @param year the year to set
-	 */
-	public void setYear(String year) {
-		this.year.setText(year);
-	}
-
-	/**
-	 * @param i the pages to set
-	 */
-	public void setPages(int i) {
-		this.pages.setText(i + " pages");
+	public void setName(int i) {
+		this.name.setText("ID: " + i);
 	}
 
 	/**
@@ -221,15 +140,6 @@ public class ComicP extends JPanel{
 	 */
 	public void setPrice(double price) {
 		this.price.setText(String.format("Price: %.2f€", price));
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescriptionText(String texto) {
-	    this.description.setText("<html><body style='width: 300px;'>" +
-	                             "<b>Description:</b> " + texto + 
-	                             "</body></html>");
 	}
 
 	/**
@@ -264,30 +174,6 @@ public class ComicP extends JPanel{
 	    }
 	}
 
-	/**
-	 * @param listReviews the listReviews to set
-	 */
-	public void setListReviews(JList<String> listReviews) {
-		this.listReviews = listReviews;
-	}
-	
-	public void setRating(double score) {
-	    int estrellasEnteras = (int) Math.round(score);
-
-	    String estrellas = "★".repeat(Math.max(0, Math.min(5, estrellasEnteras)));
-	    String vacias = "☆".repeat(Math.max(0, 5 - estrellasEnteras));
-	    
-	    this.rating.setText(String.format("Rating: %.1f / 5 %s%s", score, estrellas, vacias));
-	    
-	    this.rating.setFont(new Font("Monospaced", Font.BOLD, 16));
-	}
-
-	/**
-	 * @param categories the categories to set
-	 */
-	public void setCategories(String categories) {
-		this.categories.setText(categories);
-	}
 	
 	public void setMaxStock(int realStock) {
 	    SpinnerNumberModel model = (SpinnerNumberModel) unitSpinner.getModel();
@@ -309,5 +195,26 @@ public class ComicP extends JPanel{
 	    }
 	}
 	
+	public void setProductsInPack(ArrayList<StoreProduct> products) {
+	    if (products == null || products.isEmpty()) {
+	        listProducts.setListData(new String[]{"Este pack no contiene productos."});
+	    } else {
+	        String[] data = products.stream()
+	                .map(p -> p.getName() + " - (" + String.format("%.2f", p.getPrice()) + "€)")
+	                .toArray(String[]::new);
+	        listProducts.setListData(data);
+	    }
+	}
 	
+	public void setPackssInPack(HashSet<Pack> packs) {
+	    if (packs == null || packs.isEmpty()) {
+	        listProducts.setListData(new String[]{"Este pack no contiene productos."});
+	    } else {
+	        String[] data = packs.stream()
+	                .map(p -> p.getId() + " - (" + String.format("%.2f", p.getDiscountedPrice()) + "€ - " 
+	        + p.getDiscount().toString() + ")")
+	                .toArray(String[]::new);
+	        listProducts.setListData(data);
+	    }
+	}
 }

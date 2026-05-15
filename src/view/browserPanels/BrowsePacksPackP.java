@@ -41,7 +41,7 @@ public class BrowsePacksPackP extends AbstractBrowserP<Pack>{
 	@Override
     public void addMiniPanel(Pack item, int index) throws BadLocationException {
         PackMiniP miniProduct = new PackMiniP(item, index, "DELETE", null);
-        miniProduct.setController(new StoreProductDeleteMiniC(miniProduct, this.original));
+        miniProduct.setController(null);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

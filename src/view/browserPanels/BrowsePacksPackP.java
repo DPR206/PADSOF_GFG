@@ -6,17 +6,17 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.text.BadLocationException;
 
+import controller.miniControllers.StoreProductDeleteMiniC;
 import model.product.Pack;
 import model.product.StoreProduct;
-import view.miniPanels.*;
-import controller.miniControllers.*;
+import view.miniPanels.PackMiniP;
+import view.miniPanels.StoreProductMiniP;
 
-public class BrowsePackProductsP extends AbstractBrowserP<StoreProduct> {
+public class BrowsePacksPackP extends AbstractBrowserP<Pack>{
+	private Pack original;
 
-	private Pack p;
-
-	public BrowsePackProductsP(Pack p) {
-		this.p= p;
+	public BrowsePacksPackP(Pack original) {
+		this.original= original;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         try {
 			paintEverything();
@@ -39,8 +39,9 @@ public class BrowsePackProductsP extends AbstractBrowserP<StoreProduct> {
 	}
 
 	@Override
-    public void addMiniPanel(StoreProduct item, int index) throws BadLocationException {
-        StoreProductMiniP miniProduct = new StoreProductMiniP(item, index, "DELETE", null);
+    public void addMiniPanel(Pack item, int index) throws BadLocationException {
+        PackMiniP miniProduct = new PackMiniP(item, index, "DELETE", null);
+        miniProduct.setController(null);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

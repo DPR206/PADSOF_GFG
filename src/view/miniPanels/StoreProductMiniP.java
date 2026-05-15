@@ -63,15 +63,17 @@ public class StoreProductMiniP extends AbstractMiniP {
         } else {
             doc.insertString(doc.getLength(), "\n", attributes);
         }
-
-        if (product.getStock() == 0) {
-            StyleConstants.setForeground(attributes, Color.RED);
-            StyleConstants.setItalic(attributes, true);
-            button.setEnabled(false);
-            doc.insertString(doc.getLength(), "Out of stock", attributes);
-        } else {
-            doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
+        if(buttonName.equals("Add to Cart")) {
+        	if (product.getStock() == 0) {
+                StyleConstants.setForeground(attributes, Color.RED);
+                StyleConstants.setItalic(attributes, true);
+                button.setEnabled(false);
+                doc.insertString(doc.getLength(), "Out of stock", attributes);
+            } else {
+                doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
+            }
         }
+        
 
         productInfo.setPreferredSize(new Dimension(width, height));
 

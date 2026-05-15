@@ -5,6 +5,7 @@ import java.util.*;
 import javax.swing.text.BadLocationException;
 
 import controller.Controller;
+import model.product.ComposedPack;
 import model.product.Pack;
 import model.product.SimplePack;
 import model.store.Store;
@@ -36,20 +37,19 @@ public class ManagePacksC implements Controller{
 			}
 		}
 		
-		for(AbstractMiniP p:this.gestionar.getBrowser().getMiniPanels()) {
-			PackMiniP miniPack = (PackMiniP)p;
-			miniPack.getButton().addActionListener(e->{
-				if(miniPack.getPack() instanceof SimplePack) {
-					ManagerIndividualSimplePack misp = new ManagerIndividualSimplePack(miniPack.getPack()); 
-					//asignamos controlador
-					this.frame.addCard(misp, "SIMPLE PACKS");
-					this.frame.changeVisibleCard("SIMPLE PACKS");
-				}
-				else {
-					ManagerIndividualComposedPack misp = new ManagerIndividualComposedPack(miniPack.getPack()); 
-					//asignamos controlador
+		for (AbstractMiniP ap : this.gestionar.getBrowser().getMiniPanels()) {
+			PackMiniP miniPack = (PackMiniP) ap;
+			miniPack.setController(e -> {
+				Pack pack = miniPack.getPack();
+				if (pack instanceof ComposedPack) {
+					ManagerIndividualComposedPack misp = new ManagerIndividualComposedPack(pack);
 					this.frame.addCard(misp, "COMPOSED PACKS");
-					this.frame.changeVisibleCard("COMPOSED PACKS");
+					this.frame.changeVisibleCard("COMPOSED PACKS");}
+				else if (pack instanceof SimplePack || !(pack instanceof ComposedPack)) {
+					ManagerIndividualSimplePack misp = new ManagerIndividualSimplePack(pack);
+					new ManagerGestPackSimpleInd(pack, misp);
+					this.frame.addCard(misp, "SIMPLE PACKS");
+					this.frame.changeVisibleCard("SIMPLE PACKS"); 
 				}
 			});
 		}

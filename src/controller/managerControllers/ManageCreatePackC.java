@@ -9,7 +9,7 @@ import view.managerPanels.ManagerCreateSimplePack;
 
 public class ManageCreatePackC implements Controller{
 	private ManagerCreatePackP panel;
-	ManagerCreateSimplePack sp;
+	private ManagerCreateSimplePack sp;
 	private App frame;
 	
 	public ManageCreatePackC(ManagerCreatePackP panel, App frame) {

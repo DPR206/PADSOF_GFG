@@ -45,11 +45,6 @@ public class ManagerCreateSimplePackC implements Controller{
 			
 			List<StoreProduct> pr = Store.getInstance().getStoreProductList();
 			
-			/*DEBUG*/
-			for(StoreProduct sp: pr) {
-				System.out.println(sp.getName() + "\n");
-			}
-			
 			for(StoreProduct sp: pr) {
 				if(sp.getName().trim().equalsIgnoreCase(name)) {
 					toAdd = sp;

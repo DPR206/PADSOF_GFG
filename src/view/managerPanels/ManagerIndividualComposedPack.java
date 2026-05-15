@@ -8,9 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
 
 import model.product.Pack;
 import view.browserPanels.BrowsePackProductsP;
+import view.browserPanels.BrowsePacksComposed;
 import view.browserPanels.BrowsePacksPackP;
 
 public class ManagerIndividualComposedPack extends JPanel{
@@ -19,12 +21,17 @@ public class ManagerIndividualComposedPack extends JPanel{
     private JTextField packPrecio = new JTextField();
     private JButton btnConfirmarProducto = new JButton("CONFIRMAR PRODUCTO");
     private JButton btnConfirmarPrecio = new JButton("CONFIRMAR PRECIO");
-    private BrowsePacksPackP browser;
+    private BrowsePacksComposed browser;
 
     public ManagerIndividualComposedPack(Pack p) {
     	super();
     	this.p = p;
-    	this.browser = new BrowsePacksPackP(p);
+    	try {
+			this.browser = new BrowsePacksComposed();
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
     	this.setLayout(new BorderLayout());
 
@@ -44,7 +51,7 @@ public class ManagerIndividualComposedPack extends JPanel{
     	this.add(this.browser);
     }
     
-    public BrowsePacksPackP getBrowser() {
+    public BrowsePacksComposed getBrowser() {
     	return this.browser;
     }
     public JButton getConfirmarProduct() {

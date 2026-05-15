@@ -9,8 +9,9 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
-public class BrowseWalletOwnersP extends AbstractBrowserP<RegisteredClient> {
+public class BrowseWalletOwnersP extends AbstractClusterBrowserP<RegisteredClient> {
     private final String buttonName;
+    private JPanel usersPanel = new JPanel(new GridLayout(3, 3));
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -18,8 +19,8 @@ public class BrowseWalletOwnersP extends AbstractBrowserP<RegisteredClient> {
      * This panel's constructor
      */
     public BrowseWalletOwnersP(String buttonName) throws BadLocationException {
-        super();
-        this.setLayout(new GridLayout(3, 3));
+        super(9);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.buttonName = buttonName;
 
@@ -33,12 +34,15 @@ public class BrowseWalletOwnersP extends AbstractBrowserP<RegisteredClient> {
      */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
-
-        // Item list was set in constructor
+        usersPanel.removeAll();
 
         super.addAllMiniPanels();
-        this.add(super.getPageTurner());
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
+        for (int i = 0; i < (9 - super.getMiniPanels().size()); i++) {
+            usersPanel.add(new JLabel(""));
+        }
+        this.add(usersPanel);
+        this.add(super.getPageTurner());
 
         this.revalidate();
         this.repaint();
@@ -48,6 +52,6 @@ public class BrowseWalletOwnersP extends AbstractBrowserP<RegisteredClient> {
     public void addMiniPanel(RegisteredClient item, int index) {
         UserMiniP miniUser = new UserMiniP(item, buttonName, ".\\resources\\app\\default_user.png");
         super.addMiniPanel(miniUser);
-        this.add(miniUser);
+        usersPanel.add(miniUser);
     }
 }

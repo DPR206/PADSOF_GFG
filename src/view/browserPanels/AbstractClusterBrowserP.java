@@ -9,16 +9,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The type Browser panel.
- * @param <G> the type parameter
- */
-public abstract class AbstractBrowserP<G> extends JPanel {
+public abstract class AbstractClusterBrowserP<G> extends JPanel {
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
     private final BetterPager<G> pager = new BetterPager<>();
+    private final int clusterSize;
     private int currentPageNum;
     private List<AbstractMiniP> miniPanels = new ArrayList<>();
     private List<G> itemList = new ArrayList<>();
@@ -28,8 +25,9 @@ public abstract class AbstractBrowserP<G> extends JPanel {
     /**
      * Instantiates a new Browser panel.
      */
-    public AbstractBrowserP() {
+    public AbstractClusterBrowserP(int clusterSize) {
         currentPageNum = 1;
+        this.clusterSize = clusterSize;
     }
 
     /**
@@ -44,22 +42,6 @@ public abstract class AbstractBrowserP<G> extends JPanel {
      * @throws BadLocationException the bad location exception
      */
     public void addAllMiniPanels() throws BadLocationException {
-        miniPanels.clear();
-
-        List<G> currentItemList = pager.pageItemList(itemList, currentPageNum);
-
-        int index = 1;
-        for (G item : currentItemList) {
-            addMiniPanel(item, index);
-            index++;
-        }
-    }
-
-    /**
-     * Add all mini panels.
-     * @throws BadLocationException the bad location exception
-     */
-    public void addAllClusterMiniPanels(int clusterSize) throws BadLocationException {
         miniPanels.clear();
 
         List<G> currentItemList = pager.pageItemListCluster(itemList, currentPageNum, clusterSize);
@@ -132,7 +114,7 @@ public abstract class AbstractBrowserP<G> extends JPanel {
      * @return the available store product list's max page number
      */
     public int getMaxPageNum() {
-        return pager.getMaxPageNum(itemList);
+        return pager.getMaxPageNumCluster(itemList, clusterSize);
     }
 
     /**
@@ -160,7 +142,6 @@ public abstract class AbstractBrowserP<G> extends JPanel {
      * @return the page turner
      */
     public JPanel getPageTurner() {
-
         JPanel pageTurner = new JPanel(new FlowLayout());
         if (currentPageNum != 1) {
             pageTurner.add(firstPage);

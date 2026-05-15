@@ -8,9 +8,7 @@ import model.user.Permission;
 import view.App;
 import view.managerPanels.ManagerGestionarEmpleados;
 
-import javax.swing.*;
 import javax.swing.text.BadLocationException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +26,15 @@ public class ManagerGestionarEmpleadosC implements Controller {
 
     @Override
     public void initializeActions() {
-    	
-    	try {
-    		gest.getBrowse().setItemList(Store.getInstance().getEmployeeList());
-    		gest.getBrowse().paintEverything();
-    		new BrowseEmployeesC(frame, gest.getBrowse(), Store.getInstance());
-    	} catch(Exception e) {
-    		System.out.println(e.getMessage());
-    	}
-    	
+
+        try {
+            gest.getBrowse().setItemList(Store.getInstance().getEmployeeList());
+            gest.getBrowse().paintEverything();
+            new BrowseEmployeesC(frame, gest.getBrowse(), Store.getInstance());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println(Store.getInstance().getEmployeeList());
         gest.getConfirmar().addActionListener(e -> {
             String userName = gest.getUserName().getText();
@@ -61,27 +59,25 @@ public class ManagerGestionarEmpleadosC implements Controller {
                 perms.add(Permission.EXCHANGE);
                 count++;
             }
-            
-            if(count == 0) {
-            	return;
+
+            if (count == 0) {
+                return;
             }
-            
+
             Permission[] p = perms.toArray(new Permission[0]);
 
             Employee emp = new Employee(password, userName, false, p);
             System.out.println(emp.getId());
+//
+//            Store.getInstance().addEmployee(emp);
 
-            Store.getInstance().addEmployee(emp);
-           
-        
-            
             try {
-            	this.gest.getBrowse().setItemList(Store.getInstance().getEmployeeList());
-				this.gest.getBrowse().paintEverything();
-			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+                this.gest.getBrowse().setItemList(Store.getInstance().getEmployeeList());
+                this.gest.getBrowse().paintEverything();
+            } catch (BadLocationException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
     }
 }

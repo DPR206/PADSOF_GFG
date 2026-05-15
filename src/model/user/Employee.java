@@ -63,7 +63,7 @@ public class Employee extends User implements Serializable {
         }
 
         this.notificationHistory = new NotificationHistory(this);
-        Store.getInstance().addUser(this);
+        Store.getInstance().addEmployee(this);
     }
 
     /*---------------------------------------------------GETTERS AND SETTERS-------------------------------------------------------------*/

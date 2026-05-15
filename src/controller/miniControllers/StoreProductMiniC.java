@@ -2,12 +2,16 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.browserControllers.AbstractMixedBrowserC;
+import controller.clientControllers.ComicC;
+import model.product.Comic;
 import model.product.Pack;
+import model.product.ProductType;
 import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
 import view.browserPanels.AbstractMixedBrowserP;
+import view.clientPanels.ComicP;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
@@ -49,7 +53,16 @@ public class StoreProductMiniC implements Controller {
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                    switch(view.getStoreProduct().getType()) {
+                    case ProductType.COMIC: 
+                    	ComicP comicV = new ComicP();
+                    	new ComicC(frame, comicV, (Comic) view.getStoreProduct());
+                    	frame.addCard(comicV, "COMIC_VIEW");
+                    	frame.changeVisibleCard("COMIC_VIEW");
+					default:
+						break;
+                    }
+                  
                 }
             }
         });
@@ -57,7 +70,15 @@ public class StoreProductMiniC implements Controller {
         view.getProductInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
+                	switch(view.getStoreProduct().getType()) {
+                    case ProductType.COMIC: 
+                    	ComicP comicV = new ComicP();
+                    	new ComicC(frame, comicV, (Comic) view.getStoreProduct());
+                    	frame.addCard(comicV, "COMIC_VIEW");
+                    	frame.changeVisibleCard("COMIC_VIEW");
+					default:
+						break;
+                    }
                 }
             }
         });

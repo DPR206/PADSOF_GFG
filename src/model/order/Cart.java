@@ -500,6 +500,35 @@ public class Cart implements Serializable {
         packs.remove(pack);
         packs.put(pack, realUds);
     }
+    
+    public void addProductUds(StoreProduct p, int uds) {
+    	int cantidadActual = sp.getOrDefault(p, 0);
+        sp.put(p, cantidadActual + uds);
+    	p.setStock(p.getStock() - uds);
+    }
+    
+    public void addPackUds(Pack p, int uds) {
+    	int cantidadActual = packs.getOrDefault(p, 0);
+    	packs.put(p, cantidadActual+uds);
+    	changeStock(p);
+    }
+
+	/**
+	 * @param p
+	 */
+	private void changeStock(Pack p) {
+		if(!p.getProducts().isEmpty()) {
+			for(StoreProduct sp : p.getProducts()) {
+	    		sp.setStock(sp.getStock() - 1);
+	    	}
+		}
+    	
+		if(!p.getPacks().isEmpty()) {
+			for(Pack pack : p.getPacks()) {
+	    		changeStock(pack);
+	    	}
+		}
+	}
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 

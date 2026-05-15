@@ -42,8 +42,7 @@ public class ImageAdder {
     public static JPanel getPackImagePanel(Pack pack, int width, int height) {
         JPanel panel = new JPanel(new BorderLayout());
 
-        StoreProduct product = pack.getProducts().getFirst();
-        JLabel imageLabel = getImageLabel(product.getPhoto(), width-16, height-16);
+        JLabel imageLabel = getImageLabel(pack.getPhoto(), width-16, height-16);
         panel.add(imageLabel, BorderLayout.NORTH);
 
         JLabel number = new JLabel("+" + (pack.getProducts().size() - 1));

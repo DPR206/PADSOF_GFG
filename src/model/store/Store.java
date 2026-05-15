@@ -372,7 +372,7 @@ public class Store implements Serializable {
                 objectInputStream.close();
             }
 
-            if ((new File(".\\resources\\data\\" + staticsFilename + ".txt")).isFile()) {
+            if ((new File(".\\resources\\data\\" + staticsFilename + ".csv")).isFile()) {
                 BufferedReader buffer = new BufferedReader(
                         new InputStreamReader(new FileInputStream(".\\resources\\data\\" + staticsFilename + ".csv")));
 

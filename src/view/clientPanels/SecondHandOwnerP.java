@@ -1,11 +1,6 @@
 package view.clientPanels;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -16,7 +11,8 @@ public class SecondHandOwnerP extends JPanel {
 	private JLabel name;
 	private JLabel valuation;
 	private JLabel description;
-	private JButton btnaddCart = new JButton("Request Valoration");
+	private JButton btnValoration = new JButton("Request Valoration");
+	private JButton btnDelete = new JButton("Delete from wallet");
 	private JButton btnReturn = new JButton("Return");
 	private JLabel lblImagen;
 	
@@ -61,19 +57,25 @@ public class SecondHandOwnerP extends JPanel {
 
         Font fuenteBotones = new Font("SansSerif", Font.PLAIN, 18);
 
-        btnaddCart.setMaximumSize(new Dimension(250, 100)); 
-        btnaddCart.setFont(fuenteBotones); 
+        btnValoration.setMaximumSize(new Dimension(250, 100)); 
+        btnValoration.setFont(fuenteBotones); 
         
         btnReturn.setMaximumSize(new Dimension(250, 100));
         btnReturn.setFont(fuenteBotones);
+        
+        btnDelete.setMaximumSize(new Dimension(250, 100));
+        btnDelete.setFont(fuenteBotones);
 
-        btnaddCart.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnValoration.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnReturn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnDelete.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         buttonPanel.add(Box.createVerticalGlue()); 
-        buttonPanel.add(btnaddCart);
+        buttonPanel.add(btnValoration);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         buttonPanel.add(btnReturn);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        buttonPanel.add(btnDelete);
         buttonPanel.add(Box.createVerticalGlue());
         
         add(infoPanel, BorderLayout.CENTER);
@@ -85,7 +87,7 @@ public class SecondHandOwnerP extends JPanel {
 	 * @return the btnaddCart
 	 */
 	public JButton getBtnValorationt() {
-		return btnaddCart;
+		return btnValoration;
 	}
 
 	/**
@@ -98,8 +100,8 @@ public class SecondHandOwnerP extends JPanel {
 	/**
 	 * @param i the name to set
 	 */
-	public void setName(int i) {
-		this.name.setText("ID: " + i);
+	public void setName(String s) {
+		this.name.setText(s);
 	}
 
 	/**
@@ -141,7 +143,7 @@ public class SecondHandOwnerP extends JPanel {
 	 */
 	public void setDescriptionText(String texto) {
 	    this.description.setText("<html><body style='width: 300px;'>" +
-	                             "<b>Description:</b> " + texto + 
+	                             "Description: " + texto + 
 	                             "</body></html>");
 	}
 	

@@ -32,7 +32,7 @@ public class SecondHandOwnerC implements Controller {
 	@Override
 	public void initializeActions() {
 		
-		this.view.setName(product.getId());
+		this.view.setName(product.getName());
 	    this.view.setImage(product.getPhoto());
 	    this.view.setDescriptionText(product.getDescription());
 	    

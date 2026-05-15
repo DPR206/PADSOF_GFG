@@ -42,7 +42,7 @@ public class ManagerIndividualComposedPack extends JPanel{
     	this.add(this.browser);
     }
     
-    public BrowsePackProductsP getBrowser() {
+    public BrowsePacksPackP getBrowser() {
     	return this.browser;
     }
     public JButton getConfirmarProduct() {
@@ -64,4 +64,4 @@ public class ManagerIndividualComposedPack extends JPanel{
     	this.btnConfirmarPrecio.addActionListener(e);
     }
 }
-}
+

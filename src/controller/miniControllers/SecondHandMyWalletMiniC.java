@@ -3,6 +3,7 @@ package controller.miniControllers;
 import controller.Controller;
 import controller.browserControllers.AbstractBrowserC;
 import controller.clientControllers.CartPaymentC;
+import controller.clientControllers.SecondHandOthersC;
 import controller.clientControllers.SecondHandOwnerC;
 import controller.maxiPanels.MaxiSecondHandAddToOfferC;
 import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
@@ -15,6 +16,7 @@ import view.App;
 import view.browserPanels.AbstractBrowserP;
 import view.clientPanels.PaymentP;
 import view.clientPanels.RegisteredMainP;
+import view.clientPanels.SecondHandOthersP;
 import view.clientPanels.SecondHandOwnerP;
 import view.maxiPanels.MaxiSecondHandP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
@@ -60,10 +62,12 @@ public class SecondHandMyWalletMiniC implements Controller {
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                SecondHandOwnerP shView = new SecondHandOwnerP();
-                new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
-                frame.addCard(shView, "SECONDHAND_OWNER");
-        		frame.changeVisibleCard("SECONDHAND_OWNER");
+            	if (e.getClickCount() == 2) {
+            		SecondHandOwnerP shView = new SecondHandOwnerP();
+                    new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
+                    frame.addCard(shView, "SECONDHAND_OWNER");
+            		frame.changeVisibleCard("SECONDHAND_OWNER");
+                }
             }
         });
 
@@ -77,6 +81,18 @@ public class SecondHandMyWalletMiniC implements Controller {
                 }
             }
         });
+        
+        view.getProductInfo().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                	SecondHandOwnerP shView = new SecondHandOwnerP();
+                    new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
+                    frame.addCard(shView, "SECONDHAND_OWNER");
+            		frame.changeVisibleCard("SECONDHAND_OWNER");
+                }
+            }
+        });
+
 
         /* Add to Offer */
         view.getFirstButton().addActionListener(e -> {

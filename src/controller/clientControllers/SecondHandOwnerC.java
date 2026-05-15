@@ -53,7 +53,6 @@ public class SecondHandOwnerC implements Controller {
 	    
 	    
 	    this.view.getBtnValorationt().addActionListener(e -> {
-	    	System.out.println("DEBUG: Botón pulsado correctamente");
 	    	
 	    	PaymentP payment = new PaymentP(frame, Store.getInstance().getParameters().getValuationCost());
 	    	

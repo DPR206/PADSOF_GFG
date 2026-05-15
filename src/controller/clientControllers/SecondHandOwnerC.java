@@ -87,6 +87,13 @@ public class SecondHandOwnerC implements Controller {
 	    	
 	    	payment.setVisible(true);
 	    });
+	    
+	    view.getBtnDelete().addActionListener(e -> {
+	    	JOptionPane.showMessageDialog(frame, "Product removed", "Remove from wallet",
+                    JOptionPane.INFORMATION_MESSAGE);
+            product.setRemoved(true);
+            frame.goBack();
+	    });
 	}
 	
 

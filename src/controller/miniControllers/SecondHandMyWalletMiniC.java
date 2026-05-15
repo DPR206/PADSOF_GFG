@@ -73,7 +73,7 @@ public class SecondHandMyWalletMiniC implements Controller {
                 	 SecondHandOwnerP shView = new SecondHandOwnerP();
                      new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
                      frame.addCard(shView, "SECONDHAND_OWNER");
-             		frame.changeVisibleCard("SECONDHAND_OWNER");
+             		 frame.changeVisibleCard("SECONDHAND_OWNER");
                 }
             }
         });

@@ -98,6 +98,13 @@ public class SecondHandOwnerP extends JPanel {
 	}
 
 	/**
+	 * @return the btnDelete
+	 */
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	/**
 	 * @param i the name to set
 	 */
 	public void setName(String s) {

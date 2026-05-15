@@ -22,6 +22,7 @@ public class MixedBrowseMyWalletC extends AbstractBrowserC<SecondHandProduct> {
      */
     public MixedBrowseMyWalletC(App frame, Store model, BrowseMyWalletP view) {
         super(frame, view, model);
+        super.initializeActions();
         initializeActionsForMiniPanels();
     }
 

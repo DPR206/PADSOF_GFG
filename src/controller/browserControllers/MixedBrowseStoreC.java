@@ -24,6 +24,8 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
      */
     public MixedBrowseStoreC(App frame, Store model, MixedBrowseStoreAddToCartP view) throws BadLocationException {
         super(frame, view, model);
+        super.initializeActions();
+        initializeActionsForMiniPanels();
     }
 
     @Override
@@ -43,7 +45,8 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
         }
 
         for (AbstractMiniP miniPanel : super.getView().getFirstMiniPanels()) {
-            new PackAddToCartMiniC(super.getFrame(), super.getModel(), (PackToBuyMiniP) miniPanel, this, super.getView());
+            new PackAddToCartMiniC(super.getFrame(), super.getModel(), (PackToBuyMiniP) miniPanel, this,
+                    super.getView());
         }
         for (AbstractMiniP miniPanel : super.getView().getSecondMiniPanels()) {
             new StoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,

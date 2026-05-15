@@ -67,10 +67,14 @@ public class ManagerMainC implements Controller {
         });
 
         view.getDescuentos().addActionListener(e -> {
-            ManagerDiscountsP managerDiscountsP = new ManagerDiscountsP();
-            new ManagerDiscountsC(frame, model, managerDiscountsP);
-            this.frame.addCard(managerDiscountsP, "MANAGER_DISCOUNTS");
-            this.frame.changeVisibleCard("MANAGER_DISCOUNTS");
+            try {
+                ManagerDiscountsP managerDiscountsP = new ManagerDiscountsP();
+                new ManagerDiscountsC(frame, model, managerDiscountsP);
+                this.frame.addCard(managerDiscountsP, "MANAGER_DISCOUNTS");
+                this.frame.changeVisibleCard("MANAGER_DISCOUNTS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getParametros().addActionListener(e -> {

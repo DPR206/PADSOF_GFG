@@ -23,6 +23,7 @@ public class BrowseEmployeesC extends AbstractClusterBrowserC<Employee> {
      */
     public BrowseEmployeesC(App frame, BrowseEmployeesP view, Store model) {
         super(frame, view, model);
+        super.initializeActions();
         initializeActionsForMiniPanels();
     }
 

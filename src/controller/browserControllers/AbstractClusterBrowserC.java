@@ -25,7 +25,7 @@ public abstract class AbstractClusterBrowserC<G> implements Controller {
         this.view = view;
         this.model = model;
 
-        initializeActions();
+        //initializeActions();
     }
 
     @Override

@@ -25,7 +25,7 @@ public abstract class AbstractMixedBrowserC<G, U> implements Controller {
         this.view = view;
         this.model = model;
 
-        initializeActions();
+        //initializeActions();
     }
 
     @Override

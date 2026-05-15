@@ -21,6 +21,7 @@ public class BrowseValuationProductsC extends AbstractBrowserC<SecondHandProduct
      */
     public BrowseValuationProductsC(App frame, BrowseSecondHandProductsP view, Store model) {
         super(frame, view, model);
+        super.initializeActions();
         initializeActionsForMiniPanels();
     }
 

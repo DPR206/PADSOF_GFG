@@ -28,7 +28,7 @@ public abstract class AbstractBrowserC<G> implements Controller {
         this.view = view;
         this.model = model;
 
-        initializeActions();
+        //initializeActions();
     }
 
     @Override

@@ -23,6 +23,7 @@ public class MixedBrowseSomeonesWalletC extends AbstractBrowserC<SecondHandProdu
      */
     public MixedBrowseSomeonesWalletC(App frame, Store model, BrowseSomeonesWalletP view) throws BadLocationException {
         super(frame, view, model);
+        super.initializeActions();
         initializeActionsForMiniPanels();
     }
 

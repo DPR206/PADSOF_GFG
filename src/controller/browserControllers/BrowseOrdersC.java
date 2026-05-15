@@ -17,6 +17,7 @@ public class BrowseOrdersC extends AbstractBrowserC<Order>{
 
 	public BrowseOrdersC(App frame, BrowseOrdersP view, Store model) {
 		super(frame, view, model);
+		super.initializeActions();
 		initializeActionsForMiniPanels();
 	}
 
@@ -38,15 +39,15 @@ public class BrowseOrdersC extends AbstractBrowserC<Order>{
 	            AbstractMiniP currentPanel = miniPanels.get(i);
 
 	            new OrderMiniC(
-	                (OrderMini) currentPanel, 
-	                super.getFrame(), 
-	                super.getModel(), 
-	                currentOrder, 
-	                this, 
+	                (OrderMini) currentPanel,
+	                super.getFrame(),
+	                super.getModel(),
+	                currentOrder,
+	                this,
 	                super.getView()
 	            );
 	        }
-		
+
 	    }
 	}
 }

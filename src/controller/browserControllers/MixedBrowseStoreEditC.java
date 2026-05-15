@@ -21,6 +21,7 @@ public class MixedBrowseStoreEditC extends AbstractMixedBrowserC<Pack, StoreProd
      */
     public MixedBrowseStoreEditC(App frame, Store model, MixedBrowseStoreEditP view) throws BadLocationException {
         super(frame, view, model);
+        super.initializeActions();
         initializeActionsForMiniPanels();
     }
 

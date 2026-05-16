@@ -8,8 +8,10 @@ import model.store.Store;
 import view.App;
 import view.managerPanels.ManagerDiscountsP;
 
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class ManagerDiscountsC implements Controller {
     private final ManagerDiscountsP view; /* view -> panel */
@@ -25,6 +27,14 @@ public class ManagerDiscountsC implements Controller {
         initializeActions();
     }
 
+    public void updateControllers() {
+        new BrowseDiscountsC(frame, view.getBrowseDiscountsP(), model, view);
+        new BrowseCategoriesDiscC(frame, view.getBrowseCategoriesDiscP(), model, view);
+        new BrowsePacksDiscC(frame, view.getBrowsePacksDiscP(), model, view);
+        new BrowseStoreProductsDiscC(frame, view.getBrowseStoreProductsDiscP(), model, view, false);
+        new BrowseStoreProductsDiscC(frame, view.getBrowseStoreProductsDiscPForGift(), model, view, true);
+    }
+
     @Override
     public void initializeActions() throws BadLocationException {
         view.getBrowseDiscountsP().setItemList(model.getDiscounts());
@@ -33,15 +43,13 @@ public class ManagerDiscountsC implements Controller {
         view.getBrowseStoreProductsDiscP().setItemList(model.getStoreProductList());
         view.getBrowseStoreProductsDiscPForGift().setItemList(model.getStoreProductList());
 
-        new BrowseDiscountsC(frame, view.getBrowseDiscountsP(), model, view);
-        new BrowseCategoriesDiscC(frame, view.getBrowseCategoriesDiscP(), model, view);
-        new BrowsePacksDiscC(frame, view.getBrowsePacksDiscP(), model, view);
-        new BrowseStoreProductsDiscC(frame, view.getBrowseStoreProductsDiscP(), model, view, false);
-        new BrowseStoreProductsDiscC(frame, view.getBrowseStoreProductsDiscPForGift(), model, view, true);
+        updateControllers();
 
         view.getCoverage().addActionListener(e -> view.updateDiscountPanels());
 
         view.getDiscountType().addActionListener(e -> view.updateDiscountPanels());
+
+        view.getOverWholeStore().addActionListener(e -> view.updateDiscountPanels());
 
         view.getGiftButton().addActionListener(e -> {
             try {
@@ -60,8 +68,17 @@ public class ManagerDiscountsC implements Controller {
         });
 
         view.getCreateBtn().addActionListener(e -> {
-            LocalDateTime startDate = LocalDateTime.parse(view.getStartingDateField().getText());
-            LocalDateTime endDate = LocalDateTime.parse(view.getEndingDateField().getText());
+            LocalDateTime startDate = null;
+            LocalDateTime endDate = null;
+            try {
+                startDate = LocalDateTime.parse(view.getStartingDateField().getText());
+                endDate = LocalDateTime.parse(view.getEndingDateField().getText());
+            } catch (DateTimeParseException ex) {
+                JOptionPane.showMessageDialog(frame, "Please enter a valid date (<YYYY-MM-DD>T<HH:MM:SS>)", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+            Discount discount = null;
 
             switch (view.getDiscountTypeCmbBoxSelected()) {
                 case FIXED_PERCENTAGE -> {
@@ -73,15 +90,15 @@ public class ManagerDiscountsC implements Controller {
                         switch (view.getDiscountCoverageCmbBoxSelected()) {
                             case PRODUCT -> {
                                 if (view.getOverWholeStore().isSelected()) {
-                                    new ProductFixedPercentage(startDate, endDate, percentage,
+                                    discount = new ProductFixedPercentage(startDate, endDate, percentage,
                                             view.getSelectedProductsList().toArray(new StoreProduct[0]));
                                 } else {
-                                    new ProductFixedPercentage(startDate, endDate, percentage, true);
+                                    discount = new ProductFixedPercentage(startDate, endDate, percentage, true);
                                 }
                             }
-                            case PACK -> new PackFixedPercentage(startDate, endDate, percentage,
+                            case PACK -> discount = new PackFixedPercentage(startDate, endDate, percentage,
                                     view.getSelectedPacksList().toArray(new Pack[0]));
-                            case CATEGORY -> new CategoryFixedPercentage(startDate, endDate, percentage,
+                            case CATEGORY -> discount = new CategoryFixedPercentage(startDate, endDate, percentage,
                                     view.getSelectedCategoriesList().toArray(new Category[0]));
                         }
                     }
@@ -97,15 +114,15 @@ public class ManagerDiscountsC implements Controller {
                         switch (view.getDiscountCoverageCmbBoxSelected()) {
                             case PRODUCT -> {
                                 if (view.getOverWholeStore().isSelected()) {
-                                    new ProductGift(startDate, endDate, spendingThreshold, gift, true);
+                                    discount = new ProductGift(startDate, endDate, spendingThreshold, gift, true);
                                 } else {
-                                    new ProductGift(startDate, endDate, spendingThreshold, gift,
+                                    discount = new ProductGift(startDate, endDate, spendingThreshold, gift,
                                             view.getSelectedProductsList().toArray(new StoreProduct[0]));
                                 }
                             }
-                            case PACK -> new PackGift(startDate, endDate, spendingThreshold, gift,
+                            case PACK -> discount = new PackGift(startDate, endDate, spendingThreshold, gift,
                                     view.getSelectedPacksList().toArray(new Pack[0]));
-                            case CATEGORY -> new CategoryGift(startDate, endDate, spendingThreshold, gift,
+                            case CATEGORY -> discount = new CategoryGift(startDate, endDate, spendingThreshold, gift,
                                     view.getSelectedCategoriesList().toArray(new Category[0]));
                         }
                     }
@@ -121,16 +138,17 @@ public class ManagerDiscountsC implements Controller {
                         switch (view.getDiscountCoverageCmbBoxSelected()) {
                             case PRODUCT -> {
                                 if (view.getOverWholeStore().isSelected()) {
-                                    new ProductQuantity(startDate, endDate, numThreshold, deduction, true);
+                                    discount = new ProductQuantity(startDate, endDate, numThreshold, deduction, true);
                                 } else {
-                                    new ProductQuantity(startDate, endDate, numThreshold, deduction,
+                                    discount = new ProductQuantity(startDate, endDate, numThreshold, deduction,
                                             view.getSelectedProductsList().toArray(new StoreProduct[0]));
                                 }
                             }
-                            case PACK -> new PackQuantity(startDate, endDate, numThreshold, deduction,
+                            case PACK -> discount = new PackQuantity(startDate, endDate, numThreshold, deduction,
                                     view.getSelectedPacksList().toArray(new Pack[0]));
-                            case CATEGORY -> new CategoryQuantity(startDate, endDate, numThreshold, deduction,
-                                    view.getSelectedCategoriesList().toArray(new Category[0]));
+                            case CATEGORY -> discount =
+                                    new CategoryQuantity(startDate, endDate, numThreshold, deduction,
+                                            view.getSelectedCategoriesList().toArray(new Category[0]));
                         }
                     }
                 }
@@ -145,36 +163,57 @@ public class ManagerDiscountsC implements Controller {
                         switch (view.getDiscountCoverageCmbBoxSelected()) {
                             case PRODUCT -> {
                                 if (view.getOverWholeStore().isSelected()) {
-                                    new ProductVolume(startDate, endDate, spendingThreshold, deduction, true);
+                                    discount =
+                                            new ProductVolume(startDate, endDate, spendingThreshold, deduction, true);
                                 } else {
-                                    new ProductVolume(startDate, endDate, spendingThreshold, deduction,
+                                    discount = new ProductVolume(startDate, endDate, spendingThreshold, deduction,
                                             view.getSelectedProductsList().toArray(new StoreProduct[0]));
                                 }
                             }
-                            case PACK -> new PackVolume(startDate, endDate, spendingThreshold, deduction,
+                            case PACK -> discount = new PackVolume(startDate, endDate, spendingThreshold, deduction,
                                     view.getSelectedPacksList().toArray(new Pack[0]));
-                            case CATEGORY -> new CategoryVolume(startDate, endDate, spendingThreshold, deduction,
-                                    view.getSelectedCategoriesList().toArray(new Category[0]));
+                            case CATEGORY -> discount =
+                                    new CategoryVolume(startDate, endDate, spendingThreshold, deduction,
+                                            view.getSelectedCategoriesList().toArray(new Category[0]));
                         }
                     }
                 }
             }
+
+            if (discount == null) {
+                JOptionPane.showMessageDialog(frame, "Uh oh something went wrong when creating the discount", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Discount created successfully", "Discount created",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            view.getFirstField().setText("");
+            view.getSecondField().setText("");
+            view.getStartingDateField().setText("");
+            view.getEndingDateField().setText("");
+            view.changeToBrowseDiscountsView();
+            updateControllers();
         });
     }
 
     private void chooseGift() throws BadLocationException {
         view.changeToChooseGiftView();
+        updateControllers();
     }
 
     private void chooseStoreProducts() {
         view.changeToChooseProductsView();
+        updateControllers();
     }
 
     private void choosePacks() {
         view.changeToChoosePacksView();
+        updateControllers();
     }
 
     private void chooseCategories() {
         view.changeToChooseCategoriesView();
+        updateControllers();
     }
 }

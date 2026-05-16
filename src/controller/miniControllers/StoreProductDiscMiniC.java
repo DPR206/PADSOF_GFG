@@ -11,8 +11,6 @@ import view.miniPanels.StoreProductDiscMiniP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class StoreProductDiscMiniC implements Controller {
@@ -50,24 +48,8 @@ public class StoreProductDiscMiniC implements Controller {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        view.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
-                }
-            }
-        });
-
-        view.getProductInfo().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
-                }
-            }
-        });
-
         view.getButton().addActionListener(e -> {
-            // DUE: Añadir el producto
+            alreadyChosenProducts.add(view.getStoreProduct());
             JOptionPane.showMessageDialog(frame, view.getStoreProduct().getName() + " was added to the discount",
                     "Added To Discount", JOptionPane.INFORMATION_MESSAGE);
             if (onlyOnce) {

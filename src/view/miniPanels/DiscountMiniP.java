@@ -28,8 +28,10 @@ public class DiscountMiniP extends AbstractMiniP {
         this.setLayout(new FlowLayout());
 
         button = new JButton(buttonName);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(buttonName.length() * 15, height));
-        button.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\add.png"), height / 3, height / 3));
+        button.setMinimumSize(button.getPreferredSize());
+        button.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\delete.png"), height / 3, height / 3));
 
         this.discountImage = ImageAdder.getImageLabel(".\\resources\\app\\discount.png", 50, 50);
         this.discountInfo = new JTextPane();
@@ -41,26 +43,6 @@ public class DiscountMiniP extends AbstractMiniP {
         StyleConstants.setBold(attributes, true);
         discountInfo.setCharacterAttributes(attributes, true);
         discountInfo.setText(discount.getCoverage() + " " + discount.getType() + " :" + discount.getId() + "\n");
-
-//        attributes = new SimpleAttributeSet();
-//        StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
-//
-//        Document doc = discountInfo.getStyledDocument();
-//        doc.insertString(doc.getLength(), ("Price: " + String.format("%.2f", this.discount.getPrice()) + " €"),
-//                attributes);
-//
-//        if (discount.getDiscount() != null && discount.getDiscount().getType() == DiscountType.FIXED_PERCENTAGE) {
-//            StyleConstants.setForeground(attributes, Color.RED);
-//            StyleConstants.setItalic(attributes, true);
-//
-//            doc.insertString(doc.getLength(),
-//                    "- " + ((ProductFixedPercentage) discount.getDiscount()).getPercentage() + "%", attributes);
-//
-//            StyleConstants.setForeground(attributes, Color.BLACK);
-//            StyleConstants.setItalic(attributes, false);
-//        } else {
-//            doc.insertString(doc.getLength(), "\n", attributes);
-//        }
 
         discountInfo.setPreferredSize(new Dimension(width + 16, height));
 

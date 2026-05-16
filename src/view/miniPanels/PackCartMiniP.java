@@ -41,6 +41,7 @@ public class PackCartMiniP extends AbstractMiniP {
         this.setLayout(new FlowLayout());
 
         deleteFromCart.setPreferredSize(new Dimension(buttonName.length() * 15, height));
+        deleteFromCart.setCursor(new Cursor(Cursor.HAND_CURSOR));
         if (iconPath != null) {
             deleteFromCart.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
         }

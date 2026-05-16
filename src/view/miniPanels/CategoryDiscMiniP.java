@@ -27,6 +27,7 @@ public class CategoryDiscMiniP extends AbstractMiniP {
         this.setLayout(new FlowLayout());
 
         button = new JButton("Add to discount");
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(("Add to discount").length() * 15, height));
         button.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\add.png"), height / 3, height / 3));
         if (alreadyChosen.contains(category)) {
@@ -63,13 +64,6 @@ public class CategoryDiscMiniP extends AbstractMiniP {
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
-
-    /**
-     * Instantiates a new Category mini p.
-     * @param p     the p
-     * @param index the index
-     * @throws BadLocationException the bad location exception
-     */
 
     /**
      * Gets button.

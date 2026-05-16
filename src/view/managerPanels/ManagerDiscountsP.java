@@ -228,21 +228,27 @@ public class ManagerDiscountsP extends JPanel {
     public void updateDiscountPanels() {
         DiscountType type = getDiscountTypeCmbBoxSelected();
         DiscountCoverage coverage = getDiscountCoverageCmbBoxSelected();
+        selectedPacksList.clear();
+        selectedCategoriesList.clear();
+        selectedProductsList.clear();
 
         switch (type) {
             case FIXED_PERCENTAGE -> {
                 firstFieldLabel.setText("Percentage:");
                 cardLayout.show(secondDiscountPanel, "Hide");
             }
+
             case GIFT -> {
                 firstFieldLabel.setText("Num. threshold:");
                 cardLayout.show(secondDiscountPanel, "Gift button");
             }
+
             case QUANTITY -> {
                 firstFieldLabel.setText("Deduction:");
                 secondFieldLabel.setText("Quantity:");
                 cardLayout.show(secondDiscountPanel, "Text field");
             }
+
             case VOLUME -> {
                 firstFieldLabel.setText("Percentage:");
                 secondFieldLabel.setText("Spending threshold:");
@@ -253,9 +259,20 @@ public class ManagerDiscountsP extends JPanel {
         if (!overWholeStore.isSelected()) {
             selectItems.setVisible(true);
             switch (coverage) {
-                case PRODUCT -> selectItems.setText("Choose products");
-                case PACK -> selectItems.setText("Choose packs");
-                case CATEGORY -> selectItems.setText("Choose categories");
+                case PRODUCT -> {
+                    overWholeStore.setVisible(true);
+                    selectItems.setText("Choose products");
+                }
+
+                case PACK -> {
+                    overWholeStore.setVisible(false);
+                    selectItems.setText("Choose packs");
+                }
+
+                case CATEGORY -> {
+                    overWholeStore.setVisible(false);
+                    selectItems.setText("Choose categories");
+                }
             }
         } else {
             selectItems.setVisible(false);

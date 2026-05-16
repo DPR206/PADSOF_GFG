@@ -2,6 +2,7 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.browserControllers.BrowseDiscountsC;
+import model.product.StoreProduct;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseDiscountsP;
@@ -60,10 +61,15 @@ public class DiscountDiscMiniC implements Controller {
         });
 
         view.getButton().addActionListener(e -> {
-            // DUE: Añadir el producto
+            for (StoreProduct product : view.getDiscount().getProducts()) {
+                product.setDiscount(null);
+            }
+            model.getDiscounts().remove(view.getDiscount());
+
             JOptionPane.showMessageDialog(frame,
-                    "Discount: " + view.getDiscount().getId() + " was added to the discount", "Added To Discount",
+                    "Discount: " + view.getDiscount().getId() + " was deleted from the store", "Delete Discount",
                     JOptionPane.INFORMATION_MESSAGE);
+
             try {
                 browserPanel.paintEverything();
             } catch (BadLocationException ex) {

@@ -36,7 +36,7 @@ public class BrowseDiscountsP extends AbstractBrowserP<Discount> {
 
     @Override
     public void addMiniPanel(Discount item, int index) throws BadLocationException {
-        DiscountMiniP miniOrder = new DiscountMiniP(item, index, "Add to discount");
+        DiscountMiniP miniOrder = new DiscountMiniP(item, index, "Delete");
         super.addMiniPanel(miniOrder);
         this.add(miniOrder);
     }

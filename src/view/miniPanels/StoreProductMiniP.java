@@ -29,6 +29,7 @@ public class StoreProductMiniP extends AbstractMiniP {
         this.setLayout(new FlowLayout());
 
         button = new JButton(buttonName);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(buttonName.length() * 15, height));
         if (iconPath != null) {
             button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
@@ -63,8 +64,8 @@ public class StoreProductMiniP extends AbstractMiniP {
         } else {
             doc.insertString(doc.getLength(), "\n", attributes);
         }
-        if(buttonName.equals("Add to Cart")) {
-        	if (product.getStock() == 0) {
+        if (buttonName.equals("Add to Cart")) {
+            if (product.getStock() == 0) {
                 StyleConstants.setForeground(attributes, Color.RED);
                 StyleConstants.setItalic(attributes, true);
                 button.setEnabled(false);
@@ -73,7 +74,6 @@ public class StoreProductMiniP extends AbstractMiniP {
                 doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);
             }
         }
-        
 
         productInfo.setPreferredSize(new Dimension(width, height));
 

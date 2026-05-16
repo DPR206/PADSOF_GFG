@@ -30,6 +30,7 @@ public class StoreProductDiscMiniP extends AbstractMiniP {
         this.setLayout(new FlowLayout());
 
         button = new JButton(buttonName);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(buttonName.length() * 15, height));
         button.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\add.png"), height / 3, height / 3));
 

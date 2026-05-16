@@ -19,7 +19,7 @@ public class CategoryDiscMiniC implements Controller {
     private final Store model; /* model */
     private final BrowseCategoriesDiscC browserController;
     private final BrowseCategoriesDiscP browserPanel;
-    private final List<Category> alreadyChosenProducts;
+    private final List<Category> alreadyChosenCategories;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -29,13 +29,13 @@ public class CategoryDiscMiniC implements Controller {
      * @param model the controller's model
      */
     public CategoryDiscMiniC(App frame, Store model, CategoryDiscMiniP view, BrowseCategoriesDiscC browserController,
-                             BrowseCategoriesDiscP browserPanel, List<Category> alreadyChosenProducts) {
+                             BrowseCategoriesDiscP browserPanel, List<Category> alreadyChosenCategories) {
         this.frame = frame;
         this.view = view;
         this.model = model;
         this.browserController = browserController;
         this.browserPanel = browserPanel;
-        this.alreadyChosenProducts = alreadyChosenProducts;
+        this.alreadyChosenCategories = alreadyChosenCategories;
 
         initializeActions();
     }
@@ -46,7 +46,7 @@ public class CategoryDiscMiniC implements Controller {
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         view.getButton().addActionListener(e -> {
-            // DUE: Añadir el producto
+            alreadyChosenCategories.add(view.getCategory());
             JOptionPane.showMessageDialog(frame, view.getCategory() + " was added to the discount", "Added To Discount",
                     JOptionPane.INFORMATION_MESSAGE);
             try {

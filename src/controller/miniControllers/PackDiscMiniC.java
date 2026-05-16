@@ -11,8 +11,6 @@ import view.miniPanels.PackDiscMiniP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class PackDiscMiniC implements Controller {
@@ -21,7 +19,7 @@ public class PackDiscMiniC implements Controller {
     private final Store model; /* model */
     private final BrowsePacksDiscC browserController;
     private final BrowsePacksDiscP browserPanel;
-    private final List<Pack> alreadyChosenProducts;
+    private final List<Pack> alreadyChosenPacks;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -31,13 +29,13 @@ public class PackDiscMiniC implements Controller {
      * @param model the controller's model
      */
     public PackDiscMiniC(App frame, Store model, PackDiscMiniP view, BrowsePacksDiscC browserController,
-                         BrowsePacksDiscP browserPanel, List<Pack> alreadyChosenProducts) {
+                         BrowsePacksDiscP browserPanel, List<Pack> alreadyChosenPacks) {
         this.frame = frame;
         this.view = view;
         this.model = model;
         this.browserController = browserController;
         this.browserPanel = browserPanel;
-        this.alreadyChosenProducts = alreadyChosenProducts;
+        this.alreadyChosenPacks = alreadyChosenPacks;
 
         initializeActions();
     }
@@ -47,24 +45,8 @@ public class PackDiscMiniC implements Controller {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        view.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
-                }
-            }
-        });
-
-        view.getPackInfo().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(frame, "Aquí se cambiaría a la página del producto");
-                }
-            }
-        });
-
         view.getButton().addActionListener(e -> {
-            // DUE: Añadir el producto
+            alreadyChosenPacks.remove(view.getPack());
             JOptionPane.showMessageDialog(frame, "Pack: " + view.getPack().getId() + " was added to the discount",
                     "Added To Discount", JOptionPane.INFORMATION_MESSAGE);
             try {

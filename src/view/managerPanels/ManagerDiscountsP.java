@@ -228,9 +228,6 @@ public class ManagerDiscountsP extends JPanel {
     public void updateDiscountPanels() {
         DiscountType type = getDiscountTypeCmbBoxSelected();
         DiscountCoverage coverage = getDiscountCoverageCmbBoxSelected();
-        selectedPacksList.clear();
-        selectedCategoriesList.clear();
-        selectedProductsList.clear();
 
         switch (type) {
             case FIXED_PERCENTAGE -> {

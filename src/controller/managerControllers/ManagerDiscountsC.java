@@ -60,6 +60,9 @@ public class ManagerDiscountsC implements Controller {
         });
 
         view.getSelectItems().addActionListener(e -> {
+            view.getSelectedPacksList().clear();
+            view.getSelectedCategoriesList().clear();
+            view.getSelectedProductsList().clear();
             switch (view.getDiscountCoverageCmbBoxSelected()) {
                 case PRODUCT -> chooseStoreProducts();
                 case PACK -> choosePacks();
@@ -80,6 +83,10 @@ public class ManagerDiscountsC implements Controller {
 
             Discount discount = null;
 
+            System.out.println("- Products: " + view.getSelectedProductsList());
+            System.out.println("- Packs: " + view.getSelectedPacksList());
+            System.out.println("- Categories: " + view.getSelectedCategoriesList());
+
             switch (view.getDiscountTypeCmbBoxSelected()) {
                 case FIXED_PERCENTAGE -> {
                     if (view.getFirstField() != null && view.getStartingDateField() != null &&
@@ -90,10 +97,10 @@ public class ManagerDiscountsC implements Controller {
                         switch (view.getDiscountCoverageCmbBoxSelected()) {
                             case PRODUCT -> {
                                 if (view.getOverWholeStore().isSelected()) {
+                                    discount = new ProductFixedPercentage(startDate, endDate, percentage, true);
+                                } else {
                                     discount = new ProductFixedPercentage(startDate, endDate, percentage,
                                             view.getSelectedProductsList().toArray(new StoreProduct[0]));
-                                } else {
-                                    discount = new ProductFixedPercentage(startDate, endDate, percentage, true);
                                 }
                             }
                             case PACK -> discount = new PackFixedPercentage(startDate, endDate, percentage,

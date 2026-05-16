@@ -5,6 +5,7 @@ import model.product.StoreProduct;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 /**
  * It implements the Product discount whose type is FixedPercentage
@@ -63,6 +64,7 @@ public class ProductFixedPercentage extends ProductDiscount implements FixedPerc
     public ProductFixedPercentage(LocalDateTime startDate, LocalDateTime endDate, double percentage,
                                   StoreProduct... products) throws IllegalArgumentException {
         super(DiscountType.FIXED_PERCENTAGE, DiscountCoverage.PRODUCT, startDate, endDate);
+        System.out.println("Products check: " + Arrays.toString(products));
         this.addProducts(products);
         this.setPercentage(percentage);
     }

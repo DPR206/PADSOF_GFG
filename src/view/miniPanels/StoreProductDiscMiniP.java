@@ -60,7 +60,7 @@ public class StoreProductDiscMiniP extends AbstractMiniP {
             StyleConstants.setItalic(attributes, true);
 
             doc.insertString(doc.getLength(),
-                    "- " + ((ProductFixedPercentage) product.getDiscount()).getPercentage() + "%", attributes);
+                    "- " + ((ProductFixedPercentage) product.getDiscount()).getPercentage() + "%\n", attributes);
 
             StyleConstants.setForeground(attributes, Color.BLACK);
             StyleConstants.setItalic(attributes, false);
@@ -71,7 +71,7 @@ public class StoreProductDiscMiniP extends AbstractMiniP {
         if (product.getStock() == 0) {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
-            button.setEnabled(false);
+            //button.setEnabled(false);
             doc.insertString(doc.getLength(), "Out of stock", attributes);
         } else {
             doc.insertString(doc.getLength(), ("Stock: " + product.getStock()), attributes);

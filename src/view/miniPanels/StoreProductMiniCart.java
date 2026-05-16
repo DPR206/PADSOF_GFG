@@ -55,7 +55,7 @@ public class StoreProductMiniCart extends AbstractMiniP {
             StyleConstants.setItalic(attributes, true);
 
             doc.insertString(doc.getLength(),
-                    "- " + ((ProductFixedPercentage) product.getDiscount()).getPercentage() + "%", attributes);
+                    "- " + ((ProductFixedPercentage) product.getDiscount()).getPercentage() + "%\n", attributes);
 
             StyleConstants.setForeground(attributes, Color.BLACK);
             StyleConstants.setItalic(attributes, false);

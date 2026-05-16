@@ -64,11 +64,17 @@ public class ManagerIndividualComposedPack extends JPanel{
     public JButton getConfirmarPrecio() {
     	return this.btnConfirmarPrecio;
     }
+    public JButton getConfirmarPackId() {
+    	return this.btnConfirmarPack;
+    }
     public JTextField getIdProductText() {
     	return this.idProduct;
     }
     public JTextField getPackPriceText() {
     	return this.packPrecio;
+    }
+    public JTextField getPackIdText() {
+    	return this.idPack;
     }
     public void setControllerConfirmarProduct(ActionListener e) {
     	this.btnConfirmarProducto.addActionListener(e);

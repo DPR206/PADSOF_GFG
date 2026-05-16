@@ -8,6 +8,7 @@ import javax.swing.text.BadLocationException;
 import controller.Controller;
 import controller.browserControllers.BrowseComposedPackC;
 import model.product.ComposedPack;
+import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
 import view.managerPanels.ManagerIndividualComposedPack;
@@ -70,6 +71,25 @@ public class ManagerManageComposedPackC implements Controller{
 			JOptionPane.showMessageDialog(null, "Producto añadido correctamente.");
 		});
 		
+		panel.getConfirmarPackId().addActionListener(e->{
+			if(panel.getPackIdText().getText().isEmpty()) {
+				return;
+			}
+			
+			int id = Integer.parseInt(panel.getPackIdText().getText());
+			Pack toAdd = Store.getInstance().getPackById(id);
+			if(toAdd == null) {
+				JOptionPane.showMessageDialog(
+					    null,                                  
+					    "El pack con este id no existe.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE 
+					);
+				return;
+			}
+			this.p.addPack(toAdd);
+			JOptionPane.showMessageDialog(null, "Pack añadido correctamente.");
+		});
 	}
 
 }

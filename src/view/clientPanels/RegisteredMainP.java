@@ -1,5 +1,6 @@
 package view.clientPanels;
 
+import view.browserPanels.BrowseStoreProductsP;
 import view.browserPanels.MixedBrowseStoreAddToCartP;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class RegisteredMainP extends JPanel {
     private JPanel productSearch;
     private JPanel others;
     private CardLayout cardLayout = new CardLayout();
+    private BrowseStoreProductsP recommendedProductsPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public RegisteredMainP() throws BadLocationException {
@@ -26,7 +28,7 @@ public class RegisteredMainP extends JPanel {
         configurarEstructura();
     }
 
-    private void configurarEstructura() {
+    private void configurarEstructura() throws BadLocationException {
         this.setLayout(new BorderLayout());
 
         others = new JPanel(new BorderLayout());
@@ -39,9 +41,21 @@ public class RegisteredMainP extends JPanel {
 
         others.add(botones, BorderLayout.NORTH);
 
+        JPanel searchAndRecommend = new JPanel(new GridLayout(1, 2));
+        searchAndRecommend.add(searchingP);
+
+        recommendedProductsPanel = new BrowseStoreProductsP("Add to Cart");
+        JPanel recommendAndTitle = new JPanel();
+        recommendAndTitle.setLayout(new BoxLayout(recommendAndTitle, BoxLayout.Y_AXIS));
+        JLabel title = new JLabel("We think you may like...");
+        title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 18));
+        recommendAndTitle.add(title);
+        recommendAndTitle.add(recommendedProductsPanel);
+        searchAndRecommend.add(recommendAndTitle);
+
         bottom = new JPanel(cardLayout);
         bottom.setOpaque(false);
-        bottom.add(searchingP, "Search");
+        bottom.add(searchAndRecommend, "Search");
         bottom.add(filterP, "Filters");
         bottom.add(makeOfferP, "Second Hand");
 
@@ -51,7 +65,6 @@ public class RegisteredMainP extends JPanel {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-
     public JPanel getBottom() {
         return bottom;
     }
@@ -114,6 +127,14 @@ public class RegisteredMainP extends JPanel {
 
     public void setProductSearch(JPanel newProductSearch) {
         this.productSearch = newProductSearch;
+    }
+
+    public BrowseStoreProductsP getRecommendedProductsPanel() {
+        return recommendedProductsPanel;
+    }
+
+    public void setRecommendedProductsPanel(BrowseStoreProductsP newRecommendedProductsPanel) {
+        this.recommendedProductsPanel = newRecommendedProductsPanel;
     }
 
     public JButton getSearch() {

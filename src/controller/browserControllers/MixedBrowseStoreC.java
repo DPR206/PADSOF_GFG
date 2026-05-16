@@ -1,7 +1,7 @@
 package controller.browserControllers;
 
 import controller.miniControllers.PackAddToCartMiniC;
-import controller.miniControllers.StoreProductMiniC;
+import controller.miniControllers.MixedStoreProductMiniC;
 import model.product.Pack;
 import model.product.StoreProduct;
 import model.store.Store;
@@ -49,7 +49,7 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
                     super.getView());
         }
         for (AbstractMiniP miniPanel : super.getView().getSecondMiniPanels()) {
-            new StoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
+            new MixedStoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
                     super.getView());
         }
     }

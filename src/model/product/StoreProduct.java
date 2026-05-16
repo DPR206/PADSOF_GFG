@@ -308,9 +308,9 @@ public abstract class StoreProduct extends Product implements Serializable {
      * @throws NullPointerException discount was null
      */
     public void setDiscount(Discount newDiscount) throws NullPointerException {
-        if (newDiscount == null) {
-            throw new NullPointerException("Discount cannot be null");
-        }
+//        if (newDiscount == null) {
+//            throw new NullPointerException("Discount cannot be null");
+//        }
 
         this.discount = newDiscount;
     }

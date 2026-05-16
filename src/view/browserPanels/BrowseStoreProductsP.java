@@ -1,16 +1,14 @@
 package view.browserPanels;
 
 import model.product.StoreProduct;
-import view.miniPanels.StoreProductDiscMiniP;
+import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.util.List;
 
 import static main.Main.brownColour;
 
-public class BrowseStoreProductsDiscP extends AbstractBrowserP<StoreProduct> {
-    private final List<StoreProduct> alreadyChosen;
+public class BrowseStoreProductsP extends AbstractBrowserP<StoreProduct> {
     private final String buttonName;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -18,9 +16,8 @@ public class BrowseStoreProductsDiscP extends AbstractBrowserP<StoreProduct> {
     /**
      * This panel's constructor
      */
-    public BrowseStoreProductsDiscP(List<StoreProduct> alreadyChosen, String buttonName) throws BadLocationException {
+    public BrowseStoreProductsP(String buttonName) throws BadLocationException {
         super();
-        this.alreadyChosen = alreadyChosen;
         this.buttonName = buttonName;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -41,7 +38,7 @@ public class BrowseStoreProductsDiscP extends AbstractBrowserP<StoreProduct> {
 
     @Override
     public void addMiniPanel(StoreProduct item, int index) throws BadLocationException {
-        StoreProductDiscMiniP miniProduct = new StoreProductDiscMiniP(item, index, buttonName, alreadyChosen);
+        StoreProductMiniP miniProduct = new StoreProductMiniP(item, index, buttonName, ".\\resources\\app\\cart.png");
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

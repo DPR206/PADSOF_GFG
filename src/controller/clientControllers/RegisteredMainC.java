@@ -1,6 +1,7 @@
 package controller.clientControllers;
 
 import controller.Controller;
+import controller.browserControllers.BrowseStoreProductsC;
 import controller.browserControllers.MixedBrowseStoreC;
 import model.store.Store;
 import view.App;
@@ -44,6 +45,7 @@ public class RegisteredMainC implements Controller {
     public void linkControllers() {
         try {
             new MixedBrowseStoreC(frame, model, view.getBrowsePanel());
+            new BrowseStoreProductsC(frame, view.getRecommendedProductsPanel(), model);
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }

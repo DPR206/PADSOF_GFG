@@ -26,7 +26,6 @@ public class ManagerMainC implements Controller {
         //this.frame.addCard
 
         this.mgproduct = new ManagerGestionarProductos(this.frame);
-        new MixedBrowseStoreEditC(this.frame, this.model, this.mgproduct.getProductsPanel());
         this.mgproduct.setVisible(false);
         this.mnproduct = new ManagerNewProduct();
         new ManagerNewProductC(this.frame, this.mnproduct);
@@ -45,6 +44,7 @@ public class ManagerMainC implements Controller {
         });
 
         view.getProductoNuevo().addActionListener(e -> {
+        	new ManagerManageProductsC(this.mgproduct, this.frame);
             this.frame.addCard(this.mgproduct, "NUEVOS_PRODUCTOS");
             this.frame.changeVisibleCard("NUEVOS_PRODUCTOS");
         });

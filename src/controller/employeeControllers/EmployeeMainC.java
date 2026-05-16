@@ -18,7 +18,6 @@ import javax.swing.text.BadLocationException;
 public class EmployeeMainC implements Controller {
     private final EmployeeMainP view;
     private final App frame;
-    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -30,7 +29,14 @@ public class EmployeeMainC implements Controller {
     public EmployeeMainC(App frame, Store model) {
         this.frame = frame;
         this.view = frame.getEmployeeMainPanel();
-        this.model = model;
+
+        try {
+            BrowseSecondHandProductsP valuateView = new BrowseSecondHandProductsP("Valuate", null);
+            this.frame.addCard(valuateView, "BROWSE_VALUATION_PRODUCTS");
+            new BrowseValuationProductsC(this.frame, valuateView, model);
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
 
         initializeActions();
     }
@@ -53,15 +59,6 @@ public class EmployeeMainC implements Controller {
                 e -> JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Manage Exchanges", "Manage Exchange",
                         JOptionPane.INFORMATION_MESSAGE));
 
-        view.getValuateProducts().addActionListener(e -> {
-            try {
-                BrowseSecondHandProductsP browseSecondHandProductsP = new BrowseSecondHandProductsP("Valuate", null);
-                frame.addCard(browseSecondHandProductsP, "BROWSE_VALUATION_PRODUCTS");
-                frame.changeVisibleCard("BROWSE_VALUATION_PRODUCTS");
-                new BrowseValuationProductsC(frame, browseSecondHandProductsP, model);
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        view.getValuateProducts().addActionListener(e -> frame.changeVisibleCard("BROWSE_VALUATION_PRODUCTS"));
     }
 }

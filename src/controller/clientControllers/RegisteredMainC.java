@@ -40,7 +40,6 @@ public class RegisteredMainC implements Controller {
 
         view.getSearch().addActionListener(e -> {
             this.view.getCardLayout().show(this.view.getBottom(), "Search");
-            linkControllers();
         });
 
         view.getFilters().addActionListener(e -> {
@@ -49,7 +48,6 @@ public class RegisteredMainC implements Controller {
 
         view.getSecondHand().addActionListener(e -> {
             this.view.getCardLayout().show(this.view.getBottom(), "Second Hand");
-            linkControllers();
         });
     }
 

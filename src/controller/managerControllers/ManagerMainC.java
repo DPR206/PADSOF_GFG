@@ -32,67 +32,52 @@ public class ManagerMainC implements Controller {
         this.frame = frame;
         this.view = frame.getManagerMainPanel();
         this.model = model;
-        this.mge = new ManagerGestionarEmpleados(this.frame);
-        new ManagerGestionarEmpleadosC(this.mge, this.frame);
-        //this.frame.addCard
+
+        ManagerGestionarPacks m = new ManagerGestionarPacks(frame);
+        new ManagePacksC(m, this.frame);
+        this.frame.addCard(m, "GEST_PACKS");
 
         this.mgproduct = new ManagerGestionarProductos(this.frame);
-        this.mgproduct.setVisible(false);
+        new ManagerManageProductsC(this.mgproduct, this.frame);
+        this.frame.addCard(this.mgproduct, "NUEVOS_PRODUCTOS");
+
         this.mnproduct = new ManagerNewProduct();
         new ManagerNewProductC(this.frame, this.mnproduct);
-        this.mnproduct.setVisible(false);
+        this.frame.addCard(this.mnproduct, "CREAR_PRODUCTO");
+
+        this.mge = new ManagerGestionarEmpleados(this.frame);
+        new ManagerGestionarEmpleadosC(this.mge, this.frame);
+        this.frame.addCard(this.mge, "GESTIONAR_EMPL");
+
+        ManagerStatisticsP managerStatisticsP = new ManagerStatisticsP();
+        new ManagerStatisticsC(managerStatisticsP);
+        this.frame.addCard(managerStatisticsP, "STATISTICS");
+
+        ManagerDiscountsP managerDiscountsP = new ManagerDiscountsP();
+        new ManagerDiscountsC(frame, model, managerDiscountsP);
+        this.frame.addCard(managerDiscountsP, "MANAGER_DISCOUNTS");
+
+        ManagerParametersP managerParametersP = new ManagerParametersP();
+        new ManagerParametersC(frame, managerParametersP);
+        this.frame.addCard(managerParametersP, "MANAGER_PARAMETERS");
 
         initializeActions();
     }
 
     @Override
     public void initializeActions() {
-        view.getPacks().addActionListener(e -> {
-            ManagerGestionarPacks m = new ManagerGestionarPacks(frame);
-            new ManagePacksC(m, this.frame);
-            this.frame.addCard(m, "GEST_PACKS");
-            this.frame.changeVisibleCard("GEST_PACKS");
-        });
+        view.getPacks().addActionListener(e -> this.frame.changeVisibleCard("GEST_PACKS"));
 
-        view.getProductoNuevo().addActionListener(e -> {
-            new ManagerManageProductsC(this.mgproduct, this.frame);
-            this.frame.addCard(this.mgproduct, "NUEVOS_PRODUCTOS");
-            this.frame.changeVisibleCard("NUEVOS_PRODUCTOS");
-        });
+        view.getProductoNuevo().addActionListener(e -> this.frame.changeVisibleCard("NUEVOS_PRODUCTOS"));
 
-        view.getAnnadirProductos().addActionListener(e -> {
-            this.frame.addCard(this.mnproduct, "CREAR_PRODUCTO");
-            this.frame.changeVisibleCard("CREAR_PRODUCTO");
-        });
+        view.getAnnadirProductos().addActionListener(e -> this.frame.changeVisibleCard("CREAR_PRODUCTO"));
 
-        view.getEmpleados().addActionListener(e -> {
-            this.frame.addCard(this.mge, "GESTIONAR_EMPL");
-            this.frame.changeVisibleCard("GESTIONAR_EMPL");
-        });
+        view.getEmpleados().addActionListener(e -> this.frame.changeVisibleCard("GESTIONAR_EMPL"));
 
-        view.getEstadisticas().addActionListener(e -> {
-            ManagerStatisticsP managerStatisticsP = new ManagerStatisticsP();
-            new ManagerStatisticsC(managerStatisticsP);
-            this.frame.addCard(managerStatisticsP, "STATISTICS");
-            this.frame.changeVisibleCard("STATISTICS");
-        });
+        view.getEstadisticas().addActionListener(e -> this.frame.changeVisibleCard("STATISTICS"));
 
-        view.getDescuentos().addActionListener(e -> {
-            try {
-                ManagerDiscountsP managerDiscountsP = new ManagerDiscountsP();
-                new ManagerDiscountsC(frame, model, managerDiscountsP);
-                this.frame.addCard(managerDiscountsP, "MANAGER_DISCOUNTS");
-                this.frame.changeVisibleCard("MANAGER_DISCOUNTS");
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        view.getDescuentos().addActionListener(e -> this.frame.changeVisibleCard("MANAGER_DISCOUNTS"));
 
-        view.getParametros().addActionListener(e -> {
-            ManagerParametersP managerParametersP = new ManagerParametersP();
-            new ManagerParametersC(frame, managerParametersP);
-            this.frame.addCard(managerParametersP, "MANAGER_PARAMETERS");
-            this.frame.changeVisibleCard("MANAGER_PARAMETERS");
-        });
+        view.getParametros().addActionListener(e -> this.frame.changeVisibleCard("MANAGER_PARAMETERS"));
     }
 }

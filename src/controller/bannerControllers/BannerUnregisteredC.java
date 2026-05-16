@@ -3,7 +3,6 @@ package controller.bannerControllers;
 import controller.Controller;
 import controller.browserControllers.MixedBrowseCartC;
 import controller.clientControllers.CarritoC;
-import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
 import view.App;
 import view.banners.BannerUnregistered;
@@ -108,9 +107,6 @@ public class BannerUnregisteredC implements Controller {
      * @throws BadLocationException the bad location exception
      */
     private void abrirPaginaPrincipal() throws BadLocationException {
-
-        new UnregisteredMainC(frame, model);
-
         frame.changeVisibleCard("UNREGISTERED_MAIN");
     }
 

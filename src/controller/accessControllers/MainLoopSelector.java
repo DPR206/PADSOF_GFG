@@ -40,7 +40,6 @@ public abstract class MainLoopSelector implements Controller {
                 this.frame.changeVisibleCard("UNREGISTERED_MAIN");
                 new BannerUnregisteredC((BannerUnregistered) this.frame.getViewFromName("BANNER_UNREGISTERED"), frame,
                         model);
-                this.frame.getUnregisteredMainPanel().paintEverything();
                 break;
             case REGISTERED_CLIENT:
                 this.frame.changeVisibleBanner("BANNER_REGISTERED");

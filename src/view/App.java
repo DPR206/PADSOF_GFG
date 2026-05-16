@@ -62,7 +62,6 @@ public class App extends JFrame {
         welcomePanel = new WelcomeP();
         loginPanel = new LoginP();
         signupPanel = new SignupP();
-
         unregisteredMainPanel = new UnregisteredMainP();
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
@@ -73,21 +72,6 @@ public class App extends JFrame {
         bannerRegisteredPanel = new BannerRegistered();
         bannerEmployeePanel = new BannerEmployee();
         bannerManagerPanel = new BannerManager();
-
-        /* Controllers */
-        new WelcomeC(this, model);
-        new LoginC(this, model);
-        new SignupC(this, model);
-
-        new UnregisteredMainC(this, model);
-        new RegisteredMainC(this, model);
-        new EmployeeMainC(this, model);
-        new ManagerMainC(this, model);
-
-        new BannerUnregisteredC(bannerUnregisteredPanel, this, model);
-        new BannerRegisteredC(bannerRegisteredPanel, this, model);
-        new BannerEmployeeC(bannerEmployeePanel, this);
-        new BannerManagerC(bannerManagerPanel, this);
 
         /* Add views to main window */
         ImagePanel bgPanel = new ImagePanel(".\\resources\\app\\background.png");
@@ -117,6 +101,22 @@ public class App extends JFrame {
         addBanner(bannerRegisteredPanel, "BANNER_REGISTERED");
         addBanner(bannerEmployeePanel, "BANNER_EMPLOYEE");
         addBanner(bannerManagerPanel, "BANNER_MANAGER");
+
+        /* Controllers */
+        new WelcomeC(this, model);
+        new LoginC(this, model);
+        new SignupC(this, model);
+
+        new UnregisteredMainC(this, model);
+        new RegisteredMainC(this, model);
+
+        new EmployeeMainC(this, model);
+        new ManagerMainC(this, model);
+
+        new BannerUnregisteredC(bannerUnregisteredPanel, this, model);
+        new BannerRegisteredC(bannerRegisteredPanel, this, model);
+        new BannerEmployeeC(bannerEmployeePanel, this);
+        new BannerManagerC(bannerManagerPanel, this);
 
         /* Main panel */
         changeVisibleBanner("BANNER_UNREGISTERED");

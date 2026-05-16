@@ -30,31 +30,24 @@ public class UnregisteredMainC implements Controller {
         this.view = frame.getUnregisteredMainPanel();
         this.model = model;
 
-        initializeActions();
-    }
-
-    @Override
-    public void initializeActions() {
-        this.view.getCardLayout().show(this.view.getBottom(), "Search");
-        linkControllers();
-
-        view.getSearch().addActionListener(e -> {
-            this.view.getCardLayout().show(this.view.getBottom(), "Search");
-            linkControllers();
-        });
-
-        view.getFilters().addActionListener(e -> this.view.getCardLayout().show(this.view.getBottom(), "Filters"));
-    }
-
-    /**
-     * Link controllers.
-     */
-    public void linkControllers() {
         try {
             new MixedBrowseStoreC(frame, model, view.getBrowsePanel());
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }
         new SearcherC(frame, model, view.getFilterPanel());
+
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
+        this.view.getCardLayout().show(this.view.getBottom(), "Search");
+
+        view.getSearch().addActionListener(e -> {
+            this.view.getCardLayout().show(this.view.getBottom(), "Search");
+        });
+
+        view.getFilters().addActionListener(e -> this.view.getCardLayout().show(this.view.getBottom(), "Filters"));
     }
 }

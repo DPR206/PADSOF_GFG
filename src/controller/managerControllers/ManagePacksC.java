@@ -43,7 +43,7 @@ public class ManagePacksC implements Controller{
 				Pack pack = miniPack.getPack();
 				if (pack instanceof ComposedPack) {
 					ManagerIndividualComposedPack misp = new ManagerIndividualComposedPack(pack);
-					//new ManagerIndividualComposedPack() //due
+					new ManagerManageComposedPackC(misp, (ComposedPack)pack);
 					this.frame.addCard(misp, "COMPOSED PACKS");
 					this.frame.changeVisibleCard("COMPOSED PACKS");}
 				else if (pack instanceof SimplePack || !(pack instanceof ComposedPack)) {

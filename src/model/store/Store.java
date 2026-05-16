@@ -385,6 +385,43 @@ public class Store implements Serializable {
 
                 buffer.close();
             }
+/**TEMPORAL*******************************************************************/
+            List<Pack> currentPacks = Store.getInstance().getPacks();
+            List<StoreProduct> storeProducts = Store.getInstance().getStoreProductList();
+            if (currentPacks.size() >= 3) {
+                HashSet<Pack> composed1 = new HashSet<>();
+                composed1.add(currentPacks.get(0));
+                composed1.add(currentPacks.get(1));
+                ComposedPack composedPack1 = new ComposedPack(25.0, composed1, ".\\resources\\app\\composed1.png");
+                if (storeProducts.size() >= 1) composedPack1.addProduct(storeProducts.get(0));
+                if (storeProducts.size() >= 2) composedPack1.addProduct(storeProducts.get(1));
+
+                HashSet<Pack> composed2 = new HashSet<>();
+                composed2.add(currentPacks.get(1));
+                composed2.add(currentPacks.get(2));
+                ComposedPack composedPack2 = new ComposedPack(30.0, composed2, ".\\resources\\app\\composed2.png");
+                if (storeProducts.size() >= 3) composedPack2.addProduct(storeProducts.get(2));
+                if (storeProducts.size() >= 4) composedPack2.addProduct(storeProducts.get(3));
+
+                if (currentPacks.size() >= 5) {
+                    HashSet<Pack> composed3 = new HashSet<>();
+                    composed3.add(currentPacks.get(0));
+                    composed3.add(currentPacks.get(2));
+                    composed3.add(currentPacks.get(3));
+                    ComposedPack composedPack3 = new ComposedPack(45.0, composed3, ".\\resources\\app\\composed3.png");
+                    if (storeProducts.size() >= 5) composedPack3.addProduct(storeProducts.get(4));
+                }
+            }
+
+            if (!Store.getInstance().isCategoryInStore("Juego")) {
+                new Category("Juego");
+            }
+            if (!Store.getInstance().isCategoryInStore("Figurita")) {
+                new Category("Figurita");
+            }
+            if (!Store.getInstance().isCategoryInStore("Comic")) {
+                new Category("Comic");
+            }
 
             Store.getInstance().addUser(Manager.getInstance());
         } catch (IOException | ClassNotFoundException exception) {

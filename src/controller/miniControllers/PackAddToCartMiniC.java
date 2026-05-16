@@ -12,7 +12,6 @@ import view.clientPanels.PackP;
 import view.miniPanels.PackToBuyMiniP;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -80,11 +79,8 @@ public class PackAddToCartMiniC implements Controller {
             }
             JOptionPane.showMessageDialog(frame, view.getPack().getId() + " was added to Cart", "Added To Cart",
                     JOptionPane.INFORMATION_MESSAGE);
-            try {
-                browserPanel.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
+
+            browserController.refreshCurrentPage();
             browserController.initializeActionsForMiniPanels();
         });
     }

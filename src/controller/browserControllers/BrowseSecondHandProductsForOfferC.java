@@ -10,6 +10,7 @@ import view.browserPanels.BrowseSecondHandProductsP;
 import view.miniPanels.AbstractMiniP;
 import view.miniPanels.SecondHandMiniP;
 
+import javax.swing.text.BadLocationException;
 import java.util.List;
 
 /**
@@ -29,21 +30,47 @@ public class BrowseSecondHandProductsForOfferC extends AbstractBrowserC<SecondHa
     public BrowseSecondHandProductsForOfferC(App frame, BrowseSecondHandProductsP view, Store model) {
         super(frame, view, model);
         super.initializeActions();
+        refreshData();
         initializeActionsForMiniPanels();
     }
 
     @Override
-    public void initializeActionsForMiniPanels() {
+    public void refreshData() {
         List<SecondHandProduct> shownProducts = Store.getInstance().getAvailableSecondHandProductList();
         if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
             shownProducts.removeAll(((RegisteredClient) super.getFrame().getUser()).getWallet().getAvailableProducts());
         }
         try {
             super.getView().setItemList(shownProducts);
+            super.getView().setCurrentPageNum(1);
         } catch (Exception e) {
             throw new RuntimeException();
         }
+    }
 
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            List<SecondHandProduct> shownProducts = Store.getInstance().getAvailableSecondHandProductList();
+            if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
+                shownProducts.removeAll(
+                        ((RegisteredClient) super.getFrame().getUser()).getWallet().getAvailableProducts());
+            }
+            super.getView().setItemList(shownProducts);
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void initializeActionsForMiniPanels() {
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new SecondHandAddToOfferMiniC(super.getFrame(), (SecondHandMiniP) miniPanel, this, super.getView());
         }

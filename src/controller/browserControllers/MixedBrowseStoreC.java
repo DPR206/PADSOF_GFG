@@ -31,11 +31,12 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
     public MixedBrowseStoreC(App frame, Store model, MixedBrowseStoreAddToCartP view) throws BadLocationException {
         super(frame, view, model);
         super.initializeActions();
+        refreshData();
         initializeActionsForMiniPanels();
     }
 
     @Override
-    public void initializeActionsForMiniPanels() {
+    public void refreshData() {
         try {
             super.getView().setFirstItemList(super.getModel().getPacks());
             if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
@@ -46,10 +47,38 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
             } else {
                 super.getView().setSecondItemList(super.getModel().getStoreProductList());
             }
+            super.getView().setCurrentPageNum(1);
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }
+    }
 
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            super.getView().setFirstItemList(super.getModel().getPacks());
+            if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
+                super.getView().setSecondItemList(((RegisteredClient) super.getFrame().getUser()).searchStoreProduct());
+            } else if (super.getFrame().getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+                super.getView()
+                     .setSecondItemList(((UnregisteredClient) super.getFrame().getUser()).searchStoreProduct());
+            } else {
+                super.getView().setSecondItemList(super.getModel().getStoreProductList());
+            }
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void initializeActionsForMiniPanels() {
         for (AbstractMiniP miniPanel : super.getView().getFirstMiniPanels()) {
             new PackAddToCartMiniC(super.getFrame(), (PackToBuyMiniP) miniPanel, this, super.getView());
         }

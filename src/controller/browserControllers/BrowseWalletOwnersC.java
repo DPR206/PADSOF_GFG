@@ -30,20 +30,42 @@ public class BrowseWalletOwnersC extends AbstractClusterBrowserC<RegisteredClien
     public BrowseWalletOwnersC(App frame, BrowseWalletOwnersP view, Store model) {
         super(frame, view, model);
         super.initializeActions();
-        initializeActionsForMiniPanels();
     }
 
     @Override
-    public void initializeActionsForMiniPanels() {
+    public void refreshData() {
         List<RegisteredClient> users = new ArrayList<>(super.getModel().getRegisteredClientList());
         users.remove(super.getFrame().getUser());
         users.removeIf(user -> user.getWallet().getVisibleProducts().isEmpty());
         try {
             super.getView().setItemList(users);
+            super.getView().setCurrentPageNum(1);
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }
+    }
 
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            List<RegisteredClient> users = new ArrayList<>(super.getModel().getRegisteredClientList());
+            users.remove(super.getFrame().getUser());
+            users.removeIf(user -> user.getWallet().getVisibleProducts().isEmpty());
+            super.getView().setItemList(users);
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void initializeActionsForMiniPanels() {
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new WalletOwnerMiniC(super.getFrame(), super.getModel(), (UserMiniP) miniPanel);
         }

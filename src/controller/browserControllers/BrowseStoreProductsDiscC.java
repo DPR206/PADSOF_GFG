@@ -38,17 +38,36 @@ public class BrowseStoreProductsDiscC extends AbstractBrowserC<StoreProduct> {
         this.parentView = parentView;
         this.onlyOnce = onlyOnce;
         super.initializeActions();
-        initializeActionsForMiniPanels();
+    }
+
+    @Override
+    public void refreshData() {
+        try {
+            super.getView().setItemList(Store.getInstance().getStoreProductList());
+            super.getView().setCurrentPageNum(1);
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            super.getView().setItemList(Store.getInstance().getStoreProductList());
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
-        try {
-            super.getView().setItemList(Store.getInstance().getStoreProductList());
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
-
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             if (onlyOnce) {
                 List<StoreProduct> giftList = new ArrayList<>();

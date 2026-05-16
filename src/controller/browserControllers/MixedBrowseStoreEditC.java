@@ -28,18 +28,38 @@ public class MixedBrowseStoreEditC extends AbstractMixedBrowserC<Pack, StoreProd
     public MixedBrowseStoreEditC(App frame, Store model, MixedBrowseStoreEditP view) {
         super(frame, view, model);
         super.initializeActions();
-        initializeActionsForMiniPanels();
+    }
+
+    @Override
+    public void refreshData() {
+        try {
+            super.getView().setFirstItemList(super.getModel().getPacks());
+            super.getView().setSecondItemList(super.getModel().getStoreProductList());
+            super.getView().setCurrentPageNum(1);
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            super.getView().setFirstItemList(super.getModel().getPacks());
+            super.getView().setSecondItemList(super.getModel().getStoreProductList());
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
-        try {
-            super.getView().setFirstItemList(super.getModel().getPacks());
-            super.getView().setSecondItemList(super.getModel().getStoreProductList());
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
-
         for (AbstractMiniP miniPanel : super.getView().getFirstMiniPanels()) {
             //new PackMiniC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
         }

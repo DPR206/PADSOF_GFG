@@ -8,7 +8,6 @@ import view.browserPanels.BrowseStoreProductsDiscP;
 import view.miniPanels.StoreProductDiscMiniP;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.util.List;
 
@@ -61,11 +60,7 @@ public class StoreProductDiscMiniC implements Controller {
             if (onlyOnce) {
                 frame.changeVisibleCard("MANAGER_DISCOUNTS");
             } else {
-                try {
-                    browserPanel.paintEverything();
-                } catch (BadLocationException ex) {
-                    throw new RuntimeException(ex);
-                }
+                browserController.refreshCurrentPage();
                 browserController.initializeActionsForMiniPanels();
             }
         });

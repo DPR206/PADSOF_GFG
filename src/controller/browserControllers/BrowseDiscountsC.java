@@ -32,17 +32,36 @@ public class BrowseDiscountsC extends AbstractBrowserC<Discount> {
         super(frame, view, model);
         this.parentView = parentView;
         super.initializeActions();
-        initializeActionsForMiniPanels();
+    }
+
+    @Override
+    public void refreshData() {
+        try {
+            super.getView().setItemList(parentView.getBrowseDiscountsP().getItemList());
+            super.getView().setCurrentPageNum(1);
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            super.getView().setItemList(parentView.getBrowseDiscountsP().getItemList());
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
-        try {
-            super.getView().setItemList(parentView.getBrowseDiscountsP().getItemList());
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
-
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new DiscountDiscMiniC(super.getFrame(), super.getModel(), (DiscountMiniP) miniPanel, this,
                     (BrowseDiscountsP) super.getView());

@@ -9,12 +9,21 @@ import java.io.Serial;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse discounts p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseDiscountsP extends AbstractBrowserP<Discount> {
     @Serial
     private static final long serialVersionUID = 1L;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
+    /**
+     * Instantiates a new Browse discounts p.
+     * @throws BadLocationException the bad location exception
+     */
     public BrowseDiscountsP() throws BadLocationException {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

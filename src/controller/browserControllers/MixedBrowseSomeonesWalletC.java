@@ -30,18 +30,38 @@ public class MixedBrowseSomeonesWalletC extends AbstractBrowserC<SecondHandProdu
     public MixedBrowseSomeonesWalletC(App frame, Store model, BrowseSomeonesWalletP view) throws BadLocationException {
         super(frame, view, model);
         super.initializeActions();
-        initializeActionsForMiniPanels();
+    }
+
+    @Override
+    public void refreshData() {
+        BrowseSomeonesWalletP view = (BrowseSomeonesWalletP) super.getView();
+        try {
+            view.setItemList(((RegisteredClient) view.getOwner()).getWallet().getAvailableProducts());
+            super.getView().setCurrentPageNum(1);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            BrowseSomeonesWalletP view = (BrowseSomeonesWalletP) super.getView();
+            view.setItemList(((RegisteredClient) view.getOwner()).getWallet().getAvailableProducts());
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
-        BrowseSomeonesWalletP view = (BrowseSomeonesWalletP) super.getView();
-        try {
-            view.setItemList(((RegisteredClient) view.getOwner()).getWallet().getAvailableProducts());
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new SecondHandAddToOfferMiniC(super.getFrame(), (SecondHandMiniP) miniPanel, this, super.getView());
         }

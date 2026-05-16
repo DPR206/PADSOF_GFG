@@ -32,17 +32,36 @@ public class BrowsePacksDiscC extends AbstractBrowserC<Pack> {
         super(frame, view, model);
         this.parentView = parentView;
         super.initializeActions();
-        initializeActionsForMiniPanels();
+    }
+
+    @Override
+    public void refreshData() {
+        try {
+            super.getView().setItemList(Store.getInstance().getPacks());
+            super.getView().setCurrentPageNum(1);
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            super.getView().setItemList(Store.getInstance().getPacks());
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
-        try {
-            super.getView().setItemList(Store.getInstance().getPacks());
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
-
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new PackDiscMiniC(super.getFrame(), (PackDiscMiniP) miniPanel, this, (BrowsePacksDiscP) super.getView(),
                     parentView.getSelectedPacksList());

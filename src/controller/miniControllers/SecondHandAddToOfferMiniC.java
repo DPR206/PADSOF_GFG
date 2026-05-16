@@ -10,7 +10,6 @@ import view.clientPanels.SecondHandOthersP;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -88,11 +87,8 @@ public class SecondHandAddToOfferMiniC implements Controller {
             JOptionPane.showMessageDialog(frame,
                     view.getSecondHandProduct().getName() + " was " + "added to " + "the Offer", "Added To Offer",
                     JOptionPane.INFORMATION_MESSAGE);
-            try {
-                abstractBrowserP.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
+
+            abstractBrowserC.refreshCurrentPage();
             abstractBrowserC.initializeActionsForMiniPanels();
         });
     }

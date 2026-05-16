@@ -55,6 +55,10 @@ public class SignupP extends JPanel {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
+    /**
+     * Paint everything.
+     */
     public void paintEverything() {
         this.removeAll();
         westPanel.removeAll();
@@ -207,6 +211,9 @@ public class SignupP extends JPanel {
         this.repaint();
     }
 
+    /**
+     * Toggle shown password.
+     */
     public void toggleShownPassword() {
         if (this.shownPassword) {
             firstShowPassword.setText("\uD83D\uDD12");
@@ -236,6 +243,10 @@ public class SignupP extends JPanel {
         return new String(hiddenPassword1.getPassword());
     }
 
+    /**
+     * It gets the first show password
+     * @return the first show password
+     */
     public JButton getFirstShowPassword() {
         return firstShowPassword;
     }
@@ -283,6 +294,10 @@ public class SignupP extends JPanel {
         return textArea;
     }
 
+    /**
+     * It gets the login btn
+     * @return the login btn
+     */
     public JButton getLoginBtn() {
         return loginBtn;
     }
@@ -298,6 +313,10 @@ public class SignupP extends JPanel {
         return new String(hiddenPassword2.getPassword());
     }
 
+    /**
+     * It gets the second show password
+     * @return the second show password
+     */
     public JButton getSecondShowPassword() {
         return secondShowPassword;
     }

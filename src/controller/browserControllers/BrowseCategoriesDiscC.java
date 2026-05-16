@@ -32,17 +32,36 @@ public class BrowseCategoriesDiscC extends AbstractBrowserC<Category> {
         super(frame, view, model);
         this.parentView = parentView;
         super.initializeActions();
-        initializeActionsForMiniPanels();
+    }
+
+    @Override
+    public void refreshData() {
+        try {
+            super.getView().setItemList(Store.getInstance().getCategoryList());
+            super.getView().setCurrentPageNum(1);
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            super.getView().setItemList(Store.getInstance().getCategoryList());
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
-        try {
-            super.getView().setItemList(Store.getInstance().getCategoryList());
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
-
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new CategoryDiscMiniC(super.getFrame(), (CategoryDiscMiniP) miniPanel, this,
                     (BrowseCategoriesDiscP) super.getView(), parentView.getSelectedCategoriesList());

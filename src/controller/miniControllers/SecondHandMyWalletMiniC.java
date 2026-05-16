@@ -13,7 +13,6 @@ import view.clientPanels.SecondHandOwnerP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -128,11 +127,7 @@ public class SecondHandMyWalletMiniC implements Controller {
     }
 
     private void updateInterface() {
-        try {
-            abstractBrowserP.paintEverything();
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
+        abstractBrowserC.refreshCurrentPage();
         abstractBrowserC.initializeActionsForMiniPanels();
     }
 }

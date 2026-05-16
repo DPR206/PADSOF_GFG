@@ -32,11 +32,10 @@ public class MixedBrowseCartC extends AbstractMixedBrowserC<Pack, StoreProduct> 
     public MixedBrowseCartC(App frame, Store model, MixedBrowseCartP view) throws BadLocationException {
         super(frame, view, model);
         super.initializeActions();
-        initializeActionsForMiniPanels();
     }
 
     @Override
-    public void initializeActionsForMiniPanels() {
+    public void refreshData() {
         if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
             ((MixedBrowseCartP) super.getView()).setCart(((RegisteredClient) super.getFrame().getUser()).getC());
         } else if (super.getFrame().getUser().getType() == UserType.UNREGISTERED_CLIENT) {
@@ -56,13 +55,52 @@ public class MixedBrowseCartC extends AbstractMixedBrowserC<Pack, StoreProduct> 
                 super.getView().setFirstItemList(new ArrayList<>());
                 super.getView().setSecondItemList(new ArrayList<>());
             }
+            super.getView().setCurrentPageNum(1);
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }
+    }
 
+    @Override
+    public void refreshCurrentPage() {
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
+                ((MixedBrowseCartP) super.getView()).setCart(((RegisteredClient) super.getFrame().getUser()).getC());
+            } else if (super.getFrame().getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+                ((MixedBrowseCartP) super.getView()).setCart(
+                        ((UnregisteredClient) super.getFrame().getUser()).getCart());
+            }
+
+            if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
+                super.getView().setFirstItemList(((RegisteredClient) super.getFrame().getUser()).getC().getPacks());
+                super.getView().setSecondItemList(((RegisteredClient) super.getFrame().getUser()).getC().getProducts());
+            } else if (super.getFrame().getUser().getType() == UserType.UNREGISTERED_CLIENT) {
+                super.getView()
+                     .setFirstItemList(((UnregisteredClient) super.getFrame().getUser()).getCart().getPacks());
+                super.getView()
+                     .setSecondItemList(((UnregisteredClient) super.getFrame().getUser()).getCart().getProducts());
+            } else {
+                super.getView().setFirstItemList(new ArrayList<>());
+                super.getView().setSecondItemList(new ArrayList<>());
+            }
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void initializeActionsForMiniPanels() {
         for (AbstractMiniP miniPanel : super.getView().getFirstMiniPanels()) {
             new PackCartMiniC(super.getFrame(), super.getModel(), (PackCartMiniP) miniPanel);
         }
+
         for (AbstractMiniP miniPanel : super.getView().getSecondMiniPanels()) {
             new StoreProductCartMiniC(super.getFrame(), super.getModel(), (StoreProductMiniCart) miniPanel);
         }

@@ -116,7 +116,6 @@ public class BannerRegisteredC implements Controller {
     private void abrirCarritoDelCliente() throws BadLocationException {
 
         CarritoP carritoVista = new CarritoP();
-        System.out.println("Check........");
         new CarritoC(carritoVista, frame);
         new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
 

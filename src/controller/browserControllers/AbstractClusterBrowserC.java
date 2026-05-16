@@ -6,6 +6,8 @@ import view.App;
 import view.browserPanels.AbstractClusterBrowserP;
 
 import javax.swing.text.BadLocationException;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * It defines a controller for a cluster browser
@@ -30,7 +32,24 @@ public abstract class AbstractClusterBrowserC<G> implements Controller {
         this.frame = frame;
         this.view = view;
         this.model = model;
+        view.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                refreshData();
+                initializeActionsForMiniPanels();
+            }
+        });
     }
+
+    /**
+     * Refresh current page.
+     */
+    public abstract void refreshCurrentPage();
+
+    /**
+     * Refresh data.
+     */
+    public abstract void refreshData();
 
     @Override
     public void initializeActions() {

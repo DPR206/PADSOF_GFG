@@ -74,6 +74,11 @@ public class LoginP extends JPanel {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * It gets the login
+     * @return the login
+     */
     public JButton getLogin() {
         return login;
     }
@@ -84,10 +89,6 @@ public class LoginP extends JPanel {
      */
     public String getPassword() {
         return new String(password.getPassword());
-    }
-
-    public JPasswordField getPasswordField() {
-        return password;
     }
 
     /**

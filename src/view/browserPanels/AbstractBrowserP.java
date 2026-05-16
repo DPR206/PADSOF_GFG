@@ -12,6 +12,8 @@ import java.util.List;
 /**
  * The type Browser panel.
  * @param <G> the type parameter
+ * @author Ana O.R.
+ * @version 1.0
  */
 public abstract class AbstractBrowserP<G> extends JPanel {
     private final JButton firstPage = new JButton("<< First Page");
@@ -56,22 +58,6 @@ public abstract class AbstractBrowserP<G> extends JPanel {
     }
 
     /**
-     * Add all mini panels.
-     * @throws BadLocationException the bad location exception
-     */
-    public void addAllClusterMiniPanels(int clusterSize) throws BadLocationException {
-        miniPanels.clear();
-
-        List<G> currentItemList = pager.pageItemListCluster(itemList, currentPageNum, clusterSize);
-
-        int index = 1;
-        for (G item : currentItemList) {
-            addMiniPanel(item, index);
-            index++;
-        }
-    }
-
-    /**
      * Add mini panel.
      * @param item  the item
      * @param index the index
@@ -106,10 +92,18 @@ public abstract class AbstractBrowserP<G> extends JPanel {
         paintEverything();
     }
 
+    /**
+     * It gets the first page
+     * @return the first page
+     */
     public JButton getFirstPage() {
         return firstPage;
     }
 
+    /**
+     * It gets the item list
+     * @return the item list
+     */
     public List<G> getItemList() {
         return itemList;
     }
@@ -117,12 +111,16 @@ public abstract class AbstractBrowserP<G> extends JPanel {
     /**
      * Sets item list.
      * @param newItemList the new item list
+     * @throws BadLocationException the bad location exception
      */
     public void setItemList(List<G> newItemList) throws BadLocationException {
         this.itemList = newItemList;
-        this.paintEverything();
     }
 
+    /**
+     * It gets the last page
+     * @return the last page
+     */
     public JButton getLastPage() {
         return lastPage;
     }
@@ -151,6 +149,10 @@ public abstract class AbstractBrowserP<G> extends JPanel {
         this.miniPanels = newMiniPanels;
     }
 
+    /**
+     * It gets the next page
+     * @return the next page
+     */
     public JButton getNextPage() {
         return nextPage;
     }
@@ -188,25 +190,5 @@ public abstract class AbstractBrowserP<G> extends JPanel {
      */
     public JButton getPreviousPage() {
         return previousPage;
-    }
-
-    @Override
-    public void setVisible(boolean aFlag) {
-        if (aFlag != isVisible()) {
-            super.setVisible(aFlag);
-            if (aFlag) {
-                Container parent = getParent();
-                if (parent != null) {
-                    Rectangle r = getBounds();
-                    parent.repaint(r.x, r.y, r.width, r.height);
-                }
-                revalidate();
-                try {
-                    setCurrentPageNum(1);
-                } catch (BadLocationException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
     }
 }

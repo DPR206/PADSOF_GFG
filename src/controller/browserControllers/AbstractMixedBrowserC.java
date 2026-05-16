@@ -6,6 +6,8 @@ import view.App;
 import view.browserPanels.AbstractMixedBrowserP;
 
 import javax.swing.text.BadLocationException;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * It defines a controller for a mixed browser
@@ -31,7 +33,24 @@ public abstract class AbstractMixedBrowserC<G, U> implements Controller {
         this.frame = frame;
         this.view = view;
         this.model = model;
+        view.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                refreshData();
+                initializeActionsForMiniPanels();
+            }
+        });
     }
+
+    /**
+     * Refresh data.
+     */
+    public abstract void refreshData();
+
+    /**
+     * Refresh current page.
+     */
+    public abstract void refreshCurrentPage();
 
     @Override
     public void initializeActions() {

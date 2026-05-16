@@ -8,7 +8,6 @@ import view.browserPanels.BrowsePacksDiscP;
 import view.miniPanels.PackDiscMiniP;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.util.List;
 
@@ -54,11 +53,8 @@ public class PackDiscMiniC implements Controller {
             alreadyChosenPacks.remove(view.getPack());
             JOptionPane.showMessageDialog(frame, "Pack: " + view.getPack().getId() + " was added to the discount",
                     "Added To Discount", JOptionPane.INFORMATION_MESSAGE);
-            try {
-                browserPanel.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
+            
+            browserController.refreshCurrentPage();
             browserController.initializeActionsForMiniPanels();
         });
     }

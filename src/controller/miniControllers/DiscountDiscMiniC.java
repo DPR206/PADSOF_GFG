@@ -97,11 +97,7 @@ public class DiscountDiscMiniC implements Controller {
                     "Discount: " + view.getDiscount().getId() + " was deleted from the store", "Delete Discount",
                     JOptionPane.INFORMATION_MESSAGE);
 
-            try {
-                browserPanel.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
+            browserController.refreshCurrentPage();
             browserController.initializeActionsForMiniPanels();
 
         });

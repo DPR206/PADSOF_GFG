@@ -44,21 +44,13 @@ public class SignupC extends MainLoopSelector {
         });
 
         /* Sign up button */
-        view.getSignup().addActionListener(e -> {
-            signUp();
-        });
+        view.getSignup().addActionListener(e -> signUp());
 
-        view.getFirstShowPassword().addActionListener(e -> {
-            view.toggleShownPassword();
-        });
+        view.getFirstShowPassword().addActionListener(e -> view.toggleShownPassword());
 
-        view.getSecondShowPassword().addActionListener(e -> {
-            view.toggleShownPassword();
-        });
+        view.getSecondShowPassword().addActionListener(e -> view.toggleShownPassword());
 
-        view.getLoginBtn().addActionListener(e -> {
-            super.getFrame().changeVisibleCard("LOGIN");
-        });
+        view.getLoginBtn().addActionListener(e -> super.getFrame().changeVisibleCard("LOGIN"));
     }
 
     /**

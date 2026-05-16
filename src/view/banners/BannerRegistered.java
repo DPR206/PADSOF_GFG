@@ -2,17 +2,24 @@ package view.banners;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
+/**
+ * The type Banner registered.
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class BannerRegistered extends JPanel {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private final JButton btnGoBack;
-    private JButton home;
-    private JButton cartera;
-    private JButton btnCarrito;
-    private JButton btnPerfil;
-    private JButton btnNots;
-    private JButton btnExit;
+    private final JButton home;
+    private final JButton cartera;
+    private final JButton btnCarrito;
+    private final JButton btnPerfil;
+    private final JButton btnNots;
+    private final JButton btnExit;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -146,6 +153,7 @@ public class BannerRegistered extends JPanel {
     }
 
     /**
+     * It gets the btn carrito
      * @return the btnCarrito
      */
     public JButton getBtnCarrito() {
@@ -153,17 +161,23 @@ public class BannerRegistered extends JPanel {
     }
 
     /**
+     * It gets the btn exit
      * @return the btnExit
      */
     public JButton getBtnExit() {
         return btnExit;
     }
 
+    /**
+     * It gets the btn go back
+     * @return the btn go back
+     */
     public JButton getBtnGoBack() {
         return btnGoBack;
     }
 
     /**
+     * It gets the btn nots
      * @return the btnNots
      */
     public JButton getBtnNots() {
@@ -171,6 +185,7 @@ public class BannerRegistered extends JPanel {
     }
 
     /**
+     * It gets the btn perfil
      * @return the btnPerfil
      */
     public JButton getBtnPerfil() {
@@ -178,6 +193,7 @@ public class BannerRegistered extends JPanel {
     }
 
     /**
+     * It gets the cartera
      * @return the cartera
      */
     public JButton getCartera() {
@@ -185,6 +201,7 @@ public class BannerRegistered extends JPanel {
     }
 
     /**
+     * It gets the home
      * @return the home
      */
     public JButton getHome() {

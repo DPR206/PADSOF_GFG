@@ -9,6 +9,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Abstract cluster browser p.
+ * @param <G> the type parameter
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public abstract class AbstractClusterBrowserP<G> extends JPanel {
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
@@ -24,6 +30,7 @@ public abstract class AbstractClusterBrowserP<G> extends JPanel {
 
     /**
      * Instantiates a new Browser panel.
+     * @param clusterSize the cluster size
      */
     public AbstractClusterBrowserP(int clusterSize) {
         currentPageNum = 1;
@@ -88,23 +95,18 @@ public abstract class AbstractClusterBrowserP<G> extends JPanel {
         paintEverything();
     }
 
+    /**
+     * It gets the first page
+     * @return the first page
+     */
     public JButton getFirstPage() {
         return firstPage;
     }
 
-    public List<G> getItemList() {
-        return itemList;
-    }
-
     /**
-     * Sets item list.
-     * @param newItemList the new item list
+     * It gets the last page
+     * @return the last page
      */
-    public void setItemList(List<G> newItemList) throws BadLocationException {
-        this.itemList = newItemList;
-        this.paintEverything();
-    }
-
     public JButton getLastPage() {
         return lastPage;
     }
@@ -133,6 +135,10 @@ public abstract class AbstractClusterBrowserP<G> extends JPanel {
         this.miniPanels = newMiniPanels;
     }
 
+    /**
+     * It gets the next page
+     * @return the next page
+     */
     public JButton getNextPage() {
         return nextPage;
     }
@@ -171,23 +177,12 @@ public abstract class AbstractClusterBrowserP<G> extends JPanel {
         return previousPage;
     }
 
-    @Override
-    public void setVisible(boolean aFlag) {
-        if (aFlag != isVisible()) {
-            super.setVisible(aFlag);
-            if (aFlag) {
-                Container parent = getParent();
-                if (parent != null) {
-                    Rectangle r = getBounds();
-                    parent.repaint(r.x, r.y, r.width, r.height);
-                }
-                revalidate();
-                try {
-                    setCurrentPageNum(1);
-                } catch (BadLocationException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+    /**
+     * Sets item list.
+     * @param newItemList the new item list
+     * @throws BadLocationException the bad location exception
+     */
+    public void setItemList(List<G> newItemList) throws BadLocationException {
+        this.itemList = newItemList;
     }
 }

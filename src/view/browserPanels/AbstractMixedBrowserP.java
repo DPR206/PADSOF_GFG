@@ -1,12 +1,12 @@
 package view.browserPanels;
 
-import model.store.BetterPager;
 import model.store.Parameter;
 import view.miniPanels.AbstractMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +14,21 @@ import java.util.List;
  * The type Mixed browser panel.
  * @param <G> the type parameter
  * @param <U> the type parameter
+ * @author Ana O.R.
+ * @version 1.0
  */
 public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
+    @Serial
     private static final long serialVersionUID = 1L;
     private final JButton firstPage = new JButton("<< First Page");
     private final JButton previousPage = new JButton("< Previous Page");
     private final JButton nextPage = new JButton("Next Page >");
     private final JButton lastPage = new JButton("Last Page >>");
-    private final BetterPager<G> firstPager = new BetterPager<>();
-    private final BetterPager<U> secondPager = new BetterPager<>();
     private final List<AbstractMiniP> firstMiniPanels = new ArrayList<>();
     private final List<AbstractMiniP> secondMiniPanels = new ArrayList<>();
+    /**
+     * The Container items.
+     */
     protected JPanel containerItems;
     private int currentPageNum;
     private List<G> firstItemList = new ArrayList<>();
@@ -114,6 +118,9 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
         this.containerItems.add(newMiniPanel);
     }
 
+    /**
+     * Clear items' container.
+     */
     protected void clearItemsContainer() {
         this.containerItems.removeAll();
     }
@@ -137,15 +144,6 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
         paintEverything();
     }
 
-    public List<G> getFirstItemList() {
-        return firstItemList;
-    }
-
-    public void setFirstItemList(List<G> newFirstItemList) throws BadLocationException {
-        this.firstItemList = newFirstItemList;
-        this.paintEverything();
-    }
-
     /**
      * Gets mini panels.
      * @return the mini panels
@@ -154,14 +152,18 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
         return firstMiniPanels;
     }
 
+    /**
+     * It gets the first page
+     * @return the first page
+     */
     public JButton getFirstPage() {
         return firstPage;
     }
 
-    public BetterPager<G> getFirstPager() {
-        return firstPager;
-    }
-
+    /**
+     * It gets the last page
+     * @return the last page
+     */
     public JButton getLastPage() {
         return lastPage;
     }
@@ -183,6 +185,10 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
         return (totalItems / itemsPerPage) + 1;
     }
 
+    /**
+     * It gets the next page
+     * @return the next page
+     */
     public JButton getNextPage() {
         return nextPage;
     }
@@ -206,28 +212,11 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
     }
 
     /**
-     * Gets firstPager.
-     * @return the firstPager
-     */
-    public BetterPager<G> getPager() {
-        return firstPager;
-    }
-
-    /**
      * Gets previous page.
      * @return the previous page
      */
     public JButton getPreviousPage() {
         return previousPage;
-    }
-
-    public List<U> getSecondItemList() {
-        return secondItemList;
-    }
-
-    public void setSecondItemList(List<U> newSecondItemList) throws BadLocationException {
-        this.secondItemList = newSecondItemList;
-        this.paintEverything();
     }
 
     /**
@@ -238,27 +227,21 @@ public abstract class AbstractMixedBrowserP<G, U> extends JPanel {
         return secondMiniPanels;
     }
 
-    public BetterPager<U> getSecondPager() {
-        return secondPager;
+    /**
+     * It sets the first item list
+     * @param newFirstItemList the new first item list
+     * @throws BadLocationException the bad location exception
+     */
+    public void setFirstItemList(List<G> newFirstItemList) throws BadLocationException {
+        this.firstItemList = newFirstItemList;
     }
 
-    @Override
-    public void setVisible(boolean aFlag) {
-        if (aFlag != isVisible()) {
-            super.setVisible(aFlag);
-            if (aFlag) {
-                Container parent = getParent();
-                if (parent != null) {
-                    Rectangle r = getBounds();
-                    parent.repaint(r.x, r.y, r.width, r.height);
-                }
-                revalidate();
-                try {
-                    setCurrentPageNum(1);
-                } catch (BadLocationException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+    /**
+     * It sets the second item list
+     * @param newSecondItemList the new second item list
+     * @throws BadLocationException the bad location exception
+     */
+    public void setSecondItemList(List<U> newSecondItemList) throws BadLocationException {
+        this.secondItemList = newSecondItemList;
     }
 }

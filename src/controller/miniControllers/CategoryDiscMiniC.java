@@ -54,11 +54,7 @@ public class CategoryDiscMiniC implements Controller {
             alreadyChosenCategories.add(view.getCategory());
             JOptionPane.showMessageDialog(frame, view.getCategory() + " was added to the discount", "Added To Discount",
                     JOptionPane.INFORMATION_MESSAGE);
-            try {
-                browserPanel.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
+            browserController.refreshCurrentPage();
             browserController.initializeActionsForMiniPanels();
         });
     }

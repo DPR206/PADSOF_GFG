@@ -6,6 +6,8 @@ import view.App;
 import view.browserPanels.AbstractBrowserP;
 
 import javax.swing.text.BadLocationException;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * It defines a controller for a browser
@@ -30,7 +32,19 @@ public abstract class AbstractBrowserC<G> implements Controller {
         this.frame = frame;
         this.view = view;
         this.model = model;
+        view.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                refreshData();
+                initializeActionsForMiniPanels();
+            }
+        });
     }
+
+    /**
+     * Refresh data.
+     */
+    public abstract void refreshData();
 
     @Override
     public void initializeActions() {
@@ -77,6 +91,11 @@ public abstract class AbstractBrowserC<G> implements Controller {
      * Initialize actions for mini panels.
      */
     public abstract void initializeActionsForMiniPanels();
+
+    /**
+     * Refresh current page.
+     */
+    public abstract void refreshCurrentPage();
 
     /**
      * It gets the frame

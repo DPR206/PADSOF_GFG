@@ -6,6 +6,8 @@ import javax.swing.text.BadLocationException;
 
 import controller.Controller;
 import controller.managerControllers.ManageComicC;
+import controller.managerControllers.ManageFigurineC;
+import controller.managerControllers.ManageGameC;
 import model.product.Comic;
 import model.product.Figurine;
 import model.product.Game;
@@ -56,19 +58,19 @@ public class BrowseStoreProductC implements Controller{
 				if(miniSp.getStoreProduct() instanceof Comic) {
 					this.manageComic = new ManagerIndividualComicP();
 					new ManageComicC(miniSp, this.manageComic);
-					this.frame.addCard(panel, "MANAGE COMIC");
+					this.frame.addCard(this.manageComic, "MANAGE COMIC");
 					this.frame.changeVisibleCard("MANAGE COMIC");
 				}
 				else if(miniSp.getStoreProduct() instanceof Figurine) {
 					this.manageFigurine = new  ManageIndividualFiguraP();
 					new ManageFigurineC(miniSp, this.manageFigurine);
-					this.frame.addCard(panel, "MANAGE FIGURINE");
+					this.frame.addCard(this.manageFigurine, "MANAGE FIGURINE");
 					this.frame.changeVisibleCard("MANAGE FIGURINE");
 				}
 				else if(miniSp.getStoreProduct() instanceof Game) {
 					this.manageGame = new ManagerIndividualGameP();
 					new ManageGameC(miniSp, this.manageGame);
-					this.frame.addCard(panel, "MANAGE GAME");
+					this.frame.addCard(this.manageGame, "MANAGE GAME");
 					this.frame.changeVisibleCard("MANAGE GAME");
 				}
 			});

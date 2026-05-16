@@ -93,8 +93,8 @@ public class ManagerDiscountsP extends JPanel {
 
         /* Init panels */
         browseDiscountsP = new BrowseDiscountsP();
-        browseStoreProductsDiscP = new BrowseStoreProductsDiscP(selectedProductsList);
-        browseStoreProductsDiscPForGift = new BrowseStoreProductsDiscP(selectedProductsList);
+        browseStoreProductsDiscP = new BrowseStoreProductsDiscP(selectedProductsList, "Add to discount");
+        browseStoreProductsDiscPForGift = new BrowseStoreProductsDiscP(selectedProductsList, "Choose this gift");
         browsePacksDiscP = new BrowsePacksDiscP(selectedPacksList);
         browseCategoriesDiscP = new BrowseCategoriesDiscP(selectedCategoriesList);
 

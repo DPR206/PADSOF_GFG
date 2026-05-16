@@ -412,8 +412,17 @@ public class Store implements Serializable {
                     if (storeProducts.size() >= 5) composedPack3.addProduct(storeProducts.get(4));
                 }
             }
-        
-            
+
+            if (!Store.getInstance().isCategoryInStore("Juego")) {
+                new Category("Juego");
+            }
+            if (!Store.getInstance().isCategoryInStore("Figurita")) {
+                new Category("Figurita");
+            }
+            if (!Store.getInstance().isCategoryInStore("Comic")) {
+                new Category("Comic");
+            }
+
             Store.getInstance().addUser(Manager.getInstance());
         } catch (IOException | ClassNotFoundException exception) {
             throw new IOException(exception.getMessage());

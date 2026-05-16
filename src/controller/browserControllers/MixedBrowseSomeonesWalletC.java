@@ -43,8 +43,7 @@ public class MixedBrowseSomeonesWalletC extends AbstractBrowserC<SecondHandProdu
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
-                    super.getView());
+            new SecondHandAddToOfferMiniC(super.getFrame(), (SecondHandMiniP) miniPanel, this, super.getView());
         }
     }
 }

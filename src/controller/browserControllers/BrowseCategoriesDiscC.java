@@ -44,7 +44,7 @@ public class BrowseCategoriesDiscC extends AbstractBrowserC<Category> {
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new CategoryDiscMiniC(super.getFrame(), super.getModel(), (CategoryDiscMiniP) miniPanel, this,
+            new CategoryDiscMiniC(super.getFrame(), (CategoryDiscMiniP) miniPanel, this,
                     (BrowseCategoriesDiscP) super.getView(), parentView.getSelectedCategoriesList());
         }
     }

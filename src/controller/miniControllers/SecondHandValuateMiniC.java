@@ -2,11 +2,8 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.maxiPanels.MaxiValuateSecondHandC;
-import controller.browserControllers.AbstractBrowserC;
-import model.product.SecondHandProduct;
 import model.store.Store;
 import view.App;
-import view.browserPanels.AbstractBrowserP;
 import view.maxiPanels.MaxiValuateSecondHandP;
 import view.miniPanels.SecondHandMiniP;
 
@@ -15,30 +12,28 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Second hand valuate mini c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class SecondHandValuateMiniC implements Controller {
-    private final SecondHandMiniP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
-    private final AbstractBrowserC<SecondHandProduct> abstractBrowserC;
-    private final AbstractBrowserP<SecondHandProduct> abstractBrowserP;
+    private final SecondHandMiniP view;
+    private final App frame;
+    private final Store model;
+
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This controller's constructor
-     * @param frame             the controller's frame
-     * @param model             the controller's model
-     * @param view
-     * @param abstractBrowserC
-     * @param abstractBrowserP
+     * @param frame the controller's frame
+     * @param model the controller's model
+     * @param view  the view
      */
-    public SecondHandValuateMiniC(App frame, Store model, SecondHandMiniP view,
-                                  AbstractBrowserC<SecondHandProduct> abstractBrowserC,
-                                  AbstractBrowserP<SecondHandProduct> abstractBrowserP) {
+    public SecondHandValuateMiniC(App frame, Store model, SecondHandMiniP view) {
         this.frame = frame;
         this.view = view;
         this.model = model;
-        this.abstractBrowserC = abstractBrowserC;
-        this.abstractBrowserP = abstractBrowserP;
 
         initializeActions();
     }
@@ -52,12 +47,6 @@ public class SecondHandValuateMiniC implements Controller {
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }
-//        try {
-//            browserPanel.paintEverything();
-//        } catch (BadLocationException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//        browserController.initializeActionsForMiniPanels();
     }
 
     @Override
@@ -86,8 +75,6 @@ public class SecondHandValuateMiniC implements Controller {
             }
         });
 
-        view.getButton().addActionListener(e -> {
-            seeProduct();
-        });
+        view.getButton().addActionListener(e -> seeProduct());
     }
 }

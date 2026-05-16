@@ -44,8 +44,8 @@ public class BrowsePacksDiscC extends AbstractBrowserC<Pack> {
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new PackDiscMiniC(super.getFrame(), super.getModel(), (PackDiscMiniP) miniPanel, this,
-                    (BrowsePacksDiscP) super.getView(), parentView.getSelectedPacksList());
+            new PackDiscMiniC(super.getFrame(), (PackDiscMiniP) miniPanel, this, (BrowsePacksDiscP) super.getView(),
+                    parentView.getSelectedPacksList());
         }
     }
 }

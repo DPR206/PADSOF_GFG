@@ -4,7 +4,6 @@ import controller.Controller;
 import controller.browserControllers.AbstractBrowserC;
 import controller.clientControllers.*;
 import model.product.*;
-import model.store.Store;
 import model.user.*;
 import view.App;
 import view.browserPanels.AbstractBrowserP;
@@ -17,10 +16,14 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Store product mini c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class StoreProductMiniC implements Controller {
-    private final StoreProductMiniP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final StoreProductMiniP view;
+    private final App frame;
     private final AbstractBrowserC<StoreProduct> browserController;
     private final AbstractBrowserP<StoreProduct> browserPanel;
 
@@ -28,15 +31,15 @@ public class StoreProductMiniC implements Controller {
 
     /**
      * This controller's constructor
-     * @param frame the controller's frame
-     * @param model the controller's model
+     * @param frame             the controller's frame
+     * @param view              the view
+     * @param browserController the browser controller
+     * @param browserPanel      the browser panel
      */
-    public StoreProductMiniC(App frame, Store model, StoreProductMiniP view,
-                             AbstractBrowserC<StoreProduct> browserController,
+    public StoreProductMiniC(App frame, StoreProductMiniP view, AbstractBrowserC<StoreProduct> browserController,
                              AbstractBrowserP<StoreProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
-        this.model = model;
         this.browserController = browserController;
         this.browserPanel = browserPanel;
 

@@ -1,39 +1,47 @@
 package controller.managerControllers;
 
-import javax.swing.JButton;
-
 import controller.Controller;
 import view.App;
-import view.managerPanels.ManagerCreateComposedPackP;
-import view.managerPanels.ManagerCreatePackP;
-import view.managerPanels.ManagerCreateSimplePack;
+import view.managerPanels.*;
 
-public class ManageCreatePackC implements Controller{
-	private ManagerCreatePackP panel;
-	private ManagerCreateSimplePack sp;
-	private ManagerCreateComposedPackP pp;
-	private App frame;
-	
-	public ManageCreatePackC(ManagerCreatePackP panel, App frame) {
-		this.panel = panel;
-		this.frame = frame;
-		initializeActions();
-	}
+/**
+ * The type Manage create pack c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
+public class ManageCreatePackC implements Controller {
+    private final ManagerCreatePackP panel;
+    private final App frame;
+    private ManagerCreateSimplePack sp;
+    private ManagerCreateComposedPackP pp;
 
-	@Override
-	public void initializeActions() {
-		this.panel.getSimplePackButton().addActionListener(e->{
-			sp = new ManagerCreateSimplePack();
-			new ManagerCreateSimplePackC(sp, this.frame);
-			this.frame.addCard(sp, "CREATING SIMPLE PACK");
-			this.frame.changeVisibleCard("CREATING SIMPLE PACK");
-		});
-		
-		this.panel.getComposedPackButton().addActionListener(e->{
-			pp = new ManagerCreateComposedPackP();
-			new ManagerCreateComposedPackC(pp, this.frame);
-			this.frame.addCard(pp, "CREATING COMPOSED PACK");
-			this.frame.changeVisibleCard("CREATING COMPOSED PACK");
-		});
-	}
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manage create pack c.
+     * @param panel the panel
+     * @param frame the frame
+     */
+    public ManageCreatePackC(ManagerCreatePackP panel, App frame) {
+        this.panel = panel;
+        this.frame = frame;
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
+        this.panel.getSimplePackButton().addActionListener(e -> {
+            sp = new ManagerCreateSimplePack();
+            new ManagerCreateSimplePackC(sp);
+            this.frame.addCard(sp, "CREATING SIMPLE PACK");
+            this.frame.changeVisibleCard("CREATING SIMPLE PACK");
+        });
+
+        this.panel.getComposedPackButton().addActionListener(e -> {
+            pp = new ManagerCreateComposedPackP();
+            new ManagerCreateComposedPackC(pp);
+            this.frame.addCard(pp, "CREATING COMPOSED PACK");
+            this.frame.changeVisibleCard("CREATING COMPOSED PACK");
+        });
+    }
 }

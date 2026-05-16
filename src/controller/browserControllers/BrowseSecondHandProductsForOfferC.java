@@ -45,8 +45,7 @@ public class BrowseSecondHandProductsForOfferC extends AbstractBrowserC<SecondHa
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
-                    super.getView());
+            new SecondHandAddToOfferMiniC(super.getFrame(), (SecondHandMiniP) miniPanel, this, super.getView());
         }
     }
 }

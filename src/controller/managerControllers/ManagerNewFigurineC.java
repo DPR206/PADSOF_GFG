@@ -4,20 +4,27 @@ import controller.Controller;
 import model.product.Category;
 import model.product.Figurine;
 import model.store.Store;
-import view.App;
 import view.managerPanels.ManagerCreateFiguritaP;
 
 import javax.swing.*;
 
+/**
+ * The type Manager new figurine c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class ManagerNewFigurineC implements Controller {
 
-    private ManagerCreateFiguritaP mnc;
-    private App frame;
+    private final ManagerCreateFiguritaP mnc;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public ManagerNewFigurineC(ManagerCreateFiguritaP mnc, App frame) {
+
+    /**
+     * Instantiates a new Manager new figurine c.
+     * @param mnc the mnc
+     */
+    public ManagerNewFigurineC(ManagerCreateFiguritaP mnc) {
         this.mnc = mnc;
-        this.frame = frame;
 
         initializeActions();
     }

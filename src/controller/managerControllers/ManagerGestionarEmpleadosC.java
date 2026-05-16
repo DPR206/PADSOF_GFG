@@ -12,11 +12,22 @@ import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Manager gestionar empleados c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class ManagerGestionarEmpleadosC implements Controller {
-    private App frame;
-    private ManagerGestionarEmpleados gest;
+    private final App frame;
+    private final ManagerGestionarEmpleados gest;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager gestionar empleados c.
+     * @param gest  the gest
+     * @param frame the frame
+     */
     public ManagerGestionarEmpleadosC(ManagerGestionarEmpleados gest, App frame) {
         this.frame = frame;
         this.gest = gest;
@@ -68,15 +79,12 @@ public class ManagerGestionarEmpleadosC implements Controller {
 
             Employee emp = new Employee(password, userName, false, p);
             System.out.println(emp.getId());
-//
-//            Store.getInstance().addEmployee(emp);
 
             try {
                 this.gest.getBrowse().setItemList(Store.getInstance().getEmployeeList());
                 this.gest.getBrowse().paintEverything();
             } catch (BadLocationException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+                throw new RuntimeException(e1);
             }
         });
     }

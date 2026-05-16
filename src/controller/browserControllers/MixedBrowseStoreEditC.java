@@ -44,8 +44,7 @@ public class MixedBrowseStoreEditC extends AbstractMixedBrowserC<Pack, StoreProd
             //new PackMiniC(super.getFrame(), super.getModel(), (PackMiniP) miniPanel, this, super.getView());
         }
         for (AbstractMiniP miniPanel : super.getView().getSecondMiniPanels()) {
-            new StoreProductEditMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
-                    super.getView());
+            new StoreProductEditMiniC(super.getFrame(), (StoreProductMiniP) miniPanel, this, super.getView());
         }
     }
 }

@@ -1,13 +1,17 @@
 package controller.managerControllers;
 
 import controller.Controller;
-import controller.browserControllers.MixedBrowseStoreEditC;
 import model.store.Store;
 import view.App;
 import view.managerPanels.*;
 
 import javax.swing.text.BadLocationException;
 
+/**
+ * The type Manager main c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class ManagerMainC implements Controller {
     private final ManagerMainP view; /* view -> panel */
     private final App frame; /* view -> frame */
@@ -17,6 +21,13 @@ public class ManagerMainC implements Controller {
     private final ManagerNewProduct mnproduct;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager main c.
+     * @param frame the frame
+     * @param model the model
+     * @throws BadLocationException the bad location exception
+     */
     public ManagerMainC(App frame, Store model) throws BadLocationException {
         this.frame = frame;
         this.view = frame.getManagerMainPanel();
@@ -37,14 +48,14 @@ public class ManagerMainC implements Controller {
     @Override
     public void initializeActions() {
         view.getPacks().addActionListener(e -> {
-        	ManagerGestionarPacks m = new ManagerGestionarPacks(frame);
-        	new ManagePacksC(m, this.frame);
+            ManagerGestionarPacks m = new ManagerGestionarPacks(frame);
+            new ManagePacksC(m, this.frame);
             this.frame.addCard(m, "GEST_PACKS");
-            this.frame.changeVisibleCard("GEST_PACKS");      
+            this.frame.changeVisibleCard("GEST_PACKS");
         });
 
         view.getProductoNuevo().addActionListener(e -> {
-        	new ManagerManageProductsC(this.mgproduct, this.frame);
+            new ManagerManageProductsC(this.mgproduct, this.frame);
             this.frame.addCard(this.mgproduct, "NUEVOS_PRODUCTOS");
             this.frame.changeVisibleCard("NUEVOS_PRODUCTOS");
         });
@@ -61,7 +72,7 @@ public class ManagerMainC implements Controller {
 
         view.getEstadisticas().addActionListener(e -> {
             ManagerStatisticsP managerStatisticsP = new ManagerStatisticsP();
-            new ManagerStatisticsC(frame, model, managerStatisticsP);
+            new ManagerStatisticsC(managerStatisticsP);
             this.frame.addCard(managerStatisticsP, "STATISTICS");
             this.frame.changeVisibleCard("STATISTICS");
         });
@@ -79,7 +90,7 @@ public class ManagerMainC implements Controller {
 
         view.getParametros().addActionListener(e -> {
             ManagerParametersP managerParametersP = new ManagerParametersP();
-            new ManagerParametersC(frame, model, managerParametersP);
+            new ManagerParametersC(frame, managerParametersP);
             this.frame.addCard(managerParametersP, "MANAGER_PARAMETERS");
             this.frame.changeVisibleCard("MANAGER_PARAMETERS");
         });

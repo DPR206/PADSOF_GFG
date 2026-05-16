@@ -3,20 +3,27 @@ package controller.managerControllers;
 import controller.Controller;
 import model.product.*;
 import model.store.Store;
-import view.App;
 import view.managerPanels.ManagerCreateGameP;
 
 import javax.swing.*;
 
+/**
+ * The type Manager new game c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class ManagerNewGameC implements Controller {
 
-    private ManagerCreateGameP mnc;
-    private App frame;
+    private final ManagerCreateGameP mnc;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public ManagerNewGameC(ManagerCreateGameP mnc, App frame) {
+
+    /**
+     * Instantiates a new Manager new game c.
+     * @param mnc the mnc
+     */
+    public ManagerNewGameC(ManagerCreateGameP mnc) {
         this.mnc = mnc;
-        this.frame = frame;
 
         initializeActions();
     }

@@ -42,8 +42,7 @@ public class BrowseValuationProductsC extends AbstractBrowserC<SecondHandProduct
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new SecondHandValuateMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel, this,
-                    super.getView());
+            new SecondHandValuateMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel);
         }
     }
 }

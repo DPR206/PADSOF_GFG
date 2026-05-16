@@ -2,22 +2,26 @@ package controller.managerControllers;
 
 import controller.Controller;
 import model.store.Statistics;
-import model.store.Store;
-import view.App;
 import view.managerPanels.ManagerStatisticsP;
 
 import javax.swing.*;
 import java.time.Month;
 
+/**
+ * The type Manager statistics c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class ManagerStatisticsC implements Controller {
-    private final ManagerStatisticsP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final ManagerStatisticsP view;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public ManagerStatisticsC(App frame, Store model, ManagerStatisticsP view) {
-        this.frame = frame;
-        this.model = model;
+
+    /**
+     * Instantiates a new Manager statistics c.
+     * @param view the view
+     */
+    public ManagerStatisticsC(ManagerStatisticsP view) {
         this.view = view;
 
         initializeActions();

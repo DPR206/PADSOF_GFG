@@ -5,7 +5,6 @@ import controller.browserControllers.AbstractMixedBrowserC;
 import controller.clientControllers.PackC;
 import model.product.Pack;
 import model.product.StoreProduct;
-import model.store.Store;
 import model.user.*;
 import view.App;
 import view.browserPanels.AbstractMixedBrowserP;
@@ -17,21 +16,32 @@ import javax.swing.text.BadLocationException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Pack add to cart mini c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class PackAddToCartMiniC implements Controller {
 
-    private final PackToBuyMiniP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final PackToBuyMiniP view;
+    private final App frame;
     private final AbstractMixedBrowserC<Pack, StoreProduct> browserController;
     private final AbstractMixedBrowserP<Pack, StoreProduct> browserPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackAddToCartMiniC(App frame, Store model, PackToBuyMiniP view,
+
+    /**
+     * Instantiates a new Pack add to cart mini c.
+     * @param frame             the frame
+     * @param view              the view
+     * @param browserController the browser controller
+     * @param browserPanel      the browser panel
+     */
+    public PackAddToCartMiniC(App frame, PackToBuyMiniP view,
                               AbstractMixedBrowserC<Pack, StoreProduct> browserController,
                               AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
         this.frame = frame;
         this.view = view;
-        this.model = model;
         this.browserController = browserController;
         this.browserPanel = browserPanel;
 
@@ -43,7 +53,7 @@ public class PackAddToCartMiniC implements Controller {
         view.getPackImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                	PackP packV = new PackP();
+                    PackP packV = new PackP();
                     new PackC(frame, packV, view.getPack());
                     frame.addCard(packV, "PACK_V");
                     frame.changeVisibleCard("PACK_V");
@@ -54,7 +64,7 @@ public class PackAddToCartMiniC implements Controller {
         view.getPackInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                	PackP packV = new PackP();
+                    PackP packV = new PackP();
                     new PackC(frame, packV, view.getPack());
                     frame.addCard(packV, "PACK_V");
                     frame.changeVisibleCard("PACK_V");

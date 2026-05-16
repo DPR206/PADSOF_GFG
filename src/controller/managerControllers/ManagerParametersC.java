@@ -2,7 +2,6 @@ package controller.managerControllers;
 
 import controller.Controller;
 import model.store.Parameter;
-import model.store.Store;
 import view.App;
 import view.managerPanels.ManagerParametersP;
 
@@ -10,15 +9,24 @@ import javax.swing.*;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The type Manager parameters c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class ManagerParametersC implements Controller {
-    private final ManagerParametersP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final ManagerParametersP view;
+    private final App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public ManagerParametersC(App frame, Store model, ManagerParametersP view) {
+
+    /**
+     * Instantiates a new Manager parameters c.
+     * @param frame the frame
+     * @param view  the view
+     */
+    public ManagerParametersC(App frame, ManagerParametersP view) {
         this.frame = frame;
-        this.model = model;
         this.view = view;
 
         initializeActions();
@@ -76,6 +84,9 @@ public class ManagerParametersC implements Controller {
         });
     }
 
+    /**
+     * Assign values to view.
+     */
     public void assignValuesToView() {
         view.setOfferTime(Parameter.getParam().getOfferTime());
         view.setOrderTime(Parameter.getParam().getOrderTime());

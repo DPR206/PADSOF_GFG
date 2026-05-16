@@ -53,10 +53,10 @@ public class BrowseStoreProductsDiscC extends AbstractBrowserC<StoreProduct> {
             if (onlyOnce) {
                 List<StoreProduct> giftList = new ArrayList<>();
                 giftList.add(parentView.getGift());
-                new StoreProductDiscMiniC(super.getFrame(), super.getModel(), (StoreProductDiscMiniP) miniPanel, this,
+                new StoreProductDiscMiniC(super.getFrame(), (StoreProductDiscMiniP) miniPanel, this,
                         (BrowseStoreProductsDiscP) super.getView(), giftList, true);
             } else {
-                new StoreProductDiscMiniC(super.getFrame(), super.getModel(), (StoreProductDiscMiniP) miniPanel, this,
+                new StoreProductDiscMiniC(super.getFrame(), (StoreProductDiscMiniP) miniPanel, this,
                         (BrowseStoreProductsDiscP) super.getView(), parentView.getSelectedProductsList(), false);
             }
         }

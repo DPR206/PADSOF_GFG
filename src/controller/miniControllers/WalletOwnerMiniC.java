@@ -13,10 +13,15 @@ import javax.swing.text.BadLocationException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Wallet owner mini c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class WalletOwnerMiniC implements Controller {
-    private final UserMiniP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final UserMiniP view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -24,6 +29,7 @@ public class WalletOwnerMiniC implements Controller {
      * This controller's constructor
      * @param frame the controller's frame
      * @param model the controller's model
+     * @param view  the view
      */
     public WalletOwnerMiniC(App frame, Store model, UserMiniP view) {
         this.frame = frame;

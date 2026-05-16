@@ -1,23 +1,31 @@
 package controller.maxiPanels;
 
 import controller.Controller;
-import model.store.Store;
 import view.App;
 import view.clientPanels.RegisteredMainP;
 import view.maxiPanels.MaxiSecondHandP;
 
 import javax.swing.*;
 
+/**
+ * The type Maxi second hand add to offer c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class MaxiSecondHandAddToOfferC implements Controller {
-    private final MaxiSecondHandP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final MaxiSecondHandP view;
+    private final App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public MaxiSecondHandAddToOfferC(App frame, Store model, MaxiSecondHandP view) {
+
+    /**
+     * Instantiates a new Maxi second hand add to offer c.
+     * @param frame the frame
+     * @param view  the view
+     */
+    public MaxiSecondHandAddToOfferC(App frame, MaxiSecondHandP view) {
         this.view = view;
         this.frame = frame;
-        this.model = model;
 
         initializeActions();
     }

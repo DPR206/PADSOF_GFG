@@ -3,7 +3,6 @@ package controller.miniControllers;
 import controller.Controller;
 import controller.browserControllers.BrowseStoreProductsDiscC;
 import model.product.StoreProduct;
-import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseStoreProductsDiscP;
 import view.miniPanels.StoreProductDiscMiniP;
@@ -13,10 +12,14 @@ import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * The type Store product disc mini c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class StoreProductDiscMiniC implements Controller {
-    private final StoreProductDiscMiniP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final StoreProductDiscMiniP view;
+    private final App frame;
     private final BrowseStoreProductsDiscC browserController;
     private final BrowseStoreProductsDiscP browserPanel;
     private final boolean onlyOnce;
@@ -26,15 +29,18 @@ public class StoreProductDiscMiniC implements Controller {
 
     /**
      * This controller's constructor
-     * @param frame the controller's frame
-     * @param model the controller's model
+     * @param frame                 the controller's frame
+     * @param view                  the view
+     * @param browserController     the browser controller
+     * @param browserPanel          the browser panel
+     * @param alreadyChosenProducts the already chosen products
+     * @param onlyOnce              the only once
      */
-    public StoreProductDiscMiniC(App frame, Store model, StoreProductDiscMiniP view,
-                                 BrowseStoreProductsDiscC browserController, BrowseStoreProductsDiscP browserPanel,
-                                 List<StoreProduct> alreadyChosenProducts, boolean onlyOnce) {
+    public StoreProductDiscMiniC(App frame, StoreProductDiscMiniP view, BrowseStoreProductsDiscC browserController,
+                                 BrowseStoreProductsDiscP browserPanel, List<StoreProduct> alreadyChosenProducts,
+                                 boolean onlyOnce) {
         this.frame = frame;
         this.view = view;
-        this.model = model;
         this.browserController = browserController;
         this.browserPanel = browserPanel;
         this.alreadyChosenProducts = alreadyChosenProducts;

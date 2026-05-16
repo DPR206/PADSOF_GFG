@@ -12,12 +12,24 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.util.Objects;
 
+/**
+ * The type Maxi valuate second hand c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class MaxiValuateSecondHandC implements Controller {
-    private final MaxiValuateSecondHandP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final MaxiValuateSecondHandP view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Maxi valuate second hand c.
+     * @param frame the frame
+     * @param model the model
+     * @param view  the view
+     */
     public MaxiValuateSecondHandC(App frame, Store model, MaxiValuateSecondHandP view) {
         this.view = view;
         this.frame = frame;

@@ -56,8 +56,7 @@ public class BrowseStoreProductsC extends AbstractBrowserC<StoreProduct> {
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new StoreProductMiniC(super.getFrame(), super.getModel(), (StoreProductMiniP) miniPanel, this,
-                    super.getView());
+            new StoreProductMiniC(super.getFrame(), (StoreProductMiniP) miniPanel, this, super.getView());
         }
     }
 }

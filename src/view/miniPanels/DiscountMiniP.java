@@ -42,7 +42,9 @@ public class DiscountMiniP extends AbstractMiniP {
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
         StyleConstants.setBold(attributes, true);
         discountInfo.setCharacterAttributes(attributes, true);
-        discountInfo.setText(discount.getCoverage() + " " + discount.getType() + " :" + discount.getId() + "\n");
+        discountInfo.setText(
+                discount.getCoverage() + " " + discount.getType() + " :" + discount.getId() + "\n(Double " +
+                "click to view its products)");
 
         discountInfo.setPreferredSize(new Dimension(width + 16, height));
 

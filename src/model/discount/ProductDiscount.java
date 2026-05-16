@@ -64,6 +64,7 @@ public abstract class ProductDiscount extends Discount implements Serializable {
         }
 
         this.products.addAll(List.of(products));
+
         for (StoreProduct product : products) {
             product.setDiscount(this);
         }

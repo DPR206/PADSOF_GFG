@@ -2,9 +2,7 @@ package view.miniPanels;
 
 import model.discount.DiscountType;
 import model.discount.ProductFixedPercentage;
-import model.product.ComposedPack;
-import model.product.Pack;
-import model.product.SimplePack;
+import model.product.*;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -68,8 +66,8 @@ public class PackMiniP extends AbstractMiniP {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
 
-            doc.insertString(doc.getLength(), "- " + ((ProductFixedPercentage) p.getDiscount()).getPercentage() + "%\n",
-                    attributes);
+            doc.insertString(doc.getLength(),
+                    " - " + ((ProductFixedPercentage) p.getDiscount()).getPercentage() + "%\n", attributes);
 
             StyleConstants.setForeground(attributes, Color.BLACK);
             StyleConstants.setItalic(attributes, false);
@@ -110,10 +108,12 @@ public class PackMiniP extends AbstractMiniP {
      * @return the pack
      */
     public Pack getPack() {
-    	SimplePack pack;
-    	ComposedPack packc;
-    	if(p instanceof ComposedPack) return (ComposedPack)p;
-		return p;
+        SimplePack pack;
+        ComposedPack packc;
+        if (p instanceof ComposedPack) {
+            return (ComposedPack) p;
+        }
+        return p;
     }
 
     /**

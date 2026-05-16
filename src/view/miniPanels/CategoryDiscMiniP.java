@@ -1,6 +1,7 @@
 package view.miniPanels;
 
 import model.product.Category;
+import view.ImageAdder;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -15,7 +16,7 @@ public class CategoryDiscMiniP extends AbstractMiniP {
     private final JButton button;
     private final Category category;
     private final JTextPane categoryInfo;
-    //private final JPanel categoryImage;
+    private final JLabel categoryImage;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public CategoryDiscMiniP(Category category, int index, List<Category> alreadyChosen) throws BadLocationException {
@@ -34,7 +35,7 @@ public class CategoryDiscMiniP extends AbstractMiniP {
             button.setEnabled(false);
         }
 
-        //this.categoryImage = getCategoryImagePanel(p, height, height);
+        this.categoryImage = ImageAdder.getImageLabel(".\\resources\\app\\check.png", 50, 50);
         this.categoryInfo = new JTextPane();
         this.categoryInfo.setEditable(false);
         this.categoryInfo.setFocusable(false);
@@ -43,7 +44,7 @@ public class CategoryDiscMiniP extends AbstractMiniP {
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
         StyleConstants.setBold(attributes, true);
         categoryInfo.setCharacterAttributes(attributes, true);
-        categoryInfo.setText("Category: " + category.getName() + "\n");
+        categoryInfo.setText(category.getName() + "\n");
 
         categoryInfo.setPreferredSize(new Dimension(width + 16, height));
 
@@ -58,7 +59,7 @@ public class CategoryDiscMiniP extends AbstractMiniP {
         indexNum.setPreferredSize(new Dimension(25, height));
 
         this.add(indexNum);
-        //this.add(categoryImage);
+        this.add(categoryImage);
         this.add(categoryInfo);
         this.add(button);
 

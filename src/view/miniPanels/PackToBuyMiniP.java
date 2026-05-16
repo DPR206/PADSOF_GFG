@@ -64,8 +64,8 @@ public class PackToBuyMiniP extends AbstractMiniP {
             StyleConstants.setForeground(attributes, Color.RED);
             StyleConstants.setItalic(attributes, true);
 
-            doc.insertString(doc.getLength(), "- " + ((ProductFixedPercentage) p.getDiscount()).getPercentage() + "%\n",
-                    attributes);
+            doc.insertString(doc.getLength(),
+                    " - " + ((ProductFixedPercentage) p.getDiscount()).getPercentage() + "%\n", attributes);
 
             StyleConstants.setForeground(attributes, Color.BLACK);
             StyleConstants.setItalic(attributes, false);

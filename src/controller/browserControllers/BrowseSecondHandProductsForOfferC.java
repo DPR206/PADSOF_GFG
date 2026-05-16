@@ -12,6 +12,11 @@ import view.miniPanels.SecondHandMiniP;
 
 import java.util.List;
 
+/**
+ * The type Browse second hand products for offer c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseSecondHandProductsForOfferC extends AbstractBrowserC<SecondHandProduct> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

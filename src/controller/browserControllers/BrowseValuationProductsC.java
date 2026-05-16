@@ -10,6 +10,11 @@ import view.miniPanels.SecondHandMiniP;
 
 import java.util.List;
 
+/**
+ * The type Browse valuation products c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseValuationProductsC extends AbstractBrowserC<SecondHandProduct> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

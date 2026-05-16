@@ -12,16 +12,23 @@ import view.managerPanels.ManagerProfile;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+/**
+ * It implements the manager's banner
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class BannerManagerC implements Controller {
 
-    private BannerManager vista;
-    private App frame;
-    private Store store = Store.getInstance();
+    private final BannerManager vista;
+    private final App frame;
+    private final Store store = Store.getInstance();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * @param vista
+     * Instantiates a new Banner manager c.
+     * @param vista the vista
+     * @param frame the frame
      */
     public BannerManagerC(BannerManager vista, App frame) {
         this.vista = vista;
@@ -29,6 +36,9 @@ public class BannerManagerC implements Controller {
         initializeActions();
     }
 
+    /**
+     * It opens the welcome page
+     */
     private void abrirWelcome() {
 
         int respuesta =
@@ -43,6 +53,9 @@ public class BannerManagerC implements Controller {
         }
     }
 
+    /**
+     * It opens the profile page
+     */
     private void abrirPerfil() {
 
         Manager currentManager = store.getManager();
@@ -62,11 +75,15 @@ public class BannerManagerC implements Controller {
         frame.changeVisibleCard("PERFIL_MANAGER");
     }
 
+    /**
+     * It opens the main page
+     */
     private void abrirPaginaPrincipal() {
 
         frame.changeVisibleCard("MANAGER_MAIN");
     }
 
+    @Override
     public void initializeActions() {
         vista.getBtnGoBack().setEnabled(!frame.getLastShownPanels().isEmpty());
         vista.revalidate();
@@ -75,16 +92,12 @@ public class BannerManagerC implements Controller {
         for (ActionListener listener : vista.getHome().getActionListeners()) {
             vista.getHome().removeActionListener(listener);
         }
-        vista.getHome().addActionListener(e -> {
-            abrirPaginaPrincipal();
-        });
+        vista.getHome().addActionListener(e -> abrirPaginaPrincipal());
 
         for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
             vista.getBtnPerfil().removeActionListener(listener);
         }
-        vista.getBtnPerfil().addActionListener(e -> {
-            abrirPerfil();
-        });
+        vista.getBtnPerfil().addActionListener(e -> abrirPerfil());
 
         for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
             vista.getBtnExit().removeActionListener(listener);
@@ -97,13 +110,6 @@ public class BannerManagerC implements Controller {
         for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
             vista.getBtnGoBack().removeActionListener(listener);
         }
-        vista.getBtnGoBack().addActionListener(e -> {
-            goBack();
-        });
+        vista.getBtnGoBack().addActionListener(e -> frame.goBack());
     }
-
-    private void goBack() {
-        frame.goBack();
-    }
-
 }

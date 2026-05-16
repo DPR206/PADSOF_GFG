@@ -12,6 +12,11 @@ import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Browse employees c.
+ * @author Sofía C.L. & Ana O.R.
+ * @version 1.0
+ */
 public class BrowseEmployeesC extends AbstractClusterBrowserC<Employee> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -34,7 +39,7 @@ public class BrowseEmployeesC extends AbstractClusterBrowserC<Employee> {
         try {
             super.getView().setItemList(users);
         } catch (BadLocationException ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {

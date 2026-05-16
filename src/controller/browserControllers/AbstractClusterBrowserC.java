@@ -7,10 +7,16 @@ import view.browserPanels.AbstractClusterBrowserP;
 
 import javax.swing.text.BadLocationException;
 
+/**
+ * It defines a controller for a cluster browser
+ * @param <G> the type parameter
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public abstract class AbstractClusterBrowserC<G> implements Controller {
-    private final AbstractClusterBrowserP<G> view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final AbstractClusterBrowserP<G> view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -24,8 +30,6 @@ public abstract class AbstractClusterBrowserC<G> implements Controller {
         this.frame = frame;
         this.view = view;
         this.model = model;
-
-        //initializeActions();
     }
 
     @Override
@@ -69,16 +73,31 @@ public abstract class AbstractClusterBrowserC<G> implements Controller {
         });
     }
 
+    /**
+     * Initialize actions for mini panels.
+     */
     public abstract void initializeActionsForMiniPanels();
 
+    /**
+     * It gets the frame
+     * @return the frame
+     */
     public App getFrame() {
         return frame;
     }
 
+    /**
+     * It gets the model
+     * @return the model
+     */
     public Store getModel() {
         return model;
     }
 
+    /**
+     * It gets the view
+     * @return the view
+     */
     public AbstractClusterBrowserP<G> getView() {
         return view;
     }

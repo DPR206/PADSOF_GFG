@@ -8,13 +8,24 @@ import view.clientPanels.UnregisteredMainP;
 
 import javax.swing.text.BadLocationException;
 
+/**
+ * The type Unregistered main c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class UnregisteredMainC implements Controller {
-    private final UnregisteredMainP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final UnregisteredMainP view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public UnregisteredMainC(App frame, Store model) throws BadLocationException {
+
+    /**
+     * Instantiates a new Unregistered main c.
+     * @param frame the frame
+     * @param model the model
+     */
+    public UnregisteredMainC(App frame, Store model) {
         this.frame = frame;
         this.view = frame.getUnregisteredMainPanel();
         this.model = model;
@@ -22,6 +33,7 @@ public class UnregisteredMainC implements Controller {
         initializeActions();
     }
 
+    @Override
     public void initializeActions() {
         this.view.getCardLayout().show(this.view.getBottom(), "Search");
         linkControllers();
@@ -31,11 +43,12 @@ public class UnregisteredMainC implements Controller {
             linkControllers();
         });
 
-        view.getFilters().addActionListener(e -> {
-            this.view.getCardLayout().show(this.view.getBottom(), "Filters");
-        });
+        view.getFilters().addActionListener(e -> this.view.getCardLayout().show(this.view.getBottom(), "Filters"));
     }
 
+    /**
+     * Link controllers.
+     */
     public void linkControllers() {
         try {
             new MixedBrowseStoreC(frame, model, view.getBrowsePanel());

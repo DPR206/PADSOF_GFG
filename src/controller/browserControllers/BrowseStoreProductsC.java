@@ -14,6 +14,11 @@ import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Browse store products c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseStoreProductsC extends AbstractBrowserC<StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -47,7 +52,7 @@ public class BrowseStoreProductsC extends AbstractBrowserC<StoreProduct> {
             }
             super.getView().setItemList(products);
         } catch (BadLocationException ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {

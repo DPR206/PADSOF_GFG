@@ -13,6 +13,11 @@ import view.miniPanels.*;
 import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 
+/**
+ * The type Mixed browse cart c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class MixedBrowseCartC extends AbstractMixedBrowserC<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -20,8 +25,9 @@ public class MixedBrowseCartC extends AbstractMixedBrowserC<Pack, StoreProduct> 
     /**
      * This controller's constructor
      * @param frame the controller's frame
-     * @param view  the controller's view
      * @param model the controller's model
+     * @param view  the controller's view
+     * @throws BadLocationException the bad location exception
      */
     public MixedBrowseCartC(App frame, Store model, MixedBrowseCartP view) throws BadLocationException {
         super(frame, view, model);
@@ -51,7 +57,7 @@ public class MixedBrowseCartC extends AbstractMixedBrowserC<Pack, StoreProduct> 
                 super.getView().setSecondItemList(new ArrayList<>());
             }
         } catch (BadLocationException ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
 
         for (AbstractMiniP miniPanel : super.getView().getFirstMiniPanels()) {

@@ -7,6 +7,9 @@ import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Unregistered main p.
+ */
 public class UnregisteredMainP extends JPanel {
     private static final long serialVersionUID = 1L;
     JPanel bottom;
@@ -19,13 +22,21 @@ public class UnregisteredMainP extends JPanel {
     private CardLayout cardLayout = new CardLayout();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Unregistered main p.
+     * @throws BadLocationException the bad location exception
+     */
     public UnregisteredMainP() throws BadLocationException {
         searchingP = new MixedBrowseStoreAddToCartP();
 
-        configurarEstructura();
+        paintEverything();
     }
 
-    private void configurarEstructura() {
+    /**
+     * Paint everything.
+     */
+    public void paintEverything() {
         this.setLayout(new BorderLayout());
 
         others = new JPanel(new BorderLayout());
@@ -49,97 +60,93 @@ public class UnregisteredMainP extends JPanel {
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
 
+    /**
+     * It gets the bottom
+     * @return the bottom
+     */
     public JPanel getBottom() {
         return bottom;
     }
 
-    public void setBottom(JPanel newBottom) {
-        this.bottom = newBottom;
-    }
-
+    /**
+     * It gets the browse panel
+     * @return the browse panel
+     */
     public MixedBrowseStoreAddToCartP getBrowsePanel() {
         return this.searchingP;
     }
 
+    /**
+     * It gets the card layout
+     * @return the card layout
+     */
     public CardLayout getCardLayout() {
         return cardLayout;
     }
 
-    public void setCardLayout(CardLayout newCardLayout) {
-        this.cardLayout = newCardLayout;
-    }
-
-    public SearchPanel getFilterP() {
-        return filterP;
-    }
-
-    public void setFilterP(SearchPanel newFilterP) {
-        this.filterP = newFilterP;
-    }
-
+    /**
+     * It gets the filter panel
+     * @return the filter panel
+     */
     public SearchPanel getFilterPanel() {
         return this.filterP;
     }
 
+    /**
+     * It gets the filters
+     * @return the filters
+     */
     public JButton getFilters() {
         return filters;
     }
 
+    /**
+     * It sets the filters
+     * @param newFilters the new filters
+     */
     public void setFilters(JButton newFilters) {
         this.filters = newFilters;
     }
 
-    public JPanel getOthers() {
-        return others;
-    }
-
-    public void setOthers(JPanel newOthers) {
-        this.others = newOthers;
-    }
-
-    public JPanel getProductSearch() {
-        return productSearch;
-    }
-
-    public void setProductSearch(JPanel newProductSearch) {
-        this.productSearch = newProductSearch;
-    }
-
+    /**
+     * It gets the search
+     * @return the search
+     */
     public JButton getSearch() {
         return search;
     }
 
+    /**
+     * It sets the search
+     * @param newSearch the new search
+     */
     public void setSearch(JButton newSearch) {
         this.search = newSearch;
     }
 
+    /**
+     * It gets the searching
+     * @return the searching
+     */
     public MixedBrowseStoreAddToCartP getSearching() {
         return searchingP;
     }
 
+    /**
+     * It sets the searching
+     * @param newSearching the new searching
+     */
     public void setSearching(MixedBrowseStoreAddToCartP newSearching) {
         this.searchingP = newSearching;
     }
 
-    public MixedBrowseStoreAddToCartP getSearchingP() {
-        return searchingP;
-    }
-
-    public void setSearchingP(MixedBrowseStoreAddToCartP newSearchingP) {
-        this.searchingP = newSearchingP;
-    }
-
+    /**
+     * It sets the controller
+     * @param e the e
+     */
     public void setController(ActionListener e) {
         this.filters.addActionListener(e);
         this.search.addActionListener(e);
 
-    }
-
-    public void setPanelInferior(JPanel panel, String nombre) {
-        this.bottom.add(panel, nombre);
-        this.cardLayout.show(bottom, nombre);
-
-        this.revalidate();
-        this.repaint();
     }
 }

@@ -11,6 +11,11 @@ import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.text.BadLocationException;
 
+/**
+ * The type Mixed browse my wallet c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class MixedBrowseMyWalletC extends AbstractBrowserC<SecondHandProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -19,6 +24,7 @@ public class MixedBrowseMyWalletC extends AbstractBrowserC<SecondHandProduct> {
      * This controller's constructor
      * @param frame the controller's frame
      * @param model the controller's model
+     * @param view  the view
      */
     public MixedBrowseMyWalletC(App frame, Store model, BrowseMyWalletP view) {
         super(frame, view, model);

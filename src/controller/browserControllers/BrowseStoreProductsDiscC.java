@@ -13,6 +13,11 @@ import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Browse store products disc c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseStoreProductsDiscC extends AbstractBrowserC<StoreProduct> {
     private final ManagerDiscountsP parentView;
     private final boolean onlyOnce;
@@ -21,9 +26,11 @@ public class BrowseStoreProductsDiscC extends AbstractBrowserC<StoreProduct> {
 
     /**
      * This controller's constructor
-     * @param frame the controller's frame
-     * @param view  the controller's view
-     * @param model the controller's model
+     * @param frame      the controller's frame
+     * @param view       the controller's view
+     * @param model      the controller's model
+     * @param parentView the parent view
+     * @param onlyOnce   the only once
      */
     public BrowseStoreProductsDiscC(App frame, BrowseStoreProductsDiscP view, Store model, ManagerDiscountsP parentView,
                                     boolean onlyOnce) {
@@ -39,7 +46,7 @@ public class BrowseStoreProductsDiscC extends AbstractBrowserC<StoreProduct> {
         try {
             super.getView().setItemList(Store.getInstance().getStoreProductList());
         } catch (BadLocationException ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {

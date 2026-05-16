@@ -19,24 +19,34 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.event.ActionListener;
 
+/**
+ * It implements the registered user's banner
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class BannerRegisteredC implements Controller {
 
-    private BannerRegistered vista;
-    private App frame;
+    private final BannerRegistered vista;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     *
-     * @param vista
-     * @param frame
+     * Instantiates a new Banner registered c.
+     * @param vista the vista
+     * @param frame the frame
      */
-    public BannerRegisteredC(BannerRegistered vista, App frame) {
+    public BannerRegisteredC(BannerRegistered vista, App frame, Store model) {
         this.vista = vista;
         this.frame = frame;
+        this.model = model;
         initializeActions();
     }
 
+    /**
+     * It opens the welcome page
+     */
     private void abrirWelcome() {
 
         int respuesta =
@@ -51,6 +61,10 @@ public class BannerRegisteredC implements Controller {
         }
     }
 
+    /**
+     * It opens the wallet page
+     * @throws BadLocationException the bad location exception
+     */
     private void abrirCartera() throws BadLocationException {
 
         BrowseMyWalletP pagWallet = new BrowseMyWalletP((RegisteredClient) frame.getUser());
@@ -61,6 +75,9 @@ public class BannerRegisteredC implements Controller {
 
     }
 
+    /**
+     * It opens the notifications page
+     */
     private void abrirNots() {
 
         NotificacionP pagNots = new NotificacionP();
@@ -71,6 +88,9 @@ public class BannerRegisteredC implements Controller {
         this.frame.changeVisibleCard("NOTIFICATIONS");
     }
 
+    /**
+     * It opens the profile page
+     */
     private void abrirPerfil() {
 
         User usuario = frame.getUser();
@@ -82,22 +102,30 @@ public class BannerRegisteredC implements Controller {
         this.frame.changeVisibleCard("PROFILE_REGISTERED");
     }
 
+    /**
+     * It opens the main page
+     */
     private void abrirPaginaPrincipal() {
         frame.changeVisibleCard("REGISTERED_MAIN");
     }
 
+    /**
+     * It opens the cart
+     * @throws BadLocationException the bad location exception
+     */
     private void abrirCarritoDelCliente() throws BadLocationException {
 
         CarritoP carritoVista = new CarritoP();
         System.out.println("Check........");
         new CarritoC(carritoVista, frame);
-        new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
+        new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
 
         frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");
 
     }
 
+    @Override
     public void initializeActions() {
         vista.getBtnGoBack().setEnabled(!frame.getLastShownPanels().isEmpty());
         vista.revalidate();
@@ -117,23 +145,17 @@ public class BannerRegisteredC implements Controller {
         for (ActionListener listener : vista.getHome().getActionListeners()) {
             vista.getHome().removeActionListener(listener);
         }
-        vista.getHome().addActionListener(e -> {
-            abrirPaginaPrincipal();
-        });
+        vista.getHome().addActionListener(e -> abrirPaginaPrincipal());
 
         for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
             vista.getBtnPerfil().removeActionListener(listener);
         }
-        vista.getBtnPerfil().addActionListener(e -> {
-            abrirPerfil();
-        });
+        vista.getBtnPerfil().addActionListener(e -> abrirPerfil());
 
         for (ActionListener listener : vista.getBtnNots().getActionListeners()) {
             vista.getBtnNots().removeActionListener(listener);
         }
-        vista.getBtnNots().addActionListener(e -> {
-            abrirNots();
-        });
+        vista.getBtnNots().addActionListener(e -> abrirNots());
 
         for (ActionListener listener : vista.getCartera().getActionListeners()) {
             vista.getCartera().removeActionListener(listener);
@@ -157,12 +179,6 @@ public class BannerRegisteredC implements Controller {
         for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
             vista.getBtnGoBack().removeActionListener(listener);
         }
-        vista.getBtnGoBack().addActionListener(e -> {
-            goBack();
-        });
-    }
-
-    private void goBack() {
-        frame.goBack();
+        vista.getBtnGoBack().addActionListener(e -> frame.goBack());
     }
 }

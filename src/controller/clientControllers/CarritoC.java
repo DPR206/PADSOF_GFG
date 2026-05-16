@@ -10,12 +10,23 @@ import view.clientPanels.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
+/**
+ * The type Carrito c.
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class CarritoC implements Controller {
-    private App frame;
-    private CarritoP view;
-    private User user;
+    private final App frame;
+    private final CarritoP view;
+    private final User user;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Carrito c.
+     * @param carritoVista the carrito vista
+     * @param frame        the frame
+     */
     public CarritoC(CarritoP carritoVista, App frame) {
         this.frame = frame;
         this.view = carritoVista;
@@ -38,17 +49,11 @@ public class CarritoC implements Controller {
             view.setTotal(c.getCart().calculatePrice());
         }
 
-        view.getBtnOrders().addActionListener(e -> {
-            abrirOrders();
-        });
+        view.getBtnOrders().addActionListener(e -> abrirOrders());
 
-        view.getBtnPay().addActionListener(e -> {
-            makePayment();
-        });
+        view.getBtnPay().addActionListener(e -> makePayment());
 
-        view.getBtnDeleteAll().addActionListener(e -> {
-            deleteAll();
-        });
+        view.getBtnDeleteAll().addActionListener(e -> deleteAll());
     }
 
     private void deleteAll() {
@@ -71,7 +76,6 @@ public class CarritoC implements Controller {
 
     private void updateInterface() {
         try {
-            System.out.println("Updating cart..");
             CarritoP carritoVista = new CarritoP();
             new CarritoC(carritoVista, frame);
             new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems());
@@ -106,11 +110,11 @@ public class CarritoC implements Controller {
 
         if (user instanceof RegisteredClient) {
             OrdersP pagOrders;
-			try {
-				pagOrders = new OrdersP();
-			} catch (BadLocationException ex) {
-				throw new RuntimeException(ex);
-			}
+            try {
+                pagOrders = new OrdersP();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
             new OrdersC(pagOrders, frame);
 
             frame.addCard(pagOrders, "ORDERS_REGISTERED");

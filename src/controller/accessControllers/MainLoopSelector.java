@@ -38,12 +38,14 @@ public abstract class MainLoopSelector implements Controller {
                 JOptionPane.showMessageDialog(this.frame, "Welcome Unregistered Client!");
                 this.frame.changeVisibleBanner("BANNER_UNREGISTERED");
                 this.frame.changeVisibleCard("UNREGISTERED_MAIN");
-                new BannerUnregisteredC((BannerUnregistered) this.frame.getViewFromName("BANNER_UNREGISTERED"), frame);
+                new BannerUnregisteredC((BannerUnregistered) this.frame.getViewFromName("BANNER_UNREGISTERED"), frame,
+                        model);
+                this.frame.getUnregisteredMainPanel().paintEverything();
                 break;
             case REGISTERED_CLIENT:
                 this.frame.changeVisibleBanner("BANNER_REGISTERED");
                 this.frame.changeVisibleCard("REGISTERED_MAIN");
-                new BannerRegisteredC((BannerRegistered) this.frame.getViewFromName("BANNER_REGISTERED"), frame);
+                new BannerRegisteredC((BannerRegistered) this.frame.getViewFromName("BANNER_REGISTERED"), frame, model);
                 break;
             case EMPLOYEE:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Employee!");

@@ -49,6 +49,7 @@ public class App extends JFrame {
     private final BannerEmployee bannerEmployeePanel;
     private final BannerManager bannerManagerPanel;
     private final List<String> lastShownPanels = new ArrayList<>();
+    private final Store model = Store.getInstance();
     private String currentShownPanel;
     private User mainUser = new UnregisteredClient(true);
 
@@ -73,9 +74,6 @@ public class App extends JFrame {
         bannerEmployeePanel = new BannerEmployee();
         bannerManagerPanel = new BannerManager();
 
-        /* Model */
-        Store model = Store.getInstance();
-
         /* Controllers */
         new WelcomeC(this, model);
         new LoginC(this, model);
@@ -86,8 +84,8 @@ public class App extends JFrame {
         new EmployeeMainC(this, model);
         new ManagerMainC(this, model);
 
-        new BannerUnregisteredC(bannerUnregisteredPanel, this);
-        new BannerRegisteredC(bannerRegisteredPanel, this);
+        new BannerUnregisteredC(bannerUnregisteredPanel, this, model);
+        new BannerRegisteredC(bannerRegisteredPanel, this, model);
         new BannerEmployeeC(bannerEmployeePanel, this);
         new BannerManagerC(bannerManagerPanel, this);
 
@@ -169,8 +167,8 @@ public class App extends JFrame {
     }
 
     public void updateBanners() {
-        new BannerUnregisteredC(bannerUnregisteredPanel, this);
-        new BannerRegisteredC(bannerRegisteredPanel, this);
+        new BannerUnregisteredC(bannerUnregisteredPanel, this, model);
+        new BannerRegisteredC(bannerRegisteredPanel, this, model);
         new BannerEmployeeC(bannerEmployeePanel, this);
         new BannerManagerC(bannerManagerPanel, this);
     }

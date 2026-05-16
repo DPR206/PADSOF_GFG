@@ -1,9 +1,5 @@
 package controller.browserControllers;
 
-import java.util.List;
-
-import javax.swing.text.BadLocationException;
-
 import controller.miniControllers.OrderMiniC;
 import model.order.Order;
 import model.store.Store;
@@ -13,41 +9,51 @@ import view.browserPanels.BrowseOrdersP;
 import view.miniPanels.AbstractMiniP;
 import view.miniPanels.OrderMini;
 
-public class BrowseOrdersC extends AbstractBrowserC<Order>{
+import javax.swing.text.BadLocationException;
+import java.util.List;
 
-	public BrowseOrdersC(App frame, BrowseOrdersP view, Store model) {
-		super(frame, view, model);
-		super.initializeActions();
-		initializeActionsForMiniPanels();
-	}
+/**
+ * The type Browse orders c.
+ * @author Duna P.R.
+ * @version 1.0
+ */
+public class BrowseOrdersC extends AbstractBrowserC<Order> {
 
-	@Override
-	public void initializeActionsForMiniPanels() {
-		try {
-	        List<Order> orders = ((RegisteredClient) super.getFrame().getUser()).getOrderHistory().getOrders();
-	        super.getView().setItemList(orders);
-	    } catch (BadLocationException ex) {
-	        throw new RuntimeException(ex);
-	    }
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
-		List<AbstractMiniP> miniPanels = super.getView().getMiniPanels();
-	    List<Order> itemList = super.getView().getItemList();
+    /**
+     * Instantiates a new Browse orders c.
+     * @param frame the frame
+     * @param view  the view
+     * @param model the model
+     */
+    public BrowseOrdersC(App frame, BrowseOrdersP view, Store model) {
+        super(frame, view, model);
+        super.initializeActions();
+        initializeActionsForMiniPanels();
+    }
 
-	    for (int i = 0; i < miniPanels.size(); i++) {
-	        if (i < itemList.size()) {
-	            Order currentOrder = (Order) itemList.get(i);
-	            AbstractMiniP currentPanel = miniPanels.get(i);
+    @Override
+    public void initializeActionsForMiniPanels() {
+        try {
+            List<Order> orders = ((RegisteredClient) super.getFrame().getUser()).getOrderHistory().getOrders();
+            super.getView().setItemList(orders);
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
 
-	            new OrderMiniC(
-	                (OrderMini) currentPanel,
-	                super.getFrame(),
-	                super.getModel(),
-	                currentOrder,
-	                this,
-	                super.getView()
-	            );
-	        }
+        List<AbstractMiniP> miniPanels = super.getView().getMiniPanels();
+        List<Order> itemList = super.getView().getItemList();
 
-	    }
-	}
+        for (int i = 0; i < miniPanels.size(); i++) {
+            if (i < itemList.size()) {
+                Order currentOrder = itemList.get(i);
+                AbstractMiniP currentPanel = miniPanels.get(i);
+
+                new OrderMiniC((OrderMini) currentPanel, super.getFrame(), super.getModel(), currentOrder, this,
+                        super.getView());
+            }
+
+        }
+    }
 }

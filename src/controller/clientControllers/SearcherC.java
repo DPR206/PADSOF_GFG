@@ -10,12 +10,24 @@ import view.clientPanels.SearchPanel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Searcher c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class SearcherC implements Controller {
-    private final SearchPanel view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final SearchPanel view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Searcher c.
+     * @param frame the frame
+     * @param model the model
+     * @param view  the view
+     */
     public SearcherC(App frame, Store model, SearchPanel view) {
         this.view = view;
         this.frame = frame;
@@ -46,7 +58,7 @@ public class SearcherC implements Controller {
             if (view.getComics().isSelected()) {
                 categories.add(model.getCategoryFromName("Cómics"));
             }
-            if (categories.isEmpty() == false) {
+            if (!categories.isEmpty()) {
                 CategoryFilter c = new CategoryFilter(categories);
                 frame.getUser().getSearcher().getStoreSearcher().addCategoryFilter(c);
             }
@@ -72,9 +84,6 @@ public class SearcherC implements Controller {
 
             /*Ahora metemos el filtro de los precios*/
 
-			/*if(e.getActionCommand().equals("0-10")) {
-				frame.getUser().getSearcher().getStoreSearcher().addPunctuationFilter(0, 1);
-			} Transformado en lo de debajo */
             if (view.getCerodiez().isSelected()) {
                 frame.getUser().getSearcher().getStoreSearcher().addPriceFilter(0, 10);
             }

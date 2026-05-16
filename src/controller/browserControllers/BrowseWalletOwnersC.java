@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * The type Browse wallet owners c.
+ * @author Ana O.R.
+ * @version 1.0
  */
 public class BrowseWalletOwnersC extends AbstractClusterBrowserC<RegisteredClient> {
 
@@ -25,7 +27,7 @@ public class BrowseWalletOwnersC extends AbstractClusterBrowserC<RegisteredClien
      * @param view  the controller's view
      * @param model the controller's model
      */
-    public BrowseWalletOwnersC(App frame, BrowseWalletOwnersP view, Store model) throws BadLocationException {
+    public BrowseWalletOwnersC(App frame, BrowseWalletOwnersP view, Store model) {
         super(frame, view, model);
         super.initializeActions();
         initializeActionsForMiniPanels();
@@ -39,7 +41,7 @@ public class BrowseWalletOwnersC extends AbstractClusterBrowserC<RegisteredClien
         try {
             super.getView().setItemList(users);
         } catch (BadLocationException ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
 
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {

@@ -31,8 +31,6 @@ public class MixedBrowseStoreC extends AbstractMixedBrowserC<Pack, StoreProduct>
     public MixedBrowseStoreC(App frame, Store model, MixedBrowseStoreAddToCartP view) throws BadLocationException {
         super(frame, view, model);
         super.initializeActions();
-        refreshData();
-        initializeActionsForMiniPanels();
     }
 
     @Override

@@ -6,8 +6,7 @@ import view.App;
 import view.browserPanels.AbstractClusterBrowserP;
 
 import javax.swing.text.BadLocationException;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.HierarchyEvent;
 
 /**
  * It defines a controller for a cluster browser
@@ -32,11 +31,13 @@ public abstract class AbstractClusterBrowserC<G> implements Controller {
         this.frame = frame;
         this.view = view;
         this.model = model;
-        view.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent e) {
-                refreshData();
-                initializeActionsForMiniPanels();
+
+        view.addHierarchyListener(e -> {
+            if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
+                if (view.isShowing()) {
+                    refreshData();
+                    initializeActionsForMiniPanels();
+                }
             }
         });
     }

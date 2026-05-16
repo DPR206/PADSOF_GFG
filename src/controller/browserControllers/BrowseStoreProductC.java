@@ -43,11 +43,8 @@ public class BrowseStoreProductC implements Controller{
 	@Override
 	public void initializeActions() throws BadLocationException {
 		List<StoreProduct> products = Store.getInstance().getStoreProductList();
-		int i = 0;
-		for(StoreProduct sp: products) {
-			this.browser.addMiniPanel(sp, i);
-			i++;
-		}
+		this.browser.setItemList(products);
+		
 		/*Añadimos el controlador*/
 		List<AbstractMiniP> panels = this.browser.getMiniPanels();
 		
@@ -75,7 +72,6 @@ public class BrowseStoreProductC implements Controller{
 				}
 			});
 		}
-		
 	}
 
 }

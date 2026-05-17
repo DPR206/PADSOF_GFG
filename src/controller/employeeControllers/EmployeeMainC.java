@@ -11,6 +11,7 @@ import view.App;
 import view.browserPanels.BrowseExchangesP;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.employeePanels.EmployeeMainP;
+import view.employeePanels.EmployeeOrder;
 import view.managerPanels.ManagerGestionarPacks;
 import view.managerPanels.ManagerGestionarProductos;
 import view.managerPanels.ManagerNewProduct;
@@ -29,6 +30,7 @@ public class EmployeeMainC implements Controller {
     private ManagerGestionarPacks mgp = null;
     private ManagerGestionarProductos mproducts = null;
     private ManagerNewProduct create = null;
+    private EmployeeOrder orders = null;
     
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 

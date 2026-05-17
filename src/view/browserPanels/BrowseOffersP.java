@@ -1,6 +1,7 @@
 package view.browserPanels;
 
 import model.exchange.Offer;
+import model.user.RegisteredClient;
 import view.miniPanels.OfferMiniP;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class BrowseOffersP extends AbstractBrowserP<Offer> {
 
     @Serial
     private static final long serialVersionUID = 1L;
+    private final RegisteredClient client;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -26,8 +28,9 @@ public class BrowseOffersP extends AbstractBrowserP<Offer> {
      * Instantiates a new Browse orders p.
      * @throws BadLocationException the bad location exception
      */
-    public BrowseOffersP() throws BadLocationException {
+    public BrowseOffersP(RegisteredClient client) throws BadLocationException {
         super();
+        this.client = client;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         paintEverything();
@@ -53,7 +56,7 @@ public class BrowseOffersP extends AbstractBrowserP<Offer> {
 
     @Override
     public void addMiniPanel(Offer item, int index) throws BadLocationException {
-        OfferMiniP miniOrder = new OfferMiniP(item, index);
+        OfferMiniP miniOrder = new OfferMiniP(item, index, client);
         super.addMiniPanel(miniOrder);
         this.add(miniOrder);
 

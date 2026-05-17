@@ -32,6 +32,7 @@ public class RegisteredWalletP extends JPanel {
     private final BrowseOffersP browseOffersP;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Instantiates a new Registered wallet p.
      * @param client the client
@@ -42,7 +43,7 @@ public class RegisteredWalletP extends JPanel {
 
         this.client = client;
         browseMyWalletP = new BrowseMyWalletEditP();
-        browseOffersP = new BrowseOffersP();
+        browseOffersP = new BrowseOffersP(client);
         centerPanel.add(browseMyWalletP);
 
         typesHashMap.put("Comic", ProductType.COMIC);

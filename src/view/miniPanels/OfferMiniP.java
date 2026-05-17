@@ -1,6 +1,7 @@
 package view.miniPanels;
 
 import model.exchange.Offer;
+import model.user.RegisteredClient;
 import view.ImageAdder;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class OfferMiniP extends AbstractMiniP {
      * @param offer the offer
      * @param index the index
      */
-    public OfferMiniP(Offer offer, int index) {
+    public OfferMiniP(Offer offer, int index, RegisteredClient client) {
         super();
 
         this.offer = offer;
@@ -78,7 +79,12 @@ public class OfferMiniP extends AbstractMiniP {
         this.add(indexNum);
         this.add(offerImage);
         this.add(offerInfo);
-        this.add(acceptButton);
+        if (offer.getOrigin() != client) {
+            this.add(acceptButton);
+        } else {
+            declineButton.setText("Cancel offer");
+            declineButton.setPreferredSize(new Dimension(("Cancel offer").length() * 15, height));
+        }
         this.add(declineButton);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));

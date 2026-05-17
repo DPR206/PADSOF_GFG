@@ -1,7 +1,7 @@
 package controller.clientControllers;
 
 import controller.Controller;
-import controller.browserControllers.MixedBrowseMyWalletC;
+import controller.browserControllers.BrowseMyWalletEditC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import model.user.RegisteredClient;
@@ -21,7 +21,7 @@ import java.nio.file.*;
 public class RegisteredWalletC implements Controller {
     private final App frame;
     private final RegisteredWalletP view;
-    private final MixedBrowseMyWalletC walletBrowserController;
+    private final BrowseMyWalletEditC walletBrowserController;
     private String photoPath;
 
     /**
@@ -35,7 +35,7 @@ public class RegisteredWalletC implements Controller {
         this.frame = frame;
         this.view = view;
 
-        this.walletBrowserController = new MixedBrowseMyWalletC(frame, model, view.getBrowseMyWalletP());
+        this.walletBrowserController = new BrowseMyWalletEditC(frame, model, view.getBrowseMyWalletP());
 
         initializeActions();
     }

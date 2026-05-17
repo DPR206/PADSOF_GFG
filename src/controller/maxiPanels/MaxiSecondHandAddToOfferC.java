@@ -1,11 +1,13 @@
 package controller.maxiPanels;
 
 import controller.Controller;
+import controller.clientControllers.RegisteredMakeOfferC;
+import model.store.Store;
 import view.App;
-import view.clientPanels.RegisteredMainP;
+import view.clientPanels.RegisteredMakeOfferP;
 import view.maxiPanels.MaxiSecondHandP;
 
-import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * The type Maxi second hand add to offer c.
@@ -15,6 +17,7 @@ import javax.swing.*;
 public class MaxiSecondHandAddToOfferC implements Controller {
     private final MaxiSecondHandP view;
     private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -23,9 +26,10 @@ public class MaxiSecondHandAddToOfferC implements Controller {
      * @param frame the frame
      * @param view  the view
      */
-    public MaxiSecondHandAddToOfferC(App frame, MaxiSecondHandP view) {
+    public MaxiSecondHandAddToOfferC(App frame, MaxiSecondHandP view, Store model) {
         this.view = view;
         this.frame = frame;
+        this.model = model;
 
         initializeActions();
     }
@@ -33,13 +37,22 @@ public class MaxiSecondHandAddToOfferC implements Controller {
     @Override
     public void initializeActions() {
         view.getButton().addActionListener(e -> {
-            //DUE: Aceptar oferta en función de si el producto es mío o no
-            JOptionPane.showMessageDialog(frame, view.getProduct().getName() + " was " + "added to " + "the Offer",
-                    "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
-            ((RegisteredMainP) frame.getViewFromName("REGISTERED_MAIN")).getCardLayout()
-                                                                        .show(((RegisteredMainP) frame.getViewFromName(
-                                                                                        "REGISTERED_MAIN")).getBottom(),
-                                                                                "Second Hand");
+            try {
+                RegisteredMakeOfferP registeredMakeOfferP = new RegisteredMakeOfferP();
+                RegisteredMakeOfferC controller =
+                        new RegisteredMakeOfferC(frame, model, registeredMakeOfferP, view.getProduct().getOwner());
+
+                if (view.getProduct().getOwner() == frame.getUser()) {
+                    controller.addProductFromMyWallet(view.getProduct());
+                } else {
+                    controller.addProductFromTheirWallet(view.getProduct());
+                }
+
+                frame.addCard(registeredMakeOfferP, "MAKE_OFFER");
+                frame.changeVisibleCard("MAKE_OFFER");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 }

@@ -1,39 +1,35 @@
 package view.miniPanels;
 
-import model.discount.Discount;
+import model.exchange.Exchange;
 import view.ImageAdder;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 import static main.Main.brownColour;
 import static view.ImageAdder.getScaledImage;
 
-/**
- * The type Discount mini p.
- * @author Ana O.R.
- * @version 1.0
- */
-public class DiscountMiniP extends AbstractMiniP {
+public class ExchangeMiniP extends AbstractMiniP {
     private final JButton button;
-    private final Discount discount;
-    private final JTextPane discountInfo;
-    private final JLabel discountImage;
+    private final Exchange exchange;
+    private final JTextPane exchangeInfo;
+    private final JLabel exchangeImage;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new Discount mini p.
-     * @param discount   the discount
+     * @param exchange   the exchange
      * @param index      the index
      * @param buttonName the button name
      */
-    public DiscountMiniP(Discount discount, int index, String buttonName) {
+    public ExchangeMiniP(Exchange exchange, int index, String buttonName) {
         super();
 
-        this.discount = discount;
+        this.exchange = exchange;
         int width = 350;
         int height = 60;
         this.setLayout(new FlowLayout());
@@ -44,20 +40,18 @@ public class DiscountMiniP extends AbstractMiniP {
         button.setMinimumSize(button.getPreferredSize());
         button.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\delete.png"), height / 3, height / 3));
 
-        this.discountImage = ImageAdder.getImageLabel(".\\resources\\app\\discount.png", 50, 50);
-        this.discountInfo = new JTextPane();
-        this.discountInfo.setEditable(false);
-        this.discountInfo.setFocusable(false);
+        this.exchangeImage = ImageAdder.getImageLabel(".\\resources\\app\\exchange.png", 50, 50);
+        this.exchangeInfo = new JTextPane();
+        this.exchangeInfo.setEditable(false);
+        this.exchangeInfo.setFocusable(false);
 
         SimpleAttributeSet attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
         StyleConstants.setBold(attributes, true);
-        discountInfo.setCharacterAttributes(attributes, true);
-        discountInfo.setText(
-                discount.getCoverage() + " " + discount.getType() + " :" + discount.getId() + "\n(Double " +
-                "click to view its products)");
+        exchangeInfo.setCharacterAttributes(attributes, true);
+        exchangeInfo.setText("Exchange nº :" + exchange.getId() + "\n");
 
-        discountInfo.setPreferredSize(new Dimension(width + 16, height));
+        exchangeInfo.setPreferredSize(new Dimension(width + 16, height));
 
         JTextPane indexNum = new JTextPane();
         indexNum.setEditable(false);
@@ -70,8 +64,8 @@ public class DiscountMiniP extends AbstractMiniP {
         indexNum.setPreferredSize(new Dimension(25, height));
 
         this.add(indexNum);
-        this.add(discountImage);
-        this.add(discountInfo);
+        this.add(exchangeImage);
+        this.add(exchangeInfo);
         this.add(button);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
@@ -86,18 +80,22 @@ public class DiscountMiniP extends AbstractMiniP {
     }
 
     /**
-     * It gets the discount
-     * @return the discount
+     * It gets the exchange info
+     * @return the exchange info
      */
-    public Discount getDiscount() {
-        return discount;
+    public JTextPane getDiscountInfo() {
+        return exchangeInfo;
+    }
+
+    public Exchange getExchange() {
+        return exchange;
     }
 
     /**
-     * It gets the discount info
-     * @return the discount info
+     * It makes it possible to assign a controller to this panel's components
+     * @param c the desired controller
      */
-    public JTextPane getDiscountInfo() {
-        return discountInfo;
+    public void setController(ActionListener c) {
+        button.addActionListener(c);
     }
 }

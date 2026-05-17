@@ -1,9 +1,11 @@
 package controller.employeeControllers;
 
 import controller.Controller;
+import controller.browserControllers.BrowseExchangesC;
 import controller.browserControllers.BrowseValuationProductsC;
 import model.store.Store;
 import view.App;
+import view.browserPanels.BrowseExchangesP;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.employeePanels.EmployeeMainP;
 
@@ -26,9 +28,13 @@ public class EmployeeMainC implements Controller {
      * @param frame the controller's frame
      * @param model the controller's model
      */
-    public EmployeeMainC(App frame, Store model) {
+    public EmployeeMainC(App frame, Store model) throws BadLocationException {
         this.frame = frame;
         this.view = frame.getEmployeeMainPanel();
+
+        BrowseExchangesP exchangeView = new BrowseExchangesP();
+        this.frame.addCard(exchangeView, "MANAGE_EXCHANGES");
+        new BrowseExchangesC(this.frame, exchangeView, model);
 
         try {
             BrowseSecondHandProductsP valuateView = new BrowseSecondHandProductsP("Valuate", null);
@@ -55,9 +61,13 @@ public class EmployeeMainC implements Controller {
                 e -> JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Add Store Products", "Add Store",
                         JOptionPane.INFORMATION_MESSAGE));
 
-        view.getManageExchanges().addActionListener(
-                e -> JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Manage Exchanges", "Manage Exchange",
-                        JOptionPane.INFORMATION_MESSAGE));
+        view.getManageExchanges().addActionListener(e -> {
+            try {
+                frame.changeVisibleCard("MANAGE_EXCHANGES");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         view.getValuateProducts().addActionListener(e -> {
             try {

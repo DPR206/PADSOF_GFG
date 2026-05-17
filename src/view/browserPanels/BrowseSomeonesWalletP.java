@@ -3,10 +3,13 @@ package view.browserPanels;
 import model.product.SecondHandProduct;
 import model.user.RegisteredClient;
 import model.user.User;
+import view.App;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+
+import java.awt.*;
 
 import static main.Main.brownColour;
 
@@ -17,6 +20,7 @@ import static main.Main.brownColour;
  */
 public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
     private final User owner;
+    private final App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -25,10 +29,11 @@ public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
      * @param owner the owner
      * @throws BadLocationException the bad location exception
      */
-    public BrowseSomeonesWalletP(RegisteredClient owner) throws BadLocationException {
+    public BrowseSomeonesWalletP(App frame, RegisteredClient owner) throws BadLocationException {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        this.frame = frame;
         this.owner = owner;
 
         paintEverything();
@@ -38,9 +43,15 @@ public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
-        JLabel title = new JLabel(owner.getUserName() + "'s wallet'");
-        title.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
-        this.add(title);
+        if (owner == frame.getUser()) {
+            JLabel title = new JLabel("My wallet'");
+            title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 20));
+            this.add(title);
+        } else {
+            JLabel title = new JLabel(owner.getUserName() + "'s wallet'");
+            title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 20));
+            this.add(title);
+        }
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());

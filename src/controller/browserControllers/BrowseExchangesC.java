@@ -1,32 +1,26 @@
 package controller.browserControllers;
 
-import controller.miniControllers.SecondHandMyWalletMiniC;
-import model.product.SecondHandProduct;
+import controller.miniControllers.ExchangeMiniC;
+import model.exchange.Exchange;
 import model.store.Store;
-import model.user.RegisteredClient;
 import view.App;
-import view.browserPanels.BrowseMyWalletP;
+import view.browserPanels.BrowseExchangesP;
 import view.miniPanels.AbstractMiniP;
-import view.miniPanels.ThreeButtonSecondHandMiniP;
+import view.miniPanels.ExchangeMiniP;
 
 import javax.swing.text.BadLocationException;
 
-/**
- * The type Mixed browse my wallet c.
- * @author Ana O.R.
- * @version 1.0
- */
-public class MixedBrowseMyWalletC extends AbstractBrowserC<SecondHandProduct> {
+public class BrowseExchangesC extends AbstractBrowserC<Exchange> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * This controller's constructor
-     * @param frame the controller's frame
-     * @param model the controller's model
+     * Instantiates a new Browse orders c.
+     * @param frame the frame
      * @param view  the view
+     * @param model the model
      */
-    public MixedBrowseMyWalletC(App frame, Store model, BrowseMyWalletP view) {
+    public BrowseExchangesC(App frame, BrowseExchangesP view, Store model) {
         super(frame, view, model);
         super.initializeActions();
     }
@@ -34,7 +28,7 @@ public class MixedBrowseMyWalletC extends AbstractBrowserC<SecondHandProduct> {
     @Override
     public void refreshData() {
         try {
-            super.getView().setItemList(((RegisteredClient) super.getFrame().getUser()).getWallet().getProducts());
+            super.getView().setItemList(getModel().getExchanges());
             super.getView().setCurrentPageNum(1);
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
@@ -45,7 +39,7 @@ public class MixedBrowseMyWalletC extends AbstractBrowserC<SecondHandProduct> {
     public void refreshCurrentPage() {
         try {
             int currentPage = super.getView().getCurrentPageNum();
-            super.getView().setItemList(((RegisteredClient) super.getFrame().getUser()).getWallet().getProducts());
+            super.getView().setItemList(getModel().getExchanges());
             int maxPage = super.getView().getMaxPageNum();
             if (currentPage > maxPage) {
                 currentPage = maxPage;
@@ -60,8 +54,8 @@ public class MixedBrowseMyWalletC extends AbstractBrowserC<SecondHandProduct> {
     @Override
     public void initializeActionsForMiniPanels() {
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new SecondHandMyWalletMiniC(super.getFrame(), (ThreeButtonSecondHandMiniP) miniPanel, this,
-                    super.getView());
+            new ExchangeMiniC(super.getFrame(), super.getModel(), (ExchangeMiniP) miniPanel, this,
+                    (BrowseExchangesP) super.getView());
         }
     }
 }

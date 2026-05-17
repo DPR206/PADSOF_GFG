@@ -62,7 +62,7 @@ public class RegisteredMainC implements Controller {
             throw new RuntimeException(ex);
         }
         new SearcherC(frame, model, view.getFilterPanel());
-        new RegisteredMakeOfferC(frame, model, view.getMakeOfferP());
+        new RegisteredBrowseForOfferC(frame, model, view.getMakeOfferP());
     }
 
 }

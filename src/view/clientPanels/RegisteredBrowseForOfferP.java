@@ -31,7 +31,7 @@ public class RegisteredBrowseForOfferP extends JPanel {
 
         this.add(new JLabel("Select a product:"));
 
-        browseSecondHandProductsP = new BrowseSecondHandProductsP(frame, "Add to offer", null);
+        browseSecondHandProductsP = new BrowseSecondHandProductsP(frame, "Add to Offer", ".\\resources\\app\\add.png");
         browseUsersP = new BrowseWalletOwnersP("Browse Wallet");
 
         this.setLayout(new BorderLayout());

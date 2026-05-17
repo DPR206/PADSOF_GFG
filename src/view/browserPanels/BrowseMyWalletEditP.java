@@ -48,7 +48,7 @@ public class BrowseMyWalletEditP extends AbstractBrowserP<SecondHandProduct> {
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
         ThreeButtonSecondHandMiniP miniProduct =
-                new ThreeButtonSecondHandMiniP(item, index, "Add to Offer", null, "Request valuation", null,
+                new ThreeButtonSecondHandMiniP(item, index, "Add to Offer", ".\\resources\\app\\add.png", "Request valuation", null,
                         "Remove from wallet", null);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);

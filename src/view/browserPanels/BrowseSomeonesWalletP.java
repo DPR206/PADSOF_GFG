@@ -64,7 +64,8 @@ public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
         List<SecondHandProduct> alreadyChosen = frame.getMyProducts();
         alreadyChosen.addAll(frame.getTheirProducts());
-        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, "Add to Offer", null, alreadyChosen);
+        SecondHandMiniP miniProduct =
+                new SecondHandMiniP(item, index, "Add to Offer", ".\\resources\\app\\add.png", alreadyChosen);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

@@ -28,7 +28,7 @@ public class EmployeeExchangePermP extends JPanel {
      */
     public EmployeeExchangePermP(App frame) throws BadLocationException {
         this.setLayout(new BorderLayout());
-        browseSecondHandProductsP = new BrowseSecondHandProductsP(frame, "Add to Offer", null);
+        browseSecondHandProductsP = new BrowseSecondHandProductsP(frame, "Add to Offer", ".\\resources\\app\\add.png");
 
         paintEverything();
     }

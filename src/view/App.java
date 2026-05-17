@@ -162,7 +162,6 @@ public class App extends JFrame {
      */
     public void addProductFromTheirWallet(SecondHandProduct product) {
         theirProducts.add(product);
-        System.out.println("Their products: " + theirProducts);
     }
 
     /**
@@ -171,7 +170,6 @@ public class App extends JFrame {
      */
     public void addProductFromMyWallet(SecondHandProduct product) {
         myProducts.add(product);
-        System.out.println("My products: " + myProducts);
     }
 
     private void addBanner(JPanel newView, String constraints) {
@@ -186,7 +184,6 @@ public class App extends JFrame {
      * @throws BadLocationException the bad location exception
      */
     public void changeVisibleCard(String cardName) throws BadLocationException {
-        System.out.println("Changing visible card: " + cardName);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
         getViewFromName(cardName).requestFocusInWindow();
@@ -217,16 +214,12 @@ public class App extends JFrame {
     public void goBack() throws BadLocationException {
         if (!lastShownPanels.isEmpty()) {
             String previousPanel = lastShownPanels.removeLast();
-            System.out.println("Going back to card: " + previousPanel);
 
             CardLayout cl = (CardLayout) (cards.getLayout());
             cl.show(cards, previousPanel);
             getViewFromName(previousPanel).requestFocusInWindow();
 
             currentShownPanel = previousPanel;
-
-            theirProducts.clear();
-            myProducts.clear();
 
             updateBanners();
         }
@@ -239,9 +232,6 @@ public class App extends JFrame {
     public void changeVisibleBanner(String cardName) {
         CardLayout cl = (CardLayout) (banners.getLayout());
         cl.show(banners, cardName);
-
-        theirProducts.clear();
-        myProducts.clear();
 
         banners.revalidate();
         banners.repaint();
@@ -353,6 +343,7 @@ public class App extends JFrame {
     }
 
     public ArrayList<SecondHandProduct> getMyProducts() {
+
         return myProducts;
     }
 

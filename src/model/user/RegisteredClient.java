@@ -308,9 +308,7 @@ public class RegisteredClient extends User implements Serializable {
      * @param myProducts    the products the client offers
      */
     public void makeAnOffer(ArrayList<SecondHandProduct> theirProducts, ArrayList<SecondHandProduct> myProducts) {
-        System.out.println("Making an offer...");
         Offer offer = new Offer(this, theirProducts.getFirst().getOwner(), myProducts, theirProducts);
-        System.out.println("Offer: " + offer);
         this.getOfferHistory().addOffer(offer);
         theirProducts.getFirst().getOwner().getOfferHistory().addOffer(offer);
     }

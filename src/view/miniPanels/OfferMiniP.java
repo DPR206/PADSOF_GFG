@@ -61,7 +61,7 @@ public class OfferMiniP extends AbstractMiniP {
         offerInfo.setCharacterAttributes(attributes, true);
         offerInfo.setText(
                 "New offer from " + offer.getOrigin().getUserName() + "\n(" + offer.getOriginProducts().size() +
-                " products in exchange for " + offer.getDestinationProducts() + " products)");
+                " products in exchange for " + offer.getDestinationProducts().size() + " products)");
 
         offerInfo.setPreferredSize(new Dimension(width + 16, height));
 

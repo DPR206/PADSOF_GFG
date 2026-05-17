@@ -33,7 +33,7 @@ public class Offer implements Serializable {
     /** The client who received the offer */
     private final RegisteredClient destination;
     /** The sender's and receiver's products */
-    private HashMap<RegisteredClient, ArrayList<SecondHandProduct>> products = new HashMap<>();
+    private HashMap<String, ArrayList<SecondHandProduct>> products = new HashMap<>();
     /** The offer's current status */
     private OfferStatus status;
 
@@ -61,8 +61,8 @@ public class Offer implements Serializable {
         this.creationDate = creationDate;
         this.origin = origin;
         this.destination = destination;
-        this.products.put(origin, originProducts);
-        this.products.put(destination, destinationProducts);
+        this.products.put(origin.getUserName(), new ArrayList<>(originProducts));
+        this.products.put(destination.getUserName(), new ArrayList<>(destinationProducts));
         this.status = status;
 
         Store.getInstance().getOffers().add(this);
@@ -170,8 +170,8 @@ public class Offer implements Serializable {
         NotificationEmployeeExchange notification2 =
                 new NotificationEmployeeExchange(LocalDateTime.now(), false, true, NotificationType.EMPLOYEE_EXCHANGE);
         Exchange newExchange =
-                new Exchange(LocalDateTime.now(), this.origin, this.products.get(this.origin), this.destination,
-                        this.products.get(this.destination));
+                new Exchange(LocalDateTime.now(), this.origin, this.products.get(this.origin.getUserName()),
+                        this.destination, this.products.get(this.destination.getUserName()));
         notification2.FullNotification(newExchange);
         Store.getInstance().sendNotificationEmployees(notification2);
 
@@ -223,7 +223,7 @@ public class Offer implements Serializable {
      * @return the destination's products
      */
     public ArrayList<SecondHandProduct> getDestinationProducts() {
-        return this.products.get(this.destination);
+        return this.products.get(this.destination.getUserName());
     }
 
     /**
@@ -236,7 +236,7 @@ public class Offer implements Serializable {
             throw new NullPointerException("The products weren't provided");
         }
 
-        this.products.put(this.destination,
+        this.products.put(this.destination.getUserName(),
                 (ArrayList<SecondHandProduct>) Arrays.stream(newDestinationProducts).toList());
     }
 
@@ -245,7 +245,7 @@ public class Offer implements Serializable {
      * @param newDestinationProducts the new destination client's products
      */
     public void setDestinationProducts(ArrayList<SecondHandProduct> newDestinationProducts) {
-        this.products.put(this.destination, newDestinationProducts);
+        this.products.put(this.destination.getUserName(), newDestinationProducts);
     }
 
     /**
@@ -271,7 +271,7 @@ public class Offer implements Serializable {
      * @return the sender's products
      */
     public ArrayList<SecondHandProduct> getOriginProducts() {
-        return this.products.get(this.origin);
+        return this.products.get(this.origin.getUserName());
     }
 
     /* destination is final thus has no setters */
@@ -281,7 +281,7 @@ public class Offer implements Serializable {
      * @param newOriginProducts the new origin client's products
      */
     public void setOriginProducts(ArrayList<SecondHandProduct> newOriginProducts) {
-        this.products.put(this.origin, newOriginProducts);
+        this.products.put(this.origin.getUserName(), newOriginProducts);
     }
 
     /**
@@ -294,7 +294,8 @@ public class Offer implements Serializable {
             throw new NullPointerException("The products weren't provided");
         }
 
-        this.products.put(this.destination, (ArrayList<SecondHandProduct>) Arrays.stream(newOriginProducts).toList());
+        this.products.put(this.destination.getUserName(),
+                (ArrayList<SecondHandProduct>) Arrays.stream(newOriginProducts).toList());
     }
 
     /**
@@ -304,14 +305,14 @@ public class Offer implements Serializable {
     public String getPrintProducts() {
         StringBuilder sb = new StringBuilder();
 
-        ArrayList<SecondHandProduct> clientProducts = this.products.get(this.origin);
+        ArrayList<SecondHandProduct> clientProducts = this.products.get(this.origin.getUserName());
         for (SecondHandProduct product : clientProducts) {
             sb.append(product.getId()).append(",");
         }
 
         sb.append(";");
 
-        clientProducts = this.products.get(this.destination);
+        clientProducts = this.products.get(this.destination.getUserName());
         for (SecondHandProduct product : clientProducts) {
             sb.append(product.getId()).append(",");
         }
@@ -323,7 +324,7 @@ public class Offer implements Serializable {
      * It gets all the offer's products
      * @return all the offer's products
      */
-    public HashMap<RegisteredClient, ArrayList<SecondHandProduct>> getProducts() {
+    public HashMap<String, ArrayList<SecondHandProduct>> getProducts() {
         return products;
     }
 
@@ -331,7 +332,7 @@ public class Offer implements Serializable {
      * It sets all the offer's products.
      * @param newProducts all the new offer's products
      */
-    public void setProducts(HashMap<RegisteredClient, ArrayList<SecondHandProduct>> newProducts) {
+    public void setProducts(HashMap<String, ArrayList<SecondHandProduct>> newProducts) {
         this.products = newProducts;
     }
 

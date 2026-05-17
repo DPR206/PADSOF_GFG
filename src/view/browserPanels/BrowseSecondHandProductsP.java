@@ -7,6 +7,7 @@ import view.miniPanels.SecondHandMiniP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static main.Main.brownColour;
@@ -52,7 +53,7 @@ public class BrowseSecondHandProductsP extends AbstractBrowserP<SecondHandProduc
 
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
-        List<SecondHandProduct> alreadyChosen = frame.getMyProducts();
+        List<SecondHandProduct> alreadyChosen = new ArrayList<>(frame.getMyProducts());
         alreadyChosen.addAll(frame.getTheirProducts());
         SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, buttonName, iconPath, alreadyChosen);
         super.addMiniPanel(miniProduct);

@@ -55,6 +55,8 @@ public class RegisteredMakeOfferC implements Controller {
                         "Minimum products not reached", JOptionPane.ERROR_MESSAGE);
             } else {
                 ((RegisteredClient) frame.getUser()).makeAnOffer(frame.getTheirProducts(), frame.getMyProducts());
+                frame.getTheirProducts().clear();
+                frame.getMyProducts().clear();
                 JOptionPane.showMessageDialog(frame, "Offer made successfully");
                 try {
                     frame.goBack();

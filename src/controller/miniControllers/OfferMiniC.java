@@ -2,7 +2,6 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.browserControllers.BrowseOffersC;
-import model.exchange.OfferStatus;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseOffersP;
@@ -59,7 +58,7 @@ public class OfferMiniC implements Controller {
         });
 
         view.getAcceptButton().addActionListener(e -> {
-            view.getOffer().setStatus(OfferStatus.ACCEPTED);
+            view.getOffer().acceptOffer();
 
             JOptionPane.showMessageDialog(frame, "Offer was accepted", "Offer accepted",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -69,7 +68,11 @@ public class OfferMiniC implements Controller {
         });
 
         view.getDeclineButton().addActionListener(e -> {
-            view.getOffer().setStatus(OfferStatus.REJECTED);
+            if (view.getOffer().getOrigin() == frame.getUser()) {
+                view.getOffer().cancelOffer();
+            } else {
+                view.getOffer().rejectOffer();
+            }
 
             JOptionPane.showMessageDialog(frame, "Offer was rejected", "Offer rejected",
                     JOptionPane.INFORMATION_MESSAGE);

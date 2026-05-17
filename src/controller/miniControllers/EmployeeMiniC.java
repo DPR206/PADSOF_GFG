@@ -1,6 +1,7 @@
 package controller.miniControllers;
 
 import controller.Controller;
+import controller.managerControllers.ManagerGestionarEmpleado;
 import view.App;
 import view.managerPanels.ManagerGestionEmplIndividual;
 import view.miniPanels.UserMiniP;
@@ -33,8 +34,10 @@ public class EmployeeMiniC implements Controller {
 
     public void initializeActions() {
         this.employee.getButton().addActionListener(e -> {
-            this.frame.addCard(mge, "EMPLEADO INDIVIDUAL");
             try {
+            	new ManagerGestionarEmpleado(mge, frame, employee);
+            	
+            	this.frame.addCard(mge, "EMPLEADO INDIVIDUAL");
                 this.frame.changeVisibleCard("EMPLEADO INDIVIDUAL");
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);

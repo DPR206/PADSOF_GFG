@@ -113,4 +113,8 @@ public class EmployeeMainP extends JPanel {
     public JButton getValuateProducts() {
         return valuateProducts;
     }
+    
+    public JButton getManageOrders() {
+    	return this.manageOrders;
+    }
 }

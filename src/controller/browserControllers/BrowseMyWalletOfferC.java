@@ -4,45 +4,40 @@ import controller.miniControllers.SecondHandAddToOfferMiniC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import model.user.RegisteredClient;
-import model.user.UserType;
 import view.App;
-import view.browserPanels.BrowseSecondHandProductsP;
+import view.browserPanels.BrowseSomeonesWalletP;
 import view.miniPanels.AbstractMiniP;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.text.BadLocationException;
-import java.util.List;
 
 /**
- * The type Browse second hand products for offer c.
+ * The type Mixed browse my wallet c.
  * @author Ana O.R.
  * @version 1.0
  */
-public class BrowseSecondHandProductsForOfferC extends AbstractBrowserC<SecondHandProduct> {
+public class BrowseMyWalletOfferC extends AbstractBrowserC<SecondHandProduct> {
+
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This controller's constructor
      * @param frame the controller's frame
-     * @param view  the controller's view
      * @param model the controller's model
+     * @param view  the view
      */
-    public BrowseSecondHandProductsForOfferC(App frame, BrowseSecondHandProductsP view, Store model) {
+    public BrowseMyWalletOfferC(App frame, Store model, BrowseSomeonesWalletP view) {
         super(frame, view, model);
         super.initializeActions();
     }
 
     @Override
     public void refreshData() {
-        List<SecondHandProduct> shownProducts = Store.getInstance().getAvailableSecondHandProductList();
-        if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
-            shownProducts.removeAll(((RegisteredClient) super.getFrame().getUser()).getWallet().getAvailableProducts());
-        }
         try {
-            super.getView().setItemList(shownProducts);
+            super.getView().setItemList(((RegisteredClient) super.getFrame().getUser()).getWallet().getProducts());
             super.getView().setCurrentPageNum(1);
-        } catch (Exception e) {
-            throw new RuntimeException();
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
@@ -50,12 +45,7 @@ public class BrowseSecondHandProductsForOfferC extends AbstractBrowserC<SecondHa
     public void refreshCurrentPage() {
         try {
             int currentPage = super.getView().getCurrentPageNum();
-            List<SecondHandProduct> shownProducts = Store.getInstance().getAvailableSecondHandProductList();
-            if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
-                shownProducts.removeAll(
-                        ((RegisteredClient) super.getFrame().getUser()).getWallet().getAvailableProducts());
-            }
-            super.getView().setItemList(shownProducts);
+            super.getView().setItemList(((RegisteredClient) super.getFrame().getUser()).getWallet().getProducts());
             int maxPage = super.getView().getMaxPageNum();
             if (currentPage > maxPage) {
                 currentPage = maxPage;

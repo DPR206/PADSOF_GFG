@@ -2,14 +2,15 @@ package controller.miniControllers;
 
 import controller.Controller;
 import controller.browserControllers.AbstractBrowserC;
+import controller.clientControllers.RegisteredMakeOfferC;
 import controller.clientControllers.SecondHandOwnerC;
 import es.uam.eps.padsof.telecard.*;
 import model.product.SecondHandProduct;
 import model.store.Store;
+import model.user.RegisteredClient;
 import view.App;
 import view.browserPanels.AbstractBrowserP;
-import view.clientPanels.PaymentP;
-import view.clientPanels.SecondHandOwnerP;
+import view.clientPanels.*;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
@@ -26,6 +27,7 @@ import java.awt.event.MouseEvent;
 public class SecondHandMyWalletMiniC implements Controller {
     private final ThreeButtonSecondHandMiniP view;
     private final App frame;
+    private final Store model;
     private final AbstractBrowserC<SecondHandProduct> abstractBrowserC;
     private final AbstractBrowserP<SecondHandProduct> abstractBrowserP;
 
@@ -38,10 +40,11 @@ public class SecondHandMyWalletMiniC implements Controller {
      * @param abstractBrowserC the abstract browser c
      * @param abstractBrowserP the abstract browser p
      */
-    public SecondHandMyWalletMiniC(App frame, ThreeButtonSecondHandMiniP view,
+    public SecondHandMyWalletMiniC(App frame, Store model, ThreeButtonSecondHandMiniP view,
                                    AbstractBrowserC<SecondHandProduct> abstractBrowserC,
                                    AbstractBrowserP<SecondHandProduct> abstractBrowserP) {
         this.frame = frame;
+        this.model = model;
         this.view = view;
         this.abstractBrowserC = abstractBrowserC;
         this.abstractBrowserP = abstractBrowserP;
@@ -101,10 +104,32 @@ public class SecondHandMyWalletMiniC implements Controller {
 
         /* Add to Offer */
         view.getFirstButton().addActionListener(e -> {
-            // DUE: Add to Offer
             JOptionPane.showMessageDialog(frame, view.getSecondHandProduct().getName() + " was added to the Offer",
                     "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
-            updateInterface();
+
+            try {
+                if (view.getSecondHandProduct().getOwner() != frame.getUser()) {
+                    RegisteredMakeOfferP registeredMakeOfferP =
+                            new RegisteredMakeOfferP(frame, view.getSecondHandProduct().getOwner(),
+                                    (RegisteredClient) frame.getUser());
+                    new RegisteredMakeOfferC(frame, model, registeredMakeOfferP,
+                            view.getSecondHandProduct().getOwner());
+
+                    frame.addProductFromTheirWallet(view.getSecondHandProduct());
+
+                    JPanel check = frame.getViewFromName("MAKE OFFER");
+                    if (check != null) {
+                        frame.remove(check);
+                    }
+                    frame.addCard(registeredMakeOfferP, "MAKE_OFFER");
+                    frame.changeVisibleCard("MAKE_OFFER");
+                } else {
+                    frame.addProductFromMyWallet(view.getSecondHandProduct());
+
+                }
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         /* Request valuation */

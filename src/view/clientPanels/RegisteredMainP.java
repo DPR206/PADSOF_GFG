@@ -18,7 +18,7 @@ public class RegisteredMainP extends JPanel {
     private static final long serialVersionUID = 1L;
     private final JButton secondHand = new JButton("Second Hand");
     private final SearchPanel filterP = new SearchPanel();
-    private final RegisteredMakeOfferP makeOfferP = new RegisteredMakeOfferP();
+    private final RegisteredBrowseForOfferP makeOfferP = new RegisteredBrowseForOfferP();
     private final CardLayout cardLayout = new CardLayout();
     private JPanel bottom;
     private JButton filters = new JButton("Filters");
@@ -127,7 +127,7 @@ public class RegisteredMainP extends JPanel {
      * It gets the make offer p
      * @return the make offer p
      */
-    public RegisteredMakeOfferP getMakeOfferP() {
+    public RegisteredBrowseForOfferP getMakeOfferP() {
         return makeOfferP;
     }
 

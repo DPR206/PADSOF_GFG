@@ -1,12 +1,13 @@
 package controller.clientControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseSecondHandProductsForOfferC;
-import controller.browserControllers.BrowseWalletOwnersC;
+import controller.browserControllers.BrowseSomeonesWalletC;
 import model.store.Store;
+import model.user.RegisteredClient;
 import view.App;
 import view.clientPanels.RegisteredMakeOfferP;
 
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
 /**
@@ -15,9 +16,10 @@ import javax.swing.text.BadLocationException;
  * @version 1.0
  */
 public class RegisteredMakeOfferC implements Controller {
-    private final RegisteredMakeOfferP view;
     private final App frame;
     private final Store model;
+    private final RegisteredMakeOfferP view;
+    private final RegisteredClient them;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -26,51 +28,37 @@ public class RegisteredMakeOfferC implements Controller {
      * @param frame the frame
      * @param model the model
      * @param view  the view
+     * @param them  the them
+     * @throws BadLocationException the bad location exception
      */
-    public RegisteredMakeOfferC(App frame, Store model, RegisteredMakeOfferP view) {
+    public RegisteredMakeOfferC(App frame, Store model, RegisteredMakeOfferP view, RegisteredClient them)
+            throws BadLocationException {
         this.frame = frame;
-        this.view = view;
         this.model = model;
+        this.view = view;
+        this.them = them;
+
+        new BrowseSomeonesWalletC(frame, model, view.getBrowseTheirWallet());
+        new BrowseSomeonesWalletC(frame, model, view.getBrowseMyWallet());
 
         initializeActions();
     }
 
-    /**
-     * Initialize actions for mini panels.
-     * @throws BadLocationException the bad location exception
-     */
-    public void initializeActionsForMiniPanels() throws BadLocationException {
-        new BrowseWalletOwnersC(frame, view.getBrowseWalletOwnersP(), model);
-        new BrowseSecondHandProductsForOfferC(frame, view.getBrowseSecondHandProductsP(), model);
-    }
-
     @Override
-    public void initializeActions() {
-        try {
-            initializeActionsForMiniPanels();
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
-
-        view.getBrowseAvailableProducts().addActionListener(e -> {
-            view.getBrowseWalletOwnersP().setVisible(false);
-            view.getBrowseSecondHandProductsP().setVisible(true);
-            try {
-                initializeActionsForMiniPanels();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
+    public void initializeActions() throws BadLocationException {
+        view.getMakeOfferButton().addActionListener(e -> {
+            if (frame.getTheirProducts().isEmpty() || frame.getMyProducts().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "There must be at least one product from each wallet",
+                        "Minimum products not reached", JOptionPane.ERROR_MESSAGE);
+            } else {
+                ((RegisteredClient) frame.getUser()).makeAnOffer(frame.getTheirProducts(), frame.getMyProducts());
+                JOptionPane.showMessageDialog(frame, "Offer made successfully");
+                try {
+                    frame.goBack();
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
-
-        view.getBrowseUsers().addActionListener(e -> {
-            view.getBrowseSecondHandProductsP().setVisible(false);
-            view.getBrowseWalletOwnersP().setVisible(true);
-            try {
-                initializeActionsForMiniPanels();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
     }
 }

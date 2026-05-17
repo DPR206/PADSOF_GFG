@@ -76,6 +76,8 @@ public class ManagerNewGameC implements Controller {
                 g = new Game(price, nombre, description, ".\\resources\\app\\cart.png", stockk, num, rangoEdad,
                         GameStyle.DICE, cat);
             }
+            
+            JOptionPane.showMessageDialog(null, "Juego añadido correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
         });
     }
 }

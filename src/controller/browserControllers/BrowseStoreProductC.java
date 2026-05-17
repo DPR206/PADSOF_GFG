@@ -47,6 +47,7 @@ public class BrowseStoreProductC implements Controller {
     public void initializeActions() throws BadLocationException {
         List<StoreProduct> products = Store.getInstance().getStoreProductList();
         this.browser.setItemList(products);
+        this.browser.setCurrentPageNum(1);
 
         /*Añadimos el controlador*/
         List<AbstractMiniP> panels = this.browser.getMiniPanels();

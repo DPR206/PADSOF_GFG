@@ -13,7 +13,7 @@ import static main.Main.brownColour;
  * @author Ana O.R.
  * @version 1.0
  */
-public class BrowseMyWalletP extends AbstractBrowserP<SecondHandProduct> {
+public class BrowseMyWalletEditP extends AbstractBrowserP<SecondHandProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -21,7 +21,7 @@ public class BrowseMyWalletP extends AbstractBrowserP<SecondHandProduct> {
      * This panel's constructor
      * @throws BadLocationException the bad location exception
      */
-    public BrowseMyWalletP() throws BadLocationException {
+    public BrowseMyWalletEditP() throws BadLocationException {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         paintEverything();

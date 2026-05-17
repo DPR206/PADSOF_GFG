@@ -42,13 +42,10 @@ public abstract class User implements Serializable {
      */
     public User(UserType type, String pwd, String userName, String actualID, boolean asc) {
         this.type = type;
-        //DEBUG: System.out.println("Password will be: " + pwd);
         this.pwd = pwd;
         this.userName = userName;
         this.actualID = actualID;
         this.searching = new Searcher(new SearchStoreProducts(asc));
-        //DEBUG: System.out.println("Adding user...");
-        // Store.getInstance().addUser(this); <- Antes iba aquí pero en verdad no guardamos los unregistered
     }
 
     /**
@@ -177,11 +174,11 @@ public abstract class User implements Serializable {
     public String getUserName() {
         return this.userName;
     }
-    
+
     /**
      * Sets the new name of the user
      */
     public void setUserName(String newName) {
-    	this.userName = newName;
+        this.userName = newName;
     }
 }

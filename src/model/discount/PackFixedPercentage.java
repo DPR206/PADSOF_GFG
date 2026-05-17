@@ -90,7 +90,7 @@ public class PackFixedPercentage extends PackDiscount implements FixedPercentage
      * @return the written information of a discount
      */
     @Override
-    public String toString() { // DUE
+    public String toString() {
         /* [TYPE;ID;START_DATE;END_DATE;PRODUCTS;OVER_WHOLE];<PERCENTAGE>;GIFT;SPENDING_THRESHOLD;NUM_PRODS;DEDUCTION */
         return super.toString() + ";" + this.percentage + ";"  /*gift*/ + ";" /*spendingThreshold*/ + ";" /*numThreshold
          */ + ";" /*deduction*/;

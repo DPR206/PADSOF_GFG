@@ -13,11 +13,6 @@ public class Main {
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     public static void main(String[] args) {
-        /*try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } Da problemas*/
 
         UIManager.put("Panel.background", new ColorUIResource(246, 243, 238));
         UIManager.put("Menu.selectionBackground", backgroundColour);
@@ -26,19 +21,12 @@ public class Main {
         UIManager.put("TextPane.background", backgroundColour);
         UIManager.put("Button.background", brownColour);
         UIManager.put("Button.foreground", new Color(255, 255, 255));
-        //UIManager.put("ButtonUI", "org.jdesktop.swingx.plaf.ButtonCursorAddon$MetalButtonCursorUI");
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     /* Load store */
                     Store.getInstance().loadStore("data", "statics");
-
-//                    if (Store.getInstance().getEmployeeList().isEmpty()) {
-//                        Manager.getInstance().addEmployee("emp123", "alice", Permission.STORE, Permission.ORDER);
-//                        Manager.getInstance().addEmployee("emp456", "bob", Permission.ORDER);
-//                        Manager.getInstance().addEmployee("emp789", "carol", Permission.EXCHANGE);
-//                    } Ya están metidos
 
                     new App().setVisible(true);
                 } catch (Exception e) {

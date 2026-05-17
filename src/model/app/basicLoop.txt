@@ -2,19 +2,16 @@ private void nombre(){
     Scanner scanner = new Scanner(System.in);
     boolean exitLoop = false;
     while (!appExited && !exitLoop) {
-        System.out.println("\n <<<<<<<<<< DUE >>>>>>>>>> \n"); // Es para debug, borrar
         System.out.println("What do you wish to do? (enter the nº)");
         int i = 1;
-        System.out.println("\t[" + i++ + "] ");// DUE
-        basicLoopPrinter(i); // DUE: Change
+        System.out.println("\t[" + i++ + "] ");
+        basicLoopPrinter(i);
         chosenOption = scanner.nextInt();
 
         switch (chosenOption) {
-            case 1: /* DUE */
-                // DUE
+            case 1:
                 break;
-            case 2: /* DUE */
-                // DUE
+            case 2:
                 break;
             case 2: /* Exit */
                 exit();
@@ -27,7 +24,7 @@ private void nombre(){
 }
 
 ITEM SELECTION:
-System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n");
 System.out.println("Do you wish to select it via: ID or list number?");
 System.out.println("[1] List number");
 System.out.println("[2] ID");
@@ -35,21 +32,21 @@ int chosenOption2 = scanner.nextInt();
 
 switch (chosenOption2) {
     case 1:
-        System.out.println("Enter the number of the desired ###:"); // DUE
+        System.out.println("Enter the number of the desired ###:");
         this.itemNum = scanner.nextInt();
         leavePagedScreen();
-        seeStoreProduct(); // DUE
+        seeStoreProduct();
         break;
     case 2:
-        System.out.println("Enter the ID of the desired ###:"); // DUE
+        System.out.println("Enter the ID of the desired ###:");
         String productID = scanner.next();
-        int index = Pager.getInstance().getStoreProductIndex(filteredStore, productID); //DUE
+        int index = Pager.getInstance().getStoreProductIndex(filteredStore, productID);
         if (index != -1) {
             currentScreenPageNum = Pager.getInstance().getPageNumFromIndex(index);
             itemNum = Pager.getInstance().getItemNumFromIndex(index);
 
             leavePagedScreen();
-            seeStoreProduct(); // DUE
+            seeStoreProduct();
             break;
         }
         System.out.println("The ID wasn't valid");

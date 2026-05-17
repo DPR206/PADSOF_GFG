@@ -55,7 +55,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< managerLoop >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< managerLoop >>>>>>>>>> \n");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage packs");
@@ -110,7 +110,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< managePacks >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< managePacks >>>>>>>>>> \n");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage a pack");
@@ -120,7 +120,7 @@ public class ManagerLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Manage a pack */
-                    System.out.print("\n <<<<<<<<<< managePack >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< managePack >>>>>>>>>> \n");
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] ID");
@@ -156,7 +156,6 @@ public class ManagerLoop extends Loop {
                     ArrayList<StoreProduct> products = new ArrayList<>();
                     boolean stop = false;
                     while (!appExited && !stop) {
-                        // DUE: Podría ser un bucle de visualización paginado aparte
                         System.out.println("Enter the desired store product's id (type \"stop\" to use the ones " +
                                            "entered so far):");
                         String productId = scanner.next();
@@ -195,7 +194,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< managePack >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< managePack >>>>>>>>>> \n");
 
             Pack pack = Pager.getInstance()
                              .selectPackFromPage(Store.getInstance().getPacks(), currentScreenPageNum, itemNum);
@@ -246,7 +245,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageStoreProducts >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageStoreProducts >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
 
             if (filteredStore == null) { // Si no hay filtros se muestran todos los productos
@@ -267,7 +266,7 @@ public class ManagerLoop extends Loop {
                     System.out.println("Applying filters...");
                     break;
                 case 2:
-                    System.out.print("\n <<<<<<<<<< manageProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< manageProduct >>>>>>>>>> \n");
                     System.out.println("Enter the number of the desired product:");
                     int productNum = scanner.nextInt();
 
@@ -394,7 +393,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageComic >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageComic >>>>>>>>>> \n");
             comic.printAllInfo();
 
             System.out.println("What do you wish to change? (enter the nº)");
@@ -483,7 +482,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageGame >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageGame >>>>>>>>>> \n");
             game.printAllInfo();
 
             System.out.println("What do you wish to change? (enter the nº)");
@@ -569,7 +568,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageFigurine >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageFigurine >>>>>>>>>> \n");
             figurine.printAllInfo();
 
             System.out.println("What do you wish to change? (enter the nº)");
@@ -653,7 +652,7 @@ public class ManagerLoop extends Loop {
         while (!appExited && !exitLoop) {
             String categoryName, newCategoryName;
             Category category = null, newCategory = null;
-            System.out.print("\n <<<<<<<<<< categoryChanger >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< categoryChanger >>>>>>>>>> \n");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Replace an existing product's category");
@@ -734,7 +733,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< addStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< addStoreProduct >>>>>>>>>> \n");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Add a comic manually");
@@ -882,7 +881,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< manageEmployees >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< manageEmployees >>>>>>>>>> \n");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage an employee");
@@ -892,7 +891,7 @@ public class ManagerLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Manage an employee */
-                    System.out.print("\n <<<<<<<<<< manageEmployee >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< manageEmployee >>>>>>>>>> \n");
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] Username");
@@ -959,7 +958,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageEmployee 2 >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageEmployee 2 >>>>>>>>>> \n");
             Employee employee = Store.getInstance().selectEmployeeFromPage(currentScreenPageNum, itemNum);
             employee.printInfo();
 
@@ -1021,7 +1020,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< generateStatistics >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< generateStatistics >>>>>>>>>> \n");
             System.out.println("Which statistic do you wish to generate? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] List of store products by sales");
@@ -1109,7 +1108,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< productBySales >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< productBySales >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
             List<StoreProduct> products = Statistics.getINSTANCE().getProductsBySales();
             Pager.getInstance().printStoreProductListPage(products, currentScreenPageNum);
@@ -1148,7 +1147,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< clientsByOrders >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< clientsByOrders >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
             List<RegisteredClient> users = new ArrayList<>(Statistics.getINSTANCE().getUsersMostOrders());
             Pager.getInstance().printRegisteredClientListPage(users, currentScreenPageNum);
@@ -1187,7 +1186,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< clientsByExchanges >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< clientsByExchanges >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
             List<RegisteredClient> users = new ArrayList<>(Statistics.getINSTANCE().getUsersMostExchanges());
             Pager.getInstance().printRegisteredClientListPage(users, currentScreenPageNum);
@@ -1225,7 +1224,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< revenueByMonth >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< revenueByMonth >>>>>>>>>> \n");
             HashMap<Month, Double> revenueByMonth = Statistics.getINSTANCE().getRevenueByMonth();
             for (Map.Entry<Month, Double> entry : revenueByMonth.entrySet()) {
                 System.out.printf(entry.getKey() + ": " + entry.getValue() + "€");
@@ -1258,7 +1257,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< categoriesByRevenue >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< categoriesByRevenue >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
             HashMap<Category, Double> categories = Statistics.getINSTANCE().getRevenueAllCategories();
             Pager.getInstance().printCategoryHashMapPage(categories, currentScreenPageNum);
@@ -1296,7 +1295,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< productBySalesWithPercentage >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< productBySalesWithPercentage >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
             HashMap<StoreProduct, String> products = Statistics.getINSTANCE().getProductsTotalPercentage();
             Pager.getInstance().printStoreProductHashMapPage(products, currentScreenPageNum);
@@ -1337,7 +1336,7 @@ public class ManagerLoop extends Loop {
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
             System.out.print(
-                    "\n <<<<<<<<<< productBySalesWithPercentageCertainMonth >>>>>>>>>> \n"); // Es para debug, borrar
+                    "\n <<<<<<<<<< productBySalesWithPercentageCertainMonth >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
 
             System.out.println("Which month do you want to see? (January/February...)");
@@ -1380,7 +1379,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< manageDiscounts >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< manageDiscounts >>>>>>>>>> \n");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage a discount");
@@ -1390,7 +1389,7 @@ public class ManagerLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Manage an employee */
-                    System.out.print("\n <<<<<<<<<< manageDiscount >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< manageDiscount >>>>>>>>>> \n");
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] Username");
@@ -1421,7 +1420,7 @@ public class ManagerLoop extends Loop {
                             System.out.println("Invalid option");
                     }
                     break;
-                case 2: /* Add a discount */ // NOTE: You're here
+                case 2: /* Add a discount */
                     System.out.println("Enter the discount's start date: (example: 2007-12-03T10:15:30.)");
                     LocalDateTime startDate = LocalDateTime.parse(scanner.next());
                     System.out.println("Enter the discount's end date: (example: 2008-12-03T10:15:30.)");
@@ -1668,7 +1667,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< manageDiscount >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< manageDiscount >>>>>>>>>> \n");
 
             Discount discount = Store.getInstance().selectDiscountFromPage(currentScreenPageNum, itemNum);
             discount.bigPrintInfo();
@@ -1791,7 +1790,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageParameters >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageParameters >>>>>>>>>> \n");
             Manager manager = (Manager) currentUser;
             System.out.println("What do you wish to change? (enter the nº)");
             int i = 1;
@@ -1863,7 +1862,7 @@ public class ManagerLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeProfile >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< seeProfile >>>>>>>>>> \n");
             currentUser.printInfo();
 
             System.out.println("What do you wish to do? (enter the nº)");

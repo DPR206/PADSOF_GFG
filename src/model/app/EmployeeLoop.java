@@ -44,7 +44,7 @@ public class EmployeeLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< employeeLoop >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< employeeLoop >>>>>>>>>> \n"); 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             if (((Employee) currentUser).getSp() != null) {
@@ -111,7 +111,7 @@ public class EmployeeLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeProfile >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< seeProfile >>>>>>>>>> \n"); 
             currentUser.printInfo();
 
             System.out.println("What do you wish to do? (enter the nº)");
@@ -136,6 +136,6 @@ public class EmployeeLoop extends Loop {
      * It allows a registered client to browse and modify their notifications
      */
     protected void browseNotifications() {
-        // DUE
+
     }
 }

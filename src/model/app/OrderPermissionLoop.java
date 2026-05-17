@@ -46,7 +46,7 @@ public class OrderPermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< orderPermissionLoop >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< orderPermissionLoop >>>>>>>>>> \n"); 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage an order");
@@ -55,7 +55,7 @@ public class OrderPermissionLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Manage an order */
-                    System.out.print("\n <<<<<<<<<< manageOrder >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< manageOrder >>>>>>>>>> \n"); 
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] ID");
@@ -116,7 +116,7 @@ public class OrderPermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< manageOrder >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< manageOrder >>>>>>>>>> \n"); 
 
             Order order = Pager.getInstance()
                                .selectOrderFromPage(Store.getInstance().getOrders(), currentScreenPageNum, itemNum);

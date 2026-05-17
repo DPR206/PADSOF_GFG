@@ -244,7 +244,6 @@ public class App extends JFrame {
      */
     public void addCard(JPanel newView, String constraints) {
         cards.add(newView, constraints);
-        //newView.setVisible(false);
         newView.setOpaque(false);
         allPanels.put(constraints, newView);
     }

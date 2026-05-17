@@ -50,7 +50,7 @@ public class MainLoop extends Loop {
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
                    InvalidDni {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n <<<<<<<<<< main >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< main >>>>>>>>>> \n"); 
 
         Store.getInstance().loadStore("data", "statics");
 

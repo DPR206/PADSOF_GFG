@@ -117,7 +117,6 @@ public class OfferHistory implements Serializable {
 
     @Override
     public String toString() {
-        // DUE
         return "OfferHistory{" + "owner=" + owner + ", offers=" + offers + '}';
     }
 }

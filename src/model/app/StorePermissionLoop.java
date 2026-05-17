@@ -50,7 +50,7 @@ public class StorePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< storePermissionLoop >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< storePermissionLoop >>>>>>>>>> \n"); 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage packs");
@@ -92,7 +92,7 @@ public class StorePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< managePacks >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< managePacks >>>>>>>>>> \n"); 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage a pack");
@@ -102,7 +102,7 @@ public class StorePermissionLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Manage a pack */
-                    System.out.print("\n <<<<<<<<<< managePack >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< managePack >>>>>>>>>> \n"); 
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] ID");
@@ -179,7 +179,7 @@ public class StorePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< managePack >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< managePack >>>>>>>>>> \n"); 
 
             Pack pack = Pager.getInstance()
                              .selectPackFromPage(Store.getInstance().getPacks(), currentScreenPageNum, itemNum);
@@ -233,7 +233,7 @@ public class StorePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageStoreProducts >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageStoreProducts >>>>>>>>>> \n"); 
             System.out.println("Page: " + currentScreenPageNum);
 
             if (filteredStore == null) { // Si no hay filtros se muestran todos los productos
@@ -254,7 +254,7 @@ public class StorePermissionLoop extends Loop {
                     System.out.println("Applying filters...");
                     break;
                 case 2:
-                    System.out.print("\n <<<<<<<<<< manageProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< manageProduct >>>>>>>>>> \n"); 
                     System.out.println("Enter the number of the desired product:");
                     int productNum = scanner.nextInt();
 
@@ -384,7 +384,7 @@ public class StorePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageComic >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageComic >>>>>>>>>> \n"); 
             comic.printAllInfo();
 
             System.out.println("What do you wish to change? (enter the nº)");
@@ -476,7 +476,7 @@ public class StorePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageGame >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageGame >>>>>>>>>> \n"); 
             game.printAllInfo();
 
             System.out.println("What do you wish to change? (enter the nº)");
@@ -565,7 +565,7 @@ public class StorePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< manageFigurine >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< manageFigurine >>>>>>>>>> \n"); 
             figurine.printAllInfo();
 
             System.out.println("What do you wish to change? (enter the nº)");
@@ -652,7 +652,7 @@ public class StorePermissionLoop extends Loop {
         while (!appExited && !exitLoop) {
             String categoryName, newCategoryName;
             Category category = null, newCategory = null;
-            System.out.print("\n <<<<<<<<<< categoryChanger >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< categoryChanger >>>>>>>>>> \n"); 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Replace an existing product's category");
@@ -736,7 +736,7 @@ public class StorePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< addStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< addStoreProduct >>>>>>>>>> \n"); 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Add a comic manually");

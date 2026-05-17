@@ -22,7 +22,7 @@ import model.discount.Discount;
 public class StorePermission  implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L; /* Para el Save & Load */
-    private Store s; //creo que debería tener acceso al store si la va a modificar
+    private Store s;
     /** The permission's searcher */
     private Searcher searching;
 

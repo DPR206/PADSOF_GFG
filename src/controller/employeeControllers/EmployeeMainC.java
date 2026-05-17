@@ -24,7 +24,10 @@ import javax.swing.text.BadLocationException;
 public class EmployeeMainC implements Controller {
     private final EmployeeMainP view;
     private final App frame;
-
+    private ManagerGestionarPacks mgp = null;
+    private ManagerGestionarProductos mproducts = null;
+    private ManagerNewProduct create = null;
+    
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**

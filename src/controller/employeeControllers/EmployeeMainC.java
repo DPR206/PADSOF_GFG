@@ -89,8 +89,19 @@ public class EmployeeMainC implements Controller {
                 });
 
         view.getAddStoreProducts().addActionListener(
-                e -> JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Add Store Products", "Add Store",
-                        JOptionPane.INFORMATION_MESSAGE));
+                e -> {
+                	this.create = new ManagerNewProduct();
+                	new ManagerNewProductC(frame, create);
+                	
+                	this.frame.addCard(create, "EMPLOYEE CREATE PRODUCTS");
+                	try {
+						this.frame.changeVisibleCard("EMPLOYEE CREATE PRODUCT");
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+                }
+          );
 
         view.getManageExchanges().addActionListener(e -> {
             try {

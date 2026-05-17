@@ -72,7 +72,7 @@ public class App extends JFrame {
         loginPanel = new LoginP();
         signupPanel = new SignupP();
         unregisteredMainPanel = new UnregisteredMainP();
-        registeredMainPanel = new RegisteredMainP();
+        registeredMainPanel = new RegisteredMainP(this);
         employeeMainPanel = new EmployeeMainP(this);
         managerMainPanel = new ManagerMainP();
         searchPanel = new SearchPanel();
@@ -155,6 +155,7 @@ public class App extends JFrame {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+
     /**
      * Add product from their wallet.
      * @param product the product
@@ -304,6 +305,7 @@ public class App extends JFrame {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
     /**
      * It gets the app
      * @return the app

@@ -1,5 +1,6 @@
 package view.employeePanels;
 
+import view.App;
 import view.browserPanels.BrowseExchangesP;
 import view.browserPanels.BrowseSecondHandProductsP;
 
@@ -17,16 +18,17 @@ public class EmployeeExchangePermP extends JPanel {
     private final JButton valuateProducts = new JButton("Valuate Products");
     private final CardLayout cardLayout = new CardLayout();
     private final BrowseExchangesP browseExchangesP = new BrowseExchangesP();
-    private final BrowseSecondHandProductsP browseSecondHandProductsP =
-            new BrowseSecondHandProductsP("Add to Offer", null);
+    private final BrowseSecondHandProductsP browseSecondHandProductsP;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Instantiates a new Employee exchange perm p.
      * @throws BadLocationException the bad location exception
      */
-    public EmployeeExchangePermP() throws BadLocationException {
+    public EmployeeExchangePermP(App frame) throws BadLocationException {
         this.setLayout(new BorderLayout());
+        browseSecondHandProductsP = new BrowseSecondHandProductsP(frame, "Add to Offer", null);
 
         paintEverything();
     }

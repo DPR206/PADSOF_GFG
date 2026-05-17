@@ -8,8 +8,8 @@ import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-
 import java.awt.*;
+import java.util.List;
 
 import static main.Main.brownColour;
 
@@ -62,7 +62,9 @@ public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
 
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
-        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, "Add to Offer", null);
+        List<SecondHandProduct> alreadyChosen = frame.getMyProducts();
+        alreadyChosen.addAll(frame.getTheirProducts());
+        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, "Add to Offer", null, alreadyChosen);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

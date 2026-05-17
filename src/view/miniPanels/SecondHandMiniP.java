@@ -5,6 +5,7 @@ import model.product.SecondHandProduct;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
+import java.util.List;
 
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
@@ -31,8 +32,8 @@ public class SecondHandMiniP extends AbstractMiniP {
      * @param iconPath   the icon path
      * @throws BadLocationException the bad location exception
      */
-    public SecondHandMiniP(SecondHandProduct product, int index, String buttonName, String iconPath)
-            throws BadLocationException {
+    public SecondHandMiniP(SecondHandProduct product, int index, String buttonName, String iconPath,
+                           List<SecondHandProduct> alreadyChosen) throws BadLocationException {
         this.secondHandProduct = product;
         int width = 350;
         int height = 60;
@@ -42,6 +43,9 @@ public class SecondHandMiniP extends AbstractMiniP {
         button.setPreferredSize(new Dimension(buttonName.length() * 15, height));
         if (iconPath != null) {
             button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
+        }
+        if (alreadyChosen.contains(secondHandProduct)) {
+            button.setEnabled(false);
         }
 
         productImage = getImageLabel(product.getPhoto(), height, height);

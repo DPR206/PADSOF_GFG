@@ -1,5 +1,6 @@
 package view.clientPanels;
 
+import view.App;
 import view.browserPanels.BrowseStoreProductsP;
 import view.browserPanels.MixedBrowseStoreAddToCartP;
 
@@ -18,7 +19,7 @@ public class RegisteredMainP extends JPanel {
     private static final long serialVersionUID = 1L;
     private final JButton secondHand = new JButton("Second Hand");
     private final SearchPanel filterP = new SearchPanel();
-    private final RegisteredBrowseForOfferP makeOfferP = new RegisteredBrowseForOfferP();
+    private final RegisteredBrowseForOfferP makeOfferP;
     private final CardLayout cardLayout = new CardLayout();
     private JPanel bottom;
     private JButton filters = new JButton("Filters");
@@ -32,8 +33,10 @@ public class RegisteredMainP extends JPanel {
      * Instantiates a new Registered main p.
      * @throws BadLocationException the bad location exception
      */
-    public RegisteredMainP() throws BadLocationException {
+    public RegisteredMainP(App frame) throws BadLocationException {
         searchingP = new MixedBrowseStoreAddToCartP();
+
+        makeOfferP = new RegisteredBrowseForOfferP(frame);
 
         configurarEstructura();
     }

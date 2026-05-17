@@ -3,20 +3,15 @@ package controller.employeeControllers;
 import controller.Controller;
 import controller.browserControllers.BrowseExchangesC;
 import controller.browserControllers.BrowseValuationProductsC;
-import controller.managerControllers.ManagePacksC;
-import controller.managerControllers.ManagerManageProductsC;
-import controller.managerControllers.ManagerNewProductC;
+import controller.managerControllers.*;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseExchangesP;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.employeePanels.EmployeeMainP;
 import view.employeePanels.EmployeeOrder;
-import view.managerPanels.ManagerGestionarPacks;
-import view.managerPanels.ManagerGestionarProductos;
-import view.managerPanels.ManagerNewProduct;
+import view.managerPanels.*;
 
-import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
 /**
@@ -31,7 +26,7 @@ public class EmployeeMainC implements Controller {
     private ManagerGestionarProductos mproducts = null;
     private ManagerNewProduct create = null;
     private EmployeeOrder orders = null;
-    
+
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
@@ -48,7 +43,7 @@ public class EmployeeMainC implements Controller {
         new BrowseExchangesC(this.frame, exchangeView, model);
 
         try {
-            BrowseSecondHandProductsP valuateView = new BrowseSecondHandProductsP("Valuate", null);
+            BrowseSecondHandProductsP valuateView = new BrowseSecondHandProductsP(frame, "Valuate", null);
             this.frame.addCard(valuateView, "BROWSE_VALUATION_PRODUCTS");
             new BrowseValuationProductsC(this.frame, valuateView, model);
         } catch (BadLocationException ex) {
@@ -60,50 +55,46 @@ public class EmployeeMainC implements Controller {
 
     @Override
     public void initializeActions() {
-        view.getManagePacks().addActionListener(
-                e ->{
-                	this.mgp = new ManagerGestionarPacks(this.frame);
-                	new ManagePacksC(mgp, this.frame);
-                	
-                	this.frame.addCard(mgp, "EMPLOYEE MANAGE PACKS");
-                	try {
-						this.frame.changeVisibleCard("EMPLOYEE MANAGE PACKS");
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                });
+        view.getManagePacks().addActionListener(e -> {
+            this.mgp = new ManagerGestionarPacks(this.frame);
+            new ManagePacksC(mgp, this.frame);
 
-        view.getManageStoreProducts().addActionListener(
-                e -> {
-                	
-                	try {
-						this.mproducts = new ManagerGestionarProductos(this.frame);
-						new ManagerManageProductsC(mproducts, frame);
-						
-						this.frame.addCard(mproducts, "EMPLOYEE MANAGE STOREPRODUCTS");
-						this.frame.changeVisibleCard("EMPLOYEE MANAGE STOREPRODUCTS");
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                	
-                });
+            this.frame.addCard(mgp, "EMPLOYEE MANAGE PACKS");
+            try {
+                this.frame.changeVisibleCard("EMPLOYEE MANAGE PACKS");
+            } catch (BadLocationException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
 
-        view.getAddStoreProducts().addActionListener(
-                e -> {
-                	this.create = new ManagerNewProduct();
-                	new ManagerNewProductC(frame, create);
-                	
-                	this.frame.addCard(create, "EMPLOYEE CREATE PRODUCTS");
-                	try {
-						this.frame.changeVisibleCard("EMPLOYEE CREATE PRODUCTS");
-					} catch (BadLocationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                }
-          );
+        view.getManageStoreProducts().addActionListener(e -> {
+
+            try {
+                this.mproducts = new ManagerGestionarProductos(this.frame);
+                new ManagerManageProductsC(mproducts, frame);
+
+                this.frame.addCard(mproducts, "EMPLOYEE MANAGE STOREPRODUCTS");
+                this.frame.changeVisibleCard("EMPLOYEE MANAGE STOREPRODUCTS");
+            } catch (BadLocationException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+        });
+
+        view.getAddStoreProducts().addActionListener(e -> {
+            this.create = new ManagerNewProduct();
+            new ManagerNewProductC(frame, create);
+
+            this.frame.addCard(create, "EMPLOYEE CREATE PRODUCTS");
+            try {
+                this.frame.changeVisibleCard("EMPLOYEE CREATE PRODUCTS");
+            } catch (BadLocationException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
 
         view.getManageExchanges().addActionListener(e -> {
             try {
@@ -120,17 +111,17 @@ public class EmployeeMainC implements Controller {
                 throw new RuntimeException(ex);
             }
         });
-        view.getManageOrders().addActionListener(e->{
-        	this.orders = new EmployeeOrder();
-        	new EmployeOrderC(this.frame, this.orders);
-        	
-        	this.frame.addCard(this.orders, "EMPLOYEE MANAGE ORDERS");
-        	try {
-				this.frame.changeVisibleCard("EMPLOYEE MANAGE ORDERS");
-			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+        view.getManageOrders().addActionListener(e -> {
+            this.orders = new EmployeeOrder();
+            new EmployeOrderC(this.frame, this.orders);
+
+            this.frame.addCard(this.orders, "EMPLOYEE MANAGE ORDERS");
+            try {
+                this.frame.changeVisibleCard("EMPLOYEE MANAGE ORDERS");
+            } catch (BadLocationException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
     }
 }

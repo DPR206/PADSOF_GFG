@@ -6,6 +6,8 @@ import view.miniPanels.ThreeButtonSecondHandMiniP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
+import java.awt.*;
+
 import static main.Main.brownColour;
 
 /**
@@ -32,7 +34,7 @@ public class BrowseMyWalletEditP extends AbstractBrowserP<SecondHandProduct> {
         this.removeAll();
 
         JLabel title = new JLabel("My wallet'");
-        title.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, brownColour));
+        title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 20));
         this.add(title);
 
         super.addAllMiniPanels();

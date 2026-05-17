@@ -86,7 +86,7 @@ public class BannerEmployeeC implements Controller {
      */
     private void abrirIntercambios() throws BadLocationException {
 
-        EmployeeExchangePermP pagExchange = new EmployeeExchangePermP();
+        EmployeeExchangePermP pagExchange = new EmployeeExchangePermP(frame);
         new EmployeeExchangePermC(frame, Store.getInstance(), pagExchange);
 
         frame.addCard(pagExchange, "EMPLOYEE_EXCHANGE");

@@ -48,7 +48,8 @@ public class MaxiValuateSecondHandC implements Controller {
             JOptionPane.showMessageDialog(frame, "Product was valuated", "Product was valuated",
                     JOptionPane.INFORMATION_MESSAGE);
             try {
-                BrowseSecondHandProductsP browseSecondHandProductsP = new BrowseSecondHandProductsP("Valuate", null);
+                BrowseSecondHandProductsP browseSecondHandProductsP =
+                        new BrowseSecondHandProductsP(frame, "Valuate", null);
                 frame.addCard(browseSecondHandProductsP, "BROWSE_VALUATION_PRODUCTS");
                 frame.changeVisibleCard("BROWSE_VALUATION_PRODUCTS");
                 new BrowseValuationProductsC(frame, browseSecondHandProductsP, model);

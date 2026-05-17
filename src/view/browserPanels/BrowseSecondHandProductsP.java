@@ -1,10 +1,13 @@
 package view.browserPanels;
 
 import model.product.SecondHandProduct;
+import view.App;
 import view.miniPanels.SecondHandMiniP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+
+import java.util.List;
 
 import static main.Main.brownColour;
 
@@ -16,6 +19,7 @@ import static main.Main.brownColour;
 public class BrowseSecondHandProductsP extends AbstractBrowserP<SecondHandProduct> {
     private final String buttonName;
     private final String iconPath;
+    private final App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -25,8 +29,9 @@ public class BrowseSecondHandProductsP extends AbstractBrowserP<SecondHandProduc
      * @param iconPath   the icon path
      * @throws BadLocationException the bad location exception
      */
-    public BrowseSecondHandProductsP(String buttonName, String iconPath) throws BadLocationException {
+    public BrowseSecondHandProductsP(App frame, String buttonName, String iconPath) throws BadLocationException {
         super();
+        this.frame = frame;
         this.buttonName = buttonName;
         this.iconPath = iconPath;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -47,7 +52,9 @@ public class BrowseSecondHandProductsP extends AbstractBrowserP<SecondHandProduc
 
     @Override
     public void addMiniPanel(SecondHandProduct item, int index) throws BadLocationException {
-        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, buttonName, iconPath);
+        List<SecondHandProduct> alreadyChosen = frame.getMyProducts();
+        alreadyChosen.addAll(frame.getTheirProducts());
+        SecondHandMiniP miniProduct = new SecondHandMiniP(item, index, buttonName, iconPath, alreadyChosen);
         super.addMiniPanel(miniProduct);
         this.add(miniProduct);
     }

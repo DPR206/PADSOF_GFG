@@ -1,5 +1,6 @@
 package view.clientPanels;
 
+import view.App;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.browserPanels.BrowseWalletOwnersP;
 
@@ -25,12 +26,12 @@ public class RegisteredBrowseForOfferP extends JPanel {
      * Instantiates a new Registered make offer p.
      * @throws BadLocationException the bad location exception
      */
-    public RegisteredBrowseForOfferP() throws BadLocationException {
+    public RegisteredBrowseForOfferP(App frame) throws BadLocationException {
         super();
 
         this.add(new JLabel("Select a product:"));
 
-        browseSecondHandProductsP = new BrowseSecondHandProductsP("Add to offer", null);
+        browseSecondHandProductsP = new BrowseSecondHandProductsP(frame, "Add to offer", null);
         browseUsersP = new BrowseWalletOwnersP("Browse Wallet");
 
         this.setLayout(new BorderLayout());

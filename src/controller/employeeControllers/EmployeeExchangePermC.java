@@ -31,7 +31,7 @@ public class EmployeeExchangePermC implements Controller {
         new BrowseExchangesC(this.frame, exchangeView, model);
 
         try {
-            BrowseSecondHandProductsP valuateView = new BrowseSecondHandProductsP("Valuate", null);
+            BrowseSecondHandProductsP valuateView = new BrowseSecondHandProductsP(frame, "Valuate", null);
             this.frame.addCard(valuateView, "BROWSE_VALUATION_PRODUCTS");
             new BrowseValuationProductsC(this.frame, valuateView, model);
         } catch (BadLocationException ex) {

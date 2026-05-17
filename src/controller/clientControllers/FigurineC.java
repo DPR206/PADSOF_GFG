@@ -2,6 +2,7 @@ package controller.clientControllers;
 
 import controller.Controller;
 import model.order.Order;
+import model.order.OrderState;
 import model.product.Figurine;
 import model.product.Pack;
 import model.product.StoreProduct;
@@ -126,6 +127,10 @@ public class FigurineC implements Controller {
         }
     	
     	for (Order order : user.getOrderHistory().getOrders()) {
+    		
+    		if(order.getState() != OrderState.PICKED_UP)
+    			return false;
+    		
             if (order.getP() != null) {
                 for (Pack pack : order.getP()) {
                     if (checkPacks(pack)) return true;    

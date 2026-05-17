@@ -24,13 +24,14 @@ public class RegisteredWalletC implements Controller {
     private final BrowseMyWalletEditC walletBrowserController;
     private String photoPath;
 
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Instantiates a new Registered wallet c.
      * @param frame the frame
      * @param model the model
      * @param view  the view
      */
-    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public RegisteredWalletC(App frame, Store model, RegisteredWalletP view) {
         this.frame = frame;
         this.view = view;
@@ -42,6 +43,10 @@ public class RegisteredWalletC implements Controller {
 
     @Override
     public void initializeActions() {
+        view.getBtnOffers().addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Work in progress please send help");
+        });
+
         view.getAddProduct().addActionListener((e) -> {
             if (view.getProductTypeCmbBox().getSelectedIndex() != -1 && view.getNameField().getText() != null &&
                 view.getDescriptionField().getText() != null) {

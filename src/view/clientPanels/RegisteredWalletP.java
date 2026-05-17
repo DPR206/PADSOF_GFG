@@ -10,12 +10,15 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static view.ImageAdder.getScaledImage;
+
 /**
  * The type Registered wallet p.
  * @author Ana O.R.
  * @version 1.0
  */
 public class RegisteredWalletP extends JPanel {
+    private final JButton btnOffers = new JButton("Offers");
     private final BrowseMyWalletEditP browseMyWalletP;
     private final JComboBox<String> productTypeCmbBox;
     private final HashMap<String, ProductType> typesHashMap = new HashMap<>();
@@ -58,47 +61,51 @@ public class RegisteredWalletP extends JPanel {
             return;
         }
 
-        JPanel addProductPanel = new JPanel();
-        addProductPanel.setLayout(new BoxLayout(addProductPanel, BoxLayout.Y_AXIS));
+        JPanel lateralPanel = new JPanel();
+        lateralPanel.setLayout(new BoxLayout(lateralPanel, BoxLayout.Y_AXIS));
 
-        addProductPanel.add(Box.createVerticalGlue());
+        lateralPanel.add(Box.createVerticalGlue());
+
+        btnOffers.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\exchange.png"), 32, 32));
+        btnOffers.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lateralPanel.add(btnOffers);
 
         JLabel title = new JLabel("Add a product to my wallet");
         title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 15));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addProductPanel.add(title);
+        lateralPanel.add(title);
 
         JLabel nameLabel = new JLabel("Name:");
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addProductPanel.add(nameLabel);
+        lateralPanel.add(nameLabel);
 
         nameField.setColumns(15);
         nameField.setMaximumSize(nameField.getPreferredSize());
         nameField.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addProductPanel.add(nameField);
+        lateralPanel.add(nameField);
 
         JLabel descriptionLabel = new JLabel("Description:");
         descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addProductPanel.add(descriptionLabel);
+        lateralPanel.add(descriptionLabel);
 
         descriptionField.setMaximumSize(new Dimension(150, 500));
         descriptionField.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addProductPanel.add(descriptionField);
+        lateralPanel.add(descriptionField);
 
         productTypeCmbBox.setMaximumSize(productTypeCmbBox.getPreferredSize());
         productTypeCmbBox.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addProductPanel.add(productTypeCmbBox);
+        lateralPanel.add(productTypeCmbBox);
 
         photoChooser.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addProductPanel.add(photoChooser);
+        lateralPanel.add(photoChooser);
 
         addProduct.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addProductPanel.add(addProduct);
+        lateralPanel.add(addProduct);
 
-        addProductPanel.add(Box.createVerticalGlue());
+        lateralPanel.add(Box.createVerticalGlue());
 
         this.add(browseMyWalletP, BorderLayout.CENTER);
-        this.add(addProductPanel, BorderLayout.EAST);
+        this.add(lateralPanel, BorderLayout.EAST);
 
         this.revalidate();
         this.repaint();
@@ -118,6 +125,14 @@ public class RegisteredWalletP extends JPanel {
      */
     public BrowseMyWalletEditP getBrowseMyWalletP() {
         return browseMyWalletP;
+    }
+
+    /**
+     * It gets the btn offers
+     * @return the btn offers
+     */
+    public JButton getBtnOffers() {
+        return btnOffers;
     }
 
     /**

@@ -6,14 +6,18 @@ import view.App;
 import view.browserPanels.AbstractBrowserP;
 
 import javax.swing.text.BadLocationException;
+import java.awt.event.HierarchyEvent;
 
 /**
- * It defines a controller for a BrowserPanel
+ * It defines a controller for a browser
+ * @param <G> the type parameter
+ * @author Ana O.R.
+ * @version 1.0
  */
 public abstract class AbstractBrowserC<G> implements Controller {
-    private final AbstractBrowserP<G> view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final AbstractBrowserP<G> view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -28,8 +32,20 @@ public abstract class AbstractBrowserC<G> implements Controller {
         this.view = view;
         this.model = model;
 
-        //initializeActions();
+        view.addHierarchyListener(e -> {
+            if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
+                if (view.isShowing()) {
+                    refreshData();
+                    initializeActionsForMiniPanels();
+                }
+            }
+        });
     }
+
+    /**
+     * Refresh data.
+     */
+    public abstract void refreshData();
 
     @Override
     public void initializeActions() {
@@ -72,16 +88,36 @@ public abstract class AbstractBrowserC<G> implements Controller {
         });
     }
 
+    /**
+     * Initialize actions for mini panels.
+     */
     public abstract void initializeActionsForMiniPanels();
 
+    /**
+     * Refresh current page.
+     */
+    public abstract void refreshCurrentPage();
+
+    /**
+     * It gets the frame
+     * @return the frame
+     */
     public App getFrame() {
         return frame;
     }
 
+    /**
+     * It gets the model
+     * @return the model
+     */
     public Store getModel() {
         return model;
     }
 
+    /**
+     * It gets the view
+     * @return the view
+     */
     public AbstractBrowserP<G> getView() {
         return view;
     }

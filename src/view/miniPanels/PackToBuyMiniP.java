@@ -14,11 +14,18 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getPackImagePanel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Pack to buy mini p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class PackToBuyMiniP extends AbstractMiniP {
     private final JButton button;
     private final Pack p;
     private final JTextPane packInfo;
     private final JPanel packImage;
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new Pack mini p.
@@ -28,7 +35,6 @@ public class PackToBuyMiniP extends AbstractMiniP {
      * @param iconPath   the icon path
      * @throws BadLocationException the bad location exception
      */
-    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public PackToBuyMiniP(Pack p, int index, String buttonName, String iconPath) throws BadLocationException {
         super();
 
@@ -43,7 +49,7 @@ public class PackToBuyMiniP extends AbstractMiniP {
             button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
         }
 
-        this.packImage = getPackImagePanel(p, height, height);//getImageLabel(p.getPhoto(), height, height);
+        this.packImage = getPackImagePanel(p, height, height);
         this.packInfo = new JTextPane();
         this.packInfo.setEditable(false);
         this.packInfo.setFocusable(false);

@@ -12,11 +12,17 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Mixed browse store edit p.
+ * @author Sofia C.L..
+ * @version 1.0
+ */
 public class MixedBrowseStoreEditP extends AbstractMixedBrowserP<Pack, StoreProduct> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
+     * @throws BadLocationException the bad location exception
      */
     public MixedBrowseStoreEditP() throws BadLocationException {
         super();
@@ -54,7 +60,7 @@ public class MixedBrowseStoreEditP extends AbstractMixedBrowserP<Pack, StoreProd
 
     @Override
     public void addFirstMiniPanel(Pack item, int index) throws BadLocationException {
-        PackMiniP miniPack = new PackMiniP(item, index, "Manage", null);;
+        PackMiniP miniPack = new PackMiniP(item, index, "Manage", null);
         super.addFirstMiniPanel(miniPack);
         this.add(miniPack);
     }

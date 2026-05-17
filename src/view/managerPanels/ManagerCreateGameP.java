@@ -4,29 +4,34 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Manager create game p.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class ManagerCreateGameP extends JPanel {
 
     // ======== ATRIBUTOS ========
-    private JTextField txtCategoria;
+    private final JTextField txtCategoria;
 
-    private JTextField txtNombre;
-    private JTextField txtPrecio;
-    private JTextField txtStock;
-    private JTextField txtDescripcion;
+    private final JTextField txtNombre;
+    private final JTextField txtPrecio;
+    private final JTextField txtStock;
+    private final JTextField txtDescripcion;
 
-    private JTextField txtNumPlayers;
-    private JTextField txtAgeRange;
+    private final JTextField txtNumPlayers;
+    private final JTextField txtAgeRange;
 
-    private JRadioButton rbMesa;
-    private JRadioButton rbRol;
-    private JRadioButton rbCartas;
-    private ButtonGroup groupGameStyle;
+    private final JRadioButton rbMesa;
+    private final JRadioButton rbRol;
+    private final JRadioButton rbCartas;
+    private final JButton btnConfirmar;
 
-    private JButton btnConfirmar;
-    private JButton btnSubir;
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
-    private JLabel vistaPrevia;
-
+    /**
+     * Instantiates a new Manager create game p.
+     */
     public ManagerCreateGameP() {
 
         this.setLayout(new BorderLayout());
@@ -37,12 +42,12 @@ public class ManagerCreateGameP extends JPanel {
         JPanel superior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
         superior.setBackground(todo.getBackground());
 
-        btnSubir = new JButton("⬆ Subir fichero");
+        JButton btnSubir = new JButton("⬆ Subir fichero");
         btnSubir.setBackground(new Color(190, 150, 130));
         btnSubir.setForeground(Color.DARK_GRAY);
         btnSubir.setPreferredSize(new Dimension(150, 60));
 
-        vistaPrevia = new JLabel();
+        JLabel vistaPrevia = new JLabel();
         vistaPrevia.setPreferredSize(new Dimension(150, 60));
         vistaPrevia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -108,7 +113,7 @@ public class ManagerCreateGameP extends JPanel {
         rbCartas.setBackground(todo.getBackground());
 
         // Agruparlos
-        groupGameStyle = new ButtonGroup();
+        ButtonGroup groupGameStyle = new ButtonGroup();
         groupGameStyle.add(rbMesa);
         groupGameStyle.add(rbRol);
         groupGameStyle.add(rbCartas);
@@ -143,24 +148,99 @@ public class ManagerCreateGameP extends JPanel {
         this.add(todo, BorderLayout.CENTER);
     }
 
-    public JTextField getTxtCategoria() { return txtCategoria; }
-    public JTextField getTxtNombre() { return txtNombre; }
-    public JTextField getTxtPrecio() { return txtPrecio; }
-    public JTextField getTxtStock() { return txtStock; }
-    public JTextField getTxtDescripcion() { return txtDescripcion; }
+    /**
+     * It gets the btn confirmar
+     * @return the btn confirmar
+     */
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
 
-    public JTextField getTxtNumPlayers() { return txtNumPlayers; }
-    public JTextField getTxtAgeRange() { return txtAgeRange; }
+    /**
+     * It gets the rb cartas
+     * @return the rb cartas
+     */
+    public JRadioButton getRbCartas() {
+        return rbCartas;
+    }
 
-    public JRadioButton getRbMesa() { return rbMesa; }
-    public JRadioButton getRbRol() { return rbRol; }
-    public JRadioButton getRbCartas() { return rbCartas; }
+    /**
+     * It gets the rb mesa
+     * @return the rb mesa
+     */
+    public JRadioButton getRbMesa() {
+        return rbMesa;
+    }
 
-    public JButton getBtnConfirmar() { return btnConfirmar; }
-    public JButton getBtnSubir() { return btnSubir; }
-    public JLabel getVistaPrevia() { return vistaPrevia; }
-    
+    /**
+     * It gets the rb rol
+     * @return the rb rol
+     */
+    public JRadioButton getRbRol() {
+        return rbRol;
+    }
+
+    /**
+     * It gets the txt age range
+     * @return the txt age range
+     */
+    public JTextField getTxtAgeRange() {
+        return txtAgeRange;
+    }
+
+    /**
+     * It gets the txt categoria
+     * @return the txt categoria
+     */
+    public JTextField getTxtCategoria() {
+        return txtCategoria;
+    }
+
+    /**
+     * It gets the txt descripcion
+     * @return the txt descripcion
+     */
+    public JTextField getTxtDescripcion() {
+        return txtDescripcion;
+    }
+
+    /**
+     * It gets the txt nombre
+     * @return the txt nombre
+     */
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    /**
+     * It gets the txt num players
+     * @return the txt num players
+     */
+    public JTextField getTxtNumPlayers() {
+        return txtNumPlayers;
+    }
+
+    /**
+     * It gets the txt precio
+     * @return the txt precio
+     */
+    public JTextField getTxtPrecio() {
+        return txtPrecio;
+    }
+
+    /**
+     * It gets the txt stock
+     * @return the txt stock
+     */
+    public JTextField getTxtStock() {
+        return txtStock;
+    }
+
+    /**
+     * It sets the controller
+     * @param e the e
+     */
     public void setController(ActionListener e) {
-    	this.btnConfirmar.addActionListener(e);
+        this.btnConfirmar.addActionListener(e);
     }
 }

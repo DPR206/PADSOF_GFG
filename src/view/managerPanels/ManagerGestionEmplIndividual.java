@@ -4,16 +4,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Manager gestion empl individual.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class ManagerGestionEmplIndividual extends JPanel {
 
-    private JCheckBox storePerm = new JCheckBox("Trabajar con productos");
-    private JCheckBox orderPerm = new JCheckBox("Trabajar con pedidos");
-    private JCheckBox exchangePerm = new JCheckBox("Trabajar con intercambios");
-    private JTextField userName = new JTextField();
-    private JTextField pwd = new JTextField();
-    private JButton confirmar = new JButton("CONFIRMAR");
+    private final JCheckBox storePerm = new JCheckBox("Trabajar con productos");
+    private final JCheckBox orderPerm = new JCheckBox("Trabajar con pedidos");
+    private final JCheckBox exchangePerm = new JCheckBox("Trabajar con intercambios");
+    private final JTextField userName = new JTextField();
+    private final JTextField pwd = new JTextField();
+    private final JButton confirmar = new JButton("CONFIRMAR");
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager gestion empl individual.
+     */
     public ManagerGestionEmplIndividual() {
 
         super();
@@ -63,30 +72,58 @@ public class ManagerGestionEmplIndividual extends JPanel {
         this.add(panel, BorderLayout.CENTER);
     }
 
+    /**
+     * It gets the confirmar
+     * @return the confirmar
+     */
     public JButton getConfirmar() {
         return confirmar;
     }
 
+    /**
+     * It gets the exchange perm
+     * @return the exchange perm
+     */
     public JCheckBox getExchangePerm() {
         return this.exchangePerm;
     }
 
+    /**
+     * It gets the order perm
+     * @return the order perm
+     */
     public JCheckBox getOrderPerm() {
         return this.orderPerm;
     }
 
+    /**
+     * It gets the pwd
+     * @return the pwd
+     */
     public JTextField getPwd() {
         return this.pwd;
     }
 
+    /**
+     * It gets the store perm
+     * @return the store perm
+     */
     public JCheckBox getStorePerm() {
         return this.storePerm;
     }
 
+    /**
+     * It gets the user name
+     * @return the user name
+     */
     public JTextField getUserName() {
         return this.userName;
     }
 
+    /**
+     * It sets the controller
+     * @param e the e
+     */
     public void setController(ActionListener e) {
         this.confirmar.addActionListener(e);
     }

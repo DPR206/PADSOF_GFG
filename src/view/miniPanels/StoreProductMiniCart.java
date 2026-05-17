@@ -9,21 +9,35 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Store product mini cart.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class StoreProductMiniCart extends AbstractMiniP {
+    @Serial
     private static final long serialVersionUID = 1L;
     private final JButton deleteFromCart = new JButton("Delete from Cart");
     private final JButton applyChanges = new JButton("Apply Changes");
     private final StoreProduct storeProduct;
-    private final JLabel productImage;
     private final JTextPane productInfo;
-    private JSpinner unitSpinner;
+    private final JSpinner unitSpinner;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Store product mini cart.
+     * @param product the product
+     * @param index   the index
+     * @param cart    the cart
+     * @throws BadLocationException the bad location exception
+     */
     public StoreProductMiniCart(StoreProduct product, int index, Cart cart) throws BadLocationException {
         this.storeProduct = product;
         int width = 350;
@@ -33,7 +47,7 @@ public class StoreProductMiniCart extends AbstractMiniP {
         deleteFromCart.setPreferredSize(new Dimension(155, height));
         deleteFromCart.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), height / 4, height / 4));
 
-        productImage = getImageLabel(product.getPhoto(), height, height);
+        JLabel productImage = getImageLabel(product.getPhoto(), height, height);
         productInfo = new JTextPane();
         productInfo.setEditable(false);
         productInfo.setFocusable(false);
@@ -62,11 +76,6 @@ public class StoreProductMiniCart extends AbstractMiniP {
         } else {
             doc.insertString(doc.getLength(), "\n", attributes);
         }
-//        if (product.getStock() == 0) {
-//            StyleConstants.setForeground(attributes, Color.RED);
-//            StyleConstants.setItalic(attributes, true);
-//            deleteFromCart.setEnabled(false);
-//        }
 
         int initialValue;
         if (cart != null) {
@@ -111,29 +120,42 @@ public class StoreProductMiniCart extends AbstractMiniP {
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    /**
+     * It gets the apply changes
+     * @return the apply changes
+     */
     public JButton getApplyChanges() {
         return applyChanges;
     }
 
     /**
+     * It gets the delete from cart
      * @return the deleteFromCart
      */
     public JButton getDeleteFromCart() {
         return deleteFromCart;
     }
 
-    public JLabel getProductImage() {
-        return productImage;
-    }
-
+    /**
+     * It gets the product info
+     * @return the product info
+     */
     public JTextPane getProductInfo() {
         return productInfo;
     }
 
+    /**
+     * It gets the store product
+     * @return the store product
+     */
     public StoreProduct getStoreProduct() {
         return storeProduct;
     }
 
+    /**
+     * It gets the unit spinner
+     * @return the unit spinner
+     */
     public JSpinner getUnitSpinner() {
         return unitSpinner;
     }

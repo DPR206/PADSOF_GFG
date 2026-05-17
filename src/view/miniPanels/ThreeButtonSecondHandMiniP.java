@@ -10,6 +10,11 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Three button second hand mini p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class ThreeButtonSecondHandMiniP extends AbstractMiniP {
     private final JButton firstButton;
     private final JButton secondButton;
@@ -19,6 +24,19 @@ public class ThreeButtonSecondHandMiniP extends AbstractMiniP {
     private final JTextPane productInfo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Three button second hand mini p.
+     * @param product          the product
+     * @param index            the index
+     * @param firstButtonName  the first button name
+     * @param firstIconPath    the first icon path
+     * @param secondButtonName the second button name
+     * @param secondIconPath   the second icon path
+     * @param thirdButtonName  the third button name
+     * @param thirdIconPath    the third icon path
+     * @throws BadLocationException the bad location exception
+     */
     public ThreeButtonSecondHandMiniP(SecondHandProduct product, int index, String firstButtonName,
                                       String firstIconPath, String secondButtonName, String secondIconPath,
                                       String thirdButtonName, String thirdIconPath) throws BadLocationException {
@@ -97,26 +115,50 @@ public class ThreeButtonSecondHandMiniP extends AbstractMiniP {
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    /**
+     * It gets the first button
+     * @return the first button
+     */
     public JButton getFirstButton() {
         return firstButton;
     }
 
+    /**
+     * It gets the product image
+     * @return the product image
+     */
     public JLabel getProductImage() {
         return productImage;
     }
 
+    /**
+     * It gets the product info
+     * @return the product info
+     */
     public JTextPane getProductInfo() {
         return productInfo;
     }
 
+    /**
+     * It gets the second button
+     * @return the second button
+     */
     public JButton getSecondButton() {
         return secondButton;
     }
 
+    /**
+     * It gets the second hand product
+     * @return the second hand product
+     */
     public SecondHandProduct getSecondHandProduct() {
         return secondHandProduct;
     }
 
+    /**
+     * It gets the third button
+     * @return the third button
+     */
     public JButton getThirdButton() {
         return thirdButton;
     }

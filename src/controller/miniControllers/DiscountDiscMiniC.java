@@ -15,10 +15,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * The type Discount disc mini c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class DiscountDiscMiniC implements Controller {
-    private final DiscountMiniP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final DiscountMiniP view;
+    private final App frame;
+    private final Store model;
     private final BrowseDiscountsC browserController;
     private final BrowseDiscountsP browserPanel;
 
@@ -26,8 +31,11 @@ public class DiscountDiscMiniC implements Controller {
 
     /**
      * This controller's constructor
-     * @param frame the controller's frame
-     * @param model the controller's model
+     * @param frame             the controller's frame
+     * @param model             the controller's model
+     * @param view              the view
+     * @param browserController the browser controller
+     * @param browserPanel      the browser panel
      */
     public DiscountDiscMiniC(App frame, Store model, DiscountMiniP view, BrowseDiscountsC browserController,
                              BrowseDiscountsP browserPanel) {
@@ -89,11 +97,7 @@ public class DiscountDiscMiniC implements Controller {
                     "Discount: " + view.getDiscount().getId() + " was deleted from the store", "Delete Discount",
                     JOptionPane.INFORMATION_MESSAGE);
 
-            try {
-                browserPanel.paintEverything();
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
+            browserController.refreshCurrentPage();
             browserController.initializeActionsForMiniPanels();
 
         });

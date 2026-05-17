@@ -6,18 +6,27 @@ import view.App;
 import view.managerPanels.GestorChangePwd;
 import view.managerPanels.ManagerProfile;
 
+import javax.swing.text.BadLocationException;
+
+/**
+ * The type Manager profile c.
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class ManagerProfileC implements Controller {
 
-    private ManagerProfile vista;
-    private Manager user;
-    private App frame;
+    private final ManagerProfile vista;
+    private final Manager user;
+    private final App frame;
     private boolean passwordRevelada = false;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * @param vista
-     * @param user
+     * Instantiates a new Manager profile c.
+     * @param vista the vista
+     * @param user  the user
+     * @param frame the frame
      */
     public ManagerProfileC(ManagerProfile vista, Manager user, App frame) {
         this.vista = vista;
@@ -31,16 +40,18 @@ public class ManagerProfileC implements Controller {
 
         vista.setNom(user.getUserName());
 
-        vista.getBtnMostrar().addActionListener(e -> {
-            showPassword();
-        });
+        vista.getBtnMostrar().addActionListener(e -> showPassword());
 
         vista.getBtnCambiar().addActionListener(e -> {
-            cambiarPwd();
+            try {
+                cambiarPwd();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 
-    private void cambiarPwd() {
+    private void cambiarPwd() throws BadLocationException {
 
         GestorChangePwd pagPwd = new GestorChangePwd();
 

@@ -1,47 +1,51 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.AbstractMixedBrowserC;
 import controller.browserControllers.MixedBrowseCartC;
 import controller.clientControllers.CarritoC;
 import controller.clientControllers.PackC;
-import model.product.Pack;
-import model.product.StoreProduct;
 import model.store.Store;
 import model.user.*;
 import view.App;
-import view.browserPanels.AbstractMixedBrowserP;
 import view.clientPanels.CarritoP;
 import view.clientPanels.PackP;
 import view.miniPanels.PackCartMiniP;
 
-import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Pack cart mini c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class PackCartMiniC implements Controller {
 
-    private final PackCartMiniP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
-    private final AbstractMixedBrowserC<Pack, StoreProduct> browserController;
-    private final AbstractMixedBrowserP<Pack, StoreProduct> browserPanel;
+    private final PackCartMiniP view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public PackCartMiniC(App frame, Store model, PackCartMiniP view,
-                         AbstractMixedBrowserC<Pack, StoreProduct> browserController,
-                         AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
+
+    /**
+     * Instantiates a new Pack cart mini c.
+     * @param frame the frame
+     * @param model the model
+     * @param view  the view
+     */
+    public PackCartMiniC(App frame, Store model, PackCartMiniP view) {
         this.frame = frame;
         this.view = view;
         this.model = model;
-        this.browserController = browserController;
-        this.browserPanel = browserPanel;
 
         initializeActions();
     }
 
+    /**
+     * Update interface.
+     */
     public void updateInterface() {
         try {
             CarritoP carritoVista = new CarritoP();
@@ -62,10 +66,14 @@ public class PackCartMiniC implements Controller {
         view.getPackImage().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                   PackP packV = new PackP();
-                   new PackC(frame, packV, view.getPack());
-                   frame.addCard(packV, "PACK_V");
-                   frame.changeVisibleCard("PACK_V");
+                    PackP packV = new PackP();
+                    new PackC(frame, packV, view.getPack());
+                    frame.addCard(packV, "PACK_V");
+                    try {
+                        frame.changeVisibleCard("PACK_V");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -73,10 +81,14 @@ public class PackCartMiniC implements Controller {
         view.getPackInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                	PackP packV = new PackP();
+                    PackP packV = new PackP();
                     new PackC(frame, packV, view.getPack());
                     frame.addCard(packV, "PACK_V");
-                    frame.changeVisibleCard("PACK_V");
+                    try {
+                        frame.changeVisibleCard("PACK_V");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });

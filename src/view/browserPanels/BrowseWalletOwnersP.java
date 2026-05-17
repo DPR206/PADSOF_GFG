@@ -9,14 +9,21 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse wallet owners p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseWalletOwnersP extends AbstractClusterBrowserP<RegisteredClient> {
     private final String buttonName;
-    private JPanel usersPanel = new JPanel(new GridLayout(3, 3));
+    private final JPanel usersPanel = new JPanel(new GridLayout(3, 3));
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
+     * @param buttonName the button name
+     * @throws BadLocationException the bad location exception
      */
     public BrowseWalletOwnersP(String buttonName) throws BadLocationException {
         super(9);

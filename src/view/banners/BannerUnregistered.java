@@ -1,18 +1,23 @@
 package view.banners;
 
-import view.App;
-
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
+/**
+ * The type Banner unregistered.
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class BannerUnregistered extends JPanel {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private final JButton btnGoBack;
-    private JButton home;
-    private JButton btnCarrito;
-    private JButton btnPerfil;
-    private JButton btnExit;
+    private final JButton home;
+    private final JButton btnCarrito;
+    private final JButton btnPerfil;
+    private final JButton btnExit;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -116,6 +121,7 @@ public class BannerUnregistered extends JPanel {
     }
 
     /**
+     * It gets the btn carrito
      * @return the btnCarrito
      */
     public JButton getBtnCarrito() {
@@ -123,6 +129,7 @@ public class BannerUnregistered extends JPanel {
     }
 
     /**
+     * It gets the btn exit
      * @return the btnExit
      */
     public JButton getBtnExit() {
@@ -138,6 +145,7 @@ public class BannerUnregistered extends JPanel {
     }
 
     /**
+     * It gets the btn perfil
      * @return the btnPerfil
      */
     public JButton getBtnPerfil() {
@@ -145,6 +153,7 @@ public class BannerUnregistered extends JPanel {
     }
 
     /**
+     * It gets the home
      * @return the home
      */
     public JButton getHome() {

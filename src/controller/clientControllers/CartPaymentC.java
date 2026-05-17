@@ -11,16 +11,23 @@ import view.clientPanels.PaymentP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
+/**
+ * The type Cart payment c.
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class CartPaymentC {
 
-    private App frame;
-    private PaymentP view;
-    private RegisteredClient user;
+    private final App frame;
+    private final PaymentP view;
+    private final RegisteredClient user;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
-     * @param frame
-     * @param view
+     * Instantiates a new Cart payment c.
+     * @param frame the frame
+     * @param view  the view
      */
     public CartPaymentC(App frame, PaymentP view) {
         this.frame = frame;
@@ -59,11 +66,6 @@ public class CartPaymentC {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
-
         });
-
-        //frame.changeVisibleCard("CART");
-
     }
-
 }

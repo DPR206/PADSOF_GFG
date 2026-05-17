@@ -8,13 +8,23 @@ import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Registered make offer p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class RegisteredMakeOfferP extends JPanel {
-    private JButton browseAvailableProducts = new JButton("Browse available products");
-    private JButton browseUsers = new JButton("Browse users");
-    private BrowseSecondHandProductsP browseSecondHandProductsP;
-    private BrowseWalletOwnersP browseUsersP;
+    private final JButton browseAvailableProducts = new JButton("Browse available products");
+    private final JButton browseUsers = new JButton("Browse users");
+    private final BrowseSecondHandProductsP browseSecondHandProductsP;
+    private final BrowseWalletOwnersP browseUsersP;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Registered make offer p.
+     * @throws BadLocationException the bad location exception
+     */
     public RegisteredMakeOfferP() throws BadLocationException {
         super();
 
@@ -42,27 +52,43 @@ public class RegisteredMakeOfferP extends JPanel {
         this.add(others, BorderLayout.CENTER);
     }
 
+    /**
+     * It gets the browse available products
+     * @return the browse available products
+     */
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     public JButton getBrowseAvailableProducts() {
         return browseAvailableProducts;
     }
 
+    /**
+     * It gets the browse second hand products p
+     * @return the browse second hand products p
+     */
     public BrowseSecondHandProductsP getBrowseSecondHandProductsP() {
         return browseSecondHandProductsP;
     }
 
+    /**
+     * It gets the browse users
+     * @return the browse users
+     */
     public JButton getBrowseUsers() {
         return browseUsers;
     }
 
-    public BrowseWalletOwnersP getBrowseUsersP() {
-        return browseUsersP;
-    }
-
+    /**
+     * It gets the browse wallet owners p
+     * @return the browse wallet owners p
+     */
     public BrowseWalletOwnersP getBrowseWalletOwnersP() {
         return browseUsersP;
     }
 
+    /**
+     * It sets the controller
+     * @param e the e
+     */
     public void setController(ActionListener e) {
         this.browseAvailableProducts.addActionListener(e);
         this.browseUsers.addActionListener(e);

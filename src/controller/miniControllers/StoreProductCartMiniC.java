@@ -1,40 +1,29 @@
 package controller.miniControllers;
 
 import controller.Controller;
-import controller.browserControllers.AbstractMixedBrowserC;
 import controller.browserControllers.MixedBrowseCartC;
-import controller.clientControllers.CarritoC;
-import controller.clientControllers.ComicC;
-import controller.clientControllers.FigurineC;
-import controller.clientControllers.GameC;
-import model.product.Comic;
-import model.product.Figurine;
-import model.product.Game;
-import model.product.Pack;
-import model.product.ProductType;
-import model.product.StoreProduct;
+import controller.clientControllers.*;
+import model.product.*;
 import model.store.Store;
 import model.user.*;
 import view.App;
-import view.browserPanels.AbstractMixedBrowserP;
-import view.clientPanels.CarritoP;
-import view.clientPanels.ComicP;
-import view.clientPanels.FigurineP;
-import view.clientPanels.GameP;
+import view.clientPanels.*;
 import view.miniPanels.StoreProductMiniCart;
 
-import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Store product cart mini c.
+ * @author Duna P.R. & Ana O.R.
+ * @version 1.0
+ */
 public class StoreProductCartMiniC implements Controller {
-    private final StoreProductMiniCart view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
-    private final AbstractMixedBrowserC<Pack, StoreProduct> browserController;
-    private final AbstractMixedBrowserP<Pack, StoreProduct> browserPanel;
+    private final StoreProductMiniCart view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -42,19 +31,19 @@ public class StoreProductCartMiniC implements Controller {
      * This controller's constructor
      * @param frame the controller's frame
      * @param model the controller's model
+     * @param view  the view
      */
-    public StoreProductCartMiniC(App frame, Store model, StoreProductMiniCart view,
-                                 AbstractMixedBrowserC<Pack, StoreProduct> browserController,
-                                 AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {
+    public StoreProductCartMiniC(App frame, Store model, StoreProductMiniCart view) {
         this.frame = frame;
         this.view = view;
         this.model = model;
-        this.browserController = browserController;
-        this.browserPanel = browserPanel;
 
         initializeActions();
     }
 
+    /**
+     * Update interface.
+     */
     public void updateInterface() {
         try {
             CarritoP carritoVista = new CarritoP();
@@ -71,42 +60,43 @@ public class StoreProductCartMiniC implements Controller {
     public void initializeActions() {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
-//        if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
-//            view.setCart(((RegisteredClient) frame.getUser()).getC());
-//        } else if (frame.getUser().getType() == UserType.UNREGISTERED_CLIENT) {
-//            view.setCart(((UnregisteredClient) frame.getUser()).getCart());
-//        }
-//        try {
-//            browserPanel.paintEverything();
-//        } catch (BadLocationException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//        browserController.initializeActionsForMiniPanels();
 
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                	switch(view.getStoreProduct().getType()) {
-                    case ProductType.COMIC: 
-                    	ComicP comicV = new ComicP();
-                    	new ComicC(frame, comicV, (Comic) view.getStoreProduct());
-                    	frame.addCard(comicV, "COMIC_VIEW");
-                    	frame.changeVisibleCard("COMIC_VIEW");
-                    	break;
-                    case ProductType.GAME:
-                    	GameP gameV = new GameP();
-                    	new GameC(frame, gameV, (Game) view.getStoreProduct());
-                    	frame.addCard(gameV, "GAME_VIEW");
-                    	frame.changeVisibleCard("GAME_VIEW");
-                    	break;
-                    case ProductType.FIGURINE:
-                    	FigurineP figurineV = new FigurineP();
-                    	new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
-                    	frame.addCard(figurineV, "FIGURINE_VIEW");
-                    	frame.changeVisibleCard("FIGURINE_VIEW");
-                    	break;
-					default:
-						break;
+                    switch (view.getStoreProduct().getType()) {
+                        case ProductType.COMIC:
+                            ComicP comicV = new ComicP();
+                            new ComicC(frame, comicV, (Comic) view.getStoreProduct());
+                            frame.addCard(comicV, "COMIC_VIEW");
+                            try {
+                                frame.changeVisibleCard("COMIC_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            break;
+                        case ProductType.GAME:
+                            GameP gameV = new GameP();
+                            new GameC(frame, gameV, (Game) view.getStoreProduct());
+                            frame.addCard(gameV, "GAME_VIEW");
+                            try {
+                                frame.changeVisibleCard("GAME_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            break;
+                        case ProductType.FIGURINE:
+                            FigurineP figurineV = new FigurineP();
+                            new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
+                            frame.addCard(figurineV, "FIGURINE_VIEW");
+                            try {
+                                frame.changeVisibleCard("FIGURINE_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -115,27 +105,39 @@ public class StoreProductCartMiniC implements Controller {
         view.getProductInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                	switch(view.getStoreProduct().getType()) {
-                    case ProductType.COMIC: 
-                    	ComicP comicV = new ComicP();
-                    	new ComicC(frame, comicV, (Comic) view.getStoreProduct());
-                    	frame.addCard(comicV, "COMIC_VIEW");
-                    	frame.changeVisibleCard("COMIC_VIEW");
-                    	break;
-                    case ProductType.GAME:
-                    	GameP gameV = new GameP();
-                    	new GameC(frame, gameV, (Game) view.getStoreProduct());
-                    	frame.addCard(gameV, "GAME_VIEW");
-                    	frame.changeVisibleCard("GAME_VIEW");
-                    	break;
-                    case ProductType.FIGURINE:
-                    	FigurineP figurineV = new FigurineP();
-                    	new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
-                    	frame.addCard(figurineV, "FIGURINE_VIEW");
-                    	frame.changeVisibleCard("FIGURINE_VIEW");
-                    	break;
-					default:
-						break;
+                    switch (view.getStoreProduct().getType()) {
+                        case ProductType.COMIC:
+                            ComicP comicV = new ComicP();
+                            new ComicC(frame, comicV, (Comic) view.getStoreProduct());
+                            frame.addCard(comicV, "COMIC_VIEW");
+                            try {
+                                frame.changeVisibleCard("COMIC_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            break;
+                        case ProductType.GAME:
+                            GameP gameV = new GameP();
+                            new GameC(frame, gameV, (Game) view.getStoreProduct());
+                            frame.addCard(gameV, "GAME_VIEW");
+                            try {
+                                frame.changeVisibleCard("GAME_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            break;
+                        case ProductType.FIGURINE:
+                            FigurineP figurineV = new FigurineP();
+                            new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
+                            frame.addCard(figurineV, "FIGURINE_VIEW");
+                            try {
+                                frame.changeVisibleCard("FIGURINE_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -148,19 +150,6 @@ public class StoreProductCartMiniC implements Controller {
                 ((UnregisteredClient) frame.getUser()).deleteCart(view.getStoreProduct());
             }
             updateInterface();
-//            try {
-//                CarritoP carritoVista = new CarritoP();
-//                new CarritoC(carritoVista, frame);
-//                new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems());
-//            } catch (BadLocationException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            try {
-//                browserPanel.paintEverything();
-//            } catch (BadLocationException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            browserController.initializeActionsForMiniPanels();
         });
 
         view.getApplyChanges().addActionListener(e -> {
@@ -172,23 +161,6 @@ public class StoreProductCartMiniC implements Controller {
                         (int) view.getUnitSpinner().getValue());
             }
             updateInterface();
-//            try {
-//                CarritoP carritoVista;
-//                carritoVista = new CarritoP();
-//                new CarritoC(carritoVista, frame);
-//                new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
-//                frame.addCard(carritoVista, "CART");
-//                frame.changeVisibleCard("CART");
-//            } catch (BadLocationException ex) {
-//                throw new RuntimeException(ex);
-//            }
-
-//            try {
-//                browserPanel.paintEverything();
-//            } catch (BadLocationException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//            browserController.initializeActionsForMiniPanels();
         });
     }
 }

@@ -13,12 +13,25 @@ import javax.swing.text.BadLocationException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The type Manager discounts c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class ManagerDiscountsC implements Controller {
-    private final ManagerDiscountsP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final ManagerDiscountsP view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager discounts c.
+     * @param frame the frame
+     * @param model the model
+     * @param view  the view
+     * @throws BadLocationException the bad location exception
+     */
     public ManagerDiscountsC(App frame, Store model, ManagerDiscountsP view) throws BadLocationException {
         this.frame = frame;
         this.model = model;
@@ -27,6 +40,9 @@ public class ManagerDiscountsC implements Controller {
         initializeActions();
     }
 
+    /**
+     * Update controllers.
+     */
     public void updateControllers() {
         new BrowseDiscountsC(frame, view.getBrowseDiscountsP(), model, view);
         new BrowseCategoriesDiscC(frame, view.getBrowseCategoriesDiscP(), model, view);
@@ -204,21 +220,34 @@ public class ManagerDiscountsC implements Controller {
         });
     }
 
+    /**
+     * It allows the manager to choose the gift
+     * @throws BadLocationException the bad location exception
+     */
     private void chooseGift() throws BadLocationException {
         view.changeToChooseGiftView();
         updateControllers();
     }
 
+    /**
+     * It allows the manager to add store products to the discount
+     */
     private void chooseStoreProducts() {
         view.changeToChooseProductsView();
         updateControllers();
     }
 
+    /**
+     * It allows the manager to add packs to the discount
+     */
     private void choosePacks() {
         view.changeToChoosePacksView();
         updateControllers();
     }
 
+    /**
+     * It allows the manager to add categories to the discount
+     */
     private void chooseCategories() {
         view.changeToChooseCategoriesView();
         updateControllers();

@@ -9,12 +9,24 @@ import view.clientPanels.RegisteredMakeOfferP;
 
 import javax.swing.text.BadLocationException;
 
+/**
+ * The type Registered make offer c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class RegisteredMakeOfferC implements Controller {
-    private final RegisteredMakeOfferP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final RegisteredMakeOfferP view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Registered make offer c.
+     * @param frame the frame
+     * @param model the model
+     * @param view  the view
+     */
     public RegisteredMakeOfferC(App frame, Store model, RegisteredMakeOfferP view) {
         this.frame = frame;
         this.view = view;
@@ -23,6 +35,10 @@ public class RegisteredMakeOfferC implements Controller {
         initializeActions();
     }
 
+    /**
+     * Initialize actions for mini panels.
+     * @throws BadLocationException the bad location exception
+     */
     public void initializeActionsForMiniPanels() throws BadLocationException {
         new BrowseWalletOwnersC(frame, view.getBrowseWalletOwnersP(), model);
         new BrowseSecondHandProductsForOfferC(frame, view.getBrowseSecondHandProductsP(), model);
@@ -40,7 +56,6 @@ public class RegisteredMakeOfferC implements Controller {
             view.getBrowseWalletOwnersP().setVisible(false);
             view.getBrowseSecondHandProductsP().setVisible(true);
             try {
-                //view.getBrowseSecondHandProductsP().setCurrentPageNum(1);
                 initializeActionsForMiniPanels();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
@@ -51,7 +66,6 @@ public class RegisteredMakeOfferC implements Controller {
             view.getBrowseSecondHandProductsP().setVisible(false);
             view.getBrowseWalletOwnersP().setVisible(true);
             try {
-                //view.getBrowseWalletOwnersP().setCurrentPageNum(1);
                 initializeActionsForMiniPanels();
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);

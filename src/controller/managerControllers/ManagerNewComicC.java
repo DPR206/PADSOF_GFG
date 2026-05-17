@@ -4,20 +4,27 @@ import controller.Controller;
 import model.product.Category;
 import model.product.Comic;
 import model.store.Store;
-import view.App;
 import view.managerPanels.ManagerCreateComicP;
 
 import javax.swing.*;
 import java.time.Year;
 
+/**
+ * The type Manager new comic c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class ManagerNewComicC implements Controller {
-    private ManagerCreateComicP mnc;
-    private App frame;
+    private final ManagerCreateComicP mnc;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public ManagerNewComicC(ManagerCreateComicP mnc, App frame) {
+
+    /**
+     * Instantiates a new Manager new comic c.
+     * @param mnc the mnc
+     */
+    public ManagerNewComicC(ManagerCreateComicP mnc) {
         this.mnc = mnc;
-        this.frame = frame;
 
         initializeActions();
     }

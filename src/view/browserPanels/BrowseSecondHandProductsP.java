@@ -8,6 +8,11 @@ import javax.swing.text.BadLocationException;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse second hand products p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseSecondHandProductsP extends AbstractBrowserP<SecondHandProduct> {
     private final String buttonName;
     private final String iconPath;
@@ -16,6 +21,9 @@ public class BrowseSecondHandProductsP extends AbstractBrowserP<SecondHandProduc
 
     /**
      * This panel's constructor
+     * @param buttonName the button name
+     * @param iconPath   the icon path
+     * @throws BadLocationException the bad location exception
      */
     public BrowseSecondHandProductsP(String buttonName, String iconPath) throws BadLocationException {
         super();

@@ -49,10 +49,17 @@ public class App extends JFrame {
     private final BannerEmployee bannerEmployeePanel;
     private final BannerManager bannerManagerPanel;
     private final List<String> lastShownPanels = new ArrayList<>();
+    private final Store model = Store.getInstance();
     private String currentShownPanel;
     private User mainUser = new UnregisteredClient(true);
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new App.
+     * @throws IOException          the io exception
+     * @throws BadLocationException the bad location exception
+     */
     public App() throws IOException, BadLocationException {
         super("Gifts for Geeks"); /* JFrame's title */
         this.setIconImage(new ImageIcon(".\\resources\\app\\logo.png").getImage());
@@ -61,7 +68,6 @@ public class App extends JFrame {
         welcomePanel = new WelcomeP();
         loginPanel = new LoginP();
         signupPanel = new SignupP();
-
         unregisteredMainPanel = new UnregisteredMainP();
         registeredMainPanel = new RegisteredMainP();
         employeeMainPanel = new EmployeeMainP(this);
@@ -72,24 +78,6 @@ public class App extends JFrame {
         bannerRegisteredPanel = new BannerRegistered();
         bannerEmployeePanel = new BannerEmployee();
         bannerManagerPanel = new BannerManager();
-
-        /* Model */
-        Store model = Store.getInstance();
-
-        /* Controllers */
-        new WelcomeC(this, model);
-        new LoginC(this, model);
-        new SignupC(this, model);
-
-        new UnregisteredMainC(this, model);
-        new RegisteredMainC(this, model);
-        new EmployeeMainC(this, model);
-        new ManagerMainC(this, model);
-
-        new BannerUnregisteredC(bannerUnregisteredPanel, this);
-        new BannerRegisteredC(bannerRegisteredPanel, this);
-        new BannerEmployeeC(bannerEmployeePanel, this);
-        new BannerManagerC(bannerManagerPanel, this);
 
         /* Add views to main window */
         ImagePanel bgPanel = new ImagePanel(".\\resources\\app\\background.png");
@@ -119,6 +107,22 @@ public class App extends JFrame {
         addBanner(bannerRegisteredPanel, "BANNER_REGISTERED");
         addBanner(bannerEmployeePanel, "BANNER_EMPLOYEE");
         addBanner(bannerManagerPanel, "BANNER_MANAGER");
+
+        /* Controllers */
+        new WelcomeC(this, model);
+        new LoginC(this, model);
+        new SignupC(this, model);
+
+        new UnregisteredMainC(this, model);
+        new RegisteredMainC(this, model);
+
+        new EmployeeMainC(this, model);
+        new ManagerMainC(this, model);
+
+        new BannerUnregisteredC(bannerUnregisteredPanel, this, model);
+        new BannerRegisteredC(bannerRegisteredPanel, this, model);
+        new BannerEmployeeC(bannerEmployeePanel, this);
+        new BannerManagerC(bannerManagerPanel, this);
 
         /* Main panel */
         changeVisibleBanner("BANNER_UNREGISTERED");
@@ -154,7 +158,12 @@ public class App extends JFrame {
         allPanels.put(constraints, newView);
     }
 
-    public void changeVisibleCard(String cardName) {
+    /**
+     * Change visible card.
+     * @param cardName the card name
+     * @throws BadLocationException the bad location exception
+     */
+    public void changeVisibleCard(String cardName) throws BadLocationException {
         System.out.println("Changing visible card: " + cardName);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
@@ -168,14 +177,22 @@ public class App extends JFrame {
         updateBanners();
     }
 
-    public void updateBanners() {
-        new BannerUnregisteredC(bannerUnregisteredPanel, this);
-        new BannerRegisteredC(bannerRegisteredPanel, this);
+    /**
+     * Update banners.
+     * @throws BadLocationException the bad location exception
+     */
+    public void updateBanners() throws BadLocationException {
+        new BannerUnregisteredC(bannerUnregisteredPanel, this, model);
+        new BannerRegisteredC(bannerRegisteredPanel, this, model);
         new BannerEmployeeC(bannerEmployeePanel, this);
         new BannerManagerC(bannerManagerPanel, this);
     }
 
-    public void goBack() {
+    /**
+     * Go back.
+     * @throws BadLocationException the bad location exception
+     */
+    public void goBack() throws BadLocationException {
         if (!lastShownPanels.isEmpty()) {
             String previousPanel = lastShownPanels.removeLast();
             System.out.println("Going back to card: " + previousPanel);
@@ -190,6 +207,10 @@ public class App extends JFrame {
         }
     }
 
+    /**
+     * Change visible banner.
+     * @param cardName the card name
+     */
     public void changeVisibleBanner(String cardName) {
         CardLayout cl = (CardLayout) (banners.getLayout());
         cl.show(banners, cardName);
@@ -198,6 +219,11 @@ public class App extends JFrame {
         banners.repaint();
     }
 
+    /**
+     * Add card.
+     * @param newView     the new view
+     * @param constraints the constraints
+     */
     public void addCard(JPanel newView, String constraints) {
         cards.add(newView, constraints);
         //newView.setVisible(false);
@@ -205,11 +231,21 @@ public class App extends JFrame {
         allPanels.put(constraints, newView);
     }
 
-    public void updateView(String cardName, String bannerName) {
+    /**
+     * Update view.
+     * @param cardName   the card name
+     * @param bannerName the banner name
+     * @throws BadLocationException the bad location exception
+     */
+    public void updateView(String cardName, String bannerName) throws BadLocationException {
         changeVisibleCard(cardName);
         changeVisibleBanner(bannerName);
     }
 
+    /**
+     * Change current user.
+     * @param user the user
+     */
     public void changeCurrentUser(User user) {
         this.lastShownPanels.clear();
         switch (user.getType()) {
@@ -222,10 +258,17 @@ public class App extends JFrame {
         this.mainUser = user;
     }
 
+    /**
+     * The type Image panel.
+     */
     public class ImagePanel extends JPanel {
         private static final long serialVersionUID = 1L;
         private final Image backgroundImage;
 
+        /**
+         * Instantiates a new Image panel.
+         * @param filePath the file path
+         */
         /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
         public ImagePanel(String filePath) {
             this.backgroundImage = new ImageIcon(filePath).getImage();
@@ -240,54 +283,108 @@ public class App extends JFrame {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
+
+    /**
+     * It gets the app
+     * @return the app
+     */
     public App getApp() {
         return this;
     }
 
+    /**
+     * It gets the employee main panel
+     * @return the employee main panel
+     */
     public EmployeeMainP getEmployeeMainPanel() {
         return employeeMainPanel;
     }
 
+    /**
+     * It gets the last shown panels
+     * @return the last shown panels
+     */
     public List<String> getLastShownPanels() {
         return lastShownPanels;
     }
 
+    /**
+     * It gets the login panel
+     * @return the login panel
+     */
     public LoginP getLoginPanel() {
         return loginPanel;
     }
 
+    /**
+     * It gets the manager main panel
+     * @return the manager main panel
+     */
     public ManagerMainP getManagerMainPanel() {
         return managerMainPanel;
     }
 
+    /**
+     * It gets the registered main panel
+     * @return the registered main panel
+     */
     public RegisteredMainP getRegisteredMainPanel() {
         return registeredMainPanel;
     }
 
+    /**
+     * It gets the search panel
+     * @return the search panel
+     */
     public SearchPanel getSearchPanel() {
         return searchPanel;
     }
 
+    /**
+     * It gets the signup panel
+     * @return the signup panel
+     */
     public SignupP getSignupPanel() {
         return signupPanel;
     }
 
+    /**
+     * It gets the unregistered main panel
+     * @return the unregistered main panel
+     */
     public UnregisteredMainP getUnregisteredMainPanel() {
         return unregisteredMainPanel;
     }
 
+    /**
+     * It gets the user
+     * @return the user
+     */
     public User getUser() {
         return this.mainUser;
     }
 
+    /**
+     * It gets the view from name
+     * @param name the name
+     * @return the view from name
+     */
     public JPanel getViewFromName(String name) {
         return allPanels.get(name);
     }
 
+    /**
+     * It gets the welcome panel
+     * @return the welcome panel
+     */
     public WelcomeP getWelcomePanel() {
         return welcomePanel;
     }
 
+    /**
+     * It sets the unregistered client
+     * @param u the u
+     */
     public void setUnregisteredClient(UnregisteredClient u) {
         this.mainUser = u;
     }

@@ -4,20 +4,27 @@ import model.user.Employee;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Employee mini p.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class EmployeeMiniP extends AbstractMiniP {
 
-    private final JButton gestionar = new JButton("Gestionar");
     private final Employee emp;
-    private final JTextPane employeeInfo = new JTextPane();
-    private final JLabel employeeIcon;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Employee mini p.
+     * @param emp   the emp
+     * @param index the index
+     */
     public EmployeeMiniP(Employee emp, int index) {
 
         super();
@@ -34,13 +41,10 @@ public class EmployeeMiniP extends AbstractMiniP {
 
         // ---------------- ICONO ----------------
         // IMPORTANTE: cuadrado
-        this.employeeIcon = getImageLabel(
-                ".\\resources\\app\\default_user.png",
-                50,
-                50
-        );
+        JLabel employeeIcon = getImageLabel(".\\resources\\app\\default_user.png", 50, 50);
 
         // ---------------- INFO ----------------
+        JTextPane employeeInfo = new JTextPane();
         employeeInfo.setEditable(false);
         employeeInfo.setFocusable(false);
         employeeInfo.setOpaque(false);
@@ -63,15 +67,10 @@ public class EmployeeMiniP extends AbstractMiniP {
         indexNum.setPreferredSize(new Dimension(25, 50));
 
         // ---------------- BOTÓN ----------------
+        JButton gestionar = new JButton("Gestionar");
         gestionar.setPreferredSize(new Dimension(110, 45));
 
-        gestionar.setIcon(
-                getScaledImage(
-                        new ImageIcon(".\\resources\\app\\cart.png"),
-                        20,
-                        20
-                )
-        );
+        gestionar.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\cart.png"), 20, 20));
 
         // ---------------- AÑADIR COMPONENTES ----------------
         this.add(indexNum);
@@ -80,30 +79,14 @@ public class EmployeeMiniP extends AbstractMiniP {
         this.add(gestionar);
 
         // BORDE
-        this.setBorder(
-                BorderFactory.createMatteBorder(
-                        0,
-                        1,
-                        1,
-                        1,
-                        brownColour
-                )
-        );
-    }
-
-    public Employee getEmployee() {
-        return this.emp;
-    }
-
-    public JTextPane getPackInfo() {
-        return this.employeeInfo;
+        this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
     /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
+     * It gets the employee
+     * @return the employee
      */
-    public void setController(ActionListener c) {
-        gestionar.addActionListener(c);
+    public Employee getEmployee() {
+        return this.emp;
     }
 }

@@ -1,18 +1,30 @@
 package controller.notifications;
 
-import java.awt.event.ItemEvent;
-
-import javax.swing.*;
-
-import model.notification.*;
+import model.notification.NotificationSettings;
+import model.notification.NotificationType;
 import model.user.RegisteredClient;
 import view.notifications.NotificationsSettingsClientP;
 
+import javax.swing.*;
+import java.awt.event.ItemEvent;
+
+/**
+ * The type Notifications settings client c.
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class NotificationsSettingsClientC {
 
-	private NotificationsSettingsClientP vista;
-    private RegisteredClient modelo;
+    private final NotificationsSettingsClientP vista;
+    private final RegisteredClient modelo;
 
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Notifications settings client c.
+     * @param vista  the vista
+     * @param modelo the modelo
+     */
     public NotificationsSettingsClientC(NotificationsSettingsClientP vista, RegisteredClient modelo) {
         this.vista = vista;
         this.modelo = modelo;
@@ -23,8 +35,8 @@ public class NotificationsSettingsClientC {
         NotificationSettings settings = modelo.getNotificationHistory().getSettings();
 
         enlazarCheck(vista.getDisc(), NotificationType.DISCOUNT, settings);
-	    enlazarCheck(vista.getOffers(), NotificationType.EXCHANGE, settings);
-	    enlazarCheck(vista.getNewSecondHand(), NotificationType.NEW_SECONDHAND_PRODUCT, settings);
+        enlazarCheck(vista.getOffers(), NotificationType.EXCHANGE, settings);
+        enlazarCheck(vista.getNewSecondHand(), NotificationType.NEW_SECONDHAND_PRODUCT, settings);
         enlazarCheck(vista.getOrderState(), NotificationType.ORDER, settings);
         enlazarCheck(vista.getPackCart(), NotificationType.PACK_CART, settings);
         enlazarCheck(vista.getProductCart(), NotificationType.PRODUCT_CART, settings);
@@ -71,9 +83,7 @@ public class NotificationsSettingsClientC {
 
     private void enlazarCheck(JCheckBox check, NotificationType tipo, NotificationSettings settings) {
         check.setSelected(settings.getInterests().getOrDefault(tipo, false));
-        check.addItemListener(e -> {
-            settings.changeInterest(tipo, e.getStateChange() == ItemEvent.SELECTED);
-        });
+        check.addItemListener(e -> settings.changeInterest(tipo, e.getStateChange() == ItemEvent.SELECTED));
     }
 
     private void configurarChecksBloqueados(NotificationsSettingsClientP panel) {
@@ -87,9 +97,8 @@ public class NotificationsSettingsClientC {
 
             // Lanzamos el aviso
             JOptionPane.showMessageDialog(vista,
-                "The notifications of your payments must be active to assure your account's security. ",
-                "Non-permitted action",
-                JOptionPane.WARNING_MESSAGE);
+                    "The notifications of your payments must be active to assure your account's security. ",
+                    "Non-permitted action", JOptionPane.WARNING_MESSAGE);
         });
 
         // Listener para Order State
@@ -97,10 +106,8 @@ public class NotificationsSettingsClientC {
             JCheckBox source = (JCheckBox) e.getSource();
             source.setSelected(true);
 
-            JOptionPane.showMessageDialog(vista,
-                "You can't disable the tracking of your active orders. ",
-                "Non-permitted action",
-                JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(vista, "You can't disable the tracking of your active orders. ",
+                    "Non-permitted action", JOptionPane.WARNING_MESSAGE);
         });
     }
 }

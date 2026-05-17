@@ -6,22 +6,32 @@ import view.browserPanels.MixedBrowseStoreAddToCartP;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
+import java.io.Serial;
 
+/**
+ * The type Registered main p.
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class RegisteredMainP extends JPanel {
+    @Serial
     private static final long serialVersionUID = 1L;
-    JPanel bottom;
+    private final JButton secondHand = new JButton("Second Hand");
+    private final SearchPanel filterP = new SearchPanel();
+    private final RegisteredMakeOfferP makeOfferP = new RegisteredMakeOfferP();
+    private final CardLayout cardLayout = new CardLayout();
+    private JPanel bottom;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
-    private JButton secondHand = new JButton("Second Hand");
-    private SearchPanel filterP = new SearchPanel();
     private MixedBrowseStoreAddToCartP searchingP;
-    private RegisteredMakeOfferP makeOfferP = new RegisteredMakeOfferP();
-    private JPanel productSearch;
-    private JPanel others;
-    private CardLayout cardLayout = new CardLayout();
     private BrowseStoreProductsP recommendedProductsPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Registered main p.
+     * @throws BadLocationException the bad location exception
+     */
     public RegisteredMainP() throws BadLocationException {
         searchingP = new MixedBrowseStoreAddToCartP();
 
@@ -31,7 +41,7 @@ public class RegisteredMainP extends JPanel {
     private void configurarEstructura() throws BadLocationException {
         this.setLayout(new BorderLayout());
 
-        others = new JPanel(new BorderLayout());
+        JPanel others = new JPanel(new BorderLayout());
         others.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JPanel botones = new JPanel(new GridLayout(0, 3));
@@ -64,116 +74,109 @@ public class RegisteredMainP extends JPanel {
         this.add(others, BorderLayout.CENTER);
     }
 
+    /**
+     * It gets the bottom
+     * @return the bottom
+     */
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
     public JPanel getBottom() {
         return bottom;
     }
 
-    public void setBottom(JPanel newBottom) {
-        this.bottom = newBottom;
-    }
-
+    /**
+     * It gets the browse panel
+     * @return the browse panel
+     */
     public MixedBrowseStoreAddToCartP getBrowsePanel() {
         return this.searchingP;
     }
 
+    /**
+     * It gets the card layout
+     * @return the card layout
+     */
     public CardLayout getCardLayout() {
         return cardLayout;
     }
 
-    public void setCardLayout(CardLayout newCardLayout) {
-        this.cardLayout = newCardLayout;
-    }
-
-    public SearchPanel getFilterP() {
-        return filterP;
-    }
-
-    public void setFilterP(SearchPanel newFilterP) {
-        this.filterP = newFilterP;
-    }
-
+    /**
+     * It gets the filter panel
+     * @return the filter panel
+     */
     public SearchPanel getFilterPanel() {
         return this.filterP;
     }
 
+    /**
+     * It gets the filters
+     * @return the filters
+     */
     public JButton getFilters() {
         return filters;
     }
 
+    /**
+     * It sets the filters
+     * @param newFilters the new filters
+     */
     public void setFilters(JButton newFilters) {
         this.filters = newFilters;
     }
 
+    /**
+     * It gets the make offer p
+     * @return the make offer p
+     */
     public RegisteredMakeOfferP getMakeOfferP() {
         return makeOfferP;
     }
 
-    public void setMakeOfferP(RegisteredMakeOfferP newMakeOfferP) {
-        this.makeOfferP = newMakeOfferP;
-    }
-
-    public JPanel getOthers() {
-        return others;
-    }
-
-    public void setOthers(JPanel newOthers) {
-        this.others = newOthers;
-    }
-
-    public JPanel getProductSearch() {
-        return productSearch;
-    }
-
-    public void setProductSearch(JPanel newProductSearch) {
-        this.productSearch = newProductSearch;
-    }
-
+    /**
+     * It gets the recommended products panel
+     * @return the recommended products panel
+     */
     public BrowseStoreProductsP getRecommendedProductsPanel() {
         return recommendedProductsPanel;
     }
 
-    public void setRecommendedProductsPanel(BrowseStoreProductsP newRecommendedProductsPanel) {
-        this.recommendedProductsPanel = newRecommendedProductsPanel;
-    }
-
+    /**
+     * It gets the search
+     * @return the search
+     */
     public JButton getSearch() {
         return search;
     }
 
+    /**
+     * It sets the search
+     * @param newSearch the new search
+     */
     public void setSearch(JButton newSearch) {
         this.search = newSearch;
     }
 
+    /**
+     * It gets the searching
+     * @return the searching
+     */
     public MixedBrowseStoreAddToCartP getSearching() {
         return searchingP;
     }
 
+    /**
+     * It sets the searching
+     * @param newSearching the new searching
+     */
     public void setSearching(MixedBrowseStoreAddToCartP newSearching) {
         this.searchingP = newSearching;
     }
 
-    public MixedBrowseStoreAddToCartP getSearchingP() {
-        return searchingP;
-    }
-
-    public void setSearchingP(MixedBrowseStoreAddToCartP newSearchingP) {
-        this.searchingP = newSearchingP;
-    }
-
+    /**
+     * It gets the second hand
+     * @return the second hand
+     */
     public JButton getSecondHand() {
         return secondHand;
     }
 
-    public void setSecondHand(JButton newSecondHand) {
-        this.secondHand = newSecondHand;
-    }
-
-    public void setPanelInferior(JPanel panel, String nombre) {
-        this.bottom.add(panel, nombre);
-        this.cardLayout.show(bottom, nombre);
-
-        this.revalidate();
-        this.repaint();
-    }
 }

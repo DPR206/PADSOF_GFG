@@ -2,42 +2,59 @@ package controller.bannerControllers;
 
 import controller.Controller;
 import controller.browserControllers.MixedBrowseCartC;
-import controller.browserControllers.MixedBrowseMyWalletC;
-import controller.clientControllers.CarritoC;
-import controller.clientControllers.RegisteredProfileC;
+import controller.clientControllers.*;
 import controller.notifications.NotificacionesC;
 import model.store.Store;
-import model.user.*;
+import model.user.RegisteredClient;
+import model.user.UnregisteredClient;
 import view.App;
 import view.banners.BannerRegistered;
-import view.browserPanels.BrowseMyWalletP;
-import view.clientPanels.CarritoP;
-import view.clientPanels.RegisteredProfile;
+import view.clientPanels.*;
 import view.notifications.NotificacionP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.event.ActionListener;
 
+/**
+ * It implements the registered user's banner
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class BannerRegisteredC implements Controller {
 
-    private BannerRegistered vista;
-    private App frame;
+    private final BannerRegistered vista;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     *
-     * @param vista
-     * @param frame
+     * Instantiates a new Banner registered c.
+     * @param vista the vista
+     * @param frame the frame
      */
-    public BannerRegisteredC(BannerRegistered vista, App frame) {
+    public BannerRegisteredC(BannerRegistered vista, App frame, Store model) throws BadLocationException {
         this.vista = vista;
         this.frame = frame;
+        this.model = model;
+
+        NotificacionP pagNots = new NotificacionP();
+        new NotificacionesC(pagNots, frame);
+        this.frame.addCard(pagNots, "NOTIFICATIONS");
+
+        CarritoP carritoVista = new CarritoP();
+        new CarritoC(carritoVista, frame);
+        new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
+        frame.addCard(carritoVista, "CART");
+
         initializeActions();
     }
 
-    private void abrirWelcome() {
+    /**
+     * It opens the welcome page
+     */
+    private void abrirWelcome() throws BadLocationException {
 
         int respuesta =
                 JOptionPane.showConfirmDialog(this.frame, "Are you sure you want to log out?", "Confirm log out",
@@ -51,53 +68,51 @@ public class BannerRegisteredC implements Controller {
         }
     }
 
+    /**
+     * It opens the wallet page
+     * @throws BadLocationException the bad location exception
+     */
     private void abrirCartera() throws BadLocationException {
-
-        BrowseMyWalletP pagWallet = new BrowseMyWalletP((RegisteredClient) frame.getUser());
-        new MixedBrowseMyWalletC(frame, Store.getInstance(), pagWallet);
-
+        RegisteredWalletP pagWallet = new RegisteredWalletP((RegisteredClient) frame.getUser());
+        new RegisteredWalletC(frame, model, pagWallet);
         frame.addCard(pagWallet, "WALLET");
         frame.changeVisibleCard("WALLET");
-
     }
 
-    private void abrirNots() {
-
-        NotificacionP pagNots = new NotificacionP();
-
-        new NotificacionesC(pagNots, frame);
-
-        this.frame.addCard(pagNots, "NOTIFICATIONS");
+    /**
+     * It opens the notifications page
+     */
+    private void abrirNots() throws BadLocationException {
         this.frame.changeVisibleCard("NOTIFICATIONS");
     }
 
-    private void abrirPerfil() {
-
-        User usuario = frame.getUser();
+    /**
+     * It opens the profile page
+     */
+    private void abrirPerfil() throws BadLocationException {
         RegisteredProfile profile = new RegisteredProfile();
-
-        new RegisteredProfileC(profile, (RegisteredClient) usuario);
-
+        new RegisteredProfileC(profile, (RegisteredClient) frame.getUser());
         this.frame.addCard(profile, "PROFILE_REGISTERED");
         this.frame.changeVisibleCard("PROFILE_REGISTERED");
     }
 
-    private void abrirPaginaPrincipal() {
+    /**
+     * It opens the main page
+     */
+    private void abrirPaginaPrincipal() throws BadLocationException {
         frame.changeVisibleCard("REGISTERED_MAIN");
     }
 
+    /**
+     * It opens the cart
+     * @throws BadLocationException the bad location exception
+     */
     private void abrirCarritoDelCliente() throws BadLocationException {
-
-        CarritoP carritoVista = new CarritoP();
-        System.out.println("Check........");
-        new CarritoC(carritoVista, frame);
-        new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
-
-        frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");
 
     }
 
+    @Override
     public void initializeActions() {
         vista.getBtnGoBack().setEnabled(!frame.getLastShownPanels().isEmpty());
         vista.revalidate();
@@ -118,21 +133,33 @@ public class BannerRegisteredC implements Controller {
             vista.getHome().removeActionListener(listener);
         }
         vista.getHome().addActionListener(e -> {
-            abrirPaginaPrincipal();
+            try {
+                abrirPaginaPrincipal();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
             vista.getBtnPerfil().removeActionListener(listener);
         }
         vista.getBtnPerfil().addActionListener(e -> {
-            abrirPerfil();
+            try {
+                abrirPerfil();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         for (ActionListener listener : vista.getBtnNots().getActionListeners()) {
             vista.getBtnNots().removeActionListener(listener);
         }
         vista.getBtnNots().addActionListener(e -> {
-            abrirNots();
+            try {
+                abrirNots();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         for (ActionListener listener : vista.getCartera().getActionListeners()) {
@@ -151,18 +178,22 @@ public class BannerRegisteredC implements Controller {
         }
         vista.getBtnExit().addActionListener(e -> {
             this.frame.changeCurrentUser(new UnregisteredClient(true));
-            abrirWelcome();
+            try {
+                abrirWelcome();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
             vista.getBtnGoBack().removeActionListener(listener);
         }
         vista.getBtnGoBack().addActionListener(e -> {
-            goBack();
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
-    }
-
-    private void goBack() {
-        frame.goBack();
     }
 }

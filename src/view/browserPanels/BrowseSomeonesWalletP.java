@@ -10,6 +10,11 @@ import javax.swing.text.BadLocationException;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse someone's wallet p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
     private final User owner;
 
@@ -17,6 +22,8 @@ public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
 
     /**
      * This panel's constructor
+     * @param owner the owner
+     * @throws BadLocationException the bad location exception
      */
     public BrowseSomeonesWalletP(RegisteredClient owner) throws BadLocationException {
         super();
@@ -50,6 +57,10 @@ public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
         this.add(miniProduct);
     }
 
+    /**
+     * It gets the owner
+     * @return the owner
+     */
     public User getOwner() {
         return owner;
     }

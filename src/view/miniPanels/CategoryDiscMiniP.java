@@ -4,7 +4,8 @@ import model.product.Category;
 import view.ImageAdder;
 
 import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,14 +13,24 @@ import java.util.List;
 import static main.Main.brownColour;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Category disc mini p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class CategoryDiscMiniP extends AbstractMiniP {
     private final JButton button;
     private final Category category;
-    private final JTextPane categoryInfo;
-    private final JLabel categoryImage;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public CategoryDiscMiniP(Category category, int index, List<Category> alreadyChosen) throws BadLocationException {
+
+    /**
+     * Instantiates a new Category disc mini p.
+     * @param category      the category
+     * @param index         the index
+     * @param alreadyChosen the already chosen
+     */
+    public CategoryDiscMiniP(Category category, int index, List<Category> alreadyChosen) {
         super();
 
         this.category = category;
@@ -35,10 +46,10 @@ public class CategoryDiscMiniP extends AbstractMiniP {
             button.setEnabled(false);
         }
 
-        this.categoryImage = ImageAdder.getImageLabel(".\\resources\\app\\check.png", 50, 50);
-        this.categoryInfo = new JTextPane();
-        this.categoryInfo.setEditable(false);
-        this.categoryInfo.setFocusable(false);
+        JLabel categoryImage = ImageAdder.getImageLabel(".\\resources\\app\\check.png", 50, 50);
+        JTextPane categoryInfo = new JTextPane();
+        categoryInfo.setEditable(false);
+        categoryInfo.setFocusable(false);
 
         SimpleAttributeSet attributes = new SimpleAttributeSet();
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
@@ -74,12 +85,12 @@ public class CategoryDiscMiniP extends AbstractMiniP {
         return button;
     }
 
+    /**
+     * It gets the category
+     * @return the category
+     */
     public Category getCategory() {
         return category;
-    }
-
-    public JTextPane getCategoryInfo() {
-        return categoryInfo;
     }
 
     /**

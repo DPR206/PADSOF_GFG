@@ -14,16 +14,30 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Pack edit mini c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class PackEditMiniC implements Controller {
 
-    private App frame;
+    private final App frame;
+    private final PackMiniP view;
     private Store model;
-    private PackMiniP view;
     private AbstractMixedBrowserC<Pack, StoreProduct> browserController;
     private AbstractMixedBrowserP<Pack, StoreProduct> browserPanel;
     private SPManageIndividualPack spm;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Pack edit mini c.
+     * @param frame             the frame
+     * @param model             the model
+     * @param view              the view
+     * @param browserController the browser controller
+     * @param browserPanel      the browser panel
+     */
     public PackEditMiniC(App frame, Store model, PackMiniP view,
                          AbstractMixedBrowserC<Pack, StoreProduct> browserController,
                          AbstractMixedBrowserP<Pack, StoreProduct> browserPanel) {

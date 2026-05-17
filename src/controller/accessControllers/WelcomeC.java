@@ -1,14 +1,13 @@
 package controller.accessControllers;
 
 import model.store.Store;
-import model.user.Manager;
-import model.user.UnregisteredClient;
-import model.user.User;
+import model.user.*;
 import view.App;
 import view.accessPanels.WelcomeP;
 import view.employeePanels.EmployeeAccess;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * It implements the app's welcome controller
@@ -16,9 +15,8 @@ import javax.swing.*;
  * @version 1.0
  */
 public class WelcomeC extends MainLoopSelector {
-    private final WelcomeP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final WelcomeP view;
+    private final App frame;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -31,7 +29,6 @@ public class WelcomeC extends MainLoopSelector {
         super(frame, model);
         this.frame = frame;
         this.view = frame.getWelcomePanel();
-        this.model = model;
 
         initializeActions();
     }
@@ -40,15 +37,27 @@ public class WelcomeC extends MainLoopSelector {
     public void initializeActions() {
         view.getBrowseButton().addActionListener(e -> {
             this.frame.setUnregisteredClient(new UnregisteredClient(false));
-            frame.changeVisibleCard("UNREGISTERED_MAIN");
+            try {
+                frame.changeVisibleCard("UNREGISTERED_MAIN");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getLoginButton().addActionListener(e -> {
-            frame.changeVisibleCard("LOGIN");
+            try {
+                frame.changeVisibleCard("LOGIN");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getSignupButton().addActionListener(e -> {
-            frame.changeVisibleCard("SIGNUP");
+            try {
+                frame.changeVisibleCard("SIGNUP");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getManagerAccess().addActionListener(e -> {
@@ -70,7 +79,11 @@ public class WelcomeC extends MainLoopSelector {
                         Store.getInstance().setManager(managerSesion);
                         this.frame.changeCurrentUser(managerSesion);
                         stop = true;
-                        super.loopSelector();
+                        try {
+                            super.loopSelector();
+                        } catch (BadLocationException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     } else {
                         int chosen_option = JOptionPane.showConfirmDialog(null, "Incorrect password, retry?");
                         switch (chosen_option) {
@@ -82,41 +95,38 @@ public class WelcomeC extends MainLoopSelector {
                 }
             }
         });
-        
+
         view.getEmployeeAccess().addActionListener(e -> {
-        	 boolean stop = false;
-             while (!stop) {
-            	 EmployeeAccess accessPanel = new EmployeeAccess(frame);
-                 String[] options = new String[]{"OK", "Cancel"};
-                 int option = JOptionPane.showOptionDialog(
-                         null, 
-                         accessPanel, 
-                         "Employee Access", 
-                         JOptionPane.OK_CANCEL_OPTION,
-                         JOptionPane.PLAIN_MESSAGE, 
-                         null, 
-                         options, 
-                         options[0]
-                 );
-                 if (option == 0) {
-                	 String username = accessPanel.getUsername();
-                     String password = accessPanel.getPassword();
-                     User user;
-                     
-                     if ((user = super.getModel().logIn(username, password)) != null) {
-                         this.frame.changeCurrentUser(user);
-                         stop = true;
-                         super.loopSelector();
-                     } else {
-                         int chosen_option = JOptionPane.showConfirmDialog(null, "Incorrect password, retry?");
-                         switch (chosen_option) {
-                             case JOptionPane.NO_OPTION, JOptionPane.CANCEL_OPTION -> stop = true;
-                         }
-                     }
-                 } else {
-                     stop = true;
-                 }
-             }
+            boolean stop = false;
+            while (!stop) {
+                EmployeeAccess accessPanel = new EmployeeAccess();
+                String[] options = new String[]{"OK", "Cancel"};
+                int option =
+                        JOptionPane.showOptionDialog(null, accessPanel, "Employee Access", JOptionPane.OK_CANCEL_OPTION,
+                                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                if (option == 0) {
+                    String username = accessPanel.getUsername();
+                    String password = accessPanel.getPassword();
+                    User user;
+
+                    if ((user = super.getModel().logIn(username, password)) != null) {
+                        this.frame.changeCurrentUser(user);
+                        stop = true;
+                        try {
+                            super.loopSelector();
+                        } catch (BadLocationException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    } else {
+                        int chosen_option = JOptionPane.showConfirmDialog(null, "Incorrect password, retry?");
+                        switch (chosen_option) {
+                            case JOptionPane.NO_OPTION, JOptionPane.CANCEL_OPTION -> stop = true;
+                        }
+                    }
+                } else {
+                    stop = true;
+                }
+            }
         });
     }
 }

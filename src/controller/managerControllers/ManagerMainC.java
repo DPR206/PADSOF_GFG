@@ -1,13 +1,17 @@
 package controller.managerControllers;
 
 import controller.Controller;
-import controller.browserControllers.MixedBrowseStoreEditC;
 import model.store.Store;
 import view.App;
 import view.managerPanels.*;
 
 import javax.swing.text.BadLocationException;
 
+/**
+ * The type Manager main c.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class ManagerMainC implements Controller {
     private final ManagerMainP view; /* view -> panel */
     private final App frame; /* view -> frame */
@@ -17,19 +21,45 @@ public class ManagerMainC implements Controller {
     private final ManagerNewProduct mnproduct;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager main c.
+     * @param frame the frame
+     * @param model the model
+     * @throws BadLocationException the bad location exception
+     */
     public ManagerMainC(App frame, Store model) throws BadLocationException {
         this.frame = frame;
         this.view = frame.getManagerMainPanel();
         this.model = model;
-        this.mge = new ManagerGestionarEmpleados(this.frame);
-        new ManagerGestionarEmpleadosC(this.mge, this.frame);
-        //this.frame.addCard
+
+        ManagerGestionarPacks m = new ManagerGestionarPacks(frame);
+        new ManagePacksC(m, this.frame);
+        this.frame.addCard(m, "GEST_PACKS");
 
         this.mgproduct = new ManagerGestionarProductos(this.frame);
-        this.mgproduct.setVisible(false);
+        new ManagerManageProductsC(this.mgproduct, this.frame);
+        this.frame.addCard(this.mgproduct, "NUEVOS_PRODUCTOS");
+
         this.mnproduct = new ManagerNewProduct();
         new ManagerNewProductC(this.frame, this.mnproduct);
-        this.mnproduct.setVisible(false);
+        this.frame.addCard(this.mnproduct, "CREAR_PRODUCTO");
+
+        this.mge = new ManagerGestionarEmpleados(this.frame);
+        new ManagerGestionarEmpleadosC(this.mge, this.frame);
+        this.frame.addCard(this.mge, "GESTIONAR_EMPL");
+
+        ManagerStatisticsP managerStatisticsP = new ManagerStatisticsP();
+        new ManagerStatisticsC(managerStatisticsP);
+        this.frame.addCard(managerStatisticsP, "STATISTICS");
+
+        ManagerDiscountsP managerDiscountsP = new ManagerDiscountsP();
+        new ManagerDiscountsC(frame, model, managerDiscountsP);
+        this.frame.addCard(managerDiscountsP, "MANAGER_DISCOUNTS");
+
+        ManagerParametersP managerParametersP = new ManagerParametersP();
+        new ManagerParametersC(frame, managerParametersP);
+        this.frame.addCard(managerParametersP, "MANAGER_PARAMETERS");
 
         initializeActions();
     }
@@ -37,40 +67,47 @@ public class ManagerMainC implements Controller {
     @Override
     public void initializeActions() {
         view.getPacks().addActionListener(e -> {
-        	ManagerGestionarPacks m = new ManagerGestionarPacks(frame);
-        	new ManagePacksC(m, this.frame);
-            this.frame.addCard(m, "GEST_PACKS");
-            this.frame.changeVisibleCard("GEST_PACKS");      
+            try {
+                this.frame.changeVisibleCard("GEST_PACKS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getProductoNuevo().addActionListener(e -> {
-        	new ManagerManageProductsC(this.mgproduct, this.frame);
-            this.frame.addCard(this.mgproduct, "NUEVOS_PRODUCTOS");
-            this.frame.changeVisibleCard("NUEVOS_PRODUCTOS");
+            try {
+                this.frame.changeVisibleCard("NUEVOS_PRODUCTOS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getAnnadirProductos().addActionListener(e -> {
-            this.frame.addCard(this.mnproduct, "CREAR_PRODUCTO");
-            this.frame.changeVisibleCard("CREAR_PRODUCTO");
+            try {
+                this.frame.changeVisibleCard("CREAR_PRODUCTO");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getEmpleados().addActionListener(e -> {
-            this.frame.addCard(this.mge, "GESTIONAR_EMPL");
-            this.frame.changeVisibleCard("GESTIONAR_EMPL");
+            try {
+                this.frame.changeVisibleCard("GESTIONAR_EMPL");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getEstadisticas().addActionListener(e -> {
-            ManagerStatisticsP managerStatisticsP = new ManagerStatisticsP();
-            new ManagerStatisticsC(frame, model, managerStatisticsP);
-            this.frame.addCard(managerStatisticsP, "STATISTICS");
-            this.frame.changeVisibleCard("STATISTICS");
+            try {
+                this.frame.changeVisibleCard("STATISTICS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         view.getDescuentos().addActionListener(e -> {
             try {
-                ManagerDiscountsP managerDiscountsP = new ManagerDiscountsP();
-                new ManagerDiscountsC(frame, model, managerDiscountsP);
-                this.frame.addCard(managerDiscountsP, "MANAGER_DISCOUNTS");
                 this.frame.changeVisibleCard("MANAGER_DISCOUNTS");
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
@@ -78,10 +115,11 @@ public class ManagerMainC implements Controller {
         });
 
         view.getParametros().addActionListener(e -> {
-            ManagerParametersP managerParametersP = new ManagerParametersP();
-            new ManagerParametersC(frame, model, managerParametersP);
-            this.frame.addCard(managerParametersP, "MANAGER_PARAMETERS");
-            this.frame.changeVisibleCard("MANAGER_PARAMETERS");
+            try {
+                this.frame.changeVisibleCard("MANAGER_PARAMETERS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 }

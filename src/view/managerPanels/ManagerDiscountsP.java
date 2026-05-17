@@ -13,13 +13,17 @@ import java.util.List;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Manager discounts p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class ManagerDiscountsP extends JPanel {
     private final HashMap<String, DiscountType> discountTypesHashMap = new HashMap<>();
     private final HashMap<String, DiscountCoverage> coveragesHashMap = new HashMap<>();
     private final JCheckBox overWholeStore = new JCheckBox("Over Whole Store");
     private final JPanel eastPanel = new JPanel();
     private final JPanel centerPanel = new JPanel();
-    private final JButton addDiscount = new JButton("Add discount");
     private final JComboBox<String> discountTypeCmbBox;
     private final JComboBox<String> coverageCmbBox;
     private final JButton selectItems = new JButton("Choose a coverage");
@@ -44,6 +48,11 @@ public class ManagerDiscountsP extends JPanel {
     private JPanel secondDiscountPanel;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager discounts p.
+     * @throws BadLocationException the bad location exception
+     */
     public ManagerDiscountsP() throws BadLocationException {
         this.setLayout(new BorderLayout());
 
@@ -65,18 +74,10 @@ public class ManagerDiscountsP extends JPanel {
         cardLayout.show(centerPanel, "BROWSE_DISCOUNTS");
     }
 
-    public void addSelectedProduct(StoreProduct selectedProduct) {
-        selectedProductsList.add(selectedProduct);
-    }
-
-    public void addSelectedPack(Pack selectedPack) {
-        selectedPacksList.add(selectedPack);
-    }
-
-    public void addSelectedCategory(Category selectedCategory) {
-        selectedCategoriesList.add(selectedCategory);
-    }
-
+    /**
+     * Paint everything.
+     * @throws BadLocationException the bad location exception
+     */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
@@ -87,6 +88,10 @@ public class ManagerDiscountsP extends JPanel {
         this.repaint();
     }
 
+    /**
+     * Paint centre panel.
+     * @throws BadLocationException the bad location exception
+     */
     public void paintCenterPanel() throws BadLocationException {
         centerPanel.setLayout(cardLayout);
         centerPanel.removeAll();
@@ -94,7 +99,9 @@ public class ManagerDiscountsP extends JPanel {
         /* Init panels */
         browseDiscountsP = new BrowseDiscountsP();
         browseStoreProductsDiscP = new BrowseStoreProductsDiscP(selectedProductsList, "Add to discount");
-        browseStoreProductsDiscPForGift = new BrowseStoreProductsDiscP(selectedProductsList, "Choose this gift");
+        List<StoreProduct> giftList = new ArrayList<>();
+        giftList.add(gift);
+        browseStoreProductsDiscPForGift = new BrowseStoreProductsDiscP(giftList, "Choose this gift");
         browsePacksDiscP = new BrowsePacksDiscP(selectedPacksList);
         browseCategoriesDiscP = new BrowseCategoriesDiscP(selectedCategoriesList);
 
@@ -107,26 +114,44 @@ public class ManagerDiscountsP extends JPanel {
         this.add(centerPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Change to choose gift view.
+     */
     public void changeToChooseGiftView() {
         cardLayout.show(centerPanel, "CHOOSE_GIFT");
     }
 
+    /**
+     * Change to browse discounts view.
+     */
     public void changeToBrowseDiscountsView() {
         cardLayout.show(centerPanel, "BROWSE_DISCOUNTS");
     }
 
+    /**
+     * Change to choose products view.
+     */
     public void changeToChooseProductsView() {
         cardLayout.show(centerPanel, "CHOOSE_PRODUCTS");
     }
 
+    /**
+     * Change to choose packs view.
+     */
     public void changeToChoosePacksView() {
         cardLayout.show(centerPanel, "CHOOSE_PACKS");
     }
 
+    /**
+     * Change to choose categories view.
+     */
     public void changeToChooseCategoriesView() {
         cardLayout.show(centerPanel, "CHOOSE_CATEGORIES");
     }
 
+    /**
+     * Paint east panel.
+     */
     public void paintEastPanel() {
         eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
         eastPanel.setBorder(BorderFactory.createLineBorder(brownColour));
@@ -225,6 +250,9 @@ public class ManagerDiscountsP extends JPanel {
         this.add(eastPanel, BorderLayout.EAST);
     }
 
+    /**
+     * Update discount panels.
+     */
     public void updateDiscountPanels() {
         DiscountType type = getDiscountTypeCmbBoxSelected();
         DiscountCoverage coverage = getDiscountCoverageCmbBoxSelected();
@@ -279,156 +307,180 @@ public class ManagerDiscountsP extends JPanel {
         eastPanel.repaint();
     }
 
-    public JButton getAddDiscount() {
-        return addDiscount;
-    }
-
+    /**
+     * It gets the browse categories disc p
+     * @return the browse categories disc p
+     */
     public BrowseCategoriesDiscP getBrowseCategoriesDiscP() {
         return browseCategoriesDiscP;
     }
 
+    /**
+     * It gets the browse discounts p
+     * @return the browse discounts p
+     */
     public BrowseDiscountsP getBrowseDiscountsP() {
         return browseDiscountsP;
     }
 
+    /**
+     * It gets the browse packs disc p
+     * @return the browse packs disc p
+     */
     public BrowsePacksDiscP getBrowsePacksDiscP() {
         return browsePacksDiscP;
     }
 
+    /**
+     * It gets the browse store products disc p
+     * @return the browse store products disc p
+     */
     public BrowseStoreProductsDiscP getBrowseStoreProductsDiscP() {
         return browseStoreProductsDiscP;
     }
 
+    /**
+     * It gets the browse store products disc p for gift
+     * @return the browse store products disc p for gift
+     */
     public BrowseStoreProductsDiscP getBrowseStoreProductsDiscPForGift() {
         return browseStoreProductsDiscPForGift;
     }
 
-    public CardLayout getCardLayout() {
-        return cardLayout;
-    }
-
-    public JPanel getCenterPanel() {
-        return centerPanel;
-    }
-
+    /**
+     * It gets the coverage
+     * @return the coverage
+     */
     public JComboBox<String> getCoverage() {
         return coverageCmbBox;
     }
 
-    public JComboBox<String> getCoverageCmbBox() {
-        return coverageCmbBox;
-    }
-
-    public DiscountCoverage getCoverageFromString(String coverageName) {
-        return coveragesHashMap.get(coverageName);
-    }
-
-    public HashMap<String, DiscountCoverage> getCoveragesHashMap() {
-        return coveragesHashMap;
-    }
-
+    /**
+     * It gets the create button
+     * @return the create button
+     */
     public JButton getCreateBtn() {
         return createBtn;
     }
 
+    /**
+     * It gets the discount coverage cmb box selected
+     * @return the discount coverage cmb box selected
+     */
     public DiscountCoverage getDiscountCoverageCmbBoxSelected() {
         return coveragesHashMap.get(Objects.requireNonNull(coverageCmbBox.getSelectedItem()).toString());
     }
 
+    /**
+     * It gets the discount type
+     * @return the discount type
+     */
     public JComboBox<String> getDiscountType() {
         return discountTypeCmbBox;
     }
 
-    public JComboBox<String> getDiscountTypeCmbBox() {
-        return discountTypeCmbBox;
-    }
-
+    /**
+     * It gets the discount type cmb box selected
+     * @return the discount type cmb box selected
+     */
     public DiscountType getDiscountTypeCmbBoxSelected() {
         return discountTypesHashMap.get(Objects.requireNonNull(discountTypeCmbBox.getSelectedItem()).toString());
     }
 
-    public HashMap<String, DiscountType> getDiscountTypesHashMap() {
-        return discountTypesHashMap;
-    }
-
-    public JPanel getEastPanel() {
-        return eastPanel;
-    }
-
+    /**
+     * It gets the ending date field
+     * @return the ending date field
+     */
     public JTextField getEndingDateField() {
         return endingDateField;
     }
 
+    /**
+     * It gets the first field
+     * @return the first field
+     */
     public JTextField getFirstField() {
         return firstField;
     }
 
-    public JLabel getFirstFieldLabel() {
-        return firstFieldLabel;
-    }
-
+    /**
+     * It gets the gift
+     * @return the gift
+     */
     public StoreProduct getGift() {
         return gift;
     }
 
+    /**
+     * It sets the gift
+     * @param newGift the new gift
+     */
     public void setGift(StoreProduct newGift) {
         this.gift = newGift;
     }
 
+    /**
+     * It gets the gift button
+     * @return the gift button
+     */
     public JButton getGiftButton() {
         return giftButton;
     }
 
+    /**
+     * It gets the over whole store
+     * @return the over whole store
+     */
     public JCheckBox getOverWholeStore() {
         return overWholeStore;
     }
 
-    public JPanel getSecondDiscountPanel() {
-        return secondDiscountPanel;
-    }
-
-    public void setSecondDiscountPanel(JPanel newSecondDiscountPanel) {
-        this.secondDiscountPanel = newSecondDiscountPanel;
-    }
-
+    /**
+     * It gets the second field
+     * @return the second field
+     */
     public JTextField getSecondField() {
         return secondField;
     }
 
-    public JLabel getSecondFieldLabel() {
-        return secondFieldLabel;
-    }
-
+    /**
+     * It gets the select items
+     * @return the select items
+     */
     public JButton getSelectItems() {
         return selectItems;
     }
 
+    /**
+     * It gets the selected categories list
+     * @return the selected categories list
+     */
     public List<Category> getSelectedCategoriesList() {
         return selectedCategoriesList;
     }
 
+    /**
+     * It gets the selected packs list
+     * @return the selected packs list
+     */
     public List<Pack> getSelectedPacksList() {
         return selectedPacksList;
     }
 
+    /**
+     * It gets the selected products list
+     * @return the selected products list
+     */
     public List<StoreProduct> getSelectedProductsList() {
         return selectedProductsList;
     }
 
+    /**
+     * It gets the starting date field
+     * @return the starting date field
+     */
     public JTextField getStartingDateField() {
         return startingDateField;
-    }
-
-    public DiscountType getTypeFromString(String typeName) {
-        return discountTypesHashMap.get(typeName);
-    }
-
-    public HashMap<String, DiscountCoverage> getcoveragesHashMap() {
-        return coveragesHashMap;
-    }
-
-    public HashMap<String, DiscountType> getdiscountTypesHashMap() {
-        return discountTypesHashMap;
     }
 
 }

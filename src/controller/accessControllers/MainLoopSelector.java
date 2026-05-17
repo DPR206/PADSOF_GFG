@@ -8,6 +8,7 @@ import view.App;
 import view.banners.*;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * Auxiliary class for shared Login & Signup events
@@ -31,19 +32,20 @@ public abstract class MainLoopSelector implements Controller {
     /**
      * It selects which main page should be seen by the user via its type
      */
-    public void loopSelector() {
+    public void loopSelector() throws BadLocationException {
         User user = frame.getUser();
         switch (user.getType()) {
             case UNREGISTERED_CLIENT:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Unregistered Client!");
                 this.frame.changeVisibleBanner("BANNER_UNREGISTERED");
                 this.frame.changeVisibleCard("UNREGISTERED_MAIN");
-                new BannerUnregisteredC((BannerUnregistered) this.frame.getViewFromName("BANNER_UNREGISTERED"), frame);
+                new BannerUnregisteredC((BannerUnregistered) this.frame.getViewFromName("BANNER_UNREGISTERED"), frame,
+                        model);
                 break;
             case REGISTERED_CLIENT:
                 this.frame.changeVisibleBanner("BANNER_REGISTERED");
                 this.frame.changeVisibleCard("REGISTERED_MAIN");
-                new BannerRegisteredC((BannerRegistered) this.frame.getViewFromName("BANNER_REGISTERED"), frame);
+                new BannerRegisteredC((BannerRegistered) this.frame.getViewFromName("BANNER_REGISTERED"), frame, model);
                 break;
             case EMPLOYEE:
                 JOptionPane.showMessageDialog(this.frame, "Welcome Employee!");

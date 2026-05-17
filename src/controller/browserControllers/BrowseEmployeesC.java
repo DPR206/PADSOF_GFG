@@ -12,6 +12,11 @@ import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Browse employees c.
+ * @author Sofía C.L. & Ana O.R.
+ * @version 1.0
+ */
 public class BrowseEmployeesC extends AbstractClusterBrowserC<Employee> {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -24,19 +29,38 @@ public class BrowseEmployeesC extends AbstractClusterBrowserC<Employee> {
     public BrowseEmployeesC(App frame, BrowseEmployeesP view, Store model) {
         super(frame, view, model);
         super.initializeActions();
-        initializeActionsForMiniPanels();
+    }
+
+    @Override
+    public void refreshData() {
+        List<Employee> users = new ArrayList<>(Store.getInstance().getEmployeeList());
+        try {
+            super.getView().setItemList(users);
+            super.getView().setCurrentPageNum(1);
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void refreshCurrentPage() {
+        List<Employee> users = new ArrayList<>(Store.getInstance().getEmployeeList());
+        try {
+            int currentPage = super.getView().getCurrentPageNum();
+            super.getView().setItemList(users);
+            int maxPage = super.getView().getMaxPageNum();
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            super.getView().setCurrentPageNum(currentPage);
+
+        } catch (BadLocationException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void initializeActionsForMiniPanels() {
-        List<Employee> users = new ArrayList<>(Store.getInstance().getEmployeeList());
-
-        try {
-            super.getView().setItemList(users);
-        } catch (BadLocationException ex) {
-            ex.printStackTrace();
-        }
-
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
             new EmployeeMiniC(this.getFrame(), (UserMiniP) miniPanel);
         }

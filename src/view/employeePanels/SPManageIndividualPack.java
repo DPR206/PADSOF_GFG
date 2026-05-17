@@ -11,16 +11,20 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * The type Sp manage individual pack.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class SPManageIndividualPack extends JPanel {
-    private Pack p;
-    private JTextField nameProduct = new JTextField();
-    private JTextField packPrecio = new JTextField();
-    private JButton btnConfirmarProducto = new JButton("CONFIRMAR PRODUCTO");
-    private JButton btnConfirmarPrecio = new JButton("CONFIRMAR PRECIO");
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Sp manage individual pack.
+     * @param p the p
+     */
     public SPManageIndividualPack(Pack p) {
-        this.p = p;
 
         this.setLayout(new BorderLayout());
 
@@ -32,7 +36,7 @@ public class SPManageIndividualPack extends JPanel {
 
         //añado los minipacks
 
-        HashSet<Pack> listPacks = this.p.getPacks();
+        HashSet<Pack> listPacks = p.getPacks();
 
         int i = 1;
 
@@ -40,8 +44,7 @@ public class SPManageIndividualPack extends JPanel {
             try {
                 aux1.add(new PackMiniP(pack, i, "Manage", null));
             } catch (BadLocationException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
             i++;
         }
@@ -51,13 +54,12 @@ public class SPManageIndividualPack extends JPanel {
 
         i = 1;
 
-        List<StoreProduct> products = this.p.getProducts();
+        List<StoreProduct> products = p.getProducts();
         for (StoreProduct sp : products) {
             try {
                 aux2.add(new StoreProductMiniP(sp, i, "Delete from pack", ".\\resources\\app\\cart.png"));
             } catch (BadLocationException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
             i++;
         }
@@ -76,14 +78,18 @@ public class SPManageIndividualPack extends JPanel {
         camposPanel.setBackground(new Color(245, 241, 236));
 
         JLabel lblProducto = new JLabel("Añadir producto");
+        JButton btnConfirmarProducto = new JButton("CONFIRMAR PRODUCTO");
         btnConfirmarProducto.setForeground(Color.WHITE);
         JLabel precioPack = new JLabel("Precio del pack");
         camposPanel.add(lblProducto);
-        camposPanel.add(this.nameProduct);
-        camposPanel.add(this.btnConfirmarProducto);
+        JTextField nameProduct = new JTextField();
+        camposPanel.add(nameProduct);
+        camposPanel.add(btnConfirmarProducto);
         camposPanel.add(precioPack);
-        camposPanel.add(this.packPrecio);
-        camposPanel.add(this.btnConfirmarPrecio);
+        JTextField packPrecio = new JTextField();
+        camposPanel.add(packPrecio);
+        JButton btnConfirmarPrecio = new JButton("CONFIRMAR PRECIO");
+        camposPanel.add(btnConfirmarPrecio);
 
         this.add(camposPanel, BorderLayout.SOUTH);
     }

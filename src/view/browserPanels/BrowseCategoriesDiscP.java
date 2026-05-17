@@ -10,6 +10,11 @@ import java.util.List;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse categories disc p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseCategoriesDiscP extends AbstractBrowserP<Category> {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -17,6 +22,11 @@ public class BrowseCategoriesDiscP extends AbstractBrowserP<Category> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
+    /**
+     * Instantiates a new Browse categories disc p.
+     * @param alreadyChosen the already chosen
+     * @throws BadLocationException the bad location exception
+     */
     public BrowseCategoriesDiscP(List<Category> alreadyChosen) throws BadLocationException {
         super();
         this.alreadyChosen = alreadyChosen;

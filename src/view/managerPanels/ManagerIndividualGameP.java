@@ -1,28 +1,34 @@
 package view.managerPanels;
 
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+/**
+ * The type Manager individual game p.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class ManagerIndividualGameP extends JPanel {
 
-    private JTextField txtNombreProducto = new JTextField(15);
-    private JTextField txtTipoJuego = new JTextField(15);
-    private JTextField txtNumJugadores = new JTextField(15);
-    private JTextField txtRangoEdad = new JTextField(15);
-    private JTextField txtPrecio = new JTextField(15);
-    private JTextField txtCategorias = new JTextField(15);
+    private final JTextField txtNombreProducto = new JTextField(15);
+    private final JTextField txtTipoJuego = new JTextField(15);
+    private final JTextField txtNumJugadores = new JTextField(15);
+    private final JTextField txtRangoEdad = new JTextField(15);
+    private final JTextField txtPrecio = new JTextField(15);
+    private final JTextField txtCategorias = new JTextField(15);
 
-    private JButton btnConfirmarNombre = new JButton("CONFIRMAR");
-    private JButton btnConfirmarTipoJuego = new JButton("CONFIRMAR");
-    private JButton btnConfirmarJugadores = new JButton("CONFIRMAR");
-    private JButton btnConfirmarEdad = new JButton("CONFIRMAR");
-    private JButton btnConfirmarPrecio = new JButton("CONFIRMAR");
-    private JButton btnConfirmarCategorias = new JButton("CONFIRMAR");
+    private final JButton btnConfirmarNombre = new JButton("CONFIRMAR");
+    private final JButton btnConfirmarTipoJuego = new JButton("CONFIRMAR");
+    private final JButton btnConfirmarJugadores = new JButton("CONFIRMAR");
+    private final JButton btnConfirmarEdad = new JButton("CONFIRMAR");
+    private final JButton btnConfirmarPrecio = new JButton("CONFIRMAR");
+    private final JButton btnConfirmarCategorias = new JButton("CONFIRMAR");
 
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager individual game p.
+     */
     public ManagerIndividualGameP() {
         super();
         this.setLayout(new GridLayout(6, 3, 10, 10)); // 6 filas, 3 columnas
@@ -57,51 +63,100 @@ public class ManagerIndividualGameP extends JPanel {
         this.add(txtCategorias);
         this.add(btnConfirmarCategorias);
     }
-    public JTextField getTxtNombreProducto() {
-        return txtNombreProducto;
+
+    /**
+     * It gets the btn confirmar categorías
+     * @return the btn confirmar categorías
+     */
+    public JButton getBtnConfirmarCategorias() {
+        return btnConfirmarCategorias;
     }
 
-    public JTextField getTxtTipoJuego() {
-        return txtTipoJuego;
-    }
-
-    public JTextField getTxtNumJugadores() {
-        return txtNumJugadores;
-    }
-
-    public JTextField getTxtRangoEdad() {
-        return txtRangoEdad;
-    }
-
-    public JTextField getTxtPrecio() {
-        return txtPrecio;
-    }
-
-    public JTextField getTxtCategorias() {
-        return txtCategorias;
-    }
-
-    public JButton getBtnConfirmarNombre() {
-        return btnConfirmarNombre;
-    }
-
-    public JButton getBtnConfirmarTipoJuego() {
-        return btnConfirmarTipoJuego;
-    }
-
-    public JButton getBtnConfirmarJugadores() {
-        return btnConfirmarJugadores;
-    }
-
+    /**
+     * It gets the btn confirmar edad
+     * @return the btn confirmar edad
+     */
     public JButton getBtnConfirmarEdad() {
         return btnConfirmarEdad;
     }
 
+    /**
+     * It gets the btn confirmar jugadores
+     * @return the btn confirmar jugadores
+     */
+    public JButton getBtnConfirmarJugadores() {
+        return btnConfirmarJugadores;
+    }
+
+    /**
+     * It gets the btn confirmar nombre
+     * @return the btn confirmar nombre
+     */
+    public JButton getBtnConfirmarNombre() {
+        return btnConfirmarNombre;
+    }
+
+    /**
+     * It gets the btn confirmar precio
+     * @return the btn confirmar precio
+     */
     public JButton getBtnConfirmarPrecio() {
         return btnConfirmarPrecio;
     }
 
-    public JButton getBtnConfirmarCategorias() {
-        return btnConfirmarCategorias;
+    /**
+     * It gets the btn confirmar tipo juego
+     * @return the btn confirmar tipo juego
+     */
+    public JButton getBtnConfirmarTipoJuego() {
+        return btnConfirmarTipoJuego;
+    }
+
+    /**
+     * It gets the txt categorías
+     * @return the txt categorías
+     */
+    public JTextField getTxtCategorias() {
+        return txtCategorias;
+    }
+
+    /**
+     * It gets the txt nombre producto
+     * @return the txt nombre producto
+     */
+    public JTextField getTxtNombreProducto() {
+        return txtNombreProducto;
+    }
+
+    /**
+     * It gets the txt num jugadores
+     * @return the txt num jugadores
+     */
+    public JTextField getTxtNumJugadores() {
+        return txtNumJugadores;
+    }
+
+    /**
+     * It gets the txt precio
+     * @return the txt precio
+     */
+    public JTextField getTxtPrecio() {
+        return txtPrecio;
+    }
+
+    /**
+     * It gets the txt rango edad
+     * @return the txt rango edad
+     */
+    public JTextField getTxtRangoEdad() {
+        return txtRangoEdad;
+    }
+
+    /**
+     * It gets the txt tipo juego
+     * @return the txt tipo juego
+     */
+    public JTextField getTxtTipoJuego() {
+        return txtTipoJuego;
     }
 }

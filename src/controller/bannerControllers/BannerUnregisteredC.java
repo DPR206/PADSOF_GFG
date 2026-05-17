@@ -3,9 +3,7 @@ package controller.bannerControllers;
 import controller.Controller;
 import controller.browserControllers.MixedBrowseCartC;
 import controller.clientControllers.CarritoC;
-import controller.clientControllers.UnregisteredMainC;
 import model.store.Store;
-import model.user.User;
 import view.App;
 import view.banners.BannerUnregistered;
 import view.clientPanels.CarritoP;
@@ -14,21 +12,28 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.event.ActionListener;
 
+/**
+ * It implements the unregistered client's banner
+ * @author Duna P.R.
+ * @version 1.0
+ */
 public class BannerUnregisteredC implements Controller {
 
-    private BannerUnregistered vista;
-    private User user;
-    private App frame;
+    private final BannerUnregistered vista;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
-     * @param vista
+     * Instantiates a new Banner unregistered c.
+     * @param vista the vista
+     * @param frame the frame
      */
-    public BannerUnregisteredC(BannerUnregistered vista, App frame) {
+    public BannerUnregisteredC(BannerUnregistered vista, App frame, Store model) {
         this.vista = vista;
-        this.user = frame.getUser();
         this.frame = frame;
+        this.model = model;
         initializeActions();
     }
 
@@ -63,29 +68,40 @@ public class BannerUnregisteredC implements Controller {
             vista.getBtnPerfil().removeActionListener(listener);
         }
         vista.getBtnPerfil().addActionListener(e -> {
-            abrirSignUp();
+            try {
+                abrirSignUp();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
             vista.getBtnExit().removeActionListener(listener);
         }
         vista.getBtnExit().addActionListener(e -> {
-            abrirWelcome();
+            try {
+                abrirWelcome();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
             vista.getBtnGoBack().removeActionListener(listener);
         }
         vista.getBtnGoBack().addActionListener(e -> {
-            goBack();
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 
-    private void goBack() {
-        frame.goBack();
-    }
-
-    private void abrirWelcome() {
+    /**
+     * It opens the welcome screen
+     */
+    private void abrirWelcome() throws BadLocationException {
 
         int respuesta =
                 JOptionPane.showConfirmDialog(this.frame, "Are you sure you want to log out?", "Confirm log out",
@@ -96,24 +112,32 @@ public class BannerUnregisteredC implements Controller {
         }
     }
 
-    private void abrirSignUp() {
+    /**
+     * It opens the signup panel
+     */
+    private void abrirSignUp() throws BadLocationException {
 
         frame.changeVisibleCard("SIGNUP");
     }
 
+    /**
+     * It opens the main panel
+     * @throws BadLocationException the bad location exception
+     */
     private void abrirPaginaPrincipal() throws BadLocationException {
-
-        new UnregisteredMainC(frame, Store.getInstance());
-
         frame.changeVisibleCard("UNREGISTERED_MAIN");
     }
 
+    /**
+     * It opens the cart
+     * @throws BadLocationException the bad location exception
+     */
     private void abrirCarritoDelCliente() throws BadLocationException {
 
         CarritoP carritoVista = new CarritoP();
 
         new CarritoC(carritoVista, frame);
-        new MixedBrowseCartC(frame, Store.getInstance(), carritoVista.getCartItems()); // DUE: Sería mejor usar model
+        new MixedBrowseCartC(frame, model, carritoVista.getCartItems());
 
         frame.addCard(carritoVista, "CART");
         frame.changeVisibleCard("CART");

@@ -8,40 +8,46 @@ import view.clientPanels.UnregisteredMainP;
 
 import javax.swing.text.BadLocationException;
 
+/**
+ * The type Unregistered main c.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class UnregisteredMainC implements Controller {
-    private final UnregisteredMainP view; /* view -> panel */
-    private final App frame; /* view -> frame */
-    private final Store model; /* model */
+    private final UnregisteredMainP view;
+    private final App frame;
+    private final Store model;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public UnregisteredMainC(App frame, Store model) throws BadLocationException {
+
+    /**
+     * Instantiates a new Unregistered main c.
+     * @param frame the frame
+     * @param model the model
+     */
+    public UnregisteredMainC(App frame, Store model) {
         this.frame = frame;
         this.view = frame.getUnregisteredMainPanel();
         this.model = model;
 
-        initializeActions();
-    }
-
-    public void initializeActions() {
-        this.view.getCardLayout().show(this.view.getBottom(), "Search");
-        linkControllers();
-
-        view.getSearch().addActionListener(e -> {
-            this.view.getCardLayout().show(this.view.getBottom(), "Search");
-            linkControllers();
-        });
-
-        view.getFilters().addActionListener(e -> {
-            this.view.getCardLayout().show(this.view.getBottom(), "Filters");
-        });
-    }
-
-    public void linkControllers() {
         try {
             new MixedBrowseStoreC(frame, model, view.getBrowsePanel());
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }
         new SearcherC(frame, model, view.getFilterPanel());
+
+        initializeActions();
+    }
+
+    @Override
+    public void initializeActions() {
+        this.view.getCardLayout().show(this.view.getBottom(), "Search");
+
+        view.getSearch().addActionListener(e -> {
+            this.view.getCardLayout().show(this.view.getBottom(), "Search");
+        });
+
+        view.getFilters().addActionListener(e -> this.view.getCardLayout().show(this.view.getBottom(), "Filters"));
     }
 }

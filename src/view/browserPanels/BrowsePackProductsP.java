@@ -1,33 +1,38 @@
 package view.browserPanels;
 
-import static main.Main.brownColour;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.text.BadLocationException;
-
 import model.product.Pack;
 import model.product.StoreProduct;
-import view.miniPanels.*;
-import controller.miniControllers.*;
+import view.miniPanels.StoreProductMiniP;
 
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+
+import static main.Main.brownColour;
+
+/**
+ * The type Browse pack products p.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class BrowsePackProductsP extends AbstractBrowserP<StoreProduct> {
 
-	private Pack p;
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
-	public BrowsePackProductsP(Pack p) {
-		this.p= p;
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    /**
+     * Instantiates a new Browse pack products p.
+     * @param p the p
+     */
+    public BrowsePackProductsP(Pack p) {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         try {
-			paintEverything();
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+            paintEverything();
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	public void paintEverything() throws BadLocationException {
-		this.removeAll();
+    public void paintEverything() throws BadLocationException {
+        this.removeAll();
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());
@@ -36,9 +41,9 @@ public class BrowsePackProductsP extends AbstractBrowserP<StoreProduct> {
         this.revalidate();
         this.repaint();
 
-	}
+    }
 
-	@Override
+    @Override
     public void addMiniPanel(StoreProduct item, int index) throws BadLocationException {
         StoreProductMiniP miniProduct = new StoreProductMiniP(item, index, "DELETE", null);
         super.addMiniPanel(miniProduct);

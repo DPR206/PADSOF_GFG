@@ -9,7 +9,6 @@ import view.browserPanels.BrowseDiscountsP;
 import view.miniPanels.DiscountMiniP;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -56,12 +55,20 @@ public class DiscountDiscMiniC implements Controller {
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JFrame panel = new JFrame();
-                    JList<String> list = new JList<>();
-                    view.getDiscount().getProducts().forEach(product -> list.add(new JLabel(product.getName())));
-                    panel.add(list);
-                    panel.pack();
-                    panel.setVisible(true);
+                    JDialog dialog = new JDialog(frame, "Products in the discount", false);
+                    dialog.setSize(400, 250);
+                    dialog.setLocationRelativeTo(frame);
+                    DefaultListModel<String> listModel = new DefaultListModel<>();
+
+                    AtomicInteger i = new AtomicInteger(1);
+                    view.getDiscount().getProducts()
+                        .forEach(product -> listModel.addElement((i.getAndIncrement()) + ". " + product.getName()));
+
+                    JList<String> list = new JList<>(listModel);
+
+                    dialog.add(new JScrollPane(list));
+
+                    dialog.setVisible(true);
                 }
             }
         });

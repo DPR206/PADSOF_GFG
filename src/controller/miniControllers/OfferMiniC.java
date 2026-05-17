@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class OfferMiniC implements Controller {
     private final OfferMiniP view;
@@ -45,14 +46,70 @@ public class OfferMiniC implements Controller {
 
         view.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(null, "Work in progress too.... :c");
+                JDialog dialog = new JDialog(frame, "Origin's products", false);
+                dialog.setSize(400, 250);
+                dialog.setLocationRelativeTo(frame);
+                DefaultListModel<String> listModel = new DefaultListModel<>();
+
+                AtomicInteger i = new AtomicInteger(1);
+                view.getOffer().getProducts().get(view.getOffer().getOrigin().getUserName())
+                    .forEach(product -> listModel.addElement((i.getAndIncrement()) + ". " + product.getName()));
+
+                JList<String> list = new JList<>(listModel);
+
+                dialog.add(new JScrollPane(list));
+
+                dialog.setVisible(true);
+
+                JDialog dialog2 = new JDialog(frame, "Destination's products", false);
+                dialog2.setSize(400, 250);
+                dialog2.setLocationRelativeTo(frame);
+                DefaultListModel<String> listModel2 = new DefaultListModel<>();
+
+                AtomicInteger i2 = new AtomicInteger(1);
+                view.getOffer().getProducts().get(view.getOffer().getDestination().getUserName())
+                    .forEach(product -> listModel2.addElement((i2.getAndIncrement()) + ". " + product.getName()));
+
+                JList<String> list2 = new JList<>(listModel2);
+
+                dialog2.add(new JScrollPane(list2));
+
+                dialog2.setVisible(true);
             }
         });
 
         view.getOfferInfo().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    JOptionPane.showMessageDialog(null, "Work in progress too.... :c");
+                    JDialog dialog = new JDialog(frame, "Origin's products", false);
+                    dialog.setSize(400, 250);
+                    dialog.setLocationRelativeTo(frame);
+                    DefaultListModel<String> listModel = new DefaultListModel<>();
+
+                    AtomicInteger i = new AtomicInteger(1);
+                    view.getOffer().getProducts().get(view.getOffer().getOrigin().getUserName())
+                        .forEach(product -> listModel.addElement((i.getAndIncrement()) + ". " + product.getName()));
+
+                    JList<String> list = new JList<>(listModel);
+
+                    dialog.add(new JScrollPane(list));
+
+                    dialog.setVisible(true);
+
+                    JDialog dialog2 = new JDialog(frame, "Destination's products", false);
+                    dialog2.setSize(400, 250);
+                    dialog2.setLocationRelativeTo(frame);
+                    DefaultListModel<String> listModel2 = new DefaultListModel<>();
+
+                    AtomicInteger i2 = new AtomicInteger(1);
+                    view.getOffer().getProducts().get(view.getOffer().getDestination().getUserName())
+                        .forEach(product -> listModel2.addElement((i2.getAndIncrement()) + ". " + product.getName()));
+
+                    JList<String> list2 = new JList<>(listModel2);
+
+                    dialog2.add(new JScrollPane(list2));
+
+                    dialog2.setVisible(true);
                 }
             }
         });

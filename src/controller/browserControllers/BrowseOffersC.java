@@ -4,6 +4,7 @@ import controller.miniControllers.OfferMiniC;
 import model.exchange.Offer;
 import model.store.Store;
 import model.user.RegisteredClient;
+import model.user.UserType;
 import view.App;
 import view.browserPanels.BrowseOffersP;
 import view.miniPanels.AbstractMiniP;
@@ -35,9 +36,13 @@ public class BrowseOffersC extends AbstractBrowserC<Offer> {
     @Override
     public void refreshData() {
         try {
-            List<Offer> offers =
-                    new ArrayList<>(((RegisteredClient) super.getFrame().getUser()).getOfferHistory().getOffers());
-            super.getView().setItemList(offers);
+            if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
+                List<Offer> offers =
+                        new ArrayList<>(((RegisteredClient) super.getFrame().getUser()).getOfferHistory().getOffers());
+                super.getView().setItemList(offers);
+            } else {
+                super.getView().setItemList(new ArrayList<>());
+            }
             super.getView().setCurrentPageNum(1);
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);

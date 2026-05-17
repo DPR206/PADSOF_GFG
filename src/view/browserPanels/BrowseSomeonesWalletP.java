@@ -43,15 +43,14 @@ public class BrowseSomeonesWalletP extends AbstractBrowserP<SecondHandProduct> {
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
+        JLabel title;
         if (owner == frame.getUser()) {
-            JLabel title = new JLabel("My wallet'");
-            title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 20));
-            this.add(title);
+            title = new JLabel("My wallet'");
         } else {
-            JLabel title = new JLabel(owner.getUserName() + "'s wallet'");
-            title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 20));
-            this.add(title);
+            title = new JLabel(owner.getUserName() + "'s wallet");
         }
+        title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 20));
+        this.add(title);
 
         super.addAllMiniPanels();
         this.add(super.getPageTurner());

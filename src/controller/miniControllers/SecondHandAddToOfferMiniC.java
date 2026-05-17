@@ -4,6 +4,7 @@ import controller.Controller;
 import controller.clientControllers.RegisteredMakeOfferC;
 import controller.clientControllers.SecondHandOthersC;
 import model.store.Store;
+import model.user.RegisteredClient;
 import view.App;
 import view.clientPanels.RegisteredMakeOfferP;
 import view.clientPanels.SecondHandOthersP;
@@ -96,7 +97,9 @@ public class SecondHandAddToOfferMiniC implements Controller {
                     JOptionPane.INFORMATION_MESSAGE);
 
             try {
-                RegisteredMakeOfferP registeredMakeOfferP = new RegisteredMakeOfferP();
+                RegisteredMakeOfferP registeredMakeOfferP =
+                        new RegisteredMakeOfferP(frame, view.getSecondHandProduct().getOwner(),
+                                (RegisteredClient) frame.getUser());
                 RegisteredMakeOfferC controller = new RegisteredMakeOfferC(frame, model, registeredMakeOfferP,
                         view.getSecondHandProduct().getOwner());
 

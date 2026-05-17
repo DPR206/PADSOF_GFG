@@ -3,6 +3,7 @@ package controller.bannerControllers;
 import controller.Controller;
 import controller.employeeControllers.*;
 import controller.notifications.NotificacionesC;
+import model.store.Store;
 import model.user.*;
 import view.App;
 import view.banners.BannerEmployee;
@@ -86,7 +87,7 @@ public class BannerEmployeeC implements Controller {
     private void abrirIntercambios() throws BadLocationException {
 
         EmployeeExchangePermP pagExchange = new EmployeeExchangePermP();
-        new EmployeeExchangeC();
+        new EmployeeExchangePermC(frame, Store.getInstance(), pagExchange);
 
         frame.addCard(pagExchange, "EMPLOYEE_EXCHANGE");
         frame.changeVisibleCard("EMPLOYEE_EXCHANGE");

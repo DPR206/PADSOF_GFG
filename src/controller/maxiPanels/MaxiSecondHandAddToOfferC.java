@@ -3,6 +3,7 @@ package controller.maxiPanels;
 import controller.Controller;
 import controller.clientControllers.RegisteredMakeOfferC;
 import model.store.Store;
+import model.user.RegisteredClient;
 import view.App;
 import view.clientPanels.RegisteredMakeOfferP;
 import view.maxiPanels.MaxiSecondHandP;
@@ -38,7 +39,9 @@ public class MaxiSecondHandAddToOfferC implements Controller {
     public void initializeActions() {
         view.getButton().addActionListener(e -> {
             try {
-                RegisteredMakeOfferP registeredMakeOfferP = new RegisteredMakeOfferP();
+                RegisteredMakeOfferP registeredMakeOfferP =
+                        new RegisteredMakeOfferP(frame, view.getProduct().getOwner(),
+                                (RegisteredClient) frame.getUser());
                 RegisteredMakeOfferC controller =
                         new RegisteredMakeOfferC(frame, model, registeredMakeOfferP, view.getProduct().getOwner());
 

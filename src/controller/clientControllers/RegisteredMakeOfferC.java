@@ -1,13 +1,11 @@
 package controller.clientControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseMyWalletOfferC;
 import controller.browserControllers.BrowseSomeonesWalletC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
-import view.browserPanels.BrowseSomeonesWalletP;
 import view.clientPanels.RegisteredMakeOfferP;
 
 import javax.swing.*;
@@ -44,15 +42,8 @@ public class RegisteredMakeOfferC implements Controller {
         this.view = view;
         this.them = them;
 
-        BrowseSomeonesWalletP browseTheirWallet = new BrowseSomeonesWalletP(frame, them);
-        new BrowseMyWalletOfferC(frame, model, browseTheirWallet);
-        view.setBrowseTheirWallet(browseTheirWallet);
-
-        BrowseSomeonesWalletP browseMyWallet = new BrowseSomeonesWalletP(frame, them);
-        new BrowseSomeonesWalletC(frame, model, browseMyWallet);
-        view.setBrowseMyWallet(browseMyWallet);
-
-        view.paintEverything();
+        new BrowseSomeonesWalletC(frame, model, view.getBrowseTheirWallet());
+        new BrowseSomeonesWalletC(frame, model, view.getBrowseMyWallet());
     }
 
     /**

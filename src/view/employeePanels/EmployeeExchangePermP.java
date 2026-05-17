@@ -21,7 +21,6 @@ public class EmployeeExchangePermP extends JPanel {
             new BrowseSecondHandProductsP("Add to Offer", null);
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-
     /**
      * Instantiates a new Employee exchange perm p.
      * @throws BadLocationException the bad location exception
@@ -50,6 +49,14 @@ public class EmployeeExchangePermP extends JPanel {
 
         this.revalidate();
         this.repaint();
+    }
+
+    public JButton getBrowseExchanges() {
+        return browseExchanges;
+    }
+
+    public JButton getValuateProducts() {
+        return valuateProducts;
     }
 
 }

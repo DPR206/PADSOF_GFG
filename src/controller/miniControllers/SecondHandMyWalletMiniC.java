@@ -7,6 +7,7 @@ import controller.clientControllers.SecondHandOwnerC;
 import es.uam.eps.padsof.telecard.*;
 import model.product.SecondHandProduct;
 import model.store.Store;
+import model.user.RegisteredClient;
 import view.App;
 import view.browserPanels.AbstractBrowserP;
 import view.clientPanels.*;
@@ -108,7 +109,9 @@ public class SecondHandMyWalletMiniC implements Controller {
                     JOptionPane.INFORMATION_MESSAGE);
 
             try {
-                RegisteredMakeOfferP registeredMakeOfferP = new RegisteredMakeOfferP();
+                RegisteredMakeOfferP registeredMakeOfferP =
+                        new RegisteredMakeOfferP(frame, view.getSecondHandProduct().getOwner(),
+                                (RegisteredClient) frame.getUser());
                 RegisteredMakeOfferC controller = new RegisteredMakeOfferC(frame, model, registeredMakeOfferP,
                         view.getSecondHandProduct().getOwner());
 

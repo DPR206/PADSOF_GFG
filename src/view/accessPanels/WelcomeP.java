@@ -52,60 +52,76 @@ public class WelcomeP extends JPanel {
         JPanel columns = new JPanel(new GridLayout(1, 3, 20, 0));
 
         JPanel clientPanel = new JPanel();
-        clientPanel.add(Box.createVerticalGlue());
         clientPanel.setLayout(new BoxLayout(clientPanel, BoxLayout.Y_AXIS));
+        clientPanel.add(Box.createVerticalGlue());
+
         JLabel clientIcon = ImageAdder.getImageLabel(".\\resources\\app\\client.png", 180, 180);
         clientIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
         clientPanel.add(clientIcon);
+        clientPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         JLabel forClients = new JLabel("For clients:");
+        forClients.setFont(new Font(forClients.getFont().getFontName(), Font.BOLD, 18));
         forClients.setAlignmentX(Component.CENTER_ALIGNMENT);
         clientPanel.add(forClients);
         clientPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         clientPanel.add(loginButton);
         clientPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         signupButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         clientPanel.add(signupButton);
         clientPanel.add(Box.createVerticalGlue());
 
         JPanel unregisteredPanel = new JPanel();
         unregisteredPanel.add(Box.createVerticalGlue());
+
         unregisteredPanel.setLayout(new BoxLayout(unregisteredPanel, BoxLayout.Y_AXIS));
         imagenLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         unregisteredPanel.add(imagenLabel);
         unregisteredPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        JLabel firstTime = new JLabel("First time here?:");
+
+        JLabel firstTime = new JLabel("First time here?");
+        firstTime.setFont(new Font(firstTime.getFont().getFontName(), Font.BOLD, 18));
         firstTime.setAlignmentX(Component.CENTER_ALIGNMENT);
         unregisteredPanel.add(firstTime);
         unregisteredPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         browseButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         unregisteredPanel.add(browseButton);
         unregisteredPanel.add(Box.createVerticalGlue());
 
         JPanel staffPanel = new JPanel();
-        staffPanel.add(Box.createVerticalGlue());
         staffPanel.setLayout(new BoxLayout(staffPanel, BoxLayout.Y_AXIS));
+        staffPanel.add(Box.createVerticalGlue());
+
         JLabel staffIcon = ImageAdder.getImageLabel(".\\resources\\app\\employee.png", 180, 180);
         staffIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
         staffPanel.add(staffIcon);
+        staffPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         JLabel forStaff = new JLabel("For staff:");
+        forStaff.setFont(new Font(forStaff.getFont().getFontName(), Font.BOLD, 18));
         forStaff.setAlignmentX(Component.CENTER_ALIGNMENT);
         staffPanel.add(forStaff);
         staffPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         employeeAccess.setAlignmentX(Component.CENTER_ALIGNMENT);
         staffPanel.add(employeeAccess);
         staffPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         managerAccess.setAlignmentX(Component.CENTER_ALIGNMENT);
         staffPanel.add(managerAccess);
         staffPanel.add(Box.createVerticalGlue());
 
-        columns.add(clientPanel);
-        columns.add(unregisteredPanel);
         columns.add(staffPanel);
+        columns.add(unregisteredPanel);
+        columns.add(clientPanel);
 
         JPanel titlePanel = new JPanel();
         JLabel title = new JLabel("WELCOME TO GIFTS FOR GEEKS!");
-        title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 18));
+        title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 30));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         titlePanel.add(title);
 

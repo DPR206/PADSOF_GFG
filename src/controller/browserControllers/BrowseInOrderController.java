@@ -32,6 +32,6 @@ public class BrowseInOrderController implements Controller{
 		browser.setFirstItemList(packList);
 		List<StoreProduct> productList = o.getSp();
 		browser.setSecondItemList(productList);
+		browser.paintEverything();
 	}
-
 }

@@ -36,8 +36,6 @@ public class BrowseInOrder extends AbstractMixedBrowserP<Pack, StoreProduct>{
             this.add(new JLabel("No packs or products to be seen"));
         }
 
-        this.add(containerItems, BorderLayout.NORTH);
-
         JPanel northWrapper = new JPanel(new BorderLayout());
         northWrapper.setOpaque(false);
         northWrapper.add(containerItems, BorderLayout.NORTH);

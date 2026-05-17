@@ -59,7 +59,9 @@ public class OfferMiniP extends AbstractMiniP {
         StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_LEFT);
         StyleConstants.setBold(attributes, true);
         offerInfo.setCharacterAttributes(attributes, true);
-        offerInfo.setText("New offer from " + offer.getOrigin() + "!");
+        offerInfo.setText(
+                "New offer from " + offer.getOrigin().getUserName() + "\n(" + offer.getOriginProducts().size() +
+                " products in exchange for " + offer.getDestinationProducts() + " products)");
 
         offerInfo.setPreferredSize(new Dimension(width + 16, height));
 

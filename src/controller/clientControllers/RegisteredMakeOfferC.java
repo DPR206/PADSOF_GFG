@@ -46,6 +46,9 @@ public class RegisteredMakeOfferC implements Controller {
 
     @Override
     public void initializeActions() throws BadLocationException {
+        for (java.awt.event.ActionListener al : view.getMakeOfferButton().getActionListeners()) {
+            view.getMakeOfferButton().removeActionListener(al);
+        }
         view.getMakeOfferButton().addActionListener(e -> {
             if (frame.getTheirProducts().isEmpty() || frame.getMyProducts().isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "There must be at least one product from each wallet",

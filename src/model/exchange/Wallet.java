@@ -105,8 +105,7 @@ public class Wallet implements Serializable {
     /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
     @Override
     public String toString() {
-        // DUE
-        return "Wallet{" + "products=" + products + '}';
+        return "Wallet";
     }
 
 }

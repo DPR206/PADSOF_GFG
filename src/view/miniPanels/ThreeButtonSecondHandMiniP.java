@@ -104,7 +104,7 @@ public class ThreeButtonSecondHandMiniP extends AbstractMiniP {
         this.add(indexNum);
         this.add(productImage);
         this.add(productInfo);
-        this.add(firstButton);
+//        this.add(firstButton);
         if (!product.isAvailable()) {
             this.add(secondButton);
         } else {

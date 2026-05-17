@@ -40,7 +40,8 @@ public class RegisteredClient extends User implements Serializable {
     private int numOrders;
     private int numExchanges;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Creates a new registered client
      * @param type                the type of user
@@ -307,7 +308,9 @@ public class RegisteredClient extends User implements Serializable {
      * @param myProducts    the products the client offers
      */
     public void makeAnOffer(ArrayList<SecondHandProduct> theirProducts, ArrayList<SecondHandProduct> myProducts) {
+        System.out.println("Making an offer...");
         Offer offer = new Offer(this, theirProducts.getFirst().getOwner(), myProducts, theirProducts);
+        System.out.println("Offer: " + offer);
         this.getOfferHistory().addOffer(offer);
         theirProducts.getFirst().getOwner().getOfferHistory().addOffer(offer);
     }
@@ -465,17 +468,17 @@ public class RegisteredClient extends User implements Serializable {
         this.notificationHistory = new NotificationHistory(this);
     }
 
-/*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+
     /**
      * A string with the client's information
      * @return a string with the client's information
      */
     @Override
     public String toString() {
-        return "RegisteredClient [registerDate=" + registerDate + ", dni=" + dni + ", c=" + c + ", exchangeHistory=" +
-               exchangeHistory + ", wallet=" + wallet + ", orderHistory=" + getOrderHistory() + ", offerHistory=" +
-               offerHistory + ", notificationHistory=" + notificationHistory + ", searcher=" + searcher +
-               ", numOrders=" + numOrders + ", numExchanges=" + numExchanges + ", toString()=" + super.toString() + "]";
+        return "RegisteredClient [registerDate=" + registerDate + ", dni=" + dni + ", c=" + c + ", wallet=" + wallet +
+               ", notificationHistory=" + notificationHistory + ", searcher=" + searcher + ", numOrders=" + numOrders +
+               ", numExchanges=" + numExchanges + ", toString()=" + super.toString() + "]";
     }
 
 }

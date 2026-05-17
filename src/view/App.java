@@ -225,6 +225,9 @@ public class App extends JFrame {
 
             currentShownPanel = previousPanel;
 
+            theirProducts.clear();
+            myProducts.clear();
+
             updateBanners();
         }
     }
@@ -236,6 +239,9 @@ public class App extends JFrame {
     public void changeVisibleBanner(String cardName) {
         CardLayout cl = (CardLayout) (banners.getLayout());
         cl.show(banners, cardName);
+
+        theirProducts.clear();
+        myProducts.clear();
 
         banners.revalidate();
         banners.repaint();

@@ -3,12 +3,15 @@ package controller.browserControllers;
 import controller.miniControllers.OfferMiniC;
 import model.exchange.Offer;
 import model.store.Store;
+import model.user.RegisteredClient;
 import view.App;
 import view.browserPanels.BrowseOffersP;
 import view.miniPanels.AbstractMiniP;
 import view.miniPanels.OfferMiniP;
 
 import javax.swing.text.BadLocationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Browse offers c.
@@ -32,7 +35,9 @@ public class BrowseOffersC extends AbstractBrowserC<Offer> {
     @Override
     public void refreshData() {
         try {
-            super.getView().setItemList(super.getView().getItemList());
+            List<Offer> offers =
+                    new ArrayList<>(((RegisteredClient) super.getFrame().getUser()).getOfferHistory().getOffers());
+            super.getView().setItemList(offers);
             super.getView().setCurrentPageNum(1);
         } catch (BadLocationException ex) {
             throw new RuntimeException(ex);

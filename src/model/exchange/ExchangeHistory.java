@@ -1,4 +1,3 @@
-
 package model.exchange;
 
 import model.user.RegisteredClient;
@@ -14,70 +13,72 @@ import java.util.*;
  * @see Exchange
  */
 public class ExchangeHistory implements Serializable {
-	@Serial
-	private static final long serialVersionUID = 1L; /* Para el Save & Load */
+    @Serial
+    private static final long serialVersionUID = 1L; /* Para el Save & Load */
 
-	private Set<Exchange> exchanges;
-	private RegisteredClient owner;
+    private Set<Exchange> exchanges;
+    private RegisteredClient owner;
 
-	/**
-	 * Creates an exchange history
-	 * @param assignedExchanges the exchanges
-	 * @param assignedOwner     the owner
-	 */
-	public ExchangeHistory(Set<Exchange> assignedExchanges, RegisteredClient assignedOwner) {
-		this.exchanges = new HashSet<Exchange>(assignedExchanges);
-		this.owner = assignedOwner;
-	}
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
-	/**
-	 * Creates an empty exchange history
-	 * @param assignedOwner the owner
-	 */
-	public ExchangeHistory(RegisteredClient assignedOwner){
-		this(new HashSet<>(), assignedOwner);
-	}
+    /**
+     * Creates an exchange history
+     * @param assignedExchanges the exchanges
+     * @param assignedOwner     the owner
+     */
+    public ExchangeHistory(Set<Exchange> assignedExchanges, RegisteredClient assignedOwner) {
+        this.exchanges = new HashSet<Exchange>(assignedExchanges);
+        this.owner = assignedOwner;
+    }
 
-/*------------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------*/
+    /**
+     * Creates an empty exchange history
+     * @param assignedOwner the owner
+     */
+    public ExchangeHistory(RegisteredClient assignedOwner) {
+        this(new HashSet<>(), assignedOwner);
+    }
 
-	/**
-	 * Obtains the exchanges in the history
-	 * @return the exchanges, the exchanges made
-	 */
-	public Set<Exchange> getExchanges() {
-		return Collections.unmodifiableSet(exchanges);
-	}
+    /*------------------------------------------------------SETTERS AND GETTERS---------------------------------------------------------------*/
 
-	/**
-	 * Obtains the user associated to the research history
-	 * @return the owner, the owner of the history
-	 */
-	public RegisteredClient getOwner() {
-		return owner;
-	}
+    /**
+     * Adds a new exchange to the history
+     * @param newExchange the new exchange
+     */
+    public void addExchange(Exchange newExchange) {
+        exchanges.add(newExchange);
+    }
 
-/*---------------------------------------------------------METHODS------------------------------------------------------------------------*/
+    /**
+     * Add exchanges.
+     * @param newExchanges the new exchanges
+     */
+    public void addExchanges(Set<Exchange> newExchanges) {
+        exchanges.addAll(newExchanges);
+    }
 
-	/**
-	 * Adds a new exchange to the history
-	 * @param newExchange the new exchange
-	 */
-	public void addExchange(Exchange newExchange) {
-		exchanges.add(newExchange);
-	}
+    /*---------------------------------------------------------METHODS------------------------------------------------------------------------*/
 
-	/**
-	 * Add exchanges.
-	 * @param newExchanges the new exchanges
-	 */
-	public void addExchanges(Set<Exchange> newExchanges) {
-		exchanges.addAll(newExchanges);
-	}
+    /**
+     * Obtains the exchanges in the history
+     * @return the exchanges, the exchanges made
+     */
+    public Set<Exchange> getExchanges() {
+        return Collections.unmodifiableSet(exchanges);
+    }
 
-	@Override
-	public String toString() {
-		return "ExchangeHistory [exchanges=" + exchanges + ", owner=" + owner + "]";
-	}
+    /**
+     * Obtains the user associated to the research history
+     * @return the owner, the owner of the history
+     */
+    public RegisteredClient getOwner() {
+        return owner;
+    }
 
+    /*--------------------------------------------------- TOSTRING ---------------------------------------------------*/
+    @Override
+    public String toString() {
+        return "ExchangeHistory [exchanges=" + exchanges + ", owner=" + owner.getUserName() + "]";
+    }
 
 }

@@ -2,6 +2,7 @@ package controller.clientControllers;
 
 import controller.Controller;
 import controller.browserControllers.BrowseMyWalletEditC;
+import controller.browserControllers.BrowseOffersC;
 import model.product.SecondHandProduct;
 import model.store.Store;
 import model.user.RegisteredClient;
@@ -13,6 +14,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.nio.file.*;
 
+import static view.ImageAdder.getScaledImage;
+
 /**
  * The type Registered wallet c.
  * @author Ana O.R.
@@ -23,6 +26,7 @@ public class RegisteredWalletC implements Controller {
     private final RegisteredWalletP view;
     private final BrowseMyWalletEditC walletBrowserController;
     private String photoPath;
+    private boolean viewingOffers = false;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -37,6 +41,7 @@ public class RegisteredWalletC implements Controller {
         this.view = view;
 
         this.walletBrowserController = new BrowseMyWalletEditC(frame, model, view.getBrowseMyWalletP());
+        new BrowseOffersC(frame, view.getBrowseOffersP(), model);
 
         initializeActions();
     }
@@ -44,7 +49,17 @@ public class RegisteredWalletC implements Controller {
     @Override
     public void initializeActions() {
         view.getBtnOffers().addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Work in progress please send help");
+            if (!viewingOffers) {
+                view.showOffers();
+                viewingOffers = true;
+                view.getBtnOffers().setText("Products");
+                view.getBtnOffers().setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\order.png"), 32, 32));
+            } else {
+                view.showProducts();
+                viewingOffers = false;
+                view.getBtnOffers().setText("Offers");
+                view.getBtnOffers().setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\exchange.png"), 32, 32));
+            }
         });
 
         view.getAddProduct().addActionListener((e) -> {

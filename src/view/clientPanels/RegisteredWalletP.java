@@ -3,6 +3,7 @@ package view.clientPanels;
 import model.product.ProductType;
 import model.user.RegisteredClient;
 import view.browserPanels.BrowseMyWalletEditP;
+import view.browserPanels.BrowseOffersP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -27,9 +28,10 @@ public class RegisteredWalletP extends JPanel {
     private final JTextField nameField = new JTextField();
     private final JTextField descriptionField = new JTextField();
     private final RegisteredClient client;
+    private final JPanel centerPanel = new JPanel();
+    private final BrowseOffersP browseOffersP;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-
     /**
      * Instantiates a new Registered wallet p.
      * @param client the client
@@ -40,6 +42,8 @@ public class RegisteredWalletP extends JPanel {
 
         this.client = client;
         browseMyWalletP = new BrowseMyWalletEditP();
+        browseOffersP = new BrowseOffersP();
+        centerPanel.add(browseMyWalletP);
 
         typesHashMap.put("Comic", ProductType.COMIC);
         typesHashMap.put("Game", ProductType.GAME);
@@ -104,9 +108,29 @@ public class RegisteredWalletP extends JPanel {
 
         lateralPanel.add(Box.createVerticalGlue());
 
-        this.add(browseMyWalletP, BorderLayout.CENTER);
+        this.add(centerPanel, BorderLayout.CENTER);
         this.add(lateralPanel, BorderLayout.EAST);
 
+        this.revalidate();
+        this.repaint();
+    }
+
+    /**
+     * Show offers.
+     */
+    public void showOffers() {
+        centerPanel.removeAll();
+        centerPanel.add(browseOffersP);
+        this.revalidate();
+        this.repaint();
+    }
+
+    /**
+     * Show products.
+     */
+    public void showProducts() {
+        centerPanel.removeAll();
+        centerPanel.add(browseMyWalletP);
         this.revalidate();
         this.repaint();
     }
@@ -125,6 +149,10 @@ public class RegisteredWalletP extends JPanel {
      */
     public BrowseMyWalletEditP getBrowseMyWalletP() {
         return browseMyWalletP;
+    }
+
+    public BrowseOffersP getBrowseOffersP() {
+        return browseOffersP;
     }
 
     /**

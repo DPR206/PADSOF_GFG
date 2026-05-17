@@ -1,8 +1,10 @@
 package controller.miniControllers;
 
 import controller.Controller;
+import controller.browserControllers.AbstractBrowserC;
 import controller.clientControllers.RegisteredMakeOfferC;
 import controller.clientControllers.SecondHandOthersC;
+import model.product.SecondHandProduct;
 import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
@@ -25,6 +27,7 @@ public class SecondHandAddToOfferMiniC implements Controller {
     private final SecondHandMiniP view;
     private final App frame;
     private final Store model;
+    private final AbstractBrowserC<SecondHandProduct> abstractBrowserC;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -34,10 +37,12 @@ public class SecondHandAddToOfferMiniC implements Controller {
      * @param model the model
      * @param view  the view
      */
-    public SecondHandAddToOfferMiniC(App frame, Store model, SecondHandMiniP view) {
+    public SecondHandAddToOfferMiniC(App frame, Store model, SecondHandMiniP view,
+                                     AbstractBrowserC<SecondHandProduct> abstractBrowserC) {
         this.frame = frame;
         this.view = view;
         this.model = model;
+        this.abstractBrowserC = abstractBrowserC;
 
         initializeActions();
     }
@@ -91,6 +96,9 @@ public class SecondHandAddToOfferMiniC implements Controller {
             }
         });
 
+        for (java.awt.event.ActionListener al : view.getButton().getActionListeners()) {
+            view.getButton().removeActionListener(al);
+        }
         view.getButton().addActionListener(e -> {
             JOptionPane.showMessageDialog(frame, view.getSecondHandProduct().getName() + " was added to the Offer",
                     "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
@@ -113,6 +121,8 @@ public class SecondHandAddToOfferMiniC implements Controller {
                     frame.changeVisibleCard("MAKE_OFFER");
                 } else {
                     frame.addProductFromMyWallet(view.getSecondHandProduct());
+                    abstractBrowserC.refreshCurrentPage();
+                    abstractBrowserC.initializeActionsForMiniPanels();
 
                 }
             } catch (BadLocationException ex) {

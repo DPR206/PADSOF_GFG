@@ -6,6 +6,7 @@ import controller.clientControllers.RegisteredMainC;
 import controller.clientControllers.UnregisteredMainC;
 import controller.employeeControllers.EmployeeMainC;
 import controller.managerControllers.ManagerMainC;
+import model.product.SecondHandProduct;
 import model.store.Store;
 import model.user.UnregisteredClient;
 import model.user.User;
@@ -50,6 +51,8 @@ public class App extends JFrame {
     private final BannerManager bannerManagerPanel;
     private final List<String> lastShownPanels = new ArrayList<>();
     private final Store model = Store.getInstance();
+    private final ArrayList<SecondHandProduct> theirProducts = new ArrayList<>();
+    private final ArrayList<SecondHandProduct> myProducts = new ArrayList<>();
     private String currentShownPanel;
     private User mainUser = new UnregisteredClient(true);
 
@@ -152,6 +155,24 @@ public class App extends JFrame {
     }
 
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
+    /**
+     * Add product from their wallet.
+     * @param product the product
+     */
+    public void addProductFromTheirWallet(SecondHandProduct product) {
+        theirProducts.add(product);
+        System.out.println("Their products: " + theirProducts);
+    }
+
+    /**
+     * Add product from my wallet.
+     * @param product the product
+     */
+    public void addProductFromMyWallet(SecondHandProduct product) {
+        myProducts.add(product);
+        System.out.println("My products: " + myProducts);
+    }
+
     private void addBanner(JPanel newView, String constraints) {
         banners.add(newView, constraints);
         newView.setOpaque(true);
@@ -283,7 +304,6 @@ public class App extends JFrame {
     }
 
     /*----------------------------------------------- GETTERS & SETTERS ----------------------------------------------*/
-
     /**
      * It gets the app
      * @return the app
@@ -324,6 +344,10 @@ public class App extends JFrame {
         return managerMainPanel;
     }
 
+    public ArrayList<SecondHandProduct> getMyProducts() {
+        return myProducts;
+    }
+
     /**
      * It gets the registered main panel
      * @return the registered main panel
@@ -346,6 +370,10 @@ public class App extends JFrame {
      */
     public SignupP getSignupPanel() {
         return signupPanel;
+    }
+
+    public ArrayList<SecondHandProduct> getTheirProducts() {
+        return theirProducts;
     }
 
     /**

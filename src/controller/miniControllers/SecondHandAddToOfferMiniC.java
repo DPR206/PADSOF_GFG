@@ -92,25 +92,29 @@ public class SecondHandAddToOfferMiniC implements Controller {
         });
 
         view.getButton().addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame,
-                    view.getSecondHandProduct().getName() + " was " + "added to " + "the Offer", "Added To Offer",
-                    JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, view.getSecondHandProduct().getName() + " was added to the Offer",
+                    "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
 
             try {
-                RegisteredMakeOfferP registeredMakeOfferP =
-                        new RegisteredMakeOfferP(frame, view.getSecondHandProduct().getOwner(),
-                                (RegisteredClient) frame.getUser());
-                RegisteredMakeOfferC controller = new RegisteredMakeOfferC(frame, model, registeredMakeOfferP,
-                        view.getSecondHandProduct().getOwner());
+                if (view.getSecondHandProduct().getOwner() != frame.getUser()) {
+                    RegisteredMakeOfferP registeredMakeOfferP =
+                            new RegisteredMakeOfferP(frame, view.getSecondHandProduct().getOwner(),
+                                    (RegisteredClient) frame.getUser());
+                    new RegisteredMakeOfferC(frame, model, registeredMakeOfferP,
+                            view.getSecondHandProduct().getOwner());
 
-                if (view.getSecondHandProduct().getOwner() == frame.getUser()) {
-                    controller.addProductFromMyWallet(view.getSecondHandProduct());
+                    frame.addProductFromTheirWallet(view.getSecondHandProduct());
+
+                    JPanel check = frame.getViewFromName("MAKE OFFER");
+                    if (check != null) {
+                        frame.remove(check);
+                    }
+                    frame.addCard(registeredMakeOfferP, "MAKE_OFFER");
+                    frame.changeVisibleCard("MAKE_OFFER");
                 } else {
-                    controller.addProductFromTheirWallet(view.getSecondHandProduct());
-                }
+                    frame.addProductFromMyWallet(view.getSecondHandProduct());
 
-                frame.addCard(registeredMakeOfferP, "MAKE_OFFER");
-                frame.changeVisibleCard("MAKE_OFFER");
+                }
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

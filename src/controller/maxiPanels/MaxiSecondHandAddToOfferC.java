@@ -8,6 +8,7 @@ import view.App;
 import view.clientPanels.RegisteredMakeOfferP;
 import view.maxiPanels.MaxiSecondHandP;
 
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
 /**
@@ -38,21 +39,28 @@ public class MaxiSecondHandAddToOfferC implements Controller {
     @Override
     public void initializeActions() {
         view.getButton().addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame, view.getProduct().getName() + " was added to the Offer",
+                    "Added To Offer", JOptionPane.INFORMATION_MESSAGE);
+
             try {
-                RegisteredMakeOfferP registeredMakeOfferP =
-                        new RegisteredMakeOfferP(frame, view.getProduct().getOwner(),
-                                (RegisteredClient) frame.getUser());
-                RegisteredMakeOfferC controller =
-                        new RegisteredMakeOfferC(frame, model, registeredMakeOfferP, view.getProduct().getOwner());
+                if (view.getProduct().getOwner() != frame.getUser()) {
+                    RegisteredMakeOfferP registeredMakeOfferP =
+                            new RegisteredMakeOfferP(frame, view.getProduct().getOwner(),
+                                    (RegisteredClient) frame.getUser());
+                    new RegisteredMakeOfferC(frame, model, registeredMakeOfferP, view.getProduct().getOwner());
 
-                if (view.getProduct().getOwner() == frame.getUser()) {
-                    controller.addProductFromMyWallet(view.getProduct());
+                    frame.addProductFromTheirWallet(view.getProduct());
+
+                    JPanel check = frame.getViewFromName("MAKE OFFER");
+                    if (check != null) {
+                        frame.remove(check);
+                    }
+                    frame.addCard(registeredMakeOfferP, "MAKE_OFFER");
+                    frame.changeVisibleCard("MAKE_OFFER");
                 } else {
-                    controller.addProductFromTheirWallet(view.getProduct());
-                }
+                    frame.addProductFromMyWallet(view.getProduct());
 
-                frame.addCard(registeredMakeOfferP, "MAKE_OFFER");
-                frame.changeVisibleCard("MAKE_OFFER");
+                }
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

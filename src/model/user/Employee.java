@@ -4,6 +4,8 @@ import model.discount.Discount;
 import model.exchange.Exchange;
 import model.notification.Notification;
 import model.notification.NotificationHistory;
+import model.notification.NotificationOrder;
+import model.notification.NotificationType;
 import model.order.Order;
 import model.order.OrderState;
 import model.product.*;
@@ -210,6 +212,10 @@ public class Employee extends User implements Serializable {
     public boolean manageOrder(Order o, OrderState status) {
         if (this.op != null) {
             op.manageOrder(o, status);
+            NotificationOrder notification =
+                    new NotificationOrder(LocalDateTime.now(), false, true, NotificationType.ORDER);
+            notification.FullNotification(o);
+            o.getOwner().getNotificationHistory().addNotification(notification);
             return true;
         }
         System.err.println("You have no permission to do that...");

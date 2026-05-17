@@ -1,8 +1,11 @@
 package view.clientPanels;
 
+import model.user.RegisteredClient;
+import view.App;
 import view.browserPanels.BrowseSomeonesWalletP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 
 /**
@@ -12,16 +15,21 @@ import java.awt.*;
  */
 public class RegisteredMakeOfferP extends JPanel {
     private final JButton makeOfferButton = new JButton("Make Offer");
-    private BrowseSomeonesWalletP browseTheirWallet = null;
-    private BrowseSomeonesWalletP browseMyWallet = null;
+    private final BrowseSomeonesWalletP browseTheirWallet;
+    private final BrowseSomeonesWalletP browseMyWallet;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new Registered make offer p.
      */
-    public RegisteredMakeOfferP() {
+    public RegisteredMakeOfferP(App frame, RegisteredClient them, RegisteredClient me) throws BadLocationException {
         this.setLayout(new BorderLayout());
+
+        browseTheirWallet = new BrowseSomeonesWalletP(frame, them);
+        browseMyWallet = new BrowseSomeonesWalletP(frame, me);
+
+        paintEverything();
     }
 
     public void paintEverything() {
@@ -39,15 +47,15 @@ public class RegisteredMakeOfferP extends JPanel {
         this.repaint();
     }
 
+    public BrowseSomeonesWalletP getBrowseMyWallet() {
+        return browseMyWallet;
+    }
+
+    public BrowseSomeonesWalletP getBrowseTheirWallet() {
+        return browseTheirWallet;
+    }
+
     public JButton getMakeOfferButton() {
         return makeOfferButton;
-    }
-
-    public void setBrowseMyWallet(BrowseSomeonesWalletP newBrowseMyWallet) {
-        this.browseMyWallet = newBrowseMyWallet;
-    }
-
-    public void setBrowseTheirWallet(BrowseSomeonesWalletP newBrowseTheirWallet) {
-        this.browseTheirWallet = newBrowseTheirWallet;
     }
 }

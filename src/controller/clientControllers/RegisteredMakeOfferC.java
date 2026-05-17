@@ -1,18 +1,14 @@
 package controller.clientControllers;
 
 import controller.Controller;
-import controller.browserControllers.BrowseMyWalletOfferC;
 import controller.browserControllers.BrowseSomeonesWalletC;
-import model.product.SecondHandProduct;
 import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
-import view.browserPanels.BrowseSomeonesWalletP;
 import view.clientPanels.RegisteredMakeOfferP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.util.ArrayList;
 
 /**
  * The type Registered make offer c.
@@ -24,8 +20,6 @@ public class RegisteredMakeOfferC implements Controller {
     private final Store model;
     private final RegisteredMakeOfferP view;
     private final RegisteredClient them;
-    private final ArrayList<SecondHandProduct> theirProducts = new ArrayList<>();
-    private final ArrayList<SecondHandProduct> myProducts = new ArrayList<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -44,41 +38,20 @@ public class RegisteredMakeOfferC implements Controller {
         this.view = view;
         this.them = them;
 
-        BrowseSomeonesWalletP browseTheirWallet = new BrowseSomeonesWalletP(frame, them);
-        new BrowseMyWalletOfferC(frame, model, browseTheirWallet);
-        view.setBrowseTheirWallet(browseTheirWallet);
+        new BrowseSomeonesWalletC(frame, model, view.getBrowseTheirWallet());
+        new BrowseSomeonesWalletC(frame, model, view.getBrowseMyWallet());
 
-        BrowseSomeonesWalletP browseMyWallet = new BrowseSomeonesWalletP(frame, them);
-        new BrowseSomeonesWalletC(frame, model, browseMyWallet);
-        view.setBrowseMyWallet(browseMyWallet);
-
-        view.paintEverything();
-    }
-
-    /**
-     * Add product from their wallet.
-     * @param product the product
-     */
-    public void addProductFromTheirWallet(SecondHandProduct product) {
-        theirProducts.add(product);
-    }
-
-    /**
-     * Add product from my wallet.
-     * @param product the product
-     */
-    public void addProductFromMyWallet(SecondHandProduct product) {
-        myProducts.add(product);
+        initializeActions();
     }
 
     @Override
     public void initializeActions() throws BadLocationException {
         view.getMakeOfferButton().addActionListener(e -> {
-            if (theirProducts.isEmpty() || myProducts.isEmpty()) {
+            if (frame.getTheirProducts().isEmpty() || frame.getMyProducts().isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "There must be at least one product from each wallet",
                         "Minimum products not reached", JOptionPane.ERROR_MESSAGE);
             } else {
-                ((RegisteredClient) frame.getUser()).makeAnOffer(theirProducts, myProducts);
+                ((RegisteredClient) frame.getUser()).makeAnOffer(frame.getTheirProducts(), frame.getMyProducts());
                 JOptionPane.showMessageDialog(frame, "Offer made successfully");
                 try {
                     frame.goBack();

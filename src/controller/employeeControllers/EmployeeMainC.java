@@ -120,5 +120,17 @@ public class EmployeeMainC implements Controller {
                 throw new RuntimeException(ex);
             }
         });
+        view.getManageOrders().addActionListener(e->{
+        	this.orders = new EmployeeOrder();
+        	new EmployeOrderC(this.frame, this.orders);
+        	
+        	this.frame.addCard(this.orders, "EMPLOYEE MANAGE ORDERS");
+        	try {
+				this.frame.changeVisibleCard("EMPLOYEE MANAGE ORDERS");
+			} catch (BadLocationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        });
     }
 }

@@ -47,12 +47,6 @@ public class OrderMiniC implements Controller {
         this.abstractBrowserC = abstractBrowserC;
         this.abstractBrowserP = abstractBrowserP;
 
-        if (order.getState() != OrderState.PICKED_UP) {
-            view.getAddReview().setVisible(false);
-        } else {
-            view.getAddReview().setVisible(true);
-        }
-
         initializeActions();
     }
 
@@ -62,10 +56,6 @@ public class OrderMiniC implements Controller {
         cargarProductos();
 
         view.setOrderState(order.getState().getString());
-
-        view.getAddReview().addActionListener(e -> {
-            abrirReview();
-        });
     }
 
     private void cargarProductos() {
@@ -96,10 +86,6 @@ public class OrderMiniC implements Controller {
         }
 
         view.setOrderDetails(sb.toString(), order.getPrice());
-    }
-
-    private void abrirReview() {
-
     }
 
 }

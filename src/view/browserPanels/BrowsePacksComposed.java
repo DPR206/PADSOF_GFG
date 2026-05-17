@@ -1,23 +1,9 @@
 package view.browserPanels;
 
-import static main.Main.brownColour;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.text.BadLocationException;
-
-import controller.miniControllers.StoreProductDeleteMiniC;
-import model.product.ComposedPack;
 import model.product.Pack;
 import model.product.StoreProduct;
 import view.miniPanels.PackMiniP;
 import view.miniPanels.StoreProductMiniP;
-
-import model.order.Cart;
-import model.product.Pack;
-import model.product.StoreProduct;
-import view.miniPanels.PackCartMiniP;
-import view.miniPanels.StoreProductMiniCart;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -25,12 +11,17 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse packs composed.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class BrowsePacksComposed extends AbstractMixedBrowserP<Pack, StoreProduct> {
-    private ComposedPack p;
-
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * This panel's constructor
+     * @throws BadLocationException the bad location exception
      */
     public BrowsePacksComposed() throws BadLocationException {
         super();

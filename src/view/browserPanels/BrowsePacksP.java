@@ -8,10 +8,21 @@ import javax.swing.text.BadLocationException;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse packs p.
+ * @author Sofía C.L.
+ * @version 1.0
+ */
 public class BrowsePacksP extends AbstractBrowserP<Pack> {
     private final String buttonName;
     private final String iconPath;
 
+    /**
+     * Instantiates a new Browse packs p.
+     * @param buttonName the button name
+     * @param iconPath   the icon path
+     * @throws BadLocationException the bad location exception
+     */
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public BrowsePacksP(String buttonName, String... iconPath) throws BadLocationException {
         super();

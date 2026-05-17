@@ -8,6 +8,11 @@ import javax.swing.text.BadLocationException;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse store products p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseStoreProductsP extends AbstractBrowserP<StoreProduct> {
     private final String buttonName;
 
@@ -15,6 +20,8 @@ public class BrowseStoreProductsP extends AbstractBrowserP<StoreProduct> {
 
     /**
      * This panel's constructor
+     * @param buttonName the button name
+     * @throws BadLocationException the bad location exception
      */
     public BrowseStoreProductsP(String buttonName) throws BadLocationException {
         super();

@@ -6,20 +6,22 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 
 /**
  * The type Unregistered main p.
+ * @author Ana O.R.
+ * @version 1.0
  */
 public class UnregisteredMainP extends JPanel {
+    @Serial
     private static final long serialVersionUID = 1L;
-    JPanel bottom;
+    private final SearchPanel filterP = new SearchPanel();
+    private final CardLayout cardLayout = new CardLayout();
+    private JPanel bottom;
     private JButton filters = new JButton("Filters");
     private JButton search = new JButton("Search");
-    private SearchPanel filterP = new SearchPanel();
     private MixedBrowseStoreAddToCartP searchingP;
-    private JPanel productSearch;
-    private JPanel others;
-    private CardLayout cardLayout = new CardLayout();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -39,7 +41,7 @@ public class UnregisteredMainP extends JPanel {
     public void paintEverything() {
         this.setLayout(new BorderLayout());
 
-        others = new JPanel(new BorderLayout());
+        JPanel others = new JPanel(new BorderLayout());
         others.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JPanel botones = new JPanel(new GridLayout(0, 2));

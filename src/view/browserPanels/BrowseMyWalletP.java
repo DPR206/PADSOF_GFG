@@ -1,7 +1,6 @@
 package view.browserPanels;
 
 import model.product.SecondHandProduct;
-import model.user.RegisteredClient;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
@@ -9,18 +8,22 @@ import javax.swing.text.BadLocationException;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse my wallet p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseMyWalletP extends AbstractBrowserP<SecondHandProduct> {
-    private final RegisteredClient owner;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
+     * @throws BadLocationException the bad location exception
      */
-    public BrowseMyWalletP(RegisteredClient owner) throws BadLocationException {
+    public BrowseMyWalletP() throws BadLocationException {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.owner = owner;
         paintEverything();
     }
 

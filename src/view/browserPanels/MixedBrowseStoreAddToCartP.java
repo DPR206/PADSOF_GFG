@@ -11,12 +11,18 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Mixed browse store add to cart p.
+ * @author Duna P.R. & Ana O.R.
+ * @version 1.0
+ */
 public class MixedBrowseStoreAddToCartP extends AbstractMixedBrowserP<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
+     * @throws BadLocationException the bad location exception
      */
     public MixedBrowseStoreAddToCartP() throws BadLocationException {
         super();

@@ -1,27 +1,28 @@
 package view.browserPanels;
 
-import static main.Main.brownColour;
-
-import java.awt.BorderLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.text.BadLocationException;
-
 import model.product.Pack;
 import model.product.StoreProduct;
 import view.miniPanels.PackMiniP;
-import view.miniPanels.PackToBuyMiniP;
 import view.miniPanels.StoreProductMiniP;
 
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
+
+import static main.Main.brownColour;
+
+/**
+ * The type Mixed browse in pack p.
+ * @author Sofia C.L..
+ * @version 1.0
+ */
 public class MixedBrowseInPackP extends AbstractMixedBrowserP<Pack, StoreProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
+     * @throws BadLocationException the bad location exception
      */
     public MixedBrowseInPackP() throws BadLocationException {
         super();

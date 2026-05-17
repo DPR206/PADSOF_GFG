@@ -36,7 +36,7 @@ public class RegisteredWalletP extends JPanel {
         this.setLayout(new BorderLayout());
 
         this.client = client;
-        browseMyWalletP = new BrowseMyWalletP(client);
+        browseMyWalletP = new BrowseMyWalletP();
 
         typesHashMap.put("Comic", ProductType.COMIC);
         typesHashMap.put("Game", ProductType.GAME);

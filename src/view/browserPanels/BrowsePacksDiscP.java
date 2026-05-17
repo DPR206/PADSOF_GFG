@@ -10,6 +10,11 @@ import java.util.List;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse packs disc p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowsePacksDiscP extends AbstractBrowserP<Pack> {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -17,6 +22,11 @@ public class BrowsePacksDiscP extends AbstractBrowserP<Pack> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
+    /**
+     * Instantiates a new Browse packs disc p.
+     * @param alreadyChosen the already chosen
+     * @throws BadLocationException the bad location exception
+     */
     public BrowsePacksDiscP(List<Pack> alreadyChosen) throws BadLocationException {
         super();
         this.alreadyChosen = alreadyChosen;

@@ -9,14 +9,21 @@ import java.awt.*;
 
 import static main.Main.brownColour;
 
+/**
+ * The type Browse employees p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class BrowseEmployeesP extends AbstractClusterBrowserP<Employee> {
     private final String buttonName;
-    private JPanel usersPanel = new JPanel(new GridLayout(3, 3));
+    private final JPanel usersPanel = new JPanel(new GridLayout(3, 3));
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * This panel's constructor
+     * @param buttonName the button name
+     * @throws BadLocationException the bad location exception
      */
     public BrowseEmployeesP(String buttonName) throws BadLocationException {
         super(9);

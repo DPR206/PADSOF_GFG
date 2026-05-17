@@ -9,8 +9,6 @@ import view.miniPanels.ExchangeMiniP;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * The type Exchange mini c.
@@ -47,20 +45,6 @@ public class ExchangeMiniC implements Controller {
     public void initializeActions() {
         view.setFocusable(true);
         view.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        view.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    // DUE: Abrir vista grande?
-                }
-            }
-        });
-
-        view.getDiscountInfo().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                // DUE: Abrir vista grande?
-            }
-        });
 
         view.getButton().addActionListener(e -> {
             view.getExchange().changeExchanged(true);

@@ -1,6 +1,7 @@
 package view.miniPanels;
 
 import model.exchange.Offer;
+import model.exchange.OfferStatus;
 import model.user.RegisteredClient;
 import view.ImageAdder;
 
@@ -62,7 +63,8 @@ public class OfferMiniP extends AbstractMiniP {
         offerInfo.setCharacterAttributes(attributes, true);
         offerInfo.setText(
                 "New offer from " + offer.getOrigin().getUserName() + "\n(" + offer.getOriginProducts().size() +
-                " products in exchange for " + offer.getDestinationProducts().size() + " products)");
+                " products in exchange for " + offer.getDestinationProducts().size() + " products)\nStatus: " +
+                offer.getStatus().toString());
 
         offerInfo.setPreferredSize(new Dimension(width + 16, height));
 
@@ -79,13 +81,15 @@ public class OfferMiniP extends AbstractMiniP {
         this.add(indexNum);
         this.add(offerImage);
         this.add(offerInfo);
-        if (offer.getOrigin() != client) {
-            this.add(acceptButton);
-        } else {
-            declineButton.setText("Cancel offer");
-            declineButton.setPreferredSize(new Dimension(("Cancel offer").length() * 15, height));
+        if (offer.getStatus() == OfferStatus.PENDING) {
+            if (offer.getOrigin() != client) {
+                this.add(acceptButton);
+            } else {
+                declineButton.setText("Cancel offer");
+                declineButton.setPreferredSize(new Dimension(("Cancel offer").length() * 15, height));
+            }
+            this.add(declineButton);
         }
-        this.add(declineButton);
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }

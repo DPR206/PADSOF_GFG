@@ -38,7 +38,7 @@ public class ExchangeMiniP extends AbstractMiniP {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setPreferredSize(new Dimension(buttonName.length() * 15, height));
         button.setMinimumSize(button.getPreferredSize());
-        button.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\delete.png"), height / 3, height / 3));
+        button.setIcon(getScaledImage(new ImageIcon(".\\resources\\app\\yes.png"), height / 3, height / 3));
 
         this.exchangeImage = ImageAdder.getImageLabel(".\\resources\\app\\exchange.png", 50, 50);
         this.exchangeInfo = new JTextPane();
@@ -67,6 +67,9 @@ public class ExchangeMiniP extends AbstractMiniP {
         this.add(exchangeImage);
         this.add(exchangeInfo);
         this.add(button);
+        if (exchange.isExchanged()) {
+            button.setEnabled(false);
+        }
 
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }

@@ -40,7 +40,7 @@ public class BrowseExchangesP extends AbstractBrowserP<Exchange> {
 
     @Override
     public void addMiniPanel(Exchange item, int index) throws BadLocationException {
-        ExchangeMiniP miniOrder = new ExchangeMiniP(item, index, "Delete");
+        ExchangeMiniP miniOrder = new ExchangeMiniP(item, index, "Set as exchanged");
         super.addMiniPanel(miniOrder);
         this.add(miniOrder);
     }

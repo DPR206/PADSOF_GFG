@@ -1,10 +1,14 @@
 package controller.clientControllers;
 
 import controller.Controller;
+import model.order.Order;
 import model.product.Comic;
+import model.product.Pack;
+import model.product.StoreProduct;
 import model.user.*;
 import view.App;
 import view.clientPanels.ComicP;
+import view.clientPanels.ReviewP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -19,6 +23,7 @@ public class ComicC implements Controller {
     private final App frame;
     private final ComicP view;
     private final Comic comic;
+    private final RegisteredClient user;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -32,7 +37,7 @@ public class ComicC implements Controller {
         this.frame = frame;
         this.view = view;
         this.comic = comic;
-
+        this.user = (RegisteredClient) frame.getUser();
         initializeActions();
     }
 
@@ -79,9 +84,86 @@ public class ComicC implements Controller {
                 throw new RuntimeException(ex);
             }
         });
+        
+        this.view.getBtnaddReview().addActionListener(e -> {
+        	boolean hasPurchased = userHasPurchased();
+
+        	this.view.getBtnaddReview().setVisible(hasPurchased);
+        	
+        	if (hasPurchased) {
+        	    this.view.getBtnaddReview().addActionListener(r -> {
+        	        openReviewDialog(); 
+        	        try {
+						updateInterface();
+					} catch (BadLocationException e1) {
+						throw new RuntimeException(e1);
+					}
+        	    });
+        	}
+        		
+        });
     }
 
     /**
+     * Opens the review section
+     */
+    private void openReviewDialog() {
+    	ReviewP vistaReview = new ReviewP();
+        
+        ReviewC controladorReview = new ReviewC(vistaReview, comic, user);
+        
+        vistaReview.setVisible(true);
+	}
+
+	/**
+     * Check if the user has purchased the product
+     * @return true if purchased, false if else
+     */
+    private boolean userHasPurchased() {
+    	
+    	if (user == null || user.getOrderHistory() == null || user.getOrderHistory().getOrders() == null) {
+            return false;
+        }
+    	
+    	for (Order order : user.getOrderHistory().getOrders()) {
+            if (order.getP() != null) {
+                for (Pack pack : order.getP()) {
+                    if (checkPacks(pack)) return true;    
+                }
+            }
+            
+            if (order.getSp() != null) {
+                for (StoreProduct sp : order.getSp()) {
+                    if (sp.equals(comic)) return true;
+                }
+            }
+        }
+        return false;
+	}
+
+	/**
+	 * Checks the pack to look for the product
+	 * @param pack the pack to check
+	 */
+	private boolean checkPacks(Pack pack) {
+		if (pack == null) return false;
+
+	    if (pack.getProducts() != null) {
+	        for (StoreProduct sp : pack.getProducts()) {
+	            if (sp.equals(comic)) return true;
+	        }
+	    }
+	    
+	    if (pack.getPacks() != null) {
+	        for (Pack p : pack.getPacks()) {
+	            if (checkPacks(p)) return true;
+	        }
+	    }
+	    
+	    return false;
+	}
+
+	/**
      * Update interface.
      */
     public void updateInterface() throws BadLocationException {

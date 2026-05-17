@@ -17,6 +17,7 @@ public class ComicP extends JPanel {
     @Serial
     private static final long serialVersionUID = 1L;
     private final JButton btnaddCart = new JButton("Add to cart");
+    private final JButton btnaddReview = new JButton("Add review");
     private final JButton btnReturn = new JButton("Return");
     private JLabel name;
     private JLabel author;
@@ -99,15 +100,21 @@ public class ComicP extends JPanel {
 
         btnaddCart.setMaximumSize(new Dimension(250, 100));
         btnaddCart.setFont(fuenteBotones);
+        
+        btnaddReview.setMaximumSize(new Dimension(250, 100));
+        btnaddReview.setFont(fuenteBotones);
 
         btnReturn.setMaximumSize(new Dimension(250, 100));
         btnReturn.setFont(fuenteBotones);
 
         btnaddCart.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnReturn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnaddReview.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         buttonPanel.add(Box.createVerticalGlue());
         buttonPanel.add(btnaddCart);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        buttonPanel.add(btnaddReview);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         buttonPanel.add(btnReturn);
         buttonPanel.add(Box.createVerticalGlue());
@@ -165,6 +172,14 @@ public class ComicP extends JPanel {
     }
 
     /**
+     * It gets the btnadd review
+	 * @return the btnaddReview
+	 */
+	public JButton getBtnaddReview() {
+		return btnaddReview;
+	}
+
+	/**
      * It gets the unit spinner
      * @return the unitSpinner
      */

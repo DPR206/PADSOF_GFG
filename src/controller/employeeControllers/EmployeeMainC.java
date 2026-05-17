@@ -3,11 +3,17 @@ package controller.employeeControllers;
 import controller.Controller;
 import controller.browserControllers.BrowseExchangesC;
 import controller.browserControllers.BrowseValuationProductsC;
+import controller.managerControllers.ManagePacksC;
+import controller.managerControllers.ManagerManageProductsC;
+import controller.managerControllers.ManagerNewProductC;
 import model.store.Store;
 import view.App;
 import view.browserPanels.BrowseExchangesP;
 import view.browserPanels.BrowseSecondHandProductsP;
 import view.employeePanels.EmployeeMainP;
+import view.managerPanels.ManagerGestionarPacks;
+import view.managerPanels.ManagerGestionarProductos;
+import view.managerPanels.ManagerNewProduct;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

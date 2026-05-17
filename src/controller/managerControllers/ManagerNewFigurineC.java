@@ -85,7 +85,7 @@ public class ManagerNewFigurineC implements Controller {
                             material, cat);
 
             Store.getInstance().addStoreProduct(f);
-
+            JOptionPane.showMessageDialog(null, "Figura añadida correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
         });
     }
 }

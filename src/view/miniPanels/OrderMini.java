@@ -19,7 +19,6 @@ public class OrderMini extends AbstractMiniP {
     @Serial
     private static final long serialVersionUID = 1L;
     private final JLabel orderState = new JLabel("");
-    private final JButton addReview = new JButton("Add Review");
     private final JTextPane productInfo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
@@ -63,9 +62,6 @@ public class OrderMini extends AbstractMiniP {
         orderState.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(brownColour, 1),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 
-        addReview.setFont(new Font("SansSerif", Font.BOLD, 14));
-        addReview.setPreferredSize(new Dimension(25, height));
-
         JPanel rightPanel = new JPanel(new GridBagLayout());
         rightPanel.setOpaque(false);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -77,8 +73,6 @@ public class OrderMini extends AbstractMiniP {
         rightPanel.add(orderState, gbc);
 
         gbc.gridy = 1;
-        addReview.setFont(new Font("SansSerif", Font.BOLD, 13));
-        rightPanel.add(addReview, gbc);
 
         // --- AÑADIR AL PANEL PRINCIPAL ---
         this.add(leftPanel, BorderLayout.WEST);
@@ -86,22 +80,6 @@ public class OrderMini extends AbstractMiniP {
         this.add(rightPanel, BorderLayout.EAST);
 
         this.setPreferredSize(new Dimension(0, height));
-    }
-
-    /**
-     * It gets the add review
-     * @return the addReview
-     */
-    public JButton getAddReview() {
-        return addReview;
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        addReview.addActionListener(c);
     }
 
     /**

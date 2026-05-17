@@ -59,7 +59,7 @@ public class BrowseStoreOrdersC implements Controller{
 	            OrderMiniManageP miniSp = (OrderMiniManageP) panel;
 	            miniSp.getButton().addActionListener(e -> {
 	            	this.toDo = new ManageIndividualOrderP(miniSp.getItem());
-	            	//new ManageIndividualOrderC(miniSp.getItem());
+	            	new ManageIndividualOrderC(miniSp.getItem(), toDo);
 	            	
 	            	this.frame.addCard(this.toDo, "MANAGE INDIVIDUAL ORDER");
 	            	try {

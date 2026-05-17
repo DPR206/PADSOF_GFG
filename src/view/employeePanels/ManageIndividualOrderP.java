@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.text.BadLocationException;
 
 import model.order.Order;
+import view.browserPanels.BrowseInOrder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +29,12 @@ public class ManageIndividualOrderP extends JPanel {
         
         // Inicialización de tus componentes existentes
         this.state = new JLabel("Estado del Pedido", SwingConstants.CENTER);
-        this.browser = new BrowseInOrder();
+        try {
+			this.browser = new BrowseInOrder();
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         this.add(state, BorderLayout.NORTH);
         this.add(browser, BorderLayout.CENTER);

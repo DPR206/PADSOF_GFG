@@ -100,7 +100,7 @@ public class BannerEmployeeC implements Controller {
     private void abrirPedidos() throws BadLocationException {
 
         EmployeeOrder pagOrder = new EmployeeOrder();
-        new EmployeeOrderC();
+        new EmployeOrderC(frame, pagOrder);
 
         frame.addCard(pagOrder, "EMPLOYEE_ORDERS");
         frame.changeVisibleCard("EMPLOYEE_ORDERS");

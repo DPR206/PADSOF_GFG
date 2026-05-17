@@ -6,16 +6,21 @@ import java.time.Period;
 
 import static view.ImageAdder.getImageLabel;
 
+/**
+ * The type Manager parameters p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class ManagerParametersP extends JPanel {
-    public JButton applyChanges = new JButton("Apply Changes");
-    public JTextField offerTimeField;
-    public JTextField orderTimeField;
-    public JTextField valuationCostField;
-    public JTextField storeAddressField;
-    public JTextField exchangeTimeField;
-    public JTextField kRecommendField;
-    public JTextField scoreAParamField;
-    public JTextField scoreBParamField;
+    private final JButton applyChanges = new JButton("Apply Changes");
+    private JTextField offerTimeField;
+    private JTextField orderTimeField;
+    private JTextField valuationCostField;
+    private JTextField storeAddressField;
+    private JTextField exchangeTimeField;
+    private JTextField kRecommendField;
+    private JTextField scoreAParamField;
+    private JTextField scoreBParamField;
     private Period offerTime;
     private Period orderTime;
     private double valuationCost;
@@ -26,11 +31,18 @@ public class ManagerParametersP extends JPanel {
     private double scoreBParam;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager parameters p.
+     */
     public ManagerParametersP() {
         this.setLayout(new GridLayout(3, 3)); // There are 8 configurable parameters
         paintEverything();
     }
 
+    /**
+     * Paint everything.
+     */
     public void paintEverything() {
         this.removeAll();
         this.setOpaque(false);
@@ -165,139 +177,139 @@ public class ManagerParametersP extends JPanel {
         this.repaint();
     }
 
+    /**
+     * It gets the apply changes
+     * @return the apply changes
+     */
     public JButton getApplyChanges() {
         return applyChanges;
     }
 
-    public void setApplyChanges(JButton newApplyChanges) {
-        this.applyChanges = newApplyChanges;
-    }
-
-    public Period getExchangeTime() {
-        return exchangeTime;
-    }
-
-    public void setExchangeTime(Period newExchangeTime) {
-        this.exchangeTime = newExchangeTime;
-    }
-
+    /**
+     * It gets the exchange time field
+     * @return the exchange time field
+     */
     public JTextField getExchangeTimeField() {
         return exchangeTimeField;
     }
 
-    public void setExchangeTimeField(JTextField newExchangeTimeField) {
-        this.exchangeTimeField = newExchangeTimeField;
+    /**
+     * It gets the recommend field
+     * @return the recommend field
+     */
+    public JTextField getKRecommendField() {
+        return kRecommendField;
     }
 
-    public Period getOfferTime() {
-        return offerTime;
-    }
-
-    public void setOfferTime(Period newOfferTime) {
-        this.offerTime = newOfferTime;
-    }
-
+    /**
+     * It gets the offer time field
+     * @return the offer time field
+     */
     public JTextField getOfferTimeField() {
         return offerTimeField;
     }
 
-    public void setOfferTimeField(JTextField newOfferTimeField) {
-        this.offerTimeField = newOfferTimeField;
-    }
-
-    public Period getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(Period newOrderTime) {
-        this.orderTime = newOrderTime;
-    }
-
+    /**
+     * It gets the order time field
+     * @return the order time field
+     */
     public JTextField getOrderTimeField() {
         return orderTimeField;
     }
 
-    public void setOrderTimeField(JTextField newOrderTimeField) {
-        this.orderTimeField = newOrderTimeField;
-    }
-
-    public double getScoreAParam() {
-        return scoreAParam;
-    }
-
-    public void setScoreAParam(double newScoreAParam) {
-        this.scoreAParam = newScoreAParam;
-    }
-
+    /**
+     * It gets the score a param field
+     * @return the score a param field
+     */
     public JTextField getScoreAParamField() {
         return scoreAParamField;
     }
 
-    public void setScoreAParamField(JTextField newScoreAParamField) {
-        this.scoreAParamField = newScoreAParamField;
-    }
-
-    public double getScoreBParam() {
-        return scoreBParam;
-    }
-
-    public void setScoreBParam(double newScoreBParam) {
-        this.scoreBParam = newScoreBParam;
-    }
-
+    /**
+     * It gets the score b param field
+     * @return the score b param field
+     */
     public JTextField getScoreBParamField() {
         return scoreBParamField;
     }
 
-    public void setScoreBParamField(JTextField newScoreBParamField) {
-        this.scoreBParamField = newScoreBParamField;
-    }
-
-    public String getStoreAddress() {
-        return storeAddress;
-    }
-
-    public void setStoreAddress(String newStoreAddress) {
-        this.storeAddress = newStoreAddress;
-    }
-
+    /**
+     * It gets the store address field
+     * @return the store address field
+     */
     public JTextField getStoreAddressField() {
         return storeAddressField;
     }
 
-    public void setStoreAddressField(JTextField newStoreAddressField) {
-        this.storeAddressField = newStoreAddressField;
-    }
-
-    public double getValuationCost() {
-        return valuationCost;
-    }
-
-    public void setValuationCost(double newValuationCost) {
-        this.valuationCost = newValuationCost;
-    }
-
+    /**
+     * It gets the valuation cost field
+     * @return the valuation cost field
+     */
     public JTextField getValuationCostField() {
         return valuationCostField;
     }
 
-    public void setValuationCostField(JTextField newValuationCostField) {
-        this.valuationCostField = newValuationCostField;
+    /**
+     * It sets the exchange time
+     * @param newExchangeTime the new exchange time
+     */
+    public void setExchangeTime(Period newExchangeTime) {
+        this.exchangeTime = newExchangeTime;
     }
 
-    public int getkRecommend() {
-        return kRecommend;
+    /**
+     * It sets the recommend
+     * @param newKRecommend the new k recommend
+     */
+    public void setKRecommend(int newKRecommend) {
+        this.kRecommend = newKRecommend;
     }
 
-    public void setkRecommend(int newkRecommend) {
-        this.kRecommend = newkRecommend;
+    /**
+     * It sets the offer time
+     * @param newOfferTime the new offer time
+     */
+    public void setOfferTime(Period newOfferTime) {
+        this.offerTime = newOfferTime;
     }
 
-    public JTextField getkRecommendField() {
-        return kRecommendField;
+    /**
+     * It sets the order time
+     * @param newOrderTime the new order time
+     */
+    public void setOrderTime(Period newOrderTime) {
+        this.orderTime = newOrderTime;
     }
 
-    public void setkRecommendField(JTextField newkRecommendField) {
-        this.kRecommendField = newkRecommendField;
+    /**
+     * It sets the score a param
+     * @param newScoreAParam the new score a param
+     */
+    public void setScoreAParam(double newScoreAParam) {
+        this.scoreAParam = newScoreAParam;
+    }
+
+    /**
+     * It sets the score b param
+     * @param newScoreBParam the new score b param
+     */
+    public void setScoreBParam(double newScoreBParam) {
+        this.scoreBParam = newScoreBParam;
+    }
+
+    /**
+     * It sets the store address
+     * @param newStoreAddress the new store address
+     */
+    public void setStoreAddress(String newStoreAddress) {
+        this.storeAddress = newStoreAddress;
+    }
+
+    /**
+     * It sets the valuation cost
+     * @param newValuationCost the new valuation cost
+     */
+    public void setValuationCost(double newValuationCost) {
+        this.valuationCost = newValuationCost;
     }
 }

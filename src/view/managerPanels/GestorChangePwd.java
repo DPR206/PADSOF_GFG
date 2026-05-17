@@ -2,23 +2,28 @@ package view.managerPanels;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
+/**
+ * The type Gestor change pwd.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class GestorChangePwd extends JPanel {
+    @Serial
     private static final long serialVersionUID = 1L;
-    private JButton boton = new JButton("CAMBIAR");
-    //private JPanel title;
-    private JPanel main;
-    private JTextField name = new JTextField();
-    private JPasswordField pwd = new JPasswordField();
+    private final JButton boton = new JButton("CAMBIAR");
+    private final JPanel main;
+    private final JTextField name = new JTextField();
+    private final JPasswordField pwd = new JPasswordField();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Gestor change pwd.
+     */
     public GestorChangePwd() {
         super();
-
-        //this.username = username;
-        //this.title = new JPanel();
-        //this.title.add(new JLabel("GIFTS FOR GEEKS: GESTOR"), BorderLayout.NORTH);
-        //this.add(title, BorderLayout.CENTER);
 
         this.main = new JPanel();
         this.main.setLayout(new GridLayout(3, 1));
@@ -45,18 +50,34 @@ public class GestorChangePwd extends JPanel {
         this.add(main, BorderLayout.CENTER);
     }
 
+    /**
+     * It gets the boton
+     * @return the boton
+     */
     public JButton getBoton() {
         return boton;
     }
 
+    /**
+     * It gets the main
+     * @return the main
+     */
     public JPanel getMain() {
         return main;
     }
 
+    /**
+     * It gets the pwd
+     * @return the pwd
+     */
     public JPasswordField getPwd() {
         return this.pwd;
     }
 
+    /**
+     * It gets the user name
+     * @return the user name
+     */
     public JTextField getUserName() {
         return this.name;
     }

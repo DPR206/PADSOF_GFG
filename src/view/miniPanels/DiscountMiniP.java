@@ -12,6 +12,11 @@ import java.awt.event.ActionListener;
 import static main.Main.brownColour;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Discount mini p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class DiscountMiniP extends AbstractMiniP {
     private final JButton button;
     private final Discount discount;
@@ -19,6 +24,13 @@ public class DiscountMiniP extends AbstractMiniP {
     private final JLabel discountImage;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Discount mini p.
+     * @param discount   the discount
+     * @param index      the index
+     * @param buttonName the button name
+     */
     public DiscountMiniP(Discount discount, int index, String buttonName) {
         super();
 
@@ -74,14 +86,18 @@ public class DiscountMiniP extends AbstractMiniP {
         return button;
     }
 
+    /**
+     * It gets the discount
+     * @return the discount
+     */
     public Discount getDiscount() {
         return discount;
     }
 
-    public JLabel getDiscountImage() {
-        return discountImage;
-    }
-
+    /**
+     * It gets the discount info
+     * @return the discount info
+     */
     public JTextPane getDiscountInfo() {
         return discountInfo;
     }

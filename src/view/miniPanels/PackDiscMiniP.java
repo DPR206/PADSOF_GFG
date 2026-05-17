@@ -14,19 +14,26 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getPackImagePanel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Pack disc mini p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class PackDiscMiniP extends AbstractMiniP {
     private final JButton button;
     private final Pack p;
     private final JTextPane packInfo;
     private final JPanel packImage;
 
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * Instantiates a new Pack mini p.
-     * @param p     the p
-     * @param index the index
+     * @param p             the p
+     * @param index         the index
+     * @param alreadyChosen the already chosen
      * @throws BadLocationException the bad location exception
      */
-    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public PackDiscMiniP(Pack p, int index, List<Pack> alreadyChosen) throws BadLocationException {
         super();
 

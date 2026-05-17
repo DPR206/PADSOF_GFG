@@ -23,13 +23,14 @@ public class RegisteredWalletP extends JPanel {
     private final JButton photoChooser = new JButton("Upload Photo");
     private final JTextField nameField = new JTextField();
     private final JTextField descriptionField = new JTextField();
-    private RegisteredClient client;
+    private final RegisteredClient client;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new Registered wallet p.
      * @param client the client
+     * @throws BadLocationException the bad location exception
      */
     public RegisteredWalletP(RegisteredClient client) throws BadLocationException {
         this.setLayout(new BorderLayout());
@@ -45,6 +46,9 @@ public class RegisteredWalletP extends JPanel {
         paintEverything();
     }
 
+    /**
+     * Paint everything.
+     */
     public void paintEverything() {
         this.removeAll();
 
@@ -100,39 +104,67 @@ public class RegisteredWalletP extends JPanel {
         this.repaint();
     }
 
+    /**
+     * It gets the add product
+     * @return the add product
+     */
     public JButton getAddProduct() {
         return addProduct;
     }
 
+    /**
+     * It gets the browse my wallet p
+     * @return the browse my wallet p
+     */
     public BrowseMyWalletP getBrowseMyWalletP() {
         return browseMyWalletP;
     }
 
+    /**
+     * It gets the client
+     * @return the client
+     */
     public RegisteredClient getClient() {
         return client;
     }
 
+    /**
+     * It gets the description field
+     * @return the description field
+     */
     public JTextField getDescriptionField() {
         return descriptionField;
     }
 
+    /**
+     * It gets the name field
+     * @return the name field
+     */
     public JTextField getNameField() {
         return nameField;
     }
 
+    /**
+     * It gets the photo chooser
+     * @return the photo chooser
+     */
     public JButton getPhotoChooser() {
         return photoChooser;
     }
 
+    /**
+     * It gets the product type cmb box
+     * @return the product type cmb box
+     */
     public JComboBox<String> getProductTypeCmbBox() {
         return productTypeCmbBox;
     }
 
+    /**
+     * It gets the type
+     * @return the type
+     */
     public ProductType getType() {
         return typesHashMap.get(Objects.requireNonNull(productTypeCmbBox.getSelectedItem()).toString());
-    }
-
-    public HashMap<String, ProductType> getTypesHashMap() {
-        return typesHashMap;
     }
 }

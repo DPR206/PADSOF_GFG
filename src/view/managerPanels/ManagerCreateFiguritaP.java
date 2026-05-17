@@ -5,23 +5,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Manager create figurita p.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class ManagerCreateFiguritaP extends JPanel {
 
-    private JTextField txtCategoria;
-    private JTextField txtNombre;
-    private JTextField txtPrecio;
-    private JTextField txtStock;
-    private JTextField txtDescripcion;
-    private JTextField txtMarca;
-    private JTextField txtMaterial;
-    private JTextField txtLargo;
-    private JTextField txtAncho;
-    private JTextField txtAlto;
-    private JButton btnConfirmar;
-    private JButton btnSubir;
-    private JLabel vistaPrevia;
+    private final JTextField txtCategoria;
+    private final JTextField txtNombre;
+    private final JTextField txtPrecio;
+    private final JTextField txtStock;
+    private final JTextField txtDescripcion;
+    private final JTextField txtMarca;
+    private final JTextField txtMaterial;
+    private final JTextField txtLargo;
+    private final JTextField txtAncho;
+    private final JTextField txtAlto;
+    private final JButton btnConfirmar;
 
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager create figurita p.
+     */
     public ManagerCreateFiguritaP() {
         this.setLayout(new BorderLayout());
 
@@ -32,12 +39,12 @@ public class ManagerCreateFiguritaP extends JPanel {
         JPanel superior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
         superior.setBackground(getBackground());
 
-        btnSubir = new JButton("⬆ Subir fichero");
+        JButton btnSubir = new JButton("⬆ Subir fichero");
         btnSubir.setBackground(new Color(190, 150, 130));
         btnSubir.setForeground(Color.DARK_GRAY);
         btnSubir.setPreferredSize(new Dimension(150, 60));
 
-        vistaPrevia = new JLabel();
+        JLabel vistaPrevia = new JLabel();
         vistaPrevia.setPreferredSize(new Dimension(150, 60));
         vistaPrevia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -118,58 +125,98 @@ public class ManagerCreateFiguritaP extends JPanel {
         this.add(todo);
     }
 
+    /**
+     * It gets the btn confirmar
+     * @return the btn confirmar
+     */
     public JButton getBtnConfirmar() {
         return btnConfirmar;
     }
 
-    public JButton getBtnSubir() {
-        return btnSubir;
-    }
-
+    /**
+     * It gets the txt alto
+     * @return the txt alto
+     */
     public JTextField getTxtAlto() {
         return txtAlto;
     }
 
+    /**
+     * It gets the txt ancho
+     * @return the txt ancho
+     */
     public JTextField getTxtAncho() {
         return txtAncho;
     }
 
+    /**
+     * It gets the txt categoria
+     * @return the txt categoria
+     */
     public JTextField getTxtCategoria() {
         return txtCategoria;
     }
 
+    /**
+     * It gets the txt descripcion
+     * @return the txt descripcion
+     */
     public JTextField getTxtDescripcion() {
         return txtDescripcion;
     }
 
+    /**
+     * It gets the txt largo
+     * @return the txt largo
+     */
     public JTextField getTxtLargo() {
         return txtLargo;
     }
 
+    /**
+     * It gets the txt marca
+     * @return the txt marca
+     */
     public JTextField getTxtMarca() {
         return txtMarca;
     }
 
+    /**
+     * It gets the txt material
+     * @return the txt material
+     */
     public JTextField getTxtMaterial() {
         return txtMaterial;
     }
 
+    /**
+     * It gets the txt nombre
+     * @return the txt nombre
+     */
     public JTextField getTxtNombre() {
         return txtNombre;
     }
 
+    /**
+     * It gets the txt precio
+     * @return the txt precio
+     */
     public JTextField getTxtPrecio() {
         return txtPrecio;
     }
 
+    /**
+     * It gets the txt stock
+     * @return the txt stock
+     */
     public JTextField getTxtStock() {
         return txtStock;
     }
 
-    public JLabel getVistaPrevia() {
-        return vistaPrevia;
-    }
-
+    /**
+     * It sets the controller
+     * @param e the e
+     */
     public void setController(ActionListener e) {
         this.btnConfirmar.addActionListener(e);
     }

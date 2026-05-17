@@ -10,6 +10,11 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Second hand mini p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class SecondHandMiniP extends AbstractMiniP {
     private final JButton button;
     private final SecondHandProduct secondHandProduct;
@@ -17,6 +22,15 @@ public class SecondHandMiniP extends AbstractMiniP {
     private final JTextPane productInfo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Second hand mini p.
+     * @param product    the product
+     * @param index      the index
+     * @param buttonName the button name
+     * @param iconPath   the icon path
+     * @throws BadLocationException the bad location exception
+     */
     public SecondHandMiniP(SecondHandProduct product, int index, String buttonName, String iconPath)
             throws BadLocationException {
         this.secondHandProduct = product;
@@ -76,18 +90,34 @@ public class SecondHandMiniP extends AbstractMiniP {
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    /**
+     * It gets the button
+     * @return the button
+     */
     public JButton getButton() {
         return button;
     }
 
+    /**
+     * It gets the product image
+     * @return the product image
+     */
     public JLabel getProductImage() {
         return productImage;
     }
 
+    /**
+     * It gets the product info
+     * @return the product info
+     */
     public JTextPane getProductInfo() {
         return productInfo;
     }
 
+    /**
+     * It gets the second hand product
+     * @return the second hand product
+     */
     public SecondHandProduct getSecondHandProduct() {
         return secondHandProduct;
     }

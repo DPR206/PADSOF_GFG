@@ -1,24 +1,29 @@
 package view.managerPanels;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import javax.swing.*;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+/**
+ * The type Manager create composed pack p.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class ManagerCreateComposedPackP extends JPanel {
 
-    private JTextField name = new JTextField();
-    private JTextField price = new JTextField();
-    private JTextField productIdAdd = new JTextField();
-    private JTextField packIdAdd = new JTextField();
-    private JTextField pictureDirectory = new JTextField();
-    private JButton nombre = new JButton("BUSCAR PRODUCTO");
-    private JButton addPackButton = new JButton("BUSCAR PACK");
-    private JButton confirmar = new JButton("Confirmar");
+    private final JTextField name = new JTextField();
+    private final JTextField price = new JTextField();
+    private final JTextField productIdAdd = new JTextField();
+    private final JTextField packIdAdd = new JTextField();
+    private final JTextField pictureDirectory = new JTextField();
+    private final JButton nombre = new JButton("BUSCAR PRODUCTO");
+    private final JButton addPackButton = new JButton("BUSCAR PACK");
+    private final JButton confirmar = new JButton("Confirmar");
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager create composed pack p.
+     */
     public ManagerCreateComposedPackP() {
 
         super();
@@ -107,35 +112,67 @@ public class ManagerCreateComposedPackP extends JPanel {
         this.add(confirmar, gbc);
     }
 
-    public JTextField getPackName() {
-        return this.name;
-    }
-
-    public JTextField getPrice() {
-        return price;
-    }
-
-    public JTextField getProductNameAdd() {
-        return productIdAdd;
-    }
-
-    public JTextField getPackIdAdd() {
-        return packIdAdd;
-    }
-
-    public JTextField getPictureDirectory() {
-        return pictureDirectory;
-    }
-
-    public JButton getNombre() {
-        return this.nombre;
-    }
-
+    /**
+     * It gets the add pack button
+     * @return the add pack button
+     */
     public JButton getAddPackButton() {
         return addPackButton;
     }
 
+    /**
+     * It gets the confirmar
+     * @return the confirmar
+     */
     public JButton getConfirmar() {
         return confirmar;
+    }
+
+    /**
+     * It gets the nombre
+     * @return the nombre
+     */
+    public JButton getNombre() {
+        return this.nombre;
+    }
+
+    /**
+     * It gets the pack id add
+     * @return the pack id add
+     */
+    public JTextField getPackIdAdd() {
+        return packIdAdd;
+    }
+
+    /**
+     * It gets the pack name
+     * @return the pack name
+     */
+    public JTextField getPackName() {
+        return this.name;
+    }
+
+    /**
+     * It gets the picture directory
+     * @return the picture directory
+     */
+    public JTextField getPictureDirectory() {
+        return pictureDirectory;
+    }
+
+    /**
+     * It gets the price
+     * @return the price
+     */
+    public JTextField getPrice() {
+        return price;
+    }
+
+    /**
+     * It gets the product name add
+     * @return the product name add
+     */
+    public JTextField getProductNameAdd() {
+        return productIdAdd;
     }
 }

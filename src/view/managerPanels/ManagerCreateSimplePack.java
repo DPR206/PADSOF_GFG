@@ -1,24 +1,28 @@
 package view.managerPanels;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import javax.swing.*;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+/**
+ * The type Manager create simple pack.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class ManagerCreateSimplePack extends JPanel {
 
-    private JTextField name = new JTextField();
-    private JTextField price = new JTextField();
-    private JTextField productIdAdd = new JTextField();
-    private JTextField pictureDirectory = new JTextField();
+    private final JTextField name = new JTextField();
+    private final JTextField price = new JTextField();
+    private final JTextField productIdAdd = new JTextField();
+    private final JTextField pictureDirectory = new JTextField();
 
-    private JButton id = new JButton("BUSCAR PRODUCTO");
-    private JButton confirmar = new JButton("Confirmar");
+    private final JButton id = new JButton("BUSCAR PRODUCTO");
+    private final JButton confirmar = new JButton("Confirmar");
 
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager create simple pack.
+     */
     public ManagerCreateSimplePack() {
 
         super();
@@ -84,27 +88,51 @@ public class ManagerCreateSimplePack extends JPanel {
         this.add(confirmar, gbc);
     }
 
-    public JTextField getPackName() {
-        return this.name;
+    /**
+     * It gets the confirmar
+     * @return the confirmar
+     */
+    public JButton getConfirmar() {
+        return confirmar;
     }
 
-    public JTextField getPrice() {
-        return price;
-    }
-
-    public JTextField getProductNameAdd() {
-        return productIdAdd;
-    }
-
-    public JTextField getPictureDirectory() {
-        return pictureDirectory;
-    }
-
+    /**
+     * It gets the id
+     * @return the id
+     */
     public JButton getId() {
         return id;
     }
 
-    public JButton getConfirmar() {
-        return confirmar;
+    /**
+     * It gets the pack name
+     * @return the pack name
+     */
+    public JTextField getPackName() {
+        return this.name;
+    }
+
+    /**
+     * It gets the picture directory
+     * @return the picture directory
+     */
+    public JTextField getPictureDirectory() {
+        return pictureDirectory;
+    }
+
+    /**
+     * It gets the price
+     * @return the price
+     */
+    public JTextField getPrice() {
+        return price;
+    }
+
+    /**
+     * It gets the product name add
+     * @return the product name add
+     */
+    public JTextField getProductNameAdd() {
+        return productIdAdd;
     }
 }

@@ -56,7 +56,7 @@ public class ManagerParametersC implements Controller {
             }
 
             try {
-                kRecommend = Integer.parseInt(view.getkRecommendField().getText());
+                kRecommend = Integer.parseInt(view.getKRecommendField().getText());
                 scoreAParam = Double.parseDouble(view.getScoreAParamField().getText());
                 scoreBParam = Double.parseDouble(view.getScoreBParamField().getText());
                 valuationCost = Double.parseDouble(view.getValuationCostField().getText());
@@ -91,7 +91,7 @@ public class ManagerParametersC implements Controller {
         view.setOfferTime(Parameter.getParam().getOfferTime());
         view.setOrderTime(Parameter.getParam().getOrderTime());
         view.setExchangeTime(Parameter.getParam().getExchangeTime());
-        view.setkRecommend(Parameter.getParam().getkRecommend());
+        view.setKRecommend(Parameter.getParam().getkRecommend());
         view.setScoreAParam(Parameter.getParam().getScoreAParam());
         view.setScoreBParam(Parameter.getParam().getScoreBParam());
         view.setValuationCost(Parameter.getParam().getValuationCost());

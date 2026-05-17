@@ -8,20 +8,35 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.util.List;
 
 import static main.Main.brownColour;
 import static view.ImageAdder.getImageLabel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Store product disc mini p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class StoreProductDiscMiniP extends AbstractMiniP {
+    @Serial
     private static final long serialVersionUID = 1L;
     private final JButton button;
     private final StoreProduct storeProduct;
-    private final JLabel productImage;
     private final JTextPane productInfo;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Store product disc mini p.
+     * @param product       the product
+     * @param index         the index
+     * @param buttonName    the button name
+     * @param alreadyChosen the already chosen
+     * @throws BadLocationException the bad location exception
+     */
     public StoreProductDiscMiniP(StoreProduct product, int index, String buttonName, List<StoreProduct> alreadyChosen)
             throws BadLocationException {
         this.storeProduct = product;
@@ -38,7 +53,7 @@ public class StoreProductDiscMiniP extends AbstractMiniP {
             button.setEnabled(false);
         }
 
-        productImage = getImageLabel(product.getPhoto(), height, height);
+        JLabel productImage = getImageLabel(product.getPhoto(), height, height);
         productInfo = new JTextPane();
         productInfo.setEditable(false);
         productInfo.setFocusable(false);
@@ -97,18 +112,26 @@ public class StoreProductDiscMiniP extends AbstractMiniP {
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    /**
+     * It gets the button
+     * @return the button
+     */
     public JButton getButton() {
         return button;
     }
 
-    public JLabel getProductImage() {
-        return productImage;
-    }
-
+    /**
+     * It gets the product info
+     * @return the product info
+     */
     public JTextPane getProductInfo() {
         return productInfo;
     }
 
+    /**
+     * It gets the store product
+     * @return the store product
+     */
     public StoreProduct getStoreProduct() {
         return storeProduct;
     }

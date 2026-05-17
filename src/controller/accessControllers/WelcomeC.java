@@ -99,7 +99,7 @@ public class WelcomeC extends MainLoopSelector {
         view.getEmployeeAccess().addActionListener(e -> {
             boolean stop = false;
             while (!stop) {
-                EmployeeAccess accessPanel = new EmployeeAccess(frame);
+                EmployeeAccess accessPanel = new EmployeeAccess();
                 String[] options = new String[]{"OK", "Cancel"};
                 int option =
                         JOptionPane.showOptionDialog(null, accessPanel, "Employee Access", JOptionPane.OK_CANCEL_OPTION,

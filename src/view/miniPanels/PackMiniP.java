@@ -2,7 +2,8 @@ package view.miniPanels;
 
 import model.discount.DiscountType;
 import model.discount.ProductFixedPercentage;
-import model.product.*;
+import model.product.ComposedPack;
+import model.product.Pack;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -15,12 +16,16 @@ import static view.ImageAdder.getScaledImage;
 
 /**
  * The type Pack mini p.
+ * @author Sofia C.L.
+ * @version 1.0
  */
 public class PackMiniP extends AbstractMiniP {
     private final JButton button;
     private final Pack p;
     private final JTextPane packInfo;
     private final JPanel packImage;
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
     /**
      * Instantiates a new Pack mini p.
@@ -30,7 +35,6 @@ public class PackMiniP extends AbstractMiniP {
      * @param iconPath   the icon path
      * @throws BadLocationException the bad location exception
      */
-    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public PackMiniP(Pack p, int index, String buttonName, String iconPath) throws BadLocationException {
         super();
 
@@ -45,7 +49,7 @@ public class PackMiniP extends AbstractMiniP {
             button.setIcon(getScaledImage(new ImageIcon(iconPath), height / 4, height / 4));
         }
 
-        this.packImage = getPackImagePanel(p, height, height);//getImageLabel(p.getPhoto(), height, height);
+        this.packImage = getPackImagePanel(p, height, height);
         this.packInfo = new JTextPane();
         this.packInfo.setEditable(false);
         this.packInfo.setFocusable(false);
@@ -108,8 +112,6 @@ public class PackMiniP extends AbstractMiniP {
      * @return the pack
      */
     public Pack getPack() {
-        SimplePack pack;
-        ComposedPack packc;
         if (p instanceof ComposedPack) {
             return (ComposedPack) p;
         }

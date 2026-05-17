@@ -12,16 +12,27 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * The type Manager gestionar empleados.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class ManagerGestionarEmpleados extends JPanel {
-    private JCheckBox storeP = new JCheckBox("Trabajar con productos");
-    private JCheckBox orderP = new JCheckBox("Trabajar con pedidos");
-    private JCheckBox exchangeP = new JCheckBox("Trabajar con intercambios");
-    private JTextField userName = new JTextField();
-    private JPasswordField pwd = new JPasswordField();
-    private JPanel mainThings = new JPanel();
-    private JButton confirmar = new JButton("CONFIRMAR");
+    private final JCheckBox storeP = new JCheckBox("Trabajar con productos");
+    private final JCheckBox orderP = new JCheckBox("Trabajar con pedidos");
+    private final JCheckBox exchangeP = new JCheckBox("Trabajar con intercambios");
+    private final JTextField userName = new JTextField();
+    private final JPasswordField pwd = new JPasswordField();
+    private final JPanel mainThings = new JPanel();
+    private final JButton confirmar = new JButton("CONFIRMAR");
     private BrowseEmployeesP browse = null;
-/*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Manager gestionar empleados.
+     * @param app the app
+     */
     public ManagerGestionarEmpleados(App app) {
         super();
 
@@ -60,14 +71,16 @@ public class ManagerGestionarEmpleados extends JPanel {
         try {
             browse = new BrowseEmployeesP("GESTIONAR");
         } catch (BadLocationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         this.add(panel, BorderLayout.EAST);
         this.add(browse, BorderLayout.CENTER);
     }
 
+    /**
+     * Refresh.
+     */
     public void refresh() {
         mainThings.removeAll(); // Limpia la lista actual
 
@@ -89,39 +102,75 @@ public class ManagerGestionarEmpleados extends JPanel {
         mainThings.repaint();
     }
 
+    /**
+     * It gets the browse
+     * @return the browse
+     */
+    public BrowseEmployeesP getBrowse() {
+        return this.browse;
+    }
+
+    /**
+     * It gets the confirmar
+     * @return the confirmar
+     */
     public JButton getConfirmar() {
         return confirmar;
     }
 
+    /**
+     * It gets the exchange p
+     * @return the exchange p
+     */
     public JCheckBox getExchangeP() {
         return exchangeP;
     }
 
+    /**
+     * It gets the main things
+     * @return the main things
+     */
     public JPanel getMainThings() {
         return mainThings;
     }
 
+    /**
+     * It gets the order p
+     * @return the order p
+     */
     public JCheckBox getOrderP() {
         return orderP;
     }
 
+    /**
+     * It gets the pwd
+     * @return the pwd
+     */
     public JPasswordField getPwd() {
         return pwd;
     }
 
+    /**
+     * It gets the store p
+     * @return the store p
+     */
     public JCheckBox getStoreP() {
         return storeP;
     }
 
+    /**
+     * It gets the user name
+     * @return the user name
+     */
     public JTextField getUserName() {
         return userName;
     }
 
+    /**
+     * It sets the controller
+     * @param c the c
+     */
     public void setController(ActionListener c) {
         this.confirmar.addActionListener(c);
-    }
-    
-    public BrowseEmployeesP getBrowse() {
-    	return this.browse;
     }
 }

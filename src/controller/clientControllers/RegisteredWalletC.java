@@ -20,7 +20,6 @@ import java.nio.file.*;
  */
 public class RegisteredWalletC implements Controller {
     private final App frame;
-    private final Store model;
     private final RegisteredWalletP view;
     private final MixedBrowseMyWalletC walletBrowserController;
     private String photoPath;
@@ -34,7 +33,6 @@ public class RegisteredWalletC implements Controller {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
     public RegisteredWalletC(App frame, Store model, RegisteredWalletP view) {
         this.frame = frame;
-        this.model = model;
         this.view = view;
 
         this.walletBrowserController = new MixedBrowseMyWalletC(frame, model, view.getBrowseMyWalletP());

@@ -14,6 +14,11 @@ import static main.Main.brownColour;
 import static view.ImageAdder.getPackImagePanel;
 import static view.ImageAdder.getScaledImage;
 
+/**
+ * The type Pack cart mini p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class PackCartMiniP extends AbstractMiniP {
     private final JButton deleteFromCart = new JButton("Delete from Cart");
     private final JButton applyChanges = new JButton("Apply Changes");
@@ -30,6 +35,7 @@ public class PackCartMiniP extends AbstractMiniP {
      * @param index      the index
      * @param buttonName the button name
      * @param iconPath   the icon path
+     * @param cart       the cart
      * @throws BadLocationException the bad location exception
      */
     public PackCartMiniP(Pack p, int index, String buttonName, String iconPath, Cart cart) throws BadLocationException {
@@ -123,11 +129,16 @@ public class PackCartMiniP extends AbstractMiniP {
         this.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, brownColour));
     }
 
+    /**
+     * It gets the apply changes
+     * @return the apply changes
+     */
     public JButton getApplyChanges() {
         return applyChanges;
     }
 
     /**
+     * It gets the delete from cart
      * @return the deleteFromCart
      */
     public JButton getDeleteFromCart() {
@@ -158,6 +169,10 @@ public class PackCartMiniP extends AbstractMiniP {
         return packInfo;
     }
 
+    /**
+     * It gets the unit spinner
+     * @return the unit spinner
+     */
     public JSpinner getUnitSpinner() {
         return unitSpinner;
     }

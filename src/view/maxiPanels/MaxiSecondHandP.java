@@ -1,7 +1,6 @@
 package view.maxiPanels;
 
 import model.product.SecondHandProduct;
-import view.App;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -11,17 +10,24 @@ import static view.ImageAdder.getImageLabel;
 
 /**
  * Zoom view of a second hand product with customizable button
+ * @author Ana O.R.
+ * @version 1.0
  */
 public class MaxiSecondHandP extends JPanel {
-    private final App app;
     private final JTextPane productInfo;
     private final SecondHandProduct product;
     private final JButton button;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    public MaxiSecondHandP(App app, SecondHandProduct product, String buttonName) throws BadLocationException {
+
+    /**
+     * Instantiates a new Maxi second hand p.
+     * @param product    the product
+     * @param buttonName the button name
+     * @throws BadLocationException the bad location exception
+     */
+    public MaxiSecondHandP(SecondHandProduct product, String buttonName) throws BadLocationException {
         this.setLayout(new BorderLayout());
-        this.app = app;
         this.product = product;
 
         productInfo = new JTextPane();
@@ -34,6 +40,10 @@ public class MaxiSecondHandP extends JPanel {
         paintEverything();
     }
 
+    /**
+     * Paint everything.
+     * @throws BadLocationException the bad location exception
+     */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
@@ -76,10 +86,18 @@ public class MaxiSecondHandP extends JPanel {
         this.repaint();
     }
 
+    /**
+     * It gets the button
+     * @return the button
+     */
     public JButton getButton() {
         return button;
     }
 
+    /**
+     * It gets the product
+     * @return the product
+     */
     public SecondHandProduct getProduct() {
         return product;
     }

@@ -1,30 +1,36 @@
-
-	package view.managerPanels;
+package view.managerPanels;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Manager create comic p.
+ * @author Sofia C.L.
+ * @version 1.0
+ */
 public class ManagerCreateComicP extends JPanel {
 
     // ======== ATRIBUTOS ========
-    private JTextField txtCategoria;
+    private final JTextField txtCategoria;
 
-    private JTextField txtNombre;
-    private JTextField txtPrecio;
-    private JTextField txtStock;
-    private JTextField txtDescripcion;
+    private final JTextField txtNombre;
+    private final JTextField txtPrecio;
+    private final JTextField txtStock;
+    private final JTextField txtDescripcion;
 
-    private JTextField txtNumPages;
-    private JTextField txtYear;
-    private JTextField txtAuthor;
-    private JTextField txtEditorial;
+    private final JTextField txtNumPages;
+    private final JTextField txtYear;
+    private final JTextField txtAuthor;
+    private final JTextField txtEditorial;
 
-    private JButton btnConfirmar;
-    private JButton btnSubir;
+    private final JButton btnConfirmar;
 
-    private JLabel vistaPrevia;
+    /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
+    /**
+     * Instantiates a new Manager create comic p.
+     */
     public ManagerCreateComicP() {
 
         this.setLayout(new BorderLayout());
@@ -35,12 +41,12 @@ public class ManagerCreateComicP extends JPanel {
         JPanel superior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
         superior.setBackground(todo.getBackground());
 
-        btnSubir = new JButton("⬆ Subir fichero");
+        JButton btnSubir = new JButton("⬆ Subir fichero");
         btnSubir.setBackground(new Color(190, 150, 130));
         btnSubir.setForeground(Color.DARK_GRAY);
         btnSubir.setPreferredSize(new Dimension(150, 60));
 
-        vistaPrevia = new JLabel();
+        JLabel vistaPrevia = new JLabel();
         vistaPrevia.setPreferredSize(new Dimension(150, 60));
         vistaPrevia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -117,23 +123,91 @@ public class ManagerCreateComicP extends JPanel {
         this.add(todo, BorderLayout.CENTER);
     }
 
-    // ======== GETTERS PARA EL CONTROLADOR ========
-    public JTextField getTxtCategoria() { return txtCategoria; }
-    public JTextField getTxtNombre() { return txtNombre; }
-    public JTextField getTxtPrecio() { return txtPrecio; }
-    public JTextField getTxtStock() { return txtStock; }
-    public JTextField getTxtDescripcion() { return txtDescripcion; }
+    /**
+     * It gets the btn confirmar
+     * @return the btn confirmar
+     */
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
 
-    public JTextField getTxtNumPages() { return txtNumPages; }
-    public JTextField getTxtYear() { return txtYear; }
-    public JTextField getTxtAuthor() { return txtAuthor; }
-    public JTextField getTxtEditorial() { return txtEditorial; }
+    /**
+     * It gets the txt author
+     * @return the txt author
+     */
+    public JTextField getTxtAuthor() {
+        return txtAuthor;
+    }
 
-    public JButton getBtnConfirmar() { return btnConfirmar; }
-    public JButton getBtnSubir() { return btnSubir; }
-    public JLabel getVistaPrevia() { return vistaPrevia; }
-    
+    /**
+     * It gets the txt categoria
+     * @return the txt categoria
+     */
+    public JTextField getTxtCategoria() {
+        return txtCategoria;
+    }
+
+    /**
+     * It gets the txt descripcion
+     * @return the txt descripcion
+     */
+    public JTextField getTxtDescripcion() {
+        return txtDescripcion;
+    }
+
+    /**
+     * It gets the txt editorial
+     * @return the txt editorial
+     */
+    public JTextField getTxtEditorial() {
+        return txtEditorial;
+    }
+
+    /**
+     * It gets the txt nombre
+     * @return the txt nombre
+     */
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    /**
+     * It gets the txt num pages
+     * @return the txt num pages
+     */
+    public JTextField getTxtNumPages() {
+        return txtNumPages;
+    }
+
+    /**
+     * It gets the txt precio
+     * @return the txt precio
+     */
+    public JTextField getTxtPrecio() {
+        return txtPrecio;
+    }
+
+    /**
+     * It gets the txt stock
+     * @return the txt stock
+     */
+    public JTextField getTxtStock() {
+        return txtStock;
+    }
+
+    /**
+     * It gets the txt year
+     * @return the txt year
+     */
+    public JTextField getTxtYear() {
+        return txtYear;
+    }
+
+    /**
+     * It sets the controller
+     * @param e the e
+     */
     public void setController(ActionListener e) {
-    	this.btnConfirmar.addActionListener(e);
+        this.btnConfirmar.addActionListener(e);
     }
 }

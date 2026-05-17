@@ -1,17 +1,27 @@
 package view;
 
 import model.exchange.Offer;
-import model.product.*;
+import model.product.Pack;
+import model.product.SecondHandProduct;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type Image adder.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class ImageAdder {
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
-    private ImageAdder() {
 
-    }
-
+    /**
+     * It gets the image label
+     * @param imagePath the image path
+     * @param width     the width
+     * @param height    the height
+     * @return the image label
+     */
     /*----------------------------------------------------- MISC -----------------------------------------------------*/
     public static JLabel getImageLabel(String imagePath, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(imagePath);
@@ -20,12 +30,26 @@ public class ImageAdder {
         return image;
     }
 
+    /**
+     * It gets the scaled image
+     * @param imageIcon the image icon
+     * @param w         the w
+     * @param h         the h
+     * @return the scaled image
+     */
     public static ImageIcon getScaledImage(ImageIcon imageIcon, int w, int h) {
         Image image = imageIcon.getImage();
         Image newImg = image.getScaledInstance(w, h, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
     }
 
+    /**
+     * It gets the offer image panel
+     * @param offer  the offer
+     * @param width  the width
+     * @param height the height
+     * @return the offer image panel
+     */
     public static JPanel getOfferImagePanel(Offer offer, int width, int height) {
         JPanel panel = new JPanel(new GridLayout(2, 2));
         SecondHandProduct originProduct = offer.getOriginProducts().getFirst();
@@ -39,10 +63,17 @@ public class ImageAdder {
         return panel;
     }
 
+    /**
+     * It gets the pack image panel
+     * @param pack   the pack
+     * @param width  the width
+     * @param height the height
+     * @return the pack image panel
+     */
     public static JPanel getPackImagePanel(Pack pack, int width, int height) {
         JPanel panel = new JPanel(new BorderLayout());
 
-        JLabel imageLabel = getImageLabel(pack.getPhoto(), width-16, height-16);
+        JLabel imageLabel = getImageLabel(pack.getPhoto(), width - 16, height - 16);
         panel.add(imageLabel, BorderLayout.NORTH);
 
         JLabel number = new JLabel("+" + (pack.getProducts().size() - 1));

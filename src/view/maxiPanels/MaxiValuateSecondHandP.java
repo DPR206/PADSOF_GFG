@@ -11,6 +11,11 @@ import java.util.HashMap;
 
 import static view.ImageAdder.getImageLabel;
 
+/**
+ * The type Maxi valuate second hand p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class MaxiValuateSecondHandP extends JPanel {
     private final App app;
     private final JTextPane productInfo;
@@ -22,6 +27,13 @@ public class MaxiValuateSecondHandP extends JPanel {
     private final HashMap<String, ConservationStatus> conservationStatutes = new HashMap<>();
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
+    /**
+     * Instantiates a new Maxi valuate second hand p.
+     * @param app     the app
+     * @param product the product
+     * @throws BadLocationException the bad location exception
+     */
     public MaxiValuateSecondHandP(App app, SecondHandProduct product) throws BadLocationException {
         this.setLayout(new BorderLayout());
         this.app = app;
@@ -55,6 +67,10 @@ public class MaxiValuateSecondHandP extends JPanel {
         paintEverything();
     }
 
+    /**
+     * Paint everything.
+     * @throws BadLocationException the bad location exception
+     */
     public void paintEverything() throws BadLocationException {
         this.removeAll();
 
@@ -97,35 +113,60 @@ public class MaxiValuateSecondHandP extends JPanel {
         this.repaint();
     }
 
+    /**
+     * It gets the app
+     * @return the app
+     */
     public App getApp() {
         return app;
     }
 
+    /**
+     * It gets the conservation status
+     * @return the conservation status
+     */
     public JComboBox<String> getConservationStatus() {
         return conservationStatus;
     }
 
+    /**
+     * It gets the conservation status from name
+     * @param conservationStatusName the conservation status name
+     * @return the conservation status from name
+     */
     public ConservationStatus getConservationStatusFromName(String conservationStatusName) {
         return conservationStatutes.get(conservationStatusName);
     }
 
+    /**
+     * It gets the product
+     * @return the product
+     */
     public SecondHandProduct getProduct() {
         return product;
     }
 
+    /**
+     * It gets the product info
+     * @return the product info
+     */
     public JTextPane getProductInfo() {
         return productInfo;
     }
 
+    /**
+     * It gets the valuate button
+     * @return the valuate button
+     */
     public JButton getValuate() {
         return valuate;
     }
 
+    /**
+     * It gets the valuation
+     * @return the valuation
+     */
     public JTextField getValuation() {
         return valuation;
-    }
-
-    public JPanel getValuationStuff() {
-        return valuationStuff;
     }
 }

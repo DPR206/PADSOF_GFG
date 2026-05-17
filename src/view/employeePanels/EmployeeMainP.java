@@ -4,10 +4,13 @@ import model.user.*;
 import view.App;
 
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.event.ActionListener;
 
+/**
+ * The type Employee main p.
+ * @author Ana O.R.
+ * @version 1.0
+ */
 public class EmployeeMainP extends JPanel {
     private final JButton managePacks = new JButton("Manage Packs");
     private final JButton manageStoreProducts = new JButton("Manage Store Products");
@@ -18,8 +21,10 @@ public class EmployeeMainP extends JPanel {
     private final App app;
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
+
     /**
      * This panel's constructor
+     * @param app the app
      */
     public EmployeeMainP(App app) {
         //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -30,6 +35,9 @@ public class EmployeeMainP extends JPanel {
         paintEverything();
     }
 
+    /**
+     * Paint everything.
+     */
     public void paintEverything() {
         this.removeAll();
 
@@ -58,44 +66,51 @@ public class EmployeeMainP extends JPanel {
         this.repaint();
     }
 
+    /**
+     * It gets the add store products
+     * @return the add store products
+     */
     public JButton getAddStoreProducts() {
         return addStoreProducts;
     }
 
+    /**
+     * It gets the app
+     * @return the app
+     */
     public App getApp() {
         return app;
     }
 
+    /**
+     * It gets the manage exchanges
+     * @return the manage exchanges
+     */
     public JButton getManageExchanges() {
         return manageExchanges;
     }
 
-    public JButton getManageOrders() {
-        return manageOrders;
-    }
-
+    /**
+     * It gets the manage packs
+     * @return the manage packs
+     */
     public JButton getManagePacks() {
         return managePacks;
     }
 
+    /**
+     * It gets the manage store products
+     * @return the manage store products
+     */
     public JButton getManageStoreProducts() {
         return manageStoreProducts;
     }
 
+    /**
+     * It gets the valuate products
+     * @return the valuate products
+     */
     public JButton getValuateProducts() {
         return valuateProducts;
-    }
-
-    /**
-     * It makes it possible to assign a controller to this panel's components
-     * @param c the desired controller
-     */
-    public void setController(ActionListener c) {
-        managePacks.addActionListener(c);
-        manageStoreProducts.addActionListener(c);
-        addStoreProducts.addActionListener(c);
-        manageOrders.addActionListener(c);
-        manageExchanges.addActionListener(c);
-        valuateProducts.addActionListener(c);
     }
 }

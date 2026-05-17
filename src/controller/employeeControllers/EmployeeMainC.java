@@ -95,7 +95,7 @@ public class EmployeeMainC implements Controller {
                 	
                 	this.frame.addCard(create, "EMPLOYEE CREATE PRODUCTS");
                 	try {
-						this.frame.changeVisibleCard("EMPLOYEE CREATE PRODUCT");
+						this.frame.changeVisibleCard("EMPLOYEE CREATE PRODUCTS");
 					} catch (BadLocationException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

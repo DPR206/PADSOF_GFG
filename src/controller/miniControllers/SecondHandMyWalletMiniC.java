@@ -6,11 +6,13 @@ import controller.clientControllers.RegisteredMakeOfferC;
 import controller.clientControllers.SecondHandOwnerC;
 import es.uam.eps.padsof.telecard.*;
 import model.product.SecondHandProduct;
+import model.store.Parameter;
 import model.store.Store;
 import model.user.RegisteredClient;
 import view.App;
 import view.browserPanels.AbstractBrowserP;
-import view.clientPanels.*;
+import view.clientPanels.RegisteredMakeOfferP;
+import view.clientPanels.SecondHandOwnerP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
@@ -134,17 +136,12 @@ public class SecondHandMyWalletMiniC implements Controller {
 
         /* Request valuation */
         view.getSecondButton().addActionListener(e -> {
-            PaymentP payment = new PaymentP(frame, Store.getInstance().getParameters().getValuationCost());
-
-            String tarjeta = payment.getNumeroTarjeta();
-            if (tarjeta == null) {
-                return;
-            }
+            String tarjeta = JOptionPane.showInputDialog(
+                    "Total: " + Parameter.getParam().getValuationCost() + "€\nEnter your card number");
 
             try {
                 view.getSecondHandProduct().payValuation(tarjeta);
                 JOptionPane.showMessageDialog(view, "Payment successful!");
-                payment.dispose();
                 updateInterface();
             } catch (InvalidCardNumberException e1) {
                 JOptionPane.showMessageDialog(view, "Invalid card number", "Error", JOptionPane.ERROR_MESSAGE);

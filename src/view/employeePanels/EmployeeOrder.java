@@ -1,5 +1,7 @@
 package view.employeePanels;
 
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
@@ -17,8 +19,8 @@ public class EmployeeOrder extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		this.add(browser);
+		this.setLayout(new BorderLayout());
+		this.add(browser, BorderLayout.CENTER);
 	}
 
 	public BrowseStoreOrdersP getBrowser() {

@@ -152,7 +152,7 @@ public class App extends JFrame {
         allPanels.put(constraints, newView);
     }
 
-    public void changeVisibleCard(String cardName) {
+    public void changeVisibleCard(String cardName) throws BadLocationException {
         System.out.println("Changing visible card: " + cardName);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, cardName);
@@ -166,14 +166,14 @@ public class App extends JFrame {
         updateBanners();
     }
 
-    public void updateBanners() {
+    public void updateBanners() throws BadLocationException {
         new BannerUnregisteredC(bannerUnregisteredPanel, this, model);
         new BannerRegisteredC(bannerRegisteredPanel, this, model);
         new BannerEmployeeC(bannerEmployeePanel, this);
         new BannerManagerC(bannerManagerPanel, this);
     }
 
-    public void goBack() {
+    public void goBack() throws BadLocationException {
         if (!lastShownPanels.isEmpty()) {
             String previousPanel = lastShownPanels.removeLast();
             System.out.println("Going back to card: " + previousPanel);
@@ -203,7 +203,7 @@ public class App extends JFrame {
         allPanels.put(constraints, newView);
     }
 
-    public void updateView(String cardName, String bannerName) {
+    public void updateView(String cardName, String bannerName) throws BadLocationException {
         changeVisibleCard(cardName);
         changeVisibleBanner(bannerName);
     }

@@ -4,6 +4,8 @@ import controller.Controller;
 import view.App;
 import view.managerPanels.*;
 
+import javax.swing.text.BadLocationException;
+
 /**
  * The type Manage create pack c.
  * @author Sofía C.L.
@@ -34,14 +36,22 @@ public class ManageCreatePackC implements Controller {
             sp = new ManagerCreateSimplePack();
             new ManagerCreateSimplePackC(sp);
             this.frame.addCard(sp, "CREATING SIMPLE PACK");
-            this.frame.changeVisibleCard("CREATING SIMPLE PACK");
+            try {
+                this.frame.changeVisibleCard("CREATING SIMPLE PACK");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         this.panel.getComposedPackButton().addActionListener(e -> {
             pp = new ManagerCreateComposedPackP();
             new ManagerCreateComposedPackC(pp);
             this.frame.addCard(pp, "CREATING COMPOSED PACK");
-            this.frame.changeVisibleCard("CREATING COMPOSED PACK");
+            try {
+                this.frame.changeVisibleCard("CREATING COMPOSED PACK");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 }

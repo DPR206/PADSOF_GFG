@@ -7,6 +7,7 @@ import view.App;
 import view.clientPanels.ComicP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * The type Comic c.
@@ -54,7 +55,13 @@ public class ComicC implements Controller {
         this.view.setValoraciones(comic.getReviewsList());
         this.view.setMaxStock(comic.getStock());
 
-        this.view.getBtnReturn().addActionListener(e -> frame.goBack());
+        this.view.getBtnReturn().addActionListener(e -> {
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         this.view.getBtnaddCart().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
@@ -66,14 +73,18 @@ public class ComicC implements Controller {
             }
             JOptionPane.showMessageDialog(frame, comic.getName() + " was added to Cart", "Added To Cart",
                     JOptionPane.INFORMATION_MESSAGE);
-            updateInterface();
+            try {
+                updateInterface();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 
     /**
      * Update interface.
      */
-    public void updateInterface() {
+    public void updateInterface() throws BadLocationException {
         ComicP comicVista = new ComicP();
         new ComicC(frame, comicVista, comic);
         frame.addCard(comicVista, "COMIC");

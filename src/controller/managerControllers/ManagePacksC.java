@@ -49,12 +49,20 @@ public class ManagePacksC implements Controller {
                     ManagerIndividualComposedPack misp = new ManagerIndividualComposedPack(pack);
                     new ManagerManageComposedPackC(misp, (ComposedPack) pack);
                     this.frame.addCard(misp, "COMPOSED PACKS");
-                    this.frame.changeVisibleCard("COMPOSED PACKS");
+                    try {
+                        this.frame.changeVisibleCard("COMPOSED PACKS");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 } else if (pack instanceof SimplePack || !(pack instanceof ComposedPack)) {
                     ManagerIndividualSimplePack misp = new ManagerIndividualSimplePack(pack);
                     new ManagerGestPackSimpleInd(pack, misp, this.gestionar);
                     this.frame.addCard(misp, "SIMPLE PACKS");
-                    this.frame.changeVisibleCard("SIMPLE PACKS");
+                    try {
+                        this.frame.changeVisibleCard("SIMPLE PACKS");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
         }
@@ -67,7 +75,11 @@ public class ManagePacksC implements Controller {
         this.gestionar.getConfirmacion().addActionListener(e -> {
             frame.addCard(packP, "CREAR NUEVO PACK");
             new ManageCreatePackC(packP, frame);
-            this.frame.changeVisibleCard("CREAR NUEVO PACK");
+            try {
+                this.frame.changeVisibleCard("CREAR NUEVO PACK");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 

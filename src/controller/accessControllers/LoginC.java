@@ -6,6 +6,7 @@ import view.App;
 import view.accessPanels.LoginP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -50,7 +51,11 @@ public class LoginC extends MainLoopSelector {
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 super.getFrame().changeCurrentUser(user);
-                super.loopSelector();
+                try {
+                    super.loopSelector();
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }

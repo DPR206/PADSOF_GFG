@@ -8,6 +8,7 @@ import view.App;
 import view.managerPanels.ManagerGestionEmplIndividual;
 import view.miniPanels.UserMiniP;
 
+import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,11 @@ public class ManagerGestionarEmpleado implements Controller {
             } catch (PasswordNotValid e1) {
                 throw new RuntimeException(e1);
             }
-            this.frame.changeVisibleCard("GESTIONAR_EMPL");
+            try {
+                this.frame.changeVisibleCard("GESTIONAR_EMPL");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 }

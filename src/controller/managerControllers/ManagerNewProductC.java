@@ -4,6 +4,8 @@ import controller.Controller;
 import view.App;
 import view.managerPanels.*;
 
+import javax.swing.text.BadLocationException;
+
 /**
  * The type Manager new product c.
  * @author Sofía C.L.
@@ -38,17 +40,29 @@ public class ManagerNewProductC implements Controller {
     public void initializeActions() {
         panel.getComics().addActionListener(e -> {
             this.frame.addCard(managerComic, "COMICS");
-            this.frame.changeVisibleCard("COMICS");
+            try {
+                this.frame.changeVisibleCard("COMICS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         panel.getFiguras().addActionListener(e -> {
             this.frame.addCard(managerFigura, "FIGURAS");
-            this.frame.changeVisibleCard("FIGURAS");
+            try {
+                this.frame.changeVisibleCard("FIGURAS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         panel.getJuegos().addActionListener(e -> {
             this.frame.addCard(managerJuego, "JUEGO");
-            this.frame.changeVisibleCard("JUEGO");
+            try {
+                this.frame.changeVisibleCard("JUEGO");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 }

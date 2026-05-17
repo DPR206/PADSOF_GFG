@@ -49,9 +49,21 @@ public class CarritoC implements Controller {
             view.setTotal(c.getCart().calculatePrice());
         }
 
-        view.getBtnOrders().addActionListener(e -> abrirOrders());
+        view.getBtnOrders().addActionListener(e -> {
+            try {
+                abrirOrders();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
-        view.getBtnPay().addActionListener(e -> makePayment());
+        view.getBtnPay().addActionListener(e -> {
+            try {
+                makePayment();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         view.getBtnDeleteAll().addActionListener(e -> deleteAll());
     }
@@ -86,7 +98,7 @@ public class CarritoC implements Controller {
         }
     }
 
-    private void makePayment() {
+    private void makePayment() throws BadLocationException {
 
         if (user instanceof RegisteredClient c) {
             double totalActual = c.getC().calculatePrice();
@@ -106,7 +118,7 @@ public class CarritoC implements Controller {
         }
     }
 
-    private void abrirOrders() {
+    private void abrirOrders() throws BadLocationException {
 
         if (user instanceof RegisteredClient) {
             OrdersP pagOrders;

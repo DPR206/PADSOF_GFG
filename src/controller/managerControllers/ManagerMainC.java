@@ -66,18 +66,60 @@ public class ManagerMainC implements Controller {
 
     @Override
     public void initializeActions() {
-        view.getPacks().addActionListener(e -> this.frame.changeVisibleCard("GEST_PACKS"));
+        view.getPacks().addActionListener(e -> {
+            try {
+                this.frame.changeVisibleCard("GEST_PACKS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
-        view.getProductoNuevo().addActionListener(e -> this.frame.changeVisibleCard("NUEVOS_PRODUCTOS"));
+        view.getProductoNuevo().addActionListener(e -> {
+            try {
+                this.frame.changeVisibleCard("NUEVOS_PRODUCTOS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
-        view.getAnnadirProductos().addActionListener(e -> this.frame.changeVisibleCard("CREAR_PRODUCTO"));
+        view.getAnnadirProductos().addActionListener(e -> {
+            try {
+                this.frame.changeVisibleCard("CREAR_PRODUCTO");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
-        view.getEmpleados().addActionListener(e -> this.frame.changeVisibleCard("GESTIONAR_EMPL"));
+        view.getEmpleados().addActionListener(e -> {
+            try {
+                this.frame.changeVisibleCard("GESTIONAR_EMPL");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
-        view.getEstadisticas().addActionListener(e -> this.frame.changeVisibleCard("STATISTICS"));
+        view.getEstadisticas().addActionListener(e -> {
+            try {
+                this.frame.changeVisibleCard("STATISTICS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
-        view.getDescuentos().addActionListener(e -> this.frame.changeVisibleCard("MANAGER_DISCOUNTS"));
+        view.getDescuentos().addActionListener(e -> {
+            try {
+                this.frame.changeVisibleCard("MANAGER_DISCOUNTS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
-        view.getParametros().addActionListener(e -> this.frame.changeVisibleCard("MANAGER_PARAMETERS"));
+        view.getParametros().addActionListener(e -> {
+            try {
+                this.frame.changeVisibleCard("MANAGER_PARAMETERS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 }

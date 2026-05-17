@@ -12,6 +12,7 @@ import view.clientPanels.PackP;
 import view.miniPanels.PackToBuyMiniP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -55,7 +56,11 @@ public class PackAddToCartMiniC implements Controller {
                     PackP packV = new PackP();
                     new PackC(frame, packV, view.getPack());
                     frame.addCard(packV, "PACK_V");
-                    frame.changeVisibleCard("PACK_V");
+                    try {
+                        frame.changeVisibleCard("PACK_V");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -66,7 +71,11 @@ public class PackAddToCartMiniC implements Controller {
                     PackP packV = new PackP();
                     new PackC(frame, packV, view.getPack());
                     frame.addCard(packV, "PACK_V");
-                    frame.changeVisibleCard("PACK_V");
+                    try {
+                        frame.changeVisibleCard("PACK_V");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });

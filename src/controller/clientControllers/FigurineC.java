@@ -7,6 +7,7 @@ import view.App;
 import view.clientPanels.FigurineP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * The type Figurine c.
@@ -53,7 +54,13 @@ public class FigurineC implements Controller {
         this.view.setValoraciones(figurine.getReviewsList());
         this.view.setMaxStock(figurine.getStock());
 
-        this.view.getBtnReturn().addActionListener(e -> frame.goBack());
+        this.view.getBtnReturn().addActionListener(e -> {
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         this.view.getBtnaddCart().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
@@ -65,14 +72,18 @@ public class FigurineC implements Controller {
             }
             JOptionPane.showMessageDialog(frame, figurine.getName() + " was added to Cart", "Added To Cart",
                     JOptionPane.INFORMATION_MESSAGE);
-            updateInterface();
+            try {
+                updateInterface();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 
     /**
      * Update interface.
      */
-    public void updateInterface() {
+    public void updateInterface() throws BadLocationException {
         FigurineP figurineVista = new FigurineP();
         new FigurineC(frame, figurineVista, figurine);
         frame.addCard(figurineVista, "FIGURINE");

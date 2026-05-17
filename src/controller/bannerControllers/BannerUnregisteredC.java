@@ -67,23 +67,41 @@ public class BannerUnregisteredC implements Controller {
         for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
             vista.getBtnPerfil().removeActionListener(listener);
         }
-        vista.getBtnPerfil().addActionListener(e -> abrirSignUp());
+        vista.getBtnPerfil().addActionListener(e -> {
+            try {
+                abrirSignUp();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
             vista.getBtnExit().removeActionListener(listener);
         }
-        vista.getBtnExit().addActionListener(e -> abrirWelcome());
+        vista.getBtnExit().addActionListener(e -> {
+            try {
+                abrirWelcome();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
             vista.getBtnGoBack().removeActionListener(listener);
         }
-        vista.getBtnGoBack().addActionListener(e -> frame.goBack());
+        vista.getBtnGoBack().addActionListener(e -> {
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     /**
      * It opens the welcome screen
      */
-    private void abrirWelcome() {
+    private void abrirWelcome() throws BadLocationException {
 
         int respuesta =
                 JOptionPane.showConfirmDialog(this.frame, "Are you sure you want to log out?", "Confirm log out",
@@ -97,7 +115,7 @@ public class BannerUnregisteredC implements Controller {
     /**
      * It opens the signup panel
      */
-    private void abrirSignUp() {
+    private void abrirSignUp() throws BadLocationException {
 
         frame.changeVisibleCard("SIGNUP");
     }

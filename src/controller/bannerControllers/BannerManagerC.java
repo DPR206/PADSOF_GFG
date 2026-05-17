@@ -10,6 +10,7 @@ import view.banners.BannerManager;
 import view.managerPanels.ManagerProfile;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.event.ActionListener;
 
 /**
@@ -39,7 +40,7 @@ public class BannerManagerC implements Controller {
     /**
      * It opens the welcome page
      */
-    private void abrirWelcome() {
+    private void abrirWelcome() throws BadLocationException {
 
         int respuesta =
                 JOptionPane.showConfirmDialog(this.frame, "Are you sure you want to log out?", "Confirm log out",
@@ -56,7 +57,7 @@ public class BannerManagerC implements Controller {
     /**
      * It opens the profile page
      */
-    private void abrirPerfil() {
+    private void abrirPerfil() throws BadLocationException {
 
         Manager currentManager = store.getManager();
 
@@ -78,7 +79,7 @@ public class BannerManagerC implements Controller {
     /**
      * It opens the main page
      */
-    private void abrirPaginaPrincipal() {
+    private void abrirPaginaPrincipal() throws BadLocationException {
 
         frame.changeVisibleCard("MANAGER_MAIN");
     }
@@ -92,24 +93,46 @@ public class BannerManagerC implements Controller {
         for (ActionListener listener : vista.getHome().getActionListeners()) {
             vista.getHome().removeActionListener(listener);
         }
-        vista.getHome().addActionListener(e -> abrirPaginaPrincipal());
+        vista.getHome().addActionListener(e -> {
+            try {
+                abrirPaginaPrincipal();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         for (ActionListener listener : vista.getBtnPerfil().getActionListeners()) {
             vista.getBtnPerfil().removeActionListener(listener);
         }
-        vista.getBtnPerfil().addActionListener(e -> abrirPerfil());
+        vista.getBtnPerfil().addActionListener(e -> {
+            try {
+                abrirPerfil();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         for (ActionListener listener : vista.getBtnExit().getActionListeners()) {
             vista.getBtnExit().removeActionListener(listener);
         }
         vista.getBtnExit().addActionListener(e -> {
             this.frame.changeCurrentUser(new UnregisteredClient(true));
-            abrirWelcome();
+            try {
+                abrirWelcome();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         for (ActionListener listener : vista.getBtnGoBack().getActionListeners()) {
             vista.getBtnGoBack().removeActionListener(listener);
         }
-        vista.getBtnGoBack().addActionListener(e -> frame.goBack());
+        vista.getBtnGoBack().addActionListener(e -> {
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 }

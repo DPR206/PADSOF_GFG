@@ -7,6 +7,7 @@ import view.App;
 import view.clientPanels.GameP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * The type Game c.
@@ -53,7 +54,13 @@ public class GameC implements Controller {
         this.view.setValoraciones(game.getReviewsList());
         this.view.setMaxStock(game.getStock());
 
-        this.view.getBtnReturn().addActionListener(e -> frame.goBack());
+        this.view.getBtnReturn().addActionListener(e -> {
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         this.view.getBtnaddCart().addActionListener(e -> {
             if (frame.getUser().getType() == UserType.REGISTERED_CLIENT) {
@@ -64,14 +71,18 @@ public class GameC implements Controller {
             }
             JOptionPane.showMessageDialog(frame, game.getName() + " was added to Cart", "Added To Cart",
                     JOptionPane.INFORMATION_MESSAGE);
-            updateInterface();
+            try {
+                updateInterface();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 
     /**
      * Update interface.
      */
-    public void updateInterface() {
+    public void updateInterface() throws BadLocationException {
         GameP gameVista = new GameP();
         new GameC(frame, gameVista, game);
         frame.addCard(gameVista, "GAME");

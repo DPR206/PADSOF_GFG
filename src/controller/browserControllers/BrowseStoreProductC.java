@@ -59,17 +59,29 @@ public class BrowseStoreProductC implements Controller {
                     this.manageComic = new ManagerIndividualComicP();
                     new ManageComicC(miniSp, this.manageComic);
                     this.frame.addCard(this.manageComic, "MANAGE COMIC");
-                    this.frame.changeVisibleCard("MANAGE COMIC");
+                    try {
+                        this.frame.changeVisibleCard("MANAGE COMIC");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 } else if (miniSp.getStoreProduct() instanceof Figurine) {
                     this.manageFigurine = new ManageIndividualFiguraP();
                     new ManageFigurineC(miniSp, this.manageFigurine);
                     this.frame.addCard(this.manageFigurine, "MANAGE FIGURINE");
-                    this.frame.changeVisibleCard("MANAGE FIGURINE");
+                    try {
+                        this.frame.changeVisibleCard("MANAGE FIGURINE");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 } else if (miniSp.getStoreProduct() instanceof Game) {
                     this.manageGame = new ManagerIndividualGameP();
                     new ManageGameC(miniSp, this.manageGame);
                     this.frame.addCard(this.manageGame, "MANAGE GAME");
-                    this.frame.changeVisibleCard("MANAGE GAME");
+                    try {
+                        this.frame.changeVisibleCard("MANAGE GAME");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
         }

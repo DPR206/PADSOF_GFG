@@ -5,6 +5,8 @@ import view.App;
 import view.managerPanels.ManagerGestionEmplIndividual;
 import view.miniPanels.UserMiniP;
 
+import javax.swing.text.BadLocationException;
+
 /**
  * The type Employee mini c.
  * @author Sofía C.L.
@@ -32,7 +34,11 @@ public class EmployeeMiniC implements Controller {
     public void initializeActions() {
         this.employee.getButton().addActionListener(e -> {
             this.frame.addCard(mge, "EMPLEADO INDIVIDUAL");
-            this.frame.changeVisibleCard("EMPLEADO INDIVIDUAL");
+            try {
+                this.frame.changeVisibleCard("EMPLEADO INDIVIDUAL");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 

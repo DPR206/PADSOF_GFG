@@ -59,6 +59,12 @@ public class EmployeeMainC implements Controller {
                 e -> JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Manage Exchanges", "Manage Exchange",
                         JOptionPane.INFORMATION_MESSAGE));
 
-        view.getValuateProducts().addActionListener(e -> frame.changeVisibleCard("BROWSE_VALUATION_PRODUCTS"));
+        view.getValuateProducts().addActionListener(e -> {
+            try {
+                frame.changeVisibleCard("BROWSE_VALUATION_PRODUCTS");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 }

@@ -48,7 +48,11 @@ public class ManageCreatePacksC implements Controller {
         this.gestionar.getConfirmacion().addActionListener(e -> {
             new ManageCreatePackC(packP, frame);
             frame.addCard(packP, "CREAR NUEVO PACK");
-            this.frame.changeVisibleCard("CREAR NUEVO PACK");
+            try {
+                this.frame.changeVisibleCard("CREAR NUEVO PACK");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 

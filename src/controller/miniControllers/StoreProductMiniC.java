@@ -11,6 +11,7 @@ import view.clientPanels.*;
 import view.miniPanels.StoreProductMiniP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -57,19 +58,31 @@ public class StoreProductMiniC implements Controller {
                             ComicP comicV = new ComicP();
                             new ComicC(frame, comicV, (Comic) view.getStoreProduct());
                             frame.addCard(comicV, "COMIC_VIEW");
-                            frame.changeVisibleCard("COMIC_VIEW");
+                            try {
+                                frame.changeVisibleCard("COMIC_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
                             break;
                         case ProductType.GAME:
                             GameP gameV = new GameP();
                             new GameC(frame, gameV, (Game) view.getStoreProduct());
                             frame.addCard(gameV, "GAME_VIEW");
-                            frame.changeVisibleCard("GAME_VIEW");
+                            try {
+                                frame.changeVisibleCard("GAME_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
                             break;
                         case ProductType.FIGURINE:
                             FigurineP figurineV = new FigurineP();
                             new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
                             frame.addCard(figurineV, "FIGURINE_VIEW");
-                            frame.changeVisibleCard("FIGURINE_VIEW");
+                            try {
+                                frame.changeVisibleCard("FIGURINE_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
                             break;
                         default:
                             break;
@@ -87,19 +100,31 @@ public class StoreProductMiniC implements Controller {
                             ComicP comicV = new ComicP();
                             new ComicC(frame, comicV, (Comic) view.getStoreProduct());
                             frame.addCard(comicV, "COMIC_VIEW");
-                            frame.changeVisibleCard("COMIC_VIEW");
+                            try {
+                                frame.changeVisibleCard("COMIC_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
                             break;
                         case ProductType.GAME:
                             GameP gameV = new GameP();
                             new GameC(frame, gameV, (Game) view.getStoreProduct());
                             frame.addCard(gameV, "GAME_VIEW");
-                            frame.changeVisibleCard("GAME_VIEW");
+                            try {
+                                frame.changeVisibleCard("GAME_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
                             break;
                         case ProductType.FIGURINE:
                             FigurineP figurineV = new FigurineP();
                             new FigurineC(frame, figurineV, (Figurine) view.getStoreProduct());
                             frame.addCard(figurineV, "FIGURINE_VIEW");
-                            frame.changeVisibleCard("FIGURINE_VIEW");
+                            try {
+                                frame.changeVisibleCard("FIGURINE_VIEW");
+                            } catch (BadLocationException ex) {
+                                throw new RuntimeException(ex);
+                            }
                             break;
                         default:
                             break;

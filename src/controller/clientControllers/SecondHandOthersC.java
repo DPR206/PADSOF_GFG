@@ -5,6 +5,8 @@ import model.product.SecondHandProduct;
 import view.App;
 import view.clientPanels.SecondHandOthersP;
 
+import javax.swing.text.BadLocationException;
+
 /**
  * The type Second hand others c.
  * @author Duna P.R.
@@ -46,7 +48,13 @@ public class SecondHandOthersC implements Controller {
             this.view.getBtnOffer().setVisible(false);
         }
 
-        this.view.getBtnReturn().addActionListener(e -> frame.goBack());
+        this.view.getBtnReturn().addActionListener(e -> {
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         this.view.getBtnOffer().addActionListener(e -> {
             //aquí se abre offer

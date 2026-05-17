@@ -13,6 +13,7 @@ import view.clientPanels.SecondHandOwnerP;
 import view.miniPanels.ThreeButtonSecondHandMiniP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -58,7 +59,11 @@ public class SecondHandMyWalletMiniC implements Controller {
                     SecondHandOwnerP shView = new SecondHandOwnerP();
                     new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
                     frame.addCard(shView, "SECONDHAND_OWNER");
-                    frame.changeVisibleCard("SECONDHAND_OWNER");
+                    try {
+                        frame.changeVisibleCard("SECONDHAND_OWNER");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -69,7 +74,11 @@ public class SecondHandMyWalletMiniC implements Controller {
                     SecondHandOwnerP shView = new SecondHandOwnerP();
                     new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
                     frame.addCard(shView, "SECONDHAND_OWNER");
-                    frame.changeVisibleCard("SECONDHAND_OWNER");
+                    try {
+                        frame.changeVisibleCard("SECONDHAND_OWNER");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -80,7 +89,11 @@ public class SecondHandMyWalletMiniC implements Controller {
                     SecondHandOwnerP shView = new SecondHandOwnerP();
                     new SecondHandOwnerC(frame, shView, view.getSecondHandProduct());
                     frame.addCard(shView, "SECONDHAND_OWNER");
-                    frame.changeVisibleCard("SECONDHAND_OWNER");
+                    try {
+                        frame.changeVisibleCard("SECONDHAND_OWNER");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });

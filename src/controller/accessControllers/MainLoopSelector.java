@@ -8,6 +8,7 @@ import view.App;
 import view.banners.*;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * Auxiliary class for shared Login & Signup events
@@ -31,7 +32,7 @@ public abstract class MainLoopSelector implements Controller {
     /**
      * It selects which main page should be seen by the user via its type
      */
-    public void loopSelector() {
+    public void loopSelector() throws BadLocationException {
         User user = frame.getUser();
         switch (user.getType()) {
             case UNREGISTERED_CLIENT:

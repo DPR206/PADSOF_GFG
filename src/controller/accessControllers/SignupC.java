@@ -7,6 +7,7 @@ import view.App;
 import view.accessPanels.SignupP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -50,7 +51,13 @@ public class SignupC extends MainLoopSelector {
 
         view.getSecondShowPassword().addActionListener(e -> view.toggleShownPassword());
 
-        view.getLoginBtn().addActionListener(e -> super.getFrame().changeVisibleCard("LOGIN"));
+        view.getLoginBtn().addActionListener(e -> {
+            try {
+                super.getFrame().changeVisibleCard("LOGIN");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     /**
@@ -77,6 +84,8 @@ public class SignupC extends MainLoopSelector {
                 JOptionPane.showMessageDialog(null, e.toString(), "Signup failed", JOptionPane.ERROR_MESSAGE);
             } catch (InvalidDni e) {
                 JOptionPane.showMessageDialog(null, e.toString(), "Signup failed", JOptionPane.ERROR_MESSAGE);
+            } catch (BadLocationException e) {
+                throw new RuntimeException(e);
             }
         }
     }

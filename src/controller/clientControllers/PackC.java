@@ -8,6 +8,7 @@ import view.App;
 import view.clientPanels.PackP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -60,7 +61,11 @@ public class PackC implements Controller {
         }
 
         this.view.getBtnReturn().addActionListener(e -> {
-            frame.goBack();
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         this.view.getBtnaddCart().addActionListener(e -> {
@@ -72,14 +77,18 @@ public class PackC implements Controller {
             }
             JOptionPane.showMessageDialog(frame, pack.getId() + " was added to Cart", "Added To Cart",
                     JOptionPane.INFORMATION_MESSAGE);
-            updateInterface();
+            try {
+                updateInterface();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 
     /**
      * Update interface.
      */
-    public void updateInterface() {
+    public void updateInterface() throws BadLocationException {
         PackP packVista = new PackP();
         new PackC(frame, packVista, pack);
         frame.addCard(packVista, "PACK");

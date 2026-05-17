@@ -7,6 +7,7 @@ import view.accessPanels.WelcomeP;
 import view.employeePanels.EmployeeAccess;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * It implements the app's welcome controller
@@ -36,12 +37,28 @@ public class WelcomeC extends MainLoopSelector {
     public void initializeActions() {
         view.getBrowseButton().addActionListener(e -> {
             this.frame.setUnregisteredClient(new UnregisteredClient(false));
-            frame.changeVisibleCard("UNREGISTERED_MAIN");
+            try {
+                frame.changeVisibleCard("UNREGISTERED_MAIN");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
-        view.getLoginButton().addActionListener(e -> frame.changeVisibleCard("LOGIN"));
+        view.getLoginButton().addActionListener(e -> {
+            try {
+                frame.changeVisibleCard("LOGIN");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
-        view.getSignupButton().addActionListener(e -> frame.changeVisibleCard("SIGNUP"));
+        view.getSignupButton().addActionListener(e -> {
+            try {
+                frame.changeVisibleCard("SIGNUP");
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         view.getManagerAccess().addActionListener(e -> {
             boolean stop = false;
@@ -62,7 +79,11 @@ public class WelcomeC extends MainLoopSelector {
                         Store.getInstance().setManager(managerSesion);
                         this.frame.changeCurrentUser(managerSesion);
                         stop = true;
-                        super.loopSelector();
+                        try {
+                            super.loopSelector();
+                        } catch (BadLocationException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     } else {
                         int chosen_option = JOptionPane.showConfirmDialog(null, "Incorrect password, retry?");
                         switch (chosen_option) {
@@ -91,7 +112,11 @@ public class WelcomeC extends MainLoopSelector {
                     if ((user = super.getModel().logIn(username, password)) != null) {
                         this.frame.changeCurrentUser(user);
                         stop = true;
-                        super.loopSelector();
+                        try {
+                            super.loopSelector();
+                        } catch (BadLocationException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     } else {
                         int chosen_option = JOptionPane.showConfirmDialog(null, "Incorrect password, retry?");
                         switch (chosen_option) {

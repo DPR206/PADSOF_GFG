@@ -69,7 +69,11 @@ public class PackCartMiniC implements Controller {
                     PackP packV = new PackP();
                     new PackC(frame, packV, view.getPack());
                     frame.addCard(packV, "PACK_V");
-                    frame.changeVisibleCard("PACK_V");
+                    try {
+                        frame.changeVisibleCard("PACK_V");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -80,7 +84,11 @@ public class PackCartMiniC implements Controller {
                     PackP packV = new PackP();
                     new PackC(frame, packV, view.getPack());
                     frame.addCard(packV, "PACK_V");
-                    frame.changeVisibleCard("PACK_V");
+                    try {
+                        frame.changeVisibleCard("PACK_V");
+                    } catch (BadLocationException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });

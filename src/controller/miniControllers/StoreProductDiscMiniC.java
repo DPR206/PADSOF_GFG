@@ -8,6 +8,7 @@ import view.browserPanels.BrowseStoreProductsDiscP;
 import view.miniPanels.StoreProductDiscMiniP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.util.List;
 
@@ -58,7 +59,11 @@ public class StoreProductDiscMiniC implements Controller {
             JOptionPane.showMessageDialog(frame, view.getStoreProduct().getName() + " was added to the discount",
                     "Added To Discount", JOptionPane.INFORMATION_MESSAGE);
             if (onlyOnce) {
-                frame.changeVisibleCard("MANAGER_DISCOUNTS");
+                try {
+                    frame.changeVisibleCard("MANAGER_DISCOUNTS");
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
             } else {
                 browserController.refreshCurrentPage();
                 browserController.initializeActionsForMiniPanels();

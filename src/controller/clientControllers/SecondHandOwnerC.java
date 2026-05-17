@@ -9,6 +9,7 @@ import view.clientPanels.PaymentP;
 import view.clientPanels.SecondHandOwnerP;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 
 /**
  * The type Second hand owner c.
@@ -52,7 +53,13 @@ public class SecondHandOwnerC implements Controller {
             this.view.getBtnValorationt().setVisible(true);
         }
 
-        this.view.getBtnReturn().addActionListener(e -> frame.goBack());
+        this.view.getBtnReturn().addActionListener(e -> {
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         this.view.getBtnValorationt().addActionListener(e -> {
 
@@ -80,6 +87,8 @@ public class SecondHandOwnerC implements Controller {
                             JOptionPane.ERROR_MESSAGE);
                 } catch (OrderRejectedException e1) {
                     JOptionPane.showMessageDialog(view, "Order rejected", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (BadLocationException e1) {
+                    JOptionPane.showMessageDialog(view, "Bad location", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
             });
@@ -91,14 +100,18 @@ public class SecondHandOwnerC implements Controller {
             JOptionPane.showMessageDialog(frame, "Product removed", "Remove from wallet",
                     JOptionPane.INFORMATION_MESSAGE);
             product.setRemoved(true);
-            frame.goBack();
+            try {
+                frame.goBack();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 
     /**
      * It updates the payment's status
      */
-    private void actualizarEstadoPago() {
+    private void actualizarEstadoPago() throws BadLocationException {
         if (product.isPaidValuation()) {
             this.view.setValuation(product.getPrice(), product.getStatus());
             this.view.getBtnValorationt().setVisible(false);

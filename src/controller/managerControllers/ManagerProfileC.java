@@ -6,6 +6,8 @@ import view.App;
 import view.managerPanels.GestorChangePwd;
 import view.managerPanels.ManagerProfile;
 
+import javax.swing.text.BadLocationException;
+
 /**
  * The type Manager profile c.
  * @author Duna P.R.
@@ -40,10 +42,16 @@ public class ManagerProfileC implements Controller {
 
         vista.getBtnMostrar().addActionListener(e -> showPassword());
 
-        vista.getBtnCambiar().addActionListener(e -> cambiarPwd());
+        vista.getBtnCambiar().addActionListener(e -> {
+            try {
+                cambiarPwd();
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
-    private void cambiarPwd() {
+    private void cambiarPwd() throws BadLocationException {
 
         GestorChangePwd pagPwd = new GestorChangePwd();
 

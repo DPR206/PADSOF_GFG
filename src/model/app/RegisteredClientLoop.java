@@ -54,7 +54,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< registeredClientLoop >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< registeredClientLoop >>>>>>>>>> \n");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Browse store products");
@@ -104,7 +104,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< browseStore >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< browseStore >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
 
             if (filteredStore == null) { // Si no hay filtros se muestran todos los productos
@@ -126,7 +126,7 @@ public class RegisteredClientLoop extends Loop {
                     System.out.println("Applying filters...");
                     break;
                 case 2: /* See a product */
-                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n");
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] ID");
@@ -268,7 +268,7 @@ public class RegisteredClientLoop extends Loop {
     private void placeOrder() throws IOException, IllegalArgumentException, NullPointerException {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
-        System.out.print("\n <<<<<<<<<< placeOrder >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< placeOrder >>>>>>>>>> \n");
         ((RegisteredClient) currentUser).buy();
         System.out.println("Order placed!, Thank you");
     }
@@ -281,7 +281,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeStoreProduct 2 >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< seeStoreProduct 2 >>>>>>>>>> \n");
             StoreProduct product =
                     Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, itemNum);
             product.bigPrintInfo();
@@ -332,7 +332,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< browseReviews >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< browseReviews >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
 
             StoreProduct product =
@@ -375,7 +375,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeCart >>>>>>>>>> \n"); 
+            System.out.print("\n <<<<<<<<<< seeCart >>>>>>>>>> \n");
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Place order");
@@ -418,7 +418,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< browseCartProducts >>>>>>>>>> \n"); 
+            System.out.print("\n <<<<<<<<<< browseCartProducts >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
 
             ((RegisteredClient) currentUser).getC().printStoreProductListPage(currentScreenPageNum);
@@ -431,7 +431,7 @@ public class RegisteredClientLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* See a product */
-                    System.out.print("\n <<<<<<<<<< seeCartProduct >>>>>>>>>> \n"); 
+                    System.out.print("\n <<<<<<<<<< seeCartProduct >>>>>>>>>> \n");
                     System.out.println("Enter the number of the desired product:");
                     this.itemNum = scanner.nextInt();
 
@@ -442,7 +442,7 @@ public class RegisteredClientLoop extends Loop {
                     previousPage();
                     break;
                 case 3: /* Next page */
-                    nextPageStoreProduct(((RegisteredClient) currentUser).getC().getProducts()); // DUE: Revisar esto
+                    nextPageStoreProduct(((RegisteredClient) currentUser).getC().getProducts());
                     break;
                 case 4: /* See my notifications */
                     browseNotifications();
@@ -468,7 +468,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeCartProduct 2 >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< seeCartProduct 2 >>>>>>>>>> \n");
             StoreProduct product =
                     Pager.getInstance().selectStoreProductFromPage(filteredStore, currentScreenPageNum, itemNum);
             product.bigPrintInfo();
@@ -512,7 +512,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< browseCartPacks >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< browseCartPacks >>>>>>>>>> \n");
             System.out.println("Page: " + currentScreenPageNum);
 
             ((RegisteredClient) currentUser).getC().printPackListPage(currentScreenPageNum);
@@ -525,7 +525,7 @@ public class RegisteredClientLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* See a product */
-                    System.out.print("\n <<<<<<<<<< seeCartPack >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< seeCartPack >>>>>>>>>> \n");
                     System.out.println("Enter the number of the desired product:");
                     this.itemNum = scanner.nextInt();
 
@@ -562,7 +562,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeCartProduct 2 >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< seeCartProduct 2 >>>>>>>>>> \n");
             Pack pack = Pager.getInstance().selectPackFromPage((((RegisteredClient) currentUser).getC().getPacks()),
                     currentScreenPageNum, itemNum);
             pack.bigPrintInfo();
@@ -602,7 +602,7 @@ public class RegisteredClientLoop extends Loop {
      * @throws IOException the io exception
      */
     public void browseRecommendations() throws IOException, InvalidDni, PasswordNotValid {
-        System.out.print("\n <<<<<<<<<< browseRecommendations >>>>>>>>>> \n"); // Es para debug, borra
+        System.out.print("\n <<<<<<<<<< browseRecommendations >>>>>>>>>> \n");
         filteredStore = Recommender.getInstance().recommendSimilarProducts((RegisteredClient) currentUser);
         browseStore();
     }
@@ -611,14 +611,14 @@ public class RegisteredClientLoop extends Loop {
      * Browses the second-hand products
      */
     public void browseSecondHand() {
-        // DUE
+
     }
 
     /**
      * Browses the second-hand products in the wallet
      */
     public void browseWallet() {
-        // DUE
+
     }
 
     /**
@@ -629,7 +629,7 @@ public class RegisteredClientLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.print("\n <<<<<<<<<< seeProfile >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.print("\n <<<<<<<<<< seeProfile >>>>>>>>>> \n");
             currentUser.printInfo();
 
             System.out.println("What do you wish to do? (enter the nº)");
@@ -658,6 +658,6 @@ public class RegisteredClientLoop extends Loop {
      * It allows a registered client to browse and modify their notifications
      */
     private void browseNotifications() {
-        // DUE
+
     }
 }

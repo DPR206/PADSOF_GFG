@@ -70,7 +70,7 @@ public class PackEditMiniC implements Controller {
         });
 
         view.getButton().addActionListener(e -> {
-            //MOSTRAR EL PACK, DUE
+
         });
     }
 }

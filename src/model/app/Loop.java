@@ -71,7 +71,7 @@ public abstract class Loop {
      */
     protected void logger() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n <<<<<<<<<< logger >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< logger >>>>>>>>>> \n"); 
 
         System.out.print("Enter your username: ");
         String username = scanner.next();
@@ -91,7 +91,7 @@ public abstract class Loop {
      */
     protected void signer() throws IOException, UsernameTaken, PasswordNotValid, InvalidDni {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\n <<<<<<<<<< signer >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< signer >>>>>>>>>> \n"); 
         System.out.print("Enter your username: ");
         String username = scanner.next();
         System.out.print("Enter your password: ");
@@ -119,7 +119,7 @@ public abstract class Loop {
     protected void loopSelector()
             throws IOException, IllegalArgumentException, NullPointerException, UsernameTaken, PasswordNotValid,
                    InvalidDni {
-        System.out.print("\n <<<<<<<<<< loopSelector >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< loopSelector >>>>>>>>>> \n"); 
         if (currentUser == null) {
             currentUser = new UnregisteredClient(true);
         }
@@ -151,7 +151,7 @@ public abstract class Loop {
      * @throws IOException the io exception
      */
     protected void exit() throws IOException {
-        System.out.print("\n <<<<<<<<<< exit >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.print("\n <<<<<<<<<< exit >>>>>>>>>> \n"); 
         System.out.println("See you soon!");
 
         Store.getInstance().saveStore("data", "statics");

@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,9 +50,10 @@ public class LoginC extends MainLoopSelector {
         /* Log in button */
         view.getLogin().addActionListener(e -> {
             User user = super.getModel().logIn(view.getUsername(), view.getPassword());
-            List<StoreProduct> cartProducts = null;
-            List<Pack> cartPacks = null;
-            if (user != null && user.getType() == UserType.UNREGISTERED_CLIENT) {
+            List<StoreProduct> cartProducts = new ArrayList<>();
+            List<Pack> cartPacks = new ArrayList<>();
+            if (super.getFrame().getUser() != null &&
+                super.getFrame().getUser().getType() == UserType.UNREGISTERED_CLIENT) {
                 cartProducts = ((UnregisteredClient) super.getFrame().getUser()).getCart().getProducts();
                 cartPacks = ((UnregisteredClient) super.getFrame().getUser()).getCart().getPacks();
             }
@@ -60,8 +62,7 @@ public class LoginC extends MainLoopSelector {
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 super.getFrame().changeCurrentUser(user);
-                if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT && cartPacks != null &&
-                    cartProducts != null) {
+                if (super.getFrame().getUser().getType() == UserType.REGISTERED_CLIENT) {
                     ((RegisteredClient) super.getFrame().getUser()).getC().getProducts().addAll(cartProducts);
                     ((RegisteredClient) super.getFrame().getUser()).getC().getPacks().addAll(cartPacks);
                 }

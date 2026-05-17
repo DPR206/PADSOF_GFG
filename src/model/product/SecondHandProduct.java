@@ -358,6 +358,4 @@ public class SecondHandProduct extends Product implements Serializable {
                this.status.name();
     }
 
-    //Faltan métodos de intercambio para más adelante
-
 }

@@ -32,5 +32,4 @@ public class ManageMiniSimplePackC implements Controller {
         });
 
     }
-    /*DUE*/
 }

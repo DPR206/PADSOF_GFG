@@ -51,7 +51,7 @@ public class ExchangePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< exchangePermissionLoop >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< exchangePermissionLoop >>>>>>>>>> \n"); 
             System.out.println("What do you wish to do? (enter the nº)");
             int i = 1;
             System.out.println("\t[" + i++ + "] Manage an exchange");
@@ -61,7 +61,7 @@ public class ExchangePermissionLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Manage an exchange */
-                    System.out.print("\n <<<<<<<<<< manageExchange >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< manageExchange >>>>>>>>>> \n"); 
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] ID");
@@ -125,7 +125,7 @@ public class ExchangePermissionLoop extends Loop {
         Scanner scanner = new Scanner(System.in);
         boolean exitLoop = false;
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< manageExchange >>>>>>>>>> \n"); // Es para debug, borrar
+            System.out.println("\n <<<<<<<<<< manageExchange >>>>>>>>>> \n"); 
 
             Exchange exchange = Pager.getInstance()
                                      .selectExchangeFromPage(Store.getInstance().getExchanges(), currentScreenPageNum,
@@ -165,7 +165,6 @@ public class ExchangePermissionLoop extends Loop {
         products = ((Employee) currentUser).getEp().searchSecondHandProducts();
 
         while (!appExited && !exitLoop) {
-            System.out.println("\n <<<<<<<<<< DUE >>>>>>>>>> \n"); // Es para debug, borrar
             System.out.println("Page: " + currentScreenPageNum);
 
             Pager.getInstance().printSecondHandProductListPage(products, currentScreenPageNum);
@@ -178,7 +177,7 @@ public class ExchangePermissionLoop extends Loop {
 
             switch (chosenOption) {
                 case 1: /* Valuate a product */
-                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); // Es para debug, borrar
+                    System.out.print("\n <<<<<<<<<< seeStoreProduct >>>>>>>>>> \n"); 
                     System.out.println("Do you wish to select it via: ID or list number?");
                     System.out.println("[1] List number");
                     System.out.println("[2] ID");
@@ -233,7 +232,7 @@ public class ExchangePermissionLoop extends Loop {
 
     private void valuateProduct() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n <<<<<<<<<< valuateProduct >>>>>>>>>> \n"); // Es para debug, borrar
+        System.out.println("\n <<<<<<<<<< valuateProduct >>>>>>>>>> \n"); 
 
         SecondHandProduct product =
                 Pager.getInstance().selectSecondHandProductFromPage(products, currentScreenPageNum, itemNum);

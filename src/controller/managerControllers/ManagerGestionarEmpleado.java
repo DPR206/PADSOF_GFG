@@ -8,6 +8,7 @@ import view.App;
 import view.managerPanels.ManagerGestionEmplIndividual;
 import view.miniPanels.UserMiniP;
 
+import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,12 @@ public class ManagerGestionarEmpleado implements Controller {
             }
 
             if (perms.isEmpty()) {
+            	JOptionPane.showMessageDialog(
+            		    null,
+            		    "Debes seleccionar al menos un permiso.",
+            		    "Error",
+            		    JOptionPane.ERROR_MESSAGE
+            		);
                 return;
             }
 
@@ -81,6 +88,13 @@ public class ManagerGestionarEmpleado implements Controller {
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }
+            
+            JOptionPane.showMessageDialog(
+            	    null,
+            	    "Empleado cambiado correctamente.",
+            	    "Información",
+            	    JOptionPane.INFORMATION_MESSAGE
+            	);
         });
     }
 }

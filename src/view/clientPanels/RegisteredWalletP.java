@@ -2,7 +2,7 @@ package view.clientPanels;
 
 import model.product.ProductType;
 import model.user.RegisteredClient;
-import view.browserPanels.BrowseMyWalletP;
+import view.browserPanels.BrowseMyWalletEditP;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -16,7 +16,7 @@ import java.util.Objects;
  * @version 1.0
  */
 public class RegisteredWalletP extends JPanel {
-    private final BrowseMyWalletP browseMyWalletP;
+    private final BrowseMyWalletEditP browseMyWalletP;
     private final JComboBox<String> productTypeCmbBox;
     private final HashMap<String, ProductType> typesHashMap = new HashMap<>();
     private final JButton addProduct = new JButton("Add Product");
@@ -36,7 +36,7 @@ public class RegisteredWalletP extends JPanel {
         this.setLayout(new BorderLayout());
 
         this.client = client;
-        browseMyWalletP = new BrowseMyWalletP();
+        browseMyWalletP = new BrowseMyWalletEditP();
 
         typesHashMap.put("Comic", ProductType.COMIC);
         typesHashMap.put("Game", ProductType.GAME);
@@ -116,7 +116,7 @@ public class RegisteredWalletP extends JPanel {
      * It gets the browse my wallet p
      * @return the browse my wallet p
      */
-    public BrowseMyWalletP getBrowseMyWalletP() {
+    public BrowseMyWalletEditP getBrowseMyWalletP() {
         return browseMyWalletP;
     }
 

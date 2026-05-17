@@ -16,7 +16,7 @@ import javax.swing.text.BadLocationException;
  * @author Ana O.R.
  * @version 1.0
  */
-public class MixedBrowseSomeonesWalletC extends AbstractBrowserC<SecondHandProduct> {
+public class BrowseSomeonesWalletC extends AbstractBrowserC<SecondHandProduct> {
 
     /*------------------------------------------------- CONSTRUCTOR --------------------------------------------------*/
 
@@ -27,7 +27,7 @@ public class MixedBrowseSomeonesWalletC extends AbstractBrowserC<SecondHandProdu
      * @param view  the controller's view
      * @throws BadLocationException the bad location exception
      */
-    public MixedBrowseSomeonesWalletC(App frame, Store model, BrowseSomeonesWalletP view) throws BadLocationException {
+    public BrowseSomeonesWalletC(App frame, Store model, BrowseSomeonesWalletP view) throws BadLocationException {
         super(frame, view, model);
         super.initializeActions();
     }
@@ -63,7 +63,7 @@ public class MixedBrowseSomeonesWalletC extends AbstractBrowserC<SecondHandProdu
     @Override
     public void initializeActionsForMiniPanels() {
         for (AbstractMiniP miniPanel : super.getView().getMiniPanels()) {
-            new SecondHandAddToOfferMiniC(super.getFrame(), (SecondHandMiniP) miniPanel, this, super.getView());
+            new SecondHandAddToOfferMiniC(super.getFrame(), super.getModel(), (SecondHandMiniP) miniPanel);
         }
     }
 }

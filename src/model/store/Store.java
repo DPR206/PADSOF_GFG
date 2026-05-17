@@ -419,8 +419,8 @@ public class Store implements Serializable {
             if (!Store.getInstance().isCategoryInStore("Figurita")) {
                 new Category("Figurita");
             }
-            if (!Store.getInstance().isCategoryInStore("Comic")) {
-                new Category("Comic");
+            if (!Store.getInstance().isCategoryInStore("Cómic")) {
+                new Category("Cómic");
             }
 
             Store.getInstance().addUser(Manager.getInstance());

@@ -72,6 +72,7 @@ public class ManagerNewComicC implements Controller {
                     new Comic(price, nombre, description, ".\\resources\\app\\cart.png", stockk, numPages, year, author,
                             edit, cat);
             Store.getInstance().addStoreProduct(c);
+            JOptionPane.showMessageDialog(null, "Cómic añadido correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
         });
     }
 }

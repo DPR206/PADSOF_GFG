@@ -59,12 +59,34 @@ public class EmployeeMainC implements Controller {
     @Override
     public void initializeActions() {
         view.getManagePacks().addActionListener(
-                e -> JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Manage Packs", "Manage Packs",
-                        JOptionPane.INFORMATION_MESSAGE));
+                e ->{
+                	this.mgp = new ManagerGestionarPacks(this.frame);
+                	new ManagePacksC(mgp, this.frame);
+                	
+                	this.frame.addCard(mgp, "EMPLOYEE MANAGE PACKS");
+                	try {
+						this.frame.changeVisibleCard("EMPLOYEE MANAGE PACKS");
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+                });
 
         view.getManageStoreProducts().addActionListener(
-                e -> JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Manage Store Products", "Manage Store",
-                        JOptionPane.INFORMATION_MESSAGE));
+                e -> {
+                	
+                	try {
+						this.mproducts = new ManagerGestionarProductos(this.frame);
+						new ManagerManageProductsC(mproducts, frame);
+						
+						this.frame.addCard(mproducts, "EMPLOYEE MANAGE STOREPRODUCTS");
+						this.frame.changeVisibleCard("EMPLOYEE MANAGE STOREPRODUCTS");
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+                	
+                });
 
         view.getAddStoreProducts().addActionListener(
                 e -> JOptionPane.showMessageDialog(frame, "Aquí iría el panel de Add Store Products", "Add Store",
